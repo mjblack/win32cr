@@ -1,21 +1,21 @@
-require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/com.cr"
 require "./../graphics/gdi.cr"
-require "./../ui/shell/properties_system.cr"
 require "./../system/com/structured_storage.cr"
 require "./../ui/windows_and_messaging.cr"
+require "./../ui/shell/properties_system.cr"
 
 module Win32cr::Media::PictureAcquisition
   extend self
-  PKEY_PhotoAcquire_RelativePathname = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 2_u32)
-  PKEY_PhotoAcquire_FinalFilename = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 3_u32)
-  PKEY_PhotoAcquire_GroupTag = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 4_u32)
-  PKEY_PhotoAcquire_TransferResult = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 5_u32)
-  PKEY_PhotoAcquire_OriginalFilename = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 6_u32)
-  PKEY_PhotoAcquire_CameraSequenceNumber = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 7_u32)
-  PKEY_PhotoAcquire_IntermediateFile = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 8_u32)
-  PKEY_PhotoAcquire_SkipImport = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 9_u32)
-  PKEY_PhotoAcquire_DuplicateDetectionID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 10_u32)
+  PKEY_PhotoAcquire_RelativePathname = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 2_u32)
+  PKEY_PhotoAcquire_FinalFilename = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 3_u32)
+  PKEY_PhotoAcquire_GroupTag = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 4_u32)
+  PKEY_PhotoAcquire_TransferResult = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 5_u32)
+  PKEY_PhotoAcquire_OriginalFilename = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 6_u32)
+  PKEY_PhotoAcquire_CameraSequenceNumber = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 7_u32)
+  PKEY_PhotoAcquire_IntermediateFile = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 8_u32)
+  PKEY_PhotoAcquire_SkipImport = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 9_u32)
+  PKEY_PhotoAcquire_DuplicateDetectionID = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xf23377_u32, 0x7ac6_u16, 0x4b7a_u16, StaticArray[0x84_u8, 0x43_u8, 0x34_u8, 0x5e_u8, 0x73_u8, 0x1f_u8, 0xa5_u8, 0x7a_u8]), 10_u32)
   PROGRESS_INDETERMINATE = -1_i32
   PHOTOACQ_ERROR_RESTART_REQUIRED = -2147180543_i32
   PHOTOACQ_RUN_DEFAULT = 0_u32
@@ -97,14 +97,15 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoAcquireItemVtbl,
+
+  record IPhotoAcquireItemVtable,
     query_interface : Proc(IPhotoAcquireItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoAcquireItem*, UInt32),
     release : Proc(IPhotoAcquireItem*, UInt32),
     get_item_name : Proc(IPhotoAcquireItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_thumbnail : Proc(IPhotoAcquireItem*, Win32cr::Foundation::SIZE, Win32cr::Graphics::Gdi::HBITMAP*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IPhotoAcquireItem*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IPhotoAcquireItem*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IPhotoAcquireItem*, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IPhotoAcquireItem*, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
     get_stream : Proc(IPhotoAcquireItem*, Void**, Win32cr::Foundation::HRESULT),
     can_delete : Proc(IPhotoAcquireItem*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     delete : Proc(IPhotoAcquireItem*, Win32cr::Foundation::HRESULT),
@@ -113,7 +114,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoAcquireItem, lpVtbl : IPhotoAcquireItemVtbl* do
+  record IPhotoAcquireItem, lpVtbl : IPhotoAcquireItemVtable* do
     GUID = LibC::GUID.new(0xf21c97_u32, 0x28bf_u16, 0x4c02_u16, StaticArray[0xb8_u8, 0x42_u8, 0x5e_u8, 0x4e_u8, 0x90_u8, 0x13_u8, 0x9a_u8, 0x30_u8])
     def query_interface(this : IPhotoAcquireItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -130,10 +131,10 @@ module Win32cr::Media::PictureAcquisition
     def get_thumbnail(this : IPhotoAcquireItem*, sizeThumbnail : Win32cr::Foundation::SIZE, phbmpThumbnail : Win32cr::Graphics::Gdi::HBITMAP*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_thumbnail.call(this, sizeThumbnail, phbmpThumbnail)
     end
-    def get_property(this : IPhotoAcquireItem*, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pv : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IPhotoAcquireItem*, key : Win32cr::Foundation::PROPERTYKEY*, pv : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, key, pv)
     end
-    def set_property(this : IPhotoAcquireItem*, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pv : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    def set_property(this : IPhotoAcquireItem*, key : Win32cr::Foundation::PROPERTYKEY*, pv : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, key, pv)
     end
     def get_stream(this : IPhotoAcquireItem*, ppStream : Void**) : Win32cr::Foundation::HRESULT
@@ -155,7 +156,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IUserInputStringVtbl,
+
+  record IUserInputStringVtable,
     query_interface : Proc(IUserInputString*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUserInputString*, UInt32),
     release : Proc(IUserInputString*, UInt32),
@@ -172,7 +174,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IUserInputString, lpVtbl : IUserInputStringVtbl* do
+  record IUserInputString, lpVtbl : IUserInputStringVtable* do
     GUID = LibC::GUID.new(0xf243a1_u32, 0x205b_u16, 0x45ba_u16, StaticArray[0xae_u8, 0x26_u8, 0xab_u8, 0xbc_u8, 0x53_u8, 0xaa_u8, 0x7a_u8, 0x6f_u8])
     def query_interface(this : IUserInputString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -217,7 +219,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoAcquireProgressCBVtbl,
+
+  record IPhotoAcquireProgressCBVtable,
     query_interface : Proc(IPhotoAcquireProgressCB*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoAcquireProgressCB*, UInt32),
     release : Proc(IPhotoAcquireProgressCB*, UInt32),
@@ -243,7 +246,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoAcquireProgressCB, lpVtbl : IPhotoAcquireProgressCBVtbl* do
+  record IPhotoAcquireProgressCB, lpVtbl : IPhotoAcquireProgressCBVtable* do
     GUID = LibC::GUID.new(0xf2ce1e_u32, 0x935e_u16, 0x4248_u16, StaticArray[0x89_u8, 0x2c_u8, 0x13_u8, 0xf_u8, 0x32_u8, 0xc4_u8, 0x5c_u8, 0xb4_u8])
     def query_interface(this : IPhotoAcquireProgressCB*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -315,7 +318,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoProgressActionCBVtbl,
+
+  record IPhotoProgressActionCBVtable,
     query_interface : Proc(IPhotoProgressActionCB*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoProgressActionCB*, UInt32),
     release : Proc(IPhotoProgressActionCB*, UInt32),
@@ -323,7 +327,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoProgressActionCB, lpVtbl : IPhotoProgressActionCBVtbl* do
+  record IPhotoProgressActionCB, lpVtbl : IPhotoProgressActionCBVtable* do
     GUID = LibC::GUID.new(0xf242d0_u32, 0xb206_u16, 0x4e7d_u16, StaticArray[0xb4_u8, 0xc1_u8, 0x47_u8, 0x55_u8, 0xbc_u8, 0xbb_u8, 0x9c_u8, 0x9f_u8])
     def query_interface(this : IPhotoProgressActionCB*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -341,7 +345,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoProgressDialogVtbl,
+
+  record IPhotoProgressDialogVtable,
     query_interface : Proc(IPhotoProgressDialog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoProgressDialog*, UInt32),
     release : Proc(IPhotoProgressDialog*, UInt32),
@@ -366,7 +371,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoProgressDialog, lpVtbl : IPhotoProgressDialogVtbl* do
+  record IPhotoProgressDialog, lpVtbl : IPhotoProgressDialogVtable* do
     GUID = LibC::GUID.new(0xf246f9_u32, 0x750_u16, 0x4f08_u16, StaticArray[0x93_u8, 0x81_u8, 0x2c_u8, 0xd8_u8, 0xe9_u8, 0x6_u8, 0xa4_u8, 0xae_u8])
     def query_interface(this : IPhotoProgressDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -435,7 +440,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoAcquireSourceVtbl,
+
+  record IPhotoAcquireSourceVtable,
     query_interface : Proc(IPhotoAcquireSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoAcquireSource*, UInt32),
     release : Proc(IPhotoAcquireSource*, UInt32),
@@ -450,7 +456,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoAcquireSource, lpVtbl : IPhotoAcquireSourceVtbl* do
+  record IPhotoAcquireSource, lpVtbl : IPhotoAcquireSourceVtable* do
     GUID = LibC::GUID.new(0xf2c703_u32, 0x8613_u16, 0x4282_u16, StaticArray[0xa5_u8, 0x3b_u8, 0x6e_u8, 0xc5_u8, 0x9c_u8, 0x58_u8, 0x83_u8, 0xac_u8])
     def query_interface(this : IPhotoAcquireSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -489,7 +495,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoAcquireVtbl,
+
+  record IPhotoAcquireVtable,
     query_interface : Proc(IPhotoAcquire*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoAcquire*, UInt32),
     release : Proc(IPhotoAcquire*, UInt32),
@@ -499,7 +506,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoAcquire, lpVtbl : IPhotoAcquireVtbl* do
+  record IPhotoAcquire, lpVtbl : IPhotoAcquireVtable* do
     GUID = LibC::GUID.new(0xf23353_u32, 0xe31b_u16, 0x4955_u16, StaticArray[0xa8_u8, 0xad_u8, 0xca_u8, 0x5e_u8, 0xbf_u8, 0x31_u8, 0xe2_u8, 0xce_u8])
     def query_interface(this : IPhotoAcquire*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -523,7 +530,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoAcquireSettingsVtbl,
+
+  record IPhotoAcquireSettingsVtable,
     query_interface : Proc(IPhotoAcquireSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoAcquireSettings*, UInt32),
     release : Proc(IPhotoAcquireSettings*, UInt32),
@@ -543,7 +551,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoAcquireSettings, lpVtbl : IPhotoAcquireSettingsVtbl* do
+  record IPhotoAcquireSettings, lpVtbl : IPhotoAcquireSettingsVtable* do
     GUID = LibC::GUID.new(0xf2b868_u32, 0xdd67_u16, 0x487c_u16, StaticArray[0x95_u8, 0x53_u8, 0x4_u8, 0x92_u8, 0x40_u8, 0x76_u8, 0x7e_u8, 0x91_u8])
     def query_interface(this : IPhotoAcquireSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -597,7 +605,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoAcquireOptionsDialogVtbl,
+
+  record IPhotoAcquireOptionsDialogVtable,
     query_interface : Proc(IPhotoAcquireOptionsDialog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoAcquireOptionsDialog*, UInt32),
     release : Proc(IPhotoAcquireOptionsDialog*, UInt32),
@@ -609,7 +618,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoAcquireOptionsDialog, lpVtbl : IPhotoAcquireOptionsDialogVtbl* do
+  record IPhotoAcquireOptionsDialog, lpVtbl : IPhotoAcquireOptionsDialogVtable* do
     GUID = LibC::GUID.new(0xf2b3ee_u32, 0xbf64_u16, 0x47ee_u16, StaticArray[0x89_u8, 0xf4_u8, 0x4d_u8, 0xed_u8, 0xd7_u8, 0x96_u8, 0x43_u8, 0xf2_u8])
     def query_interface(this : IPhotoAcquireOptionsDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -639,7 +648,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoAcquireDeviceSelectionDialogVtbl,
+
+  record IPhotoAcquireDeviceSelectionDialogVtable,
     query_interface : Proc(IPhotoAcquireDeviceSelectionDialog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoAcquireDeviceSelectionDialog*, UInt32),
     release : Proc(IPhotoAcquireDeviceSelectionDialog*, UInt32),
@@ -649,7 +659,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoAcquireDeviceSelectionDialog, lpVtbl : IPhotoAcquireDeviceSelectionDialogVtbl* do
+  record IPhotoAcquireDeviceSelectionDialog, lpVtbl : IPhotoAcquireDeviceSelectionDialogVtable* do
     GUID = LibC::GUID.new(0xf28837_u32, 0x55dd_u16, 0x4f37_u16, StaticArray[0xaa_u8, 0xf5_u8, 0x68_u8, 0x55_u8, 0xa9_u8, 0x64_u8, 0x4_u8, 0x67_u8])
     def query_interface(this : IPhotoAcquireDeviceSelectionDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -673,7 +683,8 @@ module Win32cr::Media::PictureAcquisition
   end
 
   @[Extern]
-  record IPhotoAcquirePluginVtbl,
+
+  record IPhotoAcquirePluginVtable,
     query_interface : Proc(IPhotoAcquirePlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhotoAcquirePlugin*, UInt32),
     release : Proc(IPhotoAcquirePlugin*, UInt32),
@@ -684,7 +695,7 @@ module Win32cr::Media::PictureAcquisition
 
 
   @[Extern]
-  record IPhotoAcquirePlugin, lpVtbl : IPhotoAcquirePluginVtbl* do
+  record IPhotoAcquirePlugin, lpVtbl : IPhotoAcquirePluginVtable* do
     GUID = LibC::GUID.new(0xf2dceb_u32, 0xecb8_u16, 0x4f77_u16, StaticArray[0x8e_u8, 0x47_u8, 0xe7_u8, 0xa9_u8, 0x87_u8, 0xc8_u8, 0x3d_u8, 0xd0_u8])
     def query_interface(this : IPhotoAcquirePlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

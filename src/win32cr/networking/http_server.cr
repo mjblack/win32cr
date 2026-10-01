@@ -5,6 +5,7 @@ require "./../system/io.cr"
 
 module Win32cr::Networking::HttpServer
   extend self
+  alias HTTP_REQUEST_QUEUE_HANDLE = Void*
   HTTP_DEMAND_CBT = 4_u32
   HTTP_MAX_SERVER_QUEUE_LENGTH = 2147483647_u32
   HTTP_MIN_SERVER_QUEUE_LENGTH = 1_u32
@@ -52,6 +53,8 @@ module Win32cr::Networking::HttpServer
   HTTP_LOG_FIELD_REASON = 33554432_u32
   HTTP_LOG_FIELD_QUEUE_NAME = 67108864_u32
   HTTP_LOG_FIELD_CORRELATION_ID = 1073741824_u32
+  HTTP_LOG_FIELD_FAULT_CODE = 2147483648_u32
+  HTTP_LOG_FIELD_EXT_FAULT_CODE_EXT = 1_u64
   HTTP_LOGGING_FLAG_LOCAL_TIME_ROLLOVER = 1_u32
   HTTP_LOGGING_FLAG_USE_UTF8_CONVERSION = 2_u32
   HTTP_LOGGING_FLAG_LOG_ERRORS_ONLY = 4_u32
@@ -67,6 +70,7 @@ module Win32cr::Networking::HttpServer
   HTTP_SEND_RESPONSE_FLAG_PROCESS_RANGES = 32_u32
   HTTP_SEND_RESPONSE_FLAG_OPAQUE = 64_u32
   HTTP_SEND_RESPONSE_FLAG_GOAWAY = 256_u32
+  HTTP_SEND_RESPONSE_FLAG_AUTOMATIC_CHUNKING = 512_u32
   HTTP_FLUSH_RESPONSE_FLAG_RECURSIVE = 1_u32
   HTTP_URL_FLAG_REMOVE_ALL = 1_u32
   HTTP_RECEIVE_SECURE_CHANNEL_TOKEN = 1_u32
@@ -80,9 +84,19 @@ module Win32cr::Networking::HttpServer
   HTTP_REQUEST_FLAG_IP_ROUTED = 2_u32
   HTTP_REQUEST_FLAG_HTTP2 = 4_u32
   HTTP_REQUEST_FLAG_HTTP3 = 8_u32
+  HTTP_REQUEST_FLAG_FAST_FORWARDING_ALLOWED = 16_u32
+  HTTP_REQUEST_FLAG_FAST_FORWARDING_RESPONSE_ALLOWED = 16_u32
   HTTP_RESPONSE_FLAG_MULTIPLE_ENCODINGS_AVAILABLE = 1_u32
   HTTP_RESPONSE_FLAG_MORE_ENTITY_BODY_EXISTS = 2_u32
   HTTP_RESPONSE_INFO_FLAGS_PRESERVE_ORDER = 1_u32
+  HTTP_CERT_CHECK_MODE_NO_REVOCATION = 1_u32
+  HTTP_CERT_CHECK_MODE_CACHED_REVOCATION = 2_u32
+  HTTP_CERT_CHECK_MODE_USE_REVOCATION_FRESHNESS = 4_u32
+  HTTP_CERT_CHECK_MODE_CACHED_URLS = 8_u32
+  HTTP_CERT_CHECK_MODE_NO_AIA = 16_u32
+  HTTP_CERT_CHECK_MODE_NO_USAGE_CHECK = 65536_u32
+  HTTP_SSL_CERT_SHA_HASH_LENGTH = 20_u32
+  HTTP_SSL_CERT_STORE_NAME_LENGTH = 128_u32
   HTTP_SERVICE_CONFIG_SSL_FLAG_USE_DS_MAPPER = 1_u32
   HTTP_SERVICE_CONFIG_SSL_FLAG_NEGOTIATE_CLIENT_CERT = 2_u32
   HTTP_SERVICE_CONFIG_SSL_FLAG_NO_RAW_FILTER = 4_u32
@@ -97,6 +111,8 @@ module Win32cr::Networking::HttpServer
   HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_SESSION_TICKET = 2048_u32
   HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_TLS12 = 4096_u32
   HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_CLIENT_CORRELATION = 8192_u32
+  HTTP_SERVICE_CONFIG_SSL_FLAG_DISABLE_SESSION_ID = 16384_u32
+  HTTP_SERVICE_CONFIG_SSL_FLAG_ENABLE_CACHE_CLIENT_HELLO = 32768_u32
   HTTP_REQUEST_PROPERTY_SNI_HOST_MAX_LENGTH = 255_u32
   HTTP_REQUEST_PROPERTY_SNI_FLAG_SNI_USED = 1_u32
   HTTP_REQUEST_PROPERTY_SNI_FLAG_NO_SNI = 2_u32
@@ -125,6 +141,8 @@ module Win32cr::Networking::HttpServer
     HttpServerChannelBindProperty = 10_i32
     HttpServerProtectionLevelProperty = 11_i32
     HttpServerDelegationProperty = 16_i32
+    HttpServerFastForwardingProperty = 18_i32
+    HttpServerRequestInfoProperty = 19_i32
   end
   enum HTTP_ENABLED_STATE
     HttpEnabledStateActive = 0_i32
@@ -269,7 +287,8 @@ module Win32cr::Networking::HttpServer
     HttpDataChunkFromFragmentCache = 2_i32
     HttpDataChunkFromFragmentCacheEx = 3_i32
     HttpDataChunkTrailers = 4_i32
-    HttpDataChunkMaximum = 5_i32
+    HttpDataChunkFromWinHttpFastForwarding = 5_i32
+    HttpDataChunkMaximum = 6_i32
   end
   enum HTTP_DELEGATE_REQUEST_PROPERTY_ID
     DelegateRequestReservedProperty = 0_i32
@@ -344,6 +363,11 @@ module Win32cr::Networking::HttpServer
     HttpRequestInfoTypeRequestSizing = 7_i32
     HttpRequestInfoTypeQuicStats = 8_i32
     HttpRequestInfoTypeTcpInfoV1 = 9_i32
+    HttpRequestInfoTypeQuicStatsV2 = 10_i32
+    HttpRequestInfoTypeTcpInfoV2 = 11_i32
+    HttpRequestInfoTypeTransportIdleConnectionTimeout = 12_i32
+    HttpRequestInfoTypeDscpTag = 13_i32
+    HttpRequestInfoTypeInitialPacketTtl = 14_i32
   end
   enum HTTP_RESPONSE_INFO_TYPE
     HttpResponseInfoTypeMultipleKnownHeaders = 0_i32
@@ -385,7 +409,8 @@ module Win32cr::Networking::HttpServer
     ExParamTypeTlsRestrictions = 3_i32
     ExParamTypeErrorHeaders = 4_i32
     ExParamTypeTlsSessionTicketKeys = 5_i32
-    ExParamTypeMax = 6_i32
+    ExParamTypeCertConfig = 6_i32
+    ExParamTypeMax = 7_i32
   end
   enum HTTP_PERFORMANCE_PARAM_TYPE
     PerformanceParamSendBufferingFlags = 0_i32
@@ -409,6 +434,13 @@ module Win32cr::Networking::HttpServer
     HttpRequestPropertyStreamError = 5_i32
     HttpRequestPropertyWskApiTimings = 6_i32
     HttpRequestPropertyQuicApiTimings = 7_i32
+    HttpRequestPropertyQuicStatsV2 = 8_i32
+    HttpRequestPropertyQuicStreamStats = 9_i32
+    HttpRequestPropertyTcpInfoV2 = 10_i32
+    HttpRequestPropertyTlsClientHello = 11_i32
+    HttpRequestPropertyTransportIdleConnectionTimeout = 12_i32
+    HttpRequestPropertyDscpTag = 13_i32
+    HttpRequestPropertyTlsCipherInfo = 14_i32
   end
   enum HTTP_FEATURE_ID
     HttpFeatureUnknown = 0_i32
@@ -416,6 +448,20 @@ module Win32cr::Networking::HttpServer
     HttpFeatureApiTimings = 2_i32
     HttpFeatureDelegateEx = 3_i32
     HttpFeatureHttp3 = 4_i32
+    HttpFeatureTlsSessionTickets = 5_i32
+    HttpFeatureDisableTlsSessionId = 6_i32
+    HttpFeatureTlsDualCerts = 7_i32
+    HttpFeatureAutomaticChunkedEncoding = 8_i32
+    HttpFeatureDedicatedReqQueueDelegationType = 9_i32
+    HttpFeatureFastForwardResponse = 10_i32
+    HttpFeatureCacheTlsClientHello = 11_i32
+    HttpFeatureIdleConnectionTimeoutRequestProperty = 12_i32
+    HttpFeatureDisableAiaFlag = 13_i32
+    HttpFeatureDscp = 14_i32
+    HttpFeatureQueryCipherInfo = 15_i32
+    HttpFeatureQueryInitialPacketTtl = 16_i32
+    HttpFeatureTlsHandshakePerformanceCounters = 17_i32
+    HttpFeatureLast = 18_i32
     HttpFeaturemax = -1_i32
   end
 
@@ -502,6 +548,14 @@ module Win32cr::Networking::HttpServer
     property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
     property enable_sharing : Win32cr::Foundation::BOOLEAN
     def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @enable_sharing : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_FAST_FORWARD_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property enable_fast_forwarding : Win32cr::Foundation::BOOLEAN
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @enable_fast_forwarding : Win32cr::Foundation::BOOLEAN)
     end
   end
 
@@ -630,10 +684,18 @@ module Win32cr::Networking::HttpServer
   end
 
   @[Extern]
+  struct HTTP_REQUEST_INFO_PROPERTY_INFO
+    property flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS
+    property request_info_flags : UInt64
+    def initialize(@flags : Win32cr::Networking::HttpServer::HTTP_PROPERTY_FLAGS, @request_info_flags : UInt64)
+    end
+  end
+
+  @[Extern]
   struct HTTP_BYTE_RANGE
-    property starting_offset : Win32cr::Foundation::ULARGE_INTEGER
-    property length : Win32cr::Foundation::ULARGE_INTEGER
-    def initialize(@starting_offset : Win32cr::Foundation::ULARGE_INTEGER, @length : Win32cr::Foundation::ULARGE_INTEGER)
+    property starting_offset : UInt64
+    property length : UInt64
+    def initialize(@starting_offset : UInt64, @length : UInt64)
     end
   end
 
@@ -707,6 +769,13 @@ module Win32cr::Networking::HttpServer
   end
 
   @[Extern]
+  struct HTTP_WINHTTP_FAST_FORWARDING_DATA
+    property reserved : UInt8[16]
+    def initialize(@reserved : UInt8[16])
+    end
+  end
+
+  @[Extern]
   struct HTTP_DATA_CHUNK
     property data_chunk_type : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK_TYPE
     property anonymous : Anonymous_e__Union_
@@ -719,13 +788,14 @@ module Win32cr::Networking::HttpServer
     property from_fragment_cache : FromFragmentCache_e__Struct_
     property from_fragment_cache_ex : FromFragmentCacheEx_e__Struct_
     property trailers : Trailers_e__Struct_
+    property from_win_http_fast_forwarding : FromWinHttpFastForwarding_e__Struct_
 
-      # Nested Type FromFragmentCacheEx_e__Struct_
+      # Nested Type FromMemory_e__Struct_
       @[Extern]
-      struct FromFragmentCacheEx_e__Struct_
-    property byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE
-    property pFragmentName : Win32cr::Foundation::PWSTR
-    def initialize(@byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE, @pFragmentName : Win32cr::Foundation::PWSTR)
+      struct FromMemory_e__Struct_
+    property pBuffer : Void*
+    property buffer_length : UInt32
+    def initialize(@pBuffer : Void*, @buffer_length : UInt32)
     end
       end
 
@@ -750,12 +820,12 @@ module Win32cr::Networking::HttpServer
       end
 
 
-      # Nested Type FromMemory_e__Struct_
+      # Nested Type FromFragmentCacheEx_e__Struct_
       @[Extern]
-      struct FromMemory_e__Struct_
-    property pBuffer : Void*
-    property buffer_length : UInt32
-    def initialize(@pBuffer : Void*, @buffer_length : UInt32)
+      struct FromFragmentCacheEx_e__Struct_
+    property byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE
+    property pFragmentName : Win32cr::Foundation::PWSTR
+    def initialize(@byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE, @pFragmentName : Win32cr::Foundation::PWSTR)
     end
       end
 
@@ -769,7 +839,16 @@ module Win32cr::Networking::HttpServer
     end
       end
 
-    def initialize(@from_memory : FromMemory_e__Struct_, @from_file_handle : FromFileHandle_e__Struct_, @from_fragment_cache : FromFragmentCache_e__Struct_, @from_fragment_cache_ex : FromFragmentCacheEx_e__Struct_, @trailers : Trailers_e__Struct_)
+
+      # Nested Type FromWinHttpFastForwarding_e__Struct_
+      @[Extern]
+      struct FromWinHttpFastForwarding_e__Struct_
+    property wh_fast_forwarding_data : Win32cr::Networking::HttpServer::HTTP_WINHTTP_FAST_FORWARDING_DATA
+    def initialize(@wh_fast_forwarding_data : Win32cr::Networking::HttpServer::HTTP_WINHTTP_FAST_FORWARDING_DATA)
+    end
+      end
+
+    def initialize(@from_memory : FromMemory_e__Struct_, @from_file_handle : FromFileHandle_e__Struct_, @from_fragment_cache : FromFragmentCache_e__Struct_, @from_fragment_cache_ex : FromFragmentCacheEx_e__Struct_, @trailers : Trailers_e__Struct_, @from_win_http_fast_forwarding : FromWinHttpFastForwarding_e__Struct_)
     end
     end
 
@@ -896,6 +975,27 @@ module Win32cr::Networking::HttpServer
   end
 
   @[Extern]
+  struct HTTP_REQUEST_TRANSPORT_IDLE_CONNECTION_TIMEOUT_INFO
+    property transport_idle_connection_timeout : UInt16
+    def initialize(@transport_idle_connection_timeout : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_REQUEST_DSCP_INFO
+    property dscp_tag : UInt8
+    def initialize(@dscp_tag : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct HTTP_REQUEST_INITIAL_PACKET_TTL_INFO
+    property initial_packet_ttl : UInt8
+    def initialize(@initial_packet_ttl : UInt8)
+    end
+  end
+
+  @[Extern]
   struct HTTP_REQUEST_INFO
     property info_type : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO_TYPE
     property info_length : UInt32
@@ -949,10 +1049,10 @@ module Win32cr::Networking::HttpServer
 
   @[Extern]
   struct HTTP_REQUEST_V2
-    property __anonymous_base_http_l1861_c35 : Win32cr::Networking::HttpServer::HTTP_REQUEST_V1
+    property base : Win32cr::Networking::HttpServer::HTTP_REQUEST_V1
     property request_info_count : UInt16
     property pRequestInfo : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO*
-    def initialize(@__anonymous_base_http_l1861_c35 : Win32cr::Networking::HttpServer::HTTP_REQUEST_V1, @request_info_count : UInt16, @pRequestInfo : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO*)
+    def initialize(@base : Win32cr::Networking::HttpServer::HTTP_REQUEST_V1, @request_info_count : UInt16, @pRequestInfo : Win32cr::Networking::HttpServer::HTTP_REQUEST_INFO*)
     end
   end
 
@@ -991,10 +1091,10 @@ module Win32cr::Networking::HttpServer
 
   @[Extern]
   struct HTTP_RESPONSE_V2
-    property __anonymous_base_http_l2050_c36 : Win32cr::Networking::HttpServer::HTTP_RESPONSE_V1
+    property base : Win32cr::Networking::HttpServer::HTTP_RESPONSE_V1
     property response_info_count : UInt16
     property pResponseInfo : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO*
-    def initialize(@__anonymous_base_http_l2050_c36 : Win32cr::Networking::HttpServer::HTTP_RESPONSE_V1, @response_info_count : UInt16, @pResponseInfo : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO*)
+    def initialize(@base : Win32cr::Networking::HttpServer::HTTP_RESPONSE_V1, @response_info_count : UInt16, @pResponseInfo : Win32cr::Networking::HttpServer::HTTP_RESPONSE_INFO*)
     end
   end
 
@@ -1109,6 +1209,22 @@ module Win32cr::Networking::HttpServer
   end
 
   @[Extern]
+  struct HTTP_CERT_CONFIG_ENTRY
+    property cert_hash : UInt8[20]
+    property cert_store_name : UInt16[128]
+    def initialize(@cert_hash : UInt8[20], @cert_store_name : UInt16[128])
+    end
+  end
+
+  @[Extern]
+  struct HTTP_CERT_CONFIG_PARAM
+    property cert_config_count : UInt32
+    property cert_configs : Win32cr::Networking::HttpServer::HTTP_CERT_CONFIG_ENTRY*
+    def initialize(@cert_config_count : UInt32, @cert_configs : Win32cr::Networking::HttpServer::HTTP_CERT_CONFIG_ENTRY*)
+    end
+  end
+
+  @[Extern]
   struct HTTP_SERVICE_CONFIG_SSL_PARAM_EX
     property param_type : Win32cr::Networking::HttpServer::HTTP_SSL_SERVICE_CONFIG_EX_PARAM_TYPE
     property flags : UInt64
@@ -1123,7 +1239,8 @@ module Win32cr::Networking::HttpServer
     property http_tls_restrictions_param : Win32cr::Networking::HttpServer::HTTP_TLS_RESTRICTIONS_PARAM
     property http_error_headers_param : Win32cr::Networking::HttpServer::HTTP_ERROR_HEADERS_PARAM
     property http_tls_session_ticket_keys_param : Win32cr::Networking::HttpServer::HTTP_TLS_SESSION_TICKET_KEYS_PARAM
-    def initialize(@http2_window_size_param : Win32cr::Networking::HttpServer::HTTP2_WINDOW_SIZE_PARAM, @http2_settings_limits_param : Win32cr::Networking::HttpServer::HTTP2_SETTINGS_LIMITS_PARAM, @http_performance_param : Win32cr::Networking::HttpServer::HTTP_PERFORMANCE_PARAM, @http_tls_restrictions_param : Win32cr::Networking::HttpServer::HTTP_TLS_RESTRICTIONS_PARAM, @http_error_headers_param : Win32cr::Networking::HttpServer::HTTP_ERROR_HEADERS_PARAM, @http_tls_session_ticket_keys_param : Win32cr::Networking::HttpServer::HTTP_TLS_SESSION_TICKET_KEYS_PARAM)
+    property http_cert_config_param : Win32cr::Networking::HttpServer::HTTP_CERT_CONFIG_PARAM
+    def initialize(@http2_window_size_param : Win32cr::Networking::HttpServer::HTTP2_WINDOW_SIZE_PARAM, @http2_settings_limits_param : Win32cr::Networking::HttpServer::HTTP2_SETTINGS_LIMITS_PARAM, @http_performance_param : Win32cr::Networking::HttpServer::HTTP_PERFORMANCE_PARAM, @http_tls_restrictions_param : Win32cr::Networking::HttpServer::HTTP_TLS_RESTRICTIONS_PARAM, @http_error_headers_param : Win32cr::Networking::HttpServer::HTTP_ERROR_HEADERS_PARAM, @http_tls_session_ticket_keys_param : Win32cr::Networking::HttpServer::HTTP_TLS_SESSION_TICKET_KEYS_PARAM, @http_cert_config_param : Win32cr::Networking::HttpServer::HTTP_CERT_CONFIG_PARAM)
     end
     end
 
@@ -1247,8 +1364,8 @@ module Win32cr::Networking::HttpServer
   @[Extern]
   struct HTTP_SERVICE_CONFIG_IP_LISTEN_QUERY
     property addr_count : UInt32
-    property addr_list : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*
-    def initialize(@addr_count : UInt32, @addr_list : Win32cr::Networking::WinSock::SOCKADDR_STORAGE*)
+    property addr_list : Win32cr::Networking::WinSock::SOCKADDR_STORAGE[1]
+    def initialize(@addr_count : UInt32, @addr_list : Win32cr::Networking::WinSock::SOCKADDR_STORAGE[1])
     end
   end
 
@@ -1389,179 +1506,286 @@ module Win32cr::Networking::HttpServer
     end
   end
 
+  @[Extern]
+  struct HTTP_QUIC_STREAM_REQUEST_STATS
+    property stream_wait_start : UInt64
+    property stream_wait_end : UInt64
+    property request_headers_compression_start : UInt64
+    property request_headers_compression_end : UInt64
+    property response_headers_decompression_start : UInt64
+    property response_headers_decompression_end : UInt64
+    property request_headers_compressed_size : UInt64
+    property response_headers_compressed_size : UInt64
+    def initialize(@stream_wait_start : UInt64, @stream_wait_end : UInt64, @request_headers_compression_start : UInt64, @request_headers_compression_end : UInt64, @response_headers_decompression_start : UInt64, @response_headers_decompression_end : UInt64, @request_headers_compressed_size : UInt64, @response_headers_compressed_size : UInt64)
+    end
+  end
+
   def httpInitialize(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, flags : Win32cr::Networking::HttpServer::HTTP_INITIALIZE, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpInitialize(version, flags, pReserved)
+    {% end %}
   end
 
   def httpTerminate(flags : Win32cr::Networking::HttpServer::HTTP_INITIALIZE, pReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpTerminate(flags, pReserved)
+    {% end %}
   end
 
   def httpCreateHttpHandle(request_queue_handle : Win32cr::Foundation::HANDLE*, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpCreateHttpHandle(request_queue_handle, reserved)
+    {% end %}
   end
 
-  def httpCreateRequestQueue(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, name : Win32cr::Foundation::PWSTR, security_attributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flags : UInt32, request_queue_handle : Win32cr::Foundation::HANDLE*) : UInt32
+  def httpCreateRequestQueue(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, name : Win32cr::Foundation::PWSTR, security_attributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flags : UInt32, request_queue_handle : Win32cr::Networking::HttpServer::HTTP_REQUEST_QUEUE_HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpCreateRequestQueue(version, name, security_attributes, flags, request_queue_handle)
+    {% end %}
   end
 
-  def httpCloseRequestQueue(request_queue_handle : Win32cr::Foundation::HANDLE) : UInt32
+  def httpCloseRequestQueue(request_queue_handle : Win32cr::Networking::HttpServer::HTTP_REQUEST_QUEUE_HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpCloseRequestQueue(request_queue_handle)
+    {% end %}
   end
 
   def httpSetRequestQueueProperty(request_queue_handle : Win32cr::Foundation::HANDLE, property : Win32cr::Networking::HttpServer::HTTP_SERVER_PROPERTY, property_information : Void*, property_information_length : UInt32, reserved1 : UInt32, reserved2 : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpSetRequestQueueProperty(request_queue_handle, property, property_information, property_information_length, reserved1, reserved2)
+    {% end %}
   end
 
   def httpQueryRequestQueueProperty(request_queue_handle : Win32cr::Foundation::HANDLE, property : Win32cr::Networking::HttpServer::HTTP_SERVER_PROPERTY, property_information : Void*, property_information_length : UInt32, reserved1 : UInt32, return_length : UInt32*, reserved2 : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpQueryRequestQueueProperty(request_queue_handle, property, property_information, property_information_length, reserved1, return_length, reserved2)
+    {% end %}
   end
 
   def httpSetRequestProperty(request_queue_handle : Win32cr::Foundation::HANDLE, id : UInt64, property_id : Win32cr::Networking::HttpServer::HTTP_REQUEST_PROPERTY, input : Void*, input_property_size : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpSetRequestProperty(request_queue_handle, id, property_id, input, input_property_size, overlapped)
+    {% end %}
+  end
+
+  def httpQueryRequestProperty(request_queue_handle : Win32cr::Foundation::HANDLE, id : UInt64, property_id : Win32cr::Networking::HttpServer::HTTP_REQUEST_PROPERTY, qualifier : Void*, qualifier_size : UInt32, output : Void*, output_buffer_size : UInt32, bytes_returned : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
+    C.HttpQueryRequestProperty(request_queue_handle, id, property_id, qualifier, qualifier_size, output, output_buffer_size, bytes_returned, overlapped)
+    {% end %}
   end
 
   def httpShutdownRequestQueue(request_queue_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpShutdownRequestQueue(request_queue_handle)
+    {% end %}
   end
 
   def httpReceiveClientCertificate(request_queue_handle : Win32cr::Foundation::HANDLE, connection_id : UInt64, flags : UInt32, ssl_client_cert_info : Win32cr::Networking::HttpServer::HTTP_SSL_CLIENT_CERT_INFO*, ssl_client_cert_info_size : UInt32, bytes_received : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpReceiveClientCertificate(request_queue_handle, connection_id, flags, ssl_client_cert_info, ssl_client_cert_info_size, bytes_received, overlapped)
+    {% end %}
   end
 
   def httpCreateServerSession(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, server_session_id : UInt64*, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpCreateServerSession(version, server_session_id, reserved)
+    {% end %}
   end
 
   def httpCloseServerSession(server_session_id : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpCloseServerSession(server_session_id)
+    {% end %}
   end
 
   def httpQueryServerSessionProperty(server_session_id : UInt64, property : Win32cr::Networking::HttpServer::HTTP_SERVER_PROPERTY, property_information : Void*, property_information_length : UInt32, return_length : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpQueryServerSessionProperty(server_session_id, property, property_information, property_information_length, return_length)
+    {% end %}
   end
 
   def httpSetServerSessionProperty(server_session_id : UInt64, property : Win32cr::Networking::HttpServer::HTTP_SERVER_PROPERTY, property_information : Void*, property_information_length : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpSetServerSessionProperty(server_session_id, property, property_information, property_information_length)
+    {% end %}
   end
 
   def httpAddUrl(request_queue_handle : Win32cr::Foundation::HANDLE, fully_qualified_url : Win32cr::Foundation::PWSTR, reserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpAddUrl(request_queue_handle, fully_qualified_url, reserved)
+    {% end %}
   end
 
   def httpRemoveUrl(request_queue_handle : Win32cr::Foundation::HANDLE, fully_qualified_url : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpRemoveUrl(request_queue_handle, fully_qualified_url)
+    {% end %}
   end
 
   def httpCreateUrlGroup(server_session_id : UInt64, pUrlGroupId : UInt64*, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpCreateUrlGroup(server_session_id, pUrlGroupId, reserved)
+    {% end %}
   end
 
   def httpCloseUrlGroup(url_group_id : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpCloseUrlGroup(url_group_id)
+    {% end %}
   end
 
   def httpAddUrlToUrlGroup(url_group_id : UInt64, pFullyQualifiedUrl : Win32cr::Foundation::PWSTR, url_context : UInt64, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpAddUrlToUrlGroup(url_group_id, pFullyQualifiedUrl, url_context, reserved)
+    {% end %}
   end
 
   def httpRemoveUrlFromUrlGroup(url_group_id : UInt64, pFullyQualifiedUrl : Win32cr::Foundation::PWSTR, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpRemoveUrlFromUrlGroup(url_group_id, pFullyQualifiedUrl, flags)
+    {% end %}
   end
 
   def httpSetUrlGroupProperty(url_group_id : UInt64, property : Win32cr::Networking::HttpServer::HTTP_SERVER_PROPERTY, property_information : Void*, property_information_length : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpSetUrlGroupProperty(url_group_id, property, property_information, property_information_length)
+    {% end %}
   end
 
   def httpQueryUrlGroupProperty(url_group_id : UInt64, property : Win32cr::Networking::HttpServer::HTTP_SERVER_PROPERTY, property_information : Void*, property_information_length : UInt32, return_length : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpQueryUrlGroupProperty(url_group_id, property, property_information, property_information_length, return_length)
+    {% end %}
   end
 
   def httpPrepareUrl(reserved : Void*, flags : UInt32, url : Win32cr::Foundation::PWSTR, prepared_url : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpPrepareUrl(reserved, flags, url, prepared_url)
+    {% end %}
   end
 
   def httpReceiveHttpRequest(request_queue_handle : Win32cr::Foundation::HANDLE, request_id : UInt64, flags : Win32cr::Networking::HttpServer::HTTP_RECEIVE_HTTP_REQUEST_FLAGS, request_buffer : Win32cr::Networking::HttpServer::HTTP_REQUEST_V2*, request_buffer_length : UInt32, bytes_returned : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpReceiveHttpRequest(request_queue_handle, request_id, flags, request_buffer, request_buffer_length, bytes_returned, overlapped)
+    {% end %}
   end
 
   def httpReceiveRequestEntityBody(request_queue_handle : Win32cr::Foundation::HANDLE, request_id : UInt64, flags : UInt32, entity_buffer : Void*, entity_buffer_length : UInt32, bytes_returned : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpReceiveRequestEntityBody(request_queue_handle, request_id, flags, entity_buffer, entity_buffer_length, bytes_returned, overlapped)
+    {% end %}
   end
 
   def httpSendHttpResponse(request_queue_handle : Win32cr::Foundation::HANDLE, request_id : UInt64, flags : UInt32, http_response : Win32cr::Networking::HttpServer::HTTP_RESPONSE_V2*, cache_policy : Win32cr::Networking::HttpServer::HTTP_CACHE_POLICY*, bytes_sent : UInt32*, reserved1 : Void*, reserved2 : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*, log_data : Win32cr::Networking::HttpServer::HTTP_LOG_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpSendHttpResponse(request_queue_handle, request_id, flags, http_response, cache_policy, bytes_sent, reserved1, reserved2, overlapped, log_data)
+    {% end %}
   end
 
   def httpSendResponseEntityBody(request_queue_handle : Win32cr::Foundation::HANDLE, request_id : UInt64, flags : UInt32, entity_chunk_count : UInt16, entity_chunks : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK*, bytes_sent : UInt32*, reserved1 : Void*, reserved2 : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*, log_data : Win32cr::Networking::HttpServer::HTTP_LOG_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpSendResponseEntityBody(request_queue_handle, request_id, flags, entity_chunk_count, entity_chunks, bytes_sent, reserved1, reserved2, overlapped, log_data)
+    {% end %}
   end
 
   def httpDeclarePush(request_queue_handle : Win32cr::Foundation::HANDLE, request_id : UInt64, verb : Win32cr::Networking::HttpServer::HTTP_VERB, path : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PSTR, headers : Win32cr::Networking::HttpServer::HTTP_REQUEST_HEADERS*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpDeclarePush(request_queue_handle, request_id, verb, path, query, headers)
+    {% end %}
   end
 
   def httpWaitForDisconnect(request_queue_handle : Win32cr::Foundation::HANDLE, connection_id : UInt64, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpWaitForDisconnect(request_queue_handle, connection_id, overlapped)
+    {% end %}
   end
 
   def httpWaitForDisconnectEx(request_queue_handle : Win32cr::Foundation::HANDLE, connection_id : UInt64, reserved : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpWaitForDisconnectEx(request_queue_handle, connection_id, reserved, overlapped)
+    {% end %}
   end
 
   def httpCancelHttpRequest(request_queue_handle : Win32cr::Foundation::HANDLE, request_id : UInt64, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpCancelHttpRequest(request_queue_handle, request_id, overlapped)
+    {% end %}
   end
 
   def httpWaitForDemandStart(request_queue_handle : Win32cr::Foundation::HANDLE, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpWaitForDemandStart(request_queue_handle, overlapped)
+    {% end %}
   end
 
   def httpIsFeatureSupported(feature_id : Win32cr::Networking::HttpServer::HTTP_FEATURE_ID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpIsFeatureSupported(feature_id)
+    {% end %}
   end
 
   def httpDelegateRequestEx(request_queue_handle : Win32cr::Foundation::HANDLE, delegate_queue_handle : Win32cr::Foundation::HANDLE, request_id : UInt64, delegate_url_group_id : UInt64, property_info_set_size : UInt32, property_info_set : Win32cr::Networking::HttpServer::HTTP_DELEGATE_REQUEST_PROPERTY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpDelegateRequestEx(request_queue_handle, delegate_queue_handle, request_id, delegate_url_group_id, property_info_set_size, property_info_set)
+    {% end %}
   end
 
   def httpFindUrlGroupId(fully_qualified_url : Win32cr::Foundation::PWSTR, request_queue_handle : Win32cr::Foundation::HANDLE, url_group_id : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpFindUrlGroupId(fully_qualified_url, request_queue_handle, url_group_id)
+    {% end %}
   end
 
   def httpFlushResponseCache(request_queue_handle : Win32cr::Foundation::HANDLE, url_prefix : Win32cr::Foundation::PWSTR, flags : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpFlushResponseCache(request_queue_handle, url_prefix, flags, overlapped)
+    {% end %}
   end
 
   def httpAddFragmentToCache(request_queue_handle : Win32cr::Foundation::HANDLE, url_prefix : Win32cr::Foundation::PWSTR, data_chunk : Win32cr::Networking::HttpServer::HTTP_DATA_CHUNK*, cache_policy : Win32cr::Networking::HttpServer::HTTP_CACHE_POLICY*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpAddFragmentToCache(request_queue_handle, url_prefix, data_chunk, cache_policy, overlapped)
+    {% end %}
   end
 
   def httpReadFragmentFromCache(request_queue_handle : Win32cr::Foundation::HANDLE, url_prefix : Win32cr::Foundation::PWSTR, byte_range : Win32cr::Networking::HttpServer::HTTP_BYTE_RANGE*, buffer : Void*, buffer_length : UInt32, bytes_read : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpReadFragmentFromCache(request_queue_handle, url_prefix, byte_range, buffer, buffer_length, bytes_read, overlapped)
+    {% end %}
   end
 
   def httpSetServiceConfiguration(service_handle : Win32cr::Foundation::HANDLE, config_id : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_ID, pConfigInformation : Void*, config_information_length : UInt32, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpSetServiceConfiguration(service_handle, config_id, pConfigInformation, config_information_length, pOverlapped)
+    {% end %}
   end
 
   def httpUpdateServiceConfiguration(handle : Win32cr::Foundation::HANDLE, config_id : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_ID, config_info : Void*, config_info_length : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpUpdateServiceConfiguration(handle, config_id, config_info, config_info_length, overlapped)
+    {% end %}
   end
 
   def httpDeleteServiceConfiguration(service_handle : Win32cr::Foundation::HANDLE, config_id : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_ID, pConfigInformation : Void*, config_information_length : UInt32, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpDeleteServiceConfiguration(service_handle, config_id, pConfigInformation, config_information_length, pOverlapped)
+    {% end %}
   end
 
   def httpQueryServiceConfiguration(service_handle : Win32cr::Foundation::HANDLE, config_id : Win32cr::Networking::HttpServer::HTTP_SERVICE_CONFIG_ID, pInput : Void*, input_length : UInt32, pOutput : Void*, output_length : UInt32, pReturnLength : UInt32*, pOverlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpQueryServiceConfiguration(service_handle, config_id, pInput, input_length, pOutput, output_length, pReturnLength, pOverlapped)
+    {% end %}
   end
 
   def httpGetExtension(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, extension : UInt32, buffer : Void*, buffer_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpGetExtension(version, extension, buffer, buffer_size)
+    {% end %}
   end
 
   @[Link("httpapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun HttpInitialize(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, flags : Win32cr::Networking::HttpServer::HTTP_INITIALIZE, pReserved : Void*) : UInt32
@@ -1573,10 +1797,10 @@ module Win32cr::Networking::HttpServer
     fun HttpCreateHttpHandle(request_queue_handle : Win32cr::Foundation::HANDLE*, reserved : UInt32) : UInt32
 
     # :nodoc:
-    fun HttpCreateRequestQueue(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, name : Win32cr::Foundation::PWSTR, security_attributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flags : UInt32, request_queue_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    fun HttpCreateRequestQueue(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, name : Win32cr::Foundation::PWSTR, security_attributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flags : UInt32, request_queue_handle : Win32cr::Networking::HttpServer::HTTP_REQUEST_QUEUE_HANDLE*) : UInt32
 
     # :nodoc:
-    fun HttpCloseRequestQueue(request_queue_handle : Win32cr::Foundation::HANDLE) : UInt32
+    fun HttpCloseRequestQueue(request_queue_handle : Win32cr::Networking::HttpServer::HTTP_REQUEST_QUEUE_HANDLE) : UInt32
 
     # :nodoc:
     fun HttpSetRequestQueueProperty(request_queue_handle : Win32cr::Foundation::HANDLE, property : Win32cr::Networking::HttpServer::HTTP_SERVER_PROPERTY, property_information : Void*, property_information_length : UInt32, reserved1 : UInt32, reserved2 : Void*) : UInt32
@@ -1586,6 +1810,9 @@ module Win32cr::Networking::HttpServer
 
     # :nodoc:
     fun HttpSetRequestProperty(request_queue_handle : Win32cr::Foundation::HANDLE, id : UInt64, property_id : Win32cr::Networking::HttpServer::HTTP_REQUEST_PROPERTY, input : Void*, input_property_size : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
+
+    # :nodoc:
+    fun HttpQueryRequestProperty(request_queue_handle : Win32cr::Foundation::HANDLE, id : UInt64, property_id : Win32cr::Networking::HttpServer::HTTP_REQUEST_PROPERTY, qualifier : Void*, qualifier_size : UInt32, output : Void*, output_buffer_size : UInt32, bytes_returned : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : UInt32
 
     # :nodoc:
     fun HttpShutdownRequestQueue(request_queue_handle : Win32cr::Foundation::HANDLE) : UInt32
@@ -1693,4 +1920,5 @@ module Win32cr::Networking::HttpServer
     fun HttpGetExtension(version : Win32cr::Networking::HttpServer::HTTPAPI_VERSION, extension : UInt32, buffer : Void*, buffer_size : UInt32) : UInt32
 
   end
+  {% end %}
 end

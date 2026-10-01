@@ -4,7 +4,7 @@ require "./../../system/com.cr"
 
 module Win32cr::AI::MachineLearning::DirectML
   extend self
-  DML_TARGET_VERSION = 16384_u32
+  DML_TARGET_VERSION = 25600_u32
   DML_TENSOR_DIMENSION_COUNT_MAX = 5_u32
   DML_TENSOR_DIMENSION_COUNT_MAX1 = 8_u32
   DML_TEMPORARY_BUFFER_ALIGNMENT = 256_u32
@@ -30,9 +30,9 @@ module Win32cr::AI::MachineLearning::DirectML
     DML_TENSOR_TYPE_BUFFER = 1_i32
   end
   @[Flags]
-  enum DML_TENSOR_FLAGS : UInt32
-    DML_TENSOR_FLAG_NONE = 0_u32
-    DML_TENSOR_FLAG_OWNED_BY_DML = 1_u32
+  enum DML_TENSOR_FLAGS
+    DML_TENSOR_FLAG_NONE = 0_i32
+    DML_TENSOR_FLAG_OWNED_BY_DML = 1_i32
   end
   enum DML_OPERATOR_TYPE
     DML_OPERATOR_INVALID = 0_i32
@@ -186,6 +186,13 @@ module Win32cr::AI::MachineLearning::DirectML
     DML_OPERATOR_ELEMENT_WISE_QUANTIZED_LINEAR_ADD = 147_i32
     DML_OPERATOR_DYNAMIC_QUANTIZE_LINEAR = 148_i32
     DML_OPERATOR_ROI_ALIGN1 = 149_i32
+    DML_OPERATOR_ROI_ALIGN_GRAD = 150_i32
+    DML_OPERATOR_BATCH_NORMALIZATION_TRAINING = 151_i32
+    DML_OPERATOR_BATCH_NORMALIZATION_TRAINING_GRAD = 152_i32
+    DML_OPERATOR_ELEMENT_WISE_CLIP1 = 153_i32
+    DML_OPERATOR_ELEMENT_WISE_CLIP_GRAD1 = 154_i32
+    DML_OPERATOR_PADDING1 = 155_i32
+    DML_OPERATOR_ELEMENT_WISE_NEGATE = 156_i32
   end
   enum DML_REDUCE_FUNCTION
     DML_REDUCE_FUNCTION_ARGMAX = 0_i32
@@ -256,22 +263,31 @@ module Win32cr::AI::MachineLearning::DirectML
     DML_FEATURE_LEVEL_3_0 = 12288_i32
     DML_FEATURE_LEVEL_3_1 = 12544_i32
     DML_FEATURE_LEVEL_4_0 = 16384_i32
+    DML_FEATURE_LEVEL_4_1 = 16640_i32
+    DML_FEATURE_LEVEL_5_0 = 20480_i32
+    DML_FEATURE_LEVEL_5_1 = 20736_i32
+    DML_FEATURE_LEVEL_5_2 = 20992_i32
+    DML_FEATURE_LEVEL_6_0 = 24576_i32
+    DML_FEATURE_LEVEL_6_1 = 24832_i32
+    DML_FEATURE_LEVEL_6_2 = 25088_i32
+    DML_FEATURE_LEVEL_6_3 = 25344_i32
+    DML_FEATURE_LEVEL_6_4 = 25600_i32
   end
   enum DML_FEATURE
     DML_FEATURE_TENSOR_DATA_TYPE_SUPPORT = 0_i32
     DML_FEATURE_FEATURE_LEVELS = 1_i32
   end
   @[Flags]
-  enum DML_EXECUTION_FLAGS : UInt32
-    DML_EXECUTION_FLAG_NONE = 0_u32
-    DML_EXECUTION_FLAG_ALLOW_HALF_PRECISION_COMPUTATION = 1_u32
-    DML_EXECUTION_FLAG_DISABLE_META_COMMANDS = 2_u32
-    DML_EXECUTION_FLAG_DESCRIPTORS_VOLATILE = 4_u32
+  enum DML_EXECUTION_FLAGS
+    DML_EXECUTION_FLAG_NONE = 0_i32
+    DML_EXECUTION_FLAG_ALLOW_HALF_PRECISION_COMPUTATION = 1_i32
+    DML_EXECUTION_FLAG_DISABLE_META_COMMANDS = 2_i32
+    DML_EXECUTION_FLAG_DESCRIPTORS_VOLATILE = 4_i32
   end
   @[Flags]
-  enum DML_CREATE_DEVICE_FLAGS : UInt32
-    DML_CREATE_DEVICE_FLAG_NONE = 0_u32
-    DML_CREATE_DEVICE_FLAG_DEBUG = 1_u32
+  enum DML_CREATE_DEVICE_FLAGS
+    DML_CREATE_DEVICE_FLAG_NONE = 0_i32
+    DML_CREATE_DEVICE_FLAG_DEBUG = 1_i32
   end
   enum DML_BINDING_TYPE
     DML_BINDING_TYPE_NONE = 0_i32
@@ -1943,6 +1959,103 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
+  struct DML_ROI_ALIGN_GRAD_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property batch_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_roi_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property reduction_function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION
+    property interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE
+    property spatial_scale_x : Float32
+    property spatial_scale_y : Float32
+    property input_pixel_offset : Float32
+    property output_pixel_offset : Float32
+    property minimum_samples_per_output : UInt32
+    property maximum_samples_per_output : UInt32
+    property align_regions_to_corners : Win32cr::Foundation::BOOL
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @roi_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @batch_indices_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_roi_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @reduction_function : Win32cr::AI::MachineLearning::DirectML::DML_REDUCE_FUNCTION, @interpolation_mode : Win32cr::AI::MachineLearning::DirectML::DML_INTERPOLATION_MODE, @spatial_scale_x : Float32, @spatial_scale_y : Float32, @input_pixel_offset : Float32, @output_pixel_offset : Float32, @minimum_samples_per_output : UInt32, @maximum_samples_per_output : UInt32, @align_regions_to_corners : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct DML_BATCH_NORMALIZATION_TRAINING_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property fused_add_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property epsilon : Float32
+    property fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @bias_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @fused_add_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @epsilon : Float32, @fused_activation : Win32cr::AI::MachineLearning::DirectML::DML_OPERATOR_DESC*)
+    end
+  end
+
+  @[Extern]
+  struct DML_BATCH_NORMALIZATION_TRAINING_GRAD_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_scale_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_bias_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property epsilon : Float32
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @mean_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @variance_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_scale_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_bias_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @epsilon : Float32)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_CLIP1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*
+    property min_max_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
+    property min : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
+    property max : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @scale_bias : Win32cr::AI::MachineLearning::DirectML::DML_SCALE_BIAS*, @min_max_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE, @min : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION, @max : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_CLIP_GRAD1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property min_max_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
+    property min : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
+    property max : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @input_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_gradient_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @min_max_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE, @min : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION, @max : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION)
+    end
+  end
+
+  @[Extern]
+  struct DML_PADDING1_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property padding_mode : Win32cr::AI::MachineLearning::DirectML::DML_PADDING_MODE
+    property padding_value_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
+    property padding_value : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION
+    property dimension_count : UInt32
+    property start_padding : UInt32*
+    property end_padding : UInt32*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @padding_mode : Win32cr::AI::MachineLearning::DirectML::DML_PADDING_MODE, @padding_value_data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE, @padding_value : Win32cr::AI::MachineLearning::DirectML::DML_SCALAR_UNION, @dimension_count : UInt32, @start_padding : UInt32*, @end_padding : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct DML_ELEMENT_WISE_NEGATE_OPERATOR_DESC
+    property input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    property output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*
+    def initialize(@input_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*, @output_tensor : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DESC*)
+    end
+  end
+
+  @[Extern]
   struct DML_FEATURE_QUERY_TENSOR_DATA_TYPE_SUPPORT
     property data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE
     def initialize(@data_type : Win32cr::AI::MachineLearning::DirectML::DML_TENSOR_DATA_TYPE)
@@ -2087,7 +2200,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLObjectVtbl,
+
+  record IDMLObjectVtable,
     query_interface : Proc(IDMLObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLObject*, UInt32),
     release : Proc(IDMLObject*, UInt32),
@@ -2098,7 +2212,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLObject, lpVtbl : IDMLObjectVtbl* do
+  record IDMLObject, lpVtbl : IDMLObjectVtable* do
     GUID = LibC::GUID.new(0xc8263aac_u32, 0x9e0c_u16, 0x4a2d_u16, StaticArray[0x9b_u8, 0x8e_u8, 0x0_u8, 0x75_u8, 0x21_u8, 0xa3_u8, 0x31_u8, 0x7c_u8])
     def query_interface(this : IDMLObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2125,7 +2239,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLDeviceVtbl,
+
+  record IDMLDeviceVtable,
     query_interface : Proc(IDMLDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLDevice*, UInt32),
     release : Proc(IDMLDevice*, UInt32),
@@ -2146,7 +2261,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLDevice, lpVtbl : IDMLDeviceVtbl* do
+  record IDMLDevice, lpVtbl : IDMLDeviceVtable* do
     GUID = LibC::GUID.new(0x6dbd6437_u32, 0x96fd_u16, 0x423f_u16, StaticArray[0xa9_u8, 0x8c_u8, 0xae_u8, 0x5e_u8, 0x7c_u8, 0x2a_u8, 0x57_u8, 0x3f_u8])
     def query_interface(this : IDMLDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2203,7 +2318,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLDeviceChildVtbl,
+
+  record IDMLDeviceChildVtable,
     query_interface : Proc(IDMLDeviceChild*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLDeviceChild*, UInt32),
     release : Proc(IDMLDeviceChild*, UInt32),
@@ -2215,7 +2331,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLDeviceChild, lpVtbl : IDMLDeviceChildVtbl* do
+  record IDMLDeviceChild, lpVtbl : IDMLDeviceChildVtable* do
     GUID = LibC::GUID.new(0x27e83142_u32, 0x8165_u16, 0x49e3_u16, StaticArray[0x97_u8, 0x4e_u8, 0x2f_u8, 0xd6_u8, 0x6e_u8, 0x4c_u8, 0xb6_u8, 0x9d_u8])
     def query_interface(this : IDMLDeviceChild*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2245,7 +2361,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLPageableVtbl,
+
+  record IDMLPageableVtable,
     query_interface : Proc(IDMLPageable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLPageable*, UInt32),
     release : Proc(IDMLPageable*, UInt32),
@@ -2257,7 +2374,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLPageable, lpVtbl : IDMLPageableVtbl* do
+  record IDMLPageable, lpVtbl : IDMLPageableVtable* do
     GUID = LibC::GUID.new(0xb1ab0825_u32, 0x4542_u16, 0x4a4b_u16, StaticArray[0x86_u8, 0x17_u8, 0x6d_u8, 0xde_u8, 0x6e_u8, 0x8f_u8, 0x62_u8, 0x1_u8])
     def query_interface(this : IDMLPageable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2287,7 +2404,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLOperatorVtbl,
+
+  record IDMLOperatorVtable,
     query_interface : Proc(IDMLOperator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLOperator*, UInt32),
     release : Proc(IDMLOperator*, UInt32),
@@ -2299,7 +2417,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLOperator, lpVtbl : IDMLOperatorVtbl* do
+  record IDMLOperator, lpVtbl : IDMLOperatorVtable* do
     GUID = LibC::GUID.new(0x26caae7a_u32, 0x3081_u16, 0x4633_u16, StaticArray[0x95_u8, 0x81_u8, 0x22_u8, 0x6f_u8, 0xbe_u8, 0x57_u8, 0x69_u8, 0x5d_u8])
     def query_interface(this : IDMLOperator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2329,7 +2447,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLDispatchableVtbl,
+
+  record IDMLDispatchableVtable,
     query_interface : Proc(IDMLDispatchable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLDispatchable*, UInt32),
     release : Proc(IDMLDispatchable*, UInt32),
@@ -2342,7 +2461,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLDispatchable, lpVtbl : IDMLDispatchableVtbl* do
+  record IDMLDispatchable, lpVtbl : IDMLDispatchableVtable* do
     GUID = LibC::GUID.new(0xdcb821a8_u32, 0x1039_u16, 0x441e_u16, StaticArray[0x9f_u8, 0x1c_u8, 0xb1_u8, 0x75_u8, 0x9c_u8, 0x2f_u8, 0x3c_u8, 0xec_u8])
     def query_interface(this : IDMLDispatchable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2375,7 +2494,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLCompiledOperatorVtbl,
+
+  record IDMLCompiledOperatorVtable,
     query_interface : Proc(IDMLCompiledOperator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLCompiledOperator*, UInt32),
     release : Proc(IDMLCompiledOperator*, UInt32),
@@ -2388,7 +2508,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLCompiledOperator, lpVtbl : IDMLCompiledOperatorVtbl* do
+  record IDMLCompiledOperator, lpVtbl : IDMLCompiledOperatorVtable* do
     GUID = LibC::GUID.new(0x6b15e56a_u32, 0xbf5c_u16, 0x4902_u16, StaticArray[0x92_u8, 0xd8_u8, 0xda_u8, 0x3a_u8, 0x65_u8, 0xa_u8, 0xfe_u8, 0xa4_u8])
     def query_interface(this : IDMLCompiledOperator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2421,7 +2541,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLOperatorInitializerVtbl,
+
+  record IDMLOperatorInitializerVtable,
     query_interface : Proc(IDMLOperatorInitializer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLOperatorInitializer*, UInt32),
     release : Proc(IDMLOperatorInitializer*, UInt32),
@@ -2435,7 +2556,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLOperatorInitializer, lpVtbl : IDMLOperatorInitializerVtbl* do
+  record IDMLOperatorInitializer, lpVtbl : IDMLOperatorInitializerVtable* do
     GUID = LibC::GUID.new(0x427c1113_u32, 0x435c_u16, 0x469c_u16, StaticArray[0x86_u8, 0x76_u8, 0x4d_u8, 0x5d_u8, 0xd0_u8, 0x72_u8, 0xf8_u8, 0x13_u8])
     def query_interface(this : IDMLOperatorInitializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2471,7 +2592,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLBindingTableVtbl,
+
+  record IDMLBindingTableVtable,
     query_interface : Proc(IDMLBindingTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLBindingTable*, UInt32),
     release : Proc(IDMLBindingTable*, UInt32),
@@ -2488,7 +2610,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLBindingTable, lpVtbl : IDMLBindingTableVtbl* do
+  record IDMLBindingTable, lpVtbl : IDMLBindingTableVtable* do
     GUID = LibC::GUID.new(0x29c687dc_u32, 0xde74_u16, 0x4e3b_u16, StaticArray[0xab_u8, 0x0_u8, 0x11_u8, 0x68_u8, 0xf2_u8, 0xfc_u8, 0x3c_u8, 0xfc_u8])
     def query_interface(this : IDMLBindingTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2533,7 +2655,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLCommandRecorderVtbl,
+
+  record IDMLCommandRecorderVtable,
     query_interface : Proc(IDMLCommandRecorder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLCommandRecorder*, UInt32),
     release : Proc(IDMLCommandRecorder*, UInt32),
@@ -2546,7 +2669,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLCommandRecorder, lpVtbl : IDMLCommandRecorderVtbl* do
+  record IDMLCommandRecorder, lpVtbl : IDMLCommandRecorderVtable* do
     GUID = LibC::GUID.new(0xe6857a76_u32, 0x2e3e_u16, 0x4fdd_u16, StaticArray[0xbf_u8, 0xf4_u8, 0x5d_u8, 0x2b_u8, 0xa1_u8, 0xf_u8, 0xb4_u8, 0x53_u8])
     def query_interface(this : IDMLCommandRecorder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2579,7 +2702,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLDebugDeviceVtbl,
+
+  record IDMLDebugDeviceVtable,
     query_interface : Proc(IDMLDebugDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLDebugDevice*, UInt32),
     release : Proc(IDMLDebugDevice*, UInt32),
@@ -2587,7 +2711,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLDebugDevice, lpVtbl : IDMLDebugDeviceVtbl* do
+  record IDMLDebugDevice, lpVtbl : IDMLDebugDeviceVtable* do
     GUID = LibC::GUID.new(0x7d6f3ac9_u32, 0x394a_u16, 0x4ac3_u16, StaticArray[0x92_u8, 0xa7_u8, 0x39_u8, 0xc_u8, 0xc5_u8, 0x7a_u8, 0x82_u8, 0x17_u8])
     def query_interface(this : IDMLDebugDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2605,7 +2729,8 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   @[Extern]
-  record IDMLDevice1Vtbl,
+
+  record IDMLDevice1Vtable,
     query_interface : Proc(IDMLDevice1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMLDevice1*, UInt32),
     release : Proc(IDMLDevice1*, UInt32),
@@ -2627,7 +2752,7 @@ module Win32cr::AI::MachineLearning::DirectML
 
 
   @[Extern]
-  record IDMLDevice1, lpVtbl : IDMLDevice1Vtbl* do
+  record IDMLDevice1, lpVtbl : IDMLDevice1Vtable* do
     GUID = LibC::GUID.new(0xa0884f9a_u32, 0xd2be_u16, 0x4355_u16, StaticArray[0xaa_u8, 0x5d_u8, 0x59_u8, 0x1_u8, 0x28_u8, 0x1a_u8, 0xd1_u8, 0xd2_u8])
     def query_interface(this : IDMLDevice1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2687,14 +2812,19 @@ module Win32cr::AI::MachineLearning::DirectML
   end
 
   def dMLCreateDevice(d3d12Device : Void*, flags : Win32cr::AI::MachineLearning::DirectML::DML_CREATE_DEVICE_FLAGS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DMLCreateDevice(d3d12Device, flags, riid, ppv)
+    {% end %}
   end
 
   def dMLCreateDevice1(d3d12Device : Void*, flags : Win32cr::AI::MachineLearning::DirectML::DML_CREATE_DEVICE_FLAGS, minimumFeatureLevel : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DMLCreateDevice1(d3d12Device, flags, minimumFeatureLevel, riid, ppv)
+    {% end %}
   end
 
   @[Link("directml")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DMLCreateDevice(d3d12Device : Void*, flags : Win32cr::AI::MachineLearning::DirectML::DML_CREATE_DEVICE_FLAGS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
@@ -2703,4 +2833,5 @@ module Win32cr::AI::MachineLearning::DirectML
     fun DMLCreateDevice1(d3d12Device : Void*, flags : Win32cr::AI::MachineLearning::DirectML::DML_CREATE_DEVICE_FLAGS, minimumFeatureLevel : Win32cr::AI::MachineLearning::DirectML::DML_FEATURE_LEVEL, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

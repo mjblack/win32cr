@@ -3,19 +3,10 @@ require "./../system/io.cr"
 
 module Win32cr::Devices::Usb
   extend self
+  alias WINUSB_INTERFACE_HANDLE = Void*
+  alias USB_CHANGE_REGISTRATION_HANDLE = Void*
   alias USB_IDLE_CALLBACK = Proc(Void*, Void)
 
-  SHORT_PACKET_TERMINATE = 1_u32
-  AUTO_CLEAR_STALL = 2_u32
-  PIPE_TRANSFER_TIMEOUT = 3_u32
-  IGNORE_SHORT_PACKETS = 4_u32
-  ALLOW_PARTIAL_READS = 5_u32
-  AUTO_FLUSH = 6_u32
-  RAW_IO = 7_u32
-  MAXIMUM_TRANSFER_SIZE = 8_u32
-  RESET_PIPE_ON_RESUME = 9_u32
-  AUTO_SUSPEND = 129_u32
-  SUSPEND_DELAY = 131_u32
   DEVICE_SPEED = 1_u32
   LowSpeed = 1_u32
   FullSpeed = 2_u32
@@ -130,18 +121,20 @@ module Win32cr::Devices::Usb
   USB_GET_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC = 286_u32
   USB_STOP_TRACKING_FOR_TIME_SYNC = 287_u32
   USB_GET_DEVICE_CHARACTERISTICS = 288_u32
-  GUID_DEVINTERFACE_USB_HUB = "f18a0e88-c30c-11d0-8815-00a0c906bed8"
-  GUID_DEVINTERFACE_USB_BILLBOARD = "5e9adaef-f879-473f-b807-4e5ea77d1b1c"
-  GUID_DEVINTERFACE_USB_DEVICE = "a5dcbf10-6530-11d2-901f-00c04fb951ed"
-  GUID_DEVINTERFACE_USB_HOST_CONTROLLER = "3abf6f2d-71c4-462a-8a92-1e6861e6af27"
-  GUID_USB_WMI_STD_DATA = "4e623b20-cb14-11d1-b331-00a0c959bbd2"
-  GUID_USB_WMI_STD_NOTIFICATION = "4e623b20-cb14-11d1-b331-00a0c959bbd2"
-  GUID_USB_WMI_DEVICE_PERF_INFO = "66c1aa3c-499f-49a0-a9a5-61e2359f6407"
-  GUID_USB_WMI_NODE_INFO = "9c179357-dc7a-4f41-b66b-323b9ddcb5b1"
-  GUID_USB_WMI_TRACING = "3a61881b-b4e6-4bf9-ae0f-3cd8f394e52f"
-  GUID_USB_TRANSFER_TRACING = "681eb8aa-403d-452c-9f8a-f0616fac9540"
-  GUID_USB_PERFORMANCE_TRACING = "d5de77a6-6ae9-425c-b1e2-f5615fd348a9"
-  GUID_USB_WMI_SURPRISE_REMOVAL_NOTIFICATION = "9bbbf831-a2f2-43b4-96d1-86944b5914b3"
+  USB_GET_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION = 289_u32
+  USB_RESERVED_USER_BASE = 1024_u32
+  GUID_DEVINTERFACE_USB_HUB = LibC::GUID.new(0xf18a0e88_u32, 0xc30c_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x15_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0xbe_u8, 0xd8_u8])
+  GUID_DEVINTERFACE_USB_BILLBOARD = LibC::GUID.new(0x5e9adaef_u32, 0xf879_u16, 0x473f_u16, StaticArray[0xb8_u8, 0x7_u8, 0x4e_u8, 0x5e_u8, 0xa7_u8, 0x7d_u8, 0x1b_u8, 0x1c_u8])
+  GUID_DEVINTERFACE_USB_DEVICE = LibC::GUID.new(0xa5dcbf10_u32, 0x6530_u16, 0x11d2_u16, StaticArray[0x90_u8, 0x1f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x51_u8, 0xed_u8])
+  GUID_DEVINTERFACE_USB_HOST_CONTROLLER = LibC::GUID.new(0x3abf6f2d_u32, 0x71c4_u16, 0x462a_u16, StaticArray[0x8a_u8, 0x92_u8, 0x1e_u8, 0x68_u8, 0x61_u8, 0xe6_u8, 0xaf_u8, 0x27_u8])
+  GUID_USB_WMI_STD_DATA = LibC::GUID.new(0x4e623b20_u32, 0xcb14_u16, 0x11d1_u16, StaticArray[0xb3_u8, 0x31_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x59_u8, 0xbb_u8, 0xd2_u8])
+  GUID_USB_WMI_STD_NOTIFICATION = LibC::GUID.new(0x4e623b20_u32, 0xcb14_u16, 0x11d1_u16, StaticArray[0xb3_u8, 0x31_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x59_u8, 0xbb_u8, 0xd2_u8])
+  GUID_USB_WMI_DEVICE_PERF_INFO = LibC::GUID.new(0x66c1aa3c_u32, 0x499f_u16, 0x49a0_u16, StaticArray[0xa9_u8, 0xa5_u8, 0x61_u8, 0xe2_u8, 0x35_u8, 0x9f_u8, 0x64_u8, 0x7_u8])
+  GUID_USB_WMI_NODE_INFO = LibC::GUID.new(0x9c179357_u32, 0xdc7a_u16, 0x4f41_u16, StaticArray[0xb6_u8, 0x6b_u8, 0x32_u8, 0x3b_u8, 0x9d_u8, 0xdc_u8, 0xb5_u8, 0xb1_u8])
+  GUID_USB_WMI_TRACING = LibC::GUID.new(0x3a61881b_u32, 0xb4e6_u16, 0x4bf9_u16, StaticArray[0xae_u8, 0xf_u8, 0x3c_u8, 0xd8_u8, 0xf3_u8, 0x94_u8, 0xe5_u8, 0x2f_u8])
+  GUID_USB_TRANSFER_TRACING = LibC::GUID.new(0x681eb8aa_u32, 0x403d_u16, 0x452c_u16, StaticArray[0x9f_u8, 0x8a_u8, 0xf0_u8, 0x61_u8, 0x6f_u8, 0xac_u8, 0x95_u8, 0x40_u8])
+  GUID_USB_PERFORMANCE_TRACING = LibC::GUID.new(0xd5de77a6_u32, 0x6ae9_u16, 0x425c_u16, StaticArray[0xb1_u8, 0xe2_u8, 0xf5_u8, 0x61_u8, 0x5f_u8, 0xd3_u8, 0x48_u8, 0xa9_u8])
+  GUID_USB_WMI_SURPRISE_REMOVAL_NOTIFICATION = LibC::GUID.new(0x9bbbf831_u32, 0xa2f2_u16, 0x43b4_u16, StaticArray[0x96_u8, 0xd1_u8, 0x86_u8, 0x94_u8, 0x4b_u8, 0x59_u8, 0x14_u8, 0xb3_u8])
   FILE_DEVICE_USB = 34_u32
   BMREQUEST_HOST_TO_DEVICE = 0_u32
   BMREQUEST_DEVICE_TO_HOST = 1_u32
@@ -180,6 +173,7 @@ module Win32cr::Devices::Usb
   USB_DEVICE_QUALIFIER_DESCRIPTOR_TYPE = 6_u32
   USB_OTHER_SPEED_CONFIGURATION_DESCRIPTOR_TYPE = 7_u32
   USB_INTERFACE_POWER_DESCRIPTOR_TYPE = 8_u32
+  EUSB2_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR_TYPE = 18_u32
   USB_OTG_DESCRIPTOR_TYPE = 9_u32
   USB_DEBUG_DESCRIPTOR_TYPE = 10_u32
   USB_INTERFACE_ASSOCIATION_DESCRIPTOR_TYPE = 11_u32
@@ -271,7 +265,7 @@ module Win32cr::Devices::Usb
   USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_DIR_TX = 1_u32
   USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_PROTOCOL_SS = 0_u32
   USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED_PROTOCOL_SSP = 1_u32
-  GUID_USB_MSOS20_PLATFORM_CAPABILITY_ID = "d8dd60df-4589-4cc7-9cd2-659d9e648a9f"
+  GUID_USB_MSOS20_PLATFORM_CAPABILITY_ID = LibC::GUID.new(0xd8dd60df_u32, 0x4589_u16, 0x4cc7_u16, StaticArray[0x9c_u8, 0xd2_u8, 0x65_u8, 0x9d_u8, 0x9e_u8, 0x64_u8, 0x8a_u8, 0x9f_u8])
   USB_CONFIG_POWERED_MASK = 192_u32
   USB_CONFIG_BUS_POWERED = 128_u32
   USB_CONFIG_SELF_POWERED = 64_u32
@@ -312,6 +306,8 @@ module Win32cr::Devices::Usb
   USB_SUPERSPEED_ISOCHRONOUS_MAX_MULTIPLIER = 2_u32
   USB_SUPERSPEEDPLUS_ISOCHRONOUS_MIN_BYTESPERINTERVAL = 49153_u32
   USB_SUPERSPEEDPLUS_ISOCHRONOUS_MAX_BYTESPERINTERVAL = 16777215_u32
+  USB_HIGHSPEED_EUSB2_ISOCHRONOUS_MIN_BYTESPERINTERVAL = 3073_u32
+  USB_HIGHSPEED_EUSB2_ISOCHRONOUS_MAX_BYTESPERINTERVAL = 6144_u32
   USB_20_HUB_DESCRIPTOR_TYPE = 41_u32
   USB_30_HUB_DESCRIPTOR_TYPE = 42_u32
   USB_REQUEST_GET_STATE = 2_u32
@@ -445,6 +441,12 @@ module Win32cr::Devices::Usb
   MS_OS_STRING_SIGNATURE = "MSFT100"
   MS_OS_FLAGS_CONTAINERID = 2_u32
   URB_OPEN_STATIC_STREAMS_VERSION_100 = 256_u32
+  USB4_MAX_DEPTH = 6_u32
+  USB4_CONFIGURATION_REGISTERS_DW_LENGTH = 60_u32
+  USB4_HRD_DEBUG_INTERFACE = LibC::GUID.new(0x981fca05_u32, 0x60d3_u16, 0x4bb3_u16, StaticArray[0x89_u8, 0x8e_u8, 0x49_u8, 0x7c_u8, 0x58_u8, 0xc_u8, 0x4f_u8, 0xb3_u8])
+  USB4_HRD_DEBUG_INTERFACE_REFERENCE_STRING = "\\DEBUGINTERFACE"
+  USB4_HRD_DEBUG_FUNCTION_READ_CONFIGURATION_SPACE = 1131_u32
+  IOCTL_USB4_HRD_DEBUG_READ_CONFIGURATION_SPACE = 6295980_u32
   KREGUSBFNENUMPATH = "\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\USBFN\\"
   UREGUSBFNENUMPATH = "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\USBFN\\"
   KREGMANUSBFNENUMPATH = "\\Registry\\Machine\\SYSTEM\\CurrentControlSet\\Control\\ManufacturingMode\\Current\\USBFN\\"
@@ -522,6 +524,7 @@ module Win32cr::Devices::Usb
   IOCTL_USB_GET_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC = 2229368_u32
   IOCTL_USB_STOP_TRACKING_FOR_TIME_SYNC = 2229372_u32
   IOCTL_USB_GET_DEVICE_CHARACTERISTICS = 2229376_u32
+  IOCTL_USB_GET_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION = 2229380_u32
   WMI_USB_DRIVER_INFORMATION = 0_u32
   WMI_USB_DRIVER_NOTIFICATION = 1_u32
   WMI_USB_POWER_DEVICE_ENABLE = 2_u32
@@ -552,7 +555,23 @@ module Win32cr::Devices::Usb
   IOCTL_GET_PIPE_CONFIGURATION = 2147491880_u32
   IOCTL_SET_TIMEOUT = 2147491884_u32
   IOCTL_ABORT_PIPE = 2147491844_u32
+  WinUSB_TestGuid = LibC::GUID.new(0xda812bff_u32, 0x12c3_u16, 0x46a2_u16, StaticArray[0x8e_u8, 0x2b_u8, 0xdb_u8, 0xd3_u8, 0xb7_u8, 0x83_u8, 0x4c_u8, 0x43_u8])
 
+  enum WINUSB_PIPE_POLICY : UInt32
+    SHORT_PACKET_TERMINATE = 1_u32
+    AUTO_CLEAR_STALL = 2_u32
+    PIPE_TRANSFER_TIMEOUT = 3_u32
+    IGNORE_SHORT_PACKETS = 4_u32
+    ALLOW_PARTIAL_READS = 5_u32
+    AUTO_FLUSH = 6_u32
+    RAW_IO = 7_u32
+    MAXIMUM_TRANSFER_SIZE = 8_u32
+    RESET_PIPE_ON_RESUME = 9_u32
+  end
+  enum WINUSB_POWER_POLICY : UInt32
+    AUTO_SUSPEND = 129_u32
+    SUSPEND_DELAY = 131_u32
+  end
   enum USB_DEVICE_SPEED
     UsbLowSpeed = 0_i32
     UsbFullSpeed = 1_i32
@@ -680,6 +699,80 @@ module Win32cr::Devices::Usb
     UsbfnDeviceStateSuspended = 6_i32
     UsbfnDeviceStateStateMaximum = 7_i32
   end
+  enum USB_HUB_NODE
+    UsbHub = 0_i32
+    UsbMIParent = 1_i32
+  end
+  enum USB_CONNECTION_STATUS
+    NoDeviceConnected = 0_i32
+    DeviceConnected = 1_i32
+    DeviceFailedEnumeration = 2_i32
+    DeviceGeneralFailure = 3_i32
+    DeviceCausedOvercurrent = 4_i32
+    DeviceNotEnoughPower = 5_i32
+    DeviceNotEnoughBandwidth = 6_i32
+    DeviceHubNestedTooDeeply = 7_i32
+    DeviceInLegacyHub = 8_i32
+    DeviceEnumerating = 9_i32
+    DeviceReset = 10_i32
+  end
+  enum USB_NOTIFICATION_TYPE
+    EnumerationFailure = 0_i32
+    InsufficentBandwidth = 1_i32
+    InsufficentPower = 2_i32
+    OverCurrent = 3_i32
+    ResetOvercurrent = 4_i32
+    AcquireBusInfo = 5_i32
+    AcquireHubName = 6_i32
+    AcquireControllerName = 7_i32
+    HubOvercurrent = 8_i32
+    HubPowerChange = 9_i32
+    HubNestedTooDeeply = 10_i32
+    ModernDeviceInLegacyHub = 11_i32
+  end
+  enum USB_WMI_DEVICE_NODE_TYPE
+    UsbDevice = 0_i32
+    HubDevice = 1_i32
+    CompositeDevice = 2_i32
+    UsbController = 3_i32
+  end
+  enum USB_HUB_TYPE
+    UsbRootHub = 1_i32
+    Usb20Hub = 2_i32
+    Usb30Hub = 3_i32
+  end
+  enum USB4_CONFIG_SPACE_TYPE
+    USB4PathConfigurationSpace = 0_i32
+    USB4AdapterConfigurationSpace = 1_i32
+    USB4RouterConfigurationSpace = 2_i32
+    USB4CounterConfigurationSpace = 3_i32
+  end
+  enum USB4_STATUS
+    ErrConn = 0_i32
+    ErrLink = 1_i32
+    ErrAddr = 2_i32
+    ErrAdp = 4_i32
+    HpAck = 7_i32
+    ErrEnum = 8_i32
+    ErrNua = 9_i32
+    ErrLen = 11_i32
+    ErrHec = 12_i32
+    ErrFc = 13_i32
+    ErrPlug = 14_i32
+    ErrLock = 15_i32
+    DpBw = 32_i32
+    RopCmplt = 33_i32
+    PopCmplt = 34_i32
+    PcieWake = 35_i32
+    DpConChange = 36_i32
+    DpTxDiscovery = 37_i32
+    LinkRecovery = 38_i32
+    AsymLink = 39_i32
+    PollingSkipped = 252_i32
+    PollingTimeout = 253_i32
+    StatusSuccess = 254_i32
+    StatusUnknown = 255_i32
+  end
   enum PIPE_TYPE
     EVENT_PIPE = 0_i32
     READ_DATA_PIPE = 1_i32
@@ -718,9 +811,9 @@ module Win32cr::Devices::Usb
     property wIndex : Windex_
     property wLength : UInt16
 
-    # Nested Type Windex_
+    # Nested Type Wvalue_
     @[Extern(union: true)]
-    struct Windex_
+    struct Wvalue_
     property anonymous : Anonymous_e__Struct_
     property w : UInt16
 
@@ -738,9 +831,9 @@ module Win32cr::Devices::Usb
     end
 
 
-    # Nested Type Wvalue_
+    # Nested Type Windex_
     @[Extern(union: true)]
-    struct Wvalue_
+    struct Windex_
     property anonymous : Anonymous_e__Struct_
     property w : UInt16
 
@@ -1005,26 +1098,7 @@ module Win32cr::Devices::Usb
     property bmAttributes : Bmattributes_e__union_
     property wFunctionalitySupport : Wfunctionalitysupport_e__union_
     property wReserved : UInt16
-    property bmSublinkSpeedAttr : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED*
-
-    # Nested Type Wfunctionalitysupport_e__union_
-    @[Extern(union: true)]
-    struct Wfunctionalitysupport_e__union_
-    property as_ushort : UInt16
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt16
-    def initialize(@_bitfield : UInt16)
-    end
-      end
-
-    def initialize(@as_ushort : UInt16, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
+    property bmSublinkSpeedAttr : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED[1]
 
     # Nested Type Bmattributes_e__union_
     @[Extern(union: true)]
@@ -1044,7 +1118,26 @@ module Win32cr::Devices::Usb
     end
     end
 
-    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @bDevCapabilityType : UInt8, @bReserved : UInt8, @bmAttributes : Bmattributes_e__union_, @wFunctionalitySupport : Wfunctionalitysupport_e__union_, @wReserved : UInt16, @bmSublinkSpeedAttr : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED*)
+
+    # Nested Type Wfunctionalitysupport_e__union_
+    @[Extern(union: true)]
+    struct Wfunctionalitysupport_e__union_
+    property as_ushort : UInt16
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt16
+    def initialize(@_bitfield : UInt16)
+    end
+      end
+
+    def initialize(@as_ushort : UInt16, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @bDevCapabilityType : UInt8, @bReserved : UInt8, @bmAttributes : Bmattributes_e__union_, @wFunctionalitySupport : Wfunctionalitysupport_e__union_, @wReserved : UInt16, @bmSublinkSpeedAttr : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED[1])
     end
   end
 
@@ -1066,8 +1159,8 @@ module Win32cr::Devices::Usb
     property bDevCapabilityType : UInt8
     property bReserved : UInt8
     property platform_capability_uuid : LibC::GUID
-    property capabilility_data : UInt8*
-    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @bDevCapabilityType : UInt8, @bReserved : UInt8, @platform_capability_uuid : LibC::GUID, @capabilility_data : UInt8*)
+    property capabilility_data : UInt8[1]
+    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @bDevCapabilityType : UInt8, @bReserved : UInt8, @platform_capability_uuid : LibC::GUID, @capabilility_data : UInt8[1])
     end
   end
 
@@ -1082,7 +1175,7 @@ module Win32cr::Devices::Usb
     property vconn_power : VconnPower_e__Union_
     property bmConfigured : UInt8[32]
     property bReserved : UInt32
-    property alternate_mode : Anonymous_e__Struct_*
+    property alternate_mode : Anonymous_e__Struct_[1]
 
     # Nested Type VconnPower_e__Union_
     @[Extern(union: true)]
@@ -1113,7 +1206,7 @@ module Win32cr::Devices::Usb
     end
     end
 
-    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @bDevCapabilityType : UInt8, @iAddtionalInfoURL : UInt8, @bNumberOfAlternateModes : UInt8, @bPreferredAlternateMode : UInt8, @vconn_power : VconnPower_e__Union_, @bmConfigured : UInt8[32], @bReserved : UInt32, @alternate_mode : Anonymous_e__Struct_*)
+    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @bDevCapabilityType : UInt8, @iAddtionalInfoURL : UInt8, @bNumberOfAlternateModes : UInt8, @bPreferredAlternateMode : UInt8, @vconn_power : VconnPower_e__Union_, @bmConfigured : UInt8[32], @bReserved : UInt32, @alternate_mode : Anonymous_e__Struct_[1])
     end
   end
 
@@ -1231,8 +1324,8 @@ module Win32cr::Devices::Usb
   struct USB_STRING_DESCRIPTOR
     property bLength : UInt8
     property bDescriptorType : UInt8
-    property bString : UInt16*
-    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @bString : UInt16*)
+    property bString : UInt16[1]
+    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @bString : UInt16[1])
     end
   end
 
@@ -1283,6 +1376,16 @@ module Win32cr::Devices::Usb
     property wReserved : UInt16
     property dwBytesPerInterval : UInt32
     def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @wReserved : UInt16, @dwBytesPerInterval : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct EUSB2_ISOCH_ENDPOINT_COMPANION_DESCRIPTOR
+    property bLength : UInt8
+    property bDescriptorType : UInt8
+    property wMaxPacketSize : UInt16
+    property dwBytesPerInterval : UInt32
+    def initialize(@bLength : UInt8, @bDescriptorType : UInt8, @wMaxPacketSize : UInt16, @dwBytesPerInterval : UInt32)
     end
   end
 
@@ -1607,6 +1710,27 @@ module Win32cr::Devices::Usb
   end
 
   @[Extern]
+  struct USBD_ENDPOINT_OFFLOAD_INFORMATION_V1
+    property size : UInt32
+    property endpoint_address : UInt16
+    property resource_id : UInt32
+    property mode : Win32cr::Devices::Usb::USBD_ENDPOINT_OFFLOAD_MODE
+    property _bitfield1 : UInt32
+    property _bitfield2 : UInt32
+    property transfer_segment_la : Int64
+    property transfer_segment_va : Void*
+    property transfer_ring_size : LibC::UIntPtrT
+    property transfer_ring_initial_cycle_bit : UInt32
+    property message_number : UInt32
+    property event_ring_segment_la : Int64
+    property event_ring_segment_va : Void*
+    property event_ring_size : LibC::UIntPtrT
+    property event_ring_initial_cycle_bit : UInt32
+    def initialize(@size : UInt32, @endpoint_address : UInt16, @resource_id : UInt32, @mode : Win32cr::Devices::Usb::USBD_ENDPOINT_OFFLOAD_MODE, @_bitfield1 : UInt32, @_bitfield2 : UInt32, @transfer_segment_la : Int64, @transfer_segment_va : Void*, @transfer_ring_size : LibC::UIntPtrT, @transfer_ring_initial_cycle_bit : UInt32, @message_number : UInt32, @event_ring_segment_la : Int64, @event_ring_segment_va : Void*, @event_ring_size : LibC::UIntPtrT, @event_ring_initial_cycle_bit : UInt32)
+    end
+  end
+
+  @[Extern]
   struct USBD_ENDPOINT_OFFLOAD_INFORMATION
     property size : UInt32
     property endpoint_address : UInt16
@@ -1614,16 +1738,22 @@ module Win32cr::Devices::Usb
     property mode : Win32cr::Devices::Usb::USBD_ENDPOINT_OFFLOAD_MODE
     property _bitfield1 : UInt32
     property _bitfield2 : UInt32
-    property transfer_segment_la : Win32cr::Foundation::LARGE_INTEGER
+    property transfer_segment_la : Int64
     property transfer_segment_va : Void*
     property transfer_ring_size : LibC::UIntPtrT
     property transfer_ring_initial_cycle_bit : UInt32
     property message_number : UInt32
-    property event_ring_segment_la : Win32cr::Foundation::LARGE_INTEGER
+    property event_ring_segment_la : Int64
     property event_ring_segment_va : Void*
     property event_ring_size : LibC::UIntPtrT
     property event_ring_initial_cycle_bit : UInt32
-    def initialize(@size : UInt32, @endpoint_address : UInt16, @resource_id : UInt32, @mode : Win32cr::Devices::Usb::USBD_ENDPOINT_OFFLOAD_MODE, @_bitfield1 : UInt32, @_bitfield2 : UInt32, @transfer_segment_la : Win32cr::Foundation::LARGE_INTEGER, @transfer_segment_va : Void*, @transfer_ring_size : LibC::UIntPtrT, @transfer_ring_initial_cycle_bit : UInt32, @message_number : UInt32, @event_ring_segment_la : Win32cr::Foundation::LARGE_INTEGER, @event_ring_segment_va : Void*, @event_ring_size : LibC::UIntPtrT, @event_ring_initial_cycle_bit : UInt32)
+    property client_transfer_ring_segment_pa_in : Int64
+    property client_transfer_ring_size_in : LibC::UIntPtrT
+    property client_data_buffer_pa_in : Int64
+    property client_data_buffer_size_in : LibC::UIntPtrT
+    property client_data_buffer_la_out : Int64
+    property client_data_buffer_va_out : Void*
+    def initialize(@size : UInt32, @endpoint_address : UInt16, @resource_id : UInt32, @mode : Win32cr::Devices::Usb::USBD_ENDPOINT_OFFLOAD_MODE, @_bitfield1 : UInt32, @_bitfield2 : UInt32, @transfer_segment_la : Int64, @transfer_segment_va : Void*, @transfer_ring_size : LibC::UIntPtrT, @transfer_ring_initial_cycle_bit : UInt32, @message_number : UInt32, @event_ring_segment_la : Int64, @event_ring_segment_va : Void*, @event_ring_size : LibC::UIntPtrT, @event_ring_initial_cycle_bit : UInt32, @client_transfer_ring_segment_pa_in : Int64, @client_transfer_ring_size_in : LibC::UIntPtrT, @client_data_buffer_pa_in : Int64, @client_data_buffer_size_in : LibC::UIntPtrT, @client_data_buffer_la_out : Int64, @client_data_buffer_va_out : Void*)
     end
   end
 
@@ -1638,8 +1768,8 @@ module Win32cr::Devices::Usb
     property reserved : UInt8
     property interface_handle : Void*
     property number_of_pipes : UInt32
-    property pipes : Win32cr::Devices::Usb::USBD_PIPE_INFORMATION*
-    def initialize(@length : UInt16, @interface_number : UInt8, @alternate_setting : UInt8, @class__ : UInt8, @sub_class : UInt8, @protocol : UInt8, @reserved : UInt8, @interface_handle : Void*, @number_of_pipes : UInt32, @pipes : Win32cr::Devices::Usb::USBD_PIPE_INFORMATION*)
+    property pipes : Win32cr::Devices::Usb::USBD_PIPE_INFORMATION[1]
+    def initialize(@length : UInt16, @interface_number : UInt8, @alternate_setting : UInt8, @class__ : UInt8, @sub_class : UInt8, @protocol : UInt8, @reserved : UInt8, @interface_handle : Void*, @number_of_pipes : UInt32, @pipes : Win32cr::Devices::Usb::USBD_PIPE_INFORMATION[1])
     end
   end
 
@@ -1933,8 +2063,8 @@ module Win32cr::Devices::Usb
     property start_frame : UInt32
     property number_of_packets : UInt32
     property error_count : UInt32
-    property iso_packet : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*
-    def initialize(@hdr : Win32cr::Devices::Usb::URB_HEADER_, @pipe_handle : Void*, @transfer_flags : UInt32, @transfer_buffer_length : UInt32, @transfer_buffer : Void*, @transfer_buffer_mdl : Void*, @urb_link : Win32cr::Devices::Usb::URB*, @hca : Win32cr::Devices::Usb::URB_HCD_AREA_, @start_frame : UInt32, @number_of_packets : UInt32, @error_count : UInt32, @iso_packet : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*)
+    property iso_packet : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR[1]
+    def initialize(@hdr : Win32cr::Devices::Usb::URB_HEADER_, @pipe_handle : Void*, @transfer_flags : UInt32, @transfer_buffer_length : UInt32, @transfer_buffer : Void*, @transfer_buffer_mdl : Void*, @urb_link : Win32cr::Devices::Usb::URB*, @hca : Win32cr::Devices::Usb::URB_HCD_AREA_, @start_frame : UInt32, @number_of_packets : UInt32, @error_count : UInt32, @iso_packet : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR[1])
     end
   end
 
@@ -2122,8 +2252,8 @@ module Win32cr::Devices::Usb
   @[Extern]
   struct USB_UNICODE_NAME
     property length : UInt32
-    property string : UInt16*
-    def initialize(@length : UInt32, @string : UInt16*)
+    property string : UInt16[1]
+    def initialize(@length : UInt32, @string : UInt16[1])
     end
   end
 
@@ -2260,7 +2390,7 @@ module Win32cr::Devices::Usb
   @[Extern]
   struct USB_BUS_STATISTICS_0
     property device_count : UInt32
-    property current_system_time : Win32cr::Foundation::LARGE_INTEGER
+    property current_system_time : Int64
     property current_usb_frame : UInt32
     property bulk_bytes : UInt32
     property iso_bytes : UInt32
@@ -2275,7 +2405,7 @@ module Win32cr::Devices::Usb
     property root_hub_device_power_state : UInt8
     property unused : UInt8
     property name_index : UInt8
-    def initialize(@device_count : UInt32, @current_system_time : Win32cr::Foundation::LARGE_INTEGER, @current_usb_frame : UInt32, @bulk_bytes : UInt32, @iso_bytes : UInt32, @interrupt_bytes : UInt32, @control_data_bytes : UInt32, @pci_interrupt_count : UInt32, @hard_reset_count : UInt32, @worker_signal_count : UInt32, @common_buffer_bytes : UInt32, @worker_idle_time_ms : UInt32, @root_hub_enabled : Win32cr::Foundation::BOOLEAN, @root_hub_device_power_state : UInt8, @unused : UInt8, @name_index : UInt8)
+    def initialize(@device_count : UInt32, @current_system_time : Int64, @current_usb_frame : UInt32, @bulk_bytes : UInt32, @iso_bytes : UInt32, @interrupt_bytes : UInt32, @control_data_bytes : UInt32, @pci_interrupt_count : UInt32, @hard_reset_count : UInt32, @worker_signal_count : UInt32, @common_buffer_bytes : UInt32, @worker_idle_time_ms : UInt32, @root_hub_enabled : Win32cr::Foundation::BOOLEAN, @root_hub_device_power_state : UInt8, @unused : UInt8, @name_index : UInt8)
     end
   end
 
@@ -2327,70 +2457,6 @@ module Win32cr::Devices::Usb
     property header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER
     property flags : UInt32
     def initialize(@header : Win32cr::Devices::Usb::USBUSER_REQUEST_HEADER, @flags : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct WINUSB_PIPE_INFORMATION
-    property pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE
-    property pipe_id : UInt8
-    property maximum_packet_size : UInt16
-    property interval : UInt8
-    def initialize(@pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE, @pipe_id : UInt8, @maximum_packet_size : UInt16, @interval : UInt8)
-    end
-  end
-
-  @[Extern]
-  struct WINUSB_PIPE_INFORMATION_EX
-    property pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE
-    property pipe_id : UInt8
-    property maximum_packet_size : UInt16
-    property interval : UInt8
-    property maximum_bytes_per_interval : UInt32
-    def initialize(@pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE, @pipe_id : UInt8, @maximum_packet_size : UInt16, @interval : UInt8, @maximum_bytes_per_interval : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct WINUSB_SETUP_PACKET
-    property request_type : UInt8
-    property request : UInt8
-    property value : UInt16
-    property index : UInt16
-    property length : UInt16
-    def initialize(@request_type : UInt8, @request : UInt8, @value : UInt16, @index : UInt16, @length : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION
-    property time_tracking_handle : Win32cr::Foundation::HANDLE
-    property is_startup_delay_tolerable : Win32cr::Foundation::BOOLEAN
-    def initialize(@time_tracking_handle : Win32cr::Foundation::HANDLE, @is_startup_delay_tolerable : Win32cr::Foundation::BOOLEAN)
-    end
-  end
-
-  @[Extern]
-  struct USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION
-    property time_tracking_handle : Win32cr::Foundation::HANDLE
-    def initialize(@time_tracking_handle : Win32cr::Foundation::HANDLE)
-    end
-  end
-
-  @[Extern]
-  struct USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION
-    property time_tracking_handle : Win32cr::Foundation::HANDLE
-    property input_frame_number : UInt32
-    property input_micro_frame_number : UInt32
-    property query_performance_counter_at_input_frame_or_micro_frame : Win32cr::Foundation::LARGE_INTEGER
-    property query_performance_counter_frequency : Win32cr::Foundation::LARGE_INTEGER
-    property predicted_accuracy_in_micro_seconds : UInt32
-    property current_generation_id : UInt32
-    property current_query_performance_counter : Win32cr::Foundation::LARGE_INTEGER
-    property current_hardware_frame_number : UInt32
-    property current_hardware_micro_frame_number : UInt32
-    property current_usb_frame_number : UInt32
-    def initialize(@time_tracking_handle : Win32cr::Foundation::HANDLE, @input_frame_number : UInt32, @input_micro_frame_number : UInt32, @query_performance_counter_at_input_frame_or_micro_frame : Win32cr::Foundation::LARGE_INTEGER, @query_performance_counter_frequency : Win32cr::Foundation::LARGE_INTEGER, @predicted_accuracy_in_micro_seconds : UInt32, @current_generation_id : UInt32, @current_query_performance_counter : Win32cr::Foundation::LARGE_INTEGER, @current_hardware_frame_number : UInt32, @current_hardware_micro_frame_number : UInt32, @current_usb_frame_number : UInt32)
     end
   end
 
@@ -2479,8 +2545,8 @@ module Win32cr::Devices::Usb
     property interface_number : UInt8
     property speed : Win32cr::Devices::Usb::USBFN_BUS_SPEED
     property size : UInt16
-    property interface_descriptor_set : UInt8*
-    def initialize(@interface_number : UInt8, @speed : Win32cr::Devices::Usb::USBFN_BUS_SPEED, @size : UInt16, @interface_descriptor_set : UInt8*)
+    property interface_descriptor_set : UInt8[1]
+    def initialize(@interface_number : UInt8, @speed : Win32cr::Devices::Usb::USBFN_BUS_SPEED, @size : UInt16, @interface_descriptor_set : UInt8[1])
     end
   end
 
@@ -2498,6 +2564,690 @@ module Win32cr::Devices::Usb
     property is_current : Win32cr::Foundation::BOOLEAN
     property is_active : Win32cr::Foundation::BOOLEAN
     def initialize(@configuration_name : UInt16[40], @is_current : Win32cr::Foundation::BOOLEAN, @is_active : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct USB_TOPOLOGY_ADDRESS
+    property pci_bus_number : UInt32
+    property pci_device_number : UInt32
+    property pci_function_number : UInt32
+    property reserved : UInt32
+    property root_hub_port_number : UInt16
+    property hub_port_number : UInt16[5]
+    property reserved2 : UInt16
+    def initialize(@pci_bus_number : UInt32, @pci_device_number : UInt32, @pci_function_number : UInt32, @reserved : UInt32, @root_hub_port_number : UInt16, @hub_port_number : UInt16[5], @reserved2 : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct USB_HUB_INFORMATION
+    property hub_descriptor : Win32cr::Devices::Usb::USB_HUB_DESCRIPTOR
+    property hub_is_bus_powered : Win32cr::Foundation::BOOLEAN
+    def initialize(@hub_descriptor : Win32cr::Devices::Usb::USB_HUB_DESCRIPTOR, @hub_is_bus_powered : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct USB_MI_PARENT_INFORMATION
+    property number_of_interfaces : UInt32
+    def initialize(@number_of_interfaces : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_NODE_INFORMATION
+    property node_type : Win32cr::Devices::Usb::USB_HUB_NODE
+    property u : U_e__union_
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property hub_information : Win32cr::Devices::Usb::USB_HUB_INFORMATION
+    property mi_parent_information : Win32cr::Devices::Usb::USB_MI_PARENT_INFORMATION
+    def initialize(@hub_information : Win32cr::Devices::Usb::USB_HUB_INFORMATION, @mi_parent_information : Win32cr::Devices::Usb::USB_MI_PARENT_INFORMATION)
+    end
+    end
+
+    def initialize(@node_type : Win32cr::Devices::Usb::USB_HUB_NODE, @u : U_e__union_)
+    end
+  end
+
+  @[Extern]
+  struct USB_PIPE_INFO
+    property endpoint_descriptor : Win32cr::Devices::Usb::USB_ENDPOINT_DESCRIPTOR
+    property schedule_offset : UInt32
+    def initialize(@endpoint_descriptor : Win32cr::Devices::Usb::USB_ENDPOINT_DESCRIPTOR, @schedule_offset : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_NODE_CONNECTION_INFORMATION
+    property connection_index : UInt32
+    property device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR
+    property current_configuration_value : UInt8
+    property low_speed : Win32cr::Foundation::BOOLEAN
+    property device_is_hub : Win32cr::Foundation::BOOLEAN
+    property device_address : UInt16
+    property number_of_open_pipes : UInt32
+    property connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS
+    property pipe_list : Win32cr::Devices::Usb::USB_PIPE_INFO[1]
+    def initialize(@connection_index : UInt32, @device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR, @current_configuration_value : UInt8, @low_speed : Win32cr::Foundation::BOOLEAN, @device_is_hub : Win32cr::Foundation::BOOLEAN, @device_address : UInt16, @number_of_open_pipes : UInt32, @connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS, @pipe_list : Win32cr::Devices::Usb::USB_PIPE_INFO[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_NODE_CONNECTION_DRIVERKEY_NAME
+    property connection_index : UInt32
+    property actual_length : UInt32
+    property driver_key_name : UInt16[1]
+    def initialize(@connection_index : UInt32, @actual_length : UInt32, @driver_key_name : UInt16[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_NODE_CONNECTION_NAME
+    property connection_index : UInt32
+    property actual_length : UInt32
+    property node_name : UInt16[1]
+    def initialize(@connection_index : UInt32, @actual_length : UInt32, @node_name : UInt16[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_HUB_NAME
+    property actual_length : UInt32
+    property hub_name : UInt16[1]
+    def initialize(@actual_length : UInt32, @hub_name : UInt16[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_ROOT_HUB_NAME
+    property actual_length : UInt32
+    property root_hub_name : UInt16[1]
+    def initialize(@actual_length : UInt32, @root_hub_name : UInt16[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_HCD_DRIVERKEY_NAME
+    property actual_length : UInt32
+    property driver_key_name : UInt16[1]
+    def initialize(@actual_length : UInt32, @driver_key_name : UInt16[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_DESCRIPTOR_REQUEST
+    property connection_index : UInt32
+    property setup_packet : SetupPacket_e__Struct_
+    property data : UInt8[1]
+
+    # Nested Type SetupPacket_e__Struct_
+    @[Extern]
+    struct SetupPacket_e__Struct_
+    property bmRequest : UInt8
+    property bRequest : UInt8
+    property wValue : UInt16
+    property wIndex : UInt16
+    property wLength : UInt16
+    def initialize(@bmRequest : UInt8, @bRequest : UInt8, @wValue : UInt16, @wIndex : UInt16, @wLength : UInt16)
+    end
+    end
+
+    def initialize(@connection_index : UInt32, @setup_packet : SetupPacket_e__Struct_, @data : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_HUB_CAPABILITIES
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_NODE_CONNECTION_ATTRIBUTES
+    property connection_index : UInt32
+    property connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS
+    property port_attributes : UInt32
+    def initialize(@connection_index : UInt32, @connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS, @port_attributes : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_NODE_CONNECTION_INFORMATION_EX
+    property connection_index : UInt32
+    property device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR
+    property current_configuration_value : UInt8
+    property speed : UInt8
+    property device_is_hub : Win32cr::Foundation::BOOLEAN
+    property device_address : UInt16
+    property number_of_open_pipes : UInt32
+    property connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS
+    property pipe_list : Win32cr::Devices::Usb::USB_PIPE_INFO[1]
+    def initialize(@connection_index : UInt32, @device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR, @current_configuration_value : UInt8, @speed : UInt8, @device_is_hub : Win32cr::Foundation::BOOLEAN, @device_address : UInt16, @number_of_open_pipes : UInt32, @connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS, @pipe_list : Win32cr::Devices::Usb::USB_PIPE_INFO[1])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct USB_HUB_CAP_FLAGS
+    property ul : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@ul : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+  end
+
+  @[Extern]
+  struct USB_HUB_CAPABILITIES_EX
+    property capability_flags : Win32cr::Devices::Usb::USB_HUB_CAP_FLAGS
+    def initialize(@capability_flags : Win32cr::Devices::Usb::USB_HUB_CAP_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct USB_CYCLE_PORT_PARAMS
+    property connection_index : UInt32
+    property status_returned : UInt32
+    def initialize(@connection_index : UInt32, @status_returned : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_ID_STRING
+    property language_id : UInt16
+    property pad : UInt16
+    property length_in_bytes : UInt32
+    property buffer : Win32cr::Foundation::PWSTR
+    def initialize(@language_id : UInt16, @pad : UInt16, @length_in_bytes : UInt32, @buffer : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct USB_HUB_DEVICE_UXD_SETTINGS
+    property version : UInt32
+    property pnp_guid : LibC::GUID
+    property owner_guid : LibC::GUID
+    property delete_on_shutdown : UInt32
+    property delete_on_reload : UInt32
+    property delete_on_disconnect : UInt32
+    property reserved : UInt32[5]
+    def initialize(@version : UInt32, @pnp_guid : LibC::GUID, @owner_guid : LibC::GUID, @delete_on_shutdown : UInt32, @delete_on_reload : UInt32, @delete_on_disconnect : UInt32, @reserved : UInt32[5])
+    end
+  end
+
+  @[Extern]
+  struct HUB_DEVICE_CONFIG_INFO
+    property version : UInt32
+    property length : UInt32
+    property hub_flags : Win32cr::Devices::Usb::USB_HUB_CAP_FLAGS
+    property hardware_ids : Win32cr::Devices::Usb::USB_ID_STRING
+    property compatible_ids : Win32cr::Devices::Usb::USB_ID_STRING
+    property device_description : Win32cr::Devices::Usb::USB_ID_STRING
+    property reserved : UInt32[19]
+    property uxd_settings : Win32cr::Devices::Usb::USB_HUB_DEVICE_UXD_SETTINGS
+    def initialize(@version : UInt32, @length : UInt32, @hub_flags : Win32cr::Devices::Usb::USB_HUB_CAP_FLAGS, @hardware_ids : Win32cr::Devices::Usb::USB_ID_STRING, @compatible_ids : Win32cr::Devices::Usb::USB_ID_STRING, @device_description : Win32cr::Devices::Usb::USB_ID_STRING, @reserved : UInt32[19], @uxd_settings : Win32cr::Devices::Usb::USB_HUB_DEVICE_UXD_SETTINGS)
+    end
+  end
+
+  @[Extern]
+  struct HCD_STAT_COUNTERS
+    property bytes_transferred : UInt32
+    property iso_missed_count : UInt16
+    property data_overrun_error_count : UInt16
+    property crc_error_count : UInt16
+    property schedule_overrun_count : UInt16
+    property timeout_error_count : UInt16
+    property internal_hc_error_count : UInt16
+    property buffer_overrun_error_count : UInt16
+    property sw_error_count : UInt16
+    property stall_pid_count : UInt16
+    property port_disable_count : UInt16
+    def initialize(@bytes_transferred : UInt32, @iso_missed_count : UInt16, @data_overrun_error_count : UInt16, @crc_error_count : UInt16, @schedule_overrun_count : UInt16, @timeout_error_count : UInt16, @internal_hc_error_count : UInt16, @buffer_overrun_error_count : UInt16, @sw_error_count : UInt16, @stall_pid_count : UInt16, @port_disable_count : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct HCD_ISO_STAT_COUNTERS
+    property late_urbs : UInt16
+    property double_buffered_packets : UInt16
+    property transfers_cf_5ms : UInt16
+    property transfers_cf_2ms : UInt16
+    property transfers_cf_1ms : UInt16
+    property max_interrupt_latency : UInt16
+    property bad_start_frame : UInt16
+    property stale_urbs : UInt16
+    property iso_packet_not_accesed : UInt16
+    property iso_packet_hw_error : UInt16
+    property smallest_urb_packet_count : UInt16
+    property largest_urb_packet_count : UInt16
+    property iso_crc_error : UInt16
+    property iso_overrun_error : UInt16
+    property iso_internal_error : UInt16
+    property iso_unknown_error : UInt16
+    property iso_bytes_transferred : UInt32
+    property late_missed_count : UInt16
+    property hw_iso_missed_count : UInt16
+    property reserved7 : UInt32[8]
+    def initialize(@late_urbs : UInt16, @double_buffered_packets : UInt16, @transfers_cf_5ms : UInt16, @transfers_cf_2ms : UInt16, @transfers_cf_1ms : UInt16, @max_interrupt_latency : UInt16, @bad_start_frame : UInt16, @stale_urbs : UInt16, @iso_packet_not_accesed : UInt16, @iso_packet_hw_error : UInt16, @smallest_urb_packet_count : UInt16, @largest_urb_packet_count : UInt16, @iso_crc_error : UInt16, @iso_overrun_error : UInt16, @iso_internal_error : UInt16, @iso_unknown_error : UInt16, @iso_bytes_transferred : UInt32, @late_missed_count : UInt16, @hw_iso_missed_count : UInt16, @reserved7 : UInt32[8])
+    end
+  end
+
+  @[Extern]
+  struct HCD_STAT_INFORMATION_1
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property reset_counters : UInt32
+    property time_read : Int64
+    property counters : Win32cr::Devices::Usb::HCD_STAT_COUNTERS
+    def initialize(@reserved1 : UInt32, @reserved2 : UInt32, @reset_counters : UInt32, @time_read : Int64, @counters : Win32cr::Devices::Usb::HCD_STAT_COUNTERS)
+    end
+  end
+
+  @[Extern]
+  struct HCD_STAT_INFORMATION_2
+    property reserved1 : UInt32
+    property reserved2 : UInt32
+    property reset_counters : UInt32
+    property time_read : Int64
+    property locked_memory_used : Int32
+    property counters : Win32cr::Devices::Usb::HCD_STAT_COUNTERS
+    property iso_counters : Win32cr::Devices::Usb::HCD_ISO_STAT_COUNTERS
+    def initialize(@reserved1 : UInt32, @reserved2 : UInt32, @reset_counters : UInt32, @time_read : Int64, @locked_memory_used : Int32, @counters : Win32cr::Devices::Usb::HCD_STAT_COUNTERS, @iso_counters : Win32cr::Devices::Usb::HCD_ISO_STAT_COUNTERS)
+    end
+  end
+
+  @[Extern]
+  struct USB_NOTIFICATION
+    property notification_type : Win32cr::Devices::Usb::USB_NOTIFICATION_TYPE
+    def initialize(@notification_type : Win32cr::Devices::Usb::USB_NOTIFICATION_TYPE)
+    end
+  end
+
+  @[Extern]
+  struct USB_CONNECTION_NOTIFICATION
+    property notification_type : Win32cr::Devices::Usb::USB_NOTIFICATION_TYPE
+    property connection_number : UInt32
+    property requested_bandwidth : UInt32
+    property enumeration_fail_reason : UInt32
+    property power_requested : UInt32
+    property hub_name_length : UInt32
+    def initialize(@notification_type : Win32cr::Devices::Usb::USB_NOTIFICATION_TYPE, @connection_number : UInt32, @requested_bandwidth : UInt32, @enumeration_fail_reason : UInt32, @power_requested : UInt32, @hub_name_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_BUS_NOTIFICATION
+    property notification_type : Win32cr::Devices::Usb::USB_NOTIFICATION_TYPE
+    property total_bandwidth : UInt32
+    property consumed_bandwidth : UInt32
+    property controller_name_length : UInt32
+    def initialize(@notification_type : Win32cr::Devices::Usb::USB_NOTIFICATION_TYPE, @total_bandwidth : UInt32, @consumed_bandwidth : UInt32, @controller_name_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_ACQUIRE_INFO
+    property notification_type : Win32cr::Devices::Usb::USB_NOTIFICATION_TYPE
+    property total_size : UInt32
+    property buffer : UInt16[1]
+    def initialize(@notification_type : Win32cr::Devices::Usb::USB_NOTIFICATION_TYPE, @total_size : UInt32, @buffer : UInt16[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_DEVICE_STATE
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_HUB_PORT_INFORMATION
+    property device_state : Win32cr::Devices::Usb::USB_DEVICE_STATE
+    property port_number : UInt16
+    property device_address : UInt16
+    property connection_index : UInt32
+    property connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS
+    def initialize(@device_state : Win32cr::Devices::Usb::USB_DEVICE_STATE, @port_number : UInt16, @device_address : UInt16, @connection_index : UInt32, @connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS)
+    end
+  end
+
+  @[Extern]
+  struct USB_HUB_DEVICE_INFO
+    property hub_descriptor : Win32cr::Devices::Usb::USB_HUB_DESCRIPTOR
+    property hub_number : UInt32
+    property device_address : UInt16
+    property hub_is_self_powered : Win32cr::Foundation::BOOLEAN
+    property hub_is_root_hub : Win32cr::Foundation::BOOLEAN
+    property hub_capabilities : Win32cr::Devices::Usb::USB_HUB_CAPABILITIES
+    property number_of_hub_ports : UInt32
+    property port_info : Win32cr::Devices::Usb::USB_HUB_PORT_INFORMATION[1]
+    def initialize(@hub_descriptor : Win32cr::Devices::Usb::USB_HUB_DESCRIPTOR, @hub_number : UInt32, @device_address : UInt16, @hub_is_self_powered : Win32cr::Foundation::BOOLEAN, @hub_is_root_hub : Win32cr::Foundation::BOOLEAN, @hub_capabilities : Win32cr::Devices::Usb::USB_HUB_CAPABILITIES, @number_of_hub_ports : UInt32, @port_info : Win32cr::Devices::Usb::USB_HUB_PORT_INFORMATION[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_COMPOSITE_FUNCTION_INFO
+    property function_number : UInt8
+    property base_interface_number : UInt8
+    property number_of_interfaces : UInt8
+    property function_is_idle : Win32cr::Foundation::BOOLEAN
+    def initialize(@function_number : UInt8, @base_interface_number : UInt8, @number_of_interfaces : UInt8, @function_is_idle : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct USB_COMPOSITE_DEVICE_INFO
+    property device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR
+    property current_config_descriptor : Win32cr::Devices::Usb::USB_CONFIGURATION_DESCRIPTOR
+    property current_configuration_value : UInt8
+    property number_of_functions : UInt8
+    property function_info : Win32cr::Devices::Usb::USB_COMPOSITE_FUNCTION_INFO[1]
+    def initialize(@device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR, @current_config_descriptor : Win32cr::Devices::Usb::USB_CONFIGURATION_DESCRIPTOR, @current_configuration_value : UInt8, @number_of_functions : UInt8, @function_info : Win32cr::Devices::Usb::USB_COMPOSITE_FUNCTION_INFO[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_CONTROLLER_DEVICE_INFO
+    property pci_vendor_id : UInt32
+    property pci_device_id : UInt32
+    property pci_revision : UInt32
+    property number_of_root_ports : UInt32
+    property hc_feature_flags : UInt32
+    def initialize(@pci_vendor_id : UInt32, @pci_device_id : UInt32, @pci_revision : UInt32, @number_of_root_ports : UInt32, @hc_feature_flags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_DEVICE_INFO
+    property device_state : Win32cr::Devices::Usb::USB_DEVICE_STATE
+    property port_number : UInt16
+    property device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR
+    property current_configuration_value : UInt8
+    property speed : Win32cr::Devices::Usb::USB_DEVICE_SPEED
+    property device_address : UInt16
+    property connection_index : UInt32
+    property connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS
+    property pnp_hardware_id : UInt16[128]
+    property pnp_compatible_id : UInt16[128]
+    property serial_number_id : UInt16[128]
+    property pnp_device_description : UInt16[128]
+    property number_of_open_pipes : UInt32
+    property pipe_list : Win32cr::Devices::Usb::USB_PIPE_INFO[1]
+    def initialize(@device_state : Win32cr::Devices::Usb::USB_DEVICE_STATE, @port_number : UInt16, @device_descriptor : Win32cr::Devices::Usb::USB_DEVICE_DESCRIPTOR, @current_configuration_value : UInt8, @speed : Win32cr::Devices::Usb::USB_DEVICE_SPEED, @device_address : UInt16, @connection_index : UInt32, @connection_status : Win32cr::Devices::Usb::USB_CONNECTION_STATUS, @pnp_hardware_id : UInt16[128], @pnp_compatible_id : UInt16[128], @serial_number_id : UInt16[128], @pnp_device_description : UInt16[128], @number_of_open_pipes : UInt32, @pipe_list : Win32cr::Devices::Usb::USB_PIPE_INFO[1])
+    end
+  end
+
+  @[Extern]
+  struct USB_DEVICE_NODE_INFO
+    property sig : UInt32
+    property length_in_bytes : UInt32
+    property device_description : UInt16[40]
+    property node_type : Win32cr::Devices::Usb::USB_WMI_DEVICE_NODE_TYPE
+    property bus_address : Win32cr::Devices::Usb::USB_TOPOLOGY_ADDRESS
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property usb_device_info : Win32cr::Devices::Usb::USB_DEVICE_INFO
+    property hub_device_info : Win32cr::Devices::Usb::USB_HUB_DEVICE_INFO
+    property composite_device_info : Win32cr::Devices::Usb::USB_COMPOSITE_DEVICE_INFO
+    property controller_device_info : Win32cr::Devices::Usb::USB_CONTROLLER_DEVICE_INFO
+    property device_information : UInt8[4]
+    def initialize(@usb_device_info : Win32cr::Devices::Usb::USB_DEVICE_INFO, @hub_device_info : Win32cr::Devices::Usb::USB_HUB_DEVICE_INFO, @composite_device_info : Win32cr::Devices::Usb::USB_COMPOSITE_DEVICE_INFO, @controller_device_info : Win32cr::Devices::Usb::USB_CONTROLLER_DEVICE_INFO, @device_information : UInt8[4])
+    end
+    end
+
+    def initialize(@sig : UInt32, @length_in_bytes : UInt32, @device_description : UInt16[40], @node_type : Win32cr::Devices::Usb::USB_WMI_DEVICE_NODE_TYPE, @bus_address : Win32cr::Devices::Usb::USB_TOPOLOGY_ADDRESS, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct USB_DEVICE_PERFORMANCE_INFO
+    property bulk_bytes : UInt32
+    property control_data_bytes : UInt32
+    property iso_bytes : UInt32
+    property interrupt_bytes : UInt32
+    property bulk_urb_count : UInt32
+    property control_urb_count : UInt32
+    property iso_urb_count : UInt32
+    property interrupt_urb_count : UInt32
+    property alloced_interrupt : UInt32[6]
+    property alloced_iso : UInt32
+    property total32sec_bandwidth : UInt32
+    property total_tt_bandwidth : UInt32
+    property device_description : UInt16[60]
+    property device_speed : Win32cr::Devices::Usb::USB_DEVICE_SPEED
+    property total_iso_latency : UInt32
+    property dropped_iso_packets : UInt32
+    property transfer_errors : UInt32
+    property pci_interrupt_count : UInt32
+    property hc_idle_state : UInt32
+    property hc_async_idle_state : UInt32
+    property hc_async_cache_flush_count : UInt32
+    property hc_periodic_idle_state : UInt32
+    property hc_periodic_cache_flush_count : UInt32
+    def initialize(@bulk_bytes : UInt32, @control_data_bytes : UInt32, @iso_bytes : UInt32, @interrupt_bytes : UInt32, @bulk_urb_count : UInt32, @control_urb_count : UInt32, @iso_urb_count : UInt32, @interrupt_urb_count : UInt32, @alloced_interrupt : UInt32[6], @alloced_iso : UInt32, @total32sec_bandwidth : UInt32, @total_tt_bandwidth : UInt32, @device_description : UInt16[60], @device_speed : Win32cr::Devices::Usb::USB_DEVICE_SPEED, @total_iso_latency : UInt32, @dropped_iso_packets : UInt32, @transfer_errors : UInt32, @pci_interrupt_count : UInt32, @hc_idle_state : UInt32, @hc_async_idle_state : UInt32, @hc_async_cache_flush_count : UInt32, @hc_periodic_idle_state : UInt32, @hc_periodic_cache_flush_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_HUB_INFORMATION_EX
+    property hub_type : Win32cr::Devices::Usb::USB_HUB_TYPE
+    property highest_port_number : UInt16
+    property u : U_e__union_
+
+    # Nested Type U_e__union_
+    @[Extern(union: true)]
+    struct U_e__union_
+    property usb_hub_descriptor : Win32cr::Devices::Usb::USB_HUB_DESCRIPTOR
+    property usb30_hub_descriptor : Win32cr::Devices::Usb::USB_30_HUB_DESCRIPTOR
+    def initialize(@usb_hub_descriptor : Win32cr::Devices::Usb::USB_HUB_DESCRIPTOR, @usb30_hub_descriptor : Win32cr::Devices::Usb::USB_30_HUB_DESCRIPTOR)
+    end
+    end
+
+    def initialize(@hub_type : Win32cr::Devices::Usb::USB_HUB_TYPE, @highest_port_number : UInt16, @u : U_e__union_)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct USB_PORT_PROPERTIES
+    property ul : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@ul : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+  end
+
+  @[Extern]
+  struct USB_PORT_CONNECTOR_PROPERTIES
+    property connection_index : UInt32
+    property actual_length : UInt32
+    property usb_port_properties : Win32cr::Devices::Usb::USB_PORT_PROPERTIES
+    property companion_index : UInt16
+    property companion_port_number : UInt16
+    property companion_hub_symbolic_link_name : UInt16[1]
+    def initialize(@connection_index : UInt32, @actual_length : UInt32, @usb_port_properties : Win32cr::Devices::Usb::USB_PORT_PROPERTIES, @companion_index : UInt16, @companion_port_number : UInt16, @companion_hub_symbolic_link_name : UInt16[1])
+    end
+  end
+
+  @[Extern(union: true)]
+  struct USB_PROTOCOLS
+    property ul : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@ul : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS
+    property ul : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+    end
+
+    def initialize(@ul : UInt32, @anonymous : Anonymous_e__Struct_)
+    end
+  end
+
+  @[Extern]
+  struct USB_NODE_CONNECTION_INFORMATION_EX_V2
+    property connection_index : UInt32
+    property length : UInt32
+    property supported_usb_protocols : Win32cr::Devices::Usb::USB_PROTOCOLS
+    property flags : Win32cr::Devices::Usb::USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS
+    def initialize(@connection_index : UInt32, @length : UInt32, @supported_usb_protocols : Win32cr::Devices::Usb::USB_PROTOCOLS, @flags : Win32cr::Devices::Usb::USB_NODE_CONNECTION_INFORMATION_EX_V2_FLAGS)
+    end
+  end
+
+  @[Extern]
+  struct USB_TRANSPORT_CHARACTERISTICS
+    property version : UInt32
+    property transport_characteristics_flags : UInt32
+    property current_roundtrip_latency_in_milli_seconds : UInt64
+    property max_potential_bandwidth : UInt64
+    def initialize(@version : UInt32, @transport_characteristics_flags : UInt32, @current_roundtrip_latency_in_milli_seconds : UInt64, @max_potential_bandwidth : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct USB_TRANSPORT_CHARACTERISTICS_CHANGE_REGISTRATION
+    property change_notification_input_flags : UInt32
+    property handle : Win32cr::Devices::Usb::USB_CHANGE_REGISTRATION_HANDLE
+    property usb_transport_characteristics : Win32cr::Devices::Usb::USB_TRANSPORT_CHARACTERISTICS
+    def initialize(@change_notification_input_flags : UInt32, @handle : Win32cr::Devices::Usb::USB_CHANGE_REGISTRATION_HANDLE, @usb_transport_characteristics : Win32cr::Devices::Usb::USB_TRANSPORT_CHARACTERISTICS)
+    end
+  end
+
+  @[Extern]
+  struct USB_TRANSPORT_CHARACTERISTICS_CHANGE_NOTIFICATION
+    property handle : Win32cr::Devices::Usb::USB_CHANGE_REGISTRATION_HANDLE
+    property usb_transport_characteristics : Win32cr::Devices::Usb::USB_TRANSPORT_CHARACTERISTICS
+    def initialize(@handle : Win32cr::Devices::Usb::USB_CHANGE_REGISTRATION_HANDLE, @usb_transport_characteristics : Win32cr::Devices::Usb::USB_TRANSPORT_CHARACTERISTICS)
+    end
+  end
+
+  @[Extern]
+  struct USB_TRANSPORT_CHARACTERISTICS_CHANGE_UNREGISTRATION
+    property handle : Win32cr::Devices::Usb::USB_CHANGE_REGISTRATION_HANDLE
+    def initialize(@handle : Win32cr::Devices::Usb::USB_CHANGE_REGISTRATION_HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct USB_DEVICE_CHARACTERISTICS
+    property version : UInt32
+    property reserved : UInt32[2]
+    property usb_device_characteristics_flags : UInt32
+    property maximum_send_path_delay_in_milli_seconds : UInt32
+    property maximum_completion_path_delay_in_milli_seconds : UInt32
+    def initialize(@version : UInt32, @reserved : UInt32[2], @usb_device_characteristics_flags : UInt32, @maximum_send_path_delay_in_milli_seconds : UInt32, @maximum_completion_path_delay_in_milli_seconds : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION
+    property time_tracking_handle : Win32cr::Foundation::HANDLE
+    property is_startup_delay_tolerable : Win32cr::Foundation::BOOLEAN
+    def initialize(@time_tracking_handle : Win32cr::Foundation::HANDLE, @is_startup_delay_tolerable : Win32cr::Foundation::BOOLEAN)
+    end
+  end
+
+  @[Extern]
+  struct USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION
+    property time_tracking_handle : Win32cr::Foundation::HANDLE
+    def initialize(@time_tracking_handle : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION
+    property time_tracking_handle : Win32cr::Foundation::HANDLE
+    property input_frame_number : UInt32
+    property input_micro_frame_number : UInt32
+    property query_performance_counter_at_input_frame_or_micro_frame : Int64
+    property query_performance_counter_frequency : Int64
+    property predicted_accuracy_in_micro_seconds : UInt32
+    property current_generation_id : UInt32
+    property current_query_performance_counter : Int64
+    property current_hardware_frame_number : UInt32
+    property current_hardware_micro_frame_number : UInt32
+    property current_usb_frame_number : UInt32
+    def initialize(@time_tracking_handle : Win32cr::Foundation::HANDLE, @input_frame_number : UInt32, @input_micro_frame_number : UInt32, @query_performance_counter_at_input_frame_or_micro_frame : Int64, @query_performance_counter_frequency : Int64, @predicted_accuracy_in_micro_seconds : UInt32, @current_generation_id : UInt32, @current_query_performance_counter : Int64, @current_hardware_frame_number : UInt32, @current_hardware_micro_frame_number : UInt32, @current_usb_frame_number : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB_NODE_CONNECTION_SUPERSPEEDPLUS_INFORMATION
+    property connection_index : UInt32
+    property length : UInt32
+    property rx_super_speed_plus : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED
+    property rx_lane_count : UInt32
+    property tx_super_speed_plus : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED
+    property tx_lane_count : UInt32
+    def initialize(@connection_index : UInt32, @length : UInt32, @rx_super_speed_plus : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED, @rx_lane_count : UInt32, @tx_super_speed_plus : Win32cr::Devices::Usb::USB_DEVICE_CAPABILITY_SUPERSPEEDPLUS_SPEED, @tx_lane_count : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB4_HRD_DEBUG_ROUTE_STRING
+    property depth : UInt8
+    property route : UInt8[7]
+    def initialize(@depth : UInt8, @route : UInt8[7])
+    end
+  end
+
+  @[Extern]
+  struct USB4_HRD_DEBUG_READ_CONFIGURATION_SPACE_INPUT
+    property route : Win32cr::Devices::Usb::USB4_HRD_DEBUG_ROUTE_STRING
+    property adapter_number : UInt8
+    property configuration_space_type : Win32cr::Devices::Usb::USB4_CONFIG_SPACE_TYPE
+    property dw_offset : UInt32
+    property dw_length : UInt32
+    def initialize(@route : Win32cr::Devices::Usb::USB4_HRD_DEBUG_ROUTE_STRING, @adapter_number : UInt8, @configuration_space_type : Win32cr::Devices::Usb::USB4_CONFIG_SPACE_TYPE, @dw_offset : UInt32, @dw_length : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct USB4_HRD_DEBUG_READ_CONFIGURATION_SPACE_OUTPUT
+    property usb4_status : Win32cr::Devices::Usb::USB4_STATUS
+    property data : UInt32[60]
+    def initialize(@usb4_status : Win32cr::Devices::Usb::USB4_STATUS, @data : UInt32[60])
     end
   end
 
@@ -2588,206 +3338,307 @@ module Win32cr::Devices::Usb
     end
   end
 
-  def winUsbInitialize(device_handle : Win32cr::Foundation::HANDLE, interface_handle : Void**) : Win32cr::Foundation::BOOL
+  @[Extern]
+  struct WINUSB_PIPE_INFORMATION
+    property pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE
+    property pipe_id : UInt8
+    property maximum_packet_size : UInt16
+    property interval : UInt8
+    def initialize(@pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE, @pipe_id : UInt8, @maximum_packet_size : UInt16, @interval : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct WINUSB_PIPE_INFORMATION_EX
+    property pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE
+    property pipe_id : UInt8
+    property maximum_packet_size : UInt16
+    property interval : UInt8
+    property maximum_bytes_per_interval : UInt32
+    def initialize(@pipe_type : Win32cr::Devices::Usb::USBD_PIPE_TYPE, @pipe_id : UInt8, @maximum_packet_size : UInt16, @interval : UInt8, @maximum_bytes_per_interval : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct WINUSB_SETUP_PACKET
+    property request_type : UInt8
+    property request : UInt8
+    property value : UInt16
+    property index : UInt16
+    property length : UInt16
+    def initialize(@request_type : UInt8, @request : UInt8, @value : UInt16, @index : UInt16, @length : UInt16)
+    end
+  end
+
+  def winUsbInitialize(device_handle : Win32cr::Foundation::HANDLE, interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_Initialize(device_handle, interface_handle)
+    {% end %}
   end
 
-  def winUsbFree(interface_handle : Void*) : Win32cr::Foundation::BOOL
+  def winUsbFree(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_Free(interface_handle)
+    {% end %}
   end
 
-  def winUsbGetAssociatedInterface(interface_handle : Void*, associated_interface_index : UInt8, associated_interface_handle : Void**) : Win32cr::Foundation::BOOL
+  def winUsbGetAssociatedInterface(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, associated_interface_index : UInt8, associated_interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetAssociatedInterface(interface_handle, associated_interface_index, associated_interface_handle)
+    {% end %}
   end
 
-  def winUsbGetDescriptor(interface_handle : Void*, descriptor_type : UInt8, index : UInt8, language_id : UInt16, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*) : Win32cr::Foundation::BOOL
+  def winUsbGetDescriptor(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, descriptor_type : UInt8, index : UInt8, language_id : UInt16, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetDescriptor(interface_handle, descriptor_type, index, language_id, buffer, buffer_length, length_transferred)
+    {% end %}
   end
 
-  def winUsbQueryInterfaceSettings(interface_handle : Void*, alternate_interface_number : UInt8, usb_alt_interface_descriptor : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*) : Win32cr::Foundation::BOOL
+  def winUsbQueryInterfaceSettings(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, alternate_interface_number : UInt8, usb_alt_interface_descriptor : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_QueryInterfaceSettings(interface_handle, alternate_interface_number, usb_alt_interface_descriptor)
+    {% end %}
   end
 
-  def winUsbQueryDeviceInformation(interface_handle : Void*, information_type : UInt32, buffer_length : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+  def winUsbQueryDeviceInformation(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, information_type : UInt32, buffer_length : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_QueryDeviceInformation(interface_handle, information_type, buffer_length, buffer)
+    {% end %}
   end
 
-  def winUsbSetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8) : Win32cr::Foundation::BOOL
+  def winUsbSetCurrentAlternateSetting(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, setting_number : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_SetCurrentAlternateSetting(interface_handle, setting_number)
+    {% end %}
   end
 
-  def winUsbGetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8*) : Win32cr::Foundation::BOOL
+  def winUsbGetCurrentAlternateSetting(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, setting_number : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetCurrentAlternateSetting(interface_handle, setting_number)
+    {% end %}
   end
 
-  def winUsbQueryPipe(interface_handle : Void*, alternate_interface_number : UInt8, pipe_index : UInt8, pipe_information : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION*) : Win32cr::Foundation::BOOL
+  def winUsbQueryPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, alternate_interface_number : UInt8, pipe_index : UInt8, pipe_information : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_QueryPipe(interface_handle, alternate_interface_number, pipe_index, pipe_information)
+    {% end %}
   end
 
-  def winUsbQueryPipeEx(interface_handle : Void*, alternate_setting_number : UInt8, pipe_index : UInt8, pipe_information_ex : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION_EX*) : Win32cr::Foundation::BOOL
+  def winUsbQueryPipeEx(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, alternate_setting_number : UInt8, pipe_index : UInt8, pipe_information_ex : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION_EX*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_QueryPipeEx(interface_handle, alternate_setting_number, pipe_index, pipe_information_ex)
+    {% end %}
   end
 
-  def winUsbSetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+  def winUsbSetPipePolicy(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, policy_type : Win32cr::Devices::Usb::WINUSB_PIPE_POLICY, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_SetPipePolicy(interface_handle, pipe_id, policy_type, value_length, value)
+    {% end %}
   end
 
-  def winUsbGetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+  def winUsbGetPipePolicy(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, policy_type : Win32cr::Devices::Usb::WINUSB_PIPE_POLICY, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetPipePolicy(interface_handle, pipe_id, policy_type, value_length, value)
+    {% end %}
   end
 
-  def winUsbReadPipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+  def winUsbReadPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_ReadPipe(interface_handle, pipe_id, buffer, buffer_length, length_transferred, overlapped)
+    {% end %}
   end
 
-  def winUsbWritePipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+  def winUsbWritePipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_WritePipe(interface_handle, pipe_id, buffer, buffer_length, length_transferred, overlapped)
+    {% end %}
   end
 
-  def winUsbControlTransfer(interface_handle : Void*, setup_packet : Win32cr::Devices::Usb::WINUSB_SETUP_PACKET, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+  def winUsbControlTransfer(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, setup_packet : Win32cr::Devices::Usb::WINUSB_SETUP_PACKET, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_ControlTransfer(interface_handle, setup_packet, buffer, buffer_length, length_transferred, overlapped)
+    {% end %}
   end
 
-  def winUsbResetPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+  def winUsbResetPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_ResetPipe(interface_handle, pipe_id)
+    {% end %}
   end
 
-  def winUsbAbortPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+  def winUsbAbortPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_AbortPipe(interface_handle, pipe_id)
+    {% end %}
   end
 
-  def winUsbFlushPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+  def winUsbFlushPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_FlushPipe(interface_handle, pipe_id)
+    {% end %}
   end
 
-  def winUsbSetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+  def winUsbSetPowerPolicy(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, policy_type : Win32cr::Devices::Usb::WINUSB_POWER_POLICY, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_SetPowerPolicy(interface_handle, policy_type, value_length, value)
+    {% end %}
   end
 
-  def winUsbGetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+  def winUsbGetPowerPolicy(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, policy_type : Win32cr::Devices::Usb::WINUSB_POWER_POLICY, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetPowerPolicy(interface_handle, policy_type, value_length, value)
+    {% end %}
   end
 
-  def winUsbGetOverlappedResult(interface_handle : Void*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+  def winUsbGetOverlappedResult(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetOverlappedResult(interface_handle, lpOverlapped, lpNumberOfBytesTransferred, bWait)
+    {% end %}
   end
 
   def winUsbParseConfigurationDescriptor(configuration_descriptor : Win32cr::Devices::Usb::USB_CONFIGURATION_DESCRIPTOR*, start_position : Void*, interface_number : Int32, alternate_setting : Int32, interface_class : Int32, interface_sub_class : Int32, interface_protocol : Int32) : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*
+    {% if !flag?(:docs) %}
     C.WinUsb_ParseConfigurationDescriptor(configuration_descriptor, start_position, interface_number, alternate_setting, interface_class, interface_sub_class, interface_protocol)
+    {% end %}
   end
 
   def winUsbParseDescriptors(descriptor_buffer : Void*, total_length : UInt32, start_position : Void*, descriptor_type : Int32) : Win32cr::Devices::Usb::USB_COMMON_DESCRIPTOR*
+    {% if !flag?(:docs) %}
     C.WinUsb_ParseDescriptors(descriptor_buffer, total_length, start_position, descriptor_type)
+    {% end %}
   end
 
-  def winUsbGetCurrentFrameNumber(interface_handle : Void*, current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+  def winUsbGetCurrentFrameNumber(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, current_frame_number : UInt32*, time_stamp : Int64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetCurrentFrameNumber(interface_handle, current_frame_number, time_stamp)
+    {% end %}
   end
 
-  def winUsbGetAdjustedFrameNumber(current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::BOOL
+  def winUsbGetAdjustedFrameNumber(current_frame_number : UInt32*, time_stamp : Int64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetAdjustedFrameNumber(current_frame_number, time_stamp)
+    {% end %}
   end
 
-  def winUsbRegisterIsochBuffer(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, isoch_buffer_handle : Void**) : Win32cr::Foundation::BOOL
+  def winUsbRegisterIsochBuffer(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, isoch_buffer_handle : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_RegisterIsochBuffer(interface_handle, pipe_id, buffer, buffer_length, isoch_buffer_handle)
+    {% end %}
   end
 
   def winUsbUnregisterIsochBuffer(isoch_buffer_handle : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_UnregisterIsochBuffer(isoch_buffer_handle)
+    {% end %}
   end
 
   def winUsbWriteIsochPipe(buffer_handle : Void*, offset : UInt32, length : UInt32, frame_number : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_WriteIsochPipe(buffer_handle, offset, length, frame_number, overlapped)
+    {% end %}
   end
 
   def winUsbReadIsochPipe(buffer_handle : Void*, offset : UInt32, length : UInt32, frame_number : UInt32*, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_ReadIsochPipe(buffer_handle, offset, length, frame_number, number_of_packets, iso_packet_descriptors, overlapped)
+    {% end %}
   end
 
   def winUsbWriteIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_WriteIsochPipeAsap(buffer_handle, offset, length, continue_stream, overlapped)
+    {% end %}
   end
 
   def winUsbReadIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_ReadIsochPipeAsap(buffer_handle, offset, length, continue_stream, number_of_packets, iso_packet_descriptors, overlapped)
+    {% end %}
   end
 
-  def winUsbStartTrackingForTimeSync(interface_handle : Void*, start_tracking_info : Win32cr::Devices::Usb::USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+  def winUsbStartTrackingForTimeSync(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, start_tracking_info : Win32cr::Devices::Usb::USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_StartTrackingForTimeSync(interface_handle, start_tracking_info)
+    {% end %}
   end
 
-  def winUsbGetCurrentFrameNumberAndQpc(interface_handle : Void*, frame_qpc_info : Win32cr::Devices::Usb::USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+  def winUsbGetCurrentFrameNumberAndQpc(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, frame_qpc_info : Win32cr::Devices::Usb::USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_GetCurrentFrameNumberAndQpc(interface_handle, frame_qpc_info)
+    {% end %}
   end
 
-  def winUsbStopTrackingForTimeSync(interface_handle : Void*, stop_tracking_info : Win32cr::Devices::Usb::USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+  def winUsbStopTrackingForTimeSync(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, stop_tracking_info : Win32cr::Devices::Usb::USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinUsb_StopTrackingForTimeSync(interface_handle, stop_tracking_info)
+    {% end %}
   end
 
   @[Link("winusb")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun WinUsb_Initialize(device_handle : Win32cr::Foundation::HANDLE, interface_handle : Void**) : Win32cr::Foundation::BOOL
+    fun WinUsb_Initialize(device_handle : Win32cr::Foundation::HANDLE, interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_Free(interface_handle : Void*) : Win32cr::Foundation::BOOL
+    fun WinUsb_Free(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_GetAssociatedInterface(interface_handle : Void*, associated_interface_index : UInt8, associated_interface_handle : Void**) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetAssociatedInterface(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, associated_interface_index : UInt8, associated_interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_GetDescriptor(interface_handle : Void*, descriptor_type : UInt8, index : UInt8, language_id : UInt16, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetDescriptor(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, descriptor_type : UInt8, index : UInt8, language_id : UInt16, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_QueryInterfaceSettings(interface_handle : Void*, alternate_interface_number : UInt8, usb_alt_interface_descriptor : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*) : Win32cr::Foundation::BOOL
+    fun WinUsb_QueryInterfaceSettings(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, alternate_interface_number : UInt8, usb_alt_interface_descriptor : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_QueryDeviceInformation(interface_handle : Void*, information_type : UInt32, buffer_length : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+    fun WinUsb_QueryDeviceInformation(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, information_type : UInt32, buffer_length : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_SetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8) : Win32cr::Foundation::BOOL
+    fun WinUsb_SetCurrentAlternateSetting(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, setting_number : UInt8) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_GetCurrentAlternateSetting(interface_handle : Void*, setting_number : UInt8*) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetCurrentAlternateSetting(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, setting_number : UInt8*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_QueryPipe(interface_handle : Void*, alternate_interface_number : UInt8, pipe_index : UInt8, pipe_information : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION*) : Win32cr::Foundation::BOOL
+    fun WinUsb_QueryPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, alternate_interface_number : UInt8, pipe_index : UInt8, pipe_information : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_QueryPipeEx(interface_handle : Void*, alternate_setting_number : UInt8, pipe_index : UInt8, pipe_information_ex : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION_EX*) : Win32cr::Foundation::BOOL
+    fun WinUsb_QueryPipeEx(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, alternate_setting_number : UInt8, pipe_index : UInt8, pipe_information_ex : Win32cr::Devices::Usb::WINUSB_PIPE_INFORMATION_EX*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_SetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+    fun WinUsb_SetPipePolicy(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, policy_type : Win32cr::Devices::Usb::WINUSB_PIPE_POLICY, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_GetPipePolicy(interface_handle : Void*, pipe_id : UInt8, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetPipePolicy(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, policy_type : Win32cr::Devices::Usb::WINUSB_PIPE_POLICY, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_ReadPipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    fun WinUsb_ReadPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_WritePipe(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    fun WinUsb_WritePipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_ControlTransfer(interface_handle : Void*, setup_packet : Win32cr::Devices::Usb::WINUSB_SETUP_PACKET, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    fun WinUsb_ControlTransfer(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, setup_packet : Win32cr::Devices::Usb::WINUSB_SETUP_PACKET, buffer : UInt8*, buffer_length : UInt32, length_transferred : UInt32*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_ResetPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    fun WinUsb_ResetPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_AbortPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    fun WinUsb_AbortPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_FlushPipe(interface_handle : Void*, pipe_id : UInt8) : Win32cr::Foundation::BOOL
+    fun WinUsb_FlushPipe(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_SetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
+    fun WinUsb_SetPowerPolicy(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, policy_type : Win32cr::Devices::Usb::WINUSB_POWER_POLICY, value_length : UInt32, value : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_GetPowerPolicy(interface_handle : Void*, policy_type : UInt32, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetPowerPolicy(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, policy_type : Win32cr::Devices::Usb::WINUSB_POWER_POLICY, value_length : UInt32*, value : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_GetOverlappedResult(interface_handle : Void*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetOverlappedResult(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, bWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun WinUsb_ParseConfigurationDescriptor(configuration_descriptor : Win32cr::Devices::Usb::USB_CONFIGURATION_DESCRIPTOR*, start_position : Void*, interface_number : Int32, alternate_setting : Int32, interface_class : Int32, interface_sub_class : Int32, interface_protocol : Int32) : Win32cr::Devices::Usb::USB_INTERFACE_DESCRIPTOR*
@@ -2796,13 +3647,13 @@ module Win32cr::Devices::Usb
     fun WinUsb_ParseDescriptors(descriptor_buffer : Void*, total_length : UInt32, start_position : Void*, descriptor_type : Int32) : Win32cr::Devices::Usb::USB_COMMON_DESCRIPTOR*
 
     # :nodoc:
-    fun WinUsb_GetCurrentFrameNumber(interface_handle : Void*, current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetCurrentFrameNumber(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, current_frame_number : UInt32*, time_stamp : Int64*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_GetAdjustedFrameNumber(current_frame_number : UInt32*, time_stamp : Win32cr::Foundation::LARGE_INTEGER) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetAdjustedFrameNumber(current_frame_number : UInt32*, time_stamp : Int64) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_RegisterIsochBuffer(interface_handle : Void*, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, isoch_buffer_handle : Void**) : Win32cr::Foundation::BOOL
+    fun WinUsb_RegisterIsochBuffer(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, pipe_id : UInt8, buffer : UInt8*, buffer_length : UInt32, isoch_buffer_handle : Void**) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun WinUsb_UnregisterIsochBuffer(isoch_buffer_handle : Void*) : Win32cr::Foundation::BOOL
@@ -2820,13 +3671,14 @@ module Win32cr::Devices::Usb
     fun WinUsb_ReadIsochPipeAsap(buffer_handle : Void*, offset : UInt32, length : UInt32, continue_stream : Win32cr::Foundation::BOOL, number_of_packets : UInt32, iso_packet_descriptors : Win32cr::Devices::Usb::USBD_ISO_PACKET_DESCRIPTOR*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_StartTrackingForTimeSync(interface_handle : Void*, start_tracking_info : Win32cr::Devices::Usb::USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    fun WinUsb_StartTrackingForTimeSync(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, start_tracking_info : Win32cr::Devices::Usb::USB_START_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_GetCurrentFrameNumberAndQpc(interface_handle : Void*, frame_qpc_info : Win32cr::Devices::Usb::USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    fun WinUsb_GetCurrentFrameNumberAndQpc(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, frame_qpc_info : Win32cr::Devices::Usb::USB_FRAME_NUMBER_AND_QPC_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun WinUsb_StopTrackingForTimeSync(interface_handle : Void*, stop_tracking_info : Win32cr::Devices::Usb::USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
+    fun WinUsb_StopTrackingForTimeSync(interface_handle : Win32cr::Devices::Usb::WINUSB_INTERFACE_HANDLE, stop_tracking_info : Win32cr::Devices::Usb::USB_STOP_TRACKING_FOR_TIME_SYNC_INFORMATION*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

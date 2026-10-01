@@ -2,7 +2,7 @@ require "./../foundation.cr"
 
 module Win32cr::UI::Input
   extend self
-  alias HRAWINPUT = LibC::IntPtrT
+  alias HRAWINPUT = Void*
 
   enum RAW_INPUT_DATA_COMMAND_FLAGS : UInt32
     RID_HEADER = 268435461_u32
@@ -31,6 +31,13 @@ module Win32cr::UI::Input
     RIDEV_EXINPUTSINK = 4096_u32
     RIDEV_DEVNOTIFY = 8192_u32
   end
+  enum MOUSE_STATE : UInt16
+    MOUSE_MOVE_RELATIVE = 0_u16
+    MOUSE_MOVE_ABSOLUTE = 1_u16
+    MOUSE_VIRTUAL_DESKTOP = 2_u16
+    MOUSE_ATTRIBUTES_CHANGED = 4_u16
+    MOUSE_MOVE_NOCOALESCE = 8_u16
+  end
   enum INPUT_MESSAGE_DEVICE_TYPE
     IMDT_UNAVAILABLE = 0_i32
     IMDT_KEYBOARD = 1_i32
@@ -58,7 +65,7 @@ module Win32cr::UI::Input
 
   @[Extern]
   struct RAWMOUSE
-    property usFlags : UInt16
+    property usFlags : Win32cr::UI::Input::MOUSE_STATE
     property anonymous : Anonymous_e__Union_
     property ulRawButtons : UInt32
     property lLastX : Int32
@@ -84,7 +91,7 @@ module Win32cr::UI::Input
     end
     end
 
-    def initialize(@usFlags : UInt16, @anonymous : Anonymous_e__Union_, @ulRawButtons : UInt32, @lLastX : Int32, @lLastY : Int32, @ulExtraInformation : UInt32)
+    def initialize(@usFlags : Win32cr::UI::Input::MOUSE_STATE, @anonymous : Anonymous_e__Union_, @ulRawButtons : UInt32, @lLastX : Int32, @lLastY : Int32, @ulExtraInformation : UInt32)
     end
   end
 
@@ -104,8 +111,8 @@ module Win32cr::UI::Input
   struct RAWHID
     property dwSizeHid : UInt32
     property dwCount : UInt32
-    property bRawData : UInt8*
-    def initialize(@dwSizeHid : UInt32, @dwCount : UInt32, @bRawData : UInt8*)
+    property bRawData : UInt8[1]
+    def initialize(@dwSizeHid : UInt32, @dwCount : UInt32, @bRawData : UInt8[1])
     end
   end
 
@@ -208,46 +215,67 @@ module Win32cr::UI::Input
   end
 
   def getRawInputData(hRawInput : Win32cr::UI::Input::HRAWINPUT, uiCommand : Win32cr::UI::Input::RAW_INPUT_DATA_COMMAND_FLAGS, pData : Void*, pcbSize : UInt32*, cbSizeHeader : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRawInputData(hRawInput, uiCommand, pData, pcbSize, cbSizeHeader)
+    {% end %}
   end
 
   def getRawInputDeviceInfoA(hDevice : Win32cr::Foundation::HANDLE, uiCommand : Win32cr::UI::Input::RAW_INPUT_DEVICE_INFO_COMMAND, pData : Void*, pcbSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRawInputDeviceInfoA(hDevice, uiCommand, pData, pcbSize)
+    {% end %}
   end
 
   def getRawInputDeviceInfoW(hDevice : Win32cr::Foundation::HANDLE, uiCommand : Win32cr::UI::Input::RAW_INPUT_DEVICE_INFO_COMMAND, pData : Void*, pcbSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRawInputDeviceInfoW(hDevice, uiCommand, pData, pcbSize)
+    {% end %}
   end
 
   def getRawInputBuffer(pData : Win32cr::UI::Input::RAWINPUT*, pcbSize : UInt32*, cbSizeHeader : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRawInputBuffer(pData, pcbSize, cbSizeHeader)
+    {% end %}
   end
 
   def registerRawInputDevices(pRawInputDevices : Win32cr::UI::Input::RAWINPUTDEVICE*, uiNumDevices : UInt32, cbSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterRawInputDevices(pRawInputDevices, uiNumDevices, cbSize)
+    {% end %}
   end
 
   def getRegisteredRawInputDevices(pRawInputDevices : Win32cr::UI::Input::RAWINPUTDEVICE*, puiNumDevices : UInt32*, cbSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRegisteredRawInputDevices(pRawInputDevices, puiNumDevices, cbSize)
+    {% end %}
   end
 
   def getRawInputDeviceList(pRawInputDeviceList : Win32cr::UI::Input::RAWINPUTDEVICELIST*, puiNumDevices : UInt32*, cbSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRawInputDeviceList(pRawInputDeviceList, puiNumDevices, cbSize)
+    {% end %}
   end
 
   def defRawInputProc(paRawInput : Win32cr::UI::Input::RAWINPUT**, nInput : Int32, cbSizeHeader : UInt32) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefRawInputProc(paRawInput, nInput, cbSizeHeader)
+    {% end %}
   end
 
   def getCurrentInputMessageSource(inputMessageSource : Win32cr::UI::Input::INPUT_MESSAGE_SOURCE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCurrentInputMessageSource(inputMessageSource)
+    {% end %}
   end
 
   def getCIMSSM(inputMessageSource : Win32cr::UI::Input::INPUT_MESSAGE_SOURCE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCIMSSM(inputMessageSource)
+    {% end %}
   end
 
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetRawInputData(hRawInput : Win32cr::UI::Input::HRAWINPUT, uiCommand : Win32cr::UI::Input::RAW_INPUT_DATA_COMMAND_FLAGS, pData : Void*, pcbSize : UInt32*, cbSizeHeader : UInt32) : UInt32
@@ -280,4 +308,5 @@ module Win32cr::UI::Input
     fun GetCIMSSM(inputMessageSource : Win32cr::UI::Input::INPUT_MESSAGE_SOURCE*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

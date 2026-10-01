@@ -64,34 +64,34 @@ module Win32cr::NetworkManagement::WindowsNetworkVirtualization
 
   @[Extern]
   struct WNV_POLICY_MISMATCH_PARAM
-    property ca_family : UInt16
-    property pa_family : UInt16
+    property ca_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
+    property pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
     property virtual_subnet_id : UInt32
     property ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
     property pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
-    def initialize(@ca_family : UInt16, @pa_family : UInt16, @virtual_subnet_id : UInt32, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS)
+    def initialize(@ca_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @virtual_subnet_id : UInt32, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS)
     end
   end
 
   @[Extern]
   struct WNV_PROVIDER_ADDRESS_CHANGE_PARAM
-    property pa_family : UInt16
+    property pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
     property pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
     property address_state : Win32cr::Networking::WinSock::NL_DAD_STATE
-    def initialize(@pa_family : UInt16, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @address_state : Win32cr::Networking::WinSock::NL_DAD_STATE)
+    def initialize(@pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @address_state : Win32cr::Networking::WinSock::NL_DAD_STATE)
     end
   end
 
   @[Extern]
   struct WNV_CUSTOMER_ADDRESS_CHANGE_PARAM
     property mac_address : Win32cr::Networking::WinSock::DL_EUI48
-    property ca_family : UInt16
+    property ca_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
     property ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
     property virtual_subnet_id : UInt32
-    property pa_family : UInt16
+    property pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
     property pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
     property notification_reason : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CA_NOTIFICATION_TYPE
-    def initialize(@mac_address : Win32cr::Networking::WinSock::DL_EUI48, @ca_family : UInt16, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @virtual_subnet_id : UInt32, @pa_family : UInt16, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @notification_reason : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CA_NOTIFICATION_TYPE)
+    def initialize(@mac_address : Win32cr::Networking::WinSock::DL_EUI48, @ca_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @virtual_subnet_id : UInt32, @pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @notification_reason : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_CA_NOTIFICATION_TYPE)
     end
   end
 
@@ -115,26 +115,31 @@ module Win32cr::NetworkManagement::WindowsNetworkVirtualization
 
   @[Extern]
   struct WNV_REDIRECT_PARAM
-    property ca_family : UInt16
-    property pa_family : UInt16
-    property new_pa_family : UInt16
+    property ca_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
+    property pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
+    property new_pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY
     property virtual_subnet_id : UInt32
     property ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
     property pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
     property new_pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS
-    def initialize(@ca_family : UInt16, @pa_family : UInt16, @new_pa_family : UInt16, @virtual_subnet_id : UInt32, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @new_pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS)
+    def initialize(@ca_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @new_pa_family : Win32cr::Networking::WinSock::ADDRESS_FAMILY, @virtual_subnet_id : UInt32, @ca : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS, @new_pa : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_IP_ADDRESS)
     end
   end
 
   def wnvOpen : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.WnvOpen
+    {% end %}
   end
 
   def wnvRequestNotification(wnv_handle : Win32cr::Foundation::HANDLE, notification_param : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_PARAM*, overlapped : Win32cr::System::IO::OVERLAPPED*, bytes_transferred : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WnvRequestNotification(wnv_handle, notification_param, overlapped, bytes_transferred)
+    {% end %}
   end
 
   @[Link("wnvapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WnvOpen : Win32cr::Foundation::HANDLE
@@ -143,4 +148,5 @@ module Win32cr::NetworkManagement::WindowsNetworkVirtualization
     fun WnvRequestNotification(wnv_handle : Win32cr::Foundation::HANDLE, notification_param : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_PARAM*, overlapped : Win32cr::System::IO::OVERLAPPED*, bytes_transferred : UInt32*) : UInt32
 
   end
+  {% end %}
 end

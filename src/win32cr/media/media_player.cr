@@ -1,5 +1,6 @@
 require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/variant.cr"
 require "./media_foundation.cr"
 require "./../system/ole.cr"
 require "./../graphics/gdi.cr"
@@ -7,7 +8,7 @@ require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Media::MediaPlayer
   extend self
-  CLSID_XFeedsManager = "fe6b11c3-c72e-4061-86c6-9d163121f229"
+  CLSID_XFeedsManager = LibC::GUID.new(0xfe6b11c3_u32, 0xc72e_u16, 0x4061_u16, StaticArray[0x86_u8, 0xc6_u8, 0x9d_u8, 0x16_u8, 0x31_u8, 0x21_u8, 0xf2_u8, 0x29_u8])
   WMPGC_FLAGS_ALLOW_PREROLL = 1_u32
   WMPGC_FLAGS_SUPPRESS_DIALOGS = 2_u32
   WMPGC_FLAGS_IGNORE_AV_SYNC = 4_u32
@@ -549,13 +550,13 @@ module Win32cr::Media::MediaPlayer
   DISPID_WMPQUERY_BASE = 1350_u32
   DISPID_WMPMEDIACOLLECTION2_BASE = 1400_u32
   DISPID_WMPSTRINGCOLLECTION2_BASE = 1450_u32
-  CLSID_WMPSkinManager = "b2a7fd52-301f-4348-b93a-638c6de49229"
-  CLSID_WMPMediaPluginRegistrar = "5569e7f5-424b-4b93-89ca-79d17924689a"
-  WMP_PLUGINTYPE_DSP = "6434baea-4954-498d-abd5-2b07123e1f04"
-  WMP_PLUGINTYPE_DSP_OUTOFPROC = "ef29b174-c347-44cc-9a4f-2399118ff38c"
-  WMP_PLUGINTYPE_RENDERING = "a8554541-115d-406a-a4c7-51111c330183"
-  Kflttimedlevelmaximumfrequency = 22050
-  Kflttimedlevelminimumfrequency = 20
+  CLSID_WMPSkinManager = LibC::GUID.new(0xb2a7fd52_u32, 0x301f_u16, 0x4348_u16, StaticArray[0xb9_u8, 0x3a_u8, 0x63_u8, 0x8c_u8, 0x6d_u8, 0xe4_u8, 0x92_u8, 0x29_u8])
+  CLSID_WMPMediaPluginRegistrar = LibC::GUID.new(0x5569e7f5_u32, 0x424b_u16, 0x4b93_u16, StaticArray[0x89_u8, 0xca_u8, 0x79_u8, 0xd1_u8, 0x79_u8, 0x24_u8, 0x68_u8, 0x9a_u8])
+  WMP_PLUGINTYPE_DSP = LibC::GUID.new(0x6434baea_u32, 0x4954_u16, 0x498d_u16, StaticArray[0xab_u8, 0xd5_u8, 0x2b_u8, 0x7_u8, 0x12_u8, 0x3e_u8, 0x1f_u8, 0x4_u8])
+  WMP_PLUGINTYPE_DSP_OUTOFPROC = LibC::GUID.new(0xef29b174_u32, 0xc347_u16, 0x44cc_u16, StaticArray[0x9a_u8, 0x4f_u8, 0x23_u8, 0x99_u8, 0x11_u8, 0x8f_u8, 0xf3_u8, 0x8c_u8])
+  WMP_PLUGINTYPE_RENDERING = LibC::GUID.new(0xa8554541_u32, 0x115d_u16, 0x406a_u16, StaticArray[0xa4_u8, 0xc7_u8, 0x51_u8, 0x11_u8, 0x1c_u8, 0x33_u8, 0x1_u8, 0x83_u8])
+  Kflttimedlevelmaximumfrequency = 22050.0
+  Kflttimedlevelminimumfrequency = 20.0
   G_szcontentpartnerinfo_loginstate = "LoginState"
   G_szcontentpartnerinfo_mediaplayeraccounttype = "MediaPlayerAccountType"
   G_szcontentpartnerinfo_accounttype = "AccountType"
@@ -631,86 +632,86 @@ module Win32cr::Media::MediaPlayer
   G_szstationevent_started = "TrackStarted"
   G_szstationevent_complete = "TrackComplete"
   G_szstationevent_skipped = "TrackSkipped"
-  WMProfile_V40_DialUpMBR = "fd7f47f1-72a6-45a4-80f0-3aecefc32c07"
-  WMProfile_V40_IntranetMBR = "82cd3321-a94a-4ffc-9c2b-092c10ca16e7"
-  WMProfile_V40_2856100MBR = "5a1c2206-dc5e-4186-beb2-4c5a994b132e"
-  WMProfile_V40_6VoiceAudio = "d508978a-11a0-4d15-b0da-acdc99d4f890"
-  WMProfile_V40_16AMRadio = "0f4be81f-d57d-41e1-b2e3-2fad986bfec2"
-  WMProfile_V40_288FMRadioMono = "7fa57fc8-6ea4-4645-8abf-b6e5a8f814a1"
-  WMProfile_V40_288FMRadioStereo = "22fcf466-aa40-431f-a289-06d0ea1a1e40"
-  WMProfile_V40_56DialUpStereo = "e8026f87-e905-4594-a3c7-00d00041d1d9"
-  WMProfile_V40_64Audio = "4820b3f7-cbec-41dc-9391-78598714c8e5"
-  WMProfile_V40_96Audio = "0efa0ee3-9e64-41e2-837f-3c0038f327ba"
-  WMProfile_V40_128Audio = "93ddbe12-13dc-4e32-a35e-40378e34279a"
-  WMProfile_V40_288VideoVoice = "bb2bc274-0eb6-4da9-b550-ecf7f2b9948f"
-  WMProfile_V40_288VideoAudio = "ac617f2d-6cbe-4e84-8e9a-ce151a12a354"
-  WMProfile_V40_288VideoWebServer = "abf2f00d-d555-4815-94ce-8275f3a70bfe"
-  WMProfile_V40_56DialUpVideo = "e21713bb-652f-4dab-99de-71e04400270f"
-  WMProfile_V40_56DialUpVideoWebServer = "b756ff10-520f-4749-a399-b780e2fc9250"
-  WMProfile_V40_100Video = "8f99ddd8-6684-456b-a0a3-33e1316895f0"
-  WMProfile_V40_250Video = "541841c3-9339-4f7b-9a22-b11540894e42"
-  WMProfile_V40_512Video = "70440e6d-c4ef-4f84-8cd0-d5c28686e784"
-  WMProfile_V40_1MBVideo = "b4482a4c-cc17-4b07-a94e-9818d5e0f13f"
-  WMProfile_V40_3MBVideo = "55374ac0-309b-4396-b88f-e6e292113f28"
-  WMProfile_V70_DialUpMBR = "5b16e74b-4068-45b5-b80e-7bf8c80d2c2f"
-  WMProfile_V70_IntranetMBR = "045880dc-34b6-4ca9-a326-73557ed143f3"
-  WMProfile_V70_2856100MBR = "07df7a25-3fe2-4a5b-8b1e-348b0721ca70"
-  WMProfile_V70_288VideoVoice = "b952f38e-7dbc-4533-a9ca-b00b1c6e9800"
-  WMProfile_V70_288VideoAudio = "58bba0ee-896a-4948-9953-85b736f83947"
-  WMProfile_V70_288VideoWebServer = "70a32e2b-e2df-4ebd-9105-d9ca194a2d50"
-  WMProfile_V70_56VideoWebServer = "def99e40-57bc-4ab3-b2d1-b6e3caf64257"
-  WMProfile_V70_64VideoISDN = "c2b7a7e9-7b8e-4992-a1a1-068217a3b311"
-  WMProfile_V70_100Video = "d9f3c932-5ea9-4c6d-89b4-2686e515426e"
-  WMProfile_V70_256Video = "afe69b3a-403f-4a1b-8007-0e21cfb3df84"
-  WMProfile_V70_384Video = "f3d45fbb-8782-44df-97c6-8678e2f9b13d"
-  WMProfile_V70_768Video = "0326ebb6-f76e-4964-b0db-e729978d35ee"
-  WMProfile_V70_1500Video = "0b89164a-5490-4686-9e37-5a80884e5146"
-  WMProfile_V70_2000Video = "aa980124-bf10-4e4f-9afd-4329a7395cff"
-  WMProfile_V70_700FilmContentVideo = "7a747920-2449-4d76-99cb-fdb0c90484d4"
-  WMProfile_V70_1500FilmContentVideo = "f6a5f6df-ee3f-434c-a433-523ce55f516b"
-  WMProfile_V70_6VoiceAudio = "eaba9fbf-b64f-49b3-aa0c-73fbdd150ad0"
-  WMProfile_V70_288FMRadioMono = "c012a833-a03b-44a5-96dc-ed95cc65582d"
-  WMProfile_V70_288FMRadioStereo = "e96d67c9-1a39-4dc4-b900-b1184dc83620"
-  WMProfile_V70_56DialUpStereo = "674ee767-0949-4fac-875e-f4c9c292013b"
-  WMProfile_V70_64AudioISDN = "91dea458-9d60-4212-9c59-d40919c939e4"
-  WMProfile_V70_64Audio = "b29cffc6-f131-41db-b5e8-99d8b0b945f4"
-  WMProfile_V70_96Audio = "a9d4b819-16cc-4a59-9f37-693dbb0302d6"
-  WMProfile_V70_128Audio = "c64cf5da-df45-40d3-8027-de698d68dc66"
-  WMProfile_V70_225VideoPDA = "f55ea573-4c02-42b5-9026-a8260c438a9f"
-  WMProfile_V70_150VideoPDA = "0f472967-e3c6-4797-9694-f0304c5e2f17"
-  WMProfile_V80_255VideoPDA = "feedbcdf-3fac-4c93-ac0d-47941ec72c0b"
-  WMProfile_V80_150VideoPDA = "aee16dfa-2c14-4a2f-ad3f-a3034031784f"
-  WMProfile_V80_28856VideoMBR = "d66920c4-c21f-4ec8-a0b4-95cf2bd57fc4"
-  WMProfile_V80_100768VideoMBR = "5bdb5a0e-979e-47d3-9596-73b386392a55"
-  WMProfile_V80_288100VideoMBR = "d8722c69-2419-4b36-b4e0-6e17b60564e5"
-  WMProfile_V80_288Video = "3df678d9-1352-4186-bbf8-74f0c19b6ae2"
-  WMProfile_V80_56Video = "254e8a96-2612-405c-8039-f0bf725ced7d"
-  WMProfile_V80_100Video = "a2e300b4-c2d4-4fc0-b5dd-ecbd948dc0df"
-  WMProfile_V80_256Video = "bbc75500-33d2-4466-b86b-122b201cc9ae"
-  WMProfile_V80_384Video = "29b00c2b-09a9-48bd-ad09-cdae117d1da7"
-  WMProfile_V80_768Video = "74d01102-e71a-4820-8f0d-13d2ec1e4872"
-  WMProfile_V80_700NTSCVideo = "c8c2985f-e5d9-4538-9e23-9b21bf78f745"
-  WMProfile_V80_1400NTSCVideo = "931d1bee-617a-4bcd-9905-ccd0786683ee"
-  WMProfile_V80_384PALVideo = "9227c692-ae62-4f72-a7ea-736062d0e21e"
-  WMProfile_V80_700PALVideo = "ec298949-639b-45e2-96fd-4ab32d5919c2"
-  WMProfile_V80_288MonoAudio = "7ea3126d-e1ba-4716-89af-f65cee0c0c67"
-  WMProfile_V80_288StereoAudio = "7e4cab5c-35dc-45bb-a7c0-19b28070d0cc"
-  WMProfile_V80_32StereoAudio = "60907f9f-b352-47e5-b210-0ef1f47e9f9d"
-  WMProfile_V80_48StereoAudio = "5ee06be5-492b-480a-8a8f-12f373ecf9d4"
-  WMProfile_V80_64StereoAudio = "09bb5bc4-3176-457f-8dd6-3cd919123e2d"
-  WMProfile_V80_96StereoAudio = "1fc81930-61f2-436f-9d33-349f2a1c0f10"
-  WMProfile_V80_128StereoAudio = "407b9450-8bdc-4ee5-88b8-6f527bd941f2"
-  WMProfile_V80_288VideoOnly = "8c45b4c7-4aeb-4f78-a5ec-88420b9dadef"
-  WMProfile_V80_56VideoOnly = "6e2a6955-81df-4943-ba50-68a986a708f6"
-  WMProfile_V80_FAIRVBRVideo = "3510a862-5850-4886-835f-d78ec6a64042"
-  WMProfile_V80_HIGHVBRVideo = "0f10d9d3-3b04-4fb0-a3d3-88d4ac854acc"
-  WMProfile_V80_BESTVBRVideo = "048439ba-309c-440e-9cb4-3dcca3756423"
-
-  CLSID_WindowsMediaPlayer = LibC::GUID.new(0x6bf52a52_u32, 0x394a_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfa_u8, 0xa6_u8])
+  WMProfile_V40_DialUpMBR = LibC::GUID.new(0xfd7f47f1_u32, 0x72a6_u16, 0x45a4_u16, StaticArray[0x80_u8, 0xf0_u8, 0x3a_u8, 0xec_u8, 0xef_u8, 0xc3_u8, 0x2c_u8, 0x7_u8])
+  WMProfile_V40_IntranetMBR = LibC::GUID.new(0x82cd3321_u32, 0xa94a_u16, 0x4ffc_u16, StaticArray[0x9c_u8, 0x2b_u8, 0x9_u8, 0x2c_u8, 0x10_u8, 0xca_u8, 0x16_u8, 0xe7_u8])
+  WMProfile_V40_2856100MBR = LibC::GUID.new(0x5a1c2206_u32, 0xdc5e_u16, 0x4186_u16, StaticArray[0xbe_u8, 0xb2_u8, 0x4c_u8, 0x5a_u8, 0x99_u8, 0x4b_u8, 0x13_u8, 0x2e_u8])
+  WMProfile_V40_6VoiceAudio = LibC::GUID.new(0xd508978a_u32, 0x11a0_u16, 0x4d15_u16, StaticArray[0xb0_u8, 0xda_u8, 0xac_u8, 0xdc_u8, 0x99_u8, 0xd4_u8, 0xf8_u8, 0x90_u8])
+  WMProfile_V40_16AMRadio = LibC::GUID.new(0xf4be81f_u32, 0xd57d_u16, 0x41e1_u16, StaticArray[0xb2_u8, 0xe3_u8, 0x2f_u8, 0xad_u8, 0x98_u8, 0x6b_u8, 0xfe_u8, 0xc2_u8])
+  WMProfile_V40_288FMRadioMono = LibC::GUID.new(0x7fa57fc8_u32, 0x6ea4_u16, 0x4645_u16, StaticArray[0x8a_u8, 0xbf_u8, 0xb6_u8, 0xe5_u8, 0xa8_u8, 0xf8_u8, 0x14_u8, 0xa1_u8])
+  WMProfile_V40_288FMRadioStereo = LibC::GUID.new(0x22fcf466_u32, 0xaa40_u16, 0x431f_u16, StaticArray[0xa2_u8, 0x89_u8, 0x6_u8, 0xd0_u8, 0xea_u8, 0x1a_u8, 0x1e_u8, 0x40_u8])
+  WMProfile_V40_56DialUpStereo = LibC::GUID.new(0xe8026f87_u32, 0xe905_u16, 0x4594_u16, StaticArray[0xa3_u8, 0xc7_u8, 0x0_u8, 0xd0_u8, 0x0_u8, 0x41_u8, 0xd1_u8, 0xd9_u8])
+  WMProfile_V40_64Audio = LibC::GUID.new(0x4820b3f7_u32, 0xcbec_u16, 0x41dc_u16, StaticArray[0x93_u8, 0x91_u8, 0x78_u8, 0x59_u8, 0x87_u8, 0x14_u8, 0xc8_u8, 0xe5_u8])
+  WMProfile_V40_96Audio = LibC::GUID.new(0xefa0ee3_u32, 0x9e64_u16, 0x41e2_u16, StaticArray[0x83_u8, 0x7f_u8, 0x3c_u8, 0x0_u8, 0x38_u8, 0xf3_u8, 0x27_u8, 0xba_u8])
+  WMProfile_V40_128Audio = LibC::GUID.new(0x93ddbe12_u32, 0x13dc_u16, 0x4e32_u16, StaticArray[0xa3_u8, 0x5e_u8, 0x40_u8, 0x37_u8, 0x8e_u8, 0x34_u8, 0x27_u8, 0x9a_u8])
+  WMProfile_V40_288VideoVoice = LibC::GUID.new(0xbb2bc274_u32, 0xeb6_u16, 0x4da9_u16, StaticArray[0xb5_u8, 0x50_u8, 0xec_u8, 0xf7_u8, 0xf2_u8, 0xb9_u8, 0x94_u8, 0x8f_u8])
+  WMProfile_V40_288VideoAudio = LibC::GUID.new(0xac617f2d_u32, 0x6cbe_u16, 0x4e84_u16, StaticArray[0x8e_u8, 0x9a_u8, 0xce_u8, 0x15_u8, 0x1a_u8, 0x12_u8, 0xa3_u8, 0x54_u8])
+  WMProfile_V40_288VideoWebServer = LibC::GUID.new(0xabf2f00d_u32, 0xd555_u16, 0x4815_u16, StaticArray[0x94_u8, 0xce_u8, 0x82_u8, 0x75_u8, 0xf3_u8, 0xa7_u8, 0xb_u8, 0xfe_u8])
+  WMProfile_V40_56DialUpVideo = LibC::GUID.new(0xe21713bb_u32, 0x652f_u16, 0x4dab_u16, StaticArray[0x99_u8, 0xde_u8, 0x71_u8, 0xe0_u8, 0x44_u8, 0x0_u8, 0x27_u8, 0xf_u8])
+  WMProfile_V40_56DialUpVideoWebServer = LibC::GUID.new(0xb756ff10_u32, 0x520f_u16, 0x4749_u16, StaticArray[0xa3_u8, 0x99_u8, 0xb7_u8, 0x80_u8, 0xe2_u8, 0xfc_u8, 0x92_u8, 0x50_u8])
+  WMProfile_V40_100Video = LibC::GUID.new(0x8f99ddd8_u32, 0x6684_u16, 0x456b_u16, StaticArray[0xa0_u8, 0xa3_u8, 0x33_u8, 0xe1_u8, 0x31_u8, 0x68_u8, 0x95_u8, 0xf0_u8])
+  WMProfile_V40_250Video = LibC::GUID.new(0x541841c3_u32, 0x9339_u16, 0x4f7b_u16, StaticArray[0x9a_u8, 0x22_u8, 0xb1_u8, 0x15_u8, 0x40_u8, 0x89_u8, 0x4e_u8, 0x42_u8])
+  WMProfile_V40_512Video = LibC::GUID.new(0x70440e6d_u32, 0xc4ef_u16, 0x4f84_u16, StaticArray[0x8c_u8, 0xd0_u8, 0xd5_u8, 0xc2_u8, 0x86_u8, 0x86_u8, 0xe7_u8, 0x84_u8])
+  WMProfile_V40_1MBVideo = LibC::GUID.new(0xb4482a4c_u32, 0xcc17_u16, 0x4b07_u16, StaticArray[0xa9_u8, 0x4e_u8, 0x98_u8, 0x18_u8, 0xd5_u8, 0xe0_u8, 0xf1_u8, 0x3f_u8])
+  WMProfile_V40_3MBVideo = LibC::GUID.new(0x55374ac0_u32, 0x309b_u16, 0x4396_u16, StaticArray[0xb8_u8, 0x8f_u8, 0xe6_u8, 0xe2_u8, 0x92_u8, 0x11_u8, 0x3f_u8, 0x28_u8])
+  WMProfile_V70_DialUpMBR = LibC::GUID.new(0x5b16e74b_u32, 0x4068_u16, 0x45b5_u16, StaticArray[0xb8_u8, 0xe_u8, 0x7b_u8, 0xf8_u8, 0xc8_u8, 0xd_u8, 0x2c_u8, 0x2f_u8])
+  WMProfile_V70_IntranetMBR = LibC::GUID.new(0x45880dc_u32, 0x34b6_u16, 0x4ca9_u16, StaticArray[0xa3_u8, 0x26_u8, 0x73_u8, 0x55_u8, 0x7e_u8, 0xd1_u8, 0x43_u8, 0xf3_u8])
+  WMProfile_V70_2856100MBR = LibC::GUID.new(0x7df7a25_u32, 0x3fe2_u16, 0x4a5b_u16, StaticArray[0x8b_u8, 0x1e_u8, 0x34_u8, 0x8b_u8, 0x7_u8, 0x21_u8, 0xca_u8, 0x70_u8])
+  WMProfile_V70_288VideoVoice = LibC::GUID.new(0xb952f38e_u32, 0x7dbc_u16, 0x4533_u16, StaticArray[0xa9_u8, 0xca_u8, 0xb0_u8, 0xb_u8, 0x1c_u8, 0x6e_u8, 0x98_u8, 0x0_u8])
+  WMProfile_V70_288VideoAudio = LibC::GUID.new(0x58bba0ee_u32, 0x896a_u16, 0x4948_u16, StaticArray[0x99_u8, 0x53_u8, 0x85_u8, 0xb7_u8, 0x36_u8, 0xf8_u8, 0x39_u8, 0x47_u8])
+  WMProfile_V70_288VideoWebServer = LibC::GUID.new(0x70a32e2b_u32, 0xe2df_u16, 0x4ebd_u16, StaticArray[0x91_u8, 0x5_u8, 0xd9_u8, 0xca_u8, 0x19_u8, 0x4a_u8, 0x2d_u8, 0x50_u8])
+  WMProfile_V70_56VideoWebServer = LibC::GUID.new(0xdef99e40_u32, 0x57bc_u16, 0x4ab3_u16, StaticArray[0xb2_u8, 0xd1_u8, 0xb6_u8, 0xe3_u8, 0xca_u8, 0xf6_u8, 0x42_u8, 0x57_u8])
+  WMProfile_V70_64VideoISDN = LibC::GUID.new(0xc2b7a7e9_u32, 0x7b8e_u16, 0x4992_u16, StaticArray[0xa1_u8, 0xa1_u8, 0x6_u8, 0x82_u8, 0x17_u8, 0xa3_u8, 0xb3_u8, 0x11_u8])
+  WMProfile_V70_100Video = LibC::GUID.new(0xd9f3c932_u32, 0x5ea9_u16, 0x4c6d_u16, StaticArray[0x89_u8, 0xb4_u8, 0x26_u8, 0x86_u8, 0xe5_u8, 0x15_u8, 0x42_u8, 0x6e_u8])
+  WMProfile_V70_256Video = LibC::GUID.new(0xafe69b3a_u32, 0x403f_u16, 0x4a1b_u16, StaticArray[0x80_u8, 0x7_u8, 0xe_u8, 0x21_u8, 0xcf_u8, 0xb3_u8, 0xdf_u8, 0x84_u8])
+  WMProfile_V70_384Video = LibC::GUID.new(0xf3d45fbb_u32, 0x8782_u16, 0x44df_u16, StaticArray[0x97_u8, 0xc6_u8, 0x86_u8, 0x78_u8, 0xe2_u8, 0xf9_u8, 0xb1_u8, 0x3d_u8])
+  WMProfile_V70_768Video = LibC::GUID.new(0x326ebb6_u32, 0xf76e_u16, 0x4964_u16, StaticArray[0xb0_u8, 0xdb_u8, 0xe7_u8, 0x29_u8, 0x97_u8, 0x8d_u8, 0x35_u8, 0xee_u8])
+  WMProfile_V70_1500Video = LibC::GUID.new(0xb89164a_u32, 0x5490_u16, 0x4686_u16, StaticArray[0x9e_u8, 0x37_u8, 0x5a_u8, 0x80_u8, 0x88_u8, 0x4e_u8, 0x51_u8, 0x46_u8])
+  WMProfile_V70_2000Video = LibC::GUID.new(0xaa980124_u32, 0xbf10_u16, 0x4e4f_u16, StaticArray[0x9a_u8, 0xfd_u8, 0x43_u8, 0x29_u8, 0xa7_u8, 0x39_u8, 0x5c_u8, 0xff_u8])
+  WMProfile_V70_700FilmContentVideo = LibC::GUID.new(0x7a747920_u32, 0x2449_u16, 0x4d76_u16, StaticArray[0x99_u8, 0xcb_u8, 0xfd_u8, 0xb0_u8, 0xc9_u8, 0x4_u8, 0x84_u8, 0xd4_u8])
+  WMProfile_V70_1500FilmContentVideo = LibC::GUID.new(0xf6a5f6df_u32, 0xee3f_u16, 0x434c_u16, StaticArray[0xa4_u8, 0x33_u8, 0x52_u8, 0x3c_u8, 0xe5_u8, 0x5f_u8, 0x51_u8, 0x6b_u8])
+  WMProfile_V70_6VoiceAudio = LibC::GUID.new(0xeaba9fbf_u32, 0xb64f_u16, 0x49b3_u16, StaticArray[0xaa_u8, 0xc_u8, 0x73_u8, 0xfb_u8, 0xdd_u8, 0x15_u8, 0xa_u8, 0xd0_u8])
+  WMProfile_V70_288FMRadioMono = LibC::GUID.new(0xc012a833_u32, 0xa03b_u16, 0x44a5_u16, StaticArray[0x96_u8, 0xdc_u8, 0xed_u8, 0x95_u8, 0xcc_u8, 0x65_u8, 0x58_u8, 0x2d_u8])
+  WMProfile_V70_288FMRadioStereo = LibC::GUID.new(0xe96d67c9_u32, 0x1a39_u16, 0x4dc4_u16, StaticArray[0xb9_u8, 0x0_u8, 0xb1_u8, 0x18_u8, 0x4d_u8, 0xc8_u8, 0x36_u8, 0x20_u8])
+  WMProfile_V70_56DialUpStereo = LibC::GUID.new(0x674ee767_u32, 0x949_u16, 0x4fac_u16, StaticArray[0x87_u8, 0x5e_u8, 0xf4_u8, 0xc9_u8, 0xc2_u8, 0x92_u8, 0x1_u8, 0x3b_u8])
+  WMProfile_V70_64AudioISDN = LibC::GUID.new(0x91dea458_u32, 0x9d60_u16, 0x4212_u16, StaticArray[0x9c_u8, 0x59_u8, 0xd4_u8, 0x9_u8, 0x19_u8, 0xc9_u8, 0x39_u8, 0xe4_u8])
+  WMProfile_V70_64Audio = LibC::GUID.new(0xb29cffc6_u32, 0xf131_u16, 0x41db_u16, StaticArray[0xb5_u8, 0xe8_u8, 0x99_u8, 0xd8_u8, 0xb0_u8, 0xb9_u8, 0x45_u8, 0xf4_u8])
+  WMProfile_V70_96Audio = LibC::GUID.new(0xa9d4b819_u32, 0x16cc_u16, 0x4a59_u16, StaticArray[0x9f_u8, 0x37_u8, 0x69_u8, 0x3d_u8, 0xbb_u8, 0x3_u8, 0x2_u8, 0xd6_u8])
+  WMProfile_V70_128Audio = LibC::GUID.new(0xc64cf5da_u32, 0xdf45_u16, 0x40d3_u16, StaticArray[0x80_u8, 0x27_u8, 0xde_u8, 0x69_u8, 0x8d_u8, 0x68_u8, 0xdc_u8, 0x66_u8])
+  WMProfile_V70_225VideoPDA = LibC::GUID.new(0xf55ea573_u32, 0x4c02_u16, 0x42b5_u16, StaticArray[0x90_u8, 0x26_u8, 0xa8_u8, 0x26_u8, 0xc_u8, 0x43_u8, 0x8a_u8, 0x9f_u8])
+  WMProfile_V70_150VideoPDA = LibC::GUID.new(0xf472967_u32, 0xe3c6_u16, 0x4797_u16, StaticArray[0x96_u8, 0x94_u8, 0xf0_u8, 0x30_u8, 0x4c_u8, 0x5e_u8, 0x2f_u8, 0x17_u8])
+  WMProfile_V80_255VideoPDA = LibC::GUID.new(0xfeedbcdf_u32, 0x3fac_u16, 0x4c93_u16, StaticArray[0xac_u8, 0xd_u8, 0x47_u8, 0x94_u8, 0x1e_u8, 0xc7_u8, 0x2c_u8, 0xb_u8])
+  WMProfile_V80_150VideoPDA = LibC::GUID.new(0xaee16dfa_u32, 0x2c14_u16, 0x4a2f_u16, StaticArray[0xad_u8, 0x3f_u8, 0xa3_u8, 0x3_u8, 0x40_u8, 0x31_u8, 0x78_u8, 0x4f_u8])
+  WMProfile_V80_28856VideoMBR = LibC::GUID.new(0xd66920c4_u32, 0xc21f_u16, 0x4ec8_u16, StaticArray[0xa0_u8, 0xb4_u8, 0x95_u8, 0xcf_u8, 0x2b_u8, 0xd5_u8, 0x7f_u8, 0xc4_u8])
+  WMProfile_V80_100768VideoMBR = LibC::GUID.new(0x5bdb5a0e_u32, 0x979e_u16, 0x47d3_u16, StaticArray[0x95_u8, 0x96_u8, 0x73_u8, 0xb3_u8, 0x86_u8, 0x39_u8, 0x2a_u8, 0x55_u8])
+  WMProfile_V80_288100VideoMBR = LibC::GUID.new(0xd8722c69_u32, 0x2419_u16, 0x4b36_u16, StaticArray[0xb4_u8, 0xe0_u8, 0x6e_u8, 0x17_u8, 0xb6_u8, 0x5_u8, 0x64_u8, 0xe5_u8])
+  WMProfile_V80_288Video = LibC::GUID.new(0x3df678d9_u32, 0x1352_u16, 0x4186_u16, StaticArray[0xbb_u8, 0xf8_u8, 0x74_u8, 0xf0_u8, 0xc1_u8, 0x9b_u8, 0x6a_u8, 0xe2_u8])
+  WMProfile_V80_56Video = LibC::GUID.new(0x254e8a96_u32, 0x2612_u16, 0x405c_u16, StaticArray[0x80_u8, 0x39_u8, 0xf0_u8, 0xbf_u8, 0x72_u8, 0x5c_u8, 0xed_u8, 0x7d_u8])
+  WMProfile_V80_100Video = LibC::GUID.new(0xa2e300b4_u32, 0xc2d4_u16, 0x4fc0_u16, StaticArray[0xb5_u8, 0xdd_u8, 0xec_u8, 0xbd_u8, 0x94_u8, 0x8d_u8, 0xc0_u8, 0xdf_u8])
+  WMProfile_V80_256Video = LibC::GUID.new(0xbbc75500_u32, 0x33d2_u16, 0x4466_u16, StaticArray[0xb8_u8, 0x6b_u8, 0x12_u8, 0x2b_u8, 0x20_u8, 0x1c_u8, 0xc9_u8, 0xae_u8])
+  WMProfile_V80_384Video = LibC::GUID.new(0x29b00c2b_u32, 0x9a9_u16, 0x48bd_u16, StaticArray[0xad_u8, 0x9_u8, 0xcd_u8, 0xae_u8, 0x11_u8, 0x7d_u8, 0x1d_u8, 0xa7_u8])
+  WMProfile_V80_768Video = LibC::GUID.new(0x74d01102_u32, 0xe71a_u16, 0x4820_u16, StaticArray[0x8f_u8, 0xd_u8, 0x13_u8, 0xd2_u8, 0xec_u8, 0x1e_u8, 0x48_u8, 0x72_u8])
+  WMProfile_V80_700NTSCVideo = LibC::GUID.new(0xc8c2985f_u32, 0xe5d9_u16, 0x4538_u16, StaticArray[0x9e_u8, 0x23_u8, 0x9b_u8, 0x21_u8, 0xbf_u8, 0x78_u8, 0xf7_u8, 0x45_u8])
+  WMProfile_V80_1400NTSCVideo = LibC::GUID.new(0x931d1bee_u32, 0x617a_u16, 0x4bcd_u16, StaticArray[0x99_u8, 0x5_u8, 0xcc_u8, 0xd0_u8, 0x78_u8, 0x66_u8, 0x83_u8, 0xee_u8])
+  WMProfile_V80_384PALVideo = LibC::GUID.new(0x9227c692_u32, 0xae62_u16, 0x4f72_u16, StaticArray[0xa7_u8, 0xea_u8, 0x73_u8, 0x60_u8, 0x62_u8, 0xd0_u8, 0xe2_u8, 0x1e_u8])
+  WMProfile_V80_700PALVideo = LibC::GUID.new(0xec298949_u32, 0x639b_u16, 0x45e2_u16, StaticArray[0x96_u8, 0xfd_u8, 0x4a_u8, 0xb3_u8, 0x2d_u8, 0x59_u8, 0x19_u8, 0xc2_u8])
+  WMProfile_V80_288MonoAudio = LibC::GUID.new(0x7ea3126d_u32, 0xe1ba_u16, 0x4716_u16, StaticArray[0x89_u8, 0xaf_u8, 0xf6_u8, 0x5c_u8, 0xee_u8, 0xc_u8, 0xc_u8, 0x67_u8])
+  WMProfile_V80_288StereoAudio = LibC::GUID.new(0x7e4cab5c_u32, 0x35dc_u16, 0x45bb_u16, StaticArray[0xa7_u8, 0xc0_u8, 0x19_u8, 0xb2_u8, 0x80_u8, 0x70_u8, 0xd0_u8, 0xcc_u8])
+  WMProfile_V80_32StereoAudio = LibC::GUID.new(0x60907f9f_u32, 0xb352_u16, 0x47e5_u16, StaticArray[0xb2_u8, 0x10_u8, 0xe_u8, 0xf1_u8, 0xf4_u8, 0x7e_u8, 0x9f_u8, 0x9d_u8])
+  WMProfile_V80_48StereoAudio = LibC::GUID.new(0x5ee06be5_u32, 0x492b_u16, 0x480a_u16, StaticArray[0x8a_u8, 0x8f_u8, 0x12_u8, 0xf3_u8, 0x73_u8, 0xec_u8, 0xf9_u8, 0xd4_u8])
+  WMProfile_V80_64StereoAudio = LibC::GUID.new(0x9bb5bc4_u32, 0x3176_u16, 0x457f_u16, StaticArray[0x8d_u8, 0xd6_u8, 0x3c_u8, 0xd9_u8, 0x19_u8, 0x12_u8, 0x3e_u8, 0x2d_u8])
+  WMProfile_V80_96StereoAudio = LibC::GUID.new(0x1fc81930_u32, 0x61f2_u16, 0x436f_u16, StaticArray[0x9d_u8, 0x33_u8, 0x34_u8, 0x9f_u8, 0x2a_u8, 0x1c_u8, 0xf_u8, 0x10_u8])
+  WMProfile_V80_128StereoAudio = LibC::GUID.new(0x407b9450_u32, 0x8bdc_u16, 0x4ee5_u16, StaticArray[0x88_u8, 0xb8_u8, 0x6f_u8, 0x52_u8, 0x7b_u8, 0xd9_u8, 0x41_u8, 0xf2_u8])
+  WMProfile_V80_288VideoOnly = LibC::GUID.new(0x8c45b4c7_u32, 0x4aeb_u16, 0x4f78_u16, StaticArray[0xa5_u8, 0xec_u8, 0x88_u8, 0x42_u8, 0xb_u8, 0x9d_u8, 0xad_u8, 0xef_u8])
+  WMProfile_V80_56VideoOnly = LibC::GUID.new(0x6e2a6955_u32, 0x81df_u16, 0x4943_u16, StaticArray[0xba_u8, 0x50_u8, 0x68_u8, 0xa9_u8, 0x86_u8, 0xa7_u8, 0x8_u8, 0xf6_u8])
+  WMProfile_V80_FAIRVBRVideo = LibC::GUID.new(0x3510a862_u32, 0x5850_u16, 0x4886_u16, StaticArray[0x83_u8, 0x5f_u8, 0xd7_u8, 0x8e_u8, 0xc6_u8, 0xa6_u8, 0x40_u8, 0x42_u8])
+  WMProfile_V80_HIGHVBRVideo = LibC::GUID.new(0xf10d9d3_u32, 0x3b04_u16, 0x4fb0_u16, StaticArray[0xa3_u8, 0xd3_u8, 0x88_u8, 0xd4_u8, 0xac_u8, 0x85_u8, 0x4a_u8, 0xcc_u8])
+  WMProfile_V80_BESTVBRVideo = LibC::GUID.new(0x48439ba_u32, 0x309c_u16, 0x440e_u16, StaticArray[0x9c_u8, 0xb4_u8, 0x3d_u8, 0xcc_u8, 0xa3_u8, 0x75_u8, 0x64_u8, 0x23_u8])
 
   CLSID_WMPLib = LibC::GUID.new(0x6bf52a50_u32, 0x394a_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfa_u8, 0xa6_u8])
 
   CLSID_WMPRemoteMediaServices = LibC::GUID.new(0xdf333473_u32, 0x2cf7_u16, 0x4be2_u16, StaticArray[0x90_u8, 0x7f_u8, 0x9a_u8, 0xad_u8, 0x56_u8, 0x61_u8, 0x36_u8, 0x4f_u8])
+
+  CLSID_WindowsMediaPlayer = LibC::GUID.new(0x6bf52a52_u32, 0x394a_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfa_u8, 0xa6_u8])
 
   CLSID_FeedsManager = LibC::GUID.new(0xfaeb54c4_u32, 0xf66f_u16, 0x4806_u16, StaticArray[0x83_u8, 0xa0_u8, 0x80_u8, 0x52_u8, 0x99_u8, 0xf5_u8, 0xe3_u8, 0xad_u8])
 
@@ -1010,29 +1011,30 @@ module Win32cr::Media::MediaPlayer
     property dwUnretrievedObjectCount : UInt32
     property dwDeletedObjectStartingOffset : UInt32
     property dwFlags : UInt32
-    property wsObjectPathnameList : UInt16*
-    def initialize(@dwCurrentTransactionID : UInt32, @dwReturnedObjectCount : UInt32, @dwUnretrievedObjectCount : UInt32, @dwDeletedObjectStartingOffset : UInt32, @dwFlags : UInt32, @wsObjectPathnameList : UInt16*)
+    property wsObjectPathnameList : UInt16[1]
+    def initialize(@dwCurrentTransactionID : UInt32, @dwReturnedObjectCount : UInt32, @dwUnretrievedObjectCount : UInt32, @dwDeletedObjectStartingOffset : UInt32, @dwFlags : UInt32, @wsObjectPathnameList : UInt16[1])
     end
   end
 
   @[Extern]
-  record IWMPErrorItemVtbl,
+
+  record IWMPErrorItemVtable,
     query_interface : Proc(IWMPErrorItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPErrorItem*, UInt32),
     release : Proc(IWMPErrorItem*, UInt32),
     get_type_info_count : Proc(IWMPErrorItem*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPErrorItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPErrorItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPErrorItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPErrorItem*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_errorCode : Proc(IWMPErrorItem*, Int32*, Win32cr::Foundation::HRESULT),
     get_errorDescription : Proc(IWMPErrorItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_errorContext : Proc(IWMPErrorItem*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_errorContext : Proc(IWMPErrorItem*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_remedy : Proc(IWMPErrorItem*, Int32*, Win32cr::Foundation::HRESULT),
     get_customUrl : Proc(IWMPErrorItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPErrorItem, lpVtbl : IWMPErrorItemVtbl* do
+  record IWMPErrorItem, lpVtbl : IWMPErrorItemVtable* do
     GUID = LibC::GUID.new(0x3614c646_u32, 0x3b3b_u16, 0x4de7_u16, StaticArray[0xa8_u8, 0x1e_u8, 0x93_u8, 0xe_u8, 0x3f_u8, 0x21_u8, 0x27_u8, 0xb3_u8])
     def query_interface(this : IWMPErrorItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1052,8 +1054,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPErrorItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPErrorItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPErrorItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_errorCode(this : IWMPErrorItem*, phr : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_errorCode.call(this, phr)
@@ -1061,7 +1063,7 @@ module Win32cr::Media::MediaPlayer
     def get_errorDescription(this : IWMPErrorItem*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_errorDescription.call(this, pbstrDescription)
     end
-    def get_errorContext(this : IWMPErrorItem*, pvarContext : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_errorContext(this : IWMPErrorItem*, pvarContext : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_errorContext.call(this, pvarContext)
     end
     def get_remedy(this : IWMPErrorItem*, plRemedy : Int32*) : Win32cr::Foundation::HRESULT
@@ -1074,14 +1076,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPErrorVtbl,
+
+  record IWMPErrorVtable,
     query_interface : Proc(IWMPError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPError*, UInt32),
     release : Proc(IWMPError*, UInt32),
     get_type_info_count : Proc(IWMPError*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPError*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPError*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPError*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPError*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     clearErrorQueue : Proc(IWMPError*, Win32cr::Foundation::HRESULT),
     get_errorCount : Proc(IWMPError*, Int32*, Win32cr::Foundation::HRESULT),
     get_item : Proc(IWMPError*, Int32, Void**, Win32cr::Foundation::HRESULT),
@@ -1089,7 +1092,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPError, lpVtbl : IWMPErrorVtbl* do
+  record IWMPError, lpVtbl : IWMPErrorVtable* do
     GUID = LibC::GUID.new(0xa12dcf7d_u32, 0x14ab_u16, 0x4c1b_u16, StaticArray[0xa8_u8, 0xcd_u8, 0x63_u8, 0x90_u8, 0x9f_u8, 0x6_u8, 0x2_u8, 0x5b_u8])
     def query_interface(this : IWMPError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1109,8 +1112,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPError*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPError*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPError*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def clearErrorQueue(this : IWMPError*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clearErrorQueue.call(this)
@@ -1128,15 +1131,16 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPMediaVtbl,
+
+  record IWMPMediaVtable,
     query_interface : Proc(IWMPMedia*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPMedia*, UInt32),
     release : Proc(IWMPMedia*, UInt32),
     get_type_info_count : Proc(IWMPMedia*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPMedia*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPMedia*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPMedia*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isIdentical : Proc(IWMPMedia*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPMedia*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isIdentical : Proc(IWMPMedia*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_sourceURL : Proc(IWMPMedia*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_name : Proc(IWMPMedia*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_name : Proc(IWMPMedia*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1152,12 +1156,12 @@ module Win32cr::Media::MediaPlayer
     getItemInfo : Proc(IWMPMedia*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     setItemInfo : Proc(IWMPMedia*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     getItemInfoByAtom : Proc(IWMPMedia*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    isMemberOf : Proc(IWMPMedia*, Void*, Int16*, Win32cr::Foundation::HRESULT),
-    isReadOnlyItem : Proc(IWMPMedia*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT)
+    isMemberOf : Proc(IWMPMedia*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    isReadOnlyItem : Proc(IWMPMedia*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPMedia, lpVtbl : IWMPMediaVtbl* do
+  record IWMPMedia, lpVtbl : IWMPMediaVtable* do
     GUID = LibC::GUID.new(0x94d55e95_u32, 0x3fac_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x55_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfa_u8, 0xa6_u8])
     def query_interface(this : IWMPMedia*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1177,10 +1181,10 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPMedia*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPMedia*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPMedia*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isIdentical(this : IWMPMedia*, pIWMPMedia : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isIdentical(this : IWMPMedia*, pIWMPMedia : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isIdentical.call(this, pIWMPMedia, pvbool)
     end
     def get_sourceURL(this : IWMPMedia*, pbstrSourceURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1228,25 +1232,26 @@ module Win32cr::Media::MediaPlayer
     def getItemInfoByAtom(this : IWMPMedia*, lAtom : Int32, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getItemInfoByAtom.call(this, lAtom, pbstrVal)
     end
-    def isMemberOf(this : IWMPMedia*, pPlaylist : Void*, pvarfIsMemberOf : Int16*) : Win32cr::Foundation::HRESULT
+    def isMemberOf(this : IWMPMedia*, pPlaylist : Void*, pvarfIsMemberOf : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isMemberOf.call(this, pPlaylist, pvarfIsMemberOf)
     end
-    def isReadOnlyItem(this : IWMPMedia*, bstrItemName : Win32cr::Foundation::BSTR, pvarfIsReadOnly : Int16*) : Win32cr::Foundation::HRESULT
+    def isReadOnlyItem(this : IWMPMedia*, bstrItemName : Win32cr::Foundation::BSTR, pvarfIsReadOnly : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isReadOnlyItem.call(this, bstrItemName, pvarfIsReadOnly)
     end
 
   end
 
   @[Extern]
-  record IWMPControlsVtbl,
+
+  record IWMPControlsVtable,
     query_interface : Proc(IWMPControls*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPControls*, UInt32),
     release : Proc(IWMPControls*, UInt32),
     get_type_info_count : Proc(IWMPControls*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPControls*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPControls*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPControls*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isAvailable : Proc(IWMPControls*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPControls*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isAvailable : Proc(IWMPControls*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     play : Proc(IWMPControls*, Win32cr::Foundation::HRESULT),
     stop : Proc(IWMPControls*, Win32cr::Foundation::HRESULT),
     pause : Proc(IWMPControls*, Win32cr::Foundation::HRESULT),
@@ -1265,7 +1270,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPControls, lpVtbl : IWMPControlsVtbl* do
+  record IWMPControls, lpVtbl : IWMPControlsVtable* do
     GUID = LibC::GUID.new(0x74c09e02_u32, 0xf828_u16, 0x11d2_u16, StaticArray[0xa7_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x6e_u8])
     def query_interface(this : IWMPControls*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1285,10 +1290,10 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPControls*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPControls*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPControls*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isAvailable(this : IWMPControls*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isAvailable(this : IWMPControls*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isAvailable.call(this, bstrItem, pIsAvailable)
     end
     def play(this : IWMPControls*) : Win32cr::Foundation::HRESULT
@@ -1340,25 +1345,26 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPSettingsVtbl,
+
+  record IWMPSettingsVtable,
     query_interface : Proc(IWMPSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSettings*, UInt32),
     release : Proc(IWMPSettings*, UInt32),
     get_type_info_count : Proc(IWMPSettings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPSettings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPSettings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPSettings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isAvailable : Proc(IWMPSettings*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    get_autoStart : Proc(IWMPSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_autoStart : Proc(IWMPSettings*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPSettings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isAvailable : Proc(IWMPSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_autoStart : Proc(IWMPSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_autoStart : Proc(IWMPSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_baseURL : Proc(IWMPSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_baseURL : Proc(IWMPSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_defaultFrame : Proc(IWMPSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_defaultFrame : Proc(IWMPSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_invokeURLs : Proc(IWMPSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_invokeURLs : Proc(IWMPSettings*, Int16, Win32cr::Foundation::HRESULT),
-    get_mute : Proc(IWMPSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_mute : Proc(IWMPSettings*, Int16, Win32cr::Foundation::HRESULT),
+    get_invokeURLs : Proc(IWMPSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_invokeURLs : Proc(IWMPSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_mute : Proc(IWMPSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_mute : Proc(IWMPSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_playCount : Proc(IWMPSettings*, Int32*, Win32cr::Foundation::HRESULT),
     put_playCount : Proc(IWMPSettings*, Int32, Win32cr::Foundation::HRESULT),
     get_rate : Proc(IWMPSettings*, Float64*, Win32cr::Foundation::HRESULT),
@@ -1367,14 +1373,14 @@ module Win32cr::Media::MediaPlayer
     put_balance : Proc(IWMPSettings*, Int32, Win32cr::Foundation::HRESULT),
     get_volume : Proc(IWMPSettings*, Int32*, Win32cr::Foundation::HRESULT),
     put_volume : Proc(IWMPSettings*, Int32, Win32cr::Foundation::HRESULT),
-    getMode : Proc(IWMPSettings*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    setMode : Proc(IWMPSettings*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    get_enableErrorDialogs : Proc(IWMPSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enableErrorDialogs : Proc(IWMPSettings*, Int16, Win32cr::Foundation::HRESULT)
+    getMode : Proc(IWMPSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    setMode : Proc(IWMPSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_enableErrorDialogs : Proc(IWMPSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enableErrorDialogs : Proc(IWMPSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPSettings, lpVtbl : IWMPSettingsVtbl* do
+  record IWMPSettings, lpVtbl : IWMPSettingsVtable* do
     GUID = LibC::GUID.new(0x9104d1ab_u32, 0x80c9_u16, 0x4fed_u16, StaticArray[0xab_u8, 0xf0_u8, 0x2e_u8, 0x64_u8, 0x17_u8, 0xa6_u8, 0xdf_u8, 0x14_u8])
     def query_interface(this : IWMPSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1394,16 +1400,16 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPSettings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isAvailable(this : IWMPSettings*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isAvailable(this : IWMPSettings*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isAvailable.call(this, bstrItem, pIsAvailable)
     end
-    def get_autoStart(this : IWMPSettings*, pfAutoStart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_autoStart(this : IWMPSettings*, pfAutoStart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_autoStart.call(this, pfAutoStart)
     end
-    def put_autoStart(this : IWMPSettings*, fAutoStart : Int16) : Win32cr::Foundation::HRESULT
+    def put_autoStart(this : IWMPSettings*, fAutoStart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_autoStart.call(this, fAutoStart)
     end
     def get_baseURL(this : IWMPSettings*, pbstrBaseURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1418,16 +1424,16 @@ module Win32cr::Media::MediaPlayer
     def put_defaultFrame(this : IWMPSettings*, bstrDefaultFrame : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_defaultFrame.call(this, bstrDefaultFrame)
     end
-    def get_invokeURLs(this : IWMPSettings*, pfInvokeURLs : Int16*) : Win32cr::Foundation::HRESULT
+    def get_invokeURLs(this : IWMPSettings*, pfInvokeURLs : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_invokeURLs.call(this, pfInvokeURLs)
     end
-    def put_invokeURLs(this : IWMPSettings*, fInvokeURLs : Int16) : Win32cr::Foundation::HRESULT
+    def put_invokeURLs(this : IWMPSettings*, fInvokeURLs : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_invokeURLs.call(this, fInvokeURLs)
     end
-    def get_mute(this : IWMPSettings*, pfMute : Int16*) : Win32cr::Foundation::HRESULT
+    def get_mute(this : IWMPSettings*, pfMute : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_mute.call(this, pfMute)
     end
-    def put_mute(this : IWMPSettings*, fMute : Int16) : Win32cr::Foundation::HRESULT
+    def put_mute(this : IWMPSettings*, fMute : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_mute.call(this, fMute)
     end
     def get_playCount(this : IWMPSettings*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -1454,30 +1460,31 @@ module Win32cr::Media::MediaPlayer
     def put_volume(this : IWMPSettings*, lVolume : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_volume.call(this, lVolume)
     end
-    def getMode(this : IWMPSettings*, bstrMode : Win32cr::Foundation::BSTR, pvarfMode : Int16*) : Win32cr::Foundation::HRESULT
+    def getMode(this : IWMPSettings*, bstrMode : Win32cr::Foundation::BSTR, pvarfMode : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getMode.call(this, bstrMode, pvarfMode)
     end
-    def setMode(this : IWMPSettings*, bstrMode : Win32cr::Foundation::BSTR, varfMode : Int16) : Win32cr::Foundation::HRESULT
+    def setMode(this : IWMPSettings*, bstrMode : Win32cr::Foundation::BSTR, varfMode : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setMode.call(this, bstrMode, varfMode)
     end
-    def get_enableErrorDialogs(this : IWMPSettings*, pfEnableErrorDialogs : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enableErrorDialogs(this : IWMPSettings*, pfEnableErrorDialogs : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enableErrorDialogs.call(this, pfEnableErrorDialogs)
     end
-    def put_enableErrorDialogs(this : IWMPSettings*, fEnableErrorDialogs : Int16) : Win32cr::Foundation::HRESULT
+    def put_enableErrorDialogs(this : IWMPSettings*, fEnableErrorDialogs : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enableErrorDialogs.call(this, fEnableErrorDialogs)
     end
 
   end
 
   @[Extern]
-  record IWMPClosedCaptionVtbl,
+
+  record IWMPClosedCaptionVtable,
     query_interface : Proc(IWMPClosedCaption*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPClosedCaption*, UInt32),
     release : Proc(IWMPClosedCaption*, UInt32),
     get_type_info_count : Proc(IWMPClosedCaption*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPClosedCaption*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPClosedCaption*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPClosedCaption*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPClosedCaption*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_SAMIStyle : Proc(IWMPClosedCaption*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SAMIStyle : Proc(IWMPClosedCaption*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SAMILang : Proc(IWMPClosedCaption*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1489,7 +1496,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPClosedCaption, lpVtbl : IWMPClosedCaptionVtbl* do
+  record IWMPClosedCaption, lpVtbl : IWMPClosedCaptionVtable* do
     GUID = LibC::GUID.new(0x4f2df574_u32, 0xc588_u16, 0x11d3_u16, StaticArray[0x9e_u8, 0xd0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xe9_u8, 0x37_u8])
     def query_interface(this : IWMPClosedCaption*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1509,8 +1516,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPClosedCaption*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPClosedCaption*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPClosedCaption*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_SAMIStyle(this : IWMPClosedCaption*, pbstrSAMIStyle : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SAMIStyle.call(this, pbstrSAMIStyle)
@@ -1540,14 +1547,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlaylistVtbl,
+
+  record IWMPPlaylistVtable,
     query_interface : Proc(IWMPPlaylist*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlaylist*, UInt32),
     release : Proc(IWMPPlaylist*, UInt32),
     get_type_info_count : Proc(IWMPPlaylist*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPPlaylist*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPPlaylist*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPPlaylist*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPPlaylist*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_count : Proc(IWMPPlaylist*, Int32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(IWMPPlaylist*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_name : Proc(IWMPPlaylist*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1556,7 +1564,7 @@ module Win32cr::Media::MediaPlayer
     get_item : Proc(IWMPPlaylist*, Int32, Void**, Win32cr::Foundation::HRESULT),
     getItemInfo : Proc(IWMPPlaylist*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     setItemInfo : Proc(IWMPPlaylist*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_isIdentical : Proc(IWMPPlaylist*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isIdentical : Proc(IWMPPlaylist*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     clear : Proc(IWMPPlaylist*, Win32cr::Foundation::HRESULT),
     insertItem : Proc(IWMPPlaylist*, Int32, Void*, Win32cr::Foundation::HRESULT),
     appendItem : Proc(IWMPPlaylist*, Void*, Win32cr::Foundation::HRESULT),
@@ -1565,7 +1573,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPPlaylist, lpVtbl : IWMPPlaylistVtbl* do
+  record IWMPPlaylist, lpVtbl : IWMPPlaylistVtable* do
     GUID = LibC::GUID.new(0xd5f0f4f1_u32, 0x130c_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfa_u8, 0xa6_u8])
     def query_interface(this : IWMPPlaylist*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1585,8 +1593,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPPlaylist*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPPlaylist*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPPlaylist*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_count(this : IWMPPlaylist*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_count.call(this, plCount)
@@ -1612,7 +1620,7 @@ module Win32cr::Media::MediaPlayer
     def setItemInfo(this : IWMPPlaylist*, bstrName : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setItemInfo.call(this, bstrName, bstrValue)
     end
-    def get_isIdentical(this : IWMPPlaylist*, pIWMPPlaylist : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isIdentical(this : IWMPPlaylist*, pIWMPPlaylist : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isIdentical.call(this, pIWMPPlaylist, pvbool)
     end
     def clear(this : IWMPPlaylist*) : Win32cr::Foundation::HRESULT
@@ -1634,21 +1642,22 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPCdromVtbl,
+
+  record IWMPCdromVtable,
     query_interface : Proc(IWMPCdrom*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPCdrom*, UInt32),
     release : Proc(IWMPCdrom*, UInt32),
     get_type_info_count : Proc(IWMPCdrom*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPCdrom*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPCdrom*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPCdrom*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPCdrom*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_driveSpecifier : Proc(IWMPCdrom*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_playlist : Proc(IWMPCdrom*, Void**, Win32cr::Foundation::HRESULT),
     eject : Proc(IWMPCdrom*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPCdrom, lpVtbl : IWMPCdromVtbl* do
+  record IWMPCdrom, lpVtbl : IWMPCdromVtable* do
     GUID = LibC::GUID.new(0xcfab6e98_u32, 0x8730_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x88_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x57_u8, 0x4b_u8])
     def query_interface(this : IWMPCdrom*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1668,8 +1677,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPCdrom*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPCdrom*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPCdrom*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_driveSpecifier(this : IWMPCdrom*, pbstrDrive : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_driveSpecifier.call(this, pbstrDrive)
@@ -1684,21 +1693,22 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPCdromCollectionVtbl,
+
+  record IWMPCdromCollectionVtable,
     query_interface : Proc(IWMPCdromCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPCdromCollection*, UInt32),
     release : Proc(IWMPCdromCollection*, UInt32),
     get_type_info_count : Proc(IWMPCdromCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPCdromCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPCdromCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPCdromCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPCdromCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_count : Proc(IWMPCdromCollection*, Int32*, Win32cr::Foundation::HRESULT),
     item : Proc(IWMPCdromCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     getByDriveSpecifier : Proc(IWMPCdromCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPCdromCollection, lpVtbl : IWMPCdromCollectionVtbl* do
+  record IWMPCdromCollection, lpVtbl : IWMPCdromCollectionVtable* do
     GUID = LibC::GUID.new(0xee4c8fe2_u32, 0x34b2_u16, 0x11d3_u16, StaticArray[0xa3_u8, 0xbf_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xb3_u8, 0x44_u8])
     def query_interface(this : IWMPCdromCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1718,8 +1728,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPCdromCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPCdromCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPCdromCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_count(this : IWMPCdromCollection*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_count.call(this, plCount)
@@ -1734,20 +1744,21 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPStringCollectionVtbl,
+
+  record IWMPStringCollectionVtable,
     query_interface : Proc(IWMPStringCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPStringCollection*, UInt32),
     release : Proc(IWMPStringCollection*, UInt32),
     get_type_info_count : Proc(IWMPStringCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPStringCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPStringCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPStringCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPStringCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_count : Proc(IWMPStringCollection*, Int32*, Win32cr::Foundation::HRESULT),
     item : Proc(IWMPStringCollection*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPStringCollection, lpVtbl : IWMPStringCollectionVtbl* do
+  record IWMPStringCollection, lpVtbl : IWMPStringCollectionVtable* do
     GUID = LibC::GUID.new(0x4a976298_u32, 0x8c0d_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x89_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x57_u8, 0x4b_u8])
     def query_interface(this : IWMPStringCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1767,8 +1778,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPStringCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPStringCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPStringCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_count(this : IWMPStringCollection*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_count.call(this, plCount)
@@ -1780,14 +1791,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPMediaCollectionVtbl,
+
+  record IWMPMediaCollectionVtable,
     query_interface : Proc(IWMPMediaCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPMediaCollection*, UInt32),
     release : Proc(IWMPMediaCollection*, UInt32),
     get_type_info_count : Proc(IWMPMediaCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPMediaCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPMediaCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPMediaCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPMediaCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     add : Proc(IWMPMediaCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getAll : Proc(IWMPMediaCollection*, Void**, Win32cr::Foundation::HRESULT),
     getByName : Proc(IWMPMediaCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -1795,15 +1807,15 @@ module Win32cr::Media::MediaPlayer
     getByAuthor : Proc(IWMPMediaCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getByAlbum : Proc(IWMPMediaCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getByAttribute : Proc(IWMPMediaCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    remove : Proc(IWMPMediaCollection*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    remove : Proc(IWMPMediaCollection*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     getAttributeStringCollection : Proc(IWMPMediaCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getMediaAtom : Proc(IWMPMediaCollection*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
-    setDeleted : Proc(IWMPMediaCollection*, Void*, Int16, Win32cr::Foundation::HRESULT),
-    isDeleted : Proc(IWMPMediaCollection*, Void*, Int16*, Win32cr::Foundation::HRESULT)
+    setDeleted : Proc(IWMPMediaCollection*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    isDeleted : Proc(IWMPMediaCollection*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPMediaCollection, lpVtbl : IWMPMediaCollectionVtbl* do
+  record IWMPMediaCollection, lpVtbl : IWMPMediaCollectionVtable* do
     GUID = LibC::GUID.new(0x8363bc22_u32, 0xb4b4_u16, 0x4b19_u16, StaticArray[0x98_u8, 0x9d_u8, 0x1c_u8, 0xd7_u8, 0x65_u8, 0x74_u8, 0x9d_u8, 0xd1_u8])
     def query_interface(this : IWMPMediaCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1823,8 +1835,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPMediaCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPMediaCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPMediaCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def add(this : IWMPMediaCollection*, bstrURL : Win32cr::Foundation::BSTR, ppItem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, bstrURL, ppItem)
@@ -1847,7 +1859,7 @@ module Win32cr::Media::MediaPlayer
     def getByAttribute(this : IWMPMediaCollection*, bstrAttribute : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR, ppMediaItems : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getByAttribute.call(this, bstrAttribute, bstrValue, ppMediaItems)
     end
-    def remove(this : IWMPMediaCollection*, pItem : Void*, varfDeleteFile : Int16) : Win32cr::Foundation::HRESULT
+    def remove(this : IWMPMediaCollection*, pItem : Void*, varfDeleteFile : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, pItem, varfDeleteFile)
     end
     def getAttributeStringCollection(this : IWMPMediaCollection*, bstrAttribute : Win32cr::Foundation::BSTR, bstrMediaType : Win32cr::Foundation::BSTR, ppStringCollection : Void**) : Win32cr::Foundation::HRESULT
@@ -1856,30 +1868,31 @@ module Win32cr::Media::MediaPlayer
     def getMediaAtom(this : IWMPMediaCollection*, bstrItemName : Win32cr::Foundation::BSTR, plAtom : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getMediaAtom.call(this, bstrItemName, plAtom)
     end
-    def setDeleted(this : IWMPMediaCollection*, pItem : Void*, varfIsDeleted : Int16) : Win32cr::Foundation::HRESULT
+    def setDeleted(this : IWMPMediaCollection*, pItem : Void*, varfIsDeleted : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setDeleted.call(this, pItem, varfIsDeleted)
     end
-    def isDeleted(this : IWMPMediaCollection*, pItem : Void*, pvarfIsDeleted : Int16*) : Win32cr::Foundation::HRESULT
+    def isDeleted(this : IWMPMediaCollection*, pItem : Void*, pvarfIsDeleted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isDeleted.call(this, pItem, pvarfIsDeleted)
     end
 
   end
 
   @[Extern]
-  record IWMPPlaylistArrayVtbl,
+
+  record IWMPPlaylistArrayVtable,
     query_interface : Proc(IWMPPlaylistArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlaylistArray*, UInt32),
     release : Proc(IWMPPlaylistArray*, UInt32),
     get_type_info_count : Proc(IWMPPlaylistArray*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPPlaylistArray*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPPlaylistArray*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPPlaylistArray*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPPlaylistArray*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_count : Proc(IWMPPlaylistArray*, Int32*, Win32cr::Foundation::HRESULT),
     item : Proc(IWMPPlaylistArray*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPPlaylistArray, lpVtbl : IWMPPlaylistArrayVtbl* do
+  record IWMPPlaylistArray, lpVtbl : IWMPPlaylistArrayVtable* do
     GUID = LibC::GUID.new(0x679409c0_u32, 0x99f7_u16, 0x11d3_u16, StaticArray[0x9f_u8, 0xb7_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0xa6_u8, 0x20_u8, 0xbb_u8])
     def query_interface(this : IWMPPlaylistArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1899,8 +1912,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPPlaylistArray*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPPlaylistArray*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPPlaylistArray*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_count(this : IWMPPlaylistArray*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_count.call(this, plCount)
@@ -1912,25 +1925,26 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlaylistCollectionVtbl,
+
+  record IWMPPlaylistCollectionVtable,
     query_interface : Proc(IWMPPlaylistCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlaylistCollection*, UInt32),
     release : Proc(IWMPPlaylistCollection*, UInt32),
     get_type_info_count : Proc(IWMPPlaylistCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPPlaylistCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPPlaylistCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPPlaylistCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPPlaylistCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     newPlaylist : Proc(IWMPPlaylistCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getAll : Proc(IWMPPlaylistCollection*, Void**, Win32cr::Foundation::HRESULT),
     getByName : Proc(IWMPPlaylistCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     remove : Proc(IWMPPlaylistCollection*, Void*, Win32cr::Foundation::HRESULT),
-    setDeleted : Proc(IWMPPlaylistCollection*, Void*, Int16, Win32cr::Foundation::HRESULT),
-    isDeleted : Proc(IWMPPlaylistCollection*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    setDeleted : Proc(IWMPPlaylistCollection*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    isDeleted : Proc(IWMPPlaylistCollection*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     importPlaylist : Proc(IWMPPlaylistCollection*, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPPlaylistCollection, lpVtbl : IWMPPlaylistCollectionVtbl* do
+  record IWMPPlaylistCollection, lpVtbl : IWMPPlaylistCollectionVtable* do
     GUID = LibC::GUID.new(0x10a13217_u32, 0x23a7_u16, 0x439b_u16, StaticArray[0xb1_u8, 0xc0_u8, 0xd8_u8, 0x47_u8, 0xc7_u8, 0x9b_u8, 0x77_u8, 0x74_u8])
     def query_interface(this : IWMPPlaylistCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1950,8 +1964,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPPlaylistCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPPlaylistCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPPlaylistCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def newPlaylist(this : IWMPPlaylistCollection*, bstrName : Win32cr::Foundation::BSTR, ppItem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.newPlaylist.call(this, bstrName, ppItem)
@@ -1965,10 +1979,10 @@ module Win32cr::Media::MediaPlayer
     def remove(this : IWMPPlaylistCollection*, pItem : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, pItem)
     end
-    def setDeleted(this : IWMPPlaylistCollection*, pItem : Void*, varfIsDeleted : Int16) : Win32cr::Foundation::HRESULT
+    def setDeleted(this : IWMPPlaylistCollection*, pItem : Void*, varfIsDeleted : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setDeleted.call(this, pItem, varfIsDeleted)
     end
-    def isDeleted(this : IWMPPlaylistCollection*, pItem : Void*, pvarfIsDeleted : Int16*) : Win32cr::Foundation::HRESULT
+    def isDeleted(this : IWMPPlaylistCollection*, pItem : Void*, pvarfIsDeleted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isDeleted.call(this, pItem, pvarfIsDeleted)
     end
     def importPlaylist(this : IWMPPlaylistCollection*, pItem : Void*, ppImportedItem : Void**) : Win32cr::Foundation::HRESULT
@@ -1978,14 +1992,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPNetworkVtbl,
+
+  record IWMPNetworkVtable,
     query_interface : Proc(IWMPNetwork*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPNetwork*, UInt32),
     release : Proc(IWMPNetwork*, UInt32),
     get_type_info_count : Proc(IWMPNetwork*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPNetwork*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPNetwork*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPNetwork*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPNetwork*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_bandWidth : Proc(IWMPNetwork*, Int32*, Win32cr::Foundation::HRESULT),
     get_recoveredPackets : Proc(IWMPNetwork*, Int32*, Win32cr::Foundation::HRESULT),
     get_sourceProtocol : Proc(IWMPNetwork*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2007,8 +2022,8 @@ module Win32cr::Media::MediaPlayer
     setProxyPort : Proc(IWMPNetwork*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     getProxyExceptionList : Proc(IWMPNetwork*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     setProxyExceptionList : Proc(IWMPNetwork*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    getProxyBypassForLocal : Proc(IWMPNetwork*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    setProxyBypassForLocal : Proc(IWMPNetwork*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    getProxyBypassForLocal : Proc(IWMPNetwork*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    setProxyBypassForLocal : Proc(IWMPNetwork*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_maxBandwidth : Proc(IWMPNetwork*, Int32*, Win32cr::Foundation::HRESULT),
     put_maxBandwidth : Proc(IWMPNetwork*, Int32, Win32cr::Foundation::HRESULT),
     get_downloadProgress : Proc(IWMPNetwork*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2017,7 +2032,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPNetwork, lpVtbl : IWMPNetworkVtbl* do
+  record IWMPNetwork, lpVtbl : IWMPNetworkVtable* do
     GUID = LibC::GUID.new(0xec21b779_u32, 0xedef_u16, 0x462d_u16, StaticArray[0xbb_u8, 0xa4_u8, 0xad_u8, 0x9d_u8, 0xde_u8, 0x2b_u8, 0x29_u8, 0xa7_u8])
     def query_interface(this : IWMPNetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2037,8 +2052,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPNetwork*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPNetwork*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPNetwork*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_bandWidth(this : IWMPNetwork*, plBandwidth : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_bandWidth.call(this, plBandwidth)
@@ -2103,10 +2118,10 @@ module Win32cr::Media::MediaPlayer
     def setProxyExceptionList(this : IWMPNetwork*, bstrProtocol : Win32cr::Foundation::BSTR, pbstrExceptionList : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setProxyExceptionList.call(this, bstrProtocol, pbstrExceptionList)
     end
-    def getProxyBypassForLocal(this : IWMPNetwork*, bstrProtocol : Win32cr::Foundation::BSTR, pfBypassForLocal : Int16*) : Win32cr::Foundation::HRESULT
+    def getProxyBypassForLocal(this : IWMPNetwork*, bstrProtocol : Win32cr::Foundation::BSTR, pfBypassForLocal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProxyBypassForLocal.call(this, bstrProtocol, pfBypassForLocal)
     end
-    def setProxyBypassForLocal(this : IWMPNetwork*, bstrProtocol : Win32cr::Foundation::BSTR, fBypassForLocal : Int16) : Win32cr::Foundation::HRESULT
+    def setProxyBypassForLocal(this : IWMPNetwork*, bstrProtocol : Win32cr::Foundation::BSTR, fBypassForLocal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setProxyBypassForLocal.call(this, bstrProtocol, fBypassForLocal)
     end
     def get_maxBandwidth(this : IWMPNetwork*, lMaxBandwidth : Int32*) : Win32cr::Foundation::HRESULT
@@ -2128,14 +2143,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPCoreVtbl,
+
+  record IWMPCoreVtable,
     query_interface : Proc(IWMPCore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPCore*, UInt32),
     release : Proc(IWMPCore*, UInt32),
     get_type_info_count : Proc(IWMPCore*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPCore*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPCore*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPCore*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPCore*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(IWMPCore*, Win32cr::Foundation::HRESULT),
     get_URL : Proc(IWMPCore*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_URL : Proc(IWMPCore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2154,13 +2170,13 @@ module Win32cr::Media::MediaPlayer
     put_currentPlaylist : Proc(IWMPCore*, Void*, Win32cr::Foundation::HRESULT),
     get_cdromCollection : Proc(IWMPCore*, Void**, Win32cr::Foundation::HRESULT),
     get_closedCaption : Proc(IWMPCore*, Void**, Win32cr::Foundation::HRESULT),
-    get_isOnline : Proc(IWMPCore*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isOnline : Proc(IWMPCore*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPCore*, Void**, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPCore*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPCore, lpVtbl : IWMPCoreVtbl* do
+  record IWMPCore, lpVtbl : IWMPCoreVtable* do
     GUID = LibC::GUID.new(0xd84cca99_u32, 0xcce2_u16, 0x11d2_u16, StaticArray[0x9e_u8, 0xcc_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x8_u8, 0x59_u8, 0x81_u8])
     def query_interface(this : IWMPCore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2180,8 +2196,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPCore*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPCore*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPCore*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def close(this : IWMPCore*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
@@ -2237,7 +2253,7 @@ module Win32cr::Media::MediaPlayer
     def get_closedCaption(this : IWMPCore*, ppClosedCaption : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_closedCaption.call(this, ppClosedCaption)
     end
-    def get_isOnline(this : IWMPCore*, pfOnline : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isOnline(this : IWMPCore*, pfOnline : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isOnline.call(this, pfOnline)
     end
     def get_error(this : IWMPCore*, ppError : Void**) : Win32cr::Foundation::HRESULT
@@ -2250,14 +2266,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlayerVtbl,
+
+  record IWMPPlayerVtable,
     query_interface : Proc(IWMPPlayer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlayer*, UInt32),
     release : Proc(IWMPPlayer*, UInt32),
     get_type_info_count : Proc(IWMPPlayer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPPlayer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPPlayer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPPlayer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPPlayer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(IWMPPlayer*, Win32cr::Foundation::HRESULT),
     get_URL : Proc(IWMPPlayer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_URL : Proc(IWMPPlayer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2276,21 +2293,21 @@ module Win32cr::Media::MediaPlayer
     put_currentPlaylist : Proc(IWMPPlayer*, Void*, Win32cr::Foundation::HRESULT),
     get_cdromCollection : Proc(IWMPPlayer*, Void**, Win32cr::Foundation::HRESULT),
     get_closedCaption : Proc(IWMPPlayer*, Void**, Win32cr::Foundation::HRESULT),
-    get_isOnline : Proc(IWMPPlayer*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isOnline : Proc(IWMPPlayer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPPlayer*, Void**, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPPlayer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_enabled : Proc(IWMPPlayer*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enabled : Proc(IWMPPlayer*, Int16, Win32cr::Foundation::HRESULT),
-    get_fullScreen : Proc(IWMPPlayer*, Int16*, Win32cr::Foundation::HRESULT),
-    put_fullScreen : Proc(IWMPPlayer*, Int16, Win32cr::Foundation::HRESULT),
-    get_enableContextMenu : Proc(IWMPPlayer*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enableContextMenu : Proc(IWMPPlayer*, Int16, Win32cr::Foundation::HRESULT),
+    get_enabled : Proc(IWMPPlayer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enabled : Proc(IWMPPlayer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_fullScreen : Proc(IWMPPlayer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_fullScreen : Proc(IWMPPlayer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_enableContextMenu : Proc(IWMPPlayer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enableContextMenu : Proc(IWMPPlayer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     put_uiMode : Proc(IWMPPlayer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_uiMode : Proc(IWMPPlayer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPPlayer, lpVtbl : IWMPPlayerVtbl* do
+  record IWMPPlayer, lpVtbl : IWMPPlayerVtable* do
     GUID = LibC::GUID.new(0x6bf52a4f_u32, 0x394a_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfa_u8, 0xa6_u8])
     def query_interface(this : IWMPPlayer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2310,8 +2327,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPPlayer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPPlayer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPPlayer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def close(this : IWMPPlayer*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
@@ -2367,7 +2384,7 @@ module Win32cr::Media::MediaPlayer
     def get_closedCaption(this : IWMPPlayer*, ppClosedCaption : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_closedCaption.call(this, ppClosedCaption)
     end
-    def get_isOnline(this : IWMPPlayer*, pfOnline : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isOnline(this : IWMPPlayer*, pfOnline : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isOnline.call(this, pfOnline)
     end
     def get_error(this : IWMPPlayer*, ppError : Void**) : Win32cr::Foundation::HRESULT
@@ -2376,22 +2393,22 @@ module Win32cr::Media::MediaPlayer
     def get_status(this : IWMPPlayer*, pbstrStatus : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_status.call(this, pbstrStatus)
     end
-    def get_enabled(this : IWMPPlayer*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enabled(this : IWMPPlayer*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enabled.call(this, pbEnabled)
     end
-    def put_enabled(this : IWMPPlayer*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_enabled(this : IWMPPlayer*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enabled.call(this, bEnabled)
     end
-    def get_fullScreen(this : IWMPPlayer*, pbFullScreen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_fullScreen(this : IWMPPlayer*, pbFullScreen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_fullScreen.call(this, pbFullScreen)
     end
-    def put_fullScreen(this : IWMPPlayer*, bFullScreen : Int16) : Win32cr::Foundation::HRESULT
+    def put_fullScreen(this : IWMPPlayer*, bFullScreen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_fullScreen.call(this, bFullScreen)
     end
-    def get_enableContextMenu(this : IWMPPlayer*, pbEnableContextMenu : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enableContextMenu(this : IWMPPlayer*, pbEnableContextMenu : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enableContextMenu.call(this, pbEnableContextMenu)
     end
-    def put_enableContextMenu(this : IWMPPlayer*, bEnableContextMenu : Int16) : Win32cr::Foundation::HRESULT
+    def put_enableContextMenu(this : IWMPPlayer*, bEnableContextMenu : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enableContextMenu.call(this, bEnableContextMenu)
     end
     def put_uiMode(this : IWMPPlayer*, bstrMode : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2404,14 +2421,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlayer2Vtbl,
+
+  record IWMPPlayer2Vtable,
     query_interface : Proc(IWMPPlayer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlayer2*, UInt32),
     release : Proc(IWMPPlayer2*, UInt32),
     get_type_info_count : Proc(IWMPPlayer2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPPlayer2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPPlayer2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPPlayer2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPPlayer2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(IWMPPlayer2*, Win32cr::Foundation::HRESULT),
     get_URL : Proc(IWMPPlayer2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_URL : Proc(IWMPPlayer2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2430,25 +2448,25 @@ module Win32cr::Media::MediaPlayer
     put_currentPlaylist : Proc(IWMPPlayer2*, Void*, Win32cr::Foundation::HRESULT),
     get_cdromCollection : Proc(IWMPPlayer2*, Void**, Win32cr::Foundation::HRESULT),
     get_closedCaption : Proc(IWMPPlayer2*, Void**, Win32cr::Foundation::HRESULT),
-    get_isOnline : Proc(IWMPPlayer2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isOnline : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPPlayer2*, Void**, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPPlayer2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_enabled : Proc(IWMPPlayer2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enabled : Proc(IWMPPlayer2*, Int16, Win32cr::Foundation::HRESULT),
-    get_fullScreen : Proc(IWMPPlayer2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_fullScreen : Proc(IWMPPlayer2*, Int16, Win32cr::Foundation::HRESULT),
-    get_enableContextMenu : Proc(IWMPPlayer2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enableContextMenu : Proc(IWMPPlayer2*, Int16, Win32cr::Foundation::HRESULT),
+    get_enabled : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enabled : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_fullScreen : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_fullScreen : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_enableContextMenu : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enableContextMenu : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     put_uiMode : Proc(IWMPPlayer2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_uiMode : Proc(IWMPPlayer2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_stretchToFit : Proc(IWMPPlayer2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_stretchToFit : Proc(IWMPPlayer2*, Int16, Win32cr::Foundation::HRESULT),
-    get_windowlessVideo : Proc(IWMPPlayer2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_windowlessVideo : Proc(IWMPPlayer2*, Int16, Win32cr::Foundation::HRESULT)
+    get_stretchToFit : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_stretchToFit : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_windowlessVideo : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_windowlessVideo : Proc(IWMPPlayer2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPPlayer2, lpVtbl : IWMPPlayer2Vtbl* do
+  record IWMPPlayer2, lpVtbl : IWMPPlayer2Vtable* do
     GUID = LibC::GUID.new(0xe6b01d1_u32, 0xd407_u16, 0x4c85_u16, StaticArray[0xbf_u8, 0x5f_u8, 0x1c_u8, 0x1_u8, 0xf6_u8, 0x15_u8, 0x2_u8, 0x80_u8])
     def query_interface(this : IWMPPlayer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2468,8 +2486,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPPlayer2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPPlayer2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPPlayer2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def close(this : IWMPPlayer2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
@@ -2525,7 +2543,7 @@ module Win32cr::Media::MediaPlayer
     def get_closedCaption(this : IWMPPlayer2*, ppClosedCaption : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_closedCaption.call(this, ppClosedCaption)
     end
-    def get_isOnline(this : IWMPPlayer2*, pfOnline : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isOnline(this : IWMPPlayer2*, pfOnline : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isOnline.call(this, pfOnline)
     end
     def get_error(this : IWMPPlayer2*, ppError : Void**) : Win32cr::Foundation::HRESULT
@@ -2534,22 +2552,22 @@ module Win32cr::Media::MediaPlayer
     def get_status(this : IWMPPlayer2*, pbstrStatus : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_status.call(this, pbstrStatus)
     end
-    def get_enabled(this : IWMPPlayer2*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enabled(this : IWMPPlayer2*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enabled.call(this, pbEnabled)
     end
-    def put_enabled(this : IWMPPlayer2*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_enabled(this : IWMPPlayer2*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enabled.call(this, bEnabled)
     end
-    def get_fullScreen(this : IWMPPlayer2*, pbFullScreen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_fullScreen(this : IWMPPlayer2*, pbFullScreen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_fullScreen.call(this, pbFullScreen)
     end
-    def put_fullScreen(this : IWMPPlayer2*, bFullScreen : Int16) : Win32cr::Foundation::HRESULT
+    def put_fullScreen(this : IWMPPlayer2*, bFullScreen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_fullScreen.call(this, bFullScreen)
     end
-    def get_enableContextMenu(this : IWMPPlayer2*, pbEnableContextMenu : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enableContextMenu(this : IWMPPlayer2*, pbEnableContextMenu : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enableContextMenu.call(this, pbEnableContextMenu)
     end
-    def put_enableContextMenu(this : IWMPPlayer2*, bEnableContextMenu : Int16) : Win32cr::Foundation::HRESULT
+    def put_enableContextMenu(this : IWMPPlayer2*, bEnableContextMenu : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enableContextMenu.call(this, bEnableContextMenu)
     end
     def put_uiMode(this : IWMPPlayer2*, bstrMode : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2558,31 +2576,32 @@ module Win32cr::Media::MediaPlayer
     def get_uiMode(this : IWMPPlayer2*, pbstrMode : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_uiMode.call(this, pbstrMode)
     end
-    def get_stretchToFit(this : IWMPPlayer2*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_stretchToFit(this : IWMPPlayer2*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_stretchToFit.call(this, pbEnabled)
     end
-    def put_stretchToFit(this : IWMPPlayer2*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_stretchToFit(this : IWMPPlayer2*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_stretchToFit.call(this, bEnabled)
     end
-    def get_windowlessVideo(this : IWMPPlayer2*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_windowlessVideo(this : IWMPPlayer2*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_windowlessVideo.call(this, pbEnabled)
     end
-    def put_windowlessVideo(this : IWMPPlayer2*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_windowlessVideo(this : IWMPPlayer2*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_windowlessVideo.call(this, bEnabled)
     end
 
   end
 
   @[Extern]
-  record IWMPMedia2Vtbl,
+
+  record IWMPMedia2Vtable,
     query_interface : Proc(IWMPMedia2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPMedia2*, UInt32),
     release : Proc(IWMPMedia2*, UInt32),
     get_type_info_count : Proc(IWMPMedia2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPMedia2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPMedia2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPMedia2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isIdentical : Proc(IWMPMedia2*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPMedia2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isIdentical : Proc(IWMPMedia2*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_sourceURL : Proc(IWMPMedia2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_name : Proc(IWMPMedia2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_name : Proc(IWMPMedia2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2598,13 +2617,13 @@ module Win32cr::Media::MediaPlayer
     getItemInfo : Proc(IWMPMedia2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     setItemInfo : Proc(IWMPMedia2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     getItemInfoByAtom : Proc(IWMPMedia2*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    isMemberOf : Proc(IWMPMedia2*, Void*, Int16*, Win32cr::Foundation::HRESULT),
-    isReadOnlyItem : Proc(IWMPMedia2*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    isMemberOf : Proc(IWMPMedia2*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    isReadOnlyItem : Proc(IWMPMedia2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPMedia2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPMedia2, lpVtbl : IWMPMedia2Vtbl* do
+  record IWMPMedia2, lpVtbl : IWMPMedia2Vtable* do
     GUID = LibC::GUID.new(0xab7c88bb_u32, 0x143e_u16, 0x4ea4_u16, StaticArray[0xac_u8, 0xc3_u8, 0xe4_u8, 0x35_u8, 0xb_u8, 0x21_u8, 0x6_u8, 0xc3_u8])
     def query_interface(this : IWMPMedia2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2624,10 +2643,10 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPMedia2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPMedia2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPMedia2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isIdentical(this : IWMPMedia2*, pIWMPMedia : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isIdentical(this : IWMPMedia2*, pIWMPMedia : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isIdentical.call(this, pIWMPMedia, pvbool)
     end
     def get_sourceURL(this : IWMPMedia2*, pbstrSourceURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2675,10 +2694,10 @@ module Win32cr::Media::MediaPlayer
     def getItemInfoByAtom(this : IWMPMedia2*, lAtom : Int32, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getItemInfoByAtom.call(this, lAtom, pbstrVal)
     end
-    def isMemberOf(this : IWMPMedia2*, pPlaylist : Void*, pvarfIsMemberOf : Int16*) : Win32cr::Foundation::HRESULT
+    def isMemberOf(this : IWMPMedia2*, pPlaylist : Void*, pvarfIsMemberOf : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isMemberOf.call(this, pPlaylist, pvarfIsMemberOf)
     end
-    def isReadOnlyItem(this : IWMPMedia2*, bstrItemName : Win32cr::Foundation::BSTR, pvarfIsReadOnly : Int16*) : Win32cr::Foundation::HRESULT
+    def isReadOnlyItem(this : IWMPMedia2*, bstrItemName : Win32cr::Foundation::BSTR, pvarfIsReadOnly : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isReadOnlyItem.call(this, bstrItemName, pvarfIsReadOnly)
     end
     def get_error(this : IWMPMedia2*, ppIWMPErrorItem : Void**) : Win32cr::Foundation::HRESULT
@@ -2688,15 +2707,16 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPControls2Vtbl,
+
+  record IWMPControls2Vtable,
     query_interface : Proc(IWMPControls2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPControls2*, UInt32),
     release : Proc(IWMPControls2*, UInt32),
     get_type_info_count : Proc(IWMPControls2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPControls2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPControls2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPControls2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isAvailable : Proc(IWMPControls2*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPControls2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isAvailable : Proc(IWMPControls2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     play : Proc(IWMPControls2*, Win32cr::Foundation::HRESULT),
     stop : Proc(IWMPControls2*, Win32cr::Foundation::HRESULT),
     pause : Proc(IWMPControls2*, Win32cr::Foundation::HRESULT),
@@ -2716,7 +2736,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPControls2, lpVtbl : IWMPControls2Vtbl* do
+  record IWMPControls2, lpVtbl : IWMPControls2Vtable* do
     GUID = LibC::GUID.new(0x6f030d25_u32, 0x890_u16, 0x480f_u16, StaticArray[0x97_u8, 0x75_u8, 0x1f_u8, 0x7e_u8, 0x40_u8, 0xab_u8, 0x5b_u8, 0x8e_u8])
     def query_interface(this : IWMPControls2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2736,10 +2756,10 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPControls2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPControls2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPControls2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isAvailable(this : IWMPControls2*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isAvailable(this : IWMPControls2*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isAvailable.call(this, bstrItem, pIsAvailable)
     end
     def play(this : IWMPControls2*) : Win32cr::Foundation::HRESULT
@@ -2794,15 +2814,16 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPDVDVtbl,
+
+  record IWMPDVDVtable,
     query_interface : Proc(IWMPDVD*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPDVD*, UInt32),
     release : Proc(IWMPDVD*, UInt32),
     get_type_info_count : Proc(IWMPDVD*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPDVD*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPDVD*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPDVD*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isAvailable : Proc(IWMPDVD*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPDVD*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isAvailable : Proc(IWMPDVD*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_domain : Proc(IWMPDVD*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     topMenu : Proc(IWMPDVD*, Win32cr::Foundation::HRESULT),
     titleMenu : Proc(IWMPDVD*, Win32cr::Foundation::HRESULT),
@@ -2811,7 +2832,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPDVD, lpVtbl : IWMPDVDVtbl* do
+  record IWMPDVD, lpVtbl : IWMPDVDVtable* do
     GUID = LibC::GUID.new(0x8da61686_u32, 0x4668_u16, 0x4a5c_u16, StaticArray[0xae_u8, 0x5d_u8, 0x80_u8, 0x31_u8, 0x93_u8, 0x29_u8, 0x3d_u8, 0xbe_u8])
     def query_interface(this : IWMPDVD*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2831,10 +2852,10 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPDVD*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPDVD*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPDVD*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isAvailable(this : IWMPDVD*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isAvailable(this : IWMPDVD*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isAvailable.call(this, bstrItem, pIsAvailable)
     end
     def get_domain(this : IWMPDVD*, strDomain : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2856,14 +2877,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPCore2Vtbl,
+
+  record IWMPCore2Vtable,
     query_interface : Proc(IWMPCore2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPCore2*, UInt32),
     release : Proc(IWMPCore2*, UInt32),
     get_type_info_count : Proc(IWMPCore2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPCore2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPCore2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPCore2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPCore2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(IWMPCore2*, Win32cr::Foundation::HRESULT),
     get_URL : Proc(IWMPCore2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_URL : Proc(IWMPCore2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2882,14 +2904,14 @@ module Win32cr::Media::MediaPlayer
     put_currentPlaylist : Proc(IWMPCore2*, Void*, Win32cr::Foundation::HRESULT),
     get_cdromCollection : Proc(IWMPCore2*, Void**, Win32cr::Foundation::HRESULT),
     get_closedCaption : Proc(IWMPCore2*, Void**, Win32cr::Foundation::HRESULT),
-    get_isOnline : Proc(IWMPCore2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isOnline : Proc(IWMPCore2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPCore2*, Void**, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPCore2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_dvd : Proc(IWMPCore2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPCore2, lpVtbl : IWMPCore2Vtbl* do
+  record IWMPCore2, lpVtbl : IWMPCore2Vtable* do
     GUID = LibC::GUID.new(0xbc17e5b7_u32, 0x7561_u16, 0x4c18_u16, StaticArray[0xbb_u8, 0x90_u8, 0x17_u8, 0xd4_u8, 0x85_u8, 0x77_u8, 0x56_u8, 0x59_u8])
     def query_interface(this : IWMPCore2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2909,8 +2931,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPCore2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPCore2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPCore2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def close(this : IWMPCore2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
@@ -2966,7 +2988,7 @@ module Win32cr::Media::MediaPlayer
     def get_closedCaption(this : IWMPCore2*, ppClosedCaption : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_closedCaption.call(this, ppClosedCaption)
     end
-    def get_isOnline(this : IWMPCore2*, pfOnline : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isOnline(this : IWMPCore2*, pfOnline : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isOnline.call(this, pfOnline)
     end
     def get_error(this : IWMPCore2*, ppError : Void**) : Win32cr::Foundation::HRESULT
@@ -2982,14 +3004,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlayer3Vtbl,
+
+  record IWMPPlayer3Vtable,
     query_interface : Proc(IWMPPlayer3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlayer3*, UInt32),
     release : Proc(IWMPPlayer3*, UInt32),
     get_type_info_count : Proc(IWMPPlayer3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPPlayer3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPPlayer3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPPlayer3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPPlayer3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(IWMPPlayer3*, Win32cr::Foundation::HRESULT),
     get_URL : Proc(IWMPPlayer3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_URL : Proc(IWMPPlayer3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3008,26 +3031,26 @@ module Win32cr::Media::MediaPlayer
     put_currentPlaylist : Proc(IWMPPlayer3*, Void*, Win32cr::Foundation::HRESULT),
     get_cdromCollection : Proc(IWMPPlayer3*, Void**, Win32cr::Foundation::HRESULT),
     get_closedCaption : Proc(IWMPPlayer3*, Void**, Win32cr::Foundation::HRESULT),
-    get_isOnline : Proc(IWMPPlayer3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isOnline : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPPlayer3*, Void**, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPPlayer3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_dvd : Proc(IWMPPlayer3*, Void**, Win32cr::Foundation::HRESULT),
-    get_enabled : Proc(IWMPPlayer3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enabled : Proc(IWMPPlayer3*, Int16, Win32cr::Foundation::HRESULT),
-    get_fullScreen : Proc(IWMPPlayer3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_fullScreen : Proc(IWMPPlayer3*, Int16, Win32cr::Foundation::HRESULT),
-    get_enableContextMenu : Proc(IWMPPlayer3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enableContextMenu : Proc(IWMPPlayer3*, Int16, Win32cr::Foundation::HRESULT),
+    get_enabled : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enabled : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_fullScreen : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_fullScreen : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_enableContextMenu : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enableContextMenu : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     put_uiMode : Proc(IWMPPlayer3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_uiMode : Proc(IWMPPlayer3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_stretchToFit : Proc(IWMPPlayer3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_stretchToFit : Proc(IWMPPlayer3*, Int16, Win32cr::Foundation::HRESULT),
-    get_windowlessVideo : Proc(IWMPPlayer3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_windowlessVideo : Proc(IWMPPlayer3*, Int16, Win32cr::Foundation::HRESULT)
+    get_stretchToFit : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_stretchToFit : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_windowlessVideo : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_windowlessVideo : Proc(IWMPPlayer3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPPlayer3, lpVtbl : IWMPPlayer3Vtbl* do
+  record IWMPPlayer3, lpVtbl : IWMPPlayer3Vtable* do
     GUID = LibC::GUID.new(0x54062b68_u32, 0x52a_u16, 0x4c25_u16, StaticArray[0xa3_u8, 0x9f_u8, 0x8b_u8, 0x63_u8, 0x34_u8, 0x65_u8, 0x11_u8, 0xd4_u8])
     def query_interface(this : IWMPPlayer3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3047,8 +3070,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPPlayer3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPPlayer3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPPlayer3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def close(this : IWMPPlayer3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
@@ -3104,7 +3127,7 @@ module Win32cr::Media::MediaPlayer
     def get_closedCaption(this : IWMPPlayer3*, ppClosedCaption : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_closedCaption.call(this, ppClosedCaption)
     end
-    def get_isOnline(this : IWMPPlayer3*, pfOnline : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isOnline(this : IWMPPlayer3*, pfOnline : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isOnline.call(this, pfOnline)
     end
     def get_error(this : IWMPPlayer3*, ppError : Void**) : Win32cr::Foundation::HRESULT
@@ -3116,22 +3139,22 @@ module Win32cr::Media::MediaPlayer
     def get_dvd(this : IWMPPlayer3*, ppDVD : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dvd.call(this, ppDVD)
     end
-    def get_enabled(this : IWMPPlayer3*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enabled(this : IWMPPlayer3*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enabled.call(this, pbEnabled)
     end
-    def put_enabled(this : IWMPPlayer3*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_enabled(this : IWMPPlayer3*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enabled.call(this, bEnabled)
     end
-    def get_fullScreen(this : IWMPPlayer3*, pbFullScreen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_fullScreen(this : IWMPPlayer3*, pbFullScreen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_fullScreen.call(this, pbFullScreen)
     end
-    def put_fullScreen(this : IWMPPlayer3*, bFullScreen : Int16) : Win32cr::Foundation::HRESULT
+    def put_fullScreen(this : IWMPPlayer3*, bFullScreen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_fullScreen.call(this, bFullScreen)
     end
-    def get_enableContextMenu(this : IWMPPlayer3*, pbEnableContextMenu : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enableContextMenu(this : IWMPPlayer3*, pbEnableContextMenu : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enableContextMenu.call(this, pbEnableContextMenu)
     end
-    def put_enableContextMenu(this : IWMPPlayer3*, bEnableContextMenu : Int16) : Win32cr::Foundation::HRESULT
+    def put_enableContextMenu(this : IWMPPlayer3*, bEnableContextMenu : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enableContextMenu.call(this, bEnableContextMenu)
     end
     def put_uiMode(this : IWMPPlayer3*, bstrMode : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3140,40 +3163,41 @@ module Win32cr::Media::MediaPlayer
     def get_uiMode(this : IWMPPlayer3*, pbstrMode : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_uiMode.call(this, pbstrMode)
     end
-    def get_stretchToFit(this : IWMPPlayer3*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_stretchToFit(this : IWMPPlayer3*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_stretchToFit.call(this, pbEnabled)
     end
-    def put_stretchToFit(this : IWMPPlayer3*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_stretchToFit(this : IWMPPlayer3*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_stretchToFit.call(this, bEnabled)
     end
-    def get_windowlessVideo(this : IWMPPlayer3*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_windowlessVideo(this : IWMPPlayer3*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_windowlessVideo.call(this, pbEnabled)
     end
-    def put_windowlessVideo(this : IWMPPlayer3*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_windowlessVideo(this : IWMPPlayer3*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_windowlessVideo.call(this, bEnabled)
     end
 
   end
 
   @[Extern]
-  record IWMPErrorItem2Vtbl,
+
+  record IWMPErrorItem2Vtable,
     query_interface : Proc(IWMPErrorItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPErrorItem2*, UInt32),
     release : Proc(IWMPErrorItem2*, UInt32),
     get_type_info_count : Proc(IWMPErrorItem2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPErrorItem2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPErrorItem2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPErrorItem2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPErrorItem2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_errorCode : Proc(IWMPErrorItem2*, Int32*, Win32cr::Foundation::HRESULT),
     get_errorDescription : Proc(IWMPErrorItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_errorContext : Proc(IWMPErrorItem2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_errorContext : Proc(IWMPErrorItem2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_remedy : Proc(IWMPErrorItem2*, Int32*, Win32cr::Foundation::HRESULT),
     get_customUrl : Proc(IWMPErrorItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_condition : Proc(IWMPErrorItem2*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPErrorItem2, lpVtbl : IWMPErrorItem2Vtbl* do
+  record IWMPErrorItem2, lpVtbl : IWMPErrorItem2Vtable* do
     GUID = LibC::GUID.new(0xf75ccec0_u32, 0xc67c_u16, 0x475c_u16, StaticArray[0x93_u8, 0x1e_u8, 0x87_u8, 0x19_u8, 0x87_u8, 0xb_u8, 0xee_u8, 0x7d_u8])
     def query_interface(this : IWMPErrorItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3193,8 +3217,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPErrorItem2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPErrorItem2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPErrorItem2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_errorCode(this : IWMPErrorItem2*, phr : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_errorCode.call(this, phr)
@@ -3202,7 +3226,7 @@ module Win32cr::Media::MediaPlayer
     def get_errorDescription(this : IWMPErrorItem2*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_errorDescription.call(this, pbstrDescription)
     end
-    def get_errorContext(this : IWMPErrorItem2*, pvarContext : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_errorContext(this : IWMPErrorItem2*, pvarContext : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_errorContext.call(this, pvarContext)
     end
     def get_remedy(this : IWMPErrorItem2*, plRemedy : Int32*) : Win32cr::Foundation::HRESULT
@@ -3218,7 +3242,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPRemoteMediaServicesVtbl,
+
+  record IWMPRemoteMediaServicesVtable,
     query_interface : Proc(IWMPRemoteMediaServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPRemoteMediaServices*, UInt32),
     release : Proc(IWMPRemoteMediaServices*, UInt32),
@@ -3229,7 +3254,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPRemoteMediaServices, lpVtbl : IWMPRemoteMediaServicesVtbl* do
+  record IWMPRemoteMediaServices, lpVtbl : IWMPRemoteMediaServicesVtable* do
     GUID = LibC::GUID.new(0xcbb92747_u32, 0x741f_u16, 0x44fe_u16, StaticArray[0xab_u8, 0x5b_u8, 0xf1_u8, 0xa4_u8, 0x8f_u8, 0x3b_u8, 0x2a_u8, 0x59_u8])
     def query_interface(this : IWMPRemoteMediaServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3256,7 +3281,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPSkinManagerVtbl,
+
+  record IWMPSkinManagerVtable,
     query_interface : Proc(IWMPSkinManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSkinManager*, UInt32),
     release : Proc(IWMPSkinManager*, UInt32),
@@ -3264,7 +3290,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPSkinManager, lpVtbl : IWMPSkinManagerVtbl* do
+  record IWMPSkinManager, lpVtbl : IWMPSkinManagerVtable* do
     GUID = LibC::GUID.new(0x76f2fa6_u32, 0xed30_u16, 0x448b_u16, StaticArray[0x8c_u8, 0xc5_u8, 0x3f_u8, 0x3e_u8, 0xf3_u8, 0x52_u8, 0x9c_u8, 0x7a_u8])
     def query_interface(this : IWMPSkinManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3282,14 +3308,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPMetadataPictureVtbl,
+
+  record IWMPMetadataPictureVtable,
     query_interface : Proc(IWMPMetadataPicture*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPMetadataPicture*, UInt32),
     release : Proc(IWMPMetadataPicture*, UInt32),
     get_type_info_count : Proc(IWMPMetadataPicture*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPMetadataPicture*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPMetadataPicture*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPMetadataPicture*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPMetadataPicture*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_mimeType : Proc(IWMPMetadataPicture*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_pictureType : Proc(IWMPMetadataPicture*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_description : Proc(IWMPMetadataPicture*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3297,7 +3324,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPMetadataPicture, lpVtbl : IWMPMetadataPictureVtbl* do
+  record IWMPMetadataPicture, lpVtbl : IWMPMetadataPictureVtable* do
     GUID = LibC::GUID.new(0x5c29bbe0_u32, 0xf87d_u16, 0x4c45_u16, StaticArray[0xaa_u8, 0x28_u8, 0xa7_u8, 0xf_u8, 0x2_u8, 0x30_u8, 0xff_u8, 0xa9_u8])
     def query_interface(this : IWMPMetadataPicture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3317,8 +3344,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPMetadataPicture*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPMetadataPicture*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPMetadataPicture*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_mimeType(this : IWMPMetadataPicture*, pbstrMimeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_mimeType.call(this, pbstrMimeType)
@@ -3336,20 +3363,21 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPMetadataTextVtbl,
+
+  record IWMPMetadataTextVtable,
     query_interface : Proc(IWMPMetadataText*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPMetadataText*, UInt32),
     release : Proc(IWMPMetadataText*, UInt32),
     get_type_info_count : Proc(IWMPMetadataText*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPMetadataText*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPMetadataText*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPMetadataText*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPMetadataText*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_description : Proc(IWMPMetadataText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IWMPMetadataText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPMetadataText, lpVtbl : IWMPMetadataTextVtbl* do
+  record IWMPMetadataText, lpVtbl : IWMPMetadataTextVtable* do
     GUID = LibC::GUID.new(0x769a72db_u32, 0x13d2_u16, 0x45e2_u16, StaticArray[0x9c_u8, 0x48_u8, 0x53_u8, 0xca_u8, 0x9d_u8, 0x5b_u8, 0x74_u8, 0x50_u8])
     def query_interface(this : IWMPMetadataText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3369,8 +3397,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPMetadataText*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPMetadataText*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPMetadataText*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_description(this : IWMPMetadataText*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_description.call(this, pbstrDescription)
@@ -3382,15 +3410,16 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPMedia3Vtbl,
+
+  record IWMPMedia3Vtable,
     query_interface : Proc(IWMPMedia3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPMedia3*, UInt32),
     release : Proc(IWMPMedia3*, UInt32),
     get_type_info_count : Proc(IWMPMedia3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPMedia3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPMedia3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPMedia3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isIdentical : Proc(IWMPMedia3*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPMedia3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isIdentical : Proc(IWMPMedia3*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_sourceURL : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_name : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_name : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3406,15 +3435,15 @@ module Win32cr::Media::MediaPlayer
     getItemInfo : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     setItemInfo : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     getItemInfoByAtom : Proc(IWMPMedia3*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    isMemberOf : Proc(IWMPMedia3*, Void*, Int16*, Win32cr::Foundation::HRESULT),
-    isReadOnlyItem : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    isMemberOf : Proc(IWMPMedia3*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    isReadOnlyItem : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPMedia3*, Void**, Win32cr::Foundation::HRESULT),
     getAttributeCountByType : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
-    getItemInfoByType : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    getItemInfoByType : Proc(IWMPMedia3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPMedia3, lpVtbl : IWMPMedia3Vtbl* do
+  record IWMPMedia3, lpVtbl : IWMPMedia3Vtable* do
     GUID = LibC::GUID.new(0xf118efc7_u32, 0xf03a_u16, 0x4fb4_u16, StaticArray[0x99_u8, 0xc9_u8, 0x1c_u8, 0x2_u8, 0xa5_u8, 0xc1_u8, 0x6_u8, 0x5b_u8])
     def query_interface(this : IWMPMedia3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3434,10 +3463,10 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPMedia3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPMedia3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPMedia3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isIdentical(this : IWMPMedia3*, pIWMPMedia : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isIdentical(this : IWMPMedia3*, pIWMPMedia : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isIdentical.call(this, pIWMPMedia, pvbool)
     end
     def get_sourceURL(this : IWMPMedia3*, pbstrSourceURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3485,10 +3514,10 @@ module Win32cr::Media::MediaPlayer
     def getItemInfoByAtom(this : IWMPMedia3*, lAtom : Int32, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getItemInfoByAtom.call(this, lAtom, pbstrVal)
     end
-    def isMemberOf(this : IWMPMedia3*, pPlaylist : Void*, pvarfIsMemberOf : Int16*) : Win32cr::Foundation::HRESULT
+    def isMemberOf(this : IWMPMedia3*, pPlaylist : Void*, pvarfIsMemberOf : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isMemberOf.call(this, pPlaylist, pvarfIsMemberOf)
     end
-    def isReadOnlyItem(this : IWMPMedia3*, bstrItemName : Win32cr::Foundation::BSTR, pvarfIsReadOnly : Int16*) : Win32cr::Foundation::HRESULT
+    def isReadOnlyItem(this : IWMPMedia3*, bstrItemName : Win32cr::Foundation::BSTR, pvarfIsReadOnly : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isReadOnlyItem.call(this, bstrItemName, pvarfIsReadOnly)
     end
     def get_error(this : IWMPMedia3*, ppIWMPErrorItem : Void**) : Win32cr::Foundation::HRESULT
@@ -3497,32 +3526,33 @@ module Win32cr::Media::MediaPlayer
     def getAttributeCountByType(this : IWMPMedia3*, bstrType : Win32cr::Foundation::BSTR, bstrLanguage : Win32cr::Foundation::BSTR, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAttributeCountByType.call(this, bstrType, bstrLanguage, plCount)
     end
-    def getItemInfoByType(this : IWMPMedia3*, bstrType : Win32cr::Foundation::BSTR, bstrLanguage : Win32cr::Foundation::BSTR, lIndex : Int32, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getItemInfoByType(this : IWMPMedia3*, bstrType : Win32cr::Foundation::BSTR, bstrLanguage : Win32cr::Foundation::BSTR, lIndex : Int32, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getItemInfoByType.call(this, bstrType, bstrLanguage, lIndex, pvarValue)
     end
 
   end
 
   @[Extern]
-  record IWMPSettings2Vtbl,
+
+  record IWMPSettings2Vtable,
     query_interface : Proc(IWMPSettings2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSettings2*, UInt32),
     release : Proc(IWMPSettings2*, UInt32),
     get_type_info_count : Proc(IWMPSettings2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPSettings2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPSettings2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPSettings2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isAvailable : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    get_autoStart : Proc(IWMPSettings2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_autoStart : Proc(IWMPSettings2*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPSettings2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isAvailable : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_autoStart : Proc(IWMPSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_autoStart : Proc(IWMPSettings2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_baseURL : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_baseURL : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_defaultFrame : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_defaultFrame : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_invokeURLs : Proc(IWMPSettings2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_invokeURLs : Proc(IWMPSettings2*, Int16, Win32cr::Foundation::HRESULT),
-    get_mute : Proc(IWMPSettings2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_mute : Proc(IWMPSettings2*, Int16, Win32cr::Foundation::HRESULT),
+    get_invokeURLs : Proc(IWMPSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_invokeURLs : Proc(IWMPSettings2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_mute : Proc(IWMPSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_mute : Proc(IWMPSettings2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_playCount : Proc(IWMPSettings2*, Int32*, Win32cr::Foundation::HRESULT),
     put_playCount : Proc(IWMPSettings2*, Int32, Win32cr::Foundation::HRESULT),
     get_rate : Proc(IWMPSettings2*, Float64*, Win32cr::Foundation::HRESULT),
@@ -3531,17 +3561,17 @@ module Win32cr::Media::MediaPlayer
     put_balance : Proc(IWMPSettings2*, Int32, Win32cr::Foundation::HRESULT),
     get_volume : Proc(IWMPSettings2*, Int32*, Win32cr::Foundation::HRESULT),
     put_volume : Proc(IWMPSettings2*, Int32, Win32cr::Foundation::HRESULT),
-    getMode : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    setMode : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    get_enableErrorDialogs : Proc(IWMPSettings2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enableErrorDialogs : Proc(IWMPSettings2*, Int16, Win32cr::Foundation::HRESULT),
+    getMode : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    setMode : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_enableErrorDialogs : Proc(IWMPSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enableErrorDialogs : Proc(IWMPSettings2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_defaultAudioLanguage : Proc(IWMPSettings2*, Int32*, Win32cr::Foundation::HRESULT),
     get_mediaAccessRights : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    requestMediaAccessRights : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT)
+    requestMediaAccessRights : Proc(IWMPSettings2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPSettings2, lpVtbl : IWMPSettings2Vtbl* do
+  record IWMPSettings2, lpVtbl : IWMPSettings2Vtable* do
     GUID = LibC::GUID.new(0xfda937a4_u32, 0xeece_u16, 0x4da5_u16, StaticArray[0xa0_u8, 0xb6_u8, 0x39_u8, 0xbf_u8, 0x89_u8, 0xad_u8, 0xe2_u8, 0xc2_u8])
     def query_interface(this : IWMPSettings2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3561,16 +3591,16 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPSettings2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPSettings2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPSettings2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isAvailable(this : IWMPSettings2*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isAvailable(this : IWMPSettings2*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isAvailable.call(this, bstrItem, pIsAvailable)
     end
-    def get_autoStart(this : IWMPSettings2*, pfAutoStart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_autoStart(this : IWMPSettings2*, pfAutoStart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_autoStart.call(this, pfAutoStart)
     end
-    def put_autoStart(this : IWMPSettings2*, fAutoStart : Int16) : Win32cr::Foundation::HRESULT
+    def put_autoStart(this : IWMPSettings2*, fAutoStart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_autoStart.call(this, fAutoStart)
     end
     def get_baseURL(this : IWMPSettings2*, pbstrBaseURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3585,16 +3615,16 @@ module Win32cr::Media::MediaPlayer
     def put_defaultFrame(this : IWMPSettings2*, bstrDefaultFrame : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_defaultFrame.call(this, bstrDefaultFrame)
     end
-    def get_invokeURLs(this : IWMPSettings2*, pfInvokeURLs : Int16*) : Win32cr::Foundation::HRESULT
+    def get_invokeURLs(this : IWMPSettings2*, pfInvokeURLs : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_invokeURLs.call(this, pfInvokeURLs)
     end
-    def put_invokeURLs(this : IWMPSettings2*, fInvokeURLs : Int16) : Win32cr::Foundation::HRESULT
+    def put_invokeURLs(this : IWMPSettings2*, fInvokeURLs : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_invokeURLs.call(this, fInvokeURLs)
     end
-    def get_mute(this : IWMPSettings2*, pfMute : Int16*) : Win32cr::Foundation::HRESULT
+    def get_mute(this : IWMPSettings2*, pfMute : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_mute.call(this, pfMute)
     end
-    def put_mute(this : IWMPSettings2*, fMute : Int16) : Win32cr::Foundation::HRESULT
+    def put_mute(this : IWMPSettings2*, fMute : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_mute.call(this, fMute)
     end
     def get_playCount(this : IWMPSettings2*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -3621,16 +3651,16 @@ module Win32cr::Media::MediaPlayer
     def put_volume(this : IWMPSettings2*, lVolume : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_volume.call(this, lVolume)
     end
-    def getMode(this : IWMPSettings2*, bstrMode : Win32cr::Foundation::BSTR, pvarfMode : Int16*) : Win32cr::Foundation::HRESULT
+    def getMode(this : IWMPSettings2*, bstrMode : Win32cr::Foundation::BSTR, pvarfMode : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getMode.call(this, bstrMode, pvarfMode)
     end
-    def setMode(this : IWMPSettings2*, bstrMode : Win32cr::Foundation::BSTR, varfMode : Int16) : Win32cr::Foundation::HRESULT
+    def setMode(this : IWMPSettings2*, bstrMode : Win32cr::Foundation::BSTR, varfMode : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setMode.call(this, bstrMode, varfMode)
     end
-    def get_enableErrorDialogs(this : IWMPSettings2*, pfEnableErrorDialogs : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enableErrorDialogs(this : IWMPSettings2*, pfEnableErrorDialogs : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enableErrorDialogs.call(this, pfEnableErrorDialogs)
     end
-    def put_enableErrorDialogs(this : IWMPSettings2*, fEnableErrorDialogs : Int16) : Win32cr::Foundation::HRESULT
+    def put_enableErrorDialogs(this : IWMPSettings2*, fEnableErrorDialogs : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enableErrorDialogs.call(this, fEnableErrorDialogs)
     end
     def get_defaultAudioLanguage(this : IWMPSettings2*, plLangID : Int32*) : Win32cr::Foundation::HRESULT
@@ -3639,22 +3669,23 @@ module Win32cr::Media::MediaPlayer
     def get_mediaAccessRights(this : IWMPSettings2*, pbstrRights : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_mediaAccessRights.call(this, pbstrRights)
     end
-    def requestMediaAccessRights(this : IWMPSettings2*, bstrDesiredAccess : Win32cr::Foundation::BSTR, pvbAccepted : Int16*) : Win32cr::Foundation::HRESULT
+    def requestMediaAccessRights(this : IWMPSettings2*, bstrDesiredAccess : Win32cr::Foundation::BSTR, pvbAccepted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.requestMediaAccessRights.call(this, bstrDesiredAccess, pvbAccepted)
     end
 
   end
 
   @[Extern]
-  record IWMPControls3Vtbl,
+
+  record IWMPControls3Vtable,
     query_interface : Proc(IWMPControls3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPControls3*, UInt32),
     release : Proc(IWMPControls3*, UInt32),
     get_type_info_count : Proc(IWMPControls3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPControls3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPControls3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPControls3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_isAvailable : Proc(IWMPControls3*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPControls3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_isAvailable : Proc(IWMPControls3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     play : Proc(IWMPControls3*, Win32cr::Foundation::HRESULT),
     stop : Proc(IWMPControls3*, Win32cr::Foundation::HRESULT),
     pause : Proc(IWMPControls3*, Win32cr::Foundation::HRESULT),
@@ -3684,7 +3715,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPControls3, lpVtbl : IWMPControls3Vtbl* do
+  record IWMPControls3, lpVtbl : IWMPControls3Vtable* do
     GUID = LibC::GUID.new(0xa1d1110e_u32, 0xd545_u16, 0x476a_u16, StaticArray[0x9a_u8, 0x78_u8, 0xac_u8, 0x3e_u8, 0x4c_u8, 0xb1_u8, 0xe6_u8, 0xbd_u8])
     def query_interface(this : IWMPControls3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3704,10 +3735,10 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPControls3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPControls3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPControls3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_isAvailable(this : IWMPControls3*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isAvailable(this : IWMPControls3*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isAvailable.call(this, bstrItem, pIsAvailable)
     end
     def play(this : IWMPControls3*) : Win32cr::Foundation::HRESULT
@@ -3792,14 +3823,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPClosedCaption2Vtbl,
+
+  record IWMPClosedCaption2Vtable,
     query_interface : Proc(IWMPClosedCaption2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPClosedCaption2*, UInt32),
     release : Proc(IWMPClosedCaption2*, UInt32),
     get_type_info_count : Proc(IWMPClosedCaption2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPClosedCaption2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPClosedCaption2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPClosedCaption2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPClosedCaption2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_SAMIStyle : Proc(IWMPClosedCaption2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SAMIStyle : Proc(IWMPClosedCaption2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SAMILang : Proc(IWMPClosedCaption2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3816,7 +3848,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPClosedCaption2, lpVtbl : IWMPClosedCaption2Vtbl* do
+  record IWMPClosedCaption2, lpVtbl : IWMPClosedCaption2Vtable* do
     GUID = LibC::GUID.new(0x350ba78b_u32, 0x6bc8_u16, 0x4113_u16, StaticArray[0xa5_u8, 0xf5_u8, 0x31_u8, 0x20_u8, 0x56_u8, 0x93_u8, 0x4e_u8, 0xb6_u8])
     def query_interface(this : IWMPClosedCaption2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3836,8 +3868,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPClosedCaption2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPClosedCaption2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPClosedCaption2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_SAMIStyle(this : IWMPClosedCaption2*, pbstrSAMIStyle : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SAMIStyle.call(this, pbstrSAMIStyle)
@@ -3882,22 +3914,23 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlayerApplicationVtbl,
+
+  record IWMPPlayerApplicationVtable,
     query_interface : Proc(IWMPPlayerApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlayerApplication*, UInt32),
     release : Proc(IWMPPlayerApplication*, UInt32),
     get_type_info_count : Proc(IWMPPlayerApplication*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPPlayerApplication*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPPlayerApplication*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPPlayerApplication*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPPlayerApplication*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     switchToPlayerApplication : Proc(IWMPPlayerApplication*, Win32cr::Foundation::HRESULT),
     switchToControl : Proc(IWMPPlayerApplication*, Win32cr::Foundation::HRESULT),
-    get_playerDocked : Proc(IWMPPlayerApplication*, Int16*, Win32cr::Foundation::HRESULT),
-    get_hasDisplay : Proc(IWMPPlayerApplication*, Int16*, Win32cr::Foundation::HRESULT)
+    get_playerDocked : Proc(IWMPPlayerApplication*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_hasDisplay : Proc(IWMPPlayerApplication*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPPlayerApplication, lpVtbl : IWMPPlayerApplicationVtbl* do
+  record IWMPPlayerApplication, lpVtbl : IWMPPlayerApplicationVtable* do
     GUID = LibC::GUID.new(0x40897764_u32, 0xceab_u16, 0x47be_u16, StaticArray[0xad_u8, 0x4a_u8, 0x8e_u8, 0x28_u8, 0x53_u8, 0x7f_u8, 0x9b_u8, 0xbf_u8])
     def query_interface(this : IWMPPlayerApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3917,8 +3950,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPPlayerApplication*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPPlayerApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPPlayerApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def switchToPlayerApplication(this : IWMPPlayerApplication*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.switchToPlayerApplication.call(this)
@@ -3926,24 +3959,25 @@ module Win32cr::Media::MediaPlayer
     def switchToControl(this : IWMPPlayerApplication*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.switchToControl.call(this)
     end
-    def get_playerDocked(this : IWMPPlayerApplication*, pbPlayerDocked : Int16*) : Win32cr::Foundation::HRESULT
+    def get_playerDocked(this : IWMPPlayerApplication*, pbPlayerDocked : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_playerDocked.call(this, pbPlayerDocked)
     end
-    def get_hasDisplay(this : IWMPPlayerApplication*, pbHasDisplay : Int16*) : Win32cr::Foundation::HRESULT
+    def get_hasDisplay(this : IWMPPlayerApplication*, pbHasDisplay : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_hasDisplay.call(this, pbHasDisplay)
     end
 
   end
 
   @[Extern]
-  record IWMPCore3Vtbl,
+
+  record IWMPCore3Vtable,
     query_interface : Proc(IWMPCore3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPCore3*, UInt32),
     release : Proc(IWMPCore3*, UInt32),
     get_type_info_count : Proc(IWMPCore3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPCore3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPCore3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPCore3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPCore3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(IWMPCore3*, Win32cr::Foundation::HRESULT),
     get_URL : Proc(IWMPCore3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_URL : Proc(IWMPCore3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -3962,7 +3996,7 @@ module Win32cr::Media::MediaPlayer
     put_currentPlaylist : Proc(IWMPCore3*, Void*, Win32cr::Foundation::HRESULT),
     get_cdromCollection : Proc(IWMPCore3*, Void**, Win32cr::Foundation::HRESULT),
     get_closedCaption : Proc(IWMPCore3*, Void**, Win32cr::Foundation::HRESULT),
-    get_isOnline : Proc(IWMPCore3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isOnline : Proc(IWMPCore3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPCore3*, Void**, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPCore3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_dvd : Proc(IWMPCore3*, Void**, Win32cr::Foundation::HRESULT),
@@ -3971,7 +4005,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPCore3, lpVtbl : IWMPCore3Vtbl* do
+  record IWMPCore3, lpVtbl : IWMPCore3Vtable* do
     GUID = LibC::GUID.new(0x7587c667_u32, 0x628f_u16, 0x499f_u16, StaticArray[0x88_u8, 0xe7_u8, 0x6a_u8, 0x6f_u8, 0x4e_u8, 0x88_u8, 0x84_u8, 0x64_u8])
     def query_interface(this : IWMPCore3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3991,8 +4025,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPCore3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPCore3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPCore3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def close(this : IWMPCore3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
@@ -4048,7 +4082,7 @@ module Win32cr::Media::MediaPlayer
     def get_closedCaption(this : IWMPCore3*, ppClosedCaption : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_closedCaption.call(this, ppClosedCaption)
     end
-    def get_isOnline(this : IWMPCore3*, pfOnline : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isOnline(this : IWMPCore3*, pfOnline : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isOnline.call(this, pfOnline)
     end
     def get_error(this : IWMPCore3*, ppError : Void**) : Win32cr::Foundation::HRESULT
@@ -4070,14 +4104,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlayer4Vtbl,
+
+  record IWMPPlayer4Vtable,
     query_interface : Proc(IWMPPlayer4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlayer4*, UInt32),
     release : Proc(IWMPPlayer4*, UInt32),
     get_type_info_count : Proc(IWMPPlayer4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPPlayer4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPPlayer4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPPlayer4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPPlayer4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(IWMPPlayer4*, Win32cr::Foundation::HRESULT),
     get_URL : Proc(IWMPPlayer4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_URL : Proc(IWMPPlayer4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4096,31 +4131,31 @@ module Win32cr::Media::MediaPlayer
     put_currentPlaylist : Proc(IWMPPlayer4*, Void*, Win32cr::Foundation::HRESULT),
     get_cdromCollection : Proc(IWMPPlayer4*, Void**, Win32cr::Foundation::HRESULT),
     get_closedCaption : Proc(IWMPPlayer4*, Void**, Win32cr::Foundation::HRESULT),
-    get_isOnline : Proc(IWMPPlayer4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isOnline : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_error : Proc(IWMPPlayer4*, Void**, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPPlayer4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_dvd : Proc(IWMPPlayer4*, Void**, Win32cr::Foundation::HRESULT),
     newPlaylist : Proc(IWMPPlayer4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     newMedia : Proc(IWMPPlayer4*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_enabled : Proc(IWMPPlayer4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enabled : Proc(IWMPPlayer4*, Int16, Win32cr::Foundation::HRESULT),
-    get_fullScreen : Proc(IWMPPlayer4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_fullScreen : Proc(IWMPPlayer4*, Int16, Win32cr::Foundation::HRESULT),
-    get_enableContextMenu : Proc(IWMPPlayer4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_enableContextMenu : Proc(IWMPPlayer4*, Int16, Win32cr::Foundation::HRESULT),
+    get_enabled : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enabled : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_fullScreen : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_fullScreen : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_enableContextMenu : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_enableContextMenu : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     put_uiMode : Proc(IWMPPlayer4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_uiMode : Proc(IWMPPlayer4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_stretchToFit : Proc(IWMPPlayer4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_stretchToFit : Proc(IWMPPlayer4*, Int16, Win32cr::Foundation::HRESULT),
-    get_windowlessVideo : Proc(IWMPPlayer4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_windowlessVideo : Proc(IWMPPlayer4*, Int16, Win32cr::Foundation::HRESULT),
-    get_isRemote : Proc(IWMPPlayer4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_stretchToFit : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_stretchToFit : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_windowlessVideo : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_windowlessVideo : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_isRemote : Proc(IWMPPlayer4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_playerApplication : Proc(IWMPPlayer4*, Void**, Win32cr::Foundation::HRESULT),
     openPlayer : Proc(IWMPPlayer4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPPlayer4, lpVtbl : IWMPPlayer4Vtbl* do
+  record IWMPPlayer4, lpVtbl : IWMPPlayer4Vtable* do
     GUID = LibC::GUID.new(0x6c497d62_u32, 0x8919_u16, 0x413c_u16, StaticArray[0x82_u8, 0xdb_u8, 0xe9_u8, 0x35_u8, 0xfb_u8, 0x3e_u8, 0xc5_u8, 0x84_u8])
     def query_interface(this : IWMPPlayer4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4140,8 +4175,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPPlayer4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPPlayer4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPPlayer4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def close(this : IWMPPlayer4*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
@@ -4197,7 +4232,7 @@ module Win32cr::Media::MediaPlayer
     def get_closedCaption(this : IWMPPlayer4*, ppClosedCaption : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_closedCaption.call(this, ppClosedCaption)
     end
-    def get_isOnline(this : IWMPPlayer4*, pfOnline : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isOnline(this : IWMPPlayer4*, pfOnline : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isOnline.call(this, pfOnline)
     end
     def get_error(this : IWMPPlayer4*, ppError : Void**) : Win32cr::Foundation::HRESULT
@@ -4215,22 +4250,22 @@ module Win32cr::Media::MediaPlayer
     def newMedia(this : IWMPPlayer4*, bstrURL : Win32cr::Foundation::BSTR, ppMedia : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.newMedia.call(this, bstrURL, ppMedia)
     end
-    def get_enabled(this : IWMPPlayer4*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enabled(this : IWMPPlayer4*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enabled.call(this, pbEnabled)
     end
-    def put_enabled(this : IWMPPlayer4*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_enabled(this : IWMPPlayer4*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enabled.call(this, bEnabled)
     end
-    def get_fullScreen(this : IWMPPlayer4*, pbFullScreen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_fullScreen(this : IWMPPlayer4*, pbFullScreen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_fullScreen.call(this, pbFullScreen)
     end
-    def put_fullScreen(this : IWMPPlayer4*, bFullScreen : Int16) : Win32cr::Foundation::HRESULT
+    def put_fullScreen(this : IWMPPlayer4*, bFullScreen : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_fullScreen.call(this, bFullScreen)
     end
-    def get_enableContextMenu(this : IWMPPlayer4*, pbEnableContextMenu : Int16*) : Win32cr::Foundation::HRESULT
+    def get_enableContextMenu(this : IWMPPlayer4*, pbEnableContextMenu : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_enableContextMenu.call(this, pbEnableContextMenu)
     end
-    def put_enableContextMenu(this : IWMPPlayer4*, bEnableContextMenu : Int16) : Win32cr::Foundation::HRESULT
+    def put_enableContextMenu(this : IWMPPlayer4*, bEnableContextMenu : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_enableContextMenu.call(this, bEnableContextMenu)
     end
     def put_uiMode(this : IWMPPlayer4*, bstrMode : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4239,19 +4274,19 @@ module Win32cr::Media::MediaPlayer
     def get_uiMode(this : IWMPPlayer4*, pbstrMode : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_uiMode.call(this, pbstrMode)
     end
-    def get_stretchToFit(this : IWMPPlayer4*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_stretchToFit(this : IWMPPlayer4*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_stretchToFit.call(this, pbEnabled)
     end
-    def put_stretchToFit(this : IWMPPlayer4*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_stretchToFit(this : IWMPPlayer4*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_stretchToFit.call(this, bEnabled)
     end
-    def get_windowlessVideo(this : IWMPPlayer4*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_windowlessVideo(this : IWMPPlayer4*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_windowlessVideo.call(this, pbEnabled)
     end
-    def put_windowlessVideo(this : IWMPPlayer4*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_windowlessVideo(this : IWMPPlayer4*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_windowlessVideo.call(this, bEnabled)
     end
-    def get_isRemote(this : IWMPPlayer4*, pvarfIsRemote : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isRemote(this : IWMPPlayer4*, pvarfIsRemote : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isRemote.call(this, pvarfIsRemote)
     end
     def get_playerApplication(this : IWMPPlayer4*, ppIWMPPlayerApplication : Void**) : Win32cr::Foundation::HRESULT
@@ -4264,7 +4299,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlayerServicesVtbl,
+
+  record IWMPPlayerServicesVtable,
     query_interface : Proc(IWMPPlayerServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlayerServices*, UInt32),
     release : Proc(IWMPPlayerServices*, UInt32),
@@ -4274,7 +4310,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPPlayerServices, lpVtbl : IWMPPlayerServicesVtbl* do
+  record IWMPPlayerServices, lpVtbl : IWMPPlayerServicesVtable* do
     GUID = LibC::GUID.new(0x1d01fbdb_u32, 0xade2_u16, 0x4c8d_u16, StaticArray[0x98_u8, 0x42_u8, 0xc1_u8, 0x90_u8, 0xb9_u8, 0x5c_u8, 0x33_u8, 0x6_u8])
     def query_interface(this : IWMPPlayerServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4298,7 +4334,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPSyncDeviceVtbl,
+
+  record IWMPSyncDeviceVtable,
     query_interface : Proc(IWMPSyncDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSyncDevice*, UInt32),
     release : Proc(IWMPSyncDevice*, UInt32),
@@ -4307,21 +4344,21 @@ module Win32cr::Media::MediaPlayer
     get_deviceName : Proc(IWMPSyncDevice*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_deviceId : Proc(IWMPSyncDevice*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_partnershipIndex : Proc(IWMPSyncDevice*, Int32*, Win32cr::Foundation::HRESULT),
-    get_connected : Proc(IWMPSyncDevice*, Int16*, Win32cr::Foundation::HRESULT),
+    get_connected : Proc(IWMPSyncDevice*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPSyncDevice*, Win32cr::Media::MediaPlayer::WMPDeviceStatus*, Win32cr::Foundation::HRESULT),
     get_syncState : Proc(IWMPSyncDevice*, Win32cr::Media::MediaPlayer::WMPSyncState*, Win32cr::Foundation::HRESULT),
     get_progress : Proc(IWMPSyncDevice*, Int32*, Win32cr::Foundation::HRESULT),
     getItemInfo : Proc(IWMPSyncDevice*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    createPartnership : Proc(IWMPSyncDevice*, Int16, Win32cr::Foundation::HRESULT),
+    createPartnership : Proc(IWMPSyncDevice*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     deletePartnership : Proc(IWMPSyncDevice*, Win32cr::Foundation::HRESULT),
     start : Proc(IWMPSyncDevice*, Win32cr::Foundation::HRESULT),
     stop : Proc(IWMPSyncDevice*, Win32cr::Foundation::HRESULT),
     showSettings : Proc(IWMPSyncDevice*, Win32cr::Foundation::HRESULT),
-    isIdentical : Proc(IWMPSyncDevice*, Void*, Int16*, Win32cr::Foundation::HRESULT)
+    isIdentical : Proc(IWMPSyncDevice*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPSyncDevice, lpVtbl : IWMPSyncDeviceVtbl* do
+  record IWMPSyncDevice, lpVtbl : IWMPSyncDeviceVtable* do
     GUID = LibC::GUID.new(0x82a2986c_u32, 0x293_u16, 0x4fd0_u16, StaticArray[0xb2_u8, 0x79_u8, 0xb2_u8, 0x1b_u8, 0x86_u8, 0xc0_u8, 0x58_u8, 0xbe_u8])
     def query_interface(this : IWMPSyncDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4347,7 +4384,7 @@ module Win32cr::Media::MediaPlayer
     def get_partnershipIndex(this : IWMPSyncDevice*, plIndex : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_partnershipIndex.call(this, plIndex)
     end
-    def get_connected(this : IWMPSyncDevice*, pvbConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_connected(this : IWMPSyncDevice*, pvbConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_connected.call(this, pvbConnected)
     end
     def get_status(this : IWMPSyncDevice*, pwmpds : Win32cr::Media::MediaPlayer::WMPDeviceStatus*) : Win32cr::Foundation::HRESULT
@@ -4362,7 +4399,7 @@ module Win32cr::Media::MediaPlayer
     def getItemInfo(this : IWMPSyncDevice*, bstrItemName : Win32cr::Foundation::BSTR, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getItemInfo.call(this, bstrItemName, pbstrVal)
     end
-    def createPartnership(this : IWMPSyncDevice*, vbShowUI : Int16) : Win32cr::Foundation::HRESULT
+    def createPartnership(this : IWMPSyncDevice*, vbShowUI : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createPartnership.call(this, vbShowUI)
     end
     def deletePartnership(this : IWMPSyncDevice*) : Win32cr::Foundation::HRESULT
@@ -4377,14 +4414,15 @@ module Win32cr::Media::MediaPlayer
     def showSettings(this : IWMPSyncDevice*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.showSettings.call(this)
     end
-    def isIdentical(this : IWMPSyncDevice*, pDevice : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def isIdentical(this : IWMPSyncDevice*, pDevice : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isIdentical.call(this, pDevice, pvbool)
     end
 
   end
 
   @[Extern]
-  record IWMPSyncServicesVtbl,
+
+  record IWMPSyncServicesVtable,
     query_interface : Proc(IWMPSyncServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSyncServices*, UInt32),
     release : Proc(IWMPSyncServices*, UInt32),
@@ -4393,7 +4431,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPSyncServices, lpVtbl : IWMPSyncServicesVtbl* do
+  record IWMPSyncServices, lpVtbl : IWMPSyncServicesVtable* do
     GUID = LibC::GUID.new(0x8b5050ff_u32, 0xe0a4_u16, 0x4808_u16, StaticArray[0xb3_u8, 0xa8_u8, 0x89_u8, 0x3a_u8, 0x9e_u8, 0x1e_u8, 0xd8_u8, 0x94_u8])
     def query_interface(this : IWMPSyncServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4414,7 +4452,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPlayerServices2Vtbl,
+
+  record IWMPPlayerServices2Vtable,
     query_interface : Proc(IWMPPlayerServices2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlayerServices2*, UInt32),
     release : Proc(IWMPPlayerServices2*, UInt32),
@@ -4425,7 +4464,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPPlayerServices2, lpVtbl : IWMPPlayerServices2Vtbl* do
+  record IWMPPlayerServices2, lpVtbl : IWMPPlayerServices2Vtable* do
     GUID = LibC::GUID.new(0x1bb1592f_u32, 0xf040_u16, 0x418a_u16, StaticArray[0x9f_u8, 0x71_u8, 0x17_u8, 0xc7_u8, 0x51_u8, 0x2b_u8, 0x4d_u8, 0x70_u8])
     def query_interface(this : IWMPPlayerServices2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4452,7 +4491,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPCdromRipVtbl,
+
+  record IWMPCdromRipVtable,
     query_interface : Proc(IWMPCdromRip*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPCdromRip*, UInt32),
     release : Proc(IWMPCdromRip*, UInt32),
@@ -4463,7 +4503,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPCdromRip, lpVtbl : IWMPCdromRipVtbl* do
+  record IWMPCdromRip, lpVtbl : IWMPCdromRipVtable* do
     GUID = LibC::GUID.new(0x56e2294f_u32, 0x69ed_u16, 0x4629_u16, StaticArray[0xa8_u8, 0x69_u8, 0xae_u8, 0xa7_u8, 0x2c_u8, 0xd_u8, 0xcc_u8, 0x2c_u8])
     def query_interface(this : IWMPCdromRip*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4490,11 +4530,12 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPCdromBurnVtbl,
+
+  record IWMPCdromBurnVtable,
     query_interface : Proc(IWMPCdromBurn*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPCdromBurn*, UInt32),
     release : Proc(IWMPCdromBurn*, UInt32),
-    isAvailable : Proc(IWMPCdromBurn*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    isAvailable : Proc(IWMPCdromBurn*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     getItemInfo : Proc(IWMPCdromBurn*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_label : Proc(IWMPCdromBurn*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_label : Proc(IWMPCdromBurn*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4511,7 +4552,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPCdromBurn, lpVtbl : IWMPCdromBurnVtbl* do
+  record IWMPCdromBurn, lpVtbl : IWMPCdromBurnVtable* do
     GUID = LibC::GUID.new(0xbd94dbeb_u32, 0x417f_u16, 0x4928_u16, StaticArray[0xaa_u8, 0x6_u8, 0x8_u8, 0x7d_u8, 0x56_u8, 0xed_u8, 0x9b_u8, 0x59_u8])
     def query_interface(this : IWMPCdromBurn*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4522,7 +4563,7 @@ module Win32cr::Media::MediaPlayer
     def release(this : IWMPCdromBurn*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def isAvailable(this : IWMPCdromBurn*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def isAvailable(this : IWMPCdromBurn*, bstrItem : Win32cr::Foundation::BSTR, pIsAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isAvailable.call(this, bstrItem, pIsAvailable)
     end
     def getItemInfo(this : IWMPCdromBurn*, bstrItem : Win32cr::Foundation::BSTR, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4568,20 +4609,21 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPQueryVtbl,
+
+  record IWMPQueryVtable,
     query_interface : Proc(IWMPQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPQuery*, UInt32),
     release : Proc(IWMPQuery*, UInt32),
     get_type_info_count : Proc(IWMPQuery*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPQuery*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPQuery*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPQuery*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPQuery*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     addCondition : Proc(IWMPQuery*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     beginNextGroup : Proc(IWMPQuery*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPQuery, lpVtbl : IWMPQueryVtbl* do
+  record IWMPQuery, lpVtbl : IWMPQueryVtable* do
     GUID = LibC::GUID.new(0xa00918f3_u32, 0xa6b0_u16, 0x4bfb_u16, StaticArray[0x91_u8, 0x89_u8, 0xfd_u8, 0x83_u8, 0x4c_u8, 0x7b_u8, 0xc5_u8, 0xa5_u8])
     def query_interface(this : IWMPQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4601,8 +4643,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPQuery*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPQuery*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPQuery*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def addCondition(this : IWMPQuery*, bstrAttribute : Win32cr::Foundation::BSTR, bstrOperator : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.addCondition.call(this, bstrAttribute, bstrOperator, bstrValue)
@@ -4614,14 +4656,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPMediaCollection2Vtbl,
+
+  record IWMPMediaCollection2Vtable,
     query_interface : Proc(IWMPMediaCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPMediaCollection2*, UInt32),
     release : Proc(IWMPMediaCollection2*, UInt32),
     get_type_info_count : Proc(IWMPMediaCollection2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPMediaCollection2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPMediaCollection2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPMediaCollection2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPMediaCollection2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     add : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getAll : Proc(IWMPMediaCollection2*, Void**, Win32cr::Foundation::HRESULT),
     getByName : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -4629,19 +4672,19 @@ module Win32cr::Media::MediaPlayer
     getByAuthor : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getByAlbum : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getByAttribute : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    remove : Proc(IWMPMediaCollection2*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    remove : Proc(IWMPMediaCollection2*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     getAttributeStringCollection : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getMediaAtom : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
-    setDeleted : Proc(IWMPMediaCollection2*, Void*, Int16, Win32cr::Foundation::HRESULT),
-    isDeleted : Proc(IWMPMediaCollection2*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    setDeleted : Proc(IWMPMediaCollection2*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    isDeleted : Proc(IWMPMediaCollection2*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     createQuery : Proc(IWMPMediaCollection2*, Void**, Win32cr::Foundation::HRESULT),
-    getPlaylistByQuery : Proc(IWMPMediaCollection2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT),
-    getStringCollectionByQuery : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT),
+    getPlaylistByQuery : Proc(IWMPMediaCollection2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
+    getStringCollectionByQuery : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     getByAttributeAndMediaType : Proc(IWMPMediaCollection2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPMediaCollection2, lpVtbl : IWMPMediaCollection2Vtbl* do
+  record IWMPMediaCollection2, lpVtbl : IWMPMediaCollection2Vtable* do
     GUID = LibC::GUID.new(0x8ba957f5_u32, 0xfd8c_u16, 0x4791_u16, StaticArray[0xb8_u8, 0x2d_u8, 0xf8_u8, 0x40_u8, 0x40_u8, 0x1e_u8, 0xe4_u8, 0x74_u8])
     def query_interface(this : IWMPMediaCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4661,8 +4704,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPMediaCollection2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPMediaCollection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPMediaCollection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def add(this : IWMPMediaCollection2*, bstrURL : Win32cr::Foundation::BSTR, ppItem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, bstrURL, ppItem)
@@ -4685,7 +4728,7 @@ module Win32cr::Media::MediaPlayer
     def getByAttribute(this : IWMPMediaCollection2*, bstrAttribute : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR, ppMediaItems : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getByAttribute.call(this, bstrAttribute, bstrValue, ppMediaItems)
     end
-    def remove(this : IWMPMediaCollection2*, pItem : Void*, varfDeleteFile : Int16) : Win32cr::Foundation::HRESULT
+    def remove(this : IWMPMediaCollection2*, pItem : Void*, varfDeleteFile : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, pItem, varfDeleteFile)
     end
     def getAttributeStringCollection(this : IWMPMediaCollection2*, bstrAttribute : Win32cr::Foundation::BSTR, bstrMediaType : Win32cr::Foundation::BSTR, ppStringCollection : Void**) : Win32cr::Foundation::HRESULT
@@ -4694,19 +4737,19 @@ module Win32cr::Media::MediaPlayer
     def getMediaAtom(this : IWMPMediaCollection2*, bstrItemName : Win32cr::Foundation::BSTR, plAtom : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getMediaAtom.call(this, bstrItemName, plAtom)
     end
-    def setDeleted(this : IWMPMediaCollection2*, pItem : Void*, varfIsDeleted : Int16) : Win32cr::Foundation::HRESULT
+    def setDeleted(this : IWMPMediaCollection2*, pItem : Void*, varfIsDeleted : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setDeleted.call(this, pItem, varfIsDeleted)
     end
-    def isDeleted(this : IWMPMediaCollection2*, pItem : Void*, pvarfIsDeleted : Int16*) : Win32cr::Foundation::HRESULT
+    def isDeleted(this : IWMPMediaCollection2*, pItem : Void*, pvarfIsDeleted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isDeleted.call(this, pItem, pvarfIsDeleted)
     end
     def createQuery(this : IWMPMediaCollection2*, ppQuery : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createQuery.call(this, ppQuery)
     end
-    def getPlaylistByQuery(this : IWMPMediaCollection2*, pQuery : Void*, bstrMediaType : Win32cr::Foundation::BSTR, bstrSortAttribute : Win32cr::Foundation::BSTR, fSortAscending : Int16, ppPlaylist : Void**) : Win32cr::Foundation::HRESULT
+    def getPlaylistByQuery(this : IWMPMediaCollection2*, pQuery : Void*, bstrMediaType : Win32cr::Foundation::BSTR, bstrSortAttribute : Win32cr::Foundation::BSTR, fSortAscending : Win32cr::Foundation::VARIANT_BOOL, ppPlaylist : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getPlaylistByQuery.call(this, pQuery, bstrMediaType, bstrSortAttribute, fSortAscending, ppPlaylist)
     end
-    def getStringCollectionByQuery(this : IWMPMediaCollection2*, bstrAttribute : Win32cr::Foundation::BSTR, pQuery : Void*, bstrMediaType : Win32cr::Foundation::BSTR, bstrSortAttribute : Win32cr::Foundation::BSTR, fSortAscending : Int16, ppStringCollection : Void**) : Win32cr::Foundation::HRESULT
+    def getStringCollectionByQuery(this : IWMPMediaCollection2*, bstrAttribute : Win32cr::Foundation::BSTR, pQuery : Void*, bstrMediaType : Win32cr::Foundation::BSTR, bstrSortAttribute : Win32cr::Foundation::BSTR, fSortAscending : Win32cr::Foundation::VARIANT_BOOL, ppStringCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getStringCollectionByQuery.call(this, bstrAttribute, pQuery, bstrMediaType, bstrSortAttribute, fSortAscending, ppStringCollection)
     end
     def getByAttributeAndMediaType(this : IWMPMediaCollection2*, bstrAttribute : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR, bstrMediaType : Win32cr::Foundation::BSTR, ppMediaItems : Void**) : Win32cr::Foundation::HRESULT
@@ -4716,24 +4759,25 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPStringCollection2Vtbl,
+
+  record IWMPStringCollection2Vtable,
     query_interface : Proc(IWMPStringCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPStringCollection2*, UInt32),
     release : Proc(IWMPStringCollection2*, UInt32),
     get_type_info_count : Proc(IWMPStringCollection2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPStringCollection2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPStringCollection2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPStringCollection2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPStringCollection2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_count : Proc(IWMPStringCollection2*, Int32*, Win32cr::Foundation::HRESULT),
     item : Proc(IWMPStringCollection2*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    isIdentical : Proc(IWMPStringCollection2*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    isIdentical : Proc(IWMPStringCollection2*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     getItemInfo : Proc(IWMPStringCollection2*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     getAttributeCountByType : Proc(IWMPStringCollection2*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
-    getItemInfoByType : Proc(IWMPStringCollection2*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    getItemInfoByType : Proc(IWMPStringCollection2*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPStringCollection2, lpVtbl : IWMPStringCollection2Vtbl* do
+  record IWMPStringCollection2, lpVtbl : IWMPStringCollection2Vtable* do
     GUID = LibC::GUID.new(0x46ad648d_u32, 0x53f1_u16, 0x4a74_u16, StaticArray[0x92_u8, 0xe2_u8, 0x2a_u8, 0x1b_u8, 0x68_u8, 0xd6_u8, 0x3f_u8, 0xd4_u8])
     def query_interface(this : IWMPStringCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4753,8 +4797,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPStringCollection2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPStringCollection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPStringCollection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_count(this : IWMPStringCollection2*, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_count.call(this, plCount)
@@ -4762,7 +4806,7 @@ module Win32cr::Media::MediaPlayer
     def item(this : IWMPStringCollection2*, lIndex : Int32, pbstrString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, lIndex, pbstrString)
     end
-    def isIdentical(this : IWMPStringCollection2*, pIWMPStringCollection2 : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def isIdentical(this : IWMPStringCollection2*, pIWMPStringCollection2 : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isIdentical.call(this, pIWMPStringCollection2, pvbool)
     end
     def getItemInfo(this : IWMPStringCollection2*, lCollectionIndex : Int32, bstrItemName : Win32cr::Foundation::BSTR, pbstrValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4771,25 +4815,26 @@ module Win32cr::Media::MediaPlayer
     def getAttributeCountByType(this : IWMPStringCollection2*, lCollectionIndex : Int32, bstrType : Win32cr::Foundation::BSTR, bstrLanguage : Win32cr::Foundation::BSTR, plCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAttributeCountByType.call(this, lCollectionIndex, bstrType, bstrLanguage, plCount)
     end
-    def getItemInfoByType(this : IWMPStringCollection2*, lCollectionIndex : Int32, bstrType : Win32cr::Foundation::BSTR, bstrLanguage : Win32cr::Foundation::BSTR, lAttributeIndex : Int32, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getItemInfoByType(this : IWMPStringCollection2*, lCollectionIndex : Int32, bstrType : Win32cr::Foundation::BSTR, bstrLanguage : Win32cr::Foundation::BSTR, lAttributeIndex : Int32, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getItemInfoByType.call(this, lCollectionIndex, bstrType, bstrLanguage, lAttributeIndex, pvarValue)
     end
 
   end
 
   @[Extern]
-  record IWMPLibraryVtbl,
+
+  record IWMPLibraryVtable,
     query_interface : Proc(IWMPLibrary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPLibrary*, UInt32),
     release : Proc(IWMPLibrary*, UInt32),
     get_name : Proc(IWMPLibrary*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IWMPLibrary*, Win32cr::Media::MediaPlayer::WMPLibraryType*, Win32cr::Foundation::HRESULT),
     get_mediaCollection : Proc(IWMPLibrary*, Void**, Win32cr::Foundation::HRESULT),
-    isIdentical : Proc(IWMPLibrary*, Void*, Int16*, Win32cr::Foundation::HRESULT)
+    isIdentical : Proc(IWMPLibrary*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPLibrary, lpVtbl : IWMPLibraryVtbl* do
+  record IWMPLibrary, lpVtbl : IWMPLibraryVtable* do
     GUID = LibC::GUID.new(0x3df47861_u32, 0x7df1_u16, 0x4c1f_u16, StaticArray[0xa8_u8, 0x1b_u8, 0x4c_u8, 0x26_u8, 0xf0_u8, 0xf7_u8, 0xa7_u8, 0xc6_u8])
     def query_interface(this : IWMPLibrary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4809,14 +4854,15 @@ module Win32cr::Media::MediaPlayer
     def get_mediaCollection(this : IWMPLibrary*, ppIWMPMediaCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_mediaCollection.call(this, ppIWMPMediaCollection)
     end
-    def isIdentical(this : IWMPLibrary*, pIWMPLibrary : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def isIdentical(this : IWMPLibrary*, pIWMPLibrary : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isIdentical.call(this, pIWMPLibrary, pvbool)
     end
 
   end
 
   @[Extern]
-  record IWMPLibraryServicesVtbl,
+
+  record IWMPLibraryServicesVtable,
     query_interface : Proc(IWMPLibraryServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPLibraryServices*, UInt32),
     release : Proc(IWMPLibraryServices*, UInt32),
@@ -4825,7 +4871,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPLibraryServices, lpVtbl : IWMPLibraryServicesVtbl* do
+  record IWMPLibraryServices, lpVtbl : IWMPLibraryServicesVtable* do
     GUID = LibC::GUID.new(0x39c2f8d5_u32, 0x1cf2_u16, 0x4d5e_u16, StaticArray[0xae_u8, 0x9_u8, 0xd7_u8, 0x34_u8, 0x92_u8, 0xcf_u8, 0x9e_u8, 0xaa_u8])
     def query_interface(this : IWMPLibraryServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4846,17 +4892,18 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPLibrarySharingServicesVtbl,
+
+  record IWMPLibrarySharingServicesVtable,
     query_interface : Proc(IWMPLibrarySharingServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPLibrarySharingServices*, UInt32),
     release : Proc(IWMPLibrarySharingServices*, UInt32),
-    isLibraryShared : Proc(IWMPLibrarySharingServices*, Int16*, Win32cr::Foundation::HRESULT),
-    isLibrarySharingEnabled : Proc(IWMPLibrarySharingServices*, Int16*, Win32cr::Foundation::HRESULT),
+    isLibraryShared : Proc(IWMPLibrarySharingServices*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    isLibrarySharingEnabled : Proc(IWMPLibrarySharingServices*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     showLibrarySharing : Proc(IWMPLibrarySharingServices*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPLibrarySharingServices, lpVtbl : IWMPLibrarySharingServicesVtbl* do
+  record IWMPLibrarySharingServices, lpVtbl : IWMPLibrarySharingServicesVtable* do
     GUID = LibC::GUID.new(0x82cba86b_u32, 0x9f04_u16, 0x474b_u16, StaticArray[0xa3_u8, 0x65_u8, 0xd6_u8, 0xdd_u8, 0x14_u8, 0x66_u8, 0xe5_u8, 0x41_u8])
     def query_interface(this : IWMPLibrarySharingServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4867,10 +4914,10 @@ module Win32cr::Media::MediaPlayer
     def release(this : IWMPLibrarySharingServices*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def isLibraryShared(this : IWMPLibrarySharingServices*, pvbShared : Int16*) : Win32cr::Foundation::HRESULT
+    def isLibraryShared(this : IWMPLibrarySharingServices*, pvbShared : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isLibraryShared.call(this, pvbShared)
     end
-    def isLibrarySharingEnabled(this : IWMPLibrarySharingServices*, pvbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def isLibrarySharingEnabled(this : IWMPLibrarySharingServices*, pvbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isLibrarySharingEnabled.call(this, pvbEnabled)
     end
     def showLibrarySharing(this : IWMPLibrarySharingServices*) : Win32cr::Foundation::HRESULT
@@ -4880,7 +4927,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPFolderMonitorServicesVtbl,
+
+  record IWMPFolderMonitorServicesVtable,
     query_interface : Proc(IWMPFolderMonitorServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPFolderMonitorServices*, UInt32),
     release : Proc(IWMPFolderMonitorServices*, UInt32),
@@ -4898,7 +4946,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPFolderMonitorServices, lpVtbl : IWMPFolderMonitorServicesVtbl* do
+  record IWMPFolderMonitorServices, lpVtbl : IWMPFolderMonitorServicesVtable* do
     GUID = LibC::GUID.new(0x788c8743_u32, 0xe57f_u16, 0x439d_u16, StaticArray[0xa4_u8, 0x68_u8, 0x5b_u8, 0xc7_u8, 0x7f_u8, 0x2e_u8, 0x59_u8, 0xc6_u8])
     def query_interface(this : IWMPFolderMonitorServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4946,7 +4994,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPSyncDevice2Vtbl,
+
+  record IWMPSyncDevice2Vtable,
     query_interface : Proc(IWMPSyncDevice2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSyncDevice2*, UInt32),
     release : Proc(IWMPSyncDevice2*, UInt32),
@@ -4955,22 +5004,22 @@ module Win32cr::Media::MediaPlayer
     get_deviceName : Proc(IWMPSyncDevice2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_deviceId : Proc(IWMPSyncDevice2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_partnershipIndex : Proc(IWMPSyncDevice2*, Int32*, Win32cr::Foundation::HRESULT),
-    get_connected : Proc(IWMPSyncDevice2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_connected : Proc(IWMPSyncDevice2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPSyncDevice2*, Win32cr::Media::MediaPlayer::WMPDeviceStatus*, Win32cr::Foundation::HRESULT),
     get_syncState : Proc(IWMPSyncDevice2*, Win32cr::Media::MediaPlayer::WMPSyncState*, Win32cr::Foundation::HRESULT),
     get_progress : Proc(IWMPSyncDevice2*, Int32*, Win32cr::Foundation::HRESULT),
     getItemInfo : Proc(IWMPSyncDevice2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    createPartnership : Proc(IWMPSyncDevice2*, Int16, Win32cr::Foundation::HRESULT),
+    createPartnership : Proc(IWMPSyncDevice2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     deletePartnership : Proc(IWMPSyncDevice2*, Win32cr::Foundation::HRESULT),
     start : Proc(IWMPSyncDevice2*, Win32cr::Foundation::HRESULT),
     stop : Proc(IWMPSyncDevice2*, Win32cr::Foundation::HRESULT),
     showSettings : Proc(IWMPSyncDevice2*, Win32cr::Foundation::HRESULT),
-    isIdentical : Proc(IWMPSyncDevice2*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    isIdentical : Proc(IWMPSyncDevice2*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     setItemInfo : Proc(IWMPSyncDevice2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPSyncDevice2, lpVtbl : IWMPSyncDevice2Vtbl* do
+  record IWMPSyncDevice2, lpVtbl : IWMPSyncDevice2Vtable* do
     GUID = LibC::GUID.new(0x88afb4b2_u32, 0x140a_u16, 0x44d2_u16, StaticArray[0x91_u8, 0xe6_u8, 0x45_u8, 0x43_u8, 0xda_u8, 0x46_u8, 0x7c_u8, 0xd1_u8])
     def query_interface(this : IWMPSyncDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4996,7 +5045,7 @@ module Win32cr::Media::MediaPlayer
     def get_partnershipIndex(this : IWMPSyncDevice2*, plIndex : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_partnershipIndex.call(this, plIndex)
     end
-    def get_connected(this : IWMPSyncDevice2*, pvbConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_connected(this : IWMPSyncDevice2*, pvbConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_connected.call(this, pvbConnected)
     end
     def get_status(this : IWMPSyncDevice2*, pwmpds : Win32cr::Media::MediaPlayer::WMPDeviceStatus*) : Win32cr::Foundation::HRESULT
@@ -5011,7 +5060,7 @@ module Win32cr::Media::MediaPlayer
     def getItemInfo(this : IWMPSyncDevice2*, bstrItemName : Win32cr::Foundation::BSTR, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getItemInfo.call(this, bstrItemName, pbstrVal)
     end
-    def createPartnership(this : IWMPSyncDevice2*, vbShowUI : Int16) : Win32cr::Foundation::HRESULT
+    def createPartnership(this : IWMPSyncDevice2*, vbShowUI : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createPartnership.call(this, vbShowUI)
     end
     def deletePartnership(this : IWMPSyncDevice2*) : Win32cr::Foundation::HRESULT
@@ -5026,7 +5075,7 @@ module Win32cr::Media::MediaPlayer
     def showSettings(this : IWMPSyncDevice2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.showSettings.call(this)
     end
-    def isIdentical(this : IWMPSyncDevice2*, pDevice : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def isIdentical(this : IWMPSyncDevice2*, pDevice : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isIdentical.call(this, pDevice, pvbool)
     end
     def setItemInfo(this : IWMPSyncDevice2*, bstrItemName : Win32cr::Foundation::BSTR, bstrVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -5036,7 +5085,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPSyncDevice3Vtbl,
+
+  record IWMPSyncDevice3Vtable,
     query_interface : Proc(IWMPSyncDevice3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSyncDevice3*, UInt32),
     release : Proc(IWMPSyncDevice3*, UInt32),
@@ -5045,24 +5095,24 @@ module Win32cr::Media::MediaPlayer
     get_deviceName : Proc(IWMPSyncDevice3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_deviceId : Proc(IWMPSyncDevice3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_partnershipIndex : Proc(IWMPSyncDevice3*, Int32*, Win32cr::Foundation::HRESULT),
-    get_connected : Proc(IWMPSyncDevice3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_connected : Proc(IWMPSyncDevice3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_status : Proc(IWMPSyncDevice3*, Win32cr::Media::MediaPlayer::WMPDeviceStatus*, Win32cr::Foundation::HRESULT),
     get_syncState : Proc(IWMPSyncDevice3*, Win32cr::Media::MediaPlayer::WMPSyncState*, Win32cr::Foundation::HRESULT),
     get_progress : Proc(IWMPSyncDevice3*, Int32*, Win32cr::Foundation::HRESULT),
     getItemInfo : Proc(IWMPSyncDevice3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    createPartnership : Proc(IWMPSyncDevice3*, Int16, Win32cr::Foundation::HRESULT),
+    createPartnership : Proc(IWMPSyncDevice3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     deletePartnership : Proc(IWMPSyncDevice3*, Win32cr::Foundation::HRESULT),
     start : Proc(IWMPSyncDevice3*, Win32cr::Foundation::HRESULT),
     stop : Proc(IWMPSyncDevice3*, Win32cr::Foundation::HRESULT),
     showSettings : Proc(IWMPSyncDevice3*, Win32cr::Foundation::HRESULT),
-    isIdentical : Proc(IWMPSyncDevice3*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    isIdentical : Proc(IWMPSyncDevice3*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     setItemInfo : Proc(IWMPSyncDevice3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     estimateSyncSize : Proc(IWMPSyncDevice3*, Void*, Void*, Win32cr::Foundation::HRESULT),
     cancelEstimation : Proc(IWMPSyncDevice3*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPSyncDevice3, lpVtbl : IWMPSyncDevice3Vtbl* do
+  record IWMPSyncDevice3, lpVtbl : IWMPSyncDevice3Vtable* do
     GUID = LibC::GUID.new(0xb22c85f9_u32, 0x263c_u16, 0x4372_u16, StaticArray[0xa0_u8, 0xda_u8, 0xb5_u8, 0x18_u8, 0xdb_u8, 0x9b_u8, 0x40_u8, 0x98_u8])
     def query_interface(this : IWMPSyncDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5088,7 +5138,7 @@ module Win32cr::Media::MediaPlayer
     def get_partnershipIndex(this : IWMPSyncDevice3*, plIndex : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_partnershipIndex.call(this, plIndex)
     end
-    def get_connected(this : IWMPSyncDevice3*, pvbConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_connected(this : IWMPSyncDevice3*, pvbConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_connected.call(this, pvbConnected)
     end
     def get_status(this : IWMPSyncDevice3*, pwmpds : Win32cr::Media::MediaPlayer::WMPDeviceStatus*) : Win32cr::Foundation::HRESULT
@@ -5103,7 +5153,7 @@ module Win32cr::Media::MediaPlayer
     def getItemInfo(this : IWMPSyncDevice3*, bstrItemName : Win32cr::Foundation::BSTR, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getItemInfo.call(this, bstrItemName, pbstrVal)
     end
-    def createPartnership(this : IWMPSyncDevice3*, vbShowUI : Int16) : Win32cr::Foundation::HRESULT
+    def createPartnership(this : IWMPSyncDevice3*, vbShowUI : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createPartnership.call(this, vbShowUI)
     end
     def deletePartnership(this : IWMPSyncDevice3*) : Win32cr::Foundation::HRESULT
@@ -5118,7 +5168,7 @@ module Win32cr::Media::MediaPlayer
     def showSettings(this : IWMPSyncDevice3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.showSettings.call(this)
     end
-    def isIdentical(this : IWMPSyncDevice3*, pDevice : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def isIdentical(this : IWMPSyncDevice3*, pDevice : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isIdentical.call(this, pDevice, pvbool)
     end
     def setItemInfo(this : IWMPSyncDevice3*, bstrItemName : Win32cr::Foundation::BSTR, bstrVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -5134,19 +5184,20 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPLibrary2Vtbl,
+
+  record IWMPLibrary2Vtable,
     query_interface : Proc(IWMPLibrary2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPLibrary2*, UInt32),
     release : Proc(IWMPLibrary2*, UInt32),
     get_name : Proc(IWMPLibrary2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IWMPLibrary2*, Win32cr::Media::MediaPlayer::WMPLibraryType*, Win32cr::Foundation::HRESULT),
     get_mediaCollection : Proc(IWMPLibrary2*, Void**, Win32cr::Foundation::HRESULT),
-    isIdentical : Proc(IWMPLibrary2*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    isIdentical : Proc(IWMPLibrary2*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     getItemInfo : Proc(IWMPLibrary2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPLibrary2, lpVtbl : IWMPLibrary2Vtbl* do
+  record IWMPLibrary2, lpVtbl : IWMPLibrary2Vtable* do
     GUID = LibC::GUID.new(0xdd578a4e_u32, 0x79b1_u16, 0x426c_u16, StaticArray[0xbf_u8, 0x8f_u8, 0x3a_u8, 0xdd_u8, 0x90_u8, 0x72_u8, 0x50_u8, 0xb_u8])
     def query_interface(this : IWMPLibrary2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5166,7 +5217,7 @@ module Win32cr::Media::MediaPlayer
     def get_mediaCollection(this : IWMPLibrary2*, ppIWMPMediaCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_mediaCollection.call(this, ppIWMPMediaCollection)
     end
-    def isIdentical(this : IWMPLibrary2*, pIWMPLibrary : Void*, pvbool : Int16*) : Win32cr::Foundation::HRESULT
+    def isIdentical(this : IWMPLibrary2*, pIWMPLibrary : Void*, pvbool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isIdentical.call(this, pIWMPLibrary, pvbool)
     end
     def getItemInfo(this : IWMPLibrary2*, bstrItemName : Win32cr::Foundation::BSTR, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5176,7 +5227,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPEventsVtbl,
+
+  record IWMPEventsVtable,
     query_interface : Proc(IWMPEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPEvents*, UInt32),
     release : Proc(IWMPEvents*, UInt32),
@@ -5187,7 +5239,7 @@ module Win32cr::Media::MediaPlayer
     script_command : Proc(IWMPEvents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void),
     new_stream : Proc(IWMPEvents*, Void),
     disconnect : Proc(IWMPEvents*, Int32, Void),
-    buffering : Proc(IWMPEvents*, Int16, Void),
+    buffering : Proc(IWMPEvents*, Win32cr::Foundation::VARIANT_BOOL, Void),
     error : Proc(IWMPEvents*, Void),
     warning : Proc(IWMPEvents*, Int32, Int32, Win32cr::Foundation::BSTR, Void),
     end_of_stream : Proc(IWMPEvents*, Int32, Void),
@@ -5208,8 +5260,8 @@ module Win32cr::Media::MediaPlayer
     playlist_collection_change : Proc(IWMPEvents*, Void),
     playlist_collection_playlist_added : Proc(IWMPEvents*, Win32cr::Foundation::BSTR, Void),
     playlist_collection_playlist_removed : Proc(IWMPEvents*, Win32cr::Foundation::BSTR, Void),
-    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents*, Win32cr::Foundation::BSTR, Int16, Void),
-    mode_change : Proc(IWMPEvents*, Win32cr::Foundation::BSTR, Int16, Void),
+    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void),
+    mode_change : Proc(IWMPEvents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void),
     media_error : Proc(IWMPEvents*, Void*, Void),
     open_playlist_switch : Proc(IWMPEvents*, Void*, Void),
     domain_change : Proc(IWMPEvents*, Win32cr::Foundation::BSTR, Void),
@@ -5228,7 +5280,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPEvents, lpVtbl : IWMPEventsVtbl* do
+  record IWMPEvents, lpVtbl : IWMPEventsVtable* do
     GUID = LibC::GUID.new(0x19a6627b_u32, 0xda9e_u16, 0x47c1_u16, StaticArray[0xbb_u8, 0x23_u8, 0x0_u8, 0xb5_u8, 0xe6_u8, 0x68_u8, 0x23_u8, 0x6a_u8])
     def query_interface(this : IWMPEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5260,7 +5312,7 @@ module Win32cr::Media::MediaPlayer
     def disconnect(this : IWMPEvents*, result : Int32) : Void
       @lpVtbl.try &.value.disconnect.call(this, result)
     end
-    def buffering(this : IWMPEvents*, start : Int16) : Void
+    def buffering(this : IWMPEvents*, start : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.buffering.call(this, start)
     end
     def error(this : IWMPEvents*) : Void
@@ -5323,10 +5375,10 @@ module Win32cr::Media::MediaPlayer
     def playlist_collection_playlist_removed(this : IWMPEvents*, bstrPlaylistName : Win32cr::Foundation::BSTR) : Void
       @lpVtbl.try &.value.playlist_collection_playlist_removed.call(this, bstrPlaylistName)
     end
-    def playlist_collection_playlist_set_as_deleted(this : IWMPEvents*, bstrPlaylistName : Win32cr::Foundation::BSTR, varfIsDeleted : Int16) : Void
+    def playlist_collection_playlist_set_as_deleted(this : IWMPEvents*, bstrPlaylistName : Win32cr::Foundation::BSTR, varfIsDeleted : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.playlist_collection_playlist_set_as_deleted.call(this, bstrPlaylistName, varfIsDeleted)
     end
-    def mode_change(this : IWMPEvents*, mode_name : Win32cr::Foundation::BSTR, new_value : Int16) : Void
+    def mode_change(this : IWMPEvents*, mode_name : Win32cr::Foundation::BSTR, new_value : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.mode_change.call(this, mode_name, new_value)
     end
     def media_error(this : IWMPEvents*, pMediaObject : Void*) : Void
@@ -5378,7 +5430,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPEvents2Vtbl,
+
+  record IWMPEvents2Vtable,
     query_interface : Proc(IWMPEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPEvents2*, UInt32),
     release : Proc(IWMPEvents2*, UInt32),
@@ -5389,7 +5442,7 @@ module Win32cr::Media::MediaPlayer
     script_command : Proc(IWMPEvents2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void),
     new_stream : Proc(IWMPEvents2*, Void),
     disconnect : Proc(IWMPEvents2*, Int32, Void),
-    buffering : Proc(IWMPEvents2*, Int16, Void),
+    buffering : Proc(IWMPEvents2*, Win32cr::Foundation::VARIANT_BOOL, Void),
     error : Proc(IWMPEvents2*, Void),
     warning : Proc(IWMPEvents2*, Int32, Int32, Win32cr::Foundation::BSTR, Void),
     end_of_stream : Proc(IWMPEvents2*, Int32, Void),
@@ -5410,8 +5463,8 @@ module Win32cr::Media::MediaPlayer
     playlist_collection_change : Proc(IWMPEvents2*, Void),
     playlist_collection_playlist_added : Proc(IWMPEvents2*, Win32cr::Foundation::BSTR, Void),
     playlist_collection_playlist_removed : Proc(IWMPEvents2*, Win32cr::Foundation::BSTR, Void),
-    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents2*, Win32cr::Foundation::BSTR, Int16, Void),
-    mode_change : Proc(IWMPEvents2*, Win32cr::Foundation::BSTR, Int16, Void),
+    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void),
+    mode_change : Proc(IWMPEvents2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void),
     media_error : Proc(IWMPEvents2*, Void*, Void),
     open_playlist_switch : Proc(IWMPEvents2*, Void*, Void),
     domain_change : Proc(IWMPEvents2*, Win32cr::Foundation::BSTR, Void),
@@ -5436,7 +5489,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPEvents2, lpVtbl : IWMPEvents2Vtbl* do
+  record IWMPEvents2, lpVtbl : IWMPEvents2Vtable* do
     GUID = LibC::GUID.new(0x1e7601fa_u32, 0x47ea_u16, 0x4107_u16, StaticArray[0x9e_u8, 0xa9_u8, 0x90_u8, 0x4_u8, 0xed_u8, 0x96_u8, 0x84_u8, 0xff_u8])
     def query_interface(this : IWMPEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5468,7 +5521,7 @@ module Win32cr::Media::MediaPlayer
     def disconnect(this : IWMPEvents2*, result : Int32) : Void
       @lpVtbl.try &.value.disconnect.call(this, result)
     end
-    def buffering(this : IWMPEvents2*, start : Int16) : Void
+    def buffering(this : IWMPEvents2*, start : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.buffering.call(this, start)
     end
     def error(this : IWMPEvents2*) : Void
@@ -5531,10 +5584,10 @@ module Win32cr::Media::MediaPlayer
     def playlist_collection_playlist_removed(this : IWMPEvents2*, bstrPlaylistName : Win32cr::Foundation::BSTR) : Void
       @lpVtbl.try &.value.playlist_collection_playlist_removed.call(this, bstrPlaylistName)
     end
-    def playlist_collection_playlist_set_as_deleted(this : IWMPEvents2*, bstrPlaylistName : Win32cr::Foundation::BSTR, varfIsDeleted : Int16) : Void
+    def playlist_collection_playlist_set_as_deleted(this : IWMPEvents2*, bstrPlaylistName : Win32cr::Foundation::BSTR, varfIsDeleted : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.playlist_collection_playlist_set_as_deleted.call(this, bstrPlaylistName, varfIsDeleted)
     end
-    def mode_change(this : IWMPEvents2*, mode_name : Win32cr::Foundation::BSTR, new_value : Int16) : Void
+    def mode_change(this : IWMPEvents2*, mode_name : Win32cr::Foundation::BSTR, new_value : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.mode_change.call(this, mode_name, new_value)
     end
     def media_error(this : IWMPEvents2*, pMediaObject : Void*) : Void
@@ -5604,7 +5657,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPEvents3Vtbl,
+
+  record IWMPEvents3Vtable,
     query_interface : Proc(IWMPEvents3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPEvents3*, UInt32),
     release : Proc(IWMPEvents3*, UInt32),
@@ -5615,7 +5669,7 @@ module Win32cr::Media::MediaPlayer
     script_command : Proc(IWMPEvents3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void),
     new_stream : Proc(IWMPEvents3*, Void),
     disconnect : Proc(IWMPEvents3*, Int32, Void),
-    buffering : Proc(IWMPEvents3*, Int16, Void),
+    buffering : Proc(IWMPEvents3*, Win32cr::Foundation::VARIANT_BOOL, Void),
     error : Proc(IWMPEvents3*, Void),
     warning : Proc(IWMPEvents3*, Int32, Int32, Win32cr::Foundation::BSTR, Void),
     end_of_stream : Proc(IWMPEvents3*, Int32, Void),
@@ -5636,8 +5690,8 @@ module Win32cr::Media::MediaPlayer
     playlist_collection_change : Proc(IWMPEvents3*, Void),
     playlist_collection_playlist_added : Proc(IWMPEvents3*, Win32cr::Foundation::BSTR, Void),
     playlist_collection_playlist_removed : Proc(IWMPEvents3*, Win32cr::Foundation::BSTR, Void),
-    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents3*, Win32cr::Foundation::BSTR, Int16, Void),
-    mode_change : Proc(IWMPEvents3*, Win32cr::Foundation::BSTR, Int16, Void),
+    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void),
+    mode_change : Proc(IWMPEvents3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void),
     media_error : Proc(IWMPEvents3*, Void*, Void),
     open_playlist_switch : Proc(IWMPEvents3*, Void*, Void),
     domain_change : Proc(IWMPEvents3*, Win32cr::Foundation::BSTR, Void),
@@ -5673,7 +5727,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPEvents3, lpVtbl : IWMPEvents3Vtbl* do
+  record IWMPEvents3, lpVtbl : IWMPEvents3Vtable* do
     GUID = LibC::GUID.new(0x1f504270_u32, 0xa66b_u16, 0x4223_u16, StaticArray[0x8e_u8, 0x96_u8, 0x26_u8, 0xa0_u8, 0x6c_u8, 0x63_u8, 0xd6_u8, 0x9f_u8])
     def query_interface(this : IWMPEvents3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5705,7 +5759,7 @@ module Win32cr::Media::MediaPlayer
     def disconnect(this : IWMPEvents3*, result : Int32) : Void
       @lpVtbl.try &.value.disconnect.call(this, result)
     end
-    def buffering(this : IWMPEvents3*, start : Int16) : Void
+    def buffering(this : IWMPEvents3*, start : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.buffering.call(this, start)
     end
     def error(this : IWMPEvents3*) : Void
@@ -5768,10 +5822,10 @@ module Win32cr::Media::MediaPlayer
     def playlist_collection_playlist_removed(this : IWMPEvents3*, bstrPlaylistName : Win32cr::Foundation::BSTR) : Void
       @lpVtbl.try &.value.playlist_collection_playlist_removed.call(this, bstrPlaylistName)
     end
-    def playlist_collection_playlist_set_as_deleted(this : IWMPEvents3*, bstrPlaylistName : Win32cr::Foundation::BSTR, varfIsDeleted : Int16) : Void
+    def playlist_collection_playlist_set_as_deleted(this : IWMPEvents3*, bstrPlaylistName : Win32cr::Foundation::BSTR, varfIsDeleted : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.playlist_collection_playlist_set_as_deleted.call(this, bstrPlaylistName, varfIsDeleted)
     end
-    def mode_change(this : IWMPEvents3*, mode_name : Win32cr::Foundation::BSTR, new_value : Int16) : Void
+    def mode_change(this : IWMPEvents3*, mode_name : Win32cr::Foundation::BSTR, new_value : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.mode_change.call(this, mode_name, new_value)
     end
     def media_error(this : IWMPEvents3*, pMediaObject : Void*) : Void
@@ -5874,7 +5928,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPEvents4Vtbl,
+
+  record IWMPEvents4Vtable,
     query_interface : Proc(IWMPEvents4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPEvents4*, UInt32),
     release : Proc(IWMPEvents4*, UInt32),
@@ -5885,7 +5940,7 @@ module Win32cr::Media::MediaPlayer
     script_command : Proc(IWMPEvents4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void),
     new_stream : Proc(IWMPEvents4*, Void),
     disconnect : Proc(IWMPEvents4*, Int32, Void),
-    buffering : Proc(IWMPEvents4*, Int16, Void),
+    buffering : Proc(IWMPEvents4*, Win32cr::Foundation::VARIANT_BOOL, Void),
     error : Proc(IWMPEvents4*, Void),
     warning : Proc(IWMPEvents4*, Int32, Int32, Win32cr::Foundation::BSTR, Void),
     end_of_stream : Proc(IWMPEvents4*, Int32, Void),
@@ -5906,8 +5961,8 @@ module Win32cr::Media::MediaPlayer
     playlist_collection_change : Proc(IWMPEvents4*, Void),
     playlist_collection_playlist_added : Proc(IWMPEvents4*, Win32cr::Foundation::BSTR, Void),
     playlist_collection_playlist_removed : Proc(IWMPEvents4*, Win32cr::Foundation::BSTR, Void),
-    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents4*, Win32cr::Foundation::BSTR, Int16, Void),
-    mode_change : Proc(IWMPEvents4*, Win32cr::Foundation::BSTR, Int16, Void),
+    playlist_collection_playlist_set_as_deleted : Proc(IWMPEvents4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void),
+    mode_change : Proc(IWMPEvents4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void),
     media_error : Proc(IWMPEvents4*, Void*, Void),
     open_playlist_switch : Proc(IWMPEvents4*, Void*, Void),
     domain_change : Proc(IWMPEvents4*, Win32cr::Foundation::BSTR, Void),
@@ -5944,7 +5999,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPEvents4, lpVtbl : IWMPEvents4Vtbl* do
+  record IWMPEvents4, lpVtbl : IWMPEvents4Vtable* do
     GUID = LibC::GUID.new(0x26dabcfa_u32, 0x306b_u16, 0x404d_u16, StaticArray[0x9a_u8, 0x6f_u8, 0x63_u8, 0xa_u8, 0x84_u8, 0x5_u8, 0x4_u8, 0x8d_u8])
     def query_interface(this : IWMPEvents4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5976,7 +6031,7 @@ module Win32cr::Media::MediaPlayer
     def disconnect(this : IWMPEvents4*, result : Int32) : Void
       @lpVtbl.try &.value.disconnect.call(this, result)
     end
-    def buffering(this : IWMPEvents4*, start : Int16) : Void
+    def buffering(this : IWMPEvents4*, start : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.buffering.call(this, start)
     end
     def error(this : IWMPEvents4*) : Void
@@ -6039,10 +6094,10 @@ module Win32cr::Media::MediaPlayer
     def playlist_collection_playlist_removed(this : IWMPEvents4*, bstrPlaylistName : Win32cr::Foundation::BSTR) : Void
       @lpVtbl.try &.value.playlist_collection_playlist_removed.call(this, bstrPlaylistName)
     end
-    def playlist_collection_playlist_set_as_deleted(this : IWMPEvents4*, bstrPlaylistName : Win32cr::Foundation::BSTR, varfIsDeleted : Int16) : Void
+    def playlist_collection_playlist_set_as_deleted(this : IWMPEvents4*, bstrPlaylistName : Win32cr::Foundation::BSTR, varfIsDeleted : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.playlist_collection_playlist_set_as_deleted.call(this, bstrPlaylistName, varfIsDeleted)
     end
-    def mode_change(this : IWMPEvents4*, mode_name : Win32cr::Foundation::BSTR, new_value : Int16) : Void
+    def mode_change(this : IWMPEvents4*, mode_name : Win32cr::Foundation::BSTR, new_value : Win32cr::Foundation::VARIANT_BOOL) : Void
       @lpVtbl.try &.value.mode_change.call(this, mode_name, new_value)
     end
     def media_error(this : IWMPEvents4*, pMediaObject : Void*) : Void
@@ -6148,18 +6203,19 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record WMPOCXEvents_Vtbl,
+
+  record WMPOCXEvents_Vtable,
     query_interface : Proc(WMPOCXEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(WMPOCXEvents_*, UInt32),
     release : Proc(WMPOCXEvents_*, UInt32),
     get_type_info_count : Proc(WMPOCXEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(WMPOCXEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(WMPOCXEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(WMPOCXEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(WMPOCXEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record WMPOCXEvents_, lpVtbl : WMPOCXEvents_Vtbl* do
+  record WMPOCXEvents_, lpVtbl : WMPOCXEvents_Vtable* do
     GUID = LibC::GUID.new(0x6bf52a51_u32, 0x394a_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfa_u8, 0xa6_u8])
     def query_interface(this : WMPOCXEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6179,14 +6235,15 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : WMPOCXEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : WMPOCXEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : WMPOCXEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IWMPNodeRealEstateVtbl,
+
+  record IWMPNodeRealEstateVtable,
     query_interface : Proc(IWMPNodeRealEstate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPNodeRealEstate*, UInt32),
     release : Proc(IWMPNodeRealEstate*, UInt32),
@@ -6200,7 +6257,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPNodeRealEstate, lpVtbl : IWMPNodeRealEstateVtbl* do
+  record IWMPNodeRealEstate, lpVtbl : IWMPNodeRealEstateVtable* do
     GUID = LibC::GUID.new(0x42751198_u32, 0x5a50_u16, 0x4460_u16, StaticArray[0xbc_u8, 0xb4_u8, 0x70_u8, 0x9f_u8, 0x8b_u8, 0xdc_u8, 0x8e_u8, 0x59_u8])
     def query_interface(this : IWMPNodeRealEstate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6236,7 +6293,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPNodeRealEstateHostVtbl,
+
+  record IWMPNodeRealEstateHostVtable,
     query_interface : Proc(IWMPNodeRealEstateHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPNodeRealEstateHost*, UInt32),
     release : Proc(IWMPNodeRealEstateHost*, UInt32),
@@ -6245,7 +6303,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPNodeRealEstateHost, lpVtbl : IWMPNodeRealEstateHostVtbl* do
+  record IWMPNodeRealEstateHost, lpVtbl : IWMPNodeRealEstateHostVtable* do
     GUID = LibC::GUID.new(0x1491087d_u32, 0x2c6b_u16, 0x44c8_u16, StaticArray[0xb0_u8, 0x19_u8, 0xb3_u8, 0xc9_u8, 0x29_u8, 0xd2_u8, 0xad_u8, 0xa9_u8])
     def query_interface(this : IWMPNodeRealEstateHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6266,7 +6324,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPNodeWindowedVtbl,
+
+  record IWMPNodeWindowedVtable,
     query_interface : Proc(IWMPNodeWindowed*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPNodeWindowed*, UInt32),
     release : Proc(IWMPNodeWindowed*, UInt32),
@@ -6275,7 +6334,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPNodeWindowed, lpVtbl : IWMPNodeWindowedVtbl* do
+  record IWMPNodeWindowed, lpVtbl : IWMPNodeWindowedVtable* do
     GUID = LibC::GUID.new(0x96740bfa_u32, 0xc56a_u16, 0x45d1_u16, StaticArray[0xa3_u8, 0xa4_u8, 0x76_u8, 0x29_u8, 0x14_u8, 0xd4_u8, 0xad_u8, 0xe9_u8])
     def query_interface(this : IWMPNodeWindowed*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6296,7 +6355,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPNodeWindowedHostVtbl,
+
+  record IWMPNodeWindowedHostVtable,
     query_interface : Proc(IWMPNodeWindowedHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPNodeWindowedHost*, UInt32),
     release : Proc(IWMPNodeWindowedHost*, UInt32),
@@ -6304,7 +6364,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPNodeWindowedHost, lpVtbl : IWMPNodeWindowedHostVtbl* do
+  record IWMPNodeWindowedHost, lpVtbl : IWMPNodeWindowedHostVtable* do
     GUID = LibC::GUID.new(0xa300415a_u32, 0x54aa_u16, 0x4081_u16, StaticArray[0xad_u8, 0xbf_u8, 0x3b_u8, 0x13_u8, 0x61_u8, 0xd_u8, 0x89_u8, 0x58_u8])
     def query_interface(this : IWMPNodeWindowedHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6322,7 +6382,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPWindowMessageSinkVtbl,
+
+  record IWMPWindowMessageSinkVtable,
     query_interface : Proc(IWMPWindowMessageSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPWindowMessageSink*, UInt32),
     release : Proc(IWMPWindowMessageSink*, UInt32),
@@ -6330,7 +6391,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPWindowMessageSink, lpVtbl : IWMPWindowMessageSinkVtbl* do
+  record IWMPWindowMessageSink, lpVtbl : IWMPWindowMessageSinkVtable* do
     GUID = LibC::GUID.new(0x3a0daa30_u32, 0x908d_u16, 0x4789_u16, StaticArray[0xba_u8, 0x87_u8, 0xae_u8, 0xd8_u8, 0x79_u8, 0xb5_u8, 0xc4_u8, 0x9b_u8])
     def query_interface(this : IWMPWindowMessageSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6348,7 +6409,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPNodeWindowlessVtbl,
+
+  record IWMPNodeWindowlessVtable,
     query_interface : Proc(IWMPNodeWindowless*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPNodeWindowless*, UInt32),
     release : Proc(IWMPNodeWindowless*, UInt32),
@@ -6357,7 +6419,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPNodeWindowless, lpVtbl : IWMPNodeWindowlessVtbl* do
+  record IWMPNodeWindowless, lpVtbl : IWMPNodeWindowlessVtable* do
     GUID = LibC::GUID.new(0x9b9199ad_u32, 0x780c_u16, 0x4eda_u16, StaticArray[0xb8_u8, 0x16_u8, 0x26_u8, 0x1e_u8, 0xba_u8, 0x5d_u8, 0x15_u8, 0x75_u8])
     def query_interface(this : IWMPNodeWindowless*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6378,7 +6440,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPNodeWindowlessHostVtbl,
+
+  record IWMPNodeWindowlessHostVtable,
     query_interface : Proc(IWMPNodeWindowlessHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPNodeWindowlessHost*, UInt32),
     release : Proc(IWMPNodeWindowlessHost*, UInt32),
@@ -6386,7 +6449,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPNodeWindowlessHost, lpVtbl : IWMPNodeWindowlessHostVtbl* do
+  record IWMPNodeWindowlessHost, lpVtbl : IWMPNodeWindowlessHostVtable* do
     GUID = LibC::GUID.new(0xbe7017c6_u32, 0xce34_u16, 0x4901_u16, StaticArray[0x81_u8, 0x6_u8, 0x77_u8, 0x3_u8, 0x81_u8, 0xaa_u8, 0x6e_u8, 0x3e_u8])
     def query_interface(this : IWMPNodeWindowlessHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6404,7 +6467,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPVideoRenderConfigVtbl,
+
+  record IWMPVideoRenderConfigVtable,
     query_interface : Proc(IWMPVideoRenderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPVideoRenderConfig*, UInt32),
     release : Proc(IWMPVideoRenderConfig*, UInt32),
@@ -6412,7 +6476,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPVideoRenderConfig, lpVtbl : IWMPVideoRenderConfigVtbl* do
+  record IWMPVideoRenderConfig, lpVtbl : IWMPVideoRenderConfigVtable* do
     GUID = LibC::GUID.new(0x6d6cf803_u32, 0x1ec0_u16, 0x4c8d_u16, StaticArray[0xb3_u8, 0xca_u8, 0xf1_u8, 0x8e_u8, 0x27_u8, 0x28_u8, 0x20_u8, 0x74_u8])
     def query_interface(this : IWMPVideoRenderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6430,7 +6494,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPAudioRenderConfigVtbl,
+
+  record IWMPAudioRenderConfigVtable,
     query_interface : Proc(IWMPAudioRenderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPAudioRenderConfig*, UInt32),
     release : Proc(IWMPAudioRenderConfig*, UInt32),
@@ -6439,7 +6504,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPAudioRenderConfig, lpVtbl : IWMPAudioRenderConfigVtbl* do
+  record IWMPAudioRenderConfig, lpVtbl : IWMPAudioRenderConfigVtable* do
     GUID = LibC::GUID.new(0xe79c6349_u32, 0x5997_u16, 0x4ce4_u16, StaticArray[0x91_u8, 0x7c_u8, 0x22_u8, 0xa3_u8, 0x39_u8, 0x1e_u8, 0xc5_u8, 0x64_u8])
     def query_interface(this : IWMPAudioRenderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6460,7 +6525,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPRenderConfigVtbl,
+
+  record IWMPRenderConfigVtable,
     query_interface : Proc(IWMPRenderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPRenderConfig*, UInt32),
     release : Proc(IWMPRenderConfig*, UInt32),
@@ -6469,7 +6535,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPRenderConfig, lpVtbl : IWMPRenderConfigVtbl* do
+  record IWMPRenderConfig, lpVtbl : IWMPRenderConfigVtable* do
     GUID = LibC::GUID.new(0x959506c1_u32, 0x314_u16, 0x4ec5_u16, StaticArray[0x9e_u8, 0x61_u8, 0x85_u8, 0x28_u8, 0xdb_u8, 0x5e_u8, 0x54_u8, 0x78_u8])
     def query_interface(this : IWMPRenderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6490,7 +6556,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPServicesVtbl,
+
+  record IWMPServicesVtable,
     query_interface : Proc(IWMPServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPServices*, UInt32),
     release : Proc(IWMPServices*, UInt32),
@@ -6499,7 +6566,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPServices, lpVtbl : IWMPServicesVtbl* do
+  record IWMPServices, lpVtbl : IWMPServicesVtable* do
     GUID = LibC::GUID.new(0xafb6b76b_u32, 0x1e20_u16, 0x4198_u16, StaticArray[0x83_u8, 0xb3_u8, 0x19_u8, 0x1d_u8, 0xb6_u8, 0xe0_u8, 0xb1_u8, 0x49_u8])
     def query_interface(this : IWMPServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6520,7 +6587,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPMediaPluginRegistrarVtbl,
+
+  record IWMPMediaPluginRegistrarVtable,
     query_interface : Proc(IWMPMediaPluginRegistrar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPMediaPluginRegistrar*, UInt32),
     release : Proc(IWMPMediaPluginRegistrar*, UInt32),
@@ -6529,7 +6597,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPMediaPluginRegistrar, lpVtbl : IWMPMediaPluginRegistrarVtbl* do
+  record IWMPMediaPluginRegistrar, lpVtbl : IWMPMediaPluginRegistrarVtable* do
     GUID = LibC::GUID.new(0x68e27045_u32, 0x5bd_u16, 0x40b2_u16, StaticArray[0x97_u8, 0x20_u8, 0x23_u8, 0x8_u8, 0x8c_u8, 0x78_u8, 0xe3_u8, 0x90_u8])
     def query_interface(this : IWMPMediaPluginRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6550,7 +6618,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPluginVtbl,
+
+  record IWMPPluginVtable,
     query_interface : Proc(IWMPPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPlugin*, UInt32),
     release : Proc(IWMPPlugin*, UInt32),
@@ -6563,7 +6632,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPPlugin, lpVtbl : IWMPPluginVtbl* do
+  record IWMPPlugin, lpVtbl : IWMPPluginVtable* do
     GUID = LibC::GUID.new(0xf1392a70_u32, 0x24c_u16, 0x42bb_u16, StaticArray[0xa9_u8, 0x98_u8, 0x73_u8, 0xdf_u8, 0xdf_u8, 0xe7_u8, 0xd5_u8, 0xa7_u8])
     def query_interface(this : IWMPPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6596,7 +6665,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPluginEnableVtbl,
+
+  record IWMPPluginEnableVtable,
     query_interface : Proc(IWMPPluginEnable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPluginEnable*, UInt32),
     release : Proc(IWMPPluginEnable*, UInt32),
@@ -6605,7 +6675,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPPluginEnable, lpVtbl : IWMPPluginEnableVtbl* do
+  record IWMPPluginEnable, lpVtbl : IWMPPluginEnableVtable* do
     GUID = LibC::GUID.new(0x5fca444c_u32, 0x7ad1_u16, 0x479d_u16, StaticArray[0xa4_u8, 0xef_u8, 0x40_u8, 0x56_u8, 0x6a_u8, 0x53_u8, 0x9_u8, 0xd6_u8])
     def query_interface(this : IWMPPluginEnable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6626,7 +6696,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPGraphCreationVtbl,
+
+  record IWMPGraphCreationVtable,
     query_interface : Proc(IWMPGraphCreation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPGraphCreation*, UInt32),
     release : Proc(IWMPGraphCreation*, UInt32),
@@ -6636,7 +6707,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPGraphCreation, lpVtbl : IWMPGraphCreationVtbl* do
+  record IWMPGraphCreation, lpVtbl : IWMPGraphCreationVtable* do
     GUID = LibC::GUID.new(0xbfb377e5_u32, 0xc594_u16, 0x4369_u16, StaticArray[0xa9_u8, 0x70_u8, 0xde_u8, 0x89_u8, 0x6d_u8, 0x5e_u8, 0xce_u8, 0x74_u8])
     def query_interface(this : IWMPGraphCreation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6660,7 +6731,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPConvertVtbl,
+
+  record IWMPConvertVtable,
     query_interface : Proc(IWMPConvert*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPConvert*, UInt32),
     release : Proc(IWMPConvert*, UInt32),
@@ -6669,7 +6741,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPConvert, lpVtbl : IWMPConvertVtbl* do
+  record IWMPConvert, lpVtbl : IWMPConvertVtable* do
     GUID = LibC::GUID.new(0xd683162f_u32, 0x57d4_u16, 0x4108_u16, StaticArray[0x83_u8, 0x73_u8, 0x4a_u8, 0x96_u8, 0x76_u8, 0xd1_u8, 0xc2_u8, 0xe9_u8])
     def query_interface(this : IWMPConvert*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6690,15 +6762,16 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPTranscodePolicyVtbl,
+
+  record IWMPTranscodePolicyVtable,
     query_interface : Proc(IWMPTranscodePolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPTranscodePolicy*, UInt32),
     release : Proc(IWMPTranscodePolicy*, UInt32),
-    allowTranscode : Proc(IWMPTranscodePolicy*, Int16*, Win32cr::Foundation::HRESULT)
+    allowTranscode : Proc(IWMPTranscodePolicy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPTranscodePolicy, lpVtbl : IWMPTranscodePolicyVtbl* do
+  record IWMPTranscodePolicy, lpVtbl : IWMPTranscodePolicyVtable* do
     GUID = LibC::GUID.new(0xb64cbac3_u32, 0x401c_u16, 0x4327_u16, StaticArray[0xa3_u8, 0xe8_u8, 0xb9_u8, 0xfe_u8, 0xb3_u8, 0xa8_u8, 0xc2_u8, 0x5c_u8])
     def query_interface(this : IWMPTranscodePolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6709,14 +6782,15 @@ module Win32cr::Media::MediaPlayer
     def release(this : IWMPTranscodePolicy*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def allowTranscode(this : IWMPTranscodePolicy*, pvbAllow : Int16*) : Win32cr::Foundation::HRESULT
+    def allowTranscode(this : IWMPTranscodePolicy*, pvbAllow : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.allowTranscode.call(this, pvbAllow)
     end
 
   end
 
   @[Extern]
-  record IWMPUserEventSinkVtbl,
+
+  record IWMPUserEventSinkVtable,
     query_interface : Proc(IWMPUserEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPUserEventSink*, UInt32),
     release : Proc(IWMPUserEventSink*, UInt32),
@@ -6724,7 +6798,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPUserEventSink, lpVtbl : IWMPUserEventSinkVtbl* do
+  record IWMPUserEventSink, lpVtbl : IWMPUserEventSinkVtable* do
     GUID = LibC::GUID.new(0xcfccfa72_u32, 0xc343_u16, 0x48c3_u16, StaticArray[0xa2_u8, 0xde_u8, 0xb7_u8, 0xa4_u8, 0x40_u8, 0x2e_u8, 0x39_u8, 0xf2_u8])
     def query_interface(this : IWMPUserEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6742,7 +6816,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedsManagerVtbl,
+
+  record IXFeedsManagerVtable,
     query_interface : Proc(IXFeedsManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeedsManager*, UInt32),
     release : Proc(IXFeedsManager*, UInt32),
@@ -6765,7 +6840,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeedsManager, lpVtbl : IXFeedsManagerVtbl* do
+  record IXFeedsManager, lpVtbl : IXFeedsManagerVtable* do
     GUID = LibC::GUID.new(0x5357e238_u32, 0xfb12_u16, 0x4aca_u16, StaticArray[0xa9_u8, 0x30_u8, 0xca_u8, 0xb7_u8, 0x83_u8, 0x2b_u8, 0x84_u8, 0xbf_u8])
     def query_interface(this : IXFeedsManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6828,7 +6903,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedsEnumVtbl,
+
+  record IXFeedsEnumVtable,
     query_interface : Proc(IXFeedsEnum*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeedsEnum*, UInt32),
     release : Proc(IXFeedsEnum*, UInt32),
@@ -6837,7 +6913,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeedsEnum, lpVtbl : IXFeedsEnumVtbl* do
+  record IXFeedsEnum, lpVtbl : IXFeedsEnumVtable* do
     GUID = LibC::GUID.new(0xdc43a9d5_u32, 0x5015_u16, 0x4301_u16, StaticArray[0x8c_u8, 0x96_u8, 0xa4_u8, 0x74_u8, 0x34_u8, 0xb4_u8, 0xd6_u8, 0x58_u8])
     def query_interface(this : IXFeedsEnum*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6858,7 +6934,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedFolderVtbl,
+
+  record IXFeedFolderVtable,
     query_interface : Proc(IXFeedFolder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeedFolder*, UInt32),
     release : Proc(IXFeedFolder*, UInt32),
@@ -6883,7 +6960,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeedFolder, lpVtbl : IXFeedFolderVtbl* do
+  record IXFeedFolder, lpVtbl : IXFeedFolderVtable* do
     GUID = LibC::GUID.new(0x4c963678_u32, 0x3a51_u16, 0x4b88_u16, StaticArray[0x85_u8, 0x31_u8, 0x98_u8, 0xb9_u8, 0xb_u8, 0x65_u8, 0x8_u8, 0xf2_u8])
     def query_interface(this : IXFeedFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6952,7 +7029,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedFolderEventsVtbl,
+
+  record IXFeedFolderEventsVtable,
     query_interface : Proc(IXFeedFolderEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeedFolderEvents*, UInt32),
     release : Proc(IXFeedFolderEvents*, UInt32),
@@ -6975,7 +7053,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeedFolderEvents, lpVtbl : IXFeedFolderEventsVtbl* do
+  record IXFeedFolderEvents, lpVtbl : IXFeedFolderEventsVtable* do
     GUID = LibC::GUID.new(0x7964b769_u32, 0x234a_u16, 0x4bb1_u16, StaticArray[0xa5_u8, 0xf4_u8, 0x90_u8, 0x45_u8, 0x4c_u8, 0x8a_u8, 0xd0_u8, 0x7e_u8])
     def query_interface(this : IXFeedFolderEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7038,7 +7116,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedVtbl,
+
+  record IXFeedVtable,
     query_interface : Proc(IXFeed*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeed*, UInt32),
     release : Proc(IXFeed*, UInt32),
@@ -7089,7 +7168,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeed, lpVtbl : IXFeedVtbl* do
+  record IXFeed, lpVtbl : IXFeedVtable* do
     GUID = LibC::GUID.new(0xa44179a4_u32, 0xe0f6_u16, 0x403b_u16, StaticArray[0xaf_u8, 0x8d_u8, 0xd0_u8, 0x80_u8, 0xf4_u8, 0x25_u8, 0xa4_u8, 0x51_u8])
     def query_interface(this : IXFeed*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7236,7 +7315,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeed2Vtbl,
+
+  record IXFeed2Vtable,
     query_interface : Proc(IXFeed2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeed2*, UInt32),
     release : Proc(IXFeed2*, UInt32),
@@ -7293,7 +7373,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeed2, lpVtbl : IXFeed2Vtbl* do
+  record IXFeed2, lpVtbl : IXFeed2Vtable* do
     GUID = LibC::GUID.new(0xce528e77_u32, 0x3716_u16, 0x4eb7_u16, StaticArray[0x95_u8, 0x6d_u8, 0xf5_u8, 0xe3_u8, 0x75_u8, 0x2_u8, 0xe1_u8, 0x2a_u8])
     def query_interface(this : IXFeed2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7458,7 +7538,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedEventsVtbl,
+
+  record IXFeedEventsVtable,
     query_interface : Proc(IXFeedEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeedEvents*, UInt32),
     release : Proc(IXFeedEvents*, UInt32),
@@ -7473,7 +7554,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeedEvents, lpVtbl : IXFeedEventsVtbl* do
+  record IXFeedEvents, lpVtbl : IXFeedEventsVtable* do
     GUID = LibC::GUID.new(0x1630852e_u32, 0x1263_u16, 0x465b_u16, StaticArray[0x98_u8, 0xe5_u8, 0xfe_u8, 0x60_u8, 0xff_u8, 0xec_u8, 0x4a_u8, 0xc2_u8])
     def query_interface(this : IXFeedEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7512,7 +7593,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedItemVtbl,
+
+  record IXFeedItemVtable,
     query_interface : Proc(IXFeedItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeedItem*, UInt32),
     release : Proc(IXFeedItem*, UInt32),
@@ -7536,7 +7618,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeedItem, lpVtbl : IXFeedItemVtbl* do
+  record IXFeedItem, lpVtbl : IXFeedItemVtable* do
     GUID = LibC::GUID.new(0xe757b2f5_u32, 0xe73e_u16, 0x434e_u16, StaticArray[0xa1_u8, 0xbf_u8, 0x2b_u8, 0xd7_u8, 0xc3_u8, 0xe6_u8, 0xf_u8, 0xcb_u8])
     def query_interface(this : IXFeedItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7602,7 +7684,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedItem2Vtbl,
+
+  record IXFeedItem2Vtable,
     query_interface : Proc(IXFeedItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeedItem2*, UInt32),
     release : Proc(IXFeedItem2*, UInt32),
@@ -7627,7 +7710,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeedItem2, lpVtbl : IXFeedItem2Vtbl* do
+  record IXFeedItem2, lpVtbl : IXFeedItem2Vtable* do
     GUID = LibC::GUID.new(0x6cda2dc7_u32, 0x9013_u16, 0x4522_u16, StaticArray[0x99_u8, 0x70_u8, 0x2a_u8, 0x9d_u8, 0xd9_u8, 0xea_u8, 0xd5_u8, 0xa3_u8])
     def query_interface(this : IXFeedItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7696,7 +7779,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IXFeedEnclosureVtbl,
+
+  record IXFeedEnclosureVtable,
     query_interface : Proc(IXFeedEnclosure*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXFeedEnclosure*, UInt32),
     release : Proc(IXFeedEnclosure*, UInt32),
@@ -7716,7 +7800,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IXFeedEnclosure, lpVtbl : IXFeedEnclosureVtbl* do
+  record IXFeedEnclosure, lpVtbl : IXFeedEnclosureVtable* do
     GUID = LibC::GUID.new(0xbfbfb953_u32, 0x644f_u16, 0x4792_u16, StaticArray[0xb6_u8, 0x9c_u8, 0xdf_u8, 0xac_u8, 0xa4_u8, 0xcb_u8, 0xf8_u8, 0x9a_u8])
     def query_interface(this : IXFeedEnclosure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7770,20 +7854,21 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedsManagerVtbl,
+
+  record IFeedsManagerVtable,
     query_interface : Proc(IFeedsManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeedsManager*, UInt32),
     release : Proc(IFeedsManager*, UInt32),
     get_type_info_count : Proc(IFeedsManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeedsManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeedsManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeedsManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeedsManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_RootFolder : Proc(IFeedsManager*, Void**, Win32cr::Foundation::HRESULT),
-    is_subscribed : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    exists_feed : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    is_subscribed : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    exists_feed : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_feed : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_feed_by_url : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    exists_folder : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    exists_folder : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_folder : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     delete_feed : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete_folder : Proc(IFeedsManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -7797,7 +7882,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IFeedsManager, lpVtbl : IFeedsManagerVtbl* do
+  record IFeedsManager, lpVtbl : IFeedsManagerVtable* do
     GUID = LibC::GUID.new(0xa74029cc_u32, 0x1f1a_u16, 0x4906_u16, StaticArray[0x88_u8, 0xf0_u8, 0x81_u8, 0x6_u8, 0x38_u8, 0xd8_u8, 0x65_u8, 0x91_u8])
     def query_interface(this : IFeedsManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7817,16 +7902,16 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeedsManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeedsManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeedsManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_RootFolder(this : IFeedsManager*, disp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RootFolder.call(this, disp)
     end
-    def is_subscribed(this : IFeedsManager*, feedUrl : Win32cr::Foundation::BSTR, subscribed : Int16*) : Win32cr::Foundation::HRESULT
+    def is_subscribed(this : IFeedsManager*, feedUrl : Win32cr::Foundation::BSTR, subscribed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_subscribed.call(this, feedUrl, subscribed)
     end
-    def exists_feed(this : IFeedsManager*, feedPath : Win32cr::Foundation::BSTR, exists : Int16*) : Win32cr::Foundation::HRESULT
+    def exists_feed(this : IFeedsManager*, feedPath : Win32cr::Foundation::BSTR, exists : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.exists_feed.call(this, feedPath, exists)
     end
     def get_feed(this : IFeedsManager*, feedPath : Win32cr::Foundation::BSTR, disp : Void**) : Win32cr::Foundation::HRESULT
@@ -7835,7 +7920,7 @@ module Win32cr::Media::MediaPlayer
     def get_feed_by_url(this : IFeedsManager*, feedUrl : Win32cr::Foundation::BSTR, disp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_feed_by_url.call(this, feedUrl, disp)
     end
-    def exists_folder(this : IFeedsManager*, folderPath : Win32cr::Foundation::BSTR, exists : Int16*) : Win32cr::Foundation::HRESULT
+    def exists_folder(this : IFeedsManager*, folderPath : Win32cr::Foundation::BSTR, exists : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.exists_folder.call(this, folderPath, exists)
     end
     def get_folder(this : IFeedsManager*, folderPath : Win32cr::Foundation::BSTR, disp : Void**) : Win32cr::Foundation::HRESULT
@@ -7872,21 +7957,22 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedsEnumVtbl,
+
+  record IFeedsEnumVtable,
     query_interface : Proc(IFeedsEnum*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeedsEnum*, UInt32),
     release : Proc(IFeedsEnum*, UInt32),
     get_type_info_count : Proc(IFeedsEnum*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeedsEnum*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeedsEnum*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeedsEnum*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeedsEnum*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFeedsEnum*, Int32*, Win32cr::Foundation::HRESULT),
     item : Proc(IFeedsEnum*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFeedsEnum*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFeedsEnum, lpVtbl : IFeedsEnumVtbl* do
+  record IFeedsEnum, lpVtbl : IFeedsEnumVtable* do
     GUID = LibC::GUID.new(0xe3cd0028_u32, 0x2eed_u16, 0x4c60_u16, StaticArray[0x8f_u8, 0xae_u8, 0xa3_u8, 0x22_u8, 0x53_u8, 0x9_u8, 0xa8_u8, 0x36_u8])
     def query_interface(this : IFeedsEnum*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7906,8 +7992,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeedsEnum*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeedsEnum*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeedsEnum*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IFeedsEnum*, count : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, count)
@@ -7922,21 +8008,22 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedFolderVtbl,
+
+  record IFeedFolderVtable,
     query_interface : Proc(IFeedFolder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeedFolder*, UInt32),
     release : Proc(IFeedFolder*, UInt32),
     get_type_info_count : Proc(IFeedFolder*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeedFolder*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeedFolder*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeedFolder*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeedFolder*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Feeds : Proc(IFeedFolder*, Void**, Win32cr::Foundation::HRESULT),
     get_Subfolders : Proc(IFeedFolder*, Void**, Win32cr::Foundation::HRESULT),
     create_feed : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     create_subfolder : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    exists_feed : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    exists_feed : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_feed : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    exists_subfolder : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    exists_subfolder : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_subfolder : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     delete : Proc(IFeedFolder*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFeedFolder*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7944,14 +8031,14 @@ module Win32cr::Media::MediaPlayer
     get_Path : Proc(IFeedFolder*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     move : Proc(IFeedFolder*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Parent : Proc(IFeedFolder*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsRoot : Proc(IFeedFolder*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsRoot : Proc(IFeedFolder*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TotalUnreadItemCount : Proc(IFeedFolder*, Int32*, Win32cr::Foundation::HRESULT),
     get_TotalItemCount : Proc(IFeedFolder*, Int32*, Win32cr::Foundation::HRESULT),
     get_watcher : Proc(IFeedFolder*, Win32cr::Media::MediaPlayer::FEEDS_EVENTS_SCOPE, Win32cr::Media::MediaPlayer::FEEDS_EVENTS_MASK, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFeedFolder, lpVtbl : IFeedFolderVtbl* do
+  record IFeedFolder, lpVtbl : IFeedFolderVtable* do
     GUID = LibC::GUID.new(0x81f04ad1_u32, 0x4194_u16, 0x4d7d_u16, StaticArray[0x86_u8, 0xd6_u8, 0x11_u8, 0x81_u8, 0x3c_u8, 0xec_u8, 0x16_u8, 0x3c_u8])
     def query_interface(this : IFeedFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7971,8 +8058,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeedFolder*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeedFolder*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeedFolder*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Feeds(this : IFeedFolder*, disp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Feeds.call(this, disp)
@@ -7986,13 +8073,13 @@ module Win32cr::Media::MediaPlayer
     def create_subfolder(this : IFeedFolder*, folderName : Win32cr::Foundation::BSTR, disp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_subfolder.call(this, folderName, disp)
     end
-    def exists_feed(this : IFeedFolder*, feedName : Win32cr::Foundation::BSTR, exists : Int16*) : Win32cr::Foundation::HRESULT
+    def exists_feed(this : IFeedFolder*, feedName : Win32cr::Foundation::BSTR, exists : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.exists_feed.call(this, feedName, exists)
     end
     def get_feed(this : IFeedFolder*, feedName : Win32cr::Foundation::BSTR, disp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_feed.call(this, feedName, disp)
     end
-    def exists_subfolder(this : IFeedFolder*, folderName : Win32cr::Foundation::BSTR, exists : Int16*) : Win32cr::Foundation::HRESULT
+    def exists_subfolder(this : IFeedFolder*, folderName : Win32cr::Foundation::BSTR, exists : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.exists_subfolder.call(this, folderName, exists)
     end
     def get_subfolder(this : IFeedFolder*, folderName : Win32cr::Foundation::BSTR, disp : Void**) : Win32cr::Foundation::HRESULT
@@ -8016,7 +8103,7 @@ module Win32cr::Media::MediaPlayer
     def get_Parent(this : IFeedFolder*, disp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Parent.call(this, disp)
     end
-    def get_IsRoot(this : IFeedFolder*, isRoot : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsRoot(this : IFeedFolder*, isRoot : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsRoot.call(this, isRoot)
     end
     def get_TotalUnreadItemCount(this : IFeedFolder*, count : Int32*) : Win32cr::Foundation::HRESULT
@@ -8032,14 +8119,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedFolderEventsVtbl,
+
+  record IFeedFolderEventsVtable,
     query_interface : Proc(IFeedFolderEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeedFolderEvents*, UInt32),
     release : Proc(IFeedFolderEvents*, UInt32),
     get_type_info_count : Proc(IFeedFolderEvents*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeedFolderEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeedFolderEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeedFolderEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeedFolderEvents*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     error : Proc(IFeedFolderEvents*, Win32cr::Foundation::HRESULT),
     folder_added : Proc(IFeedFolderEvents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     folder_deleted : Proc(IFeedFolderEvents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -8059,7 +8147,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IFeedFolderEvents, lpVtbl : IFeedFolderEventsVtbl* do
+  record IFeedFolderEvents, lpVtbl : IFeedFolderEventsVtable* do
     GUID = LibC::GUID.new(0x20a59fa6_u32, 0xa844_u16, 0x4630_u16, StaticArray[0x9e_u8, 0x98_u8, 0x17_u8, 0x5f_u8, 0x70_u8, 0xb4_u8, 0xd5_u8, 0x5b_u8])
     def query_interface(this : IFeedFolderEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8079,8 +8167,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeedFolderEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeedFolderEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeedFolderEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def error(this : IFeedFolderEvents*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.error.call(this)
@@ -8134,14 +8222,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedVtbl,
+
+  record IFeedVtable,
     query_interface : Proc(IFeed*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeed*, UInt32),
     release : Proc(IFeed*, UInt32),
     get_type_info_count : Proc(IFeed*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeed*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeed*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeed*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeed*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     xml : Proc(IFeed*, Int32, Win32cr::Media::MediaPlayer::FEEDS_XML_SORT_PROPERTY, Win32cr::Media::MediaPlayer::FEEDS_XML_SORT_ORDER, Win32cr::Media::MediaPlayer::FEEDS_XML_FILTER_FLAGS, Win32cr::Media::MediaPlayer::FEEDS_XML_INCLUDE_FLAGS, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFeed*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     rename : Proc(IFeed*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -8175,13 +8264,13 @@ module Win32cr::Media::MediaPlayer
     get_Copyright : Proc(IFeed*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MaxItemCount : Proc(IFeed*, Int32*, Win32cr::Foundation::HRESULT),
     put_MaxItemCount : Proc(IFeed*, Int32, Win32cr::Foundation::HRESULT),
-    get_DownloadEnclosuresAutomatically : Proc(IFeed*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DownloadEnclosuresAutomatically : Proc(IFeed*, Int16, Win32cr::Foundation::HRESULT),
+    get_DownloadEnclosuresAutomatically : Proc(IFeed*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DownloadEnclosuresAutomatically : Proc(IFeed*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadStatus : Proc(IFeed*, Win32cr::Media::MediaPlayer::FEEDS_DOWNLOAD_STATUS*, Win32cr::Foundation::HRESULT),
     get_LastDownloadError : Proc(IFeed*, Win32cr::Media::MediaPlayer::FEEDS_DOWNLOAD_ERROR*, Win32cr::Foundation::HRESULT),
     merge : Proc(IFeed*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_DownloadUrl : Proc(IFeed*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsList : Proc(IFeed*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsList : Proc(IFeed*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     mark_all_items_read : Proc(IFeed*, Win32cr::Foundation::HRESULT),
     get_watcher : Proc(IFeed*, Win32cr::Media::MediaPlayer::FEEDS_EVENTS_SCOPE, Win32cr::Media::MediaPlayer::FEEDS_EVENTS_MASK, Void**, Win32cr::Foundation::HRESULT),
     get_UnreadItemCount : Proc(IFeed*, Int32*, Win32cr::Foundation::HRESULT),
@@ -8189,7 +8278,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IFeed, lpVtbl : IFeedVtbl* do
+  record IFeed, lpVtbl : IFeedVtable* do
     GUID = LibC::GUID.new(0xf7f915d8_u32, 0x2ede_u16, 0x42bc_u16, StaticArray[0x98_u8, 0xe7_u8, 0xa5_u8, 0xd0_u8, 0x50_u8, 0x63_u8, 0xa7_u8, 0x57_u8])
     def query_interface(this : IFeed*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8209,8 +8298,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeed*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeed*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeed*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def xml(this : IFeed*, count : Int32, sortProperty : Win32cr::Media::MediaPlayer::FEEDS_XML_SORT_PROPERTY, sortOrder : Win32cr::Media::MediaPlayer::FEEDS_XML_SORT_ORDER, filterFlags : Win32cr::Media::MediaPlayer::FEEDS_XML_FILTER_FLAGS, includeFlags : Win32cr::Media::MediaPlayer::FEEDS_XML_INCLUDE_FLAGS, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.xml.call(this, count, sortProperty, sortOrder, filterFlags, includeFlags, xml)
@@ -8311,10 +8400,10 @@ module Win32cr::Media::MediaPlayer
     def put_MaxItemCount(this : IFeed*, count : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MaxItemCount.call(this, count)
     end
-    def get_DownloadEnclosuresAutomatically(this : IFeed*, downloadEnclosuresAutomatically : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DownloadEnclosuresAutomatically(this : IFeed*, downloadEnclosuresAutomatically : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadEnclosuresAutomatically.call(this, downloadEnclosuresAutomatically)
     end
-    def put_DownloadEnclosuresAutomatically(this : IFeed*, downloadEnclosuresAutomatically : Int16) : Win32cr::Foundation::HRESULT
+    def put_DownloadEnclosuresAutomatically(this : IFeed*, downloadEnclosuresAutomatically : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DownloadEnclosuresAutomatically.call(this, downloadEnclosuresAutomatically)
     end
     def get_DownloadStatus(this : IFeed*, status : Win32cr::Media::MediaPlayer::FEEDS_DOWNLOAD_STATUS*) : Win32cr::Foundation::HRESULT
@@ -8329,7 +8418,7 @@ module Win32cr::Media::MediaPlayer
     def get_DownloadUrl(this : IFeed*, feedUrl : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadUrl.call(this, feedUrl)
     end
-    def get_IsList(this : IFeed*, isList : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsList(this : IFeed*, isList : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsList.call(this, isList)
     end
     def mark_all_items_read(this : IFeed*) : Win32cr::Foundation::HRESULT
@@ -8348,14 +8437,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeed2Vtbl,
+
+  record IFeed2Vtable,
     query_interface : Proc(IFeed2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeed2*, UInt32),
     release : Proc(IFeed2*, UInt32),
     get_type_info_count : Proc(IFeed2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeed2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeed2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeed2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeed2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     xml : Proc(IFeed2*, Int32, Win32cr::Media::MediaPlayer::FEEDS_XML_SORT_PROPERTY, Win32cr::Media::MediaPlayer::FEEDS_XML_SORT_ORDER, Win32cr::Media::MediaPlayer::FEEDS_XML_FILTER_FLAGS, Win32cr::Media::MediaPlayer::FEEDS_XML_INCLUDE_FLAGS, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFeed2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     rename : Proc(IFeed2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -8389,13 +8479,13 @@ module Win32cr::Media::MediaPlayer
     get_Copyright : Proc(IFeed2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MaxItemCount : Proc(IFeed2*, Int32*, Win32cr::Foundation::HRESULT),
     put_MaxItemCount : Proc(IFeed2*, Int32, Win32cr::Foundation::HRESULT),
-    get_DownloadEnclosuresAutomatically : Proc(IFeed2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DownloadEnclosuresAutomatically : Proc(IFeed2*, Int16, Win32cr::Foundation::HRESULT),
+    get_DownloadEnclosuresAutomatically : Proc(IFeed2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DownloadEnclosuresAutomatically : Proc(IFeed2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DownloadStatus : Proc(IFeed2*, Win32cr::Media::MediaPlayer::FEEDS_DOWNLOAD_STATUS*, Win32cr::Foundation::HRESULT),
     get_LastDownloadError : Proc(IFeed2*, Win32cr::Media::MediaPlayer::FEEDS_DOWNLOAD_ERROR*, Win32cr::Foundation::HRESULT),
     merge : Proc(IFeed2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_DownloadUrl : Proc(IFeed2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsList : Proc(IFeed2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsList : Proc(IFeed2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     mark_all_items_read : Proc(IFeed2*, Win32cr::Foundation::HRESULT),
     get_watcher : Proc(IFeed2*, Win32cr::Media::MediaPlayer::FEEDS_EVENTS_SCOPE, Win32cr::Media::MediaPlayer::FEEDS_EVENTS_MASK, Void**, Win32cr::Foundation::HRESULT),
     get_UnreadItemCount : Proc(IFeed2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -8409,7 +8499,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IFeed2, lpVtbl : IFeed2Vtbl* do
+  record IFeed2, lpVtbl : IFeed2Vtable* do
     GUID = LibC::GUID.new(0x33f2ea09_u32, 0x1398_u16, 0x4ab9_u16, StaticArray[0xb6_u8, 0xa4_u8, 0xf9_u8, 0x4b_u8, 0x49_u8, 0xd0_u8, 0xa4_u8, 0x2e_u8])
     def query_interface(this : IFeed2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8429,8 +8519,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeed2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeed2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeed2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def xml(this : IFeed2*, count : Int32, sortProperty : Win32cr::Media::MediaPlayer::FEEDS_XML_SORT_PROPERTY, sortOrder : Win32cr::Media::MediaPlayer::FEEDS_XML_SORT_ORDER, filterFlags : Win32cr::Media::MediaPlayer::FEEDS_XML_FILTER_FLAGS, includeFlags : Win32cr::Media::MediaPlayer::FEEDS_XML_INCLUDE_FLAGS, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.xml.call(this, count, sortProperty, sortOrder, filterFlags, includeFlags, xml)
@@ -8531,10 +8621,10 @@ module Win32cr::Media::MediaPlayer
     def put_MaxItemCount(this : IFeed2*, count : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MaxItemCount.call(this, count)
     end
-    def get_DownloadEnclosuresAutomatically(this : IFeed2*, downloadEnclosuresAutomatically : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DownloadEnclosuresAutomatically(this : IFeed2*, downloadEnclosuresAutomatically : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadEnclosuresAutomatically.call(this, downloadEnclosuresAutomatically)
     end
-    def put_DownloadEnclosuresAutomatically(this : IFeed2*, downloadEnclosuresAutomatically : Int16) : Win32cr::Foundation::HRESULT
+    def put_DownloadEnclosuresAutomatically(this : IFeed2*, downloadEnclosuresAutomatically : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DownloadEnclosuresAutomatically.call(this, downloadEnclosuresAutomatically)
     end
     def get_DownloadStatus(this : IFeed2*, status : Win32cr::Media::MediaPlayer::FEEDS_DOWNLOAD_STATUS*) : Win32cr::Foundation::HRESULT
@@ -8549,7 +8639,7 @@ module Win32cr::Media::MediaPlayer
     def get_DownloadUrl(this : IFeed2*, feedUrl : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DownloadUrl.call(this, feedUrl)
     end
-    def get_IsList(this : IFeed2*, isList : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsList(this : IFeed2*, isList : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsList.call(this, isList)
     end
     def mark_all_items_read(this : IFeed2*) : Win32cr::Foundation::HRESULT
@@ -8586,14 +8676,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedEventsVtbl,
+
+  record IFeedEventsVtable,
     query_interface : Proc(IFeedEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeedEvents*, UInt32),
     release : Proc(IFeedEvents*, UInt32),
     get_type_info_count : Proc(IFeedEvents*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeedEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeedEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeedEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeedEvents*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     error : Proc(IFeedEvents*, Win32cr::Foundation::HRESULT),
     feed_deleted : Proc(IFeedEvents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     feed_renamed : Proc(IFeedEvents*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -8605,7 +8696,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IFeedEvents, lpVtbl : IFeedEventsVtbl* do
+  record IFeedEvents, lpVtbl : IFeedEventsVtable* do
     GUID = LibC::GUID.new(0xabf35c99_u32, 0x681_u16, 0x47ea_u16, StaticArray[0x9a_u8, 0x8c_u8, 0x14_u8, 0x36_u8, 0xa3_u8, 0x75_u8, 0xa9_u8, 0x9e_u8])
     def query_interface(this : IFeedEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8625,8 +8716,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeedEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeedEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeedEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def error(this : IFeedEvents*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.error.call(this)
@@ -8656,14 +8747,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedItemVtbl,
+
+  record IFeedItemVtable,
     query_interface : Proc(IFeedItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeedItem*, UInt32),
     release : Proc(IFeedItem*, UInt32),
     get_type_info_count : Proc(IFeedItem*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeedItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeedItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeedItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeedItem*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     xml : Proc(IFeedItem*, Win32cr::Media::MediaPlayer::FEEDS_XML_INCLUDE_FLAGS, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IFeedItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Link : Proc(IFeedItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -8673,8 +8765,8 @@ module Win32cr::Media::MediaPlayer
     get_Comments : Proc(IFeedItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Author : Proc(IFeedItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Enclosure : Proc(IFeedItem*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsRead : Proc(IFeedItem*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsRead : Proc(IFeedItem*, Int16, Win32cr::Foundation::HRESULT),
+    get_IsRead : Proc(IFeedItem*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsRead : Proc(IFeedItem*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_LocalId : Proc(IFeedItem*, Int32*, Win32cr::Foundation::HRESULT),
     get_Parent : Proc(IFeedItem*, Void**, Win32cr::Foundation::HRESULT),
     delete : Proc(IFeedItem*, Win32cr::Foundation::HRESULT),
@@ -8684,7 +8776,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IFeedItem, lpVtbl : IFeedItemVtbl* do
+  record IFeedItem, lpVtbl : IFeedItemVtable* do
     GUID = LibC::GUID.new(0xa1e6cad_u32, 0xa47_u16, 0x4da2_u16, StaticArray[0xa1_u8, 0x3d_u8, 0x5b_u8, 0xaa_u8, 0xa5_u8, 0xc8_u8, 0xbd_u8, 0x4f_u8])
     def query_interface(this : IFeedItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8704,8 +8796,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeedItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeedItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeedItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def xml(this : IFeedItem*, includeFlags : Win32cr::Media::MediaPlayer::FEEDS_XML_INCLUDE_FLAGS, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.xml.call(this, includeFlags, xml)
@@ -8734,10 +8826,10 @@ module Win32cr::Media::MediaPlayer
     def get_Enclosure(this : IFeedItem*, disp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enclosure.call(this, disp)
     end
-    def get_IsRead(this : IFeedItem*, isRead : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsRead(this : IFeedItem*, isRead : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsRead.call(this, isRead)
     end
-    def put_IsRead(this : IFeedItem*, isRead : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsRead(this : IFeedItem*, isRead : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsRead.call(this, isRead)
     end
     def get_LocalId(this : IFeedItem*, itemId : Int32*) : Win32cr::Foundation::HRESULT
@@ -8762,14 +8854,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedItem2Vtbl,
+
+  record IFeedItem2Vtable,
     query_interface : Proc(IFeedItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeedItem2*, UInt32),
     release : Proc(IFeedItem2*, UInt32),
     get_type_info_count : Proc(IFeedItem2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeedItem2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeedItem2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeedItem2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeedItem2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     xml : Proc(IFeedItem2*, Win32cr::Media::MediaPlayer::FEEDS_XML_INCLUDE_FLAGS, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Title : Proc(IFeedItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Link : Proc(IFeedItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -8779,8 +8872,8 @@ module Win32cr::Media::MediaPlayer
     get_Comments : Proc(IFeedItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Author : Proc(IFeedItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Enclosure : Proc(IFeedItem2*, Void**, Win32cr::Foundation::HRESULT),
-    get_IsRead : Proc(IFeedItem2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsRead : Proc(IFeedItem2*, Int16, Win32cr::Foundation::HRESULT),
+    get_IsRead : Proc(IFeedItem2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsRead : Proc(IFeedItem2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_LocalId : Proc(IFeedItem2*, Int32*, Win32cr::Foundation::HRESULT),
     get_Parent : Proc(IFeedItem2*, Void**, Win32cr::Foundation::HRESULT),
     delete : Proc(IFeedItem2*, Win32cr::Foundation::HRESULT),
@@ -8791,7 +8884,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IFeedItem2, lpVtbl : IFeedItem2Vtbl* do
+  record IFeedItem2, lpVtbl : IFeedItem2Vtable* do
     GUID = LibC::GUID.new(0x79ac9ef4_u32, 0xf9c1_u16, 0x4d2b_u16, StaticArray[0xa5_u8, 0xb_u8, 0xa7_u8, 0xff_u8, 0xba_u8, 0x4d_u8, 0xcf_u8, 0x37_u8])
     def query_interface(this : IFeedItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8811,8 +8904,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeedItem2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeedItem2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeedItem2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def xml(this : IFeedItem2*, includeFlags : Win32cr::Media::MediaPlayer::FEEDS_XML_INCLUDE_FLAGS, xml : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.xml.call(this, includeFlags, xml)
@@ -8841,10 +8934,10 @@ module Win32cr::Media::MediaPlayer
     def get_Enclosure(this : IFeedItem2*, disp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enclosure.call(this, disp)
     end
-    def get_IsRead(this : IFeedItem2*, isRead : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsRead(this : IFeedItem2*, isRead : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsRead.call(this, isRead)
     end
-    def put_IsRead(this : IFeedItem2*, isRead : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsRead(this : IFeedItem2*, isRead : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsRead.call(this, isRead)
     end
     def get_LocalId(this : IFeedItem2*, itemId : Int32*) : Win32cr::Foundation::HRESULT
@@ -8872,14 +8965,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IFeedEnclosureVtbl,
+
+  record IFeedEnclosureVtable,
     query_interface : Proc(IFeedEnclosure*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFeedEnclosure*, UInt32),
     release : Proc(IFeedEnclosure*, UInt32),
     get_type_info_count : Proc(IFeedEnclosure*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFeedEnclosure*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFeedEnclosure*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFeedEnclosure*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFeedEnclosure*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Url : Proc(IFeedEnclosure*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IFeedEnclosure*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Length : Proc(IFeedEnclosure*, Int32*, Win32cr::Foundation::HRESULT),
@@ -8896,7 +8990,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IFeedEnclosure, lpVtbl : IFeedEnclosureVtbl* do
+  record IFeedEnclosure, lpVtbl : IFeedEnclosureVtable* do
     GUID = LibC::GUID.new(0x361c26f7_u32, 0x90a4_u16, 0x4e67_u16, StaticArray[0xae_u8, 0x9_u8, 0x3a_u8, 0x36_u8, 0xa5_u8, 0x46_u8, 0x43_u8, 0x6a_u8])
     def query_interface(this : IFeedEnclosure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8916,8 +9010,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IFeedEnclosure*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFeedEnclosure*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFeedEnclosure*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Url(this : IFeedEnclosure*, enclosureUrl : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Url.call(this, enclosureUrl)
@@ -8962,7 +9056,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPEffectsVtbl,
+
+  record IWMPEffectsVtable,
     query_interface : Proc(IWMPEffects*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPEffects*, UInt32),
     release : Proc(IWMPEffects*, UInt32),
@@ -8980,7 +9075,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPEffects, lpVtbl : IWMPEffectsVtbl* do
+  record IWMPEffects, lpVtbl : IWMPEffectsVtable* do
     GUID = LibC::GUID.new(0xd3984c13_u32, 0xc3cb_u16, 0x48e2_u16, StaticArray[0x8b_u8, 0xe5_u8, 0x51_u8, 0x68_u8, 0x34_u8, 0xb_u8, 0x4f_u8, 0x35_u8])
     def query_interface(this : IWMPEffects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9028,7 +9123,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPEffects2Vtbl,
+
+  record IWMPEffects2Vtable,
     query_interface : Proc(IWMPEffects2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPEffects2*, UInt32),
     release : Proc(IWMPEffects2*, UInt32),
@@ -9052,7 +9148,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPEffects2, lpVtbl : IWMPEffects2Vtbl* do
+  record IWMPEffects2, lpVtbl : IWMPEffects2Vtable* do
     GUID = LibC::GUID.new(0x695386ec_u32, 0xaa3c_u16, 0x4618_u16, StaticArray[0xa5_u8, 0xe1_u8, 0xdd_u8, 0x9a_u8, 0x8b_u8, 0x98_u8, 0x76_u8, 0x32_u8])
     def query_interface(this : IWMPEffects2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9118,7 +9214,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPPluginUIVtbl,
+
+  record IWMPPluginUIVtable,
     query_interface : Proc(IWMPPluginUI*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPPluginUI*, UInt32),
     release : Proc(IWMPPluginUI*, UInt32),
@@ -9126,13 +9223,13 @@ module Win32cr::Media::MediaPlayer
     create : Proc(IWMPPluginUI*, Win32cr::Foundation::HWND, Win32cr::Foundation::HWND*, Win32cr::Foundation::HRESULT),
     destroy : Proc(IWMPPluginUI*, Win32cr::Foundation::HRESULT),
     display_property_page : Proc(IWMPPluginUI*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IWMPPluginUI*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IWMPPluginUI*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IWMPPluginUI*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IWMPPluginUI*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     translate_accelerator : Proc(IWMPPluginUI*, Win32cr::UI::WindowsAndMessaging::MSG*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPPluginUI, lpVtbl : IWMPPluginUIVtbl* do
+  record IWMPPluginUI, lpVtbl : IWMPPluginUIVtable* do
     GUID = LibC::GUID.new(0x4c5e8f9f_u32, 0xad3e_u16, 0x4bf9_u16, StaticArray[0x97_u8, 0x53_u8, 0xfc_u8, 0xd3_u8, 0xd_u8, 0x6d_u8, 0x38_u8, 0xdd_u8])
     def query_interface(this : IWMPPluginUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9155,10 +9252,10 @@ module Win32cr::Media::MediaPlayer
     def display_property_page(this : IWMPPluginUI*, hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.display_property_page.call(this, hwndParent)
     end
-    def get_property(this : IWMPPluginUI*, pwszName : Win32cr::Foundation::PWSTR, pvarProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IWMPPluginUI*, pwszName : Win32cr::Foundation::PWSTR, pvarProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, pwszName, pvarProperty)
     end
-    def set_property(this : IWMPPluginUI*, pwszName : Win32cr::Foundation::PWSTR, pvarProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_property(this : IWMPPluginUI*, pwszName : Win32cr::Foundation::PWSTR, pvarProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, pwszName, pvarProperty)
     end
     def translate_accelerator(this : IWMPPluginUI*, lpmsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::HRESULT
@@ -9168,7 +9265,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPContentContainerVtbl,
+
+  record IWMPContentContainerVtable,
     query_interface : Proc(IWMPContentContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPContentContainer*, UInt32),
     release : Proc(IWMPContentContainer*, UInt32),
@@ -9181,7 +9279,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPContentContainer, lpVtbl : IWMPContentContainerVtbl* do
+  record IWMPContentContainer, lpVtbl : IWMPContentContainerVtable* do
     GUID = LibC::GUID.new(0xad7f4d9c_u32, 0x1a9f_u16, 0x4ed2_u16, StaticArray[0x98_u8, 0x15_u8, 0xec_u8, 0xc0_u8, 0xb5_u8, 0x8c_u8, 0xb6_u8, 0x16_u8])
     def query_interface(this : IWMPContentContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9214,7 +9312,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPContentContainerListVtbl,
+
+  record IWMPContentContainerListVtable,
     query_interface : Proc(IWMPContentContainerList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPContentContainerList*, UInt32),
     release : Proc(IWMPContentContainerList*, UInt32),
@@ -9224,7 +9323,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPContentContainerList, lpVtbl : IWMPContentContainerListVtbl* do
+  record IWMPContentContainerList, lpVtbl : IWMPContentContainerListVtable* do
     GUID = LibC::GUID.new(0xa9937f78_u32, 0x802_u16, 0x4af8_u16, StaticArray[0x8b_u8, 0x8d_u8, 0xe3_u8, 0xf0_u8, 0x45_u8, 0xbc_u8, 0x8a_u8, 0xb5_u8])
     def query_interface(this : IWMPContentContainerList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9248,11 +9347,12 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPContentPartnerCallbackVtbl,
+
+  record IWMPContentPartnerCallbackVtable,
     query_interface : Proc(IWMPContentPartnerCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPContentPartnerCallback*, UInt32),
     release : Proc(IWMPContentPartnerCallback*, UInt32),
-    notify : Proc(IWMPContentPartnerCallback*, Win32cr::Media::MediaPlayer::WMPCallbackNotification, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    notify : Proc(IWMPContentPartnerCallback*, Win32cr::Media::MediaPlayer::WMPCallbackNotification, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     buy_complete : Proc(IWMPContentPartnerCallback*, Win32cr::Foundation::HRESULT, UInt32, Win32cr::Foundation::HRESULT),
     download_track : Proc(IWMPContentPartnerCallback*, UInt32, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT, Win32cr::Foundation::HRESULT),
     get_catalog_version : Proc(IWMPContentPartnerCallback*, UInt32*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -9264,11 +9364,11 @@ module Win32cr::Media::MediaPlayer
     get_content_i_ds_in_library : Proc(IWMPContentPartnerCallback*, UInt32*, UInt32**, Win32cr::Foundation::HRESULT),
     refresh_license_complete : Proc(IWMPContentPartnerCallback*, UInt32, UInt32, Win32cr::Foundation::HRESULT, Win32cr::Foundation::HRESULT),
     show_popup : Proc(IWMPContentPartnerCallback*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    verify_permission_complete : Proc(IWMPContentPartnerCallback*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::HRESULT)
+    verify_permission_complete : Proc(IWMPContentPartnerCallback*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPContentPartnerCallback, lpVtbl : IWMPContentPartnerCallbackVtbl* do
+  record IWMPContentPartnerCallback, lpVtbl : IWMPContentPartnerCallbackVtable* do
     GUID = LibC::GUID.new(0x9e8f7da2_u32, 0x695_u16, 0x403c_u16, StaticArray[0xb6_u8, 0x97_u8, 0xda_u8, 0x10_u8, 0xfa_u8, 0xfa_u8, 0xa6_u8, 0x76_u8])
     def query_interface(this : IWMPContentPartnerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9279,7 +9379,7 @@ module Win32cr::Media::MediaPlayer
     def release(this : IWMPContentPartnerCallback*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def notify(this : IWMPContentPartnerCallback*, type__ : Win32cr::Media::MediaPlayer::WMPCallbackNotification, pContext : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def notify(this : IWMPContentPartnerCallback*, type__ : Win32cr::Media::MediaPlayer::WMPCallbackNotification, pContext : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.notify.call(this, type__, pContext)
     end
     def buy_complete(this : IWMPContentPartnerCallback*, hrResult : Win32cr::Foundation::HRESULT, dwBuyCookie : UInt32) : Win32cr::Foundation::HRESULT
@@ -9315,44 +9415,45 @@ module Win32cr::Media::MediaPlayer
     def show_popup(this : IWMPContentPartnerCallback*, lIndex : Int32, bstrParameters : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.show_popup.call(this, lIndex, bstrParameters)
     end
-    def verify_permission_complete(this : IWMPContentPartnerCallback*, bstrPermission : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Com::VARIANT*, hrPermission : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    def verify_permission_complete(this : IWMPContentPartnerCallback*, bstrPermission : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Variant::VARIANT*, hrPermission : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.verify_permission_complete.call(this, bstrPermission, pContext, hrPermission)
     end
 
   end
 
   @[Extern]
-  record IWMPContentPartnerVtbl,
+
+  record IWMPContentPartnerVtable,
     query_interface : Proc(IWMPContentPartner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPContentPartner*, UInt32),
     release : Proc(IWMPContentPartner*, UInt32),
     set_callback : Proc(IWMPContentPartner*, Void*, Win32cr::Foundation::HRESULT),
-    notify : Proc(IWMPContentPartner*, Win32cr::Media::MediaPlayer::WMPPartnerNotification, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_item_info : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_content_partner_info : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_commands : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, UInt32, UInt32*, UInt32*, Win32cr::Media::MediaPlayer::WMPContextMenuInfo**, Win32cr::Foundation::HRESULT),
-    invoke_command : Proc(IWMPContentPartner*, UInt32, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    can_buy_silent : Proc(IWMPContentPartner*, Void*, Win32cr::Foundation::BSTR*, Int16*, Win32cr::Foundation::HRESULT),
+    notify : Proc(IWMPContentPartner*, Win32cr::Media::MediaPlayer::WMPPartnerNotification, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_item_info : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_content_partner_info : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_commands : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, UInt32, UInt32*, UInt32*, Win32cr::Media::MediaPlayer::WMPContextMenuInfo**, Win32cr::Foundation::HRESULT),
+    invoke_command : Proc(IWMPContentPartner*, UInt32, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    can_buy_silent : Proc(IWMPContentPartner*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     buy : Proc(IWMPContentPartner*, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    get_streaming_url : Proc(IWMPContentPartner*, Win32cr::Media::MediaPlayer::WMPStreamingType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_streaming_url : Proc(IWMPContentPartner*, Win32cr::Media::MediaPlayer::WMPStreamingType, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     download : Proc(IWMPContentPartner*, Void*, UInt32, Win32cr::Foundation::HRESULT),
     download_track_complete : Proc(IWMPContentPartner*, Win32cr::Foundation::HRESULT, UInt32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    refresh_license : Proc(IWMPContentPartner*, UInt32, Int16, Win32cr::Foundation::BSTR, Win32cr::Media::MediaPlayer::WMPStreamingType, UInt32, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_catalog_url : Proc(IWMPContentPartner*, UInt32, UInt32, UInt32, UInt32*, Win32cr::Foundation::BSTR*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_template : Proc(IWMPContentPartner*, Win32cr::Media::MediaPlayer::WMPTaskType, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Media::MediaPlayer::WMPTemplateSize*, Win32cr::Foundation::HRESULT),
+    refresh_license : Proc(IWMPContentPartner*, UInt32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Media::MediaPlayer::WMPStreamingType, UInt32, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_catalog_url : Proc(IWMPContentPartner*, UInt32, UInt32, UInt32, UInt32*, Win32cr::Foundation::BSTR*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_template : Proc(IWMPContentPartner*, Win32cr::Media::MediaPlayer::WMPTaskType, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Media::MediaPlayer::WMPTemplateSize*, Win32cr::Foundation::HRESULT),
     update_device : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_list_contents : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT),
-    login : Proc(IWMPContentPartner*, Win32cr::System::Com::BLOB, Win32cr::System::Com::BLOB, Int16, Int16, Win32cr::Foundation::HRESULT),
+    get_list_contents : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT),
+    login : Proc(IWMPContentPartner*, Win32cr::System::Com::BLOB, Win32cr::System::Com::BLOB, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     authenticate : Proc(IWMPContentPartner*, Win32cr::System::Com::BLOB, Win32cr::System::Com::BLOB, Win32cr::Foundation::HRESULT),
     logout : Proc(IWMPContentPartner*, Win32cr::Foundation::HRESULT),
     send_message : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     station_event : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::BSTR, UInt32, Win32cr::Foundation::HRESULT),
     compare_container_list_prices : Proc(IWMPContentPartner*, Void*, Void*, Int32*, Win32cr::Foundation::HRESULT),
-    verify_permission : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    verify_permission : Proc(IWMPContentPartner*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPContentPartner, lpVtbl : IWMPContentPartnerVtbl* do
+  record IWMPContentPartner, lpVtbl : IWMPContentPartnerVtable* do
     GUID = LibC::GUID.new(0x55455073_u32, 0x41b5_u16, 0x4e75_u16, StaticArray[0x87_u8, 0xb8_u8, 0xf1_u8, 0x3b_u8, 0xdb_u8, 0x29_u8, 0x1d_u8, 0x8_u8])
     def query_interface(this : IWMPContentPartner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9366,28 +9467,28 @@ module Win32cr::Media::MediaPlayer
     def set_callback(this : IWMPContentPartner*, pCallback : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_callback.call(this, pCallback)
     end
-    def notify(this : IWMPContentPartner*, type__ : Win32cr::Media::MediaPlayer::WMPPartnerNotification, pContext : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def notify(this : IWMPContentPartner*, type__ : Win32cr::Media::MediaPlayer::WMPPartnerNotification, pContext : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.notify.call(this, type__, pContext)
     end
-    def get_item_info(this : IWMPContentPartner*, bstrInfoName : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Com::VARIANT*, pData : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_item_info(this : IWMPContentPartner*, bstrInfoName : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Variant::VARIANT*, pData : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_item_info.call(this, bstrInfoName, pContext, pData)
     end
-    def get_content_partner_info(this : IWMPContentPartner*, bstrInfoName : Win32cr::Foundation::BSTR, pData : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_content_partner_info(this : IWMPContentPartner*, bstrInfoName : Win32cr::Foundation::BSTR, pData : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_content_partner_info.call(this, bstrInfoName, pData)
     end
-    def get_commands(this : IWMPContentPartner*, location : Win32cr::Foundation::BSTR, pLocationContext : Win32cr::System::Com::VARIANT*, itemLocation : Win32cr::Foundation::BSTR, cItemIDs : UInt32, prgItemIDs : UInt32*, pcItemIDs : UInt32*, pprgItems : Win32cr::Media::MediaPlayer::WMPContextMenuInfo**) : Win32cr::Foundation::HRESULT
+    def get_commands(this : IWMPContentPartner*, location : Win32cr::Foundation::BSTR, pLocationContext : Win32cr::System::Variant::VARIANT*, itemLocation : Win32cr::Foundation::BSTR, cItemIDs : UInt32, prgItemIDs : UInt32*, pcItemIDs : UInt32*, pprgItems : Win32cr::Media::MediaPlayer::WMPContextMenuInfo**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_commands.call(this, location, pLocationContext, itemLocation, cItemIDs, prgItemIDs, pcItemIDs, pprgItems)
     end
-    def invoke_command(this : IWMPContentPartner*, dwCommandID : UInt32, location : Win32cr::Foundation::BSTR, pLocationContext : Win32cr::System::Com::VARIANT*, itemLocation : Win32cr::Foundation::BSTR, cItemIDs : UInt32, rgItemIDs : UInt32*) : Win32cr::Foundation::HRESULT
+    def invoke_command(this : IWMPContentPartner*, dwCommandID : UInt32, location : Win32cr::Foundation::BSTR, pLocationContext : Win32cr::System::Variant::VARIANT*, itemLocation : Win32cr::Foundation::BSTR, cItemIDs : UInt32, rgItemIDs : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.invoke_command.call(this, dwCommandID, location, pLocationContext, itemLocation, cItemIDs, rgItemIDs)
     end
-    def can_buy_silent(this : IWMPContentPartner*, pInfo : Void*, pbstrTotalPrice : Win32cr::Foundation::BSTR*, pSilentOK : Int16*) : Win32cr::Foundation::HRESULT
+    def can_buy_silent(this : IWMPContentPartner*, pInfo : Void*, pbstrTotalPrice : Win32cr::Foundation::BSTR*, pSilentOK : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.can_buy_silent.call(this, pInfo, pbstrTotalPrice, pSilentOK)
     end
     def buy(this : IWMPContentPartner*, pInfo : Void*, cookie : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.buy.call(this, pInfo, cookie)
     end
-    def get_streaming_url(this : IWMPContentPartner*, st : Win32cr::Media::MediaPlayer::WMPStreamingType, pStreamContext : Win32cr::System::Com::VARIANT*, pbstrURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_streaming_url(this : IWMPContentPartner*, st : Win32cr::Media::MediaPlayer::WMPStreamingType, pStreamContext : Win32cr::System::Variant::VARIANT*, pbstrURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_streaming_url.call(this, st, pStreamContext, pbstrURL)
     end
     def download(this : IWMPContentPartner*, pInfo : Void*, cookie : UInt32) : Win32cr::Foundation::HRESULT
@@ -9396,22 +9497,22 @@ module Win32cr::Media::MediaPlayer
     def download_track_complete(this : IWMPContentPartner*, hrResult : Win32cr::Foundation::HRESULT, contentID : UInt32, downloadTrackParam : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.download_track_complete.call(this, hrResult, contentID, downloadTrackParam)
     end
-    def refresh_license(this : IWMPContentPartner*, dwCookie : UInt32, fLocal : Int16, bstrURL : Win32cr::Foundation::BSTR, type__ : Win32cr::Media::MediaPlayer::WMPStreamingType, contentID : UInt32, bstrRefreshReason : Win32cr::Foundation::BSTR, pReasonContext : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def refresh_license(this : IWMPContentPartner*, dwCookie : UInt32, fLocal : Win32cr::Foundation::VARIANT_BOOL, bstrURL : Win32cr::Foundation::BSTR, type__ : Win32cr::Media::MediaPlayer::WMPStreamingType, contentID : UInt32, bstrRefreshReason : Win32cr::Foundation::BSTR, pReasonContext : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.refresh_license.call(this, dwCookie, fLocal, bstrURL, type__, contentID, bstrRefreshReason, pReasonContext)
     end
-    def get_catalog_url(this : IWMPContentPartner*, dwCatalogVersion : UInt32, dwCatalogSchemaVersion : UInt32, catalogLCID : UInt32, pdwNewCatalogVersion : UInt32*, pbstrCatalogURL : Win32cr::Foundation::BSTR*, pExpirationDate : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_catalog_url(this : IWMPContentPartner*, dwCatalogVersion : UInt32, dwCatalogSchemaVersion : UInt32, catalogLCID : UInt32, pdwNewCatalogVersion : UInt32*, pbstrCatalogURL : Win32cr::Foundation::BSTR*, pExpirationDate : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_catalog_url.call(this, dwCatalogVersion, dwCatalogSchemaVersion, catalogLCID, pdwNewCatalogVersion, pbstrCatalogURL, pExpirationDate)
     end
-    def get_template(this : IWMPContentPartner*, task : Win32cr::Media::MediaPlayer::WMPTaskType, location : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Com::VARIANT*, clickLocation : Win32cr::Foundation::BSTR, pClickContext : Win32cr::System::Com::VARIANT*, bstrFilter : Win32cr::Foundation::BSTR, bstrViewParams : Win32cr::Foundation::BSTR, pbstrTemplateURL : Win32cr::Foundation::BSTR*, pTemplateSize : Win32cr::Media::MediaPlayer::WMPTemplateSize*) : Win32cr::Foundation::HRESULT
+    def get_template(this : IWMPContentPartner*, task : Win32cr::Media::MediaPlayer::WMPTaskType, location : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Variant::VARIANT*, clickLocation : Win32cr::Foundation::BSTR, pClickContext : Win32cr::System::Variant::VARIANT*, bstrFilter : Win32cr::Foundation::BSTR, bstrViewParams : Win32cr::Foundation::BSTR, pbstrTemplateURL : Win32cr::Foundation::BSTR*, pTemplateSize : Win32cr::Media::MediaPlayer::WMPTemplateSize*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_template.call(this, task, location, pContext, clickLocation, pClickContext, bstrFilter, bstrViewParams, pbstrTemplateURL, pTemplateSize)
     end
     def update_device(this : IWMPContentPartner*, bstrDeviceName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.update_device.call(this, bstrDeviceName)
     end
-    def get_list_contents(this : IWMPContentPartner*, location : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Com::VARIANT*, bstrListType : Win32cr::Foundation::BSTR, bstrParams : Win32cr::Foundation::BSTR, dwListCookie : UInt32) : Win32cr::Foundation::HRESULT
+    def get_list_contents(this : IWMPContentPartner*, location : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Variant::VARIANT*, bstrListType : Win32cr::Foundation::BSTR, bstrParams : Win32cr::Foundation::BSTR, dwListCookie : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_list_contents.call(this, location, pContext, bstrListType, bstrParams, dwListCookie)
     end
-    def login(this : IWMPContentPartner*, userInfo : Win32cr::System::Com::BLOB, pwdInfo : Win32cr::System::Com::BLOB, fUsedCachedCreds : Int16, fOkToCache : Int16) : Win32cr::Foundation::HRESULT
+    def login(this : IWMPContentPartner*, userInfo : Win32cr::System::Com::BLOB, pwdInfo : Win32cr::System::Com::BLOB, fUsedCachedCreds : Win32cr::Foundation::VARIANT_BOOL, fOkToCache : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.login.call(this, userInfo, pwdInfo, fUsedCachedCreds, fOkToCache)
     end
     def authenticate(this : IWMPContentPartner*, userInfo : Win32cr::System::Com::BLOB, pwdInfo : Win32cr::System::Com::BLOB) : Win32cr::Foundation::HRESULT
@@ -9429,14 +9530,15 @@ module Win32cr::Media::MediaPlayer
     def compare_container_list_prices(this : IWMPContentPartner*, pListBase : Void*, pListCompare : Void*, pResult : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.compare_container_list_prices.call(this, pListBase, pListCompare, pResult)
     end
-    def verify_permission(this : IWMPContentPartner*, bstrPermission : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def verify_permission(this : IWMPContentPartner*, bstrPermission : Win32cr::Foundation::BSTR, pContext : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.verify_permission.call(this, bstrPermission, pContext)
     end
 
   end
 
   @[Extern]
-  record IWMPSubscriptionServiceVtbl,
+
+  record IWMPSubscriptionServiceVtable,
     query_interface : Proc(IWMPSubscriptionService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSubscriptionService*, UInt32),
     release : Proc(IWMPSubscriptionService*, UInt32),
@@ -9447,7 +9549,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPSubscriptionService, lpVtbl : IWMPSubscriptionServiceVtbl* do
+  record IWMPSubscriptionService, lpVtbl : IWMPSubscriptionServiceVtable* do
     GUID = LibC::GUID.new(0x376055f8_u32, 0x2a59_u16, 0x4a73_u16, StaticArray[0x95_u8, 0x1_u8, 0xdc_u8, 0xa5_u8, 0x27_u8, 0x3a_u8, 0x7a_u8, 0x10_u8])
     def query_interface(this : IWMPSubscriptionService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9474,7 +9576,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPSubscriptionServiceCallbackVtbl,
+
+  record IWMPSubscriptionServiceCallbackVtable,
     query_interface : Proc(IWMPSubscriptionServiceCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSubscriptionServiceCallback*, UInt32),
     release : Proc(IWMPSubscriptionServiceCallback*, UInt32),
@@ -9482,7 +9585,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPSubscriptionServiceCallback, lpVtbl : IWMPSubscriptionServiceCallbackVtbl* do
+  record IWMPSubscriptionServiceCallback, lpVtbl : IWMPSubscriptionServiceCallbackVtable* do
     GUID = LibC::GUID.new(0xdd01d127_u32, 0x2dc2_u16, 0x4c3a_u16, StaticArray[0x87_u8, 0x6e_u8, 0x63_u8, 0x31_u8, 0x20_u8, 0x79_u8, 0xf9_u8, 0xb0_u8])
     def query_interface(this : IWMPSubscriptionServiceCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9500,7 +9603,8 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPSubscriptionService2Vtbl,
+
+  record IWMPSubscriptionService2Vtable,
     query_interface : Proc(IWMPSubscriptionService2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPSubscriptionService2*, UInt32),
     release : Proc(IWMPSubscriptionService2*, UInt32),
@@ -9515,7 +9619,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPSubscriptionService2, lpVtbl : IWMPSubscriptionService2Vtbl* do
+  record IWMPSubscriptionService2, lpVtbl : IWMPSubscriptionService2Vtable* do
     GUID = LibC::GUID.new(0xa94c120e_u32, 0xd600_u16, 0x4ec6_u16, StaticArray[0xb0_u8, 0x5e_u8, 0xec_u8, 0x9d_u8, 0x56_u8, 0xd8_u8, 0x4d_u8, 0xe0_u8])
     def query_interface(this : IWMPSubscriptionService2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9554,14 +9658,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPDownloadItemVtbl,
+
+  record IWMPDownloadItemVtable,
     query_interface : Proc(IWMPDownloadItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPDownloadItem*, UInt32),
     release : Proc(IWMPDownloadItem*, UInt32),
     get_type_info_count : Proc(IWMPDownloadItem*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPDownloadItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPDownloadItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPDownloadItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPDownloadItem*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_sourceURL : Proc(IWMPDownloadItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IWMPDownloadItem*, Int32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IWMPDownloadItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -9573,7 +9678,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPDownloadItem, lpVtbl : IWMPDownloadItemVtbl* do
+  record IWMPDownloadItem, lpVtbl : IWMPDownloadItemVtable* do
     GUID = LibC::GUID.new(0xc9470e8e_u32, 0x3f6b_u16, 0x46a9_u16, StaticArray[0xa0_u8, 0xa9_u8, 0x45_u8, 0x28_u8, 0x15_u8, 0xc3_u8, 0x42_u8, 0x97_u8])
     def query_interface(this : IWMPDownloadItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9593,8 +9698,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPDownloadItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPDownloadItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPDownloadItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_sourceURL(this : IWMPDownloadItem*, pbstrURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_sourceURL.call(this, pbstrURL)
@@ -9624,14 +9729,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPDownloadItem2Vtbl,
+
+  record IWMPDownloadItem2Vtable,
     query_interface : Proc(IWMPDownloadItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPDownloadItem2*, UInt32),
     release : Proc(IWMPDownloadItem2*, UInt32),
     get_type_info_count : Proc(IWMPDownloadItem2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPDownloadItem2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPDownloadItem2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPDownloadItem2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPDownloadItem2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_sourceURL : Proc(IWMPDownloadItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_size : Proc(IWMPDownloadItem2*, Int32*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IWMPDownloadItem2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -9644,7 +9750,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPDownloadItem2, lpVtbl : IWMPDownloadItem2Vtbl* do
+  record IWMPDownloadItem2, lpVtbl : IWMPDownloadItem2Vtable* do
     GUID = LibC::GUID.new(0x9fbb3336_u32, 0x6da3_u16, 0x479d_u16, StaticArray[0xb8_u8, 0xff_u8, 0x67_u8, 0xd4_u8, 0x6e_u8, 0x20_u8, 0xa9_u8, 0x87_u8])
     def query_interface(this : IWMPDownloadItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9664,8 +9770,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPDownloadItem2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPDownloadItem2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPDownloadItem2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_sourceURL(this : IWMPDownloadItem2*, pbstrURL : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_sourceURL.call(this, pbstrURL)
@@ -9698,14 +9804,15 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPDownloadCollectionVtbl,
+
+  record IWMPDownloadCollectionVtable,
     query_interface : Proc(IWMPDownloadCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPDownloadCollection*, UInt32),
     release : Proc(IWMPDownloadCollection*, UInt32),
     get_type_info_count : Proc(IWMPDownloadCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPDownloadCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPDownloadCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPDownloadCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPDownloadCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_id : Proc(IWMPDownloadCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get_count : Proc(IWMPDownloadCollection*, Int32*, Win32cr::Foundation::HRESULT),
     item : Proc(IWMPDownloadCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
@@ -9715,7 +9822,7 @@ module Win32cr::Media::MediaPlayer
 
 
   @[Extern]
-  record IWMPDownloadCollection, lpVtbl : IWMPDownloadCollectionVtbl* do
+  record IWMPDownloadCollection, lpVtbl : IWMPDownloadCollectionVtable* do
     GUID = LibC::GUID.new(0xa319c7f_u32, 0x85f9_u16, 0x436c_u16, StaticArray[0xb8_u8, 0x8e_u8, 0x82_u8, 0xfd_u8, 0x88_u8, 0x0_u8, 0xe_u8, 0x1c_u8])
     def query_interface(this : IWMPDownloadCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9735,8 +9842,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPDownloadCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPDownloadCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPDownloadCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_id(this : IWMPDownloadCollection*, plId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_id.call(this, plId)
@@ -9760,20 +9867,21 @@ module Win32cr::Media::MediaPlayer
   end
 
   @[Extern]
-  record IWMPDownloadManagerVtbl,
+
+  record IWMPDownloadManagerVtable,
     query_interface : Proc(IWMPDownloadManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMPDownloadManager*, UInt32),
     release : Proc(IWMPDownloadManager*, UInt32),
     get_type_info_count : Proc(IWMPDownloadManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWMPDownloadManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWMPDownloadManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWMPDownloadManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWMPDownloadManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     getDownloadCollection : Proc(IWMPDownloadManager*, Int32, Void**, Win32cr::Foundation::HRESULT),
     createDownloadCollection : Proc(IWMPDownloadManager*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWMPDownloadManager, lpVtbl : IWMPDownloadManagerVtbl* do
+  record IWMPDownloadManager, lpVtbl : IWMPDownloadManagerVtable* do
     GUID = LibC::GUID.new(0xe15e9ad1_u32, 0x8f20_u16, 0x4cc4_u16, StaticArray[0x9e_u8, 0xc7_u8, 0x1a_u8, 0x32_u8, 0x8c_u8, 0xa8_u8, 0x6a_u8, 0xd_u8])
     def query_interface(this : IWMPDownloadManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9793,8 +9901,8 @@ module Win32cr::Media::MediaPlayer
     def get_i_ds_of_names(this : IWMPDownloadManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWMPDownloadManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWMPDownloadManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def getDownloadCollection(this : IWMPDownloadManager*, lCollectionId : Int32, ppCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getDownloadCollection.call(this, lCollectionId, ppCollection)

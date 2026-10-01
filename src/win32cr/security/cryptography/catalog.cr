@@ -12,14 +12,6 @@ module Win32cr::Security::Cryptography::Catalog
   CRYPTCAT_FILEEXT = "CAT"
   CRYPTCAT_MAX_MEMBERTAG = 64_u32
   CRYPTCAT_MEMBER_SORTED = 1073741824_u32
-  CRYPTCAT_ATTR_AUTHENTICATED = 268435456_u32
-  CRYPTCAT_ATTR_UNAUTHENTICATED = 536870912_u32
-  CRYPTCAT_ATTR_NAMEASCII = 1_u32
-  CRYPTCAT_ATTR_NAMEOBJID = 2_u32
-  CRYPTCAT_ATTR_DATAASCII = 65536_u32
-  CRYPTCAT_ATTR_DATABASE64 = 131072_u32
-  CRYPTCAT_ATTR_DATAREPLACE = 262144_u32
-  CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY = 16777216_u32
   CRYPTCAT_E_AREA_HEADER = 0_u32
   CRYPTCAT_E_AREA_MEMBER = 65536_u32
   CRYPTCAT_E_AREA_ATTRIBUTE = 131072_u32
@@ -51,6 +43,17 @@ module Win32cr::Security::Cryptography::Catalog
     CRYPTCAT_OPEN_SORTED = 1073741824_u32
     CRYPTCAT_OPEN_FLAGS_MASK = 4294901760_u32
   end
+  @[Flags]
+  enum CRYPTCATATTRIBUTE_FLAGS : UInt32
+    CRYPTCAT_ATTR_AUTHENTICATED = 268435456_u32
+    CRYPTCAT_ATTR_UNAUTHENTICATED = 536870912_u32
+    CRYPTCAT_ATTR_NAMEASCII = 1_u32
+    CRYPTCAT_ATTR_NAMEOBJID = 2_u32
+    CRYPTCAT_ATTR_DATAASCII = 65536_u32
+    CRYPTCAT_ATTR_DATABASE64 = 131072_u32
+    CRYPTCAT_ATTR_DATAREPLACE = 262144_u32
+    CRYPTCAT_ATTR_NO_AUTO_COMPAT_ENTRY = 16777216_u32
+  end
 
   @[Extern]
   struct CRYPTCATSTORE
@@ -79,9 +82,9 @@ module Win32cr::Security::Cryptography::Catalog
     property dwCertVersion : UInt32
     property dwReserved : UInt32
     property hReserved : Win32cr::Foundation::HANDLE
-    property sEncodedIndirectData : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property sEncodedMemberInfo : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@cbStruct : UInt32, @pwszReferenceTag : Win32cr::Foundation::PWSTR, @pwszFileName : Win32cr::Foundation::PWSTR, @gSubjectType : LibC::GUID, @fdwMemberFlags : UInt32, @pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*, @dwCertVersion : UInt32, @dwReserved : UInt32, @hReserved : Win32cr::Foundation::HANDLE, @sEncodedIndirectData : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @sEncodedMemberInfo : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property sEncodedIndirectData : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property sEncodedMemberInfo : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@cbStruct : UInt32, @pwszReferenceTag : Win32cr::Foundation::PWSTR, @pwszFileName : Win32cr::Foundation::PWSTR, @gSubjectType : LibC::GUID, @fdwMemberFlags : UInt32, @pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*, @dwCertVersion : UInt32, @dwReserved : UInt32, @hReserved : Win32cr::Foundation::HANDLE, @sEncodedIndirectData : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @sEncodedMemberInfo : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -89,11 +92,11 @@ module Win32cr::Security::Cryptography::Catalog
   struct CRYPTCATATTRIBUTE
     property cbStruct : UInt32
     property pwszReferenceTag : Win32cr::Foundation::PWSTR
-    property dwAttrTypeAndAction : UInt32
+    property dwAttrTypeAndAction : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE_FLAGS
     property cbValue : UInt32
     property pbValue : UInt8*
     property dwReserved : UInt32
-    def initialize(@cbStruct : UInt32, @pwszReferenceTag : Win32cr::Foundation::PWSTR, @dwAttrTypeAndAction : UInt32, @cbValue : UInt32, @pbValue : UInt8*, @dwReserved : UInt32)
+    def initialize(@cbStruct : UInt32, @pwszReferenceTag : Win32cr::Foundation::PWSTR, @dwAttrTypeAndAction : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE_FLAGS, @cbValue : UInt32, @pbValue : UInt8*, @dwReserved : UInt32)
     end
   end
 
@@ -128,142 +131,223 @@ module Win32cr::Security::Cryptography::Catalog
   end
 
   def cryptCATOpen(pwszFileName : Win32cr::Foundation::PWSTR, fdwOpenFlags : Win32cr::Security::Cryptography::Catalog::CRYPTCAT_OPEN_FLAGS, hProv : LibC::UIntPtrT, dwPublicVersion : Win32cr::Security::Cryptography::Catalog::CRYPTCAT_VERSION, dwEncodingType : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CryptCATOpen(pwszFileName, fdwOpenFlags, hProv, dwPublicVersion, dwEncodingType)
+    {% end %}
   end
 
   def cryptCATClose(hCatalog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATClose(hCatalog)
+    {% end %}
   end
 
   def cryptCATStoreFromHandle(hCatalog : Win32cr::Foundation::HANDLE) : Win32cr::Security::Cryptography::Catalog::CRYPTCATSTORE*
+    {% if !flag?(:docs) %}
     C.CryptCATStoreFromHandle(hCatalog)
+    {% end %}
   end
 
   def cryptCATHandleFromStore(pCatStore : Win32cr::Security::Cryptography::Catalog::CRYPTCATSTORE*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CryptCATHandleFromStore(pCatStore)
+    {% end %}
   end
 
   def cryptCATPersistStore(hCatalog : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATPersistStore(hCatalog)
+    {% end %}
   end
 
   def cryptCATGetCatAttrInfo(hCatalog : Win32cr::Foundation::HANDLE, pwszReferenceTag : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CryptCATGetCatAttrInfo(hCatalog, pwszReferenceTag)
+    {% end %}
   end
 
   def cryptCATPutCatAttrInfo(hCatalog : Win32cr::Foundation::HANDLE, pwszReferenceTag : Win32cr::Foundation::PWSTR, dwAttrTypeAndAction : UInt32, cbData : UInt32, pbData : UInt8*) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CryptCATPutCatAttrInfo(hCatalog, pwszReferenceTag, dwAttrTypeAndAction, cbData, pbData)
+    {% end %}
   end
 
   def cryptCATEnumerateCatAttr(hCatalog : Win32cr::Foundation::HANDLE, pPrevAttr : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CryptCATEnumerateCatAttr(hCatalog, pPrevAttr)
+    {% end %}
   end
 
   def cryptCATGetMemberInfo(hCatalog : Win32cr::Foundation::HANDLE, pwszReferenceTag : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*
+    {% if !flag?(:docs) %}
     C.CryptCATGetMemberInfo(hCatalog, pwszReferenceTag)
+    {% end %}
   end
 
   def cryptCATAllocSortedMemberInfo(hCatalog : Win32cr::Foundation::HANDLE, pwszReferenceTag : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*
+    {% if !flag?(:docs) %}
     C.CryptCATAllocSortedMemberInfo(hCatalog, pwszReferenceTag)
+    {% end %}
   end
 
   def cryptCATFreeSortedMemberInfo(hCatalog : Win32cr::Foundation::HANDLE, pCatMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*) : Void
+    {% if !flag?(:docs) %}
     C.CryptCATFreeSortedMemberInfo(hCatalog, pCatMember)
+    {% end %}
   end
 
   def cryptCATGetAttrInfo(hCatalog : Win32cr::Foundation::HANDLE, pCatMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*, pwszReferenceTag : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CryptCATGetAttrInfo(hCatalog, pCatMember, pwszReferenceTag)
+    {% end %}
   end
 
   def cryptCATPutMemberInfo(hCatalog : Win32cr::Foundation::HANDLE, pwszFileName : Win32cr::Foundation::PWSTR, pwszReferenceTag : Win32cr::Foundation::PWSTR, pgSubjectType : LibC::GUID*, dwCertVersion : UInt32, cbSIPIndirectData : UInt32, pbSIPIndirectData : UInt8*) : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*
+    {% if !flag?(:docs) %}
     C.CryptCATPutMemberInfo(hCatalog, pwszFileName, pwszReferenceTag, pgSubjectType, dwCertVersion, cbSIPIndirectData, pbSIPIndirectData)
+    {% end %}
   end
 
   def cryptCATPutAttrInfo(hCatalog : Win32cr::Foundation::HANDLE, pCatMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*, pwszReferenceTag : Win32cr::Foundation::PWSTR, dwAttrTypeAndAction : UInt32, cbData : UInt32, pbData : UInt8*) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CryptCATPutAttrInfo(hCatalog, pCatMember, pwszReferenceTag, dwAttrTypeAndAction, cbData, pbData)
+    {% end %}
   end
 
   def cryptCATEnumerateMember(hCatalog : Win32cr::Foundation::HANDLE, pPrevMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*) : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*
+    {% if !flag?(:docs) %}
     C.CryptCATEnumerateMember(hCatalog, pPrevMember)
+    {% end %}
   end
 
   def cryptCATEnumerateAttr(hCatalog : Win32cr::Foundation::HANDLE, pCatMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*, pPrevAttr : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CryptCATEnumerateAttr(hCatalog, pCatMember, pPrevAttr)
+    {% end %}
   end
 
   def cryptCATCDFOpen(pwszFilePath : Win32cr::Foundation::PWSTR, pfnParseError : Win32cr::Security::Cryptography::Catalog::PFN_CDF_PARSE_ERROR_CALLBACK) : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*
+    {% if !flag?(:docs) %}
     C.CryptCATCDFOpen(pwszFilePath, pfnParseError)
+    {% end %}
   end
 
   def cryptCATCDFClose(pCDF : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATCDFClose(pCDF)
+    {% end %}
   end
 
   def cryptCATCDFEnumCatAttributes(pCDF : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*, pPrevAttr : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*, pfnParseError : Win32cr::Security::Cryptography::Catalog::PFN_CDF_PARSE_ERROR_CALLBACK) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CryptCATCDFEnumCatAttributes(pCDF, pPrevAttr, pfnParseError)
+    {% end %}
   end
 
   def cryptCATCDFEnumMembers(pCDF : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*, pPrevMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*, pfnParseError : Win32cr::Security::Cryptography::Catalog::PFN_CDF_PARSE_ERROR_CALLBACK) : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*
+    {% if !flag?(:docs) %}
     C.CryptCATCDFEnumMembers(pCDF, pPrevMember, pfnParseError)
+    {% end %}
   end
 
   def cryptCATCDFEnumAttributes(pCDF : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*, pMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*, pPrevAttr : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*, pfnParseError : Win32cr::Security::Cryptography::Catalog::PFN_CDF_PARSE_ERROR_CALLBACK) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CryptCATCDFEnumAttributes(pCDF, pMember, pPrevAttr, pfnParseError)
+    {% end %}
   end
 
   def isCatalogFile(hFile : Win32cr::Foundation::HANDLE, pwszFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsCatalogFile(hFile, pwszFileName)
+    {% end %}
   end
 
   def cryptCATAdminAcquireContext(phCatAdmin : LibC::IntPtrT*, pgSubsystem : LibC::GUID*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminAcquireContext(phCatAdmin, pgSubsystem, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminAcquireContext2(phCatAdmin : LibC::IntPtrT*, pgSubsystem : LibC::GUID*, pwszHashAlgorithm : Win32cr::Foundation::PWSTR, pStrongHashPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminAcquireContext2(phCatAdmin, pgSubsystem, pwszHashAlgorithm, pStrongHashPolicy, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminReleaseContext(hCatAdmin : LibC::IntPtrT, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminReleaseContext(hCatAdmin, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminReleaseCatalogContext(hCatAdmin : LibC::IntPtrT, hCatInfo : LibC::IntPtrT, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminReleaseCatalogContext(hCatAdmin, hCatInfo, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminEnumCatalogFromHash(hCatAdmin : LibC::IntPtrT, pbHash : UInt8*, cbHash : UInt32, dwFlags : UInt32, phPrevCatInfo : LibC::IntPtrT*) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CryptCATAdminEnumCatalogFromHash(hCatAdmin, pbHash, cbHash, dwFlags, phPrevCatInfo)
+    {% end %}
   end
 
   def cryptCATAdminCalcHashFromFileHandle(hFile : Win32cr::Foundation::HANDLE, pcbHash : UInt32*, pbHash : UInt8*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminCalcHashFromFileHandle(hFile, pcbHash, pbHash, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminCalcHashFromFileHandle2(hCatAdmin : LibC::IntPtrT, hFile : Win32cr::Foundation::HANDLE, pcbHash : UInt32*, pbHash : UInt8*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminCalcHashFromFileHandle2(hCatAdmin, hFile, pcbHash, pbHash, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminAddCatalog(hCatAdmin : LibC::IntPtrT, pwszCatalogFile : Win32cr::Foundation::PWSTR, pwszSelectBaseName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CryptCATAdminAddCatalog(hCatAdmin, pwszCatalogFile, pwszSelectBaseName, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminRemoveCatalog(hCatAdmin : LibC::IntPtrT, pwszCatalogFile : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminRemoveCatalog(hCatAdmin, pwszCatalogFile, dwFlags)
+    {% end %}
   end
 
   def cryptCATCatalogInfoFromContext(hCatInfo : LibC::IntPtrT, psCatInfo : Win32cr::Security::Cryptography::Catalog::CATALOG_INFO*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATCatalogInfoFromContext(hCatInfo, psCatInfo, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminResolveCatalogPath(hCatAdmin : LibC::IntPtrT, pwszCatalogFile : Win32cr::Foundation::PWSTR, psCatInfo : Win32cr::Security::Cryptography::Catalog::CATALOG_INFO*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminResolveCatalogPath(hCatAdmin, pwszCatalogFile, psCatInfo, dwFlags)
+    {% end %}
   end
 
   def cryptCATAdminPauseServiceForBackup(dwFlags : UInt32, fResume : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCATAdminPauseServiceForBackup(dwFlags, fResume)
+    {% end %}
+  end
+
+  def cryptCATCDFEnumMembersByCDFTagEx(pCDF : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*, pwszPrevCDFTag : Win32cr::Foundation::PWSTR, pfnParseError : Win32cr::Security::Cryptography::Catalog::PFN_CDF_PARSE_ERROR_CALLBACK, ppMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER**, fContinueOnError : Win32cr::Foundation::BOOL, pvReserved : Void*) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
+    C.CryptCATCDFEnumMembersByCDFTagEx(pCDF, pwszPrevCDFTag, pfnParseError, ppMember, fContinueOnError, pvReserved)
+    {% end %}
+  end
+
+  def cryptCATCDFEnumAttributesWithCDFTag(pCDF : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*, pwszMemberTag : Win32cr::Foundation::PWSTR, pMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*, pPrevAttr : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*, pfnParseError : Win32cr::Security::Cryptography::Catalog::PFN_CDF_PARSE_ERROR_CALLBACK) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+    {% if !flag?(:docs) %}
+    C.CryptCATCDFEnumAttributesWithCDFTag(pCDF, pwszMemberTag, pMember, pPrevAttr, pfnParseError)
+    {% end %}
   end
 
   @[Link("wintrust")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CryptCATOpen(pwszFileName : Win32cr::Foundation::PWSTR, fdwOpenFlags : Win32cr::Security::Cryptography::Catalog::CRYPTCAT_OPEN_FLAGS, hProv : LibC::UIntPtrT, dwPublicVersion : Win32cr::Security::Cryptography::Catalog::CRYPTCAT_VERSION, dwEncodingType : UInt32) : Win32cr::Foundation::HANDLE
@@ -367,5 +451,12 @@ module Win32cr::Security::Cryptography::Catalog
     # :nodoc:
     fun CryptCATAdminPauseServiceForBackup(dwFlags : UInt32, fResume : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # :nodoc:
+    fun CryptCATCDFEnumMembersByCDFTagEx(pCDF : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*, pwszPrevCDFTag : Win32cr::Foundation::PWSTR, pfnParseError : Win32cr::Security::Cryptography::Catalog::PFN_CDF_PARSE_ERROR_CALLBACK, ppMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER**, fContinueOnError : Win32cr::Foundation::BOOL, pvReserved : Void*) : Win32cr::Foundation::PWSTR
+
+    # :nodoc:
+    fun CryptCATCDFEnumAttributesWithCDFTag(pCDF : Win32cr::Security::Cryptography::Catalog::CRYPTCATCDF*, pwszMemberTag : Win32cr::Foundation::PWSTR, pMember : Win32cr::Security::Cryptography::Catalog::CRYPTCATMEMBER*, pPrevAttr : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*, pfnParseError : Win32cr::Security::Cryptography::Catalog::PFN_CDF_PARSE_ERROR_CALLBACK) : Win32cr::Security::Cryptography::Catalog::CRYPTCATATTRIBUTE*
+
   end
+  {% end %}
 end

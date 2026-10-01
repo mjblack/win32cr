@@ -2,8 +2,6 @@ require "./../foundation.cr"
 
 module Win32cr::System::Environment
   extend self
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE = Proc(LibC::UIntPtrT, Void)
-
   {% if flag?(:x86_64) %}
   alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_EXCEPTION_AMD64*, Int32)
   {% end %}
@@ -16,25 +14,11 @@ module Win32cr::System::Environment
   alias VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64*, Int32)
   {% end %}
 
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES = Proc(Void*, LibC::UIntPtrT, Void*, UInt32, Int32)
-
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES = Proc(Void*, LibC::UIntPtrT, Int32)
-
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES = Proc(Void*, LibC::UIntPtrT, UInt32, Int32)
-
   {% if flag?(:x86_64) || flag?(:arm) %}
   alias VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR64*, Int32)
   {% end %}
 
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION = Proc(Win32cr::System::Environment::ENCLAVE_INFORMATION*, Int32)
-
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY = Proc(Win32cr::System::Environment::ENCLAVE_VBS_BASIC_KEY_REQUEST*, UInt32, UInt8*, Int32)
-
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT = Proc(UInt8*, Void*, UInt32, UInt32*, Int32)
-
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT = Proc(Void*, UInt32, Int32)
-
-  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA = Proc(UInt8*, UInt32, UInt64*, Int32)
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_ENCLAVE = Proc(LibC::UIntPtrT, Void)
 
   {% if flag?(:i386) || flag?(:arm) %}
   alias VBS_BASIC_ENCLAVE_BASIC_CALL_RETURN_FROM_EXCEPTION = Proc(Void*, Int32)
@@ -48,9 +32,25 @@ module Win32cr::System::Environment
   alias VBS_BASIC_ENCLAVE_BASIC_CALL_INTERRUPT_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32*, Int32)
   {% end %}
 
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_COMMIT_PAGES = Proc(Void*, LibC::UIntPtrT, Void*, UInt32, Int32)
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_DECOMMIT_PAGES = Proc(Void*, LibC::UIntPtrT, Int32)
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_PROTECT_PAGES = Proc(Void*, LibC::UIntPtrT, UInt32, Int32)
+
   {% if flag?(:i386) %}
   alias VBS_BASIC_ENCLAVE_BASIC_CALL_CREATE_THREAD = Proc(Win32cr::System::Environment::VBS_BASIC_ENCLAVE_THREAD_DESCRIPTOR32*, Int32)
   {% end %}
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GET_ENCLAVE_INFORMATION = Proc(Win32cr::System::Environment::ENCLAVE_INFORMATION*, Int32)
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_KEY = Proc(Win32cr::System::Environment::ENCLAVE_VBS_BASIC_KEY_REQUEST*, UInt32, UInt8*, Int32)
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_REPORT = Proc(UInt8*, Void*, UInt32, UInt32*, Int32)
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_VERIFY_REPORT = Proc(Void*, UInt32, Int32)
+
+  alias VBS_BASIC_ENCLAVE_BASIC_CALL_GENERATE_RANDOM_DATA = Proc(UInt8*, UInt32, UInt64*, Int32)
 
   ENCLAVE_RUNTIME_POLICY_ALLOW_FULL_DEBUG = 1_u32
   ENCLAVE_RUNTIME_POLICY_ALLOW_DYNAMIC_DEBUG = 2_u32
@@ -133,8 +133,8 @@ module Win32cr::System::Environment
     property family_id : UInt8[16]
     property image_id : UInt8[16]
     property svn : UInt32
-    property module_name : UInt16*
-    def initialize(@header : Win32cr::System::Environment::VBS_ENCLAVE_REPORT_VARDATA_HEADER, @unique_id : UInt8[32], @author_id : UInt8[32], @family_id : UInt8[16], @image_id : UInt8[16], @svn : UInt32, @module_name : UInt16*)
+    property module_name : UInt16[1]
+    def initialize(@header : Win32cr::System::Environment::VBS_ENCLAVE_REPORT_VARDATA_HEADER, @unique_id : UInt8[32], @author_id : UInt8[32], @family_id : UInt8[16], @image_id : UInt8[16], @svn : UInt32, @module_name : UInt16[1])
     end
   end
 
@@ -217,20 +217,46 @@ module Win32cr::System::Environment
     end
   end
 
+  @[Extern]
+  struct PS_TRUSTLET_TKSESSION_ID
+    property session_id : UInt64[4]
+    def initialize(@session_id : UInt64[4])
+    end
+  end
+
+  @[Extern]
+  struct TRUSTLET_BINDING_DATA
+    property trustlet_identity : UInt64
+    property trustlet_session_id : Win32cr::System::Environment::PS_TRUSTLET_TKSESSION_ID
+    property trustlet_svn : UInt32
+    property reserved1 : UInt32
+    property reserved2 : UInt64
+    def initialize(@trustlet_identity : UInt64, @trustlet_session_id : Win32cr::System::Environment::PS_TRUSTLET_TKSESSION_ID, @trustlet_svn : UInt32, @reserved1 : UInt32, @reserved2 : UInt64)
+    end
+  end
+
   def setEnvironmentStringsW(new_environment : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetEnvironmentStringsW(new_environment)
+    {% end %}
   end
 
   def getCommandLineA : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.GetCommandLineA
+    {% end %}
   end
 
   def getCommandLineW : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.GetCommandLineW
+    {% end %}
   end
 
   def getEnvironmentStrings : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.GetEnvironmentStrings
+    {% end %}
   end
 
   #def getEnvironmentStringsW : Win32cr::Foundation::PWSTR
@@ -238,136 +264,221 @@ module Win32cr::System::Environment
   #end
 
   def freeEnvironmentStringsA(penv : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeEnvironmentStringsA(penv)
+    {% end %}
   end
 
   #def freeEnvironmentStringsW(penv : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
     #C.FreeEnvironmentStringsW(penv)
   #end
 
-  def getEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpBuffer : UInt8*, nSize : UInt32) : UInt32
+  def getEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEnvironmentVariableA(lpName, lpBuffer, nSize)
+    {% end %}
   end
 
-  #def getEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpBuffer : UInt16*, nSize : UInt32) : UInt32
+  #def getEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
     #C.GetEnvironmentVariableW(lpName, lpBuffer, nSize)
   #end
 
   def setEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetEnvironmentVariableA(lpName, lpValue)
+    {% end %}
   end
 
   #def setEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
     #C.SetEnvironmentVariableW(lpName, lpValue)
   #end
 
-  def expandEnvironmentStringsA(lpSrc : Win32cr::Foundation::PSTR, lpDst : UInt8*, nSize : UInt32) : UInt32
+  def expandEnvironmentStringsA(lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::Foundation::PSTR, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ExpandEnvironmentStringsA(lpSrc, lpDst, nSize)
+    {% end %}
   end
 
-  def expandEnvironmentStringsW(lpSrc : Win32cr::Foundation::PWSTR, lpDst : UInt16*, nSize : UInt32) : UInt32
+  def expandEnvironmentStringsW(lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ExpandEnvironmentStringsW(lpSrc, lpDst, nSize)
+    {% end %}
   end
 
   def setCurrentDirectoryA(lpPathName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCurrentDirectoryA(lpPathName)
+    {% end %}
   end
 
   #def setCurrentDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
     #C.SetCurrentDirectoryW(lpPathName)
   #end
 
-  def getCurrentDirectoryA(nBufferLength : UInt32, lpBuffer : UInt8*) : UInt32
+  def getCurrentDirectoryA(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetCurrentDirectoryA(nBufferLength, lpBuffer)
+    {% end %}
   end
 
-  #def getCurrentDirectoryW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
+  #def getCurrentDirectoryW(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : UInt32
     #C.GetCurrentDirectoryW(nBufferLength, lpBuffer)
   #end
 
   def needCurrentDirectoryForExePathA(exe_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.NeedCurrentDirectoryForExePathA(exe_name)
+    {% end %}
   end
 
   def needCurrentDirectoryForExePathW(exe_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.NeedCurrentDirectoryForExePathW(exe_name)
+    {% end %}
   end
 
   def createEnvironmentBlock(lpEnvironment : Void**, hToken : Win32cr::Foundation::HANDLE, bInherit : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateEnvironmentBlock(lpEnvironment, hToken, bInherit)
+    {% end %}
   end
 
   def destroyEnvironmentBlock(lpEnvironment : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyEnvironmentBlock(lpEnvironment)
+    {% end %}
   end
 
-  def expandEnvironmentStringsForUserA(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PSTR, lpDest : UInt8*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+  def expandEnvironmentStringsForUserA(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PSTR, lpDest : Win32cr::Foundation::PSTR, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExpandEnvironmentStringsForUserA(hToken, lpSrc, lpDest, dwSize)
+    {% end %}
   end
 
-  def expandEnvironmentStringsForUserW(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PWSTR, lpDest : UInt16*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+  def expandEnvironmentStringsForUserW(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PWSTR, lpDest : Win32cr::Foundation::PWSTR, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExpandEnvironmentStringsForUserW(hToken, lpSrc, lpDest, dwSize)
+    {% end %}
   end
 
   def isEnclaveTypeSupported(flEnclaveType : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsEnclaveTypeSupported(flEnclaveType)
+    {% end %}
   end
 
   def createEnclave(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, dwSize : LibC::UIntPtrT, dwInitialCommitment : LibC::UIntPtrT, flEnclaveType : UInt32, lpEnclaveInformation : Void*, dwInfoLength : UInt32, lpEnclaveError : UInt32*) : Void*
+    {% if !flag?(:docs) %}
     C.CreateEnclave(hProcess, lpAddress, dwSize, dwInitialCommitment, flEnclaveType, lpEnclaveInformation, dwInfoLength, lpEnclaveError)
+    {% end %}
   end
 
   def loadEnclaveData(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, flProtect : UInt32, lpPageInformation : Void*, dwInfoLength : UInt32, lpNumberOfBytesWritten : LibC::UIntPtrT*, lpEnclaveError : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LoadEnclaveData(hProcess, lpAddress, lpBuffer, nSize, flProtect, lpPageInformation, dwInfoLength, lpNumberOfBytesWritten, lpEnclaveError)
+    {% end %}
   end
 
   def initializeEnclave(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, lpEnclaveInformation : Void*, dwInfoLength : UInt32, lpEnclaveError : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeEnclave(hProcess, lpAddress, lpEnclaveInformation, dwInfoLength, lpEnclaveError)
+    {% end %}
   end
 
   def loadEnclaveImageA(lpEnclaveAddress : Void*, lpImageName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LoadEnclaveImageA(lpEnclaveAddress, lpImageName)
+    {% end %}
   end
 
   def loadEnclaveImageW(lpEnclaveAddress : Void*, lpImageName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LoadEnclaveImageW(lpEnclaveAddress, lpImageName)
+    {% end %}
   end
 
   def callEnclave(lpRoutine : LibC::IntPtrT, lpParameter : Void*, fWaitForThread : Win32cr::Foundation::BOOL, lpReturnValue : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CallEnclave(lpRoutine, lpParameter, fWaitForThread, lpReturnValue)
+    {% end %}
   end
 
   def terminateEnclave(lpAddress : Void*, fWait : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TerminateEnclave(lpAddress, fWait)
+    {% end %}
   end
 
   def deleteEnclave(lpAddress : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteEnclave(lpAddress)
+    {% end %}
   end
 
   def enclaveGetAttestationReport(enclave_data : UInt8*, report : Void*, buffer_size : UInt32, output_size : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EnclaveGetAttestationReport(enclave_data, report, buffer_size, output_size)
+    {% end %}
   end
 
   def enclaveVerifyAttestationReport(enclave_type : UInt32, report : Void*, report_size : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EnclaveVerifyAttestationReport(enclave_type, report, report_size)
+    {% end %}
   end
 
   def enclaveSealData(data_to_encrypt : Void*, data_to_encrypt_size : UInt32, identity_policy : Win32cr::System::Environment::ENCLAVE_SEALING_IDENTITY_POLICY, runtime_policy : UInt32, protected_blob : Void*, buffer_size : UInt32, protected_blob_size : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EnclaveSealData(data_to_encrypt, data_to_encrypt_size, identity_policy, runtime_policy, protected_blob, buffer_size, protected_blob_size)
+    {% end %}
   end
 
   def enclaveUnsealData(protected_blob : Void*, protected_blob_size : UInt32, decrypted_data : Void*, buffer_size : UInt32, decrypted_data_size : UInt32*, sealing_identity : Win32cr::System::Environment::ENCLAVE_IDENTITY*, unsealing_flags : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EnclaveUnsealData(protected_blob, protected_blob_size, decrypted_data, buffer_size, decrypted_data_size, sealing_identity, unsealing_flags)
+    {% end %}
+  end
+
+  def enclaveEncryptDataForTrustlet(data_to_encrypt : Void*, data_to_encrypt_size : UInt32, trustlet_binding_data : Win32cr::System::Environment::TRUSTLET_BINDING_DATA*, encrypted_data : Void*, buffer_size : UInt32, encrypted_data_size : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.EnclaveEncryptDataForTrustlet(data_to_encrypt, data_to_encrypt_size, trustlet_binding_data, encrypted_data, buffer_size, encrypted_data_size)
+    {% end %}
   end
 
   def enclaveGetEnclaveInformation(information_size : UInt32, enclave_information : Win32cr::System::Environment::ENCLAVE_INFORMATION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EnclaveGetEnclaveInformation(information_size, enclave_information)
+    {% end %}
+  end
+
+  def enclaveUsesAttestedKeys : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
+    C.EnclaveUsesAttestedKeys
+    {% end %}
+  end
+
+  def enclaveRestrictContainingProcessAccess(restrict_access : Win32cr::Foundation::BOOL, previously_restricted : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.EnclaveRestrictContainingProcessAccess(restrict_access, previously_restricted)
+    {% end %}
+  end
+
+  def enclaveCopyIntoEnclave(enclave_address : Void*, unsecure_address : Void*, number_of_bytes : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.EnclaveCopyIntoEnclave(enclave_address, unsecure_address, number_of_bytes)
+    {% end %}
+  end
+
+  def enclaveCopyOutOfEnclave(unsecure_address : Void*, enclave_address : Void*, number_of_bytes : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.EnclaveCopyOutOfEnclave(unsecure_address, enclave_address, number_of_bytes)
+    {% end %}
   end
 
   @[Link("kernel32")]
   @[Link("userenv")]
   @[Link("vertdll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SetEnvironmentStringsW(new_environment : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
@@ -393,11 +504,11 @@ module Win32cr::System::Environment
     #fun FreeEnvironmentStringsW(penv : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpBuffer : UInt8*, nSize : UInt32) : UInt32
+    fun GetEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32) : UInt32
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun GetEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpBuffer : UInt16*, nSize : UInt32) : UInt32
+    #fun GetEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
 
     # :nodoc:
     fun SetEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
@@ -407,10 +518,10 @@ module Win32cr::System::Environment
     #fun SetEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ExpandEnvironmentStringsA(lpSrc : Win32cr::Foundation::PSTR, lpDst : UInt8*, nSize : UInt32) : UInt32
+    fun ExpandEnvironmentStringsA(lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::Foundation::PSTR, nSize : UInt32) : UInt32
 
     # :nodoc:
-    fun ExpandEnvironmentStringsW(lpSrc : Win32cr::Foundation::PWSTR, lpDst : UInt16*, nSize : UInt32) : UInt32
+    fun ExpandEnvironmentStringsW(lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::Foundation::PWSTR, nSize : UInt32) : UInt32
 
     # :nodoc:
     fun SetCurrentDirectoryA(lpPathName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
@@ -420,11 +531,11 @@ module Win32cr::System::Environment
     #fun SetCurrentDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetCurrentDirectoryA(nBufferLength : UInt32, lpBuffer : UInt8*) : UInt32
+    fun GetCurrentDirectoryA(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PSTR) : UInt32
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun GetCurrentDirectoryW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
+    #fun GetCurrentDirectoryW(nBufferLength : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
     fun NeedCurrentDirectoryForExePathA(exe_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
@@ -439,10 +550,10 @@ module Win32cr::System::Environment
     fun DestroyEnvironmentBlock(lpEnvironment : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ExpandEnvironmentStringsForUserA(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PSTR, lpDest : UInt8*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    fun ExpandEnvironmentStringsForUserA(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PSTR, lpDest : Win32cr::Foundation::PSTR, dwSize : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ExpandEnvironmentStringsForUserW(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PWSTR, lpDest : UInt16*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    fun ExpandEnvironmentStringsForUserW(hToken : Win32cr::Foundation::HANDLE, lpSrc : Win32cr::Foundation::PWSTR, lpDest : Win32cr::Foundation::PWSTR, dwSize : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun IsEnclaveTypeSupported(flEnclaveType : UInt32) : Win32cr::Foundation::BOOL
@@ -484,7 +595,23 @@ module Win32cr::System::Environment
     fun EnclaveUnsealData(protected_blob : Void*, protected_blob_size : UInt32, decrypted_data : Void*, buffer_size : UInt32, decrypted_data_size : UInt32*, sealing_identity : Win32cr::System::Environment::ENCLAVE_IDENTITY*, unsealing_flags : UInt32*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
+    fun EnclaveEncryptDataForTrustlet(data_to_encrypt : Void*, data_to_encrypt_size : UInt32, trustlet_binding_data : Win32cr::System::Environment::TRUSTLET_BINDING_DATA*, encrypted_data : Void*, buffer_size : UInt32, encrypted_data_size : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
     fun EnclaveGetEnclaveInformation(information_size : UInt32, enclave_information : Win32cr::System::Environment::ENCLAVE_INFORMATION*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
+    fun EnclaveUsesAttestedKeys : Win32cr::Foundation::BOOLEAN
+
+    # :nodoc:
+    fun EnclaveRestrictContainingProcessAccess(restrict_access : Win32cr::Foundation::BOOL, previously_restricted : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun EnclaveCopyIntoEnclave(enclave_address : Void*, unsecure_address : Void*, number_of_bytes : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun EnclaveCopyOutOfEnclave(unsecure_address : Void*, enclave_address : Void*, number_of_bytes : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+
   end
+  {% end %}
 end

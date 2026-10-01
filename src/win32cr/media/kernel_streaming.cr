@@ -1,6 +1,8 @@
-require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/com.cr"
 require "./../media.cr"
+require "./direct_show.cr"
+require "./media_foundation.cr"
 
 module Win32cr::Media::KernelStreaming
   extend self
@@ -178,8 +180,8 @@ module Win32cr::Media::KernelStreaming
   KSPIN_FLAG_SOME_FRAMES_REQUIRED_FOR_PROCESSING = 8388608_u32
   KSPIN_FLAG_PROCESS_IF_ANY_IN_RUN_STATE = 16777216_u32
   KSPIN_FLAG_DENY_USERMODE_ACCESS = 2147483648_u32
-  RT_STRING = 6_i32
-  RT_RCDATA = 10_i32
+  RT_STRING = Win32cr::Foundation::PWSTR.new(0x6_u64)
+  RT_RCDATA = Win32cr::Foundation::PWSTR.new(0xa_u64)
   WAVE_FORMAT_EXTENSIBLE = 65534_u32
   KSDSOUND_BUFFER_PRIMARY = 1_u32
   KSDSOUND_BUFFER_STATIC = 2_u32
@@ -190,9 +192,9 @@ module Win32cr::Media::KernelStreaming
   KSDSOUND_BUFFER_CTRL_PAN = 4_u32
   KSDSOUND_BUFFER_CTRL_VOLUME = 8_u32
   KSDSOUND_BUFFER_CTRL_POSITIONNOTIFY = 16_u32
-  DEVPKEY_KsAudio_PacketSize_Constraints = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x13e004d6_u32, 0xb066_u16, 0x43bd_u16, StaticArray[0x91_u8, 0x3b_u8, 0xa4_u8, 0x15_u8, 0xcd_u8, 0x13_u8, 0xda_u8, 0x87_u8]), 2_u32)
-  DEVPKEY_KsAudio_Controller_DeviceInterface_Path = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x13e004d6_u32, 0xb066_u16, 0x43bd_u16, StaticArray[0x91_u8, 0x3b_u8, 0xa4_u8, 0x15_u8, 0xcd_u8, 0x13_u8, 0xda_u8, 0x87_u8]), 3_u32)
-  DEVPKEY_KsAudio_PacketSize_Constraints2 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x9404f781_u32, 0x7191_u16, 0x409b_u16, StaticArray[0x8b_u8, 0xb_u8, 0x80_u8, 0xbf_u8, 0x6e_u8, 0xc2_u8, 0x29_u8, 0xae_u8]), 2_u32)
+  DEVPKEY_KsAudio_PacketSize_Constraints = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x13e004d6_u32, 0xb066_u16, 0x43bd_u16, StaticArray[0x91_u8, 0x3b_u8, 0xa4_u8, 0x15_u8, 0xcd_u8, 0x13_u8, 0xda_u8, 0x87_u8]), 2_u32)
+  DEVPKEY_KsAudio_Controller_DeviceInterface_Path = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x13e004d6_u32, 0xb066_u16, 0x43bd_u16, StaticArray[0x91_u8, 0x3b_u8, 0xa4_u8, 0x15_u8, 0xcd_u8, 0x13_u8, 0xda_u8, 0x87_u8]), 3_u32)
+  DEVPKEY_KsAudio_PacketSize_Constraints2 = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x9404f781_u32, 0x7191_u16, 0x409b_u16, StaticArray[0x8b_u8, 0xb_u8, 0x80_u8, 0xbf_u8, 0x6e_u8, 0xc2_u8, 0x29_u8, 0xae_u8]), 2_u32)
   KSAUDIO_STEREO_SPEAKER_GEOMETRY_HEADPHONE = -1_i32
   KSAUDIO_STEREO_SPEAKER_GEOMETRY_MIN = 5_u32
   KSAUDIO_STEREO_SPEAKER_GEOMETRY_NARROW = 10_u32
@@ -589,11 +591,15 @@ module Win32cr::Media::KernelStreaming
   KSCAMERA_EXTENDEDPROP_RELATIVEPANELOPTIMIZATION_DYNAMIC = 2_u64
   KSCAMERA_EXTENDEDPROP_EYEGAZECORRECTION_OFF = 0_u64
   KSCAMERA_EXTENDEDPROP_EYEGAZECORRECTION_ON = 1_u64
+  KSCAMERA_EXTENDEDPROP_EYEGAZECORRECTION_STARE = 2_u64
   KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_OFF = 0_u64
   KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_BLUR = 1_u64
   KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_MASK = 2_u64
+  KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_SHALLOWFOCUS = 4_u64
   KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_MANUAL = 0_u64
   KSCAMERA_EXTENDEDPROP_DIGITALWINDOW_AUTOFACEFRAMING = 1_u64
+  KSCAMERA_EXTENDEDPROP_FRAMERATE_THROTTLE_OFF = 0_u64
+  KSCAMERA_EXTENDEDPROP_FRAMERATE_THROTTLE_ON = 1_u64
   KSCAMERAPROFILE_FLAGS_VIDEOSTABLIZATION = 1_u64
   KSCAMERAPROFILE_FLAGS_VIDEOHDR = 2_u64
   KSCAMERAPROFILE_FLAGS_PHOTOHDR = 4_u64
@@ -622,6 +628,8 @@ module Win32cr::Media::KernelStreaming
   JACKDESC2_PRESENCE_DETECT_CAPABILITY = 1_u32
   JACKDESC2_DYNAMIC_FORMAT_CHANGE_CAPABILITY = 2_u32
   KSPROPERTY_AUDIO_BUFFER_DURATION = 1_u32
+  AUDIOLOOPBACK_TAPPOINT_CAPS_PREVOLUMEMUTE = 1_u32
+  AUDIOLOOPBACK_TAPPOINT_CAPS_POSTVOLUMEMUTE = 2_u32
   MAX_RESOURCEGROUPID_LENGTH = 256_u32
   AUDIOMODULE_MAX_DATA_SIZE = 64000_u32
   AUDIOMODULE_MAX_NAME_CCH_SIZE = 128_u32
@@ -643,16 +651,6 @@ module Win32cr::Media::KernelStreaming
   PipeFactor_Align = 512_u32
   PipeFactor_PhysicalEnd = 1024_u32
   PipeFactor_LogicalEnd = 2048_u32
-  ENCAPIPARAM_BITRATE = "49cc4c43-ca83-4ad4-a9af-f3696af666df"
-  ENCAPIPARAM_PEAK_BITRATE = "703f16a9-3d48-44a1-b077-018dff915d19"
-  ENCAPIPARAM_BITRATE_MODE = "ee5fb25c-c713-40d1-9d58-c0d7241e250f"
-  CODECAPI_CHANGELISTS = "62b12acf-f6b0-47d9-9456-96f22c4e0b9d"
-  CODECAPI_VIDEO_ENCODER = "7112e8e1-3d03-47ef-8e60-03f1cf537301"
-  CODECAPI_AUDIO_ENCODER = "b9d19a3e-f897-429c-bc46-8138b7272b2d"
-  CODECAPI_SETALLDEFAULTS = "6c5e6a7c-acf8-4f55-a999-1a628109051b"
-  CODECAPI_ALLSETTINGS = "6a577e92-83e1-4113-adc2-4fcec32f83a1"
-  CODECAPI_SUPPORTSEVENTS = "0581af97-7693-4dbd-9dca-3f9ebd6585a1"
-  CODECAPI_CURRENTCHANGELIST = "1cb14e83-7d72-4657-83fd-47a2c5b9d13d"
   KSPROPERTY_MEMORY_TRANSPORT = 1_i32
 
   CLSID_GUID_NULL = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
@@ -1227,6 +1225,10 @@ module Win32cr::Media::KernelStreaming
 
   CLSID_KSDATAFORMAT_SUBTYPE_RIFFMIDI = LibC::GUID.new(0x4995daf0_u32, 0x9ee6_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0xe_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
 
+  CLSID_KSDATAFORMAT_SUBTYPE_UNIVERSALMIDIPACKET = LibC::GUID.new(0xfbffd49e_u32, 0xce26_u16, 0x464a_u16, StaticArray[0x9d_u8, 0xfc_u8, 0xfe_u8, 0xe4_u8, 0x24_u8, 0x56_u8, 0xc8_u8, 0x1c_u8])
+
+  CLSID_KSPROPSETID_MidiLoopedStreaming = LibC::GUID.new(0x1f306ba6_u32, 0xfd9b_u16, 0x427a_u16, StaticArray[0xbc_u8, 0xb3_u8, 0x27_u8, 0xcb_u8, 0xcf_u8, 0xe_u8, 0xf_u8, 0x19_u8])
+
   CLSID_KSDATAFORMAT_TYPE_STANDARD_ELEMENTARY_STREAM = LibC::GUID.new(0x36523b11_u32, 0x8ee5_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0xa3_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x57_u8, 0x66_u8, 0x4a_u8])
 
   CLSID_KSDATAFORMAT_TYPE_STANDARD_PES_PACKET = LibC::GUID.new(0x36523b12_u32, 0x8ee5_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0xa3_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x57_u8, 0x66_u8, 0x4a_u8])
@@ -1325,7 +1327,29 @@ module Win32cr::Media::KernelStreaming
 
   CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21 = LibC::GUID.new(0x30c_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
 
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MAT21_PROFILE4 = LibC::GUID.new(0x70c_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
   CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_DST = LibC::GUID.new(0xd_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_LC = LibC::GUID.new(0x110bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_LC = LibC::GUID.new(0x120bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_LC = LibC::GUID.new(0x130bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_LC = LibC::GUID.new(0x140bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_LC = LibC::GUID.new(0x150bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL1_BL = LibC::GUID.new(0x210bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL2_BL = LibC::GUID.new(0x220bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL3_BL = LibC::GUID.new(0x230bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL4_BL = LibC::GUID.new(0x240bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
+
+  CLSID_KSDATAFORMAT_SUBTYPE_IEC61937_MPEGH_LEVEL5_BL = LibC::GUID.new(0x250bf_u32, 0xcea_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
 
   CLSID_KSDATAFORMAT_SUBTYPE_MPEGLAYER3 = LibC::GUID.new(0x55_u32, 0x0_u16, 0x10_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
 
@@ -1463,6 +1487,8 @@ module Win32cr::Media::KernelStreaming
 
   CLSID_KSEVENTSETID_DynamicFormatChange = LibC::GUID.new(0x162ac456_u32, 0x83d7_u16, 0x4239_u16, StaticArray[0x96_u8, 0xdf_u8, 0xc7_u8, 0x5f_u8, 0xfa_u8, 0x13_u8, 0x8b_u8, 0xc6_u8])
 
+  CLSID_KSATTRIBUTEID_VIDEOFORMAT_DX12 = LibC::GUID.new(0xfc9d87b5_u32, 0xb02_u16, 0x438e_u16, StaticArray[0x89_u8, 0xb0_u8, 0xe2_u8, 0x41_u8, 0xfc_u8, 0xe8_u8, 0x89_u8, 0xad_u8])
+
   CLSID_PROPSETID_ALLOCATOR_CONTROL = LibC::GUID.new(0x53171960_u32, 0x148e_u16, 0x11d2_u16, StaticArray[0x99_u8, 0x79_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0xcc_u8, 0x16_u8, 0xba_u8])
 
   CLSID_PROPSETID_VIDCAP_VIDEOPROCAMP = LibC::GUID.new(0xc6e13360_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
@@ -1514,6 +1540,8 @@ module Win32cr::Media::KernelStreaming
   CLSID_KSEVENTSETID_ExtendedCameraControl = LibC::GUID.new(0x571c92c9_u32, 0x13a2_u16, 0x47e3_u16, StaticArray[0xa6_u8, 0x49_u8, 0xd2_u8, 0xa7_u8, 0x78_u8, 0x16_u8, 0x63_u8, 0x84_u8])
 
   CLSID_KSEVENTSETID_CameraEvent = LibC::GUID.new(0x7899b2e0_u32, 0x6b43_u16, 0x4964_u16, StaticArray[0x9d_u8, 0x2a_u8, 0xa2_u8, 0x1f_u8, 0x40_u8, 0x61_u8, 0xf5_u8, 0x76_u8])
+
+  CLSID_KSPROPERTYSETID_WindowsCameraEffect = LibC::GUID.new(0x1666d655_u32, 0x21a6_u16, 0x4982_u16, StaticArray[0x97_u8, 0x28_u8, 0x52_u8, 0xc3_u8, 0x9e_u8, 0x86_u8, 0x9f_u8, 0x90_u8])
 
   CLSID_KSPROPERTYSETID_PerFrameSettingControl = LibC::GUID.new(0xf1f3e261_u32, 0xdee6_u16, 0x4537_u16, StaticArray[0xbf_u8, 0xf5_u8, 0xee_u8, 0x20_u8, 0x6d_u8, 0xb5_u8, 0x4a_u8, 0xac_u8])
 
@@ -1597,26 +1625,6 @@ module Win32cr::Media::KernelStreaming
 
   CLSID_KSCATEGORY_MULTIPLEXER = LibC::GUID.new(0x7a5de1d3_u32, 0x1a1_u16, 0x452c_u16, StaticArray[0xb4_u8, 0x81_u8, 0x4f_u8, 0xa2_u8, 0xb9_u8, 0x62_u8, 0x71_u8, 0xe8_u8])
 
-  CLSID_ENCAPIPARAM_BITRATE = LibC::GUID.new(0x49cc4c43_u32, 0xca83_u16, 0x4ad4_u16, StaticArray[0xa9_u8, 0xaf_u8, 0xf3_u8, 0x69_u8, 0x6a_u8, 0xf6_u8, 0x66_u8, 0xdf_u8])
-
-  CLSID_ENCAPIPARAM_PEAK_BITRATE = LibC::GUID.new(0x703f16a9_u32, 0x3d48_u16, 0x44a1_u16, StaticArray[0xb0_u8, 0x77_u8, 0x1_u8, 0x8d_u8, 0xff_u8, 0x91_u8, 0x5d_u8, 0x19_u8])
-
-  CLSID_ENCAPIPARAM_BITRATE_MODE = LibC::GUID.new(0xee5fb25c_u32, 0xc713_u16, 0x40d1_u16, StaticArray[0x9d_u8, 0x58_u8, 0xc0_u8, 0xd7_u8, 0x24_u8, 0x1e_u8, 0x25_u8, 0xf_u8])
-
-  CLSID_CODECAPI_CHANGELISTS = LibC::GUID.new(0x62b12acf_u32, 0xf6b0_u16, 0x47d9_u16, StaticArray[0x94_u8, 0x56_u8, 0x96_u8, 0xf2_u8, 0x2c_u8, 0x4e_u8, 0xb_u8, 0x9d_u8])
-
-  CLSID_CODECAPI_VIDEO_ENCODER = LibC::GUID.new(0x7112e8e1_u32, 0x3d03_u16, 0x47ef_u16, StaticArray[0x8e_u8, 0x60_u8, 0x3_u8, 0xf1_u8, 0xcf_u8, 0x53_u8, 0x73_u8, 0x1_u8])
-
-  CLSID_CODECAPI_AUDIO_ENCODER = LibC::GUID.new(0xb9d19a3e_u32, 0xf897_u16, 0x429c_u16, StaticArray[0xbc_u8, 0x46_u8, 0x81_u8, 0x38_u8, 0xb7_u8, 0x27_u8, 0x2b_u8, 0x2d_u8])
-
-  CLSID_CODECAPI_SETALLDEFAULTS = LibC::GUID.new(0x6c5e6a7c_u32, 0xacf8_u16, 0x4f55_u16, StaticArray[0xa9_u8, 0x99_u8, 0x1a_u8, 0x62_u8, 0x81_u8, 0x9_u8, 0x5_u8, 0x1b_u8])
-
-  CLSID_CODECAPI_ALLSETTINGS = LibC::GUID.new(0x6a577e92_u32, 0x83e1_u16, 0x4113_u16, StaticArray[0xad_u8, 0xc2_u8, 0x4f_u8, 0xce_u8, 0xc3_u8, 0x2f_u8, 0x83_u8, 0xa1_u8])
-
-  CLSID_CODECAPI_SUPPORTSEVENTS = LibC::GUID.new(0x581af97_u32, 0x7693_u16, 0x4dbd_u16, StaticArray[0x9d_u8, 0xca_u8, 0x3f_u8, 0x9e_u8, 0xbd_u8, 0x65_u8, 0x85_u8, 0xa1_u8])
-
-  CLSID_CODECAPI_CURRENTCHANGELIST = LibC::GUID.new(0x1cb14e83_u32, 0x7d72_u16, 0x4657_u16, StaticArray[0x83_u8, 0xfd_u8, 0x47_u8, 0xa2_u8, 0xc5_u8, 0xb9_u8, 0xd1_u8, 0x3d_u8])
-
   CLSID_KSPROPSETID_Jack = LibC::GUID.new(0x4509f757_u32, 0x2d46_u16, 0x4637_u16, StaticArray[0x8e_u8, 0x62_u8, 0xce_u8, 0x7d_u8, 0xb9_u8, 0x44_u8, 0xf5_u8, 0x7b_u8])
 
   CLSID_KSPROPSETID_AudioPosture = LibC::GUID.new(0xa3fb7b0d_u32, 0x474e_u16, 0x4f51_u16, StaticArray[0xa3_u8, 0x79_u8, 0x51_u8, 0x28_u8, 0x2d_u8, 0xd4_u8, 0xfa_u8, 0x8f_u8])
@@ -1632,6 +1640,10 @@ module Win32cr::Media::KernelStreaming
   CLSID_AUDIO_SIGNALPROCESSINGMODE_DEFAULT = LibC::GUID.new(0xc18e2f7e_u32, 0x933d_u16, 0x4965_u16, StaticArray[0xb7_u8, 0xd1_u8, 0x1e_u8, 0xef_u8, 0x22_u8, 0x8d_u8, 0x2a_u8, 0xf3_u8])
 
   CLSID_AUDIO_SIGNALPROCESSINGMODE_RAW = LibC::GUID.new(0x9e90ea20_u32, 0xb493_u16, 0x4fd1_u16, StaticArray[0xa1_u8, 0xa8_u8, 0x7e_u8, 0x13_u8, 0x61_u8, 0xa9_u8, 0x56_u8, 0xcf_u8])
+
+  CLSID_KSPROPSETID_AudioLoopback = LibC::GUID.new(0xb3648bc8_u32, 0x5b91_u16, 0x468a_u16, StaticArray[0xb9_u8, 0x4d_u8, 0xf4_u8, 0x64_u8, 0x12_u8, 0x50_u8, 0x91_u8, 0x7c_u8])
+
+  CLSID_KSATTRIBUTEID_AUDIOLOOPBACK_TAPPOINT = LibC::GUID.new(0x2795a0f7_u32, 0x1688_u16, 0x44fe_u16, StaticArray[0xbc_u8, 0x14_u8, 0xbf_u8, 0x82_u8, 0x73_u8, 0x99_u8, 0x21_u8, 0x41_u8])
 
   CLSID_KSPROPSETID_AudioResourceManagement = LibC::GUID.new(0xd0b305e1_u32, 0xb2cc_u16, 0x484c_u16, StaticArray[0x8f_u8, 0x23_u8, 0xe5_u8, 0xd2_u8, 0x8a_u8, 0xd9_u8, 0xcf_u8, 0x88_u8])
 
@@ -1793,6 +1805,7 @@ module Win32cr::Media::KernelStreaming
   enum KSEVENT_PINCAPS_CHANGENOTIFICATIONS
     KSEVENT_PINCAPS_FORMATCHANGE = 0_i32
     KSEVENT_PINCAPS_JACKINFOCHANGE = 1_i32
+    KSEVENT_PINCAPS_INVALIDATECLIENTS = 2_i32
   end
   enum KSEVENT_VOLUMELIMIT
     KSEVENT_VOLUMELIMIT_CHANGED = 0_i32
@@ -2158,6 +2171,11 @@ module Win32cr::Media::KernelStreaming
   enum KSEVENT_LOOPEDSTREAMING
     KSEVENT_LOOPEDSTREAMING_POSITION = 0_i32
   end
+  enum KSPROPERTY_MIDILOOPEDSTREAMING
+    KSPROPERTY_MIDILOOPEDSTREAMING_BUFFER = 0_i32
+    KSPROPERTY_MIDILOOPEDSTREAMING_REGISTERS = 1_i32
+    KSPROPERTY_MIDILOOPEDSTREAMING_NOTIFICATION_EVENT = 2_i32
+  end
   enum KSPROPERTY_MPEG2VID
     KSPROPERTY_MPEG2VID_MODES = 0_i32
     KSPROPERTY_MPEG2VID_CUR_MODE = 1_i32
@@ -2329,7 +2347,7 @@ module Win32cr::Media::KernelStreaming
     KS_TUNER_STRATEGY_SIGNAL_STRENGTH = 2_i32
     KS_TUNER_STRATEGY_DRIVER_TUNES = 4_i32
   end
-  enum TunerDecoderLockType_
+  enum TunerLockType
     Tuner_LockType_None = 0_i32
     Tuner_LockType_Within_Scan_Sensing_Range = 1_i32
     Tuner_LockType_Locked = 2_i32
@@ -2448,8 +2466,11 @@ module Win32cr::Media::KernelStreaming
     KSPROPERTY_CAMERACONTROL_EXTENDED_BACKGROUNDSEGMENTATION = 41_i32
     KSPROPERTY_CAMERACONTROL_EXTENDED_DIGITALWINDOW_CONFIGCAPS = 42_i32
     KSPROPERTY_CAMERACONTROL_EXTENDED_DIGITALWINDOW = 43_i32
-    KSPROPERTY_CAMERACONTROL_EXTENDED_END = 44_i32
-    KSPROPERTY_CAMERACONTROL_EXTENDED_END2 = 44_i32
+    KSPROPERTY_CAMERACONTROL_EXTENDED_FRAMERATE_THROTTLE = 44_i32
+    KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW2_CONFIGCAPS = 45_i32
+    KSPROPERTY_CAMERACONTROL_EXTENDED_FIELDOFVIEW2 = 46_i32
+    KSPROPERTY_CAMERACONTROL_EXTENDED_END = 47_i32
+    KSPROPERTY_CAMERACONTROL_EXTENDED_END2 = 47_i32
   end
   enum KSEVENT_CAMERAEVENT
     KSEVENT_PHOTO_SAMPLE_SCANNED = 0_i32
@@ -2729,6 +2750,7 @@ module Win32cr::Media::KernelStreaming
     KSPROPERTY_JACK_DESCRIPTION2 = 2_i32
     KSPROPERTY_JACK_SINK_INFO = 3_i32
     KSPROPERTY_JACK_CONTAINERID = 4_i32
+    KSPROPERTY_JACK_DESCRIPTION3 = 5_i32
   end
   enum EPcxConnectionType
     Econntypeunknown = 0_i32
@@ -2798,13 +2820,26 @@ module Win32cr::Media::KernelStreaming
     KSPROPERTY_AUDIOENGINE_BUFFER_SIZE_RANGE = 7_i32
     KSPROPERTY_AUDIOENGINE_LOOPBACK_PROTECTION = 8_i32
     KSPROPERTY_AUDIOENGINE_VOLUMELEVEL = 9_i32
+    KSPROPERTY_AUDIOENGINE_DEVICECONTROLS = 10_i32
   end
   enum AUDIO_CURVE_TYPE
     AUDIO_CURVE_TYPE_NONE = 0_i32
     AUDIO_CURVE_TYPE_WINDOWS_FADE = 1_i32
   end
+  enum EDeviceControlUseType
+    Edevicecontrolusemissing = 0_i32
+    Edevicecontroluseprimary = 1_i32
+    Edevicecontrolusesecondary = 2_i32
+  end
   enum KSPROPERTY_AUDIOSIGNALPROCESSING
     KSPROPERTY_AUDIOSIGNALPROCESSING_MODES = 0_i32
+  end
+  enum KSPROPERTY_AUDIOLOOPBACK
+    KSPROPERTY_AUDIOLOOPBACK_TAPPOINT_CAPS = 0_i32
+  end
+  enum AUDIOLOOPBACK_TAPPOINT_TYPE
+    AUDIOLOOPBACK_TAPPOINT_PREVOLUMEMUTE = 0_i32
+    AUDIOLOOPBACK_TAPPOINT_POSTVOLUMEMUTE = 1_i32
   end
   enum KSPROPERTY_AUDIORESOURCEMANAGEMENT
     KSPROPERTY_AUDIORESOURCEMANAGEMENT_RESOURCEGROUP = 0_i32
@@ -2852,24 +2887,52 @@ module Win32cr::Media::KernelStreaming
     KS_MemoryTypeUser = 5_i32
     KS_MemoryTypeAnyHost = 6_i32
   end
-
-  @[Extern]
-  struct IKsPin
-    def initialize()
-    end
+  enum KSPEEKOPERATION
+    KsPeekOperation_PeekOnly = 0_i32
+    KsPeekOperation_AddRef = 1_i32
+  end
+  enum KSIOOPERATION
+    KsIoOperation_Write = 0_i32
+    KsIoOperation_Read = 1_i32
   end
 
+  {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  struct IKsAllocator
-    def initialize()
+  struct KSSTREAM_HEADER
+    property size : UInt32
+    property type_specific_flags : UInt32
+    property presentation_time : Win32cr::Media::KernelStreaming::KSTIME
+    property duration : Int64
+    property frame_extent : UInt32
+    property data_used : UInt32
+    property data : Void*
+    property options_flags : UInt32
+    property reserved : UInt32
+    def initialize(@size : UInt32, @type_specific_flags : UInt32, @presentation_time : Win32cr::Media::KernelStreaming::KSTIME, @duration : Int64, @frame_extent : UInt32, @data_used : UInt32, @data : Void*, @options_flags : UInt32, @reserved : UInt32)
     end
   end
+  {% end %}
 
+  {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
-  struct IKsAllocatorEx
-    def initialize()
+  struct KSNODEPROPERTY_AUDIO_3D_LISTENER
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property listener_id : Void*
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @listener_id : Void*)
     end
   end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct KSNODEPROPERTY_AUDIO_PROPERTY
+    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
+    property app_context : Void*
+    property length : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @app_context : Void*, @length : UInt32)
+    end
+  end
+  {% end %}
 
   @[Extern]
   struct KSPRIORITY
@@ -3048,6 +3111,16 @@ module Win32cr::Media::KernelStreaming
     property semaphore_handle : SemaphoreHandle_e__Struct_
     property alignment : Alignment_e__Struct_
 
+      # Nested Type EventHandle_e__Struct_
+      @[Extern]
+      struct EventHandle_e__Struct_
+    property event : Win32cr::Foundation::HANDLE
+    property reserved : LibC::UIntPtrT[2]
+    def initialize(@event : Win32cr::Foundation::HANDLE, @reserved : LibC::UIntPtrT[2])
+    end
+      end
+
+
       # Nested Type SemaphoreHandle_e__Struct_
       @[Extern]
       struct SemaphoreHandle_e__Struct_
@@ -3055,16 +3128,6 @@ module Win32cr::Media::KernelStreaming
     property reserved : UInt32
     property adjustment : Int32
     def initialize(@semaphore : Win32cr::Foundation::HANDLE, @reserved : UInt32, @adjustment : Int32)
-    end
-      end
-
-
-      # Nested Type EventHandle_e__Struct_
-      @[Extern]
-      struct EventHandle_e__Struct_
-    property event : Win32cr::Foundation::HANDLE
-    property reserved : LibC::UIntPtrT[2]
-    def initialize(@event : Win32cr::Foundation::HANDLE, @reserved : LibC::UIntPtrT[2])
     end
       end
 
@@ -3297,8 +3360,8 @@ module Win32cr::Media::KernelStreaming
   struct KSPIN_PHYSICALCONNECTION
     property size : UInt32
     property pin : UInt32
-    property symbolic_link_name : UInt16*
-    def initialize(@size : UInt32, @pin : UInt32, @symbolic_link_name : UInt16*)
+    property symbolic_link_name : UInt16[1]
+    def initialize(@size : UInt32, @pin : UInt32, @symbolic_link_name : UInt16[1])
     end
   end
 
@@ -3311,22 +3374,22 @@ module Win32cr::Media::KernelStreaming
     property anonymous2 : Anonymous2_e__Union_
     property reserved : UInt32
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property file_alignment : UInt32
-    property frame_pitch : Int32
-    def initialize(@file_alignment : UInt32, @frame_pitch : Int32)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property options_flags : UInt32
     property requirements_flags : UInt32
     def initialize(@options_flags : UInt32, @requirements_flags : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property file_alignment : UInt32
+    property frame_pitch : Int32
+    def initialize(@file_alignment : UInt32, @frame_pitch : Int32)
     end
     end
 
@@ -3393,8 +3456,8 @@ module Win32cr::Media::KernelStreaming
     property pin_flags : UInt32
     property output_compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION
     property pin_weight : UInt32
-    property framing_item : Win32cr::Media::KernelStreaming::KS_FRAMING_ITEM*
-    def initialize(@count_items : UInt32, @pin_flags : UInt32, @output_compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION, @pin_weight : UInt32, @framing_item : Win32cr::Media::KernelStreaming::KS_FRAMING_ITEM*)
+    property framing_item : Win32cr::Media::KernelStreaming::KS_FRAMING_ITEM[1]
+    def initialize(@count_items : UInt32, @pin_flags : UInt32, @output_compression : Win32cr::Media::KernelStreaming::KS_COMPRESSION, @pin_weight : UInt32, @framing_item : Win32cr::Media::KernelStreaming::KS_FRAMING_ITEM[1])
     end
   end
 
@@ -3425,7 +3488,7 @@ module Win32cr::Media::KernelStreaming
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct KSSTREAM_HEADER
     property size : UInt32
@@ -3436,8 +3499,7 @@ module Win32cr::Media::KernelStreaming
     property data_used : UInt32
     property data : Void*
     property options_flags : UInt32
-    property reserved : UInt32
-    def initialize(@size : UInt32, @type_specific_flags : UInt32, @presentation_time : Win32cr::Media::KernelStreaming::KSTIME, @duration : Int64, @frame_extent : UInt32, @data_used : UInt32, @data : Void*, @options_flags : UInt32, @reserved : UInt32)
+    def initialize(@size : UInt32, @type_specific_flags : UInt32, @presentation_time : Win32cr::Media::KernelStreaming::KSTIME, @duration : Int64, @frame_extent : UInt32, @data_used : UInt32, @data : Void*, @options_flags : UInt32)
     end
   end
   {% end %}
@@ -3645,7 +3707,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  struct KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_
+  struct KSAUDIO_PACKETSIZE_PROCESSINGMODE_CONSTRAINT
     property processing_mode : LibC::GUID
     property samples_per_processing_packet : UInt32
     property processing_packet_duration_in_hns : UInt32
@@ -3659,8 +3721,8 @@ module Win32cr::Media::KernelStreaming
     property packet_size_file_alignment : UInt32
     property reserved : UInt32
     property num_processing_mode_constraints : UInt32
-    property processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*
-    def initialize(@min_packet_period_in_hns : UInt32, @packet_size_file_alignment : UInt32, @reserved : UInt32, @num_processing_mode_constraints : UInt32, @processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*)
+    property processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_PROCESSINGMODE_CONSTRAINT[1]
+    def initialize(@min_packet_period_in_hns : UInt32, @packet_size_file_alignment : UInt32, @reserved : UInt32, @num_processing_mode_constraints : UInt32, @processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_PROCESSINGMODE_CONSTRAINT[1])
     end
   end
 
@@ -3670,8 +3732,8 @@ module Win32cr::Media::KernelStreaming
     property packet_size_file_alignment : UInt32
     property max_packet_size_in_bytes : UInt32
     property num_processing_mode_constraints : UInt32
-    property processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*
-    def initialize(@min_packet_period_in_hns : UInt32, @packet_size_file_alignment : UInt32, @max_packet_size_in_bytes : UInt32, @num_processing_mode_constraints : UInt32, @processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_SIGNALPROCESSINGMODE_CONSTRAINT_*)
+    property processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_PROCESSINGMODE_CONSTRAINT[1]
+    def initialize(@min_packet_period_in_hns : UInt32, @packet_size_file_alignment : UInt32, @max_packet_size_in_bytes : UInt32, @num_processing_mode_constraints : UInt32, @processing_mode_constraints : Win32cr::Media::KernelStreaming::KSAUDIO_PACKETSIZE_PROCESSINGMODE_CONSTRAINT[1])
     end
   end
 
@@ -3698,8 +3760,8 @@ module Win32cr::Media::KernelStreaming
     property usFrequencyBandLo : UInt16
     property usFrequencyBandHi : UInt16
     property usNumberOfMicrophones : UInt16
-    property ks_mic_coord : Win32cr::Media::KernelStreaming::KSAUDIO_MICROPHONE_COORDINATES*
-    def initialize(@usVersion : UInt16, @usMicArrayType : UInt16, @wVerticalAngleBegin : Int16, @wVerticalAngleEnd : Int16, @wHorizontalAngleBegin : Int16, @wHorizontalAngleEnd : Int16, @usFrequencyBandLo : UInt16, @usFrequencyBandHi : UInt16, @usNumberOfMicrophones : UInt16, @ks_mic_coord : Win32cr::Media::KernelStreaming::KSAUDIO_MICROPHONE_COORDINATES*)
+    property ks_mic_coord : Win32cr::Media::KernelStreaming::KSAUDIO_MICROPHONE_COORDINATES[1]
+    def initialize(@usVersion : UInt16, @usMicArrayType : UInt16, @wVerticalAngleBegin : Int16, @wVerticalAngleEnd : Int16, @wHorizontalAngleBegin : Int16, @wHorizontalAngleEnd : Int16, @usFrequencyBandLo : UInt16, @usFrequencyBandHi : UInt16, @usNumberOfMicrophones : UInt16, @ks_mic_coord : Win32cr::Media::KernelStreaming::KSAUDIO_MICROPHONE_COORDINATES[1])
     end
   end
 
@@ -3709,22 +3771,22 @@ module Win32cr::Media::KernelStreaming
     property anonymous2 : Anonymous2_e__Union_
     property anonymous3 : Anonymous3_e__Union_
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property y : Float32
-    property dvY : Float32
-    def initialize(@y : Float32, @dvY : Float32)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property x : Float32
     property dvX : Float32
     def initialize(@x : Float32, @dvX : Float32)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property y : Float32
+    property dvY : Float32
+    def initialize(@y : Float32, @dvY : Float32)
     end
     end
 
@@ -4095,18 +4157,18 @@ module Win32cr::Media::KernelStreaming
   struct KSAUDIO_MIXCAP_TABLE
     property input_channels : UInt32
     property output_channels : UInt32
-    property capabilities : Win32cr::Media::KernelStreaming::KSAUDIO_MIX_CAPS*
-    def initialize(@input_channels : UInt32, @output_channels : UInt32, @capabilities : Win32cr::Media::KernelStreaming::KSAUDIO_MIX_CAPS*)
+    property capabilities : Win32cr::Media::KernelStreaming::KSAUDIO_MIX_CAPS[1]
+    def initialize(@input_channels : UInt32, @output_channels : UInt32, @capabilities : Win32cr::Media::KernelStreaming::KSAUDIO_MIX_CAPS[1])
     end
   end
 
   @[Extern]
   struct KSAUDIO_POSITIONEX
-    property timer_frequency : Win32cr::Foundation::LARGE_INTEGER
-    property time_stamp1 : Win32cr::Foundation::LARGE_INTEGER
+    property timer_frequency : Int64
+    property time_stamp1 : Int64
     property position : Win32cr::Media::KernelStreaming::KSAUDIO_POSITION
-    property time_stamp2 : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@timer_frequency : Win32cr::Foundation::LARGE_INTEGER, @time_stamp1 : Win32cr::Foundation::LARGE_INTEGER, @position : Win32cr::Media::KernelStreaming::KSAUDIO_POSITION, @time_stamp2 : Win32cr::Foundation::LARGE_INTEGER)
+    property time_stamp2 : Int64
+    def initialize(@timer_frequency : Int64, @time_stamp1 : Int64, @position : Win32cr::Media::KernelStreaming::KSAUDIO_POSITION, @time_stamp2 : Int64)
     end
   end
 
@@ -4272,26 +4334,75 @@ module Win32cr::Media::KernelStreaming
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct KSNODEPROPERTY_AUDIO_3D_LISTENER
     property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
     property listener_id : Void*
-    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @listener_id : Void*)
+    property reserved : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @listener_id : Void*, @reserved : UInt32)
     end
   end
   {% end %}
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct KSNODEPROPERTY_AUDIO_PROPERTY
     property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
     property app_context : Void*
     property length : UInt32
-    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @app_context : Void*, @length : UInt32)
+    property reserved : UInt32
+    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @app_context : Void*, @length : UInt32, @reserved : UInt32)
     end
   end
   {% end %}
+
+  @[Extern]
+  struct KSMIDILOOPED_BUFFER
+    property buffer_address : Void*
+    property actual_buffer_size : UInt32
+    def initialize(@buffer_address : Void*, @actual_buffer_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct KSMIDILOOPED_REGISTERS
+    property write_position : Void*
+    property read_position : Void*
+    def initialize(@write_position : Void*, @read_position : Void*)
+    end
+  end
+
+  @[Extern]
+  struct KSMIDILOOPED_EVENT
+    property write_event : Win32cr::Foundation::HANDLE
+    def initialize(@write_event : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct KSMIDILOOPED_EVENT2
+    property write_event : Win32cr::Foundation::HANDLE
+    property read_event : Win32cr::Foundation::HANDLE
+    def initialize(@write_event : Win32cr::Foundation::HANDLE, @read_event : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct KSMIDILOOPED_BUFFER_PROPERTY
+    property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
+    property requested_buffer_size : UInt32
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @requested_buffer_size : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct UMPDATAFORMAT
+    property position : Int64
+    property byte_count : UInt32
+    def initialize(@position : Int64, @byte_count : UInt32)
+    end
+  end
 
   @[Extern]
   struct KSMUSICFORMAT
@@ -4419,8 +4530,8 @@ module Win32cr::Media::KernelStreaming
   @[Extern]
   struct KS_DVDCOPY_BUSKEY
     property bus_key : UInt8[5]
-    property reserved : UInt8*
-    def initialize(@bus_key : UInt8[5], @reserved : UInt8*)
+    property reserved : UInt8[1]
+    def initialize(@bus_key : UInt8[5], @reserved : UInt8[1])
     end
   end
 
@@ -4553,7 +4664,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  struct KS_AnalogVideoInfo
+  struct KS_ANALOGVIDEOINFO
     property rcSource : Win32cr::Foundation::RECT
     property rcTarget : Win32cr::Foundation::RECT
     property dwActiveWidth : UInt32
@@ -4606,8 +4717,8 @@ module Win32cr::Media::KernelStreaming
     property hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER
     property dwStartTimeCode : UInt32
     property cbSequenceHeader : UInt32
-    property bSequenceHeader : UInt8*
-    def initialize(@hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER, @dwStartTimeCode : UInt32, @cbSequenceHeader : UInt32, @bSequenceHeader : UInt8*)
+    property bSequenceHeader : UInt8[1]
+    def initialize(@hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER, @dwStartTimeCode : UInt32, @cbSequenceHeader : UInt32, @bSequenceHeader : UInt8[1])
     end
   end
 
@@ -4619,8 +4730,8 @@ module Win32cr::Media::KernelStreaming
     property dwProfile : UInt32
     property dwLevel : UInt32
     property dwFlags : UInt32
-    property bSequenceHeader : UInt32*
-    def initialize(@hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2, @dwStartTimeCode : UInt32, @cbSequenceHeader : UInt32, @dwProfile : UInt32, @dwLevel : UInt32, @dwFlags : UInt32, @bSequenceHeader : UInt32*)
+    property bSequenceHeader : UInt32[1]
+    def initialize(@hdr : Win32cr::Media::KernelStreaming::KS_VIDEOINFOHEADER2, @dwStartTimeCode : UInt32, @cbSequenceHeader : UInt32, @dwProfile : UInt32, @dwLevel : UInt32, @dwFlags : UInt32, @bSequenceHeader : UInt32[1])
     end
   end
 
@@ -4669,7 +4780,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  struct KS_MPEAUDIOINFO
+  struct KS_MPEGAUDIOINFO
     property dwFlags : UInt32
     property dwReserved1 : UInt32
     property dwReserved2 : UInt32
@@ -4864,8 +4975,8 @@ module Win32cr::Media::KernelStreaming
   @[Extern]
   struct KS_DATARANGE_ANALOGVIDEO
     property data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT
-    property analog_video_info : Win32cr::Media::KernelStreaming::KS_AnalogVideoInfo
-    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @analog_video_info : Win32cr::Media::KernelStreaming::KS_AnalogVideoInfo)
+    property analog_video_info : Win32cr::Media::KernelStreaming::KS_ANALOGVIDEOINFO
+    def initialize(@data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT, @analog_video_info : Win32cr::Media::KernelStreaming::KS_ANALOGVIDEOINFO)
     end
   end
 
@@ -5148,6 +5259,16 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
+  struct VIDEOFORMAT_DX12
+    property header : Win32cr::Media::KernelStreaming::KSATTRIBUTE
+    property resourceLayout : UInt32
+    property resourceFlags : UInt32
+    property customLayout : LibC::GUID
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSATTRIBUTE, @resourceLayout : UInt32, @resourceFlags : UInt32, @customLayout : LibC::GUID)
+    end
+  end
+
+  @[Extern]
   struct KS_FRAME_INFO
     property extended_header_size : UInt32
     property dwFrameFlags : UInt32
@@ -5159,6 +5280,16 @@ module Win32cr::Media::KernelStreaming
     property anonymous1 : Anonymous1_e__Union_
     property reserved2 : UInt32
     property anonymous2 : Anonymous2_e__Union_
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property lSurfacePitch : Int32
+    property reserved1 : UInt32
+    def initialize(@lSurfacePitch : Int32, @reserved1 : UInt32)
+    end
+    end
+
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
@@ -5176,16 +5307,6 @@ module Win32cr::Media::KernelStreaming
       end
 
     def initialize(@anonymous : Anonymous_e__Struct_, @frame_completion_number : UInt64)
-    end
-    end
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property lSurfacePitch : Int32
-    property reserved1 : UInt32
-    def initialize(@lSurfacePitch : Int32, @reserved1 : UInt32)
     end
     end
 
@@ -5419,9 +5540,9 @@ module Win32cr::Media::KernelStreaming
   @[Extern]
   struct KSPROPERTY_TUNER_SCAN_STATUS_S
     property property : Win32cr::Media::KernelStreaming::KSIDENTIFIER
-    property lock_status : Win32cr::Media::KernelStreaming::TunerDecoderLockType_
+    property lock_status : Win32cr::Media::KernelStreaming::TunerLockType
     property current_frequency : UInt32
-    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @lock_status : Win32cr::Media::KernelStreaming::TunerDecoderLockType_, @current_frequency : UInt32)
+    def initialize(@property : Win32cr::Media::KernelStreaming::KSIDENTIFIER, @lock_status : Win32cr::Media::KernelStreaming::TunerLockType, @current_frequency : UInt32)
     end
   end
 
@@ -5622,10 +5743,10 @@ module Win32cr::Media::KernelStreaming
     property dbl : Float64
     property ull : UInt64
     property ul : UInt32
-    property ratio : Win32cr::Foundation::ULARGE_INTEGER
+    property ratio : UInt64
     property l : Int32
     property ll : Int64
-    def initialize(@dbl : Float64, @ull : UInt64, @ul : UInt32, @ratio : Win32cr::Foundation::ULARGE_INTEGER, @l : Int32, @ll : Int64)
+    def initialize(@dbl : Float64, @ull : UInt64, @ul : UInt32, @ratio : UInt64, @l : Int32, @ll : Int64)
     end
     end
 
@@ -5925,6 +6046,16 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
+  struct KSCAMERA_EXTENDEDPROP_FIELDOFVIEW2_CONFIGCAPS
+    property default_diagonal_field_of_view_in_degrees : UInt16
+    property discrete_fo_v_stops_count : UInt16
+    property discrete_fo_v_stops : UInt16[360]
+    property reserved : UInt32
+    def initialize(@default_diagonal_field_of_view_in_degrees : UInt16, @discrete_fo_v_stops_count : UInt16, @discrete_fo_v_stops : UInt16[360], @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
   struct KSCAMERA_EXTENDEDPROP_BACKGROUNDSEGMENTATION_CONFIGCAPS
     property resolution : Win32cr::Foundation::SIZE
     property max_frame_rate : MaxFrameRate_e__Struct_
@@ -5950,8 +6081,8 @@ module Win32cr::Media::KernelStreaming
     property mask_coverage_bounding_box : Win32cr::Foundation::RECT
     property mask_resolution : Win32cr::Foundation::SIZE
     property foreground_bounding_box : Win32cr::Foundation::RECT
-    property mask_data : UInt8*
-    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @mask_coverage_bounding_box : Win32cr::Foundation::RECT, @mask_resolution : Win32cr::Foundation::SIZE, @foreground_bounding_box : Win32cr::Foundation::RECT, @mask_data : UInt8*)
+    property mask_data : UInt8[1]
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @mask_coverage_bounding_box : Win32cr::Foundation::RECT, @mask_resolution : Win32cr::Foundation::SIZE, @foreground_bounding_box : Win32cr::Foundation::RECT, @mask_data : UInt8[1])
     end
   end
 
@@ -6110,8 +6241,8 @@ module Win32cr::Media::KernelStreaming
   @[Extern]
   struct KSPROPERTY_NETWORKCAMERACONTROL_EVENT_INFO
     property header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER
-    property event_filter : UInt16*
-    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @event_filter : UInt16*)
+    property event_filter : UInt16[1]
+    def initialize(@header : Win32cr::Media::KernelStreaming::KSCAMERA_METADATA_ITEMHEADER, @event_filter : UInt16[1])
     end
   end
 
@@ -6274,16 +6405,6 @@ module Win32cr::Media::KernelStreaming
     property dwAbsTrackNumber : UInt32
     property raw_avc : RawAVC_e__Struct_
 
-      # Nested Type RawAVC_e__Struct_
-      @[Extern]
-      struct RawAVC_e__Struct_
-    property payload_size : UInt32
-    property payload : UInt8[512]
-    def initialize(@payload_size : UInt32, @payload : UInt8[512])
-    end
-      end
-
-
       # Nested Type Timecode_e__Struct_
       @[Extern]
       struct Timecode_e__Struct_
@@ -6292,6 +6413,16 @@ module Win32cr::Media::KernelStreaming
     property minute : UInt8
     property hour : UInt8
     def initialize(@frame : UInt8, @second : UInt8, @minute : UInt8, @hour : UInt8)
+    end
+      end
+
+
+      # Nested Type RawAVC_e__Struct_
+      @[Extern]
+      struct RawAVC_e__Struct_
+    property payload_size : UInt32
+    property payload : UInt8[512]
+    def initialize(@payload_size : UInt32, @payload : UInt8[512])
     end
       end
 
@@ -6321,16 +6452,6 @@ module Win32cr::Media::KernelStreaming
     property dwAbsTrackNumber : UInt32
     property raw_avc : RawAVC_e__Struct_
 
-      # Nested Type RawAVC_e__Struct_
-      @[Extern]
-      struct RawAVC_e__Struct_
-    property payload_size : UInt32
-    property payload : UInt8[512]
-    def initialize(@payload_size : UInt32, @payload : UInt8[512])
-    end
-      end
-
-
       # Nested Type Timecode_e__Struct_
       @[Extern]
       struct Timecode_e__Struct_
@@ -6339,6 +6460,16 @@ module Win32cr::Media::KernelStreaming
     property minute : UInt8
     property hour : UInt8
     def initialize(@frame : UInt8, @second : UInt8, @minute : UInt8, @hour : UInt8)
+    end
+      end
+
+
+      # Nested Type RawAVC_e__Struct_
+      @[Extern]
+      struct RawAVC_e__Struct_
+    property payload_size : UInt32
+    property payload : UInt8[512]
+    def initialize(@payload_size : UInt32, @payload : UInt8[512])
     end
       end
 
@@ -6461,8 +6592,8 @@ module Win32cr::Media::KernelStreaming
     property pels_width : UInt32
     property pels_height : UInt32
     property bits_per_pel : UInt32
-    property device_id : UInt16*
-    def initialize(@pels_width : UInt32, @pels_height : UInt32, @bits_per_pel : UInt32, @device_id : UInt16*)
+    property device_id : UInt16[1]
+    def initialize(@pels_width : UInt32, @pels_height : UInt32, @bits_per_pel : UInt32, @device_id : UInt16[1])
     end
   end
 
@@ -6643,6 +6774,13 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
+  struct KSJACK_DESCRIPTION3
+    property config_id : UInt32
+    def initialize(@config_id : UInt32)
+    end
+  end
+
+  @[Extern]
   struct KSAUDIOENGINE_DESCRIPTOR
     property nHostPinId : UInt32
     property nOffloadPinId : UInt32
@@ -6669,10 +6807,27 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
+  struct KSAUDIOENGINE_DEVICECONTROLS
+    property volume : Win32cr::Media::KernelStreaming::EDeviceControlUseType
+    property mute : Win32cr::Media::KernelStreaming::EDeviceControlUseType
+    property peak_meter : Win32cr::Media::KernelStreaming::EDeviceControlUseType
+    def initialize(@volume : Win32cr::Media::KernelStreaming::EDeviceControlUseType, @mute : Win32cr::Media::KernelStreaming::EDeviceControlUseType, @peak_meter : Win32cr::Media::KernelStreaming::EDeviceControlUseType)
+    end
+  end
+
+  @[Extern]
   struct KSATTRIBUTE_AUDIOSIGNALPROCESSING_MODE
     property attribute_header : Win32cr::Media::KernelStreaming::KSATTRIBUTE
     property signal_processing_mode : LibC::GUID
     def initialize(@attribute_header : Win32cr::Media::KernelStreaming::KSATTRIBUTE, @signal_processing_mode : LibC::GUID)
+    end
+  end
+
+  @[Extern]
+  struct KSATTRIBUTE_AUDIOLOOPBACK_TAPPOINT
+    property attribute_header : Win32cr::Media::KernelStreaming::KSATTRIBUTE
+    property tap_point : Win32cr::Media::KernelStreaming::AUDIOLOOPBACK_TAPPOINT_TYPE
+    def initialize(@attribute_header : Win32cr::Media::KernelStreaming::KSATTRIBUTE, @tap_point : Win32cr::Media::KernelStreaming::AUDIOLOOPBACK_TAPPOINT_TYPE)
     end
   end
 
@@ -6781,56 +6936,149 @@ module Win32cr::Media::KernelStreaming
     property allocator_place : Win32cr::Media::KernelStreaming::PIPE_ALLOCATOR_PLACE
     property dimensions : Win32cr::Media::KernelStreaming::PIPE_DIMENSIONS
     property physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE
-    property prev_segment : Win32cr::Media::KernelStreaming::IKsAllocatorEx*
+    property prev_segment : Void*
     property count_next_segments : UInt32
-    property next_segments : Win32cr::Media::KernelStreaming::IKsAllocatorEx**
+    property next_segments : Void**
     property inside_factors : UInt32
     property number_pins : UInt32
-    def initialize(@cBuffers : Int32, @cbBuffer : Int32, @cbAlign : Int32, @cbPrefix : Int32, @memory_type : LibC::GUID, @bus_type : LibC::GUID, @state : Win32cr::Media::KernelStreaming::PIPE_STATE, @input : Win32cr::Media::KernelStreaming::PIPE_TERMINATION, @output : Win32cr::Media::KernelStreaming::PIPE_TERMINATION, @strategy : UInt32, @flags : UInt32, @weight : UInt32, @logical_memory_type : Win32cr::Media::KernelStreaming::KS_LogicalMemoryType, @allocator_place : Win32cr::Media::KernelStreaming::PIPE_ALLOCATOR_PLACE, @dimensions : Win32cr::Media::KernelStreaming::PIPE_DIMENSIONS, @physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE, @prev_segment : Win32cr::Media::KernelStreaming::IKsAllocatorEx*, @count_next_segments : UInt32, @next_segments : Win32cr::Media::KernelStreaming::IKsAllocatorEx**, @inside_factors : UInt32, @number_pins : UInt32)
+    def initialize(@cBuffers : Int32, @cbBuffer : Int32, @cbAlign : Int32, @cbPrefix : Int32, @memory_type : LibC::GUID, @bus_type : LibC::GUID, @state : Win32cr::Media::KernelStreaming::PIPE_STATE, @input : Win32cr::Media::KernelStreaming::PIPE_TERMINATION, @output : Win32cr::Media::KernelStreaming::PIPE_TERMINATION, @strategy : UInt32, @flags : UInt32, @weight : UInt32, @logical_memory_type : Win32cr::Media::KernelStreaming::KS_LogicalMemoryType, @allocator_place : Win32cr::Media::KernelStreaming::PIPE_ALLOCATOR_PLACE, @dimensions : Win32cr::Media::KernelStreaming::PIPE_DIMENSIONS, @physical_range : Win32cr::Media::KernelStreaming::KS_FRAMING_RANGE, @prev_segment : Void*, @count_next_segments : UInt32, @next_segments : Void**, @inside_factors : UInt32, @number_pins : UInt32)
     end
   end
 
-  {% if flag?(:i386) %}
   @[Extern]
-  struct KSSTREAM_HEADER
-    property size : UInt32
-    property type_specific_flags : UInt32
-    property presentation_time : Win32cr::Media::KernelStreaming::KSTIME
-    property duration : Int64
-    property frame_extent : UInt32
-    property data_used : UInt32
-    property data : Void*
-    property options_flags : UInt32
-    def initialize(@size : UInt32, @type_specific_flags : UInt32, @presentation_time : Win32cr::Media::KernelStreaming::KSTIME, @duration : Int64, @frame_extent : UInt32, @data_used : UInt32, @data : Void*, @options_flags : UInt32)
+  struct KSSTREAM_SEGMENT
+    property ks_interface_handler : Void*
+    property ks_data_type_handler : Void*
+    property io_operation : Win32cr::Media::KernelStreaming::KSIOOPERATION
+    property completion_event : Win32cr::Foundation::HANDLE
+    def initialize(@ks_interface_handler : Void*, @ks_data_type_handler : Void*, @io_operation : Win32cr::Media::KernelStreaming::KSIOOPERATION, @completion_event : Win32cr::Foundation::HANDLE)
     end
   end
-  {% end %}
 
-  {% if flag?(:i386) %}
   @[Extern]
-  struct KSNODEPROPERTY_AUDIO_3D_LISTENER
-    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
-    property listener_id : Void*
-    property reserved : UInt32
-    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @listener_id : Void*, @reserved : UInt32)
+
+  record IKsPropertySetVtable,
+    query_interface : Proc(IKsPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsPropertySet*, UInt32),
+    release : Proc(IKsPropertySet*, UInt32),
+    set : Proc(IKsPropertySet*, LibC::GUID*, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    get : Proc(IKsPropertySet*, LibC::GUID*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    query_supported : Proc(IKsPropertySet*, LibC::GUID*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsPropertySet, lpVtbl : IKsPropertySetVtable* do
+    GUID = LibC::GUID.new(0x31efac30_u32, 0x515c_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xaa_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x61_u8, 0xbe_u8, 0x93_u8])
+    def query_interface(this : IKsPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
     end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct KSNODEPROPERTY_AUDIO_PROPERTY
-    property node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY
-    property app_context : Void*
-    property length : UInt32
-    property reserved : UInt32
-    def initialize(@node_property : Win32cr::Media::KernelStreaming::KSNODEPROPERTY, @app_context : Void*, @length : UInt32, @reserved : UInt32)
+    def add_ref(this : IKsPropertySet*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
     end
+    def release(this : IKsPropertySet*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def set(this : IKsPropertySet*, guidPropSet : LibC::GUID*, dwPropID : UInt32, pInstanceData : Void*, cbInstanceData : UInt32, pPropData : Void*, cbPropData : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.set.call(this, guidPropSet, dwPropID, pInstanceData, cbInstanceData, pPropData, cbPropData)
+    end
+    def get(this : IKsPropertySet*, guidPropSet : LibC::GUID*, dwPropID : UInt32, pInstanceData : Void*, cbInstanceData : UInt32, pPropData : Void*, cbPropData : UInt32, pcbReturned : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get.call(this, guidPropSet, dwPropID, pInstanceData, cbInstanceData, pPropData, cbPropData, pcbReturned)
+    end
+    def query_supported(this : IKsPropertySet*, guidPropSet : LibC::GUID*, dwPropID : UInt32, pTypeSupport : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_supported.call(this, guidPropSet, dwPropID, pTypeSupport)
+    end
+
   end
-  {% end %}
 
   @[Extern]
-  record IKsControlVtbl,
+
+  record IKsTopologyInfoVtable,
+    query_interface : Proc(IKsTopologyInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsTopologyInfo*, UInt32),
+    release : Proc(IKsTopologyInfo*, UInt32),
+    get_NumCategories : Proc(IKsTopologyInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Category : Proc(IKsTopologyInfo*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    get_NumConnections : Proc(IKsTopologyInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_ConnectionInfo : Proc(IKsTopologyInfo*, UInt32, Win32cr::Media::KernelStreaming::KSTOPOLOGY_CONNECTION*, Win32cr::Foundation::HRESULT),
+    get_NodeName : Proc(IKsTopologyInfo*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    get_NumNodes : Proc(IKsTopologyInfo*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_NodeType : Proc(IKsTopologyInfo*, UInt32, LibC::GUID*, Win32cr::Foundation::HRESULT),
+    create_node_instance : Proc(IKsTopologyInfo*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsTopologyInfo, lpVtbl : IKsTopologyInfoVtable* do
+    GUID = LibC::GUID.new(0x720d4ac0_u32, 0x7533_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0xd6_u8, 0x28_u8, 0xdb_u8, 0x4_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
+    def query_interface(this : IKsTopologyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsTopologyInfo*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsTopologyInfo*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_NumCategories(this : IKsTopologyInfo*, pdwNumCategories : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumCategories.call(this, pdwNumCategories)
+    end
+    def get_Category(this : IKsTopologyInfo*, dwIndex : UInt32, pCategory : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_Category.call(this, dwIndex, pCategory)
+    end
+    def get_NumConnections(this : IKsTopologyInfo*, pdwNumConnections : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumConnections.call(this, pdwNumConnections)
+    end
+    def get_ConnectionInfo(this : IKsTopologyInfo*, dwIndex : UInt32, pConnectionInfo : Win32cr::Media::KernelStreaming::KSTOPOLOGY_CONNECTION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_ConnectionInfo.call(this, dwIndex, pConnectionInfo)
+    end
+    def get_NodeName(this : IKsTopologyInfo*, dwNodeId : UInt32, pwchNodeName : Win32cr::Foundation::PWSTR, dwBufSize : UInt32, pdwNameLen : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NodeName.call(this, dwNodeId, pwchNodeName, dwBufSize, pdwNameLen)
+    end
+    def get_NumNodes(this : IKsTopologyInfo*, pdwNumNodes : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NumNodes.call(this, pdwNumNodes)
+    end
+    def get_NodeType(this : IKsTopologyInfo*, dwNodeId : UInt32, pNodeType : LibC::GUID*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_NodeType.call(this, dwNodeId, pNodeType)
+    end
+    def create_node_instance(this : IKsTopologyInfo*, dwNodeId : UInt32, iid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_node_instance.call(this, dwNodeId, iid, ppvObject)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsNodeControlVtable,
+    query_interface : Proc(IKsNodeControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsNodeControl*, UInt32),
+    release : Proc(IKsNodeControl*, UInt32),
+    put_NodeId : Proc(IKsNodeControl*, UInt32, Win32cr::Foundation::HRESULT),
+    put_KsControl : Proc(IKsNodeControl*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsNodeControl, lpVtbl : IKsNodeControlVtable* do
+    GUID = LibC::GUID.new(0x11737c14_u32, 0x24a7_u16, 0x4bb5_u16, StaticArray[0x81_u8, 0xa0_u8, 0xd_u8, 0x0_u8, 0x38_u8, 0x13_u8, 0xb0_u8, 0xc4_u8])
+    def query_interface(this : IKsNodeControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsNodeControl*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsNodeControl*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def put_NodeId(this : IKsNodeControl*, dwNodeId : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_NodeId.call(this, dwNodeId)
+    end
+    def put_KsControl(this : IKsNodeControl*, pKsControl : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.put_KsControl.call(this, pKsControl)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsControlVtable,
     query_interface : Proc(IKsControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsControl*, UInt32),
     release : Proc(IKsControl*, UInt32),
@@ -6840,7 +7088,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsControl, lpVtbl : IKsControlVtbl* do
+  record IKsControl, lpVtbl : IKsControlVtable* do
     GUID = LibC::GUID.new(0x28f54685_u32, 0x6fd_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0x7a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6864,7 +7112,8 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsFormatSupportVtbl,
+
+  record IKsFormatSupportVtable,
     query_interface : Proc(IKsFormatSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsFormatSupport*, UInt32),
     release : Proc(IKsFormatSupport*, UInt32),
@@ -6873,7 +7122,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsFormatSupport, lpVtbl : IKsFormatSupportVtbl* do
+  record IKsFormatSupport, lpVtbl : IKsFormatSupportVtable* do
     GUID = LibC::GUID.new(0x3cb4a69d_u32, 0xbb6f_u16, 0x4d2b_u16, StaticArray[0x95_u8, 0xb7_u8, 0x45_u8, 0x2d_u8, 0x2c_u8, 0x15_u8, 0x5d_u8, 0xb5_u8])
     def query_interface(this : IKsFormatSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6894,7 +7143,8 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsJackDescriptionVtbl,
+
+  record IKsJackDescriptionVtable,
     query_interface : Proc(IKsJackDescription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsJackDescription*, UInt32),
     release : Proc(IKsJackDescription*, UInt32),
@@ -6903,7 +7153,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsJackDescription, lpVtbl : IKsJackDescriptionVtbl* do
+  record IKsJackDescription, lpVtbl : IKsJackDescriptionVtable* do
     GUID = LibC::GUID.new(0x4509f757_u32, 0x2d46_u16, 0x4637_u16, StaticArray[0x8e_u8, 0x62_u8, 0xce_u8, 0x7d_u8, 0xb9_u8, 0x44_u8, 0xf5_u8, 0x7b_u8])
     def query_interface(this : IKsJackDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6924,7 +7174,8 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsJackDescription2Vtbl,
+
+  record IKsJackDescription2Vtable,
     query_interface : Proc(IKsJackDescription2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsJackDescription2*, UInt32),
     release : Proc(IKsJackDescription2*, UInt32),
@@ -6933,7 +7184,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsJackDescription2, lpVtbl : IKsJackDescription2Vtbl* do
+  record IKsJackDescription2, lpVtbl : IKsJackDescription2Vtable* do
     GUID = LibC::GUID.new(0x478f3a9b_u32, 0xe0c9_u16, 0x4827_u16, StaticArray[0x92_u8, 0x28_u8, 0x6f_u8, 0x55_u8, 0x5_u8, 0xff_u8, 0xe7_u8, 0x6a_u8])
     def query_interface(this : IKsJackDescription2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6954,7 +7205,39 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsJackSinkInformationVtbl,
+
+  record IKsJackDescription3Vtable,
+    query_interface : Proc(IKsJackDescription3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsJackDescription3*, UInt32),
+    release : Proc(IKsJackDescription3*, UInt32),
+    get_jack_count : Proc(IKsJackDescription3*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_jack_description3 : Proc(IKsJackDescription3*, UInt32, Win32cr::Media::KernelStreaming::KSJACK_DESCRIPTION3*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsJackDescription3, lpVtbl : IKsJackDescription3Vtable* do
+    GUID = LibC::GUID.new(0xe3f6778b_u32, 0x6660_u16, 0x4cc8_u16, StaticArray[0xa2_u8, 0x91_u8, 0xec_u8, 0xc4_u8, 0x19_u8, 0x2d_u8, 0x99_u8, 0x67_u8])
+    def query_interface(this : IKsJackDescription3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsJackDescription3*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsJackDescription3*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_jack_count(this : IKsJackDescription3*, pcJacks : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_jack_count.call(this, pcJacks)
+    end
+    def get_jack_description3(this : IKsJackDescription3*, nJack : UInt32, pDescription3 : Win32cr::Media::KernelStreaming::KSJACK_DESCRIPTION3*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_jack_description3.call(this, nJack, pDescription3)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsJackSinkInformationVtable,
     query_interface : Proc(IKsJackSinkInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsJackSinkInformation*, UInt32),
     release : Proc(IKsJackSinkInformation*, UInt32),
@@ -6962,7 +7245,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsJackSinkInformation, lpVtbl : IKsJackSinkInformationVtbl* do
+  record IKsJackSinkInformation, lpVtbl : IKsJackSinkInformationVtable* do
     GUID = LibC::GUID.new(0xd9bd72ed_u32, 0x290f_u16, 0x4581_u16, StaticArray[0x9f_u8, 0xf3_u8, 0x61_u8, 0x2_u8, 0x7a_u8, 0x8f_u8, 0xe5_u8, 0x32_u8])
     def query_interface(this : IKsJackSinkInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6980,7 +7263,8 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsJackContainerIdVtbl,
+
+  record IKsJackContainerIdVtable,
     query_interface : Proc(IKsJackContainerId*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsJackContainerId*, UInt32),
     release : Proc(IKsJackContainerId*, UInt32),
@@ -6988,7 +7272,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsJackContainerId, lpVtbl : IKsJackContainerIdVtbl* do
+  record IKsJackContainerId, lpVtbl : IKsJackContainerIdVtable* do
     GUID = LibC::GUID.new(0xc99af463_u32, 0xd629_u16, 0x4ec4_u16, StaticArray[0x8c_u8, 0x0_u8, 0xe5_u8, 0x4d_u8, 0x68_u8, 0x15_u8, 0x42_u8, 0x48_u8])
     def query_interface(this : IKsJackContainerId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7006,41 +7290,603 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsPropertySetVtbl,
-    query_interface : Proc(IKsPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IKsPropertySet*, UInt32),
-    release : Proc(IKsPropertySet*, UInt32),
-    set : Proc(IKsPropertySet*, LibC::GUID*, UInt32, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    get : Proc(IKsPropertySet*, LibC::GUID*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
-    query_supported : Proc(IKsPropertySet*, LibC::GUID*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
+
+  record IKsClockPropertySetVtable,
+    query_interface : Proc(IKsClockPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsClockPropertySet*, UInt32),
+    release : Proc(IKsClockPropertySet*, UInt32),
+    ks_get_time : Proc(IKsClockPropertySet*, Int64*, Win32cr::Foundation::HRESULT),
+    ks_set_time : Proc(IKsClockPropertySet*, Int64, Win32cr::Foundation::HRESULT),
+    ks_get_physical_time : Proc(IKsClockPropertySet*, Int64*, Win32cr::Foundation::HRESULT),
+    ks_set_physical_time : Proc(IKsClockPropertySet*, Int64, Win32cr::Foundation::HRESULT),
+    ks_get_correlated_time : Proc(IKsClockPropertySet*, Win32cr::Media::KernelStreaming::KSCORRELATED_TIME*, Win32cr::Foundation::HRESULT),
+    ks_set_correlated_time : Proc(IKsClockPropertySet*, Win32cr::Media::KernelStreaming::KSCORRELATED_TIME*, Win32cr::Foundation::HRESULT),
+    ks_get_correlated_physical_time : Proc(IKsClockPropertySet*, Win32cr::Media::KernelStreaming::KSCORRELATED_TIME*, Win32cr::Foundation::HRESULT),
+    ks_set_correlated_physical_time : Proc(IKsClockPropertySet*, Win32cr::Media::KernelStreaming::KSCORRELATED_TIME*, Win32cr::Foundation::HRESULT),
+    ks_get_resolution : Proc(IKsClockPropertySet*, Win32cr::Media::KernelStreaming::KSRESOLUTION*, Win32cr::Foundation::HRESULT),
+    ks_get_state : Proc(IKsClockPropertySet*, Win32cr::Media::KernelStreaming::KSSTATE*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IKsPropertySet, lpVtbl : IKsPropertySetVtbl* do
-    GUID = LibC::GUID.new(0x31efac30_u32, 0x515c_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xaa_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x61_u8, 0xbe_u8, 0x93_u8])
-    def query_interface(this : IKsPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+  record IKsClockPropertySet, lpVtbl : IKsClockPropertySetVtable* do
+    GUID = LibC::GUID.new(0x5c5cbd84_u32, 0xe755_u16, 0x11d0_u16, StaticArray[0xac_u8, 0x18_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
+    def query_interface(this : IKsClockPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
     end
-    def add_ref(this : IKsPropertySet*) : UInt32
+    def add_ref(this : IKsClockPropertySet*) : UInt32
       @lpVtbl.try &.value.add_ref.call(this)
     end
-    def release(this : IKsPropertySet*) : UInt32
+    def release(this : IKsClockPropertySet*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def set(this : IKsPropertySet*, prop_set : LibC::GUID*, id : UInt32, instance_data : Void*, instance_length : UInt32, property_data : Void*, data_length : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set.call(this, prop_set, id, instance_data, instance_length, property_data, data_length)
+    def ks_get_time(this : IKsClockPropertySet*, time : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_time.call(this, time)
     end
-    def get(this : IKsPropertySet*, prop_set : LibC::GUID*, id : UInt32, instance_data : Void*, instance_length : UInt32, property_data : Void*, data_length : UInt32, bytes_returned : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get.call(this, prop_set, id, instance_data, instance_length, property_data, data_length, bytes_returned)
+    def ks_set_time(this : IKsClockPropertySet*, time : Int64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_time.call(this, time)
     end
-    def query_supported(this : IKsPropertySet*, prop_set : LibC::GUID*, id : UInt32, type_support : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_supported.call(this, prop_set, id, type_support)
+    def ks_get_physical_time(this : IKsClockPropertySet*, time : Int64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_physical_time.call(this, time)
+    end
+    def ks_set_physical_time(this : IKsClockPropertySet*, time : Int64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_physical_time.call(this, time)
+    end
+    def ks_get_correlated_time(this : IKsClockPropertySet*, correlated_time : Win32cr::Media::KernelStreaming::KSCORRELATED_TIME*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_correlated_time.call(this, correlated_time)
+    end
+    def ks_set_correlated_time(this : IKsClockPropertySet*, correlated_time : Win32cr::Media::KernelStreaming::KSCORRELATED_TIME*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_correlated_time.call(this, correlated_time)
+    end
+    def ks_get_correlated_physical_time(this : IKsClockPropertySet*, correlated_time : Win32cr::Media::KernelStreaming::KSCORRELATED_TIME*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_correlated_physical_time.call(this, correlated_time)
+    end
+    def ks_set_correlated_physical_time(this : IKsClockPropertySet*, correlated_time : Win32cr::Media::KernelStreaming::KSCORRELATED_TIME*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_correlated_physical_time.call(this, correlated_time)
+    end
+    def ks_get_resolution(this : IKsClockPropertySet*, resolution : Win32cr::Media::KernelStreaming::KSRESOLUTION*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_resolution.call(this, resolution)
+    end
+    def ks_get_state(this : IKsClockPropertySet*, state : Win32cr::Media::KernelStreaming::KSSTATE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_state.call(this, state)
     end
 
   end
 
   @[Extern]
-  record IKsAggregateControlVtbl,
+
+  record IKsAllocatorVtable,
+    query_interface : Proc(IKsAllocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsAllocator*, UInt32),
+    release : Proc(IKsAllocator*, UInt32),
+    ks_get_allocator_handle : Proc(IKsAllocator*, Win32cr::Foundation::HANDLE),
+    ks_get_allocator_mode : Proc(IKsAllocator*, Win32cr::Media::KernelStreaming::KSALLOCATORMODE),
+    ks_get_allocator_status : Proc(IKsAllocator*, Win32cr::Media::KernelStreaming::KSSTREAMALLOCATOR_STATUS*, Win32cr::Foundation::HRESULT),
+    ks_set_allocator_mode : Proc(IKsAllocator*, Win32cr::Media::KernelStreaming::KSALLOCATORMODE, Void)
+
+
+  @[Extern]
+  record IKsAllocator, lpVtbl : IKsAllocatorVtable* do
+    GUID = LibC::GUID.new(0x8da64899_u32, 0xc0d9_u16, 0x11d0_u16, StaticArray[0x84_u8, 0x13_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x22_u8, 0xfe_u8, 0x8a_u8])
+    def query_interface(this : IKsAllocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsAllocator*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsAllocator*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_get_allocator_handle(this : IKsAllocator*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.ks_get_allocator_handle.call(this)
+    end
+    def ks_get_allocator_mode(this : IKsAllocator*) : Win32cr::Media::KernelStreaming::KSALLOCATORMODE
+      @lpVtbl.try &.value.ks_get_allocator_mode.call(this)
+    end
+    def ks_get_allocator_status(this : IKsAllocator*, allocator_status : Win32cr::Media::KernelStreaming::KSSTREAMALLOCATOR_STATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_allocator_status.call(this, allocator_status)
+    end
+    def ks_set_allocator_mode(this : IKsAllocator*, mode : Win32cr::Media::KernelStreaming::KSALLOCATORMODE) : Void
+      @lpVtbl.try &.value.ks_set_allocator_mode.call(this, mode)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsAllocatorExVtable,
+    query_interface : Proc(IKsAllocatorEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsAllocatorEx*, UInt32),
+    release : Proc(IKsAllocatorEx*, UInt32),
+    ks_get_allocator_handle : Proc(IKsAllocatorEx*, Win32cr::Foundation::HANDLE),
+    ks_get_allocator_mode : Proc(IKsAllocatorEx*, Win32cr::Media::KernelStreaming::KSALLOCATORMODE),
+    ks_get_allocator_status : Proc(IKsAllocatorEx*, Win32cr::Media::KernelStreaming::KSSTREAMALLOCATOR_STATUS*, Win32cr::Foundation::HRESULT),
+    ks_set_allocator_mode : Proc(IKsAllocatorEx*, Win32cr::Media::KernelStreaming::KSALLOCATORMODE, Void),
+    ks_get_properties : Proc(IKsAllocatorEx*, Win32cr::Media::KernelStreaming::ALLOCATOR_PROPERTIES_EX*),
+    ks_set_properties : Proc(IKsAllocatorEx*, Win32cr::Media::KernelStreaming::ALLOCATOR_PROPERTIES_EX*, Void),
+    ks_set_allocator_handle : Proc(IKsAllocatorEx*, Win32cr::Foundation::HANDLE, Void),
+    ks_create_allocator_and_get_handle : Proc(IKsAllocatorEx*, Void*, Win32cr::Foundation::HANDLE)
+
+
+  @[Extern]
+  record IKsAllocatorEx, lpVtbl : IKsAllocatorExVtable* do
+    GUID = LibC::GUID.new(0x91bb63a_u32, 0x603f_u16, 0x11d1_u16, StaticArray[0xb0_u8, 0x67_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x28_u8, 0x2_u8])
+    def query_interface(this : IKsAllocatorEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsAllocatorEx*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsAllocatorEx*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_get_allocator_handle(this : IKsAllocatorEx*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.ks_get_allocator_handle.call(this)
+    end
+    def ks_get_allocator_mode(this : IKsAllocatorEx*) : Win32cr::Media::KernelStreaming::KSALLOCATORMODE
+      @lpVtbl.try &.value.ks_get_allocator_mode.call(this)
+    end
+    def ks_get_allocator_status(this : IKsAllocatorEx*, allocator_status : Win32cr::Media::KernelStreaming::KSSTREAMALLOCATOR_STATUS*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_allocator_status.call(this, allocator_status)
+    end
+    def ks_set_allocator_mode(this : IKsAllocatorEx*, mode : Win32cr::Media::KernelStreaming::KSALLOCATORMODE) : Void
+      @lpVtbl.try &.value.ks_set_allocator_mode.call(this, mode)
+    end
+    def ks_get_properties(this : IKsAllocatorEx*) : Win32cr::Media::KernelStreaming::ALLOCATOR_PROPERTIES_EX*
+      @lpVtbl.try &.value.ks_get_properties.call(this)
+    end
+    def ks_set_properties(this : IKsAllocatorEx*, param0 : Win32cr::Media::KernelStreaming::ALLOCATOR_PROPERTIES_EX*) : Void
+      @lpVtbl.try &.value.ks_set_properties.call(this, param0)
+    end
+    def ks_set_allocator_handle(this : IKsAllocatorEx*, allocator_handle : Win32cr::Foundation::HANDLE) : Void
+      @lpVtbl.try &.value.ks_set_allocator_handle.call(this, allocator_handle)
+    end
+    def ks_create_allocator_and_get_handle(this : IKsAllocatorEx*, ks_pin : Void*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.ks_create_allocator_and_get_handle.call(this, ks_pin)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsPinVtable,
+    query_interface : Proc(IKsPin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsPin*, UInt32),
+    release : Proc(IKsPin*, UInt32),
+    ks_query_mediums : Proc(IKsPin*, Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM**, Win32cr::Foundation::HRESULT),
+    ks_query_interfaces : Proc(IKsPin*, Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM**, Win32cr::Foundation::HRESULT),
+    ks_create_sink_pin_handle : Proc(IKsPin*, Win32cr::Media::KernelStreaming::KSIDENTIFIER*, Win32cr::Media::KernelStreaming::KSIDENTIFIER*, Win32cr::Foundation::HRESULT),
+    ks_get_current_communication : Proc(IKsPin*, Win32cr::Media::KernelStreaming::KSPIN_COMMUNICATION*, Win32cr::Media::KernelStreaming::KSIDENTIFIER*, Win32cr::Media::KernelStreaming::KSIDENTIFIER*, Win32cr::Foundation::HRESULT),
+    ks_propagate_acquire : Proc(IKsPin*, Win32cr::Foundation::HRESULT),
+    ks_deliver : Proc(IKsPin*, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    ks_media_samples_completed : Proc(IKsPin*, Win32cr::Media::KernelStreaming::KSSTREAM_SEGMENT*, Win32cr::Foundation::HRESULT),
+    ks_peek_allocator : Proc(IKsPin*, Win32cr::Media::KernelStreaming::KSPEEKOPERATION, Void*),
+    ks_receive_allocator : Proc(IKsPin*, Void*, Win32cr::Foundation::HRESULT),
+    ks_renegotiate_allocator : Proc(IKsPin*, Win32cr::Foundation::HRESULT),
+    ks_increment_pending_io_count : Proc(IKsPin*, Int32),
+    ks_decrement_pending_io_count : Proc(IKsPin*, Int32),
+    ks_quality_notify : Proc(IKsPin*, UInt32, Int64, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsPin, lpVtbl : IKsPinVtable* do
+    GUID = LibC::GUID.new(0xb61178d1_u32, 0xa2d9_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x53_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0x16_u8, 0xa1_u8])
+    def query_interface(this : IKsPin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsPin*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsPin*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_query_mediums(this : IKsPin*, medium_list : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_query_mediums.call(this, medium_list)
+    end
+    def ks_query_interfaces(this : IKsPin*, interface_list : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_query_interfaces.call(this, interface_list)
+    end
+    def ks_create_sink_pin_handle(this : IKsPin*, interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER*, medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_create_sink_pin_handle.call(this, interface, medium)
+    end
+    def ks_get_current_communication(this : IKsPin*, communication : Win32cr::Media::KernelStreaming::KSPIN_COMMUNICATION*, interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER*, medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_current_communication.call(this, communication, interface, medium)
+    end
+    def ks_propagate_acquire(this : IKsPin*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_propagate_acquire.call(this)
+    end
+    def ks_deliver(this : IKsPin*, sample : Void*, flags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_deliver.call(this, sample, flags)
+    end
+    def ks_media_samples_completed(this : IKsPin*, stream_segment : Win32cr::Media::KernelStreaming::KSSTREAM_SEGMENT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_media_samples_completed.call(this, stream_segment)
+    end
+    def ks_peek_allocator(this : IKsPin*, operation : Win32cr::Media::KernelStreaming::KSPEEKOPERATION) : Void*
+      @lpVtbl.try &.value.ks_peek_allocator.call(this, operation)
+    end
+    def ks_receive_allocator(this : IKsPin*, mem_allocator : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_receive_allocator.call(this, mem_allocator)
+    end
+    def ks_renegotiate_allocator(this : IKsPin*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_renegotiate_allocator.call(this)
+    end
+    def ks_increment_pending_io_count(this : IKsPin*) : Int32
+      @lpVtbl.try &.value.ks_increment_pending_io_count.call(this)
+    end
+    def ks_decrement_pending_io_count(this : IKsPin*) : Int32
+      @lpVtbl.try &.value.ks_decrement_pending_io_count.call(this)
+    end
+    def ks_quality_notify(this : IKsPin*, proportion : UInt32, time_delta : Int64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_quality_notify.call(this, proportion, time_delta)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsPinExVtable,
+    query_interface : Proc(IKsPinEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsPinEx*, UInt32),
+    release : Proc(IKsPinEx*, UInt32),
+    ks_query_mediums : Proc(IKsPinEx*, Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM**, Win32cr::Foundation::HRESULT),
+    ks_query_interfaces : Proc(IKsPinEx*, Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM**, Win32cr::Foundation::HRESULT),
+    ks_create_sink_pin_handle : Proc(IKsPinEx*, Win32cr::Media::KernelStreaming::KSIDENTIFIER*, Win32cr::Media::KernelStreaming::KSIDENTIFIER*, Win32cr::Foundation::HRESULT),
+    ks_get_current_communication : Proc(IKsPinEx*, Win32cr::Media::KernelStreaming::KSPIN_COMMUNICATION*, Win32cr::Media::KernelStreaming::KSIDENTIFIER*, Win32cr::Media::KernelStreaming::KSIDENTIFIER*, Win32cr::Foundation::HRESULT),
+    ks_propagate_acquire : Proc(IKsPinEx*, Win32cr::Foundation::HRESULT),
+    ks_deliver : Proc(IKsPinEx*, Void*, UInt32, Win32cr::Foundation::HRESULT),
+    ks_media_samples_completed : Proc(IKsPinEx*, Win32cr::Media::KernelStreaming::KSSTREAM_SEGMENT*, Win32cr::Foundation::HRESULT),
+    ks_peek_allocator : Proc(IKsPinEx*, Win32cr::Media::KernelStreaming::KSPEEKOPERATION, Void*),
+    ks_receive_allocator : Proc(IKsPinEx*, Void*, Win32cr::Foundation::HRESULT),
+    ks_renegotiate_allocator : Proc(IKsPinEx*, Win32cr::Foundation::HRESULT),
+    ks_increment_pending_io_count : Proc(IKsPinEx*, Int32),
+    ks_decrement_pending_io_count : Proc(IKsPinEx*, Int32),
+    ks_quality_notify : Proc(IKsPinEx*, UInt32, Int64, Win32cr::Foundation::HRESULT),
+    ks_notify_error : Proc(IKsPinEx*, Void*, Win32cr::Foundation::HRESULT, Void)
+
+
+  @[Extern]
+  record IKsPinEx, lpVtbl : IKsPinExVtable* do
+    GUID = LibC::GUID.new(0x7bb38260_u32, 0xd19c_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x8a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5e_u8, 0xc2_u8, 0x2e_u8])
+    def query_interface(this : IKsPinEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsPinEx*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsPinEx*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_query_mediums(this : IKsPinEx*, medium_list : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_query_mediums.call(this, medium_list)
+    end
+    def ks_query_interfaces(this : IKsPinEx*, interface_list : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_query_interfaces.call(this, interface_list)
+    end
+    def ks_create_sink_pin_handle(this : IKsPinEx*, interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER*, medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_create_sink_pin_handle.call(this, interface, medium)
+    end
+    def ks_get_current_communication(this : IKsPinEx*, communication : Win32cr::Media::KernelStreaming::KSPIN_COMMUNICATION*, interface : Win32cr::Media::KernelStreaming::KSIDENTIFIER*, medium : Win32cr::Media::KernelStreaming::KSIDENTIFIER*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_current_communication.call(this, communication, interface, medium)
+    end
+    def ks_propagate_acquire(this : IKsPinEx*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_propagate_acquire.call(this)
+    end
+    def ks_deliver(this : IKsPinEx*, sample : Void*, flags : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_deliver.call(this, sample, flags)
+    end
+    def ks_media_samples_completed(this : IKsPinEx*, stream_segment : Win32cr::Media::KernelStreaming::KSSTREAM_SEGMENT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_media_samples_completed.call(this, stream_segment)
+    end
+    def ks_peek_allocator(this : IKsPinEx*, operation : Win32cr::Media::KernelStreaming::KSPEEKOPERATION) : Void*
+      @lpVtbl.try &.value.ks_peek_allocator.call(this, operation)
+    end
+    def ks_receive_allocator(this : IKsPinEx*, mem_allocator : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_receive_allocator.call(this, mem_allocator)
+    end
+    def ks_renegotiate_allocator(this : IKsPinEx*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_renegotiate_allocator.call(this)
+    end
+    def ks_increment_pending_io_count(this : IKsPinEx*) : Int32
+      @lpVtbl.try &.value.ks_increment_pending_io_count.call(this)
+    end
+    def ks_decrement_pending_io_count(this : IKsPinEx*) : Int32
+      @lpVtbl.try &.value.ks_decrement_pending_io_count.call(this)
+    end
+    def ks_quality_notify(this : IKsPinEx*, proportion : UInt32, time_delta : Int64) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_quality_notify.call(this, proportion, time_delta)
+    end
+    def ks_notify_error(this : IKsPinEx*, sample : Void*, hr : Win32cr::Foundation::HRESULT) : Void
+      @lpVtbl.try &.value.ks_notify_error.call(this, sample, hr)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsPinPipeVtable,
+    query_interface : Proc(IKsPinPipe*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsPinPipe*, UInt32),
+    release : Proc(IKsPinPipe*, UInt32),
+    ks_get_pin_framing_cache : Proc(IKsPinPipe*, Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING_EX**, Win32cr::Media::KernelStreaming::FRAMING_PROP*, Win32cr::Media::KernelStreaming::FRAMING_CACHE_OPS, Win32cr::Foundation::HRESULT),
+    ks_set_pin_framing_cache : Proc(IKsPinPipe*, Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING_EX*, Win32cr::Media::KernelStreaming::FRAMING_PROP*, Win32cr::Media::KernelStreaming::FRAMING_CACHE_OPS, Win32cr::Foundation::HRESULT),
+    ks_get_connected_pin : Proc(IKsPinPipe*, Void*),
+    ks_get_pipe : Proc(IKsPinPipe*, Win32cr::Media::KernelStreaming::KSPEEKOPERATION, Void*),
+    ks_set_pipe : Proc(IKsPinPipe*, Void*, Win32cr::Foundation::HRESULT),
+    ks_get_pipe_allocator_flag : Proc(IKsPinPipe*, UInt32),
+    ks_set_pipe_allocator_flag : Proc(IKsPinPipe*, UInt32, Win32cr::Foundation::HRESULT),
+    ks_get_pin_bus_cache : Proc(IKsPinPipe*, LibC::GUID),
+    ks_set_pin_bus_cache : Proc(IKsPinPipe*, LibC::GUID, Win32cr::Foundation::HRESULT),
+    ks_get_pin_name : Proc(IKsPinPipe*, Win32cr::Foundation::PWSTR),
+    ks_get_filter_name : Proc(IKsPinPipe*, Win32cr::Foundation::PWSTR)
+
+
+  @[Extern]
+  record IKsPinPipe, lpVtbl : IKsPinPipeVtable* do
+    GUID = LibC::GUID.new(0xe539cd90_u32, 0xa8b4_u16, 0x11d1_u16, StaticArray[0x81_u8, 0x89_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x28_u8, 0x2_u8])
+    def query_interface(this : IKsPinPipe*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsPinPipe*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsPinPipe*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_get_pin_framing_cache(this : IKsPinPipe*, framing_ex : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING_EX**, framing_prop : Win32cr::Media::KernelStreaming::FRAMING_PROP*, option : Win32cr::Media::KernelStreaming::FRAMING_CACHE_OPS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_get_pin_framing_cache.call(this, framing_ex, framing_prop, option)
+    end
+    def ks_set_pin_framing_cache(this : IKsPinPipe*, framing_ex : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING_EX*, framing_prop : Win32cr::Media::KernelStreaming::FRAMING_PROP*, option : Win32cr::Media::KernelStreaming::FRAMING_CACHE_OPS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_pin_framing_cache.call(this, framing_ex, framing_prop, option)
+    end
+    def ks_get_connected_pin(this : IKsPinPipe*) : Void*
+      @lpVtbl.try &.value.ks_get_connected_pin.call(this)
+    end
+    def ks_get_pipe(this : IKsPinPipe*, operation : Win32cr::Media::KernelStreaming::KSPEEKOPERATION) : Void*
+      @lpVtbl.try &.value.ks_get_pipe.call(this, operation)
+    end
+    def ks_set_pipe(this : IKsPinPipe*, ks_allocator : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_pipe.call(this, ks_allocator)
+    end
+    def ks_get_pipe_allocator_flag(this : IKsPinPipe*) : UInt32
+      @lpVtbl.try &.value.ks_get_pipe_allocator_flag.call(this)
+    end
+    def ks_set_pipe_allocator_flag(this : IKsPinPipe*, flag : UInt32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_pipe_allocator_flag.call(this, flag)
+    end
+    def ks_get_pin_bus_cache(this : IKsPinPipe*) : LibC::GUID
+      @lpVtbl.try &.value.ks_get_pin_bus_cache.call(this)
+    end
+    def ks_set_pin_bus_cache(this : IKsPinPipe*, bus : LibC::GUID) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_pin_bus_cache.call(this, bus)
+    end
+    def ks_get_pin_name(this : IKsPinPipe*) : Win32cr::Foundation::PWSTR
+      @lpVtbl.try &.value.ks_get_pin_name.call(this)
+    end
+    def ks_get_filter_name(this : IKsPinPipe*) : Win32cr::Foundation::PWSTR
+      @lpVtbl.try &.value.ks_get_filter_name.call(this)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsPinFactoryVtable,
+    query_interface : Proc(IKsPinFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsPinFactory*, UInt32),
+    release : Proc(IKsPinFactory*, UInt32),
+    ks_pin_factory : Proc(IKsPinFactory*, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsPinFactory, lpVtbl : IKsPinFactoryVtable* do
+    GUID = LibC::GUID.new(0xcd5ebe6b_u32, 0x8b6e_u16, 0x11d1_u16, StaticArray[0x8a_u8, 0xe0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
+    def query_interface(this : IKsPinFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsPinFactory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsPinFactory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_pin_factory(this : IKsPinFactory*, pin_factory : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_pin_factory.call(this, pin_factory)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsDataTypeHandlerVtable,
+    query_interface : Proc(IKsDataTypeHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsDataTypeHandler*, UInt32),
+    release : Proc(IKsDataTypeHandler*, UInt32),
+    ks_complete_io_operation : Proc(IKsDataTypeHandler*, Void*, Void*, Win32cr::Media::KernelStreaming::KSIOOPERATION, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
+    ks_is_media_type_in_ranges : Proc(IKsDataTypeHandler*, Void*, Win32cr::Foundation::HRESULT),
+    ks_prepare_io_operation : Proc(IKsDataTypeHandler*, Void*, Void*, Win32cr::Media::KernelStreaming::KSIOOPERATION, Win32cr::Foundation::HRESULT),
+    ks_query_extended_size : Proc(IKsDataTypeHandler*, UInt32*, Win32cr::Foundation::HRESULT),
+    ks_set_media_type : Proc(IKsDataTypeHandler*, Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsDataTypeHandler, lpVtbl : IKsDataTypeHandlerVtable* do
+    GUID = LibC::GUID.new(0x5ffbaa02_u32, 0x49a3_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0x36_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0x16_u8, 0xa1_u8])
+    def query_interface(this : IKsDataTypeHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsDataTypeHandler*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsDataTypeHandler*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_complete_io_operation(this : IKsDataTypeHandler*, sample : Void*, stream_header : Void*, io_operation : Win32cr::Media::KernelStreaming::KSIOOPERATION, cancelled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_complete_io_operation.call(this, sample, stream_header, io_operation, cancelled)
+    end
+    def ks_is_media_type_in_ranges(this : IKsDataTypeHandler*, data_ranges : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_is_media_type_in_ranges.call(this, data_ranges)
+    end
+    def ks_prepare_io_operation(this : IKsDataTypeHandler*, sample : Void*, stream_header : Void*, io_operation : Win32cr::Media::KernelStreaming::KSIOOPERATION) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_prepare_io_operation.call(this, sample, stream_header, io_operation)
+    end
+    def ks_query_extended_size(this : IKsDataTypeHandler*, extended_size : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_query_extended_size.call(this, extended_size)
+    end
+    def ks_set_media_type(this : IKsDataTypeHandler*, am_media_type : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_media_type.call(this, am_media_type)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsDataTypeCompletionVtable,
+    query_interface : Proc(IKsDataTypeCompletion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsDataTypeCompletion*, UInt32),
+    release : Proc(IKsDataTypeCompletion*, UInt32),
+    ks_complete_media_type : Proc(IKsDataTypeCompletion*, Win32cr::Foundation::HANDLE, UInt32, Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsDataTypeCompletion, lpVtbl : IKsDataTypeCompletionVtable* do
+    GUID = LibC::GUID.new(0x827d1a0e_u32, 0xf73_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0x7a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
+    def query_interface(this : IKsDataTypeCompletion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsDataTypeCompletion*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsDataTypeCompletion*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_complete_media_type(this : IKsDataTypeCompletion*, filter_handle : Win32cr::Foundation::HANDLE, pin_factory_id : UInt32, am_media_type : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_complete_media_type.call(this, filter_handle, pin_factory_id, am_media_type)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsInterfaceHandlerVtable,
+    query_interface : Proc(IKsInterfaceHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsInterfaceHandler*, UInt32),
+    release : Proc(IKsInterfaceHandler*, UInt32),
+    ks_set_pin : Proc(IKsInterfaceHandler*, Void*, Win32cr::Foundation::HRESULT),
+    ks_process_media_samples : Proc(IKsInterfaceHandler*, Void*, Void**, Int32*, Win32cr::Media::KernelStreaming::KSIOOPERATION, Win32cr::Media::KernelStreaming::KSSTREAM_SEGMENT**, Win32cr::Foundation::HRESULT),
+    ks_complete_io : Proc(IKsInterfaceHandler*, Win32cr::Media::KernelStreaming::KSSTREAM_SEGMENT*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsInterfaceHandler, lpVtbl : IKsInterfaceHandlerVtable* do
+    GUID = LibC::GUID.new(0xd3abc7e0_u32, 0x9a61_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0xd_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
+    def query_interface(this : IKsInterfaceHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsInterfaceHandler*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsInterfaceHandler*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_set_pin(this : IKsInterfaceHandler*, ks_pin : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_set_pin.call(this, ks_pin)
+    end
+    def ks_process_media_samples(this : IKsInterfaceHandler*, ks_data_type_handler : Void*, sample_list : Void**, sample_count : Int32*, io_operation : Win32cr::Media::KernelStreaming::KSIOOPERATION, stream_segment : Win32cr::Media::KernelStreaming::KSSTREAM_SEGMENT**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_process_media_samples.call(this, ks_data_type_handler, sample_list, sample_count, io_operation, stream_segment)
+    end
+    def ks_complete_io(this : IKsInterfaceHandler*, stream_segment : Win32cr::Media::KernelStreaming::KSSTREAM_SEGMENT*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_complete_io.call(this, stream_segment)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsObjectVtable,
+    query_interface : Proc(IKsObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsObject*, UInt32),
+    release : Proc(IKsObject*, UInt32),
+    ks_get_object_handle : Proc(IKsObject*, Win32cr::Foundation::HANDLE)
+
+
+  @[Extern]
+  record IKsObject, lpVtbl : IKsObjectVtable* do
+    GUID = LibC::GUID.new(0x423c13a2_u32, 0x2070_u16, 0x11d0_u16, StaticArray[0x9e_u8, 0xf7_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa2_u8, 0x16_u8, 0xa1_u8])
+    def query_interface(this : IKsObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsObject*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsObject*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_get_object_handle(this : IKsObject*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.ks_get_object_handle.call(this)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsQualityForwarderVtable,
+    query_interface : Proc(IKsQualityForwarder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsQualityForwarder*, UInt32),
+    release : Proc(IKsQualityForwarder*, UInt32),
+    ks_get_object_handle : Proc(IKsQualityForwarder*, Win32cr::Foundation::HANDLE),
+    ks_flush_client : Proc(IKsQualityForwarder*, Void*, Void)
+
+
+  @[Extern]
+  record IKsQualityForwarder, lpVtbl : IKsQualityForwarderVtable* do
+    GUID = LibC::GUID.new(0x97ebaacb_u32, 0x95bd_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0xea_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
+    def query_interface(this : IKsQualityForwarder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsQualityForwarder*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsQualityForwarder*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_get_object_handle(this : IKsQualityForwarder*) : Win32cr::Foundation::HANDLE
+      @lpVtbl.try &.value.ks_get_object_handle.call(this)
+    end
+    def ks_flush_client(this : IKsQualityForwarder*, pin : Void*) : Void
+      @lpVtbl.try &.value.ks_flush_client.call(this, pin)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsNotifyEventVtable,
+    query_interface : Proc(IKsNotifyEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IKsNotifyEvent*, UInt32),
+    release : Proc(IKsNotifyEvent*, UInt32),
+    ks_notify_event : Proc(IKsNotifyEvent*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IKsNotifyEvent, lpVtbl : IKsNotifyEventVtable* do
+    GUID = LibC::GUID.new(0x412bd695_u32, 0xf84b_u16, 0x46c1_u16, StaticArray[0xac_u8, 0x73_u8, 0x54_u8, 0x19_u8, 0x6d_u8, 0xbc_u8, 0x8f_u8, 0xa7_u8])
+    def query_interface(this : IKsNotifyEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IKsNotifyEvent*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IKsNotifyEvent*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def ks_notify_event(this : IKsNotifyEvent*, event : UInt32, lParam1 : LibC::UIntPtrT, lParam2 : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.ks_notify_event.call(this, event, lParam1, lParam2)
+    end
+
+  end
+
+  @[Extern]
+
+  record IKsAggregateControlVtable,
     query_interface : Proc(IKsAggregateControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsAggregateControl*, UInt32),
     release : Proc(IKsAggregateControl*, UInt32),
@@ -7049,7 +7895,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsAggregateControl, lpVtbl : IKsAggregateControlVtbl* do
+  record IKsAggregateControl, lpVtbl : IKsAggregateControlVtable* do
     GUID = LibC::GUID.new(0x7f40eac0_u32, 0x3947_u16, 0x11d2_u16, StaticArray[0x87_u8, 0x4e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsAggregateControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7070,7 +7916,8 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsTopologyVtbl,
+
+  record IKsTopologyVtable,
     query_interface : Proc(IKsTopology*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsTopology*, UInt32),
     release : Proc(IKsTopology*, UInt32),
@@ -7078,7 +7925,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsTopology, lpVtbl : IKsTopologyVtbl* do
+  record IKsTopology, lpVtbl : IKsTopologyVtable* do
     GUID = LibC::GUID.new(0x28f54683_u32, 0x6fd_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0x7a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsTopology*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7096,38 +7943,92 @@ module Win32cr::Media::KernelStreaming
   end
 
   def ksCreateAllocator(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.KsCreateAllocator(connection_handle, allocator_framing, allocator_handle)
+    {% end %}
   end
 
   def ksCreateClock(connection_handle : Win32cr::Foundation::HANDLE, clock_create : Win32cr::Media::KernelStreaming::KSCLOCK_CREATE*, clock_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.KsCreateClock(connection_handle, clock_create, clock_handle)
+    {% end %}
   end
 
   def ksCreatePin(filter_handle : Win32cr::Foundation::HANDLE, connect : Win32cr::Media::KernelStreaming::KSPIN_CONNECT*, desired_access : UInt32, connection_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.KsCreatePin(filter_handle, connect, desired_access, connection_handle)
+    {% end %}
   end
 
   def ksCreateTopologyNode(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.KsCreateTopologyNode(parent_handle, node_create, desired_access, node_handle)
+    {% end %}
   end
 
   def ksCreateAllocator2(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KsCreateAllocator2(connection_handle, allocator_framing, allocator_handle)
+    {% end %}
   end
 
   def ksCreateClock2(connection_handle : Win32cr::Foundation::HANDLE, clock_create : Win32cr::Media::KernelStreaming::KSCLOCK_CREATE*, clock_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KsCreateClock2(connection_handle, clock_create, clock_handle)
+    {% end %}
   end
 
   def ksCreatePin2(filter_handle : Win32cr::Foundation::HANDLE, connect : Win32cr::Media::KernelStreaming::KSPIN_CONNECT*, desired_access : UInt32, connection_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KsCreatePin2(filter_handle, connect, desired_access, connection_handle)
+    {% end %}
   end
 
   def ksCreateTopologyNode2(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KsCreateTopologyNode2(parent_handle, node_create, desired_access, node_handle)
+    {% end %}
+  end
+
+  def ksResolveRequiredAttributes(data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT*, attributes : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.KsResolveRequiredAttributes(data_range, attributes)
+    {% end %}
+  end
+
+  def ksOpenDefaultDevice(category : LibC::GUID*, access : UInt32, device_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.KsOpenDefaultDevice(category, access, device_handle)
+    {% end %}
+  end
+
+  def ksSynchronousDeviceControl(handle : Win32cr::Foundation::HANDLE, io_control : UInt32, in_buffer : Void*, in_length : UInt32, out_buffer : Void*, out_length : UInt32, bytes_returned : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.KsSynchronousDeviceControl(handle, io_control, in_buffer, in_length, out_buffer, out_length, bytes_returned)
+    {% end %}
+  end
+
+  def ksGetMultiplePinFactoryItems(filter_handle : Win32cr::Foundation::HANDLE, pin_factory_id : UInt32, property_id : UInt32, items : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.KsGetMultiplePinFactoryItems(filter_handle, pin_factory_id, property_id, items)
+    {% end %}
+  end
+
+  def ksGetMediaTypeCount(filter_handle : Win32cr::Foundation::HANDLE, pin_factory_id : UInt32, media_type_count : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.KsGetMediaTypeCount(filter_handle, pin_factory_id, media_type_count)
+    {% end %}
+  end
+
+  def ksGetMediaType(position : Int32, am_media_type : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*, filter_handle : Win32cr::Foundation::HANDLE, pin_factory_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.KsGetMediaType(position, am_media_type, filter_handle, pin_factory_id)
+    {% end %}
   end
 
   @[Link("ksuser")]
+  @[Link("ksproxy.ax")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun KsCreateAllocator(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : UInt32
@@ -7153,5 +8054,24 @@ module Win32cr::Media::KernelStreaming
     # :nodoc:
     fun KsCreateTopologyNode2(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
+    fun KsResolveRequiredAttributes(data_range : Win32cr::Media::KernelStreaming::KSDATAFORMAT*, attributes : Win32cr::Media::KernelStreaming::KSMULTIPLE_ITEM*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun KsOpenDefaultDevice(category : LibC::GUID*, access : UInt32, device_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun KsSynchronousDeviceControl(handle : Win32cr::Foundation::HANDLE, io_control : UInt32, in_buffer : Void*, in_length : UInt32, out_buffer : Void*, out_length : UInt32, bytes_returned : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun KsGetMultiplePinFactoryItems(filter_handle : Win32cr::Foundation::HANDLE, pin_factory_id : UInt32, property_id : UInt32, items : Void**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun KsGetMediaTypeCount(filter_handle : Win32cr::Foundation::HANDLE, pin_factory_id : UInt32, media_type_count : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun KsGetMediaType(position : Int32, am_media_type : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*, filter_handle : Win32cr::Foundation::HANDLE, pin_factory_id : UInt32) : Win32cr::Foundation::HRESULT
+
   end
+  {% end %}
 end

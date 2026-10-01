@@ -1,12 +1,10 @@
-require "./diagnostics/debug.cr"
 require "./../foundation.cr"
 
 module Win32cr::System::SystemInformation
   extend self
-  alias FIRMWARE_TABLE_ID = UInt32
-  alias PGET_SYSTEM_WOW64_DIRECTORY_A = Proc(UInt8*, UInt32, UInt32)
+  alias PGET_SYSTEM_WOW64_DIRECTORY_A = Proc(Win32cr::Foundation::PSTR, UInt32, UInt32)
 
-  alias PGET_SYSTEM_WOW64_DIRECTORY_W = Proc(UInt16*, UInt32, UInt32)
+  alias PGET_SYSTEM_WOW64_DIRECTORY_W = Proc(Win32cr::Foundation::PWSTR, UInt32, UInt32)
 
   NTDDI_WIN2K = 83886080_u32
   NTDDI_WINXP = 83951616_u32
@@ -115,11 +113,16 @@ module Win32cr::System::SystemInformation
   NTDDI_WIN10_MN = 167772169_u32
   NTDDI_WIN10_FE = 167772170_u32
   NTDDI_WIN10_CO = 167772171_u32
-  WDK_NTDDI_VERSION = 167772171_u32
+  NTDDI_WIN10_NI = 167772172_u32
+  NTDDI_WIN10_CU = 167772173_u32
+  NTDDI_WIN11_ZN = 167772174_u32
+  NTDDI_WIN11_GA = 167772175_u32
+  NTDDI_WIN11_GE = 167772176_u32
+  WDK_NTDDI_VERSION = 167772176_u32
   OSVERSION_MASK = 4294901760_u32
   SPVERSION_MASK = 65280_u32
   SUBVERSION_MASK = 255_u32
-  NTDDI_VERSION = 167772171_u32
+  NTDDI_VERSION = 167772176_u32
   SCEX2_ALT_NETBIOS_NAME = 1_u32
 
   @[Flags]
@@ -167,6 +170,24 @@ module Win32cr::System::SystemInformation
     IMAGE_FILE_MACHINE_ARM64 = 43620_u16
     IMAGE_FILE_MACHINE_CEE = 49390_u16
   end
+  enum PROCESSOR_ARCHITECTURE : UInt16
+    PROCESSOR_ARCHITECTURE_INTEL = 0_u16
+    PROCESSOR_ARCHITECTURE_MIPS = 1_u16
+    PROCESSOR_ARCHITECTURE_ALPHA = 2_u16
+    PROCESSOR_ARCHITECTURE_PPC = 3_u16
+    PROCESSOR_ARCHITECTURE_SHX = 4_u16
+    PROCESSOR_ARCHITECTURE_ARM = 5_u16
+    PROCESSOR_ARCHITECTURE_IA64 = 6_u16
+    PROCESSOR_ARCHITECTURE_ALPHA64 = 7_u16
+    PROCESSOR_ARCHITECTURE_MSIL = 8_u16
+    PROCESSOR_ARCHITECTURE_AMD64 = 9_u16
+    PROCESSOR_ARCHITECTURE_IA32_ON_WIN64 = 10_u16
+    PROCESSOR_ARCHITECTURE_NEUTRAL = 11_u16
+    PROCESSOR_ARCHITECTURE_ARM64 = 12_u16
+    PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64 = 13_u16
+    PROCESSOR_ARCHITECTURE_IA32_ON_ARM64 = 14_u16
+    PROCESSOR_ARCHITECTURE_UNKNOWN = 65535_u16
+  end
   enum FIRMWARE_TABLE_PROVIDER : UInt32
     ACPI = 1094930505_u32
     FIRM = 1179210317_u32
@@ -179,102 +200,183 @@ module Win32cr::System::SystemInformation
     USER_CET_ENVIRONMENT_VBS_BASIC_ENCLAVE = 17_u32
   end
   enum OS_PRODUCT_TYPE : UInt32
-    PRODUCT_BUSINESS = 6_u32
-    PRODUCT_BUSINESS_N = 16_u32
-    PRODUCT_CLUSTER_SERVER = 18_u32
-    PRODUCT_CLUSTER_SERVER_V = 64_u32
-    PRODUCT_CORE = 101_u32
-    PRODUCT_CORE_COUNTRYSPECIFIC = 99_u32
-    PRODUCT_CORE_N = 98_u32
-    PRODUCT_CORE_SINGLELANGUAGE = 100_u32
-    PRODUCT_DATACENTER_EVALUATION_SERVER = 80_u32
-    PRODUCT_DATACENTER_A_SERVER_CORE = 145_u32
-    PRODUCT_STANDARD_A_SERVER_CORE = 146_u32
-    PRODUCT_DATACENTER_SERVER = 8_u32
-    PRODUCT_DATACENTER_SERVER_CORE = 12_u32
-    PRODUCT_DATACENTER_SERVER_CORE_V = 39_u32
-    PRODUCT_DATACENTER_SERVER_V = 37_u32
-    PRODUCT_EDUCATION = 121_u32
-    PRODUCT_EDUCATION_N = 122_u32
-    PRODUCT_ENTERPRISE = 4_u32
-    PRODUCT_ENTERPRISE_E = 70_u32
-    PRODUCT_ENTERPRISE_EVALUATION = 72_u32
-    PRODUCT_ENTERPRISE_N = 27_u32
-    PRODUCT_ENTERPRISE_N_EVALUATION = 84_u32
-    PRODUCT_ENTERPRISE_S = 125_u32
-    PRODUCT_ENTERPRISE_S_EVALUATION = 129_u32
-    PRODUCT_ENTERPRISE_S_N = 126_u32
-    PRODUCT_ENTERPRISE_S_N_EVALUATION = 130_u32
-    PRODUCT_ENTERPRISE_SERVER = 10_u32
-    PRODUCT_ENTERPRISE_SERVER_CORE = 14_u32
-    PRODUCT_ENTERPRISE_SERVER_CORE_V = 41_u32
-    PRODUCT_ENTERPRISE_SERVER_IA64 = 15_u32
-    PRODUCT_ENTERPRISE_SERVER_V = 38_u32
-    PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL = 60_u32
-    PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC = 62_u32
-    PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT = 59_u32
-    PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC = 61_u32
+    PRODUCT_UNDEFINED = 0_u32
+    PRODUCT_ULTIMATE = 1_u32
     PRODUCT_HOME_BASIC = 2_u32
-    PRODUCT_HOME_BASIC_E = 67_u32
-    PRODUCT_HOME_BASIC_N = 5_u32
     PRODUCT_HOME_PREMIUM = 3_u32
-    PRODUCT_HOME_PREMIUM_E = 68_u32
-    PRODUCT_HOME_PREMIUM_N = 26_u32
-    PRODUCT_HOME_PREMIUM_SERVER = 34_u32
-    PRODUCT_HOME_SERVER = 19_u32
-    PRODUCT_HYPERV = 42_u32
-    PRODUCT_IOTUAP = 123_u32
-    PRODUCT_IOTUAPCOMMERCIAL = 131_u32
-    PRODUCT_MEDIUMBUSINESS_SERVER_MANAGEMENT = 30_u32
-    PRODUCT_MEDIUMBUSINESS_SERVER_MESSAGING = 32_u32
-    PRODUCT_MEDIUMBUSINESS_SERVER_SECURITY = 31_u32
-    PRODUCT_MOBILE_CORE = 104_u32
-    PRODUCT_MOBILE_ENTERPRISE = 133_u32
-    PRODUCT_MULTIPOINT_PREMIUM_SERVER = 77_u32
-    PRODUCT_MULTIPOINT_STANDARD_SERVER = 76_u32
-    PRODUCT_PRO_WORKSTATION = 161_u32
-    PRODUCT_PRO_WORKSTATION_N = 162_u32
-    PRODUCT_PROFESSIONAL = 48_u32
-    PRODUCT_PROFESSIONAL_E = 69_u32
-    PRODUCT_PROFESSIONAL_N = 49_u32
-    PRODUCT_PROFESSIONAL_WMC = 103_u32
-    PRODUCT_SB_SOLUTION_SERVER = 50_u32
-    PRODUCT_SB_SOLUTION_SERVER_EM = 54_u32
-    PRODUCT_SERVER_FOR_SB_SOLUTIONS = 51_u32
-    PRODUCT_SERVER_FOR_SB_SOLUTIONS_EM = 55_u32
-    PRODUCT_SERVER_FOR_SMALLBUSINESS = 24_u32
-    PRODUCT_SERVER_FOR_SMALLBUSINESS_V = 35_u32
-    PRODUCT_SERVER_FOUNDATION = 33_u32
-    PRODUCT_SMALLBUSINESS_SERVER = 9_u32
-    PRODUCT_SMALLBUSINESS_SERVER_PREMIUM = 25_u32
-    PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE = 63_u32
-    PRODUCT_SOLUTION_EMBEDDEDSERVER = 56_u32
-    PRODUCT_STANDARD_EVALUATION_SERVER = 79_u32
+    PRODUCT_ENTERPRISE = 4_u32
+    PRODUCT_HOME_BASIC_N = 5_u32
+    PRODUCT_BUSINESS = 6_u32
     PRODUCT_STANDARD_SERVER = 7_u32
-    PRODUCT_STANDARD_SERVER_CORE_ = 13_u32
-    PRODUCT_STANDARD_SERVER_CORE_V = 40_u32
+    PRODUCT_DATACENTER_SERVER = 8_u32
+    PRODUCT_SMALLBUSINESS_SERVER = 9_u32
+    PRODUCT_ENTERPRISE_SERVER = 10_u32
+    PRODUCT_STARTER = 11_u32
+    PRODUCT_DATACENTER_SERVER_CORE = 12_u32
+    PRODUCT_STANDARD_SERVER_CORE = 13_u32
+    PRODUCT_ENTERPRISE_SERVER_CORE = 14_u32
+    PRODUCT_ENTERPRISE_SERVER_IA64 = 15_u32
+    PRODUCT_BUSINESS_N = 16_u32
+    PRODUCT_WEB_SERVER = 17_u32
+    PRODUCT_CLUSTER_SERVER = 18_u32
+    PRODUCT_HOME_SERVER = 19_u32
+    PRODUCT_STORAGE_EXPRESS_SERVER = 20_u32
+    PRODUCT_STORAGE_STANDARD_SERVER = 21_u32
+    PRODUCT_STORAGE_WORKGROUP_SERVER = 22_u32
+    PRODUCT_STORAGE_ENTERPRISE_SERVER = 23_u32
+    PRODUCT_SERVER_FOR_SMALLBUSINESS = 24_u32
+    PRODUCT_SMALLBUSINESS_SERVER_PREMIUM = 25_u32
+    PRODUCT_HOME_PREMIUM_N = 26_u32
+    PRODUCT_ENTERPRISE_N = 27_u32
+    PRODUCT_ULTIMATE_N = 28_u32
+    PRODUCT_WEB_SERVER_CORE = 29_u32
+    PRODUCT_MEDIUMBUSINESS_SERVER_MANAGEMENT = 30_u32
+    PRODUCT_MEDIUMBUSINESS_SERVER_SECURITY = 31_u32
+    PRODUCT_MEDIUMBUSINESS_SERVER_MESSAGING = 32_u32
+    PRODUCT_SERVER_FOUNDATION = 33_u32
+    PRODUCT_HOME_PREMIUM_SERVER = 34_u32
+    PRODUCT_SERVER_FOR_SMALLBUSINESS_V = 35_u32
     PRODUCT_STANDARD_SERVER_V = 36_u32
+    PRODUCT_DATACENTER_SERVER_V = 37_u32
+    PRODUCT_ENTERPRISE_SERVER_V = 38_u32
+    PRODUCT_DATACENTER_SERVER_CORE_V = 39_u32
+    PRODUCT_STANDARD_SERVER_CORE_V = 40_u32
+    PRODUCT_ENTERPRISE_SERVER_CORE_V = 41_u32
+    PRODUCT_HYPERV = 42_u32
+    PRODUCT_STORAGE_EXPRESS_SERVER_CORE = 43_u32
+    PRODUCT_STORAGE_STANDARD_SERVER_CORE = 44_u32
+    PRODUCT_STORAGE_WORKGROUP_SERVER_CORE = 45_u32
+    PRODUCT_STORAGE_ENTERPRISE_SERVER_CORE = 46_u32
+    PRODUCT_STARTER_N = 47_u32
+    PRODUCT_PROFESSIONAL = 48_u32
+    PRODUCT_PROFESSIONAL_N = 49_u32
+    PRODUCT_SB_SOLUTION_SERVER = 50_u32
+    PRODUCT_SERVER_FOR_SB_SOLUTIONS = 51_u32
     PRODUCT_STANDARD_SERVER_SOLUTIONS = 52_u32
     PRODUCT_STANDARD_SERVER_SOLUTIONS_CORE = 53_u32
-    PRODUCT_STARTER = 11_u32
+    PRODUCT_SB_SOLUTION_SERVER_EM = 54_u32
+    PRODUCT_SERVER_FOR_SB_SOLUTIONS_EM = 55_u32
+    PRODUCT_SOLUTION_EMBEDDEDSERVER = 56_u32
+    PRODUCT_SOLUTION_EMBEDDEDSERVER_CORE = 57_u32
+    PRODUCT_PROFESSIONAL_EMBEDDED = 58_u32
+    PRODUCT_ESSENTIALBUSINESS_SERVER_MGMT = 59_u32
+    PRODUCT_ESSENTIALBUSINESS_SERVER_ADDL = 60_u32
+    PRODUCT_ESSENTIALBUSINESS_SERVER_MGMTSVC = 61_u32
+    PRODUCT_ESSENTIALBUSINESS_SERVER_ADDLSVC = 62_u32
+    PRODUCT_SMALLBUSINESS_SERVER_PREMIUM_CORE = 63_u32
+    PRODUCT_CLUSTER_SERVER_V = 64_u32
+    PRODUCT_EMBEDDED = 65_u32
     PRODUCT_STARTER_E = 66_u32
-    PRODUCT_STARTER_N = 47_u32
-    PRODUCT_STORAGE_ENTERPRISE_SERVER = 23_u32
-    PRODUCT_STORAGE_ENTERPRISE_SERVER_CORE = 46_u32
-    PRODUCT_STORAGE_EXPRESS_SERVER = 20_u32
-    PRODUCT_STORAGE_EXPRESS_SERVER_CORE = 43_u32
-    PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER = 96_u32
-    PRODUCT_STORAGE_STANDARD_SERVER = 21_u32
-    PRODUCT_STORAGE_STANDARD_SERVER_CORE = 44_u32
-    PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER = 95_u32
-    PRODUCT_STORAGE_WORKGROUP_SERVER = 22_u32
-    PRODUCT_STORAGE_WORKGROUP_SERVER_CORE = 45_u32
-    PRODUCT_ULTIMATE = 1_u32
+    PRODUCT_HOME_BASIC_E = 67_u32
+    PRODUCT_HOME_PREMIUM_E = 68_u32
+    PRODUCT_PROFESSIONAL_E = 69_u32
+    PRODUCT_ENTERPRISE_E = 70_u32
     PRODUCT_ULTIMATE_E = 71_u32
-    PRODUCT_ULTIMATE_N = 28_u32
-    PRODUCT_UNDEFINED = 0_u32
-    PRODUCT_WEB_SERVER = 17_u32
-    PRODUCT_WEB_SERVER_CORE = 29_u32
+    PRODUCT_ENTERPRISE_EVALUATION = 72_u32
+    PRODUCT_MULTIPOINT_STANDARD_SERVER = 76_u32
+    PRODUCT_MULTIPOINT_PREMIUM_SERVER = 77_u32
+    PRODUCT_STANDARD_EVALUATION_SERVER = 79_u32
+    PRODUCT_DATACENTER_EVALUATION_SERVER = 80_u32
+    PRODUCT_ENTERPRISE_N_EVALUATION = 84_u32
+    PRODUCT_EMBEDDED_AUTOMOTIVE = 85_u32
+    PRODUCT_EMBEDDED_INDUSTRY_A = 86_u32
+    PRODUCT_THINPC = 87_u32
+    PRODUCT_EMBEDDED_A = 88_u32
+    PRODUCT_EMBEDDED_INDUSTRY = 89_u32
+    PRODUCT_EMBEDDED_E = 90_u32
+    PRODUCT_EMBEDDED_INDUSTRY_E = 91_u32
+    PRODUCT_EMBEDDED_INDUSTRY_A_E = 92_u32
+    PRODUCT_STORAGE_WORKGROUP_EVALUATION_SERVER = 95_u32
+    PRODUCT_STORAGE_STANDARD_EVALUATION_SERVER = 96_u32
+    PRODUCT_CORE_ARM = 97_u32
+    PRODUCT_CORE_N = 98_u32
+    PRODUCT_CORE_COUNTRYSPECIFIC = 99_u32
+    PRODUCT_CORE_SINGLELANGUAGE = 100_u32
+    PRODUCT_CORE = 101_u32
+    PRODUCT_PROFESSIONAL_WMC = 103_u32
+    PRODUCT_EMBEDDED_INDUSTRY_EVAL = 105_u32
+    PRODUCT_EMBEDDED_INDUSTRY_E_EVAL = 106_u32
+    PRODUCT_EMBEDDED_EVAL = 107_u32
+    PRODUCT_EMBEDDED_E_EVAL = 108_u32
+    PRODUCT_NANO_SERVER = 109_u32
+    PRODUCT_CLOUD_STORAGE_SERVER = 110_u32
+    PRODUCT_CORE_CONNECTED = 111_u32
+    PRODUCT_PROFESSIONAL_STUDENT = 112_u32
+    PRODUCT_CORE_CONNECTED_N = 113_u32
+    PRODUCT_PROFESSIONAL_STUDENT_N = 114_u32
+    PRODUCT_CORE_CONNECTED_SINGLELANGUAGE = 115_u32
+    PRODUCT_CORE_CONNECTED_COUNTRYSPECIFIC = 116_u32
+    PRODUCT_CONNECTED_CAR = 117_u32
+    PRODUCT_INDUSTRY_HANDHELD = 118_u32
+    PRODUCT_PPI_PRO = 119_u32
+    PRODUCT_ARM64_SERVER = 120_u32
+    PRODUCT_EDUCATION = 121_u32
+    PRODUCT_EDUCATION_N = 122_u32
+    PRODUCT_IOTUAP = 123_u32
+    PRODUCT_CLOUD_HOST_INFRASTRUCTURE_SERVER = 124_u32
+    PRODUCT_ENTERPRISE_S = 125_u32
+    PRODUCT_ENTERPRISE_S_N = 126_u32
+    PRODUCT_PROFESSIONAL_S = 127_u32
+    PRODUCT_PROFESSIONAL_S_N = 128_u32
+    PRODUCT_ENTERPRISE_S_EVALUATION = 129_u32
+    PRODUCT_ENTERPRISE_S_N_EVALUATION = 130_u32
+    PRODUCT_HOLOGRAPHIC = 135_u32
+    PRODUCT_HOLOGRAPHIC_BUSINESS = 136_u32
+    PRODUCT_PRO_SINGLE_LANGUAGE = 138_u32
+    PRODUCT_PRO_CHINA = 139_u32
+    PRODUCT_ENTERPRISE_SUBSCRIPTION = 140_u32
+    PRODUCT_ENTERPRISE_SUBSCRIPTION_N = 141_u32
+    PRODUCT_DATACENTER_NANO_SERVER = 143_u32
+    PRODUCT_STANDARD_NANO_SERVER = 144_u32
+    PRODUCT_DATACENTER_A_SERVER_CORE = 145_u32
+    PRODUCT_STANDARD_A_SERVER_CORE = 146_u32
+    PRODUCT_DATACENTER_WS_SERVER_CORE = 147_u32
+    PRODUCT_STANDARD_WS_SERVER_CORE = 148_u32
+    PRODUCT_UTILITY_VM = 149_u32
+    PRODUCT_DATACENTER_EVALUATION_SERVER_CORE = 159_u32
+    PRODUCT_STANDARD_EVALUATION_SERVER_CORE = 160_u32
+    PRODUCT_PRO_WORKSTATION = 161_u32
+    PRODUCT_PRO_WORKSTATION_N = 162_u32
+    PRODUCT_PRO_FOR_EDUCATION = 164_u32
+    PRODUCT_PRO_FOR_EDUCATION_N = 165_u32
+    PRODUCT_AZURE_SERVER_CORE = 168_u32
+    PRODUCT_AZURE_NANO_SERVER = 169_u32
+    PRODUCT_ENTERPRISEG = 171_u32
+    PRODUCT_ENTERPRISEGN = 172_u32
+    PRODUCT_SERVERRDSH = 175_u32
+    PRODUCT_CLOUD = 178_u32
+    PRODUCT_CLOUDN = 179_u32
+    PRODUCT_HUBOS = 180_u32
+    PRODUCT_ONECOREUPDATEOS = 182_u32
+    PRODUCT_CLOUDE = 183_u32
+    PRODUCT_IOTOS = 185_u32
+    PRODUCT_CLOUDEN = 186_u32
+    PRODUCT_IOTEDGEOS = 187_u32
+    PRODUCT_IOTENTERPRISE = 188_u32
+    PRODUCT_LITE = 189_u32
+    PRODUCT_IOTENTERPRISES = 191_u32
+    PRODUCT_XBOX_SYSTEMOS = 192_u32
+    PRODUCT_XBOX_GAMEOS = 194_u32
+    PRODUCT_XBOX_ERAOS = 195_u32
+    PRODUCT_XBOX_DURANGOHOSTOS = 196_u32
+    PRODUCT_XBOX_SCARLETTHOSTOS = 197_u32
+    PRODUCT_XBOX_KEYSTONE = 198_u32
+    PRODUCT_AZURE_SERVER_CLOUDHOST = 199_u32
+    PRODUCT_AZURE_SERVER_CLOUDMOS = 200_u32
+    PRODUCT_CLOUDEDITIONN = 202_u32
+    PRODUCT_CLOUDEDITION = 203_u32
+    PRODUCT_VALIDATION = 204_u32
+    PRODUCT_IOTENTERPRISESK = 205_u32
+    PRODUCT_IOTENTERPRISEK = 206_u32
+    PRODUCT_IOTENTERPRISESEVAL = 207_u32
+    PRODUCT_AZURE_SERVER_AGENTBRIDGE = 208_u32
+    PRODUCT_AZURE_SERVER_NANOHOST = 209_u32
+    PRODUCT_WNC = 210_u32
+    PRODUCT_AZURESTACKHCI_SERVER_CORE = 406_u32
+    PRODUCT_DATACENTER_SERVER_AZURE_EDITION = 407_u32
+    PRODUCT_DATACENTER_SERVER_CORE_AZURE_EDITION = 408_u32
+    PRODUCT_DATACENTER_WS_SERVER_CORE_AZURE_EDITION = 409_u32
+    PRODUCT_UNLICENSED = 2882382797_u32
   end
   enum DEVICEFAMILYINFOENUM : UInt32
     DEVICEFAMILYINFOENUM_UAP = 0_u32
@@ -334,7 +436,7 @@ module Win32cr::System::SystemInformation
     DEVICEFAMILYDEVICEFORM_XBOX_ONE_X_DEVKIT = 33_u32
     DEVICEFAMILYDEVICEFORM_XBOX_SERIES_X = 34_u32
     DEVICEFAMILYDEVICEFORM_XBOX_SERIES_X_DEVKIT = 35_u32
-    DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_00 = 36_u32
+    DEVICEFAMILYDEVICEFORM_XBOX_SERIES_S = 36_u32
     DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_01 = 37_u32
     DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_02 = 38_u32
     DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_03 = 39_u32
@@ -344,7 +446,9 @@ module Win32cr::System::SystemInformation
     DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_07 = 43_u32
     DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_08 = 44_u32
     DEVICEFAMILYDEVICEFORM_XBOX_RESERVED_09 = 45_u32
-    DEVICEFAMILYDEVICEFORM_MAX = 45_u32
+    DEVICEFAMILYDEVICEFORM_GAMING_HANDHELD = 46_u32
+    DEVICEFAMILYDEVICEFORM_GAMING_CONSOLE = 47_u32
+    DEVICEFAMILYDEVICEFORM_MAX = 47_u32
   end
   enum COMPUTER_NAME_FORMAT
     ComputerNameNetBIOS = 0_i32
@@ -356,6 +460,12 @@ module Win32cr::System::SystemInformation
     ComputerNamePhysicalDnsDomain = 6_i32
     ComputerNamePhysicalDnsFullyQualified = 7_i32
     ComputerNameMax = 8_i32
+  end
+  enum DEVELOPER_DRIVE_ENABLEMENT_STATE
+    DeveloperDriveEnablementStateError = 0_i32
+    DeveloperDriveEnabled = 1_i32
+    DeveloperDriveDisabledBySystemPolicy = 2_i32
+    DeveloperDriveDisabledByGroupPolicy = 3_i32
   end
   enum FIRMWARE_TYPE
     FirmwareTypeUnknown = 0_i32
@@ -379,6 +489,7 @@ module Win32cr::System::SystemInformation
     CacheInstruction = 1_i32
     CacheData = 2_i32
     CacheTrace = 3_i32
+    CacheUnknown = 4_i32
   end
   enum CPU_SET_INFORMATION_TYPE
     CpuSetInformation = 0_i32
@@ -402,6 +513,11 @@ module Win32cr::System::SystemInformation
     GlobalDataIdCyclesPerYield = 11_i32
     GlobalDataIdSafeBootMode = 12_i32
     GlobalDataIdLastSystemRITEventTickCount = 13_i32
+    GlobalDataIdConsoleSharedDataFlags = 14_i32
+    GlobalDataIdNtSystemRootDrive = 15_i32
+    GlobalDataIdQpcBypassEnabled = 16_i32
+    GlobalDataIdQpcData = 17_i32
+    GlobalDataIdQpcBias = 18_i32
   end
   enum DEP_SYSTEM_POLICY_TYPE
     DEPPolicyAlwaysOff = 0_i32
@@ -417,6 +533,24 @@ module Win32cr::System::SystemInformation
     property group : UInt16
     property reserved : UInt16[3]
     def initialize(@mask : LibC::UIntPtrT, @group : UInt16, @reserved : UInt16[3])
+    end
+  end
+
+  @[Extern]
+  struct GROUP_AFFINITY32
+    property mask : UInt32
+    property group : UInt16
+    property reserved : UInt16[3]
+    def initialize(@mask : UInt32, @group : UInt16, @reserved : UInt16[3])
+    end
+  end
+
+  @[Extern]
+  struct GROUP_AFFINITY64
+    property mask : UInt64
+    property group : UInt16
+    property reserved : UInt16[3]
+    def initialize(@mask : UInt64, @group : UInt16, @reserved : UInt16[3])
     end
   end
 
@@ -442,9 +576,9 @@ module Win32cr::System::SystemInformation
       # Nested Type Anonymous_e__Struct_
       @[Extern]
       struct Anonymous_e__Struct_
-    property wProcessorArchitecture : Win32cr::System::Diagnostics::Debug::PROCESSOR_ARCHITECTURE
+    property wProcessorArchitecture : Win32cr::System::SystemInformation::PROCESSOR_ARCHITECTURE
     property wReserved : UInt16
-    def initialize(@wProcessorArchitecture : Win32cr::System::Diagnostics::Debug::PROCESSOR_ARCHITECTURE, @wReserved : UInt16)
+    def initialize(@wProcessorArchitecture : Win32cr::System::SystemInformation::PROCESSOR_ARCHITECTURE, @wReserved : UInt16)
     end
       end
 
@@ -527,8 +661,8 @@ module Win32cr::System::SystemInformation
     property efficiency_class : UInt8
     property reserved : UInt8[20]
     property group_count : UInt16
-    property group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY*
-    def initialize(@flags : UInt8, @efficiency_class : UInt8, @reserved : UInt8[20], @group_count : UInt16, @group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY*)
+    property group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY[1]
+    def initialize(@flags : UInt8, @efficiency_class : UInt8, @reserved : UInt8[20], @group_count : UInt16, @group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY[1])
     end
   end
 
@@ -543,8 +677,8 @@ module Win32cr::System::SystemInformation
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY
-    property group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*
-    def initialize(@group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY, @group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*)
+    property group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY[1]
+    def initialize(@group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY, @group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY[1])
     end
     end
 
@@ -567,8 +701,8 @@ module Win32cr::System::SystemInformation
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY
-    property group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*
-    def initialize(@group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY, @group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*)
+    property group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY[1]
+    def initialize(@group_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY, @group_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY[1])
     end
     end
 
@@ -591,8 +725,8 @@ module Win32cr::System::SystemInformation
     property maximum_group_count : UInt16
     property active_group_count : UInt16
     property reserved : UInt8[20]
-    property group_info : Win32cr::System::SystemInformation::PROCESSOR_GROUP_INFO*
-    def initialize(@maximum_group_count : UInt16, @active_group_count : UInt16, @reserved : UInt8[20], @group_info : Win32cr::System::SystemInformation::PROCESSOR_GROUP_INFO*)
+    property group_info : Win32cr::System::SystemInformation::PROCESSOR_GROUP_INFO[1]
+    def initialize(@maximum_group_count : UInt16, @active_group_count : UInt16, @reserved : UInt8[20], @group_info : Win32cr::System::SystemInformation::PROCESSOR_GROUP_INFO[1])
     end
   end
 
@@ -776,15 +910,21 @@ module Win32cr::System::SystemInformation
   end
 
   def globalMemoryStatusEx(lpBuffer : Win32cr::System::SystemInformation::MEMORYSTATUSEX*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GlobalMemoryStatusEx(lpBuffer)
+    {% end %}
   end
 
   def getSystemInfo(lpSystemInfo : Win32cr::System::SystemInformation::SYSTEM_INFO*) : Void
+    {% if !flag?(:docs) %}
     C.GetSystemInfo(lpSystemInfo)
+    {% end %}
   end
 
   def getSystemTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Void
+    {% if !flag?(:docs) %}
     C.GetSystemTime(lpSystemTime)
+    {% end %}
   end
 
   #def getSystemTimeAsFileTime(lpSystemTimeAsFileTime : Win32cr::Foundation::FILETIME*) : Void
@@ -792,95 +932,139 @@ module Win32cr::System::SystemInformation
   #end
 
   def getLocalTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Void
+    {% if !flag?(:docs) %}
     C.GetLocalTime(lpSystemTime)
+    {% end %}
   end
 
   def isUserCetAvailableInEnvironment(user_cet_environment : Win32cr::System::SystemInformation::USER_CET_ENVIRONMENT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsUserCetAvailableInEnvironment(user_cet_environment)
+    {% end %}
   end
 
   def getSystemLeapSecondInformation(enabled : Win32cr::Foundation::BOOL*, flags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemLeapSecondInformation(enabled, flags)
+    {% end %}
   end
 
   def getVersion : UInt32
+    {% if !flag?(:docs) %}
     C.GetVersion
+    {% end %}
   end
 
   def setLocalTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetLocalTime(lpSystemTime)
+    {% end %}
   end
 
   def getTickCount : UInt32
+    {% if !flag?(:docs) %}
     C.GetTickCount
+    {% end %}
   end
 
   def getTickCount64 : UInt64
+    {% if !flag?(:docs) %}
     C.GetTickCount64
+    {% end %}
   end
 
   def getSystemTimeAdjustment(lpTimeAdjustment : UInt32*, lpTimeIncrement : UInt32*, lpTimeAdjustmentDisabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemTimeAdjustment(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled)
+    {% end %}
   end
 
   def getSystemTimeAdjustmentPrecise(lpTimeAdjustment : UInt64*, lpTimeIncrement : UInt64*, lpTimeAdjustmentDisabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemTimeAdjustmentPrecise(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled)
+    {% end %}
   end
 
-  def getSystemDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+  def getSystemDirectoryA(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemDirectoryA(lpBuffer, uSize)
+    {% end %}
   end
 
-  def getSystemDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+  def getSystemDirectoryW(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemDirectoryW(lpBuffer, uSize)
+    {% end %}
   end
 
-  def getWindowsDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+  def getWindowsDirectoryA(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWindowsDirectoryA(lpBuffer, uSize)
+    {% end %}
   end
 
-  def getWindowsDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+  def getWindowsDirectoryW(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWindowsDirectoryW(lpBuffer, uSize)
+    {% end %}
   end
 
-  def getSystemWindowsDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+  def getSystemWindowsDirectoryA(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWindowsDirectoryA(lpBuffer, uSize)
+    {% end %}
   end
 
-  def getSystemWindowsDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+  def getSystemWindowsDirectoryW(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWindowsDirectoryW(lpBuffer, uSize)
+    {% end %}
   end
 
-  def getComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : UInt8*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+  def getComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetComputerNameExA(name_type, lpBuffer, nSize)
+    {% end %}
   end
 
-  #def getComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+  #def getComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
     #C.GetComputerNameExW(name_type, lpBuffer, nSize)
   #end
 
   def setComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameExW(name_type, lpBuffer)
+    {% end %}
   end
 
   def setSystemTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSystemTime(lpSystemTime)
+    {% end %}
   end
 
   def getVersionExA(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetVersionExA(lpVersionInformation)
+    {% end %}
   end
 
   def getVersionExW(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetVersionExW(lpVersionInformation)
+    {% end %}
   end
 
   def getLogicalProcessorInformation(buffer : Win32cr::System::SystemInformation::SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, returned_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetLogicalProcessorInformation(buffer, returned_length)
+    {% end %}
   end
 
   def getLogicalProcessorInformationEx(relationship_type : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP, buffer : Win32cr::System::SystemInformation::SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*, returned_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetLogicalProcessorInformationEx(relationship_type, buffer, returned_length)
+    {% end %}
   end
 
   #def getNativeSystemInfo(lpSystemInfo : Win32cr::System::SystemInformation::SYSTEM_INFO*) : Void
@@ -892,140 +1076,212 @@ module Win32cr::System::SystemInformation
   #end
 
   def getProductInfo(dwOSMajorVersion : UInt32, dwOSMinorVersion : UInt32, dwSpMajorVersion : UInt32, dwSpMinorVersion : UInt32, pdwReturnedProductType : Win32cr::System::SystemInformation::OS_PRODUCT_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion, pdwReturnedProductType)
+    {% end %}
   end
 
   def verSetConditionMask(condition_mask : UInt64, type_mask : Win32cr::System::SystemInformation::VER_FLAGS, condition : UInt8) : UInt64
+    {% if !flag?(:docs) %}
     C.VerSetConditionMask(condition_mask, type_mask, condition)
+    {% end %}
   end
 
   def getOsSafeBootMode(flags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOsSafeBootMode(flags)
+    {% end %}
   end
 
-  def enumSystemFirmwareTables(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, pFirmwareTableEnumBuffer : Win32cr::System::SystemInformation::FIRMWARE_TABLE_ID*, buffer_size : UInt32) : UInt32
+  def enumSystemFirmwareTables(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, pFirmwareTableEnumBuffer : UInt8*, buffer_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.EnumSystemFirmwareTables(firmware_table_provider_signature, pFirmwareTableEnumBuffer, buffer_size)
+    {% end %}
   end
 
-  def getSystemFirmwareTable(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, firmware_table_id : Win32cr::System::SystemInformation::FIRMWARE_TABLE_ID, pFirmwareTableBuffer : Void*, buffer_size : UInt32) : UInt32
+  def getSystemFirmwareTable(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, firmware_table_id : UInt32, pFirmwareTableBuffer : UInt8*, buffer_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemFirmwareTable(firmware_table_provider_signature, firmware_table_id, pFirmwareTableBuffer, buffer_size)
+    {% end %}
   end
 
-  def dnsHostnameToComputerNameExW(hostname : Win32cr::Foundation::PWSTR, computer_name : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+  def dnsHostnameToComputerNameExW(hostname : Win32cr::Foundation::PWSTR, computer_name : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsHostnameToComputerNameExW(hostname, computer_name, nSize)
+    {% end %}
   end
 
   def getPhysicallyInstalledSystemMemory(total_memory_in_kilobytes : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPhysicallyInstalledSystemMemory(total_memory_in_kilobytes)
+    {% end %}
   end
 
   def setComputerNameEx2W(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, flags : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameEx2W(name_type, flags, lpBuffer)
+    {% end %}
   end
 
   def setSystemTimeAdjustment(dwTimeAdjustment : UInt32, bTimeAdjustmentDisabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSystemTimeAdjustment(dwTimeAdjustment, bTimeAdjustmentDisabled)
+    {% end %}
   end
 
   def setSystemTimeAdjustmentPrecise(dwTimeAdjustment : UInt64, bTimeAdjustmentDisabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSystemTimeAdjustmentPrecise(dwTimeAdjustment, bTimeAdjustmentDisabled)
+    {% end %}
   end
 
   def getProcessorSystemCycleTime(group : UInt16, buffer : Win32cr::System::SystemInformation::SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION*, returned_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessorSystemCycleTime(group, buffer, returned_length)
+    {% end %}
   end
 
   def getOsManufacturingMode(pbEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOsManufacturingMode(pbEnabled)
+    {% end %}
   end
 
   def getIntegratedDisplaySize(sizeInInches : Float64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetIntegratedDisplaySize(sizeInInches)
+    {% end %}
   end
 
   def setComputerNameA(lpComputerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameA(lpComputerName)
+    {% end %}
   end
 
   def setComputerNameW(lpComputerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameW(lpComputerName)
+    {% end %}
   end
 
   def setComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameExA(name_type, lpBuffer)
+    {% end %}
+  end
+
+  def getDeveloperDriveEnablementState : Win32cr::System::SystemInformation::DEVELOPER_DRIVE_ENABLEMENT_STATE
+    {% if !flag?(:docs) %}
+    C.GetDeveloperDriveEnablementState
+    {% end %}
+  end
+
+  def getRuntimeAttestationReport(nonce : UInt8*, package_version : UInt16, report_types_bitmap : UInt64, report_buffer : Void*, report_buffer_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetRuntimeAttestationReport(nonce, package_version, report_types_bitmap, report_buffer, report_buffer_size)
+    {% end %}
   end
 
   def getSystemCpuSetInformation(information : Win32cr::System::SystemInformation::SYSTEM_CPU_SET_INFORMATION*, buffer_length : UInt32, returned_length : UInt32*, process : Win32cr::Foundation::HANDLE, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemCpuSetInformation(information, buffer_length, returned_length, process, flags)
+    {% end %}
   end
 
-  def getSystemWow64DirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+  def getSystemWow64DirectoryA(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWow64DirectoryA(lpBuffer, uSize)
+    {% end %}
   end
 
-  def getSystemWow64DirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+  def getSystemWow64DirectoryW(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWow64DirectoryW(lpBuffer, uSize)
+    {% end %}
   end
 
-  def getSystemWow64Directory2A(lpBuffer : UInt8*, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
+  def getSystemWow64Directory2A(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWow64Directory2A(lpBuffer, uSize, image_file_machine_type)
+    {% end %}
   end
 
-  def getSystemWow64Directory2W(lpBuffer : UInt16*, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
+  def getSystemWow64Directory2W(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWow64Directory2W(lpBuffer, uSize, image_file_machine_type)
+    {% end %}
   end
 
   def isWow64GuestMachineSupported(wow_guest_machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE, machine_is_supported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsWow64GuestMachineSupported(wow_guest_machine, machine_is_supported)
+    {% end %}
   end
 
   def rtlGetProductInfo(os_major_version : UInt32, os_minor_version : UInt32, sp_major_version : UInt32, sp_minor_version : UInt32, returned_product_type : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlGetProductInfo(os_major_version, os_minor_version, sp_major_version, sp_minor_version, returned_product_type)
+    {% end %}
   end
 
   def rtlOsDeploymentState(flags : UInt32) : Win32cr::System::SystemInformation::OS_DEPLOYEMENT_STATE_VALUES
+    {% if !flag?(:docs) %}
     C.RtlOsDeploymentState(flags)
-  end
-
-  def rtlGetSystemGlobalData(data_id : Win32cr::System::SystemInformation::RTL_SYSTEM_GLOBAL_DATA_ID, buffer : Void*, size : UInt32) : UInt32
-    C.RtlGetSystemGlobalData(data_id, buffer, size)
+    {% end %}
   end
 
   def rtlGetDeviceFamilyInfoEnum(pullUAPInfo : UInt64*, pulDeviceFamily : Win32cr::System::SystemInformation::DEVICEFAMILYINFOENUM*, pulDeviceForm : Win32cr::System::SystemInformation::DEVICEFAMILYDEVICEFORM*) : Void
+    {% if !flag?(:docs) %}
     C.RtlGetDeviceFamilyInfoEnum(pullUAPInfo, pulDeviceFamily, pulDeviceForm)
+    {% end %}
   end
 
   def rtlConvertDeviceFamilyInfoToString(pulDeviceFamilyBufferSize : UInt32*, pulDeviceFormBufferSize : UInt32*, device_family : Win32cr::Foundation::PWSTR, device_form : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlConvertDeviceFamilyInfoToString(pulDeviceFamilyBufferSize, pulDeviceFormBufferSize, device_family, device_form)
+    {% end %}
   end
 
   def rtlSwitchedVVI(version_info : Win32cr::System::SystemInformation::OSVERSIONINFOEXW*, type_mask : UInt32, condition_mask : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlSwitchedVVI(version_info, type_mask, condition_mask)
+    {% end %}
   end
 
   def globalMemoryStatus(lpBuffer : Win32cr::System::SystemInformation::MEMORYSTATUS*) : Void
+    {% if !flag?(:docs) %}
     C.GlobalMemoryStatus(lpBuffer)
+    {% end %}
   end
 
   def getSystemDEPPolicy : Win32cr::System::SystemInformation::DEP_SYSTEM_POLICY_TYPE
+    {% if !flag?(:docs) %}
     C.GetSystemDEPPolicy
+    {% end %}
   end
 
   def getFirmwareType(firmware_type : Win32cr::System::SystemInformation::FIRMWARE_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFirmwareType(firmware_type)
+    {% end %}
   end
 
   def verifyVersionInfoA(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOEXA*, dwTypeMask : Win32cr::System::SystemInformation::VER_FLAGS, dwlConditionMask : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VerifyVersionInfoA(lpVersionInformation, dwTypeMask, dwlConditionMask)
+    {% end %}
   end
 
   def verifyVersionInfoW(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOEXW*, dwTypeMask : Win32cr::System::SystemInformation::VER_FLAGS, dwlConditionMask : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VerifyVersionInfoW(lpVersionInformation, dwTypeMask, dwlConditionMask)
+    {% end %}
   end
 
   @[Link("kernel32")]
   @[Link("ntdll")]
-  @[Link("ntdllk")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GlobalMemoryStatusEx(lpBuffer : Win32cr::System::SystemInformation::MEMORYSTATUSEX*) : Win32cr::Foundation::BOOL
@@ -1068,29 +1324,29 @@ module Win32cr::System::SystemInformation
     fun GetSystemTimeAdjustmentPrecise(lpTimeAdjustment : UInt64*, lpTimeIncrement : UInt64*, lpTimeAdjustmentDisabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetSystemDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+    fun GetSystemDirectoryA(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetSystemDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+    fun GetSystemDirectoryW(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetWindowsDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+    fun GetWindowsDirectoryA(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetWindowsDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+    fun GetWindowsDirectoryW(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetSystemWindowsDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+    fun GetSystemWindowsDirectoryA(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetSystemWindowsDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+    fun GetSystemWindowsDirectoryW(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : UInt8*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    fun GetComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun GetComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    #fun GetComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun SetComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
@@ -1128,13 +1384,13 @@ module Win32cr::System::SystemInformation
     fun GetOsSafeBootMode(flags : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun EnumSystemFirmwareTables(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, pFirmwareTableEnumBuffer : Win32cr::System::SystemInformation::FIRMWARE_TABLE_ID*, buffer_size : UInt32) : UInt32
+    fun EnumSystemFirmwareTables(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, pFirmwareTableEnumBuffer : UInt8*, buffer_size : UInt32) : UInt32
 
     # :nodoc:
-    fun GetSystemFirmwareTable(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, firmware_table_id : Win32cr::System::SystemInformation::FIRMWARE_TABLE_ID, pFirmwareTableBuffer : Void*, buffer_size : UInt32) : UInt32
+    fun GetSystemFirmwareTable(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, firmware_table_id : UInt32, pFirmwareTableBuffer : UInt8*, buffer_size : UInt32) : UInt32
 
     # :nodoc:
-    fun DnsHostnameToComputerNameExW(hostname : Win32cr::Foundation::PWSTR, computer_name : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    fun DnsHostnameToComputerNameExW(hostname : Win32cr::Foundation::PWSTR, computer_name : Win32cr::Foundation::PWSTR, nSize : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetPhysicallyInstalledSystemMemory(total_memory_in_kilobytes : UInt64*) : Win32cr::Foundation::BOOL
@@ -1167,19 +1423,25 @@ module Win32cr::System::SystemInformation
     fun SetComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
+    fun GetDeveloperDriveEnablementState : Win32cr::System::SystemInformation::DEVELOPER_DRIVE_ENABLEMENT_STATE
+
+    # :nodoc:
+    fun GetRuntimeAttestationReport(nonce : UInt8*, package_version : UInt16, report_types_bitmap : UInt64, report_buffer : Void*, report_buffer_size : UInt32*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
     fun GetSystemCpuSetInformation(information : Win32cr::System::SystemInformation::SYSTEM_CPU_SET_INFORMATION*, buffer_length : UInt32, returned_length : UInt32*, process : Win32cr::Foundation::HANDLE, flags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetSystemWow64DirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+    fun GetSystemWow64DirectoryA(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetSystemWow64DirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+    fun GetSystemWow64DirectoryW(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32) : UInt32
 
     # :nodoc:
-    fun GetSystemWow64Directory2A(lpBuffer : UInt8*, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
+    fun GetSystemWow64Directory2A(lpBuffer : Win32cr::Foundation::PSTR, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
 
     # :nodoc:
-    fun GetSystemWow64Directory2W(lpBuffer : UInt16*, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
+    fun GetSystemWow64Directory2W(lpBuffer : Win32cr::Foundation::PWSTR, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
 
     # :nodoc:
     fun IsWow64GuestMachineSupported(wow_guest_machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE, machine_is_supported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -1189,9 +1451,6 @@ module Win32cr::System::SystemInformation
 
     # :nodoc:
     fun RtlOsDeploymentState(flags : UInt32) : Win32cr::System::SystemInformation::OS_DEPLOYEMENT_STATE_VALUES
-
-    # :nodoc:
-    fun RtlGetSystemGlobalData(data_id : Win32cr::System::SystemInformation::RTL_SYSTEM_GLOBAL_DATA_ID, buffer : Void*, size : UInt32) : UInt32
 
     # :nodoc:
     fun RtlGetDeviceFamilyInfoEnum(pullUAPInfo : UInt64*, pulDeviceFamily : Win32cr::System::SystemInformation::DEVICEFAMILYINFOENUM*, pulDeviceForm : Win32cr::System::SystemInformation::DEVICEFAMILYDEVICEFORM*) : Void
@@ -1218,4 +1477,5 @@ module Win32cr::System::SystemInformation
     fun VerifyVersionInfoW(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOEXW*, dwTypeMask : Win32cr::System::SystemInformation::VER_FLAGS, dwlConditionMask : UInt64) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

@@ -1,8 +1,8 @@
 require "./../foundation.cr"
 require "./com.cr"
+require "./../security/cryptography.cr"
 require "./windows_programming.cr"
 require "./registry.cr"
-require "./../security/cryptography.cr"
 
 module Win32cr::System::ApplicationInstallationAndServicing
   extend self
@@ -21,6 +21,12 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
   alias PPATCH_SYMLOAD_CALLBACK = Proc(UInt32, Win32cr::Foundation::PSTR, UInt32, UInt32, UInt32, UInt32, UInt32, Void*, Win32cr::Foundation::BOOL)
 
+  MSIDBOPEN_READONLY = Win32cr::Foundation::PWSTR.new(0x0_u64)
+  MSIDBOPEN_TRANSACT = Win32cr::Foundation::PWSTR.new(0x1_u64)
+  MSIDBOPEN_DIRECT = Win32cr::Foundation::PWSTR.new(0x2_u64)
+  MSIDBOPEN_CREATE = Win32cr::Foundation::PWSTR.new(0x3_u64)
+  MSIDBOPEN_CREATEDIRECT = Win32cr::Foundation::PWSTR.new(0x4_u64)
+  MSIDBOPEN_PATCHFILE = 16_i32
   UIALL = 32768_u32
   LOGTOKEN_TYPE_MASK = 3_u32
   LOGTOKEN_UNSPECIFIED = 0_u32
@@ -62,10 +68,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
   TXTLOG_DEVMGR = 536870912_u32
   TXTLOG_INSTALLER = 1073741824_u32
   TXTLOG_VENDOR = 2147483648_u32
-  CLSID_EvalCom2 = "6e5e1910-8053-4660-b795-6b612e29bc58"
+  CLSID_EvalCom2 = LibC::GUID.new(0x6e5e1910_u32, 0x8053_u16, 0x4660_u16, StaticArray[0xb7_u8, 0x95_u8, 0x6b_u8, 0x61_u8, 0x2e_u8, 0x29_u8, 0xbc_u8, 0x58_u8])
   WIN32_MSM_ = 100_u32
-  LIBID_MsmMergeTypeLib = "0adda82f-2c26-11d2-ad65-00a0c9af11a6"
-  CLSID_MsmMerge2 = "f94985d5-29f9-4743-9805-99bc3f35b678"
+  LIBID_MsmMergeTypeLib = LibC::GUID.new(0xadda82f_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
+  CLSID_MsmMerge2 = LibC::GUID.new(0xf94985d5_u32, 0x29f9_u16, 0x4743_u16, StaticArray[0x98_u8, 0x5_u8, 0x99_u8, 0xbc_u8, 0x3f_u8, 0x35_u8, 0xb6_u8, 0x78_u8])
   WIN32_MSI_ = 500_u32
   MAX_GUID_CHARS = 38_u32
   MAX_FEATURE_CHARS = 38_u32
@@ -121,9 +127,9 @@ module Win32cr::System::ApplicationInstallationAndServicing
   IASSEMBLYCACHEITEM_COMMIT_DISPOSITION_INSTALLED = 1_u32
   IASSEMBLYCACHEITEM_COMMIT_DISPOSITION_REFRESHED = 2_u32
   IASSEMBLYCACHEITEM_COMMIT_DISPOSITION_ALREADY_INSTALLED = 3_u32
-  FUSION_REFCOUNT_UNINSTALL_SUBKEY_GUID = "8cedc215-ac4b-488b-93c0-a50a49cb2fb8"
-  FUSION_REFCOUNT_FILEPATH_GUID = "b02f9d65-fb77-4f7a-afa5-b391309f11c9"
-  FUSION_REFCOUNT_OPAQUE_STRING_GUID = "2ec93463-b0c3-45e1-8364-327e96aea856"
+  FUSION_REFCOUNT_UNINSTALL_SUBKEY_GUID = LibC::GUID.new(0x8cedc215_u32, 0xac4b_u16, 0x488b_u16, StaticArray[0x93_u8, 0xc0_u8, 0xa5_u8, 0xa_u8, 0x49_u8, 0xcb_u8, 0x2f_u8, 0xb8_u8])
+  FUSION_REFCOUNT_FILEPATH_GUID = LibC::GUID.new(0xb02f9d65_u32, 0xfb77_u16, 0x4f7a_u16, StaticArray[0xaf_u8, 0xa5_u8, 0xb3_u8, 0x91_u8, 0x30_u8, 0x9f_u8, 0x11_u8, 0xc9_u8])
+  FUSION_REFCOUNT_OPAQUE_STRING_GUID = LibC::GUID.new(0x2ec93463_u32, 0xb0c3_u16, 0x45e1_u16, StaticArray[0x83_u8, 0x64_u8, 0x32_u8, 0x7e_u8, 0x96_u8, 0xae_u8, 0xa8_u8, 0x56_u8])
   SFC_DISABLE_NORMAL = 0_u32
   SFC_DISABLE_ASK = 1_u32
   SFC_DISABLE_ONCE = 2_u32
@@ -757,7 +763,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
     REINSTALLMODE_SHORTCUT = 512_i32
     REINSTALLMODE_PACKAGE = 1024_i32
   end
-  enum INSTALLOGMODE
+  enum INSTALLLOGMODE
     INSTALLLOGMODE_FATALEXIT = 1_i32
     INSTALLLOGMODE_ERROR = 2_i32
     INSTALLLOGMODE_WARNING = 4_i32
@@ -1013,13 +1019,13 @@ module Win32cr::System::ApplicationInstallationAndServicing
     ASM_NAME_MAX_PARAMS = 20_i32
   end
   @[Flags]
-  enum ASM_BIND_FLAGS : UInt32
-    ASM_BINDF_FORCE_CACHE_INSTALL = 1_u32
-    ASM_BINDF_RFS_INTEGRITY_CHECK = 2_u32
-    ASM_BINDF_RFS_MODULE_CHECK = 4_u32
-    ASM_BINDF_BINPATH_PROBE_ONLY = 8_u32
-    ASM_BINDF_SHARED_BINPATH_HINT = 16_u32
-    ASM_BINDF_PARENT_ASM_HINT = 32_u32
+  enum ASM_BIND_FLAGS
+    ASM_BINDF_FORCE_CACHE_INSTALL = 1_i32
+    ASM_BINDF_RFS_INTEGRITY_CHECK = 2_i32
+    ASM_BINDF_RFS_MODULE_CHECK = 4_i32
+    ASM_BINDF_BINPATH_PROBE_ONLY = 8_i32
+    ASM_BINDF_SHARED_BINPATH_HINT = 16_i32
+    ASM_BINDF_PARENT_ASM_HINT = 32_i32
   end
   enum ASM_DISPLAY_FLAGS
     ASM_DISPLAYF_VERSION = 1_i32
@@ -1532,10 +1538,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
   struct ASSEMBLY_INFO
     property cbAssemblyInfo : UInt32
     property dwAssemblyFlags : UInt32
-    property uliAssemblySizeInKB : Win32cr::Foundation::ULARGE_INTEGER
+    property uliAssemblySizeInKB : UInt64
     property pszCurrentAssemblyPathBuf : Win32cr::Foundation::PWSTR
     property cchBuf : UInt32
-    def initialize(@cbAssemblyInfo : UInt32, @dwAssemblyFlags : UInt32, @uliAssemblySizeInKB : Win32cr::Foundation::ULARGE_INTEGER, @pszCurrentAssemblyPathBuf : Win32cr::Foundation::PWSTR, @cchBuf : UInt32)
+    def initialize(@cbAssemblyInfo : UInt32, @dwAssemblyFlags : UInt32, @uliAssemblySizeInKB : UInt64, @pszCurrentAssemblyPathBuf : Win32cr::Foundation::PWSTR, @cchBuf : UInt32)
     end
   end
 
@@ -1559,7 +1565,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  struct Tagapptasktype_
+  struct PM_APPTASKTYPE
     property product_id : LibC::GUID
     property task_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE
     def initialize(@product_id : LibC::GUID, @task_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE)
@@ -1605,7 +1611,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
     property tasktype : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE
     property task_product_id : LibC::GUID
     property tile_product_id : LibC::GUID
-    property app_task_type : Win32cr::System::ApplicationInstallationAndServicing::Tagapptasktype_
+    property app_task_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPTASKTYPE
     property consumer : Win32cr::System::ApplicationInstallationAndServicing::PM_EXTENSIONCONSUMER
     property bsa_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BSATASKID
     property bsa_product_id : LibC::GUID
@@ -1615,7 +1621,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
     property content_type : Win32cr::Foundation::BSTR
     property app_supported_file_ext_pid : LibC::GUID
     property share_target_file_type : Win32cr::Foundation::BSTR
-    def initialize(@dummy : Int32, @genre : Win32cr::System::ApplicationInstallationAndServicing::PM_APP_GENRE, @app_hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_HUBTYPE, @hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TILE_HUBTYPE, @tasktype : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE, @task_product_id : LibC::GUID, @tile_product_id : LibC::GUID, @app_task_type : Win32cr::System::ApplicationInstallationAndServicing::Tagapptasktype_, @consumer : Win32cr::System::ApplicationInstallationAndServicing::PM_EXTENSIONCONSUMER, @bsa_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BSATASKID, @bsa_product_id : LibC::GUID, @bw_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BWTASKID, @protocol_name : Win32cr::Foundation::BSTR, @file_type : Win32cr::Foundation::BSTR, @content_type : Win32cr::Foundation::BSTR, @app_supported_file_ext_pid : LibC::GUID, @share_target_file_type : Win32cr::Foundation::BSTR)
+    def initialize(@dummy : Int32, @genre : Win32cr::System::ApplicationInstallationAndServicing::PM_APP_GENRE, @app_hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPLICATION_HUBTYPE, @hub_type : Win32cr::System::ApplicationInstallationAndServicing::PM_TILE_HUBTYPE, @tasktype : Win32cr::System::ApplicationInstallationAndServicing::PM_TASK_TYPE, @task_product_id : LibC::GUID, @tile_product_id : LibC::GUID, @app_task_type : Win32cr::System::ApplicationInstallationAndServicing::PM_APPTASKTYPE, @consumer : Win32cr::System::ApplicationInstallationAndServicing::PM_EXTENSIONCONSUMER, @bsa_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BSATASKID, @bsa_product_id : LibC::GUID, @bw_task : Win32cr::System::ApplicationInstallationAndServicing::PM_BWTASKID, @protocol_name : Win32cr::Foundation::BSTR, @file_type : Win32cr::Foundation::BSTR, @content_type : Win32cr::Foundation::BSTR, @app_supported_file_ext_pid : LibC::GUID, @share_target_file_type : Win32cr::Foundation::BSTR)
     end
     end
 
@@ -1786,7 +1792,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
   @[Extern]
   struct PATCH_INTERLEAVE_MAP
     property count_ranges : UInt32
-    property range : Anonymous_e__Struct_*
+    property range : Anonymous_e__Struct_[1]
 
     # Nested Type Anonymous_e__Struct_
     @[Extern]
@@ -1798,7 +1804,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
     end
     end
 
-    def initialize(@count_ranges : UInt32, @range : Anonymous_e__Struct_*)
+    def initialize(@count_ranges : UInt32, @range : Anonymous_e__Struct_[1])
     end
   end
 
@@ -1859,9 +1865,9 @@ module Win32cr::System::ApplicationInstallationAndServicing
     property flags : Int64
     property target_size : LibC::UIntPtrT
     property target_file_time : Win32cr::Foundation::FILETIME
-    property target_hash_alg_id : UInt32
+    property target_hash_alg_id : Win32cr::Security::Cryptography::ALG_ID
     property target_hash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH
-    def initialize(@file_type_set : Int64, @file_type : Int64, @flags : Int64, @target_size : LibC::UIntPtrT, @target_file_time : Win32cr::Foundation::FILETIME, @target_hash_alg_id : UInt32, @target_hash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH)
+    def initialize(@file_type_set : Int64, @file_type : Int64, @flags : Int64, @target_size : LibC::UIntPtrT, @target_file_time : Win32cr::Foundation::FILETIME, @target_hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, @target_hash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH)
     end
   end
 
@@ -1890,10 +1896,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     property ulEncodedAssemblyIdentityLength : UInt32
     property ulManifestPathType : UInt32
     property ulManifestPathLength : UInt32
-    property liManifestLastWriteTime : Win32cr::Foundation::LARGE_INTEGER
+    property liManifestLastWriteTime : Int64
     property ulPolicyPathType : UInt32
     property ulPolicyPathLength : UInt32
-    property liPolicyLastWriteTime : Win32cr::Foundation::LARGE_INTEGER
+    property liPolicyLastWriteTime : Int64
     property ulMetadataSatelliteRosterIndex : UInt32
     property ulManifestVersionMajor : UInt32
     property ulManifestVersionMinor : UInt32
@@ -1905,7 +1911,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
     property lpAssemblyPolicyPath : Win32cr::Foundation::PWSTR
     property lpAssemblyDirectoryName : Win32cr::Foundation::PWSTR
     property ulFileCount : UInt32
-    def initialize(@ulFlags : UInt32, @ulEncodedAssemblyIdentityLength : UInt32, @ulManifestPathType : UInt32, @ulManifestPathLength : UInt32, @liManifestLastWriteTime : Win32cr::Foundation::LARGE_INTEGER, @ulPolicyPathType : UInt32, @ulPolicyPathLength : UInt32, @liPolicyLastWriteTime : Win32cr::Foundation::LARGE_INTEGER, @ulMetadataSatelliteRosterIndex : UInt32, @ulManifestVersionMajor : UInt32, @ulManifestVersionMinor : UInt32, @ulPolicyVersionMajor : UInt32, @ulPolicyVersionMinor : UInt32, @ulAssemblyDirectoryNameLength : UInt32, @lpAssemblyEncodedAssemblyIdentity : Win32cr::Foundation::PWSTR, @lpAssemblyManifestPath : Win32cr::Foundation::PWSTR, @lpAssemblyPolicyPath : Win32cr::Foundation::PWSTR, @lpAssemblyDirectoryName : Win32cr::Foundation::PWSTR, @ulFileCount : UInt32)
+    def initialize(@ulFlags : UInt32, @ulEncodedAssemblyIdentityLength : UInt32, @ulManifestPathType : UInt32, @ulManifestPathLength : UInt32, @liManifestLastWriteTime : Int64, @ulPolicyPathType : UInt32, @ulPolicyPathLength : UInt32, @liPolicyLastWriteTime : Int64, @ulMetadataSatelliteRosterIndex : UInt32, @ulManifestVersionMajor : UInt32, @ulManifestVersionMinor : UInt32, @ulPolicyVersionMajor : UInt32, @ulPolicyVersionMinor : UInt32, @ulAssemblyDirectoryNameLength : UInt32, @lpAssemblyEncodedAssemblyIdentity : Win32cr::Foundation::PWSTR, @lpAssemblyManifestPath : Win32cr::Foundation::PWSTR, @lpAssemblyPolicyPath : Win32cr::Foundation::PWSTR, @lpAssemblyDirectoryName : Win32cr::Foundation::PWSTR, @ulFileCount : UInt32)
     end
   end
 
@@ -1930,8 +1936,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   @[Extern]
   struct ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION
     property element_count : UInt32
-    property elements : Win32cr::System::ApplicationInstallationAndServicing::COMPATIBILITY_CONTEXT_ELEMENT*
-    def initialize(@element_count : UInt32, @elements : Win32cr::System::ApplicationInstallationAndServicing::COMPATIBILITY_CONTEXT_ELEMENT*)
+    property elements : Win32cr::System::ApplicationInstallationAndServicing::COMPATIBILITY_CONTEXT_ELEMENT[1]
+    def initialize(@element_count : UInt32, @elements : Win32cr::System::ApplicationInstallationAndServicing::COMPATIBILITY_CONTEXT_ELEMENT[1])
     end
   end
 
@@ -1963,8 +1969,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     property lpAssemblyDirectory : Win32cr::Foundation::PSTR
     property lpResourceName : Win32cr::Foundation::PSTR
     property lpApplicationName : Win32cr::Foundation::PSTR
-    property hModule : Win32cr::Foundation::HINSTANCE
-    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @lpSource : Win32cr::Foundation::PSTR, @wProcessorArchitecture : UInt16, @wLangId : UInt16, @lpAssemblyDirectory : Win32cr::Foundation::PSTR, @lpResourceName : Win32cr::Foundation::PSTR, @lpApplicationName : Win32cr::Foundation::PSTR, @hModule : Win32cr::Foundation::HINSTANCE)
+    property hModule : Win32cr::Foundation::HMODULE
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @lpSource : Win32cr::Foundation::PSTR, @wProcessorArchitecture : UInt16, @wLangId : UInt16, @lpAssemblyDirectory : Win32cr::Foundation::PSTR, @lpResourceName : Win32cr::Foundation::PSTR, @lpApplicationName : Win32cr::Foundation::PSTR, @hModule : Win32cr::Foundation::HMODULE)
     end
   end
 
@@ -1978,8 +1984,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     property lpAssemblyDirectory : Win32cr::Foundation::PWSTR
     property lpResourceName : Win32cr::Foundation::PWSTR
     property lpApplicationName : Win32cr::Foundation::PWSTR
-    property hModule : Win32cr::Foundation::HINSTANCE
-    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @lpSource : Win32cr::Foundation::PWSTR, @wProcessorArchitecture : UInt16, @wLangId : UInt16, @lpAssemblyDirectory : Win32cr::Foundation::PWSTR, @lpResourceName : Win32cr::Foundation::PWSTR, @lpApplicationName : Win32cr::Foundation::PWSTR, @hModule : Win32cr::Foundation::HINSTANCE)
+    property hModule : Win32cr::Foundation::HMODULE
+    def initialize(@cbSize : UInt32, @dwFlags : UInt32, @lpSource : Win32cr::Foundation::PWSTR, @wProcessorArchitecture : UInt16, @wLangId : UInt16, @lpAssemblyDirectory : Win32cr::Foundation::PWSTR, @lpResourceName : Win32cr::Foundation::PWSTR, @lpApplicationName : Win32cr::Foundation::PWSTR, @hModule : Win32cr::Foundation::HMODULE)
     end
   end
 
@@ -2002,7 +2008,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IValidateVtbl,
+
+  record IValidateVtable,
     query_interface : Proc(IValidate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IValidate*, UInt32),
     release : Proc(IValidate*, UInt32),
@@ -2016,7 +2023,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IValidate, lpVtbl : IValidateVtbl* do
+  record IValidate, lpVtbl : IValidateVtable* do
     GUID = LibC::GUID.new(0xe482e5c6_u32, 0xe31e_u16, 0x4143_u16, StaticArray[0xa2_u8, 0xe6_u8, 0xdb_u8, 0xc3_u8, 0xd8_u8, 0xe4_u8, 0xb8_u8, 0xd3_u8])
     def query_interface(this : IValidate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2052,7 +2059,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IEnumMsmStringVtbl,
+
+  record IEnumMsmStringVtable,
     query_interface : Proc(IEnumMsmString*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumMsmString*, UInt32),
     release : Proc(IEnumMsmString*, UInt32),
@@ -2063,7 +2071,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IEnumMsmString, lpVtbl : IEnumMsmStringVtbl* do
+  record IEnumMsmString, lpVtbl : IEnumMsmStringVtable* do
     GUID = LibC::GUID.new(0xadda826_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IEnumMsmString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2090,21 +2098,22 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IMsmStringsVtbl,
+
+  record IMsmStringsVtable,
     query_interface : Proc(IMsmStrings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMsmStrings*, UInt32),
     release : Proc(IMsmStrings*, UInt32),
     get_type_info_count : Proc(IMsmStrings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMsmStrings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMsmStrings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMsmStrings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMsmStrings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IMsmStrings*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IMsmStrings*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IMsmStrings*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMsmStrings, lpVtbl : IMsmStringsVtbl* do
+  record IMsmStrings, lpVtbl : IMsmStringsVtable* do
     GUID = LibC::GUID.new(0xadda827_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmStrings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2124,8 +2133,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def get_i_ds_of_names(this : IMsmStrings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMsmStrings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMsmStrings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IMsmStrings*, item : Int32, return__ : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, item, return__)
@@ -2140,14 +2149,15 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IMsmErrorVtbl,
+
+  record IMsmErrorVtable,
     query_interface : Proc(IMsmError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMsmError*, UInt32),
     release : Proc(IMsmError*, UInt32),
     get_type_info_count : Proc(IMsmError*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMsmError*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMsmError*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMsmError*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMsmError*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IMsmError*, Win32cr::System::ApplicationInstallationAndServicing::Msmerrortype*, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IMsmError*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Language : Proc(IMsmError*, Int16*, Win32cr::Foundation::HRESULT),
@@ -2158,7 +2168,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IMsmError, lpVtbl : IMsmErrorVtbl* do
+  record IMsmError, lpVtbl : IMsmErrorVtable* do
     GUID = LibC::GUID.new(0xadda828_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2178,8 +2188,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def get_i_ds_of_names(this : IMsmError*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMsmError*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMsmError*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IMsmError*, error_type : Win32cr::System::ApplicationInstallationAndServicing::Msmerrortype*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, error_type)
@@ -2206,7 +2216,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IEnumMsmErrorVtbl,
+
+  record IEnumMsmErrorVtable,
     query_interface : Proc(IEnumMsmError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumMsmError*, UInt32),
     release : Proc(IEnumMsmError*, UInt32),
@@ -2217,7 +2228,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IEnumMsmError, lpVtbl : IEnumMsmErrorVtbl* do
+  record IEnumMsmError, lpVtbl : IEnumMsmErrorVtable* do
     GUID = LibC::GUID.new(0xadda829_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IEnumMsmError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2244,21 +2255,22 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IMsmErrorsVtbl,
+
+  record IMsmErrorsVtable,
     query_interface : Proc(IMsmErrors*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMsmErrors*, UInt32),
     release : Proc(IMsmErrors*, UInt32),
     get_type_info_count : Proc(IMsmErrors*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMsmErrors*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMsmErrors*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMsmErrors*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMsmErrors*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IMsmErrors*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IMsmErrors*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IMsmErrors*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMsmErrors, lpVtbl : IMsmErrorsVtbl* do
+  record IMsmErrors, lpVtbl : IMsmErrorsVtable* do
     GUID = LibC::GUID.new(0xadda82a_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmErrors*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2278,8 +2290,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def get_i_ds_of_names(this : IMsmErrors*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMsmErrors*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMsmErrors*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IMsmErrors*, item : Int32, return__ : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, item, return__)
@@ -2294,21 +2306,22 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IMsmDependencyVtbl,
+
+  record IMsmDependencyVtable,
     query_interface : Proc(IMsmDependency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMsmDependency*, UInt32),
     release : Proc(IMsmDependency*, UInt32),
     get_type_info_count : Proc(IMsmDependency*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMsmDependency*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMsmDependency*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMsmDependency*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMsmDependency*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Module : Proc(IMsmDependency*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Language : Proc(IMsmDependency*, Int16*, Win32cr::Foundation::HRESULT),
     get_Version : Proc(IMsmDependency*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMsmDependency, lpVtbl : IMsmDependencyVtbl* do
+  record IMsmDependency, lpVtbl : IMsmDependencyVtable* do
     GUID = LibC::GUID.new(0xadda82b_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2328,8 +2341,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def get_i_ds_of_names(this : IMsmDependency*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMsmDependency*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMsmDependency*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Module(this : IMsmDependency*, module__ : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Module.call(this, module__)
@@ -2344,7 +2357,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IEnumMsmDependencyVtbl,
+
+  record IEnumMsmDependencyVtable,
     query_interface : Proc(IEnumMsmDependency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumMsmDependency*, UInt32),
     release : Proc(IEnumMsmDependency*, UInt32),
@@ -2355,7 +2369,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IEnumMsmDependency, lpVtbl : IEnumMsmDependencyVtbl* do
+  record IEnumMsmDependency, lpVtbl : IEnumMsmDependencyVtable* do
     GUID = LibC::GUID.new(0xadda82c_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IEnumMsmDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2382,21 +2396,22 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IMsmDependenciesVtbl,
+
+  record IMsmDependenciesVtable,
     query_interface : Proc(IMsmDependencies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMsmDependencies*, UInt32),
     release : Proc(IMsmDependencies*, UInt32),
     get_type_info_count : Proc(IMsmDependencies*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMsmDependencies*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMsmDependencies*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMsmDependencies*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMsmDependencies*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IMsmDependencies*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IMsmDependencies*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IMsmDependencies*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMsmDependencies, lpVtbl : IMsmDependenciesVtbl* do
+  record IMsmDependencies, lpVtbl : IMsmDependenciesVtable* do
     GUID = LibC::GUID.new(0xadda82d_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmDependencies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2416,8 +2431,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def get_i_ds_of_names(this : IMsmDependencies*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMsmDependencies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMsmDependencies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Item(this : IMsmDependencies*, item : Int32, return__ : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, item, return__)
@@ -2432,17 +2447,18 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IMsmMergeVtbl,
+
+  record IMsmMergeVtable,
     query_interface : Proc(IMsmMerge*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMsmMerge*, UInt32),
     release : Proc(IMsmMerge*, UInt32),
     get_type_info_count : Proc(IMsmMerge*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMsmMerge*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMsmMerge*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMsmMerge*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMsmMerge*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open_database : Proc(IMsmMerge*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     open_module : Proc(IMsmMerge*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    close_database : Proc(IMsmMerge*, Int16, Win32cr::Foundation::HRESULT),
+    close_database : Proc(IMsmMerge*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     close_module : Proc(IMsmMerge*, Win32cr::Foundation::HRESULT),
     open_log : Proc(IMsmMerge*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     close_log : Proc(IMsmMerge*, Win32cr::Foundation::HRESULT),
@@ -2456,7 +2472,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IMsmMerge, lpVtbl : IMsmMergeVtbl* do
+  record IMsmMerge, lpVtbl : IMsmMergeVtable* do
     GUID = LibC::GUID.new(0xadda82e_u32, 0x2c26_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x65_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xaf_u8, 0x11_u8, 0xa6_u8])
     def query_interface(this : IMsmMerge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2476,8 +2492,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def get_i_ds_of_names(this : IMsmMerge*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMsmMerge*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMsmMerge*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open_database(this : IMsmMerge*, path : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_database.call(this, path)
@@ -2485,7 +2501,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def open_module(this : IMsmMerge*, path : Win32cr::Foundation::BSTR, language : Int16) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_module.call(this, path, language)
     end
-    def close_database(this : IMsmMerge*, commit : Int16) : Win32cr::Foundation::HRESULT
+    def close_database(this : IMsmMerge*, commit : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close_database.call(this, commit)
     end
     def close_module(this : IMsmMerge*) : Win32cr::Foundation::HRESULT
@@ -2522,19 +2538,20 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IMsmGetFilesVtbl,
+
+  record IMsmGetFilesVtable,
     query_interface : Proc(IMsmGetFiles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMsmGetFiles*, UInt32),
     release : Proc(IMsmGetFiles*, UInt32),
     get_type_info_count : Proc(IMsmGetFiles*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMsmGetFiles*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMsmGetFiles*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMsmGetFiles*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMsmGetFiles*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ModuleFiles : Proc(IMsmGetFiles*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMsmGetFiles, lpVtbl : IMsmGetFilesVtbl* do
+  record IMsmGetFiles, lpVtbl : IMsmGetFilesVtable* do
     GUID = LibC::GUID.new(0x7041ae26_u32, 0x2d78_u16, 0x11d2_u16, StaticArray[0x88_u8, 0x8a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x81_u8, 0xb0_u8, 0x15_u8])
     def query_interface(this : IMsmGetFiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2554,8 +2571,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def get_i_ds_of_names(this : IMsmGetFiles*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMsmGetFiles*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMsmGetFiles*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ModuleFiles(this : IMsmGetFiles*, files : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModuleFiles.call(this, files)
@@ -2564,23 +2581,24 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IAssemblyNameVtbl,
+
+  record IAssemblyNameVtable,
     query_interface : Proc(IAssemblyName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAssemblyName*, UInt32),
     release : Proc(IAssemblyName*, UInt32),
     set_property : Proc(IAssemblyName*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
     get_property : Proc(IAssemblyName*, UInt32, Void*, UInt32*, Win32cr::Foundation::HRESULT),
     finalize__ : Proc(IAssemblyName*, Win32cr::Foundation::HRESULT),
-    get_display_name : Proc(IAssemblyName*, UInt16*, UInt32*, UInt32, Win32cr::Foundation::HRESULT),
+    get_display_name : Proc(IAssemblyName*, Win32cr::Foundation::PWSTR, UInt32*, UInt32, Win32cr::Foundation::HRESULT),
     reserved : Proc(IAssemblyName*, LibC::GUID*, Void*, Void*, Win32cr::Foundation::PWSTR, Int64, Void*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_name : Proc(IAssemblyName*, UInt32*, UInt16*, Win32cr::Foundation::HRESULT),
+    get_name : Proc(IAssemblyName*, UInt32*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     get_version : Proc(IAssemblyName*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
     is_equal : Proc(IAssemblyName*, Void*, UInt32, Win32cr::Foundation::HRESULT),
     clone : Proc(IAssemblyName*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAssemblyName, lpVtbl : IAssemblyNameVtbl* do
+  record IAssemblyName, lpVtbl : IAssemblyNameVtable* do
     GUID = LibC::GUID.new(0xcd193bc0_u32, 0xb4bc_u16, 0x11d2_u16, StaticArray[0x98_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1d_u8, 0x2e_u8])
     def query_interface(this : IAssemblyName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2600,13 +2618,13 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def finalize__(this : IAssemblyName*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.finalize__.call(this)
     end
-    def get_display_name(this : IAssemblyName*, szDisplayName : UInt16*, pccDisplayName : UInt32*, dwDisplayFlags : UInt32) : Win32cr::Foundation::HRESULT
+    def get_display_name(this : IAssemblyName*, szDisplayName : Win32cr::Foundation::PWSTR, pccDisplayName : UInt32*, dwDisplayFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_display_name.call(this, szDisplayName, pccDisplayName, dwDisplayFlags)
     end
     def reserved(this : IAssemblyName*, refIID : LibC::GUID*, pUnkReserved1 : Void*, pUnkReserved2 : Void*, szReserved : Win32cr::Foundation::PWSTR, llReserved : Int64, pvReserved : Void*, cbReserved : UInt32, ppReserved : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reserved.call(this, refIID, pUnkReserved1, pUnkReserved2, szReserved, llReserved, pvReserved, cbReserved, ppReserved)
     end
-    def get_name(this : IAssemblyName*, lpcwBuffer : UInt32*, pwzName : UInt16*) : Win32cr::Foundation::HRESULT
+    def get_name(this : IAssemblyName*, lpcwBuffer : UInt32*, pwzName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, lpcwBuffer, pwzName)
     end
     def get_version(this : IAssemblyName*, pdwVersionHi : UInt32*, pdwVersionLow : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2622,17 +2640,18 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IAssemblyCacheItemVtbl,
+
+  record IAssemblyCacheItemVtable,
     query_interface : Proc(IAssemblyCacheItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAssemblyCacheItem*, UInt32),
     release : Proc(IAssemblyCacheItem*, UInt32),
-    create_stream : Proc(IAssemblyCacheItem*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Void**, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    create_stream : Proc(IAssemblyCacheItem*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Void**, UInt64*, Win32cr::Foundation::HRESULT),
     commit : Proc(IAssemblyCacheItem*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     abort_item : Proc(IAssemblyCacheItem*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAssemblyCacheItem, lpVtbl : IAssemblyCacheItemVtbl* do
+  record IAssemblyCacheItem, lpVtbl : IAssemblyCacheItemVtable* do
     GUID = LibC::GUID.new(0x9e3aaeb4_u32, 0xd1cd_u16, 0x11d2_u16, StaticArray[0xba_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xce_u8, 0xae_u8])
     def query_interface(this : IAssemblyCacheItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2643,7 +2662,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
     def release(this : IAssemblyCacheItem*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def create_stream(this : IAssemblyCacheItem*, dwFlags : UInt32, pszStreamName : Win32cr::Foundation::PWSTR, dwFormat : UInt32, dwFormatFlags : UInt32, ppIStream : Void**, puliMaxSize : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    def create_stream(this : IAssemblyCacheItem*, dwFlags : UInt32, pszStreamName : Win32cr::Foundation::PWSTR, dwFormat : UInt32, dwFormatFlags : UInt32, ppIStream : Void**, puliMaxSize : UInt64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_stream.call(this, dwFlags, pszStreamName, dwFormat, dwFormatFlags, ppIStream, puliMaxSize)
     end
     def commit(this : IAssemblyCacheItem*, dwFlags : UInt32, pulDisposition : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2656,7 +2675,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IAssemblyCacheVtbl,
+
+  record IAssemblyCacheVtable,
     query_interface : Proc(IAssemblyCache*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAssemblyCache*, UInt32),
     release : Proc(IAssemblyCache*, UInt32),
@@ -2668,7 +2688,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IAssemblyCache, lpVtbl : IAssemblyCacheVtbl* do
+  record IAssemblyCache, lpVtbl : IAssemblyCacheVtable* do
     GUID = LibC::GUID.new(0xe707dcde_u32, 0xd1cd_u16, 0x11d2_u16, StaticArray[0xba_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xce_u8, 0xae_u8])
     def query_interface(this : IAssemblyCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2698,7 +2718,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMApplicationInfoVtbl,
+
+  record IPMApplicationInfoVtable,
     query_interface : Proc(IPMApplicationInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMApplicationInfo*, UInt32),
     release : Proc(IPMApplicationInfo*, UInt32),
@@ -2760,7 +2781,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMApplicationInfo, lpVtbl : IPMApplicationInfoVtbl* do
+  record IPMApplicationInfo, lpVtbl : IPMApplicationInfoVtable* do
     GUID = LibC::GUID.new(0x50afb58a_u32, 0x438c_u16, 0x4088_u16, StaticArray[0x97_u8, 0x89_u8, 0xf8_u8, 0xc4_u8, 0x89_u8, 0x98_u8, 0x29_u8, 0xc7_u8])
     def query_interface(this : IPMApplicationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2940,7 +2961,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMTilePropertyInfoVtbl,
+
+  record IPMTilePropertyInfoVtable,
     query_interface : Proc(IPMTilePropertyInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMTilePropertyInfo*, UInt32),
     release : Proc(IPMTilePropertyInfo*, UInt32),
@@ -2950,7 +2972,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMTilePropertyInfo, lpVtbl : IPMTilePropertyInfoVtbl* do
+  record IPMTilePropertyInfo, lpVtbl : IPMTilePropertyInfoVtable* do
     GUID = LibC::GUID.new(0x6c2b8017_u32, 0x1efa_u16, 0x42a7_u16, StaticArray[0x86_u8, 0xc0_u8, 0x6d_u8, 0x4b_u8, 0x64_u8, 0xb_u8, 0xf5_u8, 0x28_u8])
     def query_interface(this : IPMTilePropertyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2974,7 +2996,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMTilePropertyEnumeratorVtbl,
+
+  record IPMTilePropertyEnumeratorVtable,
     query_interface : Proc(IPMTilePropertyEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMTilePropertyEnumerator*, UInt32),
     release : Proc(IPMTilePropertyEnumerator*, UInt32),
@@ -2982,7 +3005,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMTilePropertyEnumerator, lpVtbl : IPMTilePropertyEnumeratorVtbl* do
+  record IPMTilePropertyEnumerator, lpVtbl : IPMTilePropertyEnumeratorVtable* do
     GUID = LibC::GUID.new(0xcc4cd629_u32, 0x9047_u16, 0x4250_u16, StaticArray[0xaa_u8, 0xc8_u8, 0x93_u8, 0xe_u8, 0x47_u8, 0x81_u8, 0x24_u8, 0x21_u8])
     def query_interface(this : IPMTilePropertyEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3000,7 +3023,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMTileInfoVtbl,
+
+  record IPMTileInfoVtable,
     query_interface : Proc(IPMTileInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMTileInfo*, UInt32),
     release : Proc(IPMTileInfo*, UInt32),
@@ -3031,7 +3055,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMTileInfo, lpVtbl : IPMTileInfoVtbl* do
+  record IPMTileInfo, lpVtbl : IPMTileInfoVtable* do
     GUID = LibC::GUID.new(0xd1604833_u32, 0x2b08_u16, 0x4001_u16, StaticArray[0x82_u8, 0xcd_u8, 0x18_u8, 0x3a_u8, 0xd7_u8, 0x34_u8, 0xf7_u8, 0x52_u8])
     def query_interface(this : IPMTileInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3118,7 +3142,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMTileInfoEnumeratorVtbl,
+
+  record IPMTileInfoEnumeratorVtable,
     query_interface : Proc(IPMTileInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMTileInfoEnumerator*, UInt32),
     release : Proc(IPMTileInfoEnumerator*, UInt32),
@@ -3126,7 +3151,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMTileInfoEnumerator, lpVtbl : IPMTileInfoEnumeratorVtbl* do
+  record IPMTileInfoEnumerator, lpVtbl : IPMTileInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0xded83065_u32, 0xe462_u16, 0x4b2c_u16, StaticArray[0xac_u8, 0xb5_u8, 0xe3_u8, 0x9c_u8, 0xea_u8, 0x61_u8, 0xc8_u8, 0x74_u8])
     def query_interface(this : IPMTileInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3144,7 +3169,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMApplicationInfoEnumeratorVtbl,
+
+  record IPMApplicationInfoEnumeratorVtable,
     query_interface : Proc(IPMApplicationInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMApplicationInfoEnumerator*, UInt32),
     release : Proc(IPMApplicationInfoEnumerator*, UInt32),
@@ -3152,7 +3178,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMApplicationInfoEnumerator, lpVtbl : IPMApplicationInfoEnumeratorVtbl* do
+  record IPMApplicationInfoEnumerator, lpVtbl : IPMApplicationInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0xec42a96_u32, 0x4d46_u16, 0x4dc6_u16, StaticArray[0xa3_u8, 0xd9_u8, 0xa7_u8, 0xac_u8, 0xaa_u8, 0xc0_u8, 0xf5_u8, 0xfa_u8])
     def query_interface(this : IPMApplicationInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3170,7 +3196,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMLiveTileJobInfoVtbl,
+
+  record IPMLiveTileJobInfoVtable,
     query_interface : Proc(IPMLiveTileJobInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMLiveTileJobInfo*, UInt32),
     release : Proc(IPMLiveTileJobInfo*, UInt32),
@@ -3201,7 +3228,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMLiveTileJobInfo, lpVtbl : IPMLiveTileJobInfoVtbl* do
+  record IPMLiveTileJobInfo, lpVtbl : IPMLiveTileJobInfoVtable* do
     GUID = LibC::GUID.new(0x6009a81f_u32, 0x4710_u16, 0x4697_u16, StaticArray[0xb5_u8, 0xf6_u8, 0x22_u8, 0x8_u8, 0xf6_u8, 0x5_u8, 0x7b_u8, 0x8e_u8])
     def query_interface(this : IPMLiveTileJobInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3288,7 +3315,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMLiveTileJobInfoEnumeratorVtbl,
+
+  record IPMLiveTileJobInfoEnumeratorVtable,
     query_interface : Proc(IPMLiveTileJobInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMLiveTileJobInfoEnumerator*, UInt32),
     release : Proc(IPMLiveTileJobInfoEnumerator*, UInt32),
@@ -3296,7 +3324,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMLiveTileJobInfoEnumerator, lpVtbl : IPMLiveTileJobInfoEnumeratorVtbl* do
+  record IPMLiveTileJobInfoEnumerator, lpVtbl : IPMLiveTileJobInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0xbc042582_u32, 0x9415_u16, 0x4f36_u16, StaticArray[0x9f_u8, 0x99_u8, 0x6_u8, 0xf1_u8, 0x4_u8, 0xc0_u8, 0x7c_u8, 0x3_u8])
     def query_interface(this : IPMLiveTileJobInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3314,7 +3342,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMDeploymentManagerVtbl,
+
+  record IPMDeploymentManagerVtable,
     query_interface : Proc(IPMDeploymentManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMDeploymentManager*, UInt32),
     release : Proc(IPMDeploymentManager*, UInt32),
@@ -3356,7 +3385,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMDeploymentManager, lpVtbl : IPMDeploymentManagerVtbl* do
+  record IPMDeploymentManager, lpVtbl : IPMDeploymentManagerVtable* do
     GUID = LibC::GUID.new(0x35f785fa_u32, 0x1979_u16, 0x4a8b_u16, StaticArray[0xbc_u8, 0x8f_u8, 0xfd_u8, 0x70_u8, 0xeb_u8, 0xd_u8, 0x15_u8, 0x44_u8])
     def query_interface(this : IPMDeploymentManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3476,7 +3505,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMEnumerationManagerVtbl,
+
+  record IPMEnumerationManagerVtable,
     query_interface : Proc(IPMEnumerationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMEnumerationManager*, UInt32),
     release : Proc(IPMEnumerationManager*, UInt32),
@@ -3501,7 +3531,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMEnumerationManager, lpVtbl : IPMEnumerationManagerVtbl* do
+  record IPMEnumerationManager, lpVtbl : IPMEnumerationManagerVtable* do
     GUID = LibC::GUID.new(0x698d57c2_u32, 0x292d_u16, 0x4cf3_u16, StaticArray[0xb7_u8, 0x3c_u8, 0xd9_u8, 0x5a_u8, 0x69_u8, 0x22_u8, 0xed_u8, 0x9a_u8])
     def query_interface(this : IPMEnumerationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3570,7 +3600,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMTaskInfoVtbl,
+
+  record IPMTaskInfoVtable,
     query_interface : Proc(IPMTaskInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMTaskInfo*, UInt32),
     release : Proc(IPMTaskInfo*, UInt32),
@@ -3598,7 +3629,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMTaskInfo, lpVtbl : IPMTaskInfoVtbl* do
+  record IPMTaskInfo, lpVtbl : IPMTaskInfoVtable* do
     GUID = LibC::GUID.new(0xbf1d8c33_u32, 0x1bf5_u16, 0x4ee0_u16, StaticArray[0xb5_u8, 0x49_u8, 0x6b_u8, 0x9d_u8, 0xd3_u8, 0x83_u8, 0x49_u8, 0x42_u8])
     def query_interface(this : IPMTaskInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3676,7 +3707,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMTaskInfoEnumeratorVtbl,
+
+  record IPMTaskInfoEnumeratorVtable,
     query_interface : Proc(IPMTaskInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMTaskInfoEnumerator*, UInt32),
     release : Proc(IPMTaskInfoEnumerator*, UInt32),
@@ -3684,7 +3716,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMTaskInfoEnumerator, lpVtbl : IPMTaskInfoEnumeratorVtbl* do
+  record IPMTaskInfoEnumerator, lpVtbl : IPMTaskInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0x630b0f8_u32, 0xbbc_u16, 0x4821_u16, StaticArray[0xbe_u8, 0x74_u8, 0xc7_u8, 0x99_u8, 0x51_u8, 0x66_u8, 0xed_u8, 0x2a_u8])
     def query_interface(this : IPMTaskInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3702,7 +3734,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionInfoVtbl,
+
+  record IPMExtensionInfoVtable,
     query_interface : Proc(IPMExtensionInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionInfo*, UInt32),
     release : Proc(IPMExtensionInfo*, UInt32),
@@ -3715,7 +3748,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionInfo, lpVtbl : IPMExtensionInfoVtbl* do
+  record IPMExtensionInfo, lpVtbl : IPMExtensionInfoVtable* do
     GUID = LibC::GUID.new(0x49acde79_u32, 0x9788_u16, 0x4d0a_u16, StaticArray[0x8a_u8, 0xa0_u8, 0x17_u8, 0x46_u8, 0xaf_u8, 0xdb_u8, 0x9e_u8, 0x9d_u8])
     def query_interface(this : IPMExtensionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3748,7 +3781,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionFileExtensionInfoVtbl,
+
+  record IPMExtensionFileExtensionInfoVtable,
     query_interface : Proc(IPMExtensionFileExtensionInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionFileExtensionInfo*, UInt32),
     release : Proc(IPMExtensionFileExtensionInfo*, UInt32),
@@ -3762,7 +3796,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionFileExtensionInfo, lpVtbl : IPMExtensionFileExtensionInfoVtbl* do
+  record IPMExtensionFileExtensionInfo, lpVtbl : IPMExtensionFileExtensionInfoVtable* do
     GUID = LibC::GUID.new(0x6b87cb6c_u32, 0xb88_u16, 0x4989_u16, StaticArray[0xa4_u8, 0xec_u8, 0x3_u8, 0x37_u8, 0x14_u8, 0xf7_u8, 0x10_u8, 0xd4_u8])
     def query_interface(this : IPMExtensionFileExtensionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3798,7 +3832,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionProtocolInfoVtbl,
+
+  record IPMExtensionProtocolInfoVtable,
     query_interface : Proc(IPMExtensionProtocolInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionProtocolInfo*, UInt32),
     release : Proc(IPMExtensionProtocolInfo*, UInt32),
@@ -3807,7 +3842,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionProtocolInfo, lpVtbl : IPMExtensionProtocolInfoVtbl* do
+  record IPMExtensionProtocolInfo, lpVtbl : IPMExtensionProtocolInfoVtable* do
     GUID = LibC::GUID.new(0x1e3fa036_u32, 0x51eb_u16, 0x4453_u16, StaticArray[0xba_u8, 0xff_u8, 0xb8_u8, 0xd8_u8, 0xe4_u8, 0xb4_u8, 0x6c_u8, 0x8e_u8])
     def query_interface(this : IPMExtensionProtocolInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3828,7 +3863,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionShareTargetInfoVtbl,
+
+  record IPMExtensionShareTargetInfoVtable,
     query_interface : Proc(IPMExtensionShareTargetInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionShareTargetInfo*, UInt32),
     release : Proc(IPMExtensionShareTargetInfo*, UInt32),
@@ -3838,7 +3874,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionShareTargetInfo, lpVtbl : IPMExtensionShareTargetInfoVtbl* do
+  record IPMExtensionShareTargetInfo, lpVtbl : IPMExtensionShareTargetInfoVtable* do
     GUID = LibC::GUID.new(0x5471f48b_u32, 0xc65c_u16, 0x4656_u16, StaticArray[0x8c_u8, 0x70_u8, 0x24_u8, 0x2e_u8, 0x31_u8, 0x19_u8, 0x5f_u8, 0xea_u8])
     def query_interface(this : IPMExtensionShareTargetInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3862,7 +3898,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionContractInfoVtbl,
+
+  record IPMExtensionContractInfoVtable,
     query_interface : Proc(IPMExtensionContractInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionContractInfo*, UInt32),
     release : Proc(IPMExtensionContractInfo*, UInt32),
@@ -3870,7 +3907,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionContractInfo, lpVtbl : IPMExtensionContractInfoVtbl* do
+  record IPMExtensionContractInfo, lpVtbl : IPMExtensionContractInfoVtable* do
     GUID = LibC::GUID.new(0xe5666373_u32, 0x7ba1_u16, 0x467c_u16, StaticArray[0xb8_u8, 0x19_u8, 0xb1_u8, 0x75_u8, 0xdb_u8, 0x1c_u8, 0x29_u8, 0x5b_u8])
     def query_interface(this : IPMExtensionContractInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3888,7 +3925,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionFileOpenPickerInfoVtbl,
+
+  record IPMExtensionFileOpenPickerInfoVtable,
     query_interface : Proc(IPMExtensionFileOpenPickerInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionFileOpenPickerInfo*, UInt32),
     release : Proc(IPMExtensionFileOpenPickerInfo*, UInt32),
@@ -3897,7 +3935,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionFileOpenPickerInfo, lpVtbl : IPMExtensionFileOpenPickerInfoVtbl* do
+  record IPMExtensionFileOpenPickerInfo, lpVtbl : IPMExtensionFileOpenPickerInfoVtable* do
     GUID = LibC::GUID.new(0x6dc91d25_u32, 0x9606_u16, 0x420c_u16, StaticArray[0x9a_u8, 0x78_u8, 0xe0_u8, 0x34_u8, 0xa3_u8, 0x41_u8, 0x83_u8, 0x45_u8])
     def query_interface(this : IPMExtensionFileOpenPickerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3918,7 +3956,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionFileSavePickerInfoVtbl,
+
+  record IPMExtensionFileSavePickerInfoVtable,
     query_interface : Proc(IPMExtensionFileSavePickerInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionFileSavePickerInfo*, UInt32),
     release : Proc(IPMExtensionFileSavePickerInfo*, UInt32),
@@ -3927,7 +3966,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionFileSavePickerInfo, lpVtbl : IPMExtensionFileSavePickerInfoVtbl* do
+  record IPMExtensionFileSavePickerInfo, lpVtbl : IPMExtensionFileSavePickerInfoVtable* do
     GUID = LibC::GUID.new(0x38005cba_u32, 0xf81a_u16, 0x493e_u16, StaticArray[0xa0_u8, 0xf8_u8, 0x92_u8, 0x2c_u8, 0x86_u8, 0x80_u8, 0xda_u8, 0x43_u8])
     def query_interface(this : IPMExtensionFileSavePickerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3948,7 +3987,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionCachedFileUpdaterInfoVtbl,
+
+  record IPMExtensionCachedFileUpdaterInfoVtable,
     query_interface : Proc(IPMExtensionCachedFileUpdaterInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionCachedFileUpdaterInfo*, UInt32),
     release : Proc(IPMExtensionCachedFileUpdaterInfo*, UInt32),
@@ -3956,7 +3996,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionCachedFileUpdaterInfo, lpVtbl : IPMExtensionCachedFileUpdaterInfoVtbl* do
+  record IPMExtensionCachedFileUpdaterInfo, lpVtbl : IPMExtensionCachedFileUpdaterInfoVtable* do
     GUID = LibC::GUID.new(0xe2d77509_u32, 0x4e58_u16, 0x4ba9_u16, StaticArray[0xaf_u8, 0x7e_u8, 0xb6_u8, 0x42_u8, 0xe3_u8, 0x70_u8, 0xe1_u8, 0xb0_u8])
     def query_interface(this : IPMExtensionCachedFileUpdaterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3974,7 +4014,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMExtensionInfoEnumeratorVtbl,
+
+  record IPMExtensionInfoEnumeratorVtable,
     query_interface : Proc(IPMExtensionInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMExtensionInfoEnumerator*, UInt32),
     release : Proc(IPMExtensionInfoEnumerator*, UInt32),
@@ -3982,7 +4023,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMExtensionInfoEnumerator, lpVtbl : IPMExtensionInfoEnumeratorVtbl* do
+  record IPMExtensionInfoEnumerator, lpVtbl : IPMExtensionInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0x403b9e82_u32, 0x1171_u16, 0x4573_u16, StaticArray[0x8e_u8, 0x6f_u8, 0x6f_u8, 0x33_u8, 0xf3_u8, 0x9b_u8, 0x83_u8, 0xdd_u8])
     def query_interface(this : IPMExtensionInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4000,7 +4041,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMBackgroundServiceAgentInfoVtbl,
+
+  record IPMBackgroundServiceAgentInfoVtable,
     query_interface : Proc(IPMBackgroundServiceAgentInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMBackgroundServiceAgentInfo*, UInt32),
     release : Proc(IPMBackgroundServiceAgentInfo*, UInt32),
@@ -4021,7 +4063,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMBackgroundServiceAgentInfo, lpVtbl : IPMBackgroundServiceAgentInfoVtbl* do
+  record IPMBackgroundServiceAgentInfo, lpVtbl : IPMBackgroundServiceAgentInfoVtable* do
     GUID = LibC::GUID.new(0x3a8b46da_u32, 0x928c_u16, 0x4879_u16, StaticArray[0x99_u8, 0x8c_u8, 0x9_u8, 0xdc_u8, 0x96_u8, 0xf3_u8, 0xd4_u8, 0x90_u8])
     def query_interface(this : IPMBackgroundServiceAgentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4078,7 +4120,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMBackgroundWorkerInfoVtbl,
+
+  record IPMBackgroundWorkerInfoVtable,
     query_interface : Proc(IPMBackgroundWorkerInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMBackgroundWorkerInfo*, UInt32),
     release : Proc(IPMBackgroundWorkerInfo*, UInt32),
@@ -4091,7 +4134,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMBackgroundWorkerInfo, lpVtbl : IPMBackgroundWorkerInfoVtbl* do
+  record IPMBackgroundWorkerInfo, lpVtbl : IPMBackgroundWorkerInfoVtable* do
     GUID = LibC::GUID.new(0x7dd4531b_u32, 0xd3bf_u16, 0x4b6b_u16, StaticArray[0x94_u8, 0xf3_u8, 0x69_u8, 0xc0_u8, 0x98_u8, 0xb1_u8, 0x49_u8, 0x7d_u8])
     def query_interface(this : IPMBackgroundWorkerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4124,7 +4167,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMBackgroundServiceAgentInfoEnumeratorVtbl,
+
+  record IPMBackgroundServiceAgentInfoEnumeratorVtable,
     query_interface : Proc(IPMBackgroundServiceAgentInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMBackgroundServiceAgentInfoEnumerator*, UInt32),
     release : Proc(IPMBackgroundServiceAgentInfoEnumerator*, UInt32),
@@ -4132,7 +4176,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMBackgroundServiceAgentInfoEnumerator, lpVtbl : IPMBackgroundServiceAgentInfoEnumeratorVtbl* do
+  record IPMBackgroundServiceAgentInfoEnumerator, lpVtbl : IPMBackgroundServiceAgentInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0x18eb2072_u32, 0xab56_u16, 0x43b3_u16, StaticArray[0x87_u8, 0x2c_u8, 0xbe_u8, 0xaf_u8, 0xb7_u8, 0xa6_u8, 0xb3_u8, 0x91_u8])
     def query_interface(this : IPMBackgroundServiceAgentInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4150,7 +4194,8 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   @[Extern]
-  record IPMBackgroundWorkerInfoEnumeratorVtbl,
+
+  record IPMBackgroundWorkerInfoEnumeratorVtable,
     query_interface : Proc(IPMBackgroundWorkerInfoEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMBackgroundWorkerInfoEnumerator*, UInt32),
     release : Proc(IPMBackgroundWorkerInfoEnumerator*, UInt32),
@@ -4158,7 +4203,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
 
 
   @[Extern]
-  record IPMBackgroundWorkerInfoEnumerator, lpVtbl : IPMBackgroundWorkerInfoEnumeratorVtbl* do
+  record IPMBackgroundWorkerInfoEnumerator, lpVtbl : IPMBackgroundWorkerInfoEnumeratorVtable* do
     GUID = LibC::GUID.new(0x87f479f8_u32, 0x90d8_u16, 0x4ec7_u16, StaticArray[0x92_u8, 0xb9_u8, 0x72_u8, 0x78_u8, 0x7e_u8, 0x2f_u8, 0x63_u8, 0x6b_u8])
     def query_interface(this : IPMBackgroundWorkerInfoEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4176,1291 +4221,1935 @@ module Win32cr::System::ApplicationInstallationAndServicing
   end
 
   def msiCloseHandle(hAny : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiCloseHandle(hAny)
+    {% end %}
   end
 
   def msiCloseAllHandles : UInt32
+    {% if !flag?(:docs) %}
     C.MsiCloseAllHandles
+    {% end %}
   end
 
   def msiSetInternalUI(dwUILevel : Win32cr::System::ApplicationInstallationAndServicing::INSTALLUILEVEL, phWnd : Win32cr::Foundation::HWND*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLUILEVEL
+    {% if !flag?(:docs) %}
     C.MsiSetInternalUI(dwUILevel, phWnd)
+    {% end %}
   end
 
   def msiSetExternalUIA(puiHandler : Win32cr::System::ApplicationInstallationAndServicing::INSTALLUI_HANDLERA, dwMessageFilter : UInt32, pvContext : Void*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLUI_HANDLERA
+    {% if !flag?(:docs) %}
     C.MsiSetExternalUIA(puiHandler, dwMessageFilter, pvContext)
+    {% end %}
   end
 
   def msiSetExternalUIW(puiHandler : Win32cr::System::ApplicationInstallationAndServicing::INSTALLUI_HANDLERW, dwMessageFilter : UInt32, pvContext : Void*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLUI_HANDLERW
+    {% if !flag?(:docs) %}
     C.MsiSetExternalUIW(puiHandler, dwMessageFilter, pvContext)
+    {% end %}
   end
 
   def msiSetExternalUIRecord(puiHandler : Win32cr::System::ApplicationInstallationAndServicing::PINSTALLUI_HANDLER_RECORD, dwMessageFilter : UInt32, pvContext : Void*, ppuiPrevHandler : Win32cr::System::ApplicationInstallationAndServicing::PINSTALLUI_HANDLER_RECORD) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetExternalUIRecord(puiHandler, dwMessageFilter, pvContext, ppuiPrevHandler)
+    {% end %}
   end
 
-  def msiEnableLogA(dwLogMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLOGMODE, szLogFile : Win32cr::Foundation::PSTR, dwLogAttributes : UInt32) : UInt32
+  def msiEnableLogA(dwLogMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLLOGMODE, szLogFile : Win32cr::Foundation::PSTR, dwLogAttributes : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnableLogA(dwLogMode, szLogFile, dwLogAttributes)
+    {% end %}
   end
 
-  def msiEnableLogW(dwLogMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLOGMODE, szLogFile : Win32cr::Foundation::PWSTR, dwLogAttributes : UInt32) : UInt32
+  def msiEnableLogW(dwLogMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLLOGMODE, szLogFile : Win32cr::Foundation::PWSTR, dwLogAttributes : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnableLogW(dwLogMode, szLogFile, dwLogAttributes)
+    {% end %}
   end
 
   def msiQueryProductStateA(szProduct : Win32cr::Foundation::PSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiQueryProductStateA(szProduct)
+    {% end %}
   end
 
   def msiQueryProductStateW(szProduct : Win32cr::Foundation::PWSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiQueryProductStateW(szProduct)
+    {% end %}
   end
 
-  def msiGetProductInfoA(szProduct : Win32cr::Foundation::PSTR, szAttribute : Win32cr::Foundation::PSTR, lpValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+  def msiGetProductInfoA(szProduct : Win32cr::Foundation::PSTR, szAttribute : Win32cr::Foundation::PSTR, lpValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductInfoA(szProduct, szAttribute, lpValueBuf, pcchValueBuf)
+    {% end %}
   end
 
-  def msiGetProductInfoW(szProduct : Win32cr::Foundation::PWSTR, szAttribute : Win32cr::Foundation::PWSTR, lpValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+  def msiGetProductInfoW(szProduct : Win32cr::Foundation::PWSTR, szAttribute : Win32cr::Foundation::PWSTR, lpValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductInfoW(szProduct, szAttribute, lpValueBuf, pcchValueBuf)
+    {% end %}
   end
 
-  def msiGetProductInfoExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PSTR, szValue : UInt8*, pcchValue : UInt32*) : UInt32
+  def msiGetProductInfoExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PSTR, szValue : Win32cr::Foundation::PSTR, pcchValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductInfoExA(szProductCode, szUserSid, dwContext, szProperty, szValue, pcchValue)
+    {% end %}
   end
 
-  def msiGetProductInfoExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PWSTR, szValue : UInt16*, pcchValue : UInt32*) : UInt32
+  def msiGetProductInfoExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PWSTR, szValue : Win32cr::Foundation::PWSTR, pcchValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductInfoExW(szProductCode, szUserSid, dwContext, szProperty, szValue, pcchValue)
+    {% end %}
   end
 
   def msiInstallProductA(szPackagePath : Win32cr::Foundation::PSTR, szCommandLine : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiInstallProductA(szPackagePath, szCommandLine)
+    {% end %}
   end
 
   def msiInstallProductW(szPackagePath : Win32cr::Foundation::PWSTR, szCommandLine : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiInstallProductW(szPackagePath, szCommandLine)
+    {% end %}
   end
 
   def msiConfigureProductA(szProduct : Win32cr::Foundation::PSTR, iInstallLevel : Win32cr::System::ApplicationInstallationAndServicing::INSTALLLEVEL, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiConfigureProductA(szProduct, iInstallLevel, eInstallState)
+    {% end %}
   end
 
   def msiConfigureProductW(szProduct : Win32cr::Foundation::PWSTR, iInstallLevel : Win32cr::System::ApplicationInstallationAndServicing::INSTALLLEVEL, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiConfigureProductW(szProduct, iInstallLevel, eInstallState)
+    {% end %}
   end
 
   def msiConfigureProductExA(szProduct : Win32cr::Foundation::PSTR, iInstallLevel : Win32cr::System::ApplicationInstallationAndServicing::INSTALLLEVEL, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szCommandLine : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiConfigureProductExA(szProduct, iInstallLevel, eInstallState, szCommandLine)
+    {% end %}
   end
 
   def msiConfigureProductExW(szProduct : Win32cr::Foundation::PWSTR, iInstallLevel : Win32cr::System::ApplicationInstallationAndServicing::INSTALLLEVEL, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szCommandLine : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiConfigureProductExW(szProduct, iInstallLevel, eInstallState, szCommandLine)
+    {% end %}
   end
 
   def msiReinstallProductA(szProduct : Win32cr::Foundation::PSTR, szReinstallMode : Win32cr::System::ApplicationInstallationAndServicing::REINSTALLMODE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiReinstallProductA(szProduct, szReinstallMode)
+    {% end %}
   end
 
   def msiReinstallProductW(szProduct : Win32cr::Foundation::PWSTR, szReinstallMode : Win32cr::System::ApplicationInstallationAndServicing::REINSTALLMODE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiReinstallProductW(szProduct, szReinstallMode)
+    {% end %}
   end
 
   def msiAdvertiseProductExA(szPackagePath : Win32cr::Foundation::PSTR, szScriptfilePath : Win32cr::Foundation::PSTR, szTransforms : Win32cr::Foundation::PSTR, lgidLanguage : UInt16, dwPlatform : UInt32, dwOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiAdvertiseProductExA(szPackagePath, szScriptfilePath, szTransforms, lgidLanguage, dwPlatform, dwOptions)
+    {% end %}
   end
 
   def msiAdvertiseProductExW(szPackagePath : Win32cr::Foundation::PWSTR, szScriptfilePath : Win32cr::Foundation::PWSTR, szTransforms : Win32cr::Foundation::PWSTR, lgidLanguage : UInt16, dwPlatform : UInt32, dwOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiAdvertiseProductExW(szPackagePath, szScriptfilePath, szTransforms, lgidLanguage, dwPlatform, dwOptions)
+    {% end %}
   end
 
   def msiAdvertiseProductA(szPackagePath : Win32cr::Foundation::PSTR, szScriptfilePath : Win32cr::Foundation::PSTR, szTransforms : Win32cr::Foundation::PSTR, lgidLanguage : UInt16) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiAdvertiseProductA(szPackagePath, szScriptfilePath, szTransforms, lgidLanguage)
+    {% end %}
   end
 
   def msiAdvertiseProductW(szPackagePath : Win32cr::Foundation::PWSTR, szScriptfilePath : Win32cr::Foundation::PWSTR, szTransforms : Win32cr::Foundation::PWSTR, lgidLanguage : UInt16) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiAdvertiseProductW(szPackagePath, szScriptfilePath, szTransforms, lgidLanguage)
+    {% end %}
   end
 
   def msiProcessAdvertiseScriptA(szScriptFile : Win32cr::Foundation::PSTR, szIconFolder : Win32cr::Foundation::PSTR, hRegData : Win32cr::System::Registry::HKEY, fShortcuts : Win32cr::Foundation::BOOL, fRemoveItems : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProcessAdvertiseScriptA(szScriptFile, szIconFolder, hRegData, fShortcuts, fRemoveItems)
+    {% end %}
   end
 
   def msiProcessAdvertiseScriptW(szScriptFile : Win32cr::Foundation::PWSTR, szIconFolder : Win32cr::Foundation::PWSTR, hRegData : Win32cr::System::Registry::HKEY, fShortcuts : Win32cr::Foundation::BOOL, fRemoveItems : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProcessAdvertiseScriptW(szScriptFile, szIconFolder, hRegData, fShortcuts, fRemoveItems)
+    {% end %}
   end
 
   def msiAdvertiseScriptA(szScriptFile : Win32cr::Foundation::PSTR, dwFlags : UInt32, phRegData : Win32cr::System::Registry::HKEY*, fRemoveItems : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiAdvertiseScriptA(szScriptFile, dwFlags, phRegData, fRemoveItems)
+    {% end %}
   end
 
   def msiAdvertiseScriptW(szScriptFile : Win32cr::Foundation::PWSTR, dwFlags : UInt32, phRegData : Win32cr::System::Registry::HKEY*, fRemoveItems : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiAdvertiseScriptW(szScriptFile, dwFlags, phRegData, fRemoveItems)
+    {% end %}
   end
 
-  def msiGetProductInfoFromScriptA(szScriptFile : Win32cr::Foundation::PSTR, lpProductBuf39 : Win32cr::Foundation::PSTR, plgidLanguage : UInt16*, pdwVersion : UInt32*, lpNameBuf : UInt8*, pcchNameBuf : UInt32*, lpPackageBuf : UInt8*, pcchPackageBuf : UInt32*) : UInt32
+  def msiGetProductInfoFromScriptA(szScriptFile : Win32cr::Foundation::PSTR, lpProductBuf39 : Win32cr::Foundation::PSTR, plgidLanguage : UInt16*, pdwVersion : UInt32*, lpNameBuf : Win32cr::Foundation::PSTR, pcchNameBuf : UInt32*, lpPackageBuf : Win32cr::Foundation::PSTR, pcchPackageBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductInfoFromScriptA(szScriptFile, lpProductBuf39, plgidLanguage, pdwVersion, lpNameBuf, pcchNameBuf, lpPackageBuf, pcchPackageBuf)
+    {% end %}
   end
 
-  def msiGetProductInfoFromScriptW(szScriptFile : Win32cr::Foundation::PWSTR, lpProductBuf39 : Win32cr::Foundation::PWSTR, plgidLanguage : UInt16*, pdwVersion : UInt32*, lpNameBuf : UInt16*, pcchNameBuf : UInt32*, lpPackageBuf : UInt16*, pcchPackageBuf : UInt32*) : UInt32
+  def msiGetProductInfoFromScriptW(szScriptFile : Win32cr::Foundation::PWSTR, lpProductBuf39 : Win32cr::Foundation::PWSTR, plgidLanguage : UInt16*, pdwVersion : UInt32*, lpNameBuf : Win32cr::Foundation::PWSTR, pcchNameBuf : UInt32*, lpPackageBuf : Win32cr::Foundation::PWSTR, pcchPackageBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductInfoFromScriptW(szScriptFile, lpProductBuf39, plgidLanguage, pdwVersion, lpNameBuf, pcchNameBuf, lpPackageBuf, pcchPackageBuf)
+    {% end %}
   end
 
   def msiGetProductCodeA(szComponent : Win32cr::Foundation::PSTR, lpBuf39 : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductCodeA(szComponent, lpBuf39)
+    {% end %}
   end
 
   def msiGetProductCodeW(szComponent : Win32cr::Foundation::PWSTR, lpBuf39 : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductCodeW(szComponent, lpBuf39)
+    {% end %}
   end
 
-  def msiGetUserInfoA(szProduct : Win32cr::Foundation::PSTR, lpUserNameBuf : UInt8*, pcchUserNameBuf : UInt32*, lpOrgNameBuf : UInt8*, pcchOrgNameBuf : UInt32*, lpSerialBuf : UInt8*, pcchSerialBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::USERINFOSTATE
+  def msiGetUserInfoA(szProduct : Win32cr::Foundation::PSTR, lpUserNameBuf : Win32cr::Foundation::PSTR, pcchUserNameBuf : UInt32*, lpOrgNameBuf : Win32cr::Foundation::PSTR, pcchOrgNameBuf : UInt32*, lpSerialBuf : Win32cr::Foundation::PSTR, pcchSerialBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::USERINFOSTATE
+    {% if !flag?(:docs) %}
     C.MsiGetUserInfoA(szProduct, lpUserNameBuf, pcchUserNameBuf, lpOrgNameBuf, pcchOrgNameBuf, lpSerialBuf, pcchSerialBuf)
+    {% end %}
   end
 
-  def msiGetUserInfoW(szProduct : Win32cr::Foundation::PWSTR, lpUserNameBuf : UInt16*, pcchUserNameBuf : UInt32*, lpOrgNameBuf : UInt16*, pcchOrgNameBuf : UInt32*, lpSerialBuf : UInt16*, pcchSerialBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::USERINFOSTATE
+  def msiGetUserInfoW(szProduct : Win32cr::Foundation::PWSTR, lpUserNameBuf : Win32cr::Foundation::PWSTR, pcchUserNameBuf : UInt32*, lpOrgNameBuf : Win32cr::Foundation::PWSTR, pcchOrgNameBuf : UInt32*, lpSerialBuf : Win32cr::Foundation::PWSTR, pcchSerialBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::USERINFOSTATE
+    {% if !flag?(:docs) %}
     C.MsiGetUserInfoW(szProduct, lpUserNameBuf, pcchUserNameBuf, lpOrgNameBuf, pcchOrgNameBuf, lpSerialBuf, pcchSerialBuf)
+    {% end %}
   end
 
   def msiCollectUserInfoA(szProduct : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiCollectUserInfoA(szProduct)
+    {% end %}
   end
 
   def msiCollectUserInfoW(szProduct : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiCollectUserInfoW(szProduct)
+    {% end %}
   end
 
   def msiApplyPatchA(szPatchPackage : Win32cr::Foundation::PSTR, szInstallPackage : Win32cr::Foundation::PSTR, eInstallType : Win32cr::System::ApplicationInstallationAndServicing::INSTALLTYPE, szCommandLine : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiApplyPatchA(szPatchPackage, szInstallPackage, eInstallType, szCommandLine)
+    {% end %}
   end
 
   def msiApplyPatchW(szPatchPackage : Win32cr::Foundation::PWSTR, szInstallPackage : Win32cr::Foundation::PWSTR, eInstallType : Win32cr::System::ApplicationInstallationAndServicing::INSTALLTYPE, szCommandLine : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiApplyPatchW(szPatchPackage, szInstallPackage, eInstallType, szCommandLine)
+    {% end %}
   end
 
-  def msiGetPatchInfoA(szPatch : Win32cr::Foundation::PSTR, szAttribute : Win32cr::Foundation::PSTR, lpValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+  def msiGetPatchInfoA(szPatch : Win32cr::Foundation::PSTR, szAttribute : Win32cr::Foundation::PSTR, lpValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetPatchInfoA(szPatch, szAttribute, lpValueBuf, pcchValueBuf)
+    {% end %}
   end
 
-  def msiGetPatchInfoW(szPatch : Win32cr::Foundation::PWSTR, szAttribute : Win32cr::Foundation::PWSTR, lpValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+  def msiGetPatchInfoW(szPatch : Win32cr::Foundation::PWSTR, szAttribute : Win32cr::Foundation::PWSTR, lpValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetPatchInfoW(szPatch, szAttribute, lpValueBuf, pcchValueBuf)
+    {% end %}
   end
 
-  def msiEnumPatchesA(szProduct : Win32cr::Foundation::PSTR, iPatchIndex : UInt32, lpPatchBuf : Win32cr::Foundation::PSTR, lpTransformsBuf : UInt8*, pcchTransformsBuf : UInt32*) : UInt32
+  def msiEnumPatchesA(szProduct : Win32cr::Foundation::PSTR, iPatchIndex : UInt32, lpPatchBuf : Win32cr::Foundation::PSTR, lpTransformsBuf : Win32cr::Foundation::PSTR, pcchTransformsBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumPatchesA(szProduct, iPatchIndex, lpPatchBuf, lpTransformsBuf, pcchTransformsBuf)
+    {% end %}
   end
 
-  def msiEnumPatchesW(szProduct : Win32cr::Foundation::PWSTR, iPatchIndex : UInt32, lpPatchBuf : Win32cr::Foundation::PWSTR, lpTransformsBuf : UInt16*, pcchTransformsBuf : UInt32*) : UInt32
+  def msiEnumPatchesW(szProduct : Win32cr::Foundation::PWSTR, iPatchIndex : UInt32, lpPatchBuf : Win32cr::Foundation::PWSTR, lpTransformsBuf : Win32cr::Foundation::PWSTR, pcchTransformsBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumPatchesW(szProduct, iPatchIndex, lpPatchBuf, lpTransformsBuf, pcchTransformsBuf)
+    {% end %}
   end
 
   def msiRemovePatchesA(szPatchList : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, eUninstallType : Win32cr::System::ApplicationInstallationAndServicing::INSTALLTYPE, szPropertyList : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRemovePatchesA(szPatchList, szProductCode, eUninstallType, szPropertyList)
+    {% end %}
   end
 
   def msiRemovePatchesW(szPatchList : Win32cr::Foundation::PWSTR, szProductCode : Win32cr::Foundation::PWSTR, eUninstallType : Win32cr::System::ApplicationInstallationAndServicing::INSTALLTYPE, szPropertyList : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRemovePatchesW(szPatchList, szProductCode, eUninstallType, szPropertyList)
+    {% end %}
   end
 
-  def msiExtractPatchXMLDataA(szPatchPath : Win32cr::Foundation::PSTR, dwReserved : UInt32, szXMLData : UInt8*, pcchXMLData : UInt32*) : UInt32
+  def msiExtractPatchXMLDataA(szPatchPath : Win32cr::Foundation::PSTR, dwReserved : UInt32, szXMLData : Win32cr::Foundation::PSTR, pcchXMLData : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiExtractPatchXMLDataA(szPatchPath, dwReserved, szXMLData, pcchXMLData)
+    {% end %}
   end
 
-  def msiExtractPatchXMLDataW(szPatchPath : Win32cr::Foundation::PWSTR, dwReserved : UInt32, szXMLData : UInt16*, pcchXMLData : UInt32*) : UInt32
+  def msiExtractPatchXMLDataW(szPatchPath : Win32cr::Foundation::PWSTR, dwReserved : UInt32, szXMLData : Win32cr::Foundation::PWSTR, pcchXMLData : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiExtractPatchXMLDataW(szPatchPath, dwReserved, szXMLData, pcchXMLData)
+    {% end %}
   end
 
-  def msiGetPatchInfoExA(szPatchCode : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PSTR, lpValue : UInt8*, pcchValue : UInt32*) : UInt32
+  def msiGetPatchInfoExA(szPatchCode : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR, pcchValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetPatchInfoExA(szPatchCode, szProductCode, szUserSid, dwContext, szProperty, lpValue, pcchValue)
+    {% end %}
   end
 
-  def msiGetPatchInfoExW(szPatchCode : Win32cr::Foundation::PWSTR, szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PWSTR, lpValue : UInt16*, pcchValue : UInt32*) : UInt32
+  def msiGetPatchInfoExW(szPatchCode : Win32cr::Foundation::PWSTR, szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR, pcchValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetPatchInfoExW(szPatchCode, szProductCode, szUserSid, dwContext, szProperty, lpValue, pcchValue)
+    {% end %}
   end
 
   def msiApplyMultiplePatchesA(szPatchPackages : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, szPropertiesList : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiApplyMultiplePatchesA(szPatchPackages, szProductCode, szPropertiesList)
+    {% end %}
   end
 
   def msiApplyMultiplePatchesW(szPatchPackages : Win32cr::Foundation::PWSTR, szProductCode : Win32cr::Foundation::PWSTR, szPropertiesList : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiApplyMultiplePatchesW(szPatchPackages, szProductCode, szPropertiesList)
+    {% end %}
   end
 
   def msiDeterminePatchSequenceA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, cPatchInfo : UInt32, pPatchInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHSEQUENCEINFOA*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDeterminePatchSequenceA(szProductCode, szUserSid, dwContext, cPatchInfo, pPatchInfo)
+    {% end %}
   end
 
   def msiDeterminePatchSequenceW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, cPatchInfo : UInt32, pPatchInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHSEQUENCEINFOW*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDeterminePatchSequenceW(szProductCode, szUserSid, dwContext, cPatchInfo, pPatchInfo)
+    {% end %}
   end
 
   def msiDetermineApplicablePatchesA(szProductPackagePath : Win32cr::Foundation::PSTR, cPatchInfo : UInt32, pPatchInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHSEQUENCEINFOA*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDetermineApplicablePatchesA(szProductPackagePath, cPatchInfo, pPatchInfo)
+    {% end %}
   end
 
   def msiDetermineApplicablePatchesW(szProductPackagePath : Win32cr::Foundation::PWSTR, cPatchInfo : UInt32, pPatchInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHSEQUENCEINFOW*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDetermineApplicablePatchesW(szProductPackagePath, cPatchInfo, pPatchInfo)
+    {% end %}
   end
 
-  def msiEnumPatchesExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwFilter : UInt32, dwIndex : UInt32, szPatchCode : Win32cr::Foundation::PSTR, szTargetProductCode : Win32cr::Foundation::PSTR, pdwTargetProductContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szTargetUserSid : UInt8*, pcchTargetUserSid : UInt32*) : UInt32
+  def msiEnumPatchesExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwFilter : UInt32, dwIndex : UInt32, szPatchCode : Win32cr::Foundation::PSTR, szTargetProductCode : Win32cr::Foundation::PSTR, pdwTargetProductContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szTargetUserSid : Win32cr::Foundation::PSTR, pcchTargetUserSid : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumPatchesExA(szProductCode, szUserSid, dwContext, dwFilter, dwIndex, szPatchCode, szTargetProductCode, pdwTargetProductContext, szTargetUserSid, pcchTargetUserSid)
+    {% end %}
   end
 
-  def msiEnumPatchesExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwFilter : UInt32, dwIndex : UInt32, szPatchCode : Win32cr::Foundation::PWSTR, szTargetProductCode : Win32cr::Foundation::PWSTR, pdwTargetProductContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szTargetUserSid : UInt16*, pcchTargetUserSid : UInt32*) : UInt32
+  def msiEnumPatchesExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwFilter : UInt32, dwIndex : UInt32, szPatchCode : Win32cr::Foundation::PWSTR, szTargetProductCode : Win32cr::Foundation::PWSTR, pdwTargetProductContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szTargetUserSid : Win32cr::Foundation::PWSTR, pcchTargetUserSid : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumPatchesExW(szProductCode, szUserSid, dwContext, dwFilter, dwIndex, szPatchCode, szTargetProductCode, pdwTargetProductContext, szTargetUserSid, pcchTargetUserSid)
+    {% end %}
   end
 
   def msiQueryFeatureStateA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiQueryFeatureStateA(szProduct, szFeature)
+    {% end %}
   end
 
   def msiQueryFeatureStateW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiQueryFeatureStateW(szProduct, szFeature)
+    {% end %}
   end
 
   def msiQueryFeatureStateExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szFeature : Win32cr::Foundation::PSTR, pdwState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiQueryFeatureStateExA(szProductCode, szUserSid, dwContext, szFeature, pdwState)
+    {% end %}
   end
 
   def msiQueryFeatureStateExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szFeature : Win32cr::Foundation::PWSTR, pdwState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiQueryFeatureStateExW(szProductCode, szUserSid, dwContext, szFeature, pdwState)
+    {% end %}
   end
 
   def msiUseFeatureA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiUseFeatureA(szProduct, szFeature)
+    {% end %}
   end
 
   def msiUseFeatureW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiUseFeatureW(szProduct, szFeature)
+    {% end %}
   end
 
   def msiUseFeatureExA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR, dwInstallMode : UInt32, dwReserved : UInt32) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiUseFeatureExA(szProduct, szFeature, dwInstallMode, dwReserved)
+    {% end %}
   end
 
   def msiUseFeatureExW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, dwInstallMode : UInt32, dwReserved : UInt32) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiUseFeatureExW(szProduct, szFeature, dwInstallMode, dwReserved)
+    {% end %}
   end
 
   def msiGetFeatureUsageA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR, pdwUseCount : UInt32*, pwDateUsed : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureUsageA(szProduct, szFeature, pdwUseCount, pwDateUsed)
+    {% end %}
   end
 
   def msiGetFeatureUsageW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, pdwUseCount : UInt32*, pwDateUsed : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureUsageW(szProduct, szFeature, pdwUseCount, pwDateUsed)
+    {% end %}
   end
 
   def msiConfigureFeatureA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiConfigureFeatureA(szProduct, szFeature, eInstallState)
+    {% end %}
   end
 
   def msiConfigureFeatureW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiConfigureFeatureW(szProduct, szFeature, eInstallState)
+    {% end %}
   end
 
   def msiReinstallFeatureA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR, dwReinstallMode : Win32cr::System::ApplicationInstallationAndServicing::REINSTALLMODE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiReinstallFeatureA(szProduct, szFeature, dwReinstallMode)
+    {% end %}
   end
 
   def msiReinstallFeatureW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, dwReinstallMode : Win32cr::System::ApplicationInstallationAndServicing::REINSTALLMODE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiReinstallFeatureW(szProduct, szFeature, dwReinstallMode)
+    {% end %}
   end
 
-  def msiProvideComponentA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+  def msiProvideComponentA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProvideComponentA(szProduct, szFeature, szComponent, dwInstallMode, lpPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiProvideComponentW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+  def msiProvideComponentW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProvideComponentW(szProduct, szFeature, szComponent, dwInstallMode, lpPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiProvideQualifiedComponentA(szCategory : Win32cr::Foundation::PSTR, szQualifier : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+  def msiProvideQualifiedComponentA(szCategory : Win32cr::Foundation::PSTR, szQualifier : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProvideQualifiedComponentA(szCategory, szQualifier, dwInstallMode, lpPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiProvideQualifiedComponentW(szCategory : Win32cr::Foundation::PWSTR, szQualifier : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+  def msiProvideQualifiedComponentW(szCategory : Win32cr::Foundation::PWSTR, szQualifier : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProvideQualifiedComponentW(szCategory, szQualifier, dwInstallMode, lpPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiProvideQualifiedComponentExA(szCategory : Win32cr::Foundation::PSTR, szQualifier : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, szProduct : Win32cr::Foundation::PSTR, dwUnused1 : UInt32, dwUnused2 : UInt32, lpPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+  def msiProvideQualifiedComponentExA(szCategory : Win32cr::Foundation::PSTR, szQualifier : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, szProduct : Win32cr::Foundation::PSTR, dwUnused1 : UInt32, dwUnused2 : UInt32, lpPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProvideQualifiedComponentExA(szCategory, szQualifier, dwInstallMode, szProduct, dwUnused1, dwUnused2, lpPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiProvideQualifiedComponentExW(szCategory : Win32cr::Foundation::PWSTR, szQualifier : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, szProduct : Win32cr::Foundation::PWSTR, dwUnused1 : UInt32, dwUnused2 : UInt32, lpPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+  def msiProvideQualifiedComponentExW(szCategory : Win32cr::Foundation::PWSTR, szQualifier : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, szProduct : Win32cr::Foundation::PWSTR, dwUnused1 : UInt32, dwUnused2 : UInt32, lpPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProvideQualifiedComponentExW(szCategory, szQualifier, dwInstallMode, szProduct, dwUnused1, dwUnused2, lpPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiGetComponentPathA(szProduct : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, lpPathBuf : UInt8*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+  def msiGetComponentPathA(szProduct : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, lpPathBuf : Win32cr::Foundation::PSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiGetComponentPathA(szProduct, szComponent, lpPathBuf, pcchBuf)
+    {% end %}
   end
 
-  def msiGetComponentPathW(szProduct : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, lpPathBuf : UInt16*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+  def msiGetComponentPathW(szProduct : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, lpPathBuf : Win32cr::Foundation::PWSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiGetComponentPathW(szProduct, szComponent, lpPathBuf, pcchBuf)
+    {% end %}
   end
 
-  def msiGetComponentPathExA(szProductCode : Win32cr::Foundation::PSTR, szComponentCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, lpOutPathBuffer : UInt8*, pcchOutPathBuffer : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+  def msiGetComponentPathExA(szProductCode : Win32cr::Foundation::PSTR, szComponentCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, lpOutPathBuffer : Win32cr::Foundation::PSTR, pcchOutPathBuffer : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiGetComponentPathExA(szProductCode, szComponentCode, szUserSid, dwContext, lpOutPathBuffer, pcchOutPathBuffer)
+    {% end %}
   end
 
-  def msiGetComponentPathExW(szProductCode : Win32cr::Foundation::PWSTR, szComponentCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, lpOutPathBuffer : UInt16*, pcchOutPathBuffer : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+  def msiGetComponentPathExW(szProductCode : Win32cr::Foundation::PWSTR, szComponentCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, lpOutPathBuffer : Win32cr::Foundation::PWSTR, pcchOutPathBuffer : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiGetComponentPathExW(szProductCode, szComponentCode, szUserSid, dwContext, lpOutPathBuffer, pcchOutPathBuffer)
+    {% end %}
   end
 
-  def msiProvideAssemblyA(szAssemblyName : Win32cr::Foundation::PSTR, szAppContext : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, dwAssemblyInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIASSEMBLYINFO, lpPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+  def msiProvideAssemblyA(szAssemblyName : Win32cr::Foundation::PSTR, szAppContext : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, dwAssemblyInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIASSEMBLYINFO, lpPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProvideAssemblyA(szAssemblyName, szAppContext, dwInstallMode, dwAssemblyInfo, lpPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiProvideAssemblyW(szAssemblyName : Win32cr::Foundation::PWSTR, szAppContext : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, dwAssemblyInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIASSEMBLYINFO, lpPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+  def msiProvideAssemblyW(szAssemblyName : Win32cr::Foundation::PWSTR, szAppContext : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, dwAssemblyInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIASSEMBLYINFO, lpPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiProvideAssemblyW(szAssemblyName, szAppContext, dwInstallMode, dwAssemblyInfo, lpPathBuf, pcchPathBuf)
+    {% end %}
   end
 
   def msiQueryComponentStateA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szComponentCode : Win32cr::Foundation::PSTR, pdwState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiQueryComponentStateA(szProductCode, szUserSid, dwContext, szComponentCode, pdwState)
+    {% end %}
   end
 
   def msiQueryComponentStateW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szComponentCode : Win32cr::Foundation::PWSTR, pdwState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiQueryComponentStateW(szProductCode, szUserSid, dwContext, szComponentCode, pdwState)
+    {% end %}
   end
 
   def msiEnumProductsA(iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumProductsA(iProductIndex, lpProductBuf)
+    {% end %}
   end
 
   def msiEnumProductsW(iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumProductsW(iProductIndex, lpProductBuf)
+    {% end %}
   end
 
-  def msiEnumProductsExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledProductCode : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt8*, pcchSid : UInt32*) : UInt32
+  def msiEnumProductsExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledProductCode : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PSTR, pcchSid : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumProductsExA(szProductCode, szUserSid, dwContext, dwIndex, szInstalledProductCode, pdwInstalledContext, szSid, pcchSid)
+    {% end %}
   end
 
-  def msiEnumProductsExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledProductCode : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt16*, pcchSid : UInt32*) : UInt32
+  def msiEnumProductsExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledProductCode : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PWSTR, pcchSid : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumProductsExW(szProductCode, szUserSid, dwContext, dwIndex, szInstalledProductCode, pdwInstalledContext, szSid, pcchSid)
+    {% end %}
   end
 
   def msiEnumRelatedProductsA(lpUpgradeCode : Win32cr::Foundation::PSTR, dwReserved : UInt32, iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumRelatedProductsA(lpUpgradeCode, dwReserved, iProductIndex, lpProductBuf)
+    {% end %}
   end
 
   def msiEnumRelatedProductsW(lpUpgradeCode : Win32cr::Foundation::PWSTR, dwReserved : UInt32, iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumRelatedProductsW(lpUpgradeCode, dwReserved, iProductIndex, lpProductBuf)
+    {% end %}
   end
 
   def msiEnumFeaturesA(szProduct : Win32cr::Foundation::PSTR, iFeatureIndex : UInt32, lpFeatureBuf : Win32cr::Foundation::PSTR, lpParentBuf : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumFeaturesA(szProduct, iFeatureIndex, lpFeatureBuf, lpParentBuf)
+    {% end %}
   end
 
   def msiEnumFeaturesW(szProduct : Win32cr::Foundation::PWSTR, iFeatureIndex : UInt32, lpFeatureBuf : Win32cr::Foundation::PWSTR, lpParentBuf : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumFeaturesW(szProduct, iFeatureIndex, lpFeatureBuf, lpParentBuf)
+    {% end %}
   end
 
   def msiEnumComponentsA(iComponentIndex : UInt32, lpComponentBuf : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumComponentsA(iComponentIndex, lpComponentBuf)
+    {% end %}
   end
 
   def msiEnumComponentsW(iComponentIndex : UInt32, lpComponentBuf : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumComponentsW(iComponentIndex, lpComponentBuf)
+    {% end %}
   end
 
-  def msiEnumComponentsExA(szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledComponentCode : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt8*, pcchSid : UInt32*) : UInt32
+  def msiEnumComponentsExA(szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledComponentCode : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PSTR, pcchSid : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumComponentsExA(szUserSid, dwContext, dwIndex, szInstalledComponentCode, pdwInstalledContext, szSid, pcchSid)
+    {% end %}
   end
 
-  def msiEnumComponentsExW(szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledComponentCode : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt16*, pcchSid : UInt32*) : UInt32
+  def msiEnumComponentsExW(szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledComponentCode : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PWSTR, pcchSid : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumComponentsExW(szUserSid, dwContext, dwIndex, szInstalledComponentCode, pdwInstalledContext, szSid, pcchSid)
+    {% end %}
   end
 
   def msiEnumClientsA(szComponent : Win32cr::Foundation::PSTR, iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumClientsA(szComponent, iProductIndex, lpProductBuf)
+    {% end %}
   end
 
   def msiEnumClientsW(szComponent : Win32cr::Foundation::PWSTR, iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumClientsW(szComponent, iProductIndex, lpProductBuf)
+    {% end %}
   end
 
-  def msiEnumClientsExA(szComponent : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwProductIndex : UInt32, szProductBuf : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt8*, pcchSid : UInt32*) : UInt32
+  def msiEnumClientsExA(szComponent : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwProductIndex : UInt32, szProductBuf : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PSTR, pcchSid : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumClientsExA(szComponent, szUserSid, dwContext, dwProductIndex, szProductBuf, pdwInstalledContext, szSid, pcchSid)
+    {% end %}
   end
 
-  def msiEnumClientsExW(szComponent : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwProductIndex : UInt32, szProductBuf : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt16*, pcchSid : UInt32*) : UInt32
+  def msiEnumClientsExW(szComponent : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwProductIndex : UInt32, szProductBuf : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PWSTR, pcchSid : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumClientsExW(szComponent, szUserSid, dwContext, dwProductIndex, szProductBuf, pdwInstalledContext, szSid, pcchSid)
+    {% end %}
   end
 
-  def msiEnumComponentQualifiersA(szComponent : Win32cr::Foundation::PSTR, iIndex : UInt32, lpQualifierBuf : UInt8*, pcchQualifierBuf : UInt32*, lpApplicationDataBuf : UInt8*, pcchApplicationDataBuf : UInt32*) : UInt32
+  def msiEnumComponentQualifiersA(szComponent : Win32cr::Foundation::PSTR, iIndex : UInt32, lpQualifierBuf : Win32cr::Foundation::PSTR, pcchQualifierBuf : UInt32*, lpApplicationDataBuf : Win32cr::Foundation::PSTR, pcchApplicationDataBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumComponentQualifiersA(szComponent, iIndex, lpQualifierBuf, pcchQualifierBuf, lpApplicationDataBuf, pcchApplicationDataBuf)
+    {% end %}
   end
 
-  def msiEnumComponentQualifiersW(szComponent : Win32cr::Foundation::PWSTR, iIndex : UInt32, lpQualifierBuf : UInt16*, pcchQualifierBuf : UInt32*, lpApplicationDataBuf : UInt16*, pcchApplicationDataBuf : UInt32*) : UInt32
+  def msiEnumComponentQualifiersW(szComponent : Win32cr::Foundation::PWSTR, iIndex : UInt32, lpQualifierBuf : Win32cr::Foundation::PWSTR, pcchQualifierBuf : UInt32*, lpApplicationDataBuf : Win32cr::Foundation::PWSTR, pcchApplicationDataBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumComponentQualifiersW(szComponent, iIndex, lpQualifierBuf, pcchQualifierBuf, lpApplicationDataBuf, pcchApplicationDataBuf)
+    {% end %}
   end
 
   def msiOpenProductA(szProduct : Win32cr::Foundation::PSTR, hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiOpenProductA(szProduct, hProduct)
+    {% end %}
   end
 
   def msiOpenProductW(szProduct : Win32cr::Foundation::PWSTR, hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiOpenProductW(szProduct, hProduct)
+    {% end %}
   end
 
   def msiOpenPackageA(szPackagePath : Win32cr::Foundation::PSTR, hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiOpenPackageA(szPackagePath, hProduct)
+    {% end %}
   end
 
   def msiOpenPackageW(szPackagePath : Win32cr::Foundation::PWSTR, hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiOpenPackageW(szPackagePath, hProduct)
+    {% end %}
   end
 
   def msiOpenPackageExA(szPackagePath : Win32cr::Foundation::PSTR, dwOptions : UInt32, hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiOpenPackageExA(szPackagePath, dwOptions, hProduct)
+    {% end %}
   end
 
   def msiOpenPackageExW(szPackagePath : Win32cr::Foundation::PWSTR, dwOptions : UInt32, hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiOpenPackageExW(szPackagePath, dwOptions, hProduct)
+    {% end %}
   end
 
   def msiGetPatchFileListA(szProductCode : Win32cr::Foundation::PSTR, szPatchPackages : Win32cr::Foundation::PSTR, pcFiles : UInt32*, pphFileRecords : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE**) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetPatchFileListA(szProductCode, szPatchPackages, pcFiles, pphFileRecords)
+    {% end %}
   end
 
   def msiGetPatchFileListW(szProductCode : Win32cr::Foundation::PWSTR, szPatchPackages : Win32cr::Foundation::PWSTR, pcFiles : UInt32*, pphFileRecords : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE**) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetPatchFileListW(szProductCode, szPatchPackages, pcFiles, pphFileRecords)
+    {% end %}
   end
 
-  def msiGetProductPropertyA(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szProperty : Win32cr::Foundation::PSTR, lpValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+  def msiGetProductPropertyA(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szProperty : Win32cr::Foundation::PSTR, lpValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductPropertyA(hProduct, szProperty, lpValueBuf, pcchValueBuf)
+    {% end %}
   end
 
-  def msiGetProductPropertyW(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szProperty : Win32cr::Foundation::PWSTR, lpValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+  def msiGetProductPropertyW(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szProperty : Win32cr::Foundation::PWSTR, lpValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetProductPropertyW(hProduct, szProperty, lpValueBuf, pcchValueBuf)
+    {% end %}
   end
 
   def msiVerifyPackageA(szPackagePath : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiVerifyPackageA(szPackagePath)
+    {% end %}
   end
 
   def msiVerifyPackageW(szPackagePath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiVerifyPackageW(szPackagePath)
+    {% end %}
   end
 
-  def msiGetFeatureInfoA(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, lpAttributes : UInt32*, lpTitleBuf : UInt8*, pcchTitleBuf : UInt32*, lpHelpBuf : UInt8*, pcchHelpBuf : UInt32*) : UInt32
+  def msiGetFeatureInfoA(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, lpAttributes : UInt32*, lpTitleBuf : Win32cr::Foundation::PSTR, pcchTitleBuf : UInt32*, lpHelpBuf : Win32cr::Foundation::PSTR, pcchHelpBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureInfoA(hProduct, szFeature, lpAttributes, lpTitleBuf, pcchTitleBuf, lpHelpBuf, pcchHelpBuf)
+    {% end %}
   end
 
-  def msiGetFeatureInfoW(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, lpAttributes : UInt32*, lpTitleBuf : UInt16*, pcchTitleBuf : UInt32*, lpHelpBuf : UInt16*, pcchHelpBuf : UInt32*) : UInt32
+  def msiGetFeatureInfoW(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, lpAttributes : UInt32*, lpTitleBuf : Win32cr::Foundation::PWSTR, pcchTitleBuf : UInt32*, lpHelpBuf : Win32cr::Foundation::PWSTR, pcchHelpBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureInfoW(hProduct, szFeature, lpAttributes, lpTitleBuf, pcchTitleBuf, lpHelpBuf, pcchHelpBuf)
+    {% end %}
   end
 
   def msiInstallMissingComponentA(szProduct : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiInstallMissingComponentA(szProduct, szComponent, eInstallState)
+    {% end %}
   end
 
   def msiInstallMissingComponentW(szProduct : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiInstallMissingComponentW(szProduct, szComponent, eInstallState)
+    {% end %}
   end
 
   def msiInstallMissingFileA(szProduct : Win32cr::Foundation::PSTR, szFile : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiInstallMissingFileA(szProduct, szFile)
+    {% end %}
   end
 
   def msiInstallMissingFileW(szProduct : Win32cr::Foundation::PWSTR, szFile : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiInstallMissingFileW(szProduct, szFile)
+    {% end %}
   end
 
-  def msiLocateComponentA(szComponent : Win32cr::Foundation::PSTR, lpPathBuf : UInt8*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+  def msiLocateComponentA(szComponent : Win32cr::Foundation::PSTR, lpPathBuf : Win32cr::Foundation::PSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiLocateComponentA(szComponent, lpPathBuf, pcchBuf)
+    {% end %}
   end
 
-  def msiLocateComponentW(szComponent : Win32cr::Foundation::PWSTR, lpPathBuf : UInt16*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+  def msiLocateComponentW(szComponent : Win32cr::Foundation::PWSTR, lpPathBuf : Win32cr::Foundation::PWSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    {% if !flag?(:docs) %}
     C.MsiLocateComponentW(szComponent, lpPathBuf, pcchBuf)
+    {% end %}
   end
 
   def msiSourceListClearAllA(szProduct : Win32cr::Foundation::PSTR, szUserName : Win32cr::Foundation::PSTR, dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListClearAllA(szProduct, szUserName, dwReserved)
+    {% end %}
   end
 
   def msiSourceListClearAllW(szProduct : Win32cr::Foundation::PWSTR, szUserName : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListClearAllW(szProduct, szUserName, dwReserved)
+    {% end %}
   end
 
   def msiSourceListAddSourceA(szProduct : Win32cr::Foundation::PSTR, szUserName : Win32cr::Foundation::PSTR, dwReserved : UInt32, szSource : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListAddSourceA(szProduct, szUserName, dwReserved, szSource)
+    {% end %}
   end
 
   def msiSourceListAddSourceW(szProduct : Win32cr::Foundation::PWSTR, szUserName : Win32cr::Foundation::PWSTR, dwReserved : UInt32, szSource : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListAddSourceW(szProduct, szUserName, dwReserved, szSource)
+    {% end %}
   end
 
   def msiSourceListForceResolutionA(szProduct : Win32cr::Foundation::PSTR, szUserName : Win32cr::Foundation::PSTR, dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListForceResolutionA(szProduct, szUserName, dwReserved)
+    {% end %}
   end
 
   def msiSourceListForceResolutionW(szProduct : Win32cr::Foundation::PWSTR, szUserName : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListForceResolutionW(szProduct, szUserName, dwReserved)
+    {% end %}
   end
 
   def msiSourceListAddSourceExA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szSource : Win32cr::Foundation::PSTR, dwIndex : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListAddSourceExA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szSource, dwIndex)
+    {% end %}
   end
 
   def msiSourceListAddSourceExW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szSource : Win32cr::Foundation::PWSTR, dwIndex : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListAddSourceExW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szSource, dwIndex)
+    {% end %}
   end
 
   def msiSourceListAddMediaDiskA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwDiskId : UInt32, szVolumeLabel : Win32cr::Foundation::PSTR, szDiskPrompt : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListAddMediaDiskA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwDiskId, szVolumeLabel, szDiskPrompt)
+    {% end %}
   end
 
   def msiSourceListAddMediaDiskW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwDiskId : UInt32, szVolumeLabel : Win32cr::Foundation::PWSTR, szDiskPrompt : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListAddMediaDiskW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwDiskId, szVolumeLabel, szDiskPrompt)
+    {% end %}
   end
 
   def msiSourceListClearSourceA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szSource : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListClearSourceA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szSource)
+    {% end %}
   end
 
   def msiSourceListClearSourceW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szSource : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListClearSourceW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szSource)
+    {% end %}
   end
 
   def msiSourceListClearMediaDiskA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwDiskId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListClearMediaDiskA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwDiskId)
+    {% end %}
   end
 
   def msiSourceListClearMediaDiskW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwDiskId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListClearMediaDiskW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwDiskId)
+    {% end %}
   end
 
   def msiSourceListClearAllExA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListClearAllExA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions)
+    {% end %}
   end
 
   def msiSourceListClearAllExW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListClearAllExW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions)
+    {% end %}
   end
 
   def msiSourceListForceResolutionExA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListForceResolutionExA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions)
+    {% end %}
   end
 
   def msiSourceListForceResolutionExW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListForceResolutionExW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions)
+    {% end %}
   end
 
   def msiSourceListSetInfoA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PSTR, szValue : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListSetInfoA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szProperty, szValue)
+    {% end %}
   end
 
   def msiSourceListSetInfoW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PWSTR, szValue : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListSetInfoW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szProperty, szValue)
+    {% end %}
   end
 
-  def msiSourceListGetInfoA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PSTR, szValue : UInt8*, pcchValue : UInt32*) : UInt32
+  def msiSourceListGetInfoA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PSTR, szValue : Win32cr::Foundation::PSTR, pcchValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListGetInfoA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szProperty, szValue, pcchValue)
+    {% end %}
   end
 
-  def msiSourceListGetInfoW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PWSTR, szValue : UInt16*, pcchValue : UInt32*) : UInt32
+  def msiSourceListGetInfoW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PWSTR, szValue : Win32cr::Foundation::PWSTR, pcchValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListGetInfoW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, szProperty, szValue, pcchValue)
+    {% end %}
   end
 
-  def msiSourceListEnumSourcesA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, szSource : UInt8*, pcchSource : UInt32*) : UInt32
+  def msiSourceListEnumSourcesA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, szSource : Win32cr::Foundation::PSTR, pcchSource : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListEnumSourcesA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwIndex, szSource, pcchSource)
+    {% end %}
   end
 
-  def msiSourceListEnumSourcesW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, szSource : UInt16*, pcchSource : UInt32*) : UInt32
+  def msiSourceListEnumSourcesW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, szSource : Win32cr::Foundation::PWSTR, pcchSource : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListEnumSourcesW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwIndex, szSource, pcchSource)
+    {% end %}
   end
 
-  def msiSourceListEnumMediaDisksA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, pdwDiskId : UInt32*, szVolumeLabel : UInt8*, pcchVolumeLabel : UInt32*, szDiskPrompt : UInt8*, pcchDiskPrompt : UInt32*) : UInt32
+  def msiSourceListEnumMediaDisksA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, pdwDiskId : UInt32*, szVolumeLabel : Win32cr::Foundation::PSTR, pcchVolumeLabel : UInt32*, szDiskPrompt : Win32cr::Foundation::PSTR, pcchDiskPrompt : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListEnumMediaDisksA(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwIndex, pdwDiskId, szVolumeLabel, pcchVolumeLabel, szDiskPrompt, pcchDiskPrompt)
+    {% end %}
   end
 
-  def msiSourceListEnumMediaDisksW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, pdwDiskId : UInt32*, szVolumeLabel : UInt16*, pcchVolumeLabel : UInt32*, szDiskPrompt : UInt16*, pcchDiskPrompt : UInt32*) : UInt32
+  def msiSourceListEnumMediaDisksW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, pdwDiskId : UInt32*, szVolumeLabel : Win32cr::Foundation::PWSTR, pcchVolumeLabel : UInt32*, szDiskPrompt : Win32cr::Foundation::PWSTR, pcchDiskPrompt : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSourceListEnumMediaDisksW(szProductCodeOrPatchCode, szUserSid, dwContext, dwOptions, dwIndex, pdwDiskId, szVolumeLabel, pcchVolumeLabel, szDiskPrompt, pcchDiskPrompt)
+    {% end %}
   end
 
-  def msiGetFileVersionA(szFilePath : Win32cr::Foundation::PSTR, lpVersionBuf : UInt8*, pcchVersionBuf : UInt32*, lpLangBuf : UInt8*, pcchLangBuf : UInt32*) : UInt32
+  def msiGetFileVersionA(szFilePath : Win32cr::Foundation::PSTR, lpVersionBuf : Win32cr::Foundation::PSTR, pcchVersionBuf : UInt32*, lpLangBuf : Win32cr::Foundation::PSTR, pcchLangBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFileVersionA(szFilePath, lpVersionBuf, pcchVersionBuf, lpLangBuf, pcchLangBuf)
+    {% end %}
   end
 
-  def msiGetFileVersionW(szFilePath : Win32cr::Foundation::PWSTR, lpVersionBuf : UInt16*, pcchVersionBuf : UInt32*, lpLangBuf : UInt16*, pcchLangBuf : UInt32*) : UInt32
+  def msiGetFileVersionW(szFilePath : Win32cr::Foundation::PWSTR, lpVersionBuf : Win32cr::Foundation::PWSTR, pcchVersionBuf : UInt32*, lpLangBuf : Win32cr::Foundation::PWSTR, pcchLangBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFileVersionW(szFilePath, lpVersionBuf, pcchVersionBuf, lpLangBuf, pcchLangBuf)
+    {% end %}
   end
 
   def msiGetFileHashA(szFilePath : Win32cr::Foundation::PSTR, dwOptions : UInt32, pHash : Win32cr::System::ApplicationInstallationAndServicing::MSIFILEHASHINFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFileHashA(szFilePath, dwOptions, pHash)
+    {% end %}
   end
 
   def msiGetFileHashW(szFilePath : Win32cr::Foundation::PWSTR, dwOptions : UInt32, pHash : Win32cr::System::ApplicationInstallationAndServicing::MSIFILEHASHINFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFileHashW(szFilePath, dwOptions, pHash)
+    {% end %}
   end
 
   def msiGetFileSignatureInformationA(szSignedObjectPath : Win32cr::Foundation::PSTR, dwFlags : UInt32, ppcCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**, pbHashData : UInt8*, pcbHashData : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MsiGetFileSignatureInformationA(szSignedObjectPath, dwFlags, ppcCertContext, pbHashData, pcbHashData)
+    {% end %}
   end
 
   def msiGetFileSignatureInformationW(szSignedObjectPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, ppcCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**, pbHashData : UInt8*, pcbHashData : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MsiGetFileSignatureInformationW(szSignedObjectPath, dwFlags, ppcCertContext, pbHashData, pcbHashData)
+    {% end %}
   end
 
   def msiGetShortcutTargetA(szShortcutPath : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, szFeatureId : Win32cr::Foundation::PSTR, szComponentCode : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetShortcutTargetA(szShortcutPath, szProductCode, szFeatureId, szComponentCode)
+    {% end %}
   end
 
   def msiGetShortcutTargetW(szShortcutPath : Win32cr::Foundation::PWSTR, szProductCode : Win32cr::Foundation::PWSTR, szFeatureId : Win32cr::Foundation::PWSTR, szComponentCode : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetShortcutTargetW(szShortcutPath, szProductCode, szFeatureId, szComponentCode)
+    {% end %}
   end
 
   def msiIsProductElevatedA(szProduct : Win32cr::Foundation::PSTR, pfElevated : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiIsProductElevatedA(szProduct, pfElevated)
+    {% end %}
   end
 
   def msiIsProductElevatedW(szProduct : Win32cr::Foundation::PWSTR, pfElevated : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiIsProductElevatedW(szProduct, pfElevated)
+    {% end %}
   end
 
   def msiNotifySidChangeA(pOldSid : Win32cr::Foundation::PSTR, pNewSid : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiNotifySidChangeA(pOldSid, pNewSid)
+    {% end %}
   end
 
   def msiNotifySidChangeW(pOldSid : Win32cr::Foundation::PWSTR, pNewSid : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiNotifySidChangeW(pOldSid, pNewSid)
+    {% end %}
   end
 
   def msiBeginTransactionA(szName : Win32cr::Foundation::PSTR, dwTransactionAttributes : UInt32, phTransactionHandle : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*, phChangeOfOwnerEvent : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiBeginTransactionA(szName, dwTransactionAttributes, phTransactionHandle, phChangeOfOwnerEvent)
+    {% end %}
   end
 
   def msiBeginTransactionW(szName : Win32cr::Foundation::PWSTR, dwTransactionAttributes : UInt32, phTransactionHandle : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*, phChangeOfOwnerEvent : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiBeginTransactionW(szName, dwTransactionAttributes, phTransactionHandle, phChangeOfOwnerEvent)
+    {% end %}
   end
 
   def msiEndTransaction(dwTransactionState : Win32cr::System::ApplicationInstallationAndServicing::MSITRANSACTIONSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEndTransaction(dwTransactionState)
+    {% end %}
   end
 
   def msiJoinTransaction(hTransactionHandle : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, dwTransactionAttributes : UInt32, phChangeOfOwnerEvent : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiJoinTransaction(hTransactionHandle, dwTransactionAttributes, phChangeOfOwnerEvent)
+    {% end %}
   end
 
   def msiDatabaseOpenViewA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szQuery : Win32cr::Foundation::PSTR, phView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseOpenViewA(hDatabase, szQuery, phView)
+    {% end %}
   end
 
   def msiDatabaseOpenViewW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szQuery : Win32cr::Foundation::PWSTR, phView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseOpenViewW(hDatabase, szQuery, phView)
+    {% end %}
   end
 
-  def msiViewGetErrorA(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szColumnNameBuffer : UInt8*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBERROR
+  def msiViewGetErrorA(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szColumnNameBuffer : Win32cr::Foundation::PSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBERROR
+    {% if !flag?(:docs) %}
     C.MsiViewGetErrorA(hView, szColumnNameBuffer, pcchBuf)
+    {% end %}
   end
 
-  def msiViewGetErrorW(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szColumnNameBuffer : UInt16*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBERROR
+  def msiViewGetErrorW(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szColumnNameBuffer : Win32cr::Foundation::PWSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBERROR
+    {% if !flag?(:docs) %}
     C.MsiViewGetErrorW(hView, szColumnNameBuffer, pcchBuf)
+    {% end %}
   end
 
   def msiViewExecute(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiViewExecute(hView, hRecord)
+    {% end %}
   end
 
   def msiViewFetch(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, phRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiViewFetch(hView, phRecord)
+    {% end %}
   end
 
   def msiViewModify(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, eModifyMode : Win32cr::System::ApplicationInstallationAndServicing::MSIMODIFY, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiViewModify(hView, eModifyMode, hRecord)
+    {% end %}
   end
 
   def msiViewGetColumnInfo(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, eColumnInfo : Win32cr::System::ApplicationInstallationAndServicing::MSICOLINFO, phRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiViewGetColumnInfo(hView, eColumnInfo, phRecord)
+    {% end %}
   end
 
   def msiViewClose(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiViewClose(hView)
+    {% end %}
   end
 
   def msiDatabaseGetPrimaryKeysA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTableName : Win32cr::Foundation::PSTR, phRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseGetPrimaryKeysA(hDatabase, szTableName, phRecord)
+    {% end %}
   end
 
   def msiDatabaseGetPrimaryKeysW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTableName : Win32cr::Foundation::PWSTR, phRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseGetPrimaryKeysW(hDatabase, szTableName, phRecord)
+    {% end %}
   end
 
   def msiDatabaseIsTablePersistentA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTableName : Win32cr::Foundation::PSTR) : Win32cr::System::ApplicationInstallationAndServicing::MSICONDITION
+    {% if !flag?(:docs) %}
     C.MsiDatabaseIsTablePersistentA(hDatabase, szTableName)
+    {% end %}
   end
 
   def msiDatabaseIsTablePersistentW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTableName : Win32cr::Foundation::PWSTR) : Win32cr::System::ApplicationInstallationAndServicing::MSICONDITION
+    {% if !flag?(:docs) %}
     C.MsiDatabaseIsTablePersistentW(hDatabase, szTableName)
+    {% end %}
   end
 
   def msiGetSummaryInformationA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szDatabasePath : Win32cr::Foundation::PSTR, uiUpdateCount : UInt32, phSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetSummaryInformationA(hDatabase, szDatabasePath, uiUpdateCount, phSummaryInfo)
+    {% end %}
   end
 
   def msiGetSummaryInformationW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szDatabasePath : Win32cr::Foundation::PWSTR, uiUpdateCount : UInt32, phSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetSummaryInformationW(hDatabase, szDatabasePath, uiUpdateCount, phSummaryInfo)
+    {% end %}
   end
 
   def msiSummaryInfoGetPropertyCount(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, puiPropertyCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSummaryInfoGetPropertyCount(hSummaryInfo, puiPropertyCount)
+    {% end %}
   end
 
   def msiSummaryInfoSetPropertyA(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, uiDataType : UInt32, iValue : Int32, pftValue : Win32cr::Foundation::FILETIME*, szValue : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSummaryInfoSetPropertyA(hSummaryInfo, uiProperty, uiDataType, iValue, pftValue, szValue)
+    {% end %}
   end
 
   def msiSummaryInfoSetPropertyW(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, uiDataType : UInt32, iValue : Int32, pftValue : Win32cr::Foundation::FILETIME*, szValue : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSummaryInfoSetPropertyW(hSummaryInfo, uiProperty, uiDataType, iValue, pftValue, szValue)
+    {% end %}
   end
 
-  def msiSummaryInfoGetPropertyA(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, puiDataType : UInt32*, piValue : Int32*, pftValue : Win32cr::Foundation::FILETIME*, szValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+  def msiSummaryInfoGetPropertyA(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, puiDataType : UInt32*, piValue : Int32*, pftValue : Win32cr::Foundation::FILETIME*, szValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSummaryInfoGetPropertyA(hSummaryInfo, uiProperty, puiDataType, piValue, pftValue, szValueBuf, pcchValueBuf)
+    {% end %}
   end
 
-  def msiSummaryInfoGetPropertyW(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, puiDataType : UInt32*, piValue : Int32*, pftValue : Win32cr::Foundation::FILETIME*, szValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+  def msiSummaryInfoGetPropertyW(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, puiDataType : UInt32*, piValue : Int32*, pftValue : Win32cr::Foundation::FILETIME*, szValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSummaryInfoGetPropertyW(hSummaryInfo, uiProperty, puiDataType, piValue, pftValue, szValueBuf, pcchValueBuf)
+    {% end %}
   end
 
   def msiSummaryInfoPersist(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSummaryInfoPersist(hSummaryInfo)
+    {% end %}
   end
 
   def msiOpenDatabaseA(szDatabasePath : Win32cr::Foundation::PSTR, szPersist : Win32cr::Foundation::PSTR, phDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiOpenDatabaseA(szDatabasePath, szPersist, phDatabase)
+    {% end %}
   end
 
   def msiOpenDatabaseW(szDatabasePath : Win32cr::Foundation::PWSTR, szPersist : Win32cr::Foundation::PWSTR, phDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiOpenDatabaseW(szDatabasePath, szPersist, phDatabase)
+    {% end %}
   end
 
   def msiDatabaseImportA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolderPath : Win32cr::Foundation::PSTR, szFileName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseImportA(hDatabase, szFolderPath, szFileName)
+    {% end %}
   end
 
   def msiDatabaseImportW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolderPath : Win32cr::Foundation::PWSTR, szFileName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseImportW(hDatabase, szFolderPath, szFileName)
+    {% end %}
   end
 
   def msiDatabaseExportA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTableName : Win32cr::Foundation::PSTR, szFolderPath : Win32cr::Foundation::PSTR, szFileName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseExportA(hDatabase, szTableName, szFolderPath, szFileName)
+    {% end %}
   end
 
   def msiDatabaseExportW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTableName : Win32cr::Foundation::PWSTR, szFolderPath : Win32cr::Foundation::PWSTR, szFileName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseExportW(hDatabase, szTableName, szFolderPath, szFileName)
+    {% end %}
   end
 
   def msiDatabaseMergeA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hDatabaseMerge : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTableName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseMergeA(hDatabase, hDatabaseMerge, szTableName)
+    {% end %}
   end
 
   def msiDatabaseMergeW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hDatabaseMerge : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTableName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseMergeW(hDatabase, hDatabaseMerge, szTableName)
+    {% end %}
   end
 
   def msiDatabaseGenerateTransformA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hDatabaseReference : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTransformFile : Win32cr::Foundation::PSTR, iReserved1 : Int32, iReserved2 : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseGenerateTransformA(hDatabase, hDatabaseReference, szTransformFile, iReserved1, iReserved2)
+    {% end %}
   end
 
   def msiDatabaseGenerateTransformW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hDatabaseReference : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTransformFile : Win32cr::Foundation::PWSTR, iReserved1 : Int32, iReserved2 : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseGenerateTransformW(hDatabase, hDatabaseReference, szTransformFile, iReserved1, iReserved2)
+    {% end %}
   end
 
   def msiDatabaseApplyTransformA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTransformFile : Win32cr::Foundation::PSTR, iErrorConditions : Win32cr::System::ApplicationInstallationAndServicing::MSITRANSFORM_ERROR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseApplyTransformA(hDatabase, szTransformFile, iErrorConditions)
+    {% end %}
   end
 
   def msiDatabaseApplyTransformW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTransformFile : Win32cr::Foundation::PWSTR, iErrorConditions : Win32cr::System::ApplicationInstallationAndServicing::MSITRANSFORM_ERROR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseApplyTransformW(hDatabase, szTransformFile, iErrorConditions)
+    {% end %}
   end
 
   def msiCreateTransformSummaryInfoA(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hDatabaseReference : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTransformFile : Win32cr::Foundation::PSTR, iErrorConditions : Win32cr::System::ApplicationInstallationAndServicing::MSITRANSFORM_ERROR, iValidation : Win32cr::System::ApplicationInstallationAndServicing::MSITRANSFORM_VALIDATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiCreateTransformSummaryInfoA(hDatabase, hDatabaseReference, szTransformFile, iErrorConditions, iValidation)
+    {% end %}
   end
 
   def msiCreateTransformSummaryInfoW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hDatabaseReference : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTransformFile : Win32cr::Foundation::PWSTR, iErrorConditions : Win32cr::System::ApplicationInstallationAndServicing::MSITRANSFORM_ERROR, iValidation : Win32cr::System::ApplicationInstallationAndServicing::MSITRANSFORM_VALIDATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiCreateTransformSummaryInfoW(hDatabase, hDatabaseReference, szTransformFile, iErrorConditions, iValidation)
+    {% end %}
   end
 
   def msiDatabaseCommit(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDatabaseCommit(hDatabase)
+    {% end %}
   end
 
   def msiGetDatabaseState(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBSTATE
+    {% if !flag?(:docs) %}
     C.MsiGetDatabaseState(hDatabase)
+    {% end %}
   end
 
   def msiCreateRecord(cParams : UInt32) : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE
+    {% if !flag?(:docs) %}
     C.MsiCreateRecord(cParams)
+    {% end %}
   end
 
   def msiRecordIsNull(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MsiRecordIsNull(hRecord, iField)
+    {% end %}
   end
 
   def msiRecordDataSize(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordDataSize(hRecord, iField)
+    {% end %}
   end
 
   def msiRecordSetInteger(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, iValue : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordSetInteger(hRecord, iField, iValue)
+    {% end %}
   end
 
   def msiRecordSetStringA(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValue : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordSetStringA(hRecord, iField, szValue)
+    {% end %}
   end
 
   def msiRecordSetStringW(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValue : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordSetStringW(hRecord, iField, szValue)
+    {% end %}
   end
 
   def msiRecordGetInteger(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.MsiRecordGetInteger(hRecord, iField)
+    {% end %}
   end
 
-  def msiRecordGetStringA(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+  def msiRecordGetStringA(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordGetStringA(hRecord, iField, szValueBuf, pcchValueBuf)
+    {% end %}
   end
 
-  def msiRecordGetStringW(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+  def msiRecordGetStringW(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordGetStringW(hRecord, iField, szValueBuf, pcchValueBuf)
+    {% end %}
   end
 
   def msiRecordGetFieldCount(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordGetFieldCount(hRecord)
+    {% end %}
   end
 
   def msiRecordSetStreamA(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szFilePath : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordSetStreamA(hRecord, iField, szFilePath)
+    {% end %}
   end
 
   def msiRecordSetStreamW(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szFilePath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordSetStreamW(hRecord, iField, szFilePath)
+    {% end %}
   end
 
   def msiRecordReadStream(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szDataBuf : Win32cr::Foundation::PSTR, pcbDataBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordReadStream(hRecord, iField, szDataBuf, pcbDataBuf)
+    {% end %}
   end
 
   def msiRecordClearData(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiRecordClearData(hRecord)
+    {% end %}
   end
 
   def msiGetActiveDatabase(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE
+    {% if !flag?(:docs) %}
     C.MsiGetActiveDatabase(hInstall)
+    {% end %}
   end
 
   def msiSetPropertyA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PSTR, szValue : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetPropertyA(hInstall, szName, szValue)
+    {% end %}
   end
 
   def msiSetPropertyW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PWSTR, szValue : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetPropertyW(hInstall, szName, szValue)
+    {% end %}
   end
 
-  def msiGetPropertyA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PSTR, szValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+  def msiGetPropertyA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PSTR, szValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetPropertyA(hInstall, szName, szValueBuf, pcchValueBuf)
+    {% end %}
   end
 
-  def msiGetPropertyW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PWSTR, szValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+  def msiGetPropertyW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PWSTR, szValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetPropertyW(hInstall, szName, szValueBuf, pcchValueBuf)
+    {% end %}
   end
 
   def msiGetLanguage(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt16
+    {% if !flag?(:docs) %}
     C.MsiGetLanguage(hInstall)
+    {% end %}
   end
 
   def msiGetMode(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, eRunMode : Win32cr::System::ApplicationInstallationAndServicing::MSIRUNMODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MsiGetMode(hInstall, eRunMode)
+    {% end %}
   end
 
   def msiSetMode(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, eRunMode : Win32cr::System::ApplicationInstallationAndServicing::MSIRUNMODE, fState : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetMode(hInstall, eRunMode, fState)
+    {% end %}
   end
 
-  def msiFormatRecordA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szResultBuf : UInt8*, pcchResultBuf : UInt32*) : UInt32
+  def msiFormatRecordA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szResultBuf : Win32cr::Foundation::PSTR, pcchResultBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiFormatRecordA(hInstall, hRecord, szResultBuf, pcchResultBuf)
+    {% end %}
   end
 
-  def msiFormatRecordW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szResultBuf : UInt16*, pcchResultBuf : UInt32*) : UInt32
+  def msiFormatRecordW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szResultBuf : Win32cr::Foundation::PWSTR, pcchResultBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiFormatRecordW(hInstall, hRecord, szResultBuf, pcchResultBuf)
+    {% end %}
   end
 
   def msiDoActionA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szAction : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDoActionA(hInstall, szAction)
+    {% end %}
   end
 
   def msiDoActionW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szAction : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiDoActionW(hInstall, szAction)
+    {% end %}
   end
 
   def msiSequenceA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTable : Win32cr::Foundation::PSTR, iSequenceMode : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSequenceA(hInstall, szTable, iSequenceMode)
+    {% end %}
   end
 
   def msiSequenceW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szTable : Win32cr::Foundation::PWSTR, iSequenceMode : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSequenceW(hInstall, szTable, iSequenceMode)
+    {% end %}
   end
 
   def msiProcessMessage(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, eMessageType : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMESSAGE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.MsiProcessMessage(hInstall, eMessageType, hRecord)
+    {% end %}
   end
 
   def msiEvaluateConditionA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szCondition : Win32cr::Foundation::PSTR) : Win32cr::System::ApplicationInstallationAndServicing::MSICONDITION
+    {% if !flag?(:docs) %}
     C.MsiEvaluateConditionA(hInstall, szCondition)
+    {% end %}
   end
 
   def msiEvaluateConditionW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szCondition : Win32cr::Foundation::PWSTR) : Win32cr::System::ApplicationInstallationAndServicing::MSICONDITION
+    {% if !flag?(:docs) %}
     C.MsiEvaluateConditionW(hInstall, szCondition)
+    {% end %}
   end
 
   def msiGetFeatureStateA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, piInstalled : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*, piAction : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureStateA(hInstall, szFeature, piInstalled, piAction)
+    {% end %}
   end
 
   def msiGetFeatureStateW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, piInstalled : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*, piAction : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureStateW(hInstall, szFeature, piInstalled, piAction)
+    {% end %}
   end
 
   def msiSetFeatureStateA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetFeatureStateA(hInstall, szFeature, iState)
+    {% end %}
   end
 
   def msiSetFeatureStateW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetFeatureStateW(hInstall, szFeature, iState)
+    {% end %}
   end
 
   def msiSetFeatureAttributesA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, dwAttributes : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetFeatureAttributesA(hInstall, szFeature, dwAttributes)
+    {% end %}
   end
 
   def msiSetFeatureAttributesW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, dwAttributes : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetFeatureAttributesW(hInstall, szFeature, dwAttributes)
+    {% end %}
   end
 
   def msiGetComponentStateA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PSTR, piInstalled : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*, piAction : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetComponentStateA(hInstall, szComponent, piInstalled, piAction)
+    {% end %}
   end
 
   def msiGetComponentStateW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PWSTR, piInstalled : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*, piAction : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetComponentStateW(hInstall, szComponent, piInstalled, piAction)
+    {% end %}
   end
 
   def msiSetComponentStateA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PSTR, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetComponentStateA(hInstall, szComponent, iState)
+    {% end %}
   end
 
   def msiSetComponentStateW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PWSTR, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetComponentStateW(hInstall, szComponent, iState)
+    {% end %}
   end
 
   def msiGetFeatureCostA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, iCostTree : Win32cr::System::ApplicationInstallationAndServicing::MSICOSTTREE, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, piCost : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureCostA(hInstall, szFeature, iCostTree, iState, piCost)
+    {% end %}
   end
 
   def msiGetFeatureCostW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, iCostTree : Win32cr::System::ApplicationInstallationAndServicing::MSICOSTTREE, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, piCost : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureCostW(hInstall, szFeature, iCostTree, iState, piCost)
+    {% end %}
   end
 
-  def msiEnumComponentCostsA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PSTR, dwIndex : UInt32, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szDriveBuf : UInt8*, pcchDriveBuf : UInt32*, piCost : Int32*, piTempCost : Int32*) : UInt32
+  def msiEnumComponentCostsA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PSTR, dwIndex : UInt32, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szDriveBuf : Win32cr::Foundation::PSTR, pcchDriveBuf : UInt32*, piCost : Int32*, piTempCost : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumComponentCostsA(hInstall, szComponent, dwIndex, iState, szDriveBuf, pcchDriveBuf, piCost, piTempCost)
+    {% end %}
   end
 
-  def msiEnumComponentCostsW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PWSTR, dwIndex : UInt32, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szDriveBuf : UInt16*, pcchDriveBuf : UInt32*, piCost : Int32*, piTempCost : Int32*) : UInt32
+  def msiEnumComponentCostsW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PWSTR, dwIndex : UInt32, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szDriveBuf : Win32cr::Foundation::PWSTR, pcchDriveBuf : UInt32*, piCost : Int32*, piTempCost : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnumComponentCostsW(hInstall, szComponent, dwIndex, iState, szDriveBuf, pcchDriveBuf, piCost, piTempCost)
+    {% end %}
   end
 
   def msiSetInstallLevel(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iInstallLevel : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetInstallLevel(hInstall, iInstallLevel)
+    {% end %}
   end
 
   def msiGetFeatureValidStatesA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, lpInstallStates : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureValidStatesA(hInstall, szFeature, lpInstallStates)
+    {% end %}
   end
 
   def msiGetFeatureValidStatesW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, lpInstallStates : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetFeatureValidStatesW(hInstall, szFeature, lpInstallStates)
+    {% end %}
   end
 
-  def msiGetSourcePathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+  def msiGetSourcePathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetSourcePathA(hInstall, szFolder, szPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiGetSourcePathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+  def msiGetSourcePathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetSourcePathW(hInstall, szFolder, szPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiGetTargetPathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+  def msiGetTargetPathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetTargetPathA(hInstall, szFolder, szPathBuf, pcchPathBuf)
+    {% end %}
   end
 
-  def msiGetTargetPathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+  def msiGetTargetPathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiGetTargetPathW(hInstall, szFolder, szPathBuf, pcchPathBuf)
+    {% end %}
   end
 
   def msiSetTargetPathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szFolderPath : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetTargetPathA(hInstall, szFolder, szFolderPath)
+    {% end %}
   end
 
   def msiSetTargetPathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szFolderPath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiSetTargetPathW(hInstall, szFolder, szFolderPath)
+    {% end %}
   end
 
   def msiVerifyDiskSpace(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiVerifyDiskSpace(hInstall)
+    {% end %}
   end
 
   def msiEnableUIPreview(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, phPreview : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiEnableUIPreview(hDatabase, phPreview)
+    {% end %}
   end
 
   def msiPreviewDialogA(hPreview : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szDialogName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiPreviewDialogA(hPreview, szDialogName)
+    {% end %}
   end
 
   def msiPreviewDialogW(hPreview : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szDialogName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiPreviewDialogW(hPreview, szDialogName)
+    {% end %}
   end
 
   def msiPreviewBillboardA(hPreview : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szControlName : Win32cr::Foundation::PSTR, szBillboard : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiPreviewBillboardA(hPreview, szControlName, szBillboard)
+    {% end %}
   end
 
   def msiPreviewBillboardW(hPreview : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szControlName : Win32cr::Foundation::PWSTR, szBillboard : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MsiPreviewBillboardW(hPreview, szControlName, szBillboard)
+    {% end %}
   end
 
   def msiGetLastErrorRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE
+    {% if !flag?(:docs) %}
     C.MsiGetLastErrorRecord
+    {% end %}
   end
 
   def sfcGetNextProtectedFile(rpc_handle : Win32cr::Foundation::HANDLE, prot_file_data : Win32cr::System::ApplicationInstallationAndServicing::PROTECTED_FILE_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SfcGetNextProtectedFile(rpc_handle, prot_file_data)
+    {% end %}
   end
 
   def sfcIsFileProtected(rpc_handle : Win32cr::Foundation::HANDLE, prot_file_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SfcIsFileProtected(rpc_handle, prot_file_name)
+    {% end %}
   end
 
   def sfcIsKeyProtected(key_handle : Win32cr::System::Registry::HKEY, sub_key_name : Win32cr::Foundation::PWSTR, key_sam : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SfcIsKeyProtected(key_handle, sub_key_name, key_sam)
+    {% end %}
   end
 
-  def sfpVerifyFile(pszFileName : Win32cr::Foundation::PSTR, pszError : UInt8*, dwErrSize : UInt32) : Win32cr::Foundation::BOOL
+  def sfpVerifyFile(pszFileName : Win32cr::Foundation::PSTR, pszError : Win32cr::Foundation::PSTR, dwErrSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SfpVerifyFile(pszFileName, pszError, dwErrSize)
+    {% end %}
   end
 
   def createPatchFileA(old_file_name : Win32cr::Foundation::PSTR, new_file_name : Win32cr::Foundation::PSTR, patch_file_name : Win32cr::Foundation::PSTR, option_flags : UInt32, option_data : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OPTION_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePatchFileA(old_file_name, new_file_name, patch_file_name, option_flags, option_data)
+    {% end %}
   end
 
   def createPatchFileW(old_file_name : Win32cr::Foundation::PWSTR, new_file_name : Win32cr::Foundation::PWSTR, patch_file_name : Win32cr::Foundation::PWSTR, option_flags : UInt32, option_data : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OPTION_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePatchFileW(old_file_name, new_file_name, patch_file_name, option_flags, option_data)
+    {% end %}
   end
 
   def createPatchFileByHandles(old_file_handle : Win32cr::Foundation::HANDLE, new_file_handle : Win32cr::Foundation::HANDLE, patch_file_handle : Win32cr::Foundation::HANDLE, option_flags : UInt32, option_data : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OPTION_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePatchFileByHandles(old_file_handle, new_file_handle, patch_file_handle, option_flags, option_data)
+    {% end %}
   end
 
   def createPatchFileExA(old_file_count : UInt32, old_file_info_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OLD_FILE_INFO_A*, new_file_name : Win32cr::Foundation::PSTR, patch_file_name : Win32cr::Foundation::PSTR, option_flags : UInt32, option_data : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OPTION_DATA*, progress_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_PROGRESS_CALLBACK, callback_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePatchFileExA(old_file_count, old_file_info_array, new_file_name, patch_file_name, option_flags, option_data, progress_callback, callback_context)
+    {% end %}
   end
 
   def createPatchFileExW(old_file_count : UInt32, old_file_info_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OLD_FILE_INFO_W*, new_file_name : Win32cr::Foundation::PWSTR, patch_file_name : Win32cr::Foundation::PWSTR, option_flags : UInt32, option_data : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OPTION_DATA*, progress_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_PROGRESS_CALLBACK, callback_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePatchFileExW(old_file_count, old_file_info_array, new_file_name, patch_file_name, option_flags, option_data, progress_callback, callback_context)
+    {% end %}
   end
 
   def createPatchFileByHandlesEx(old_file_count : UInt32, old_file_info_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OLD_FILE_INFO_H*, new_file_handle : Win32cr::Foundation::HANDLE, patch_file_handle : Win32cr::Foundation::HANDLE, option_flags : UInt32, option_data : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OPTION_DATA*, progress_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_PROGRESS_CALLBACK, callback_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePatchFileByHandlesEx(old_file_count, old_file_info_array, new_file_handle, patch_file_handle, option_flags, option_data, progress_callback, callback_context)
+    {% end %}
   end
 
   def extractPatchHeaderToFileA(patch_file_name : Win32cr::Foundation::PSTR, patch_header_file_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExtractPatchHeaderToFileA(patch_file_name, patch_header_file_name)
+    {% end %}
   end
 
   def extractPatchHeaderToFileW(patch_file_name : Win32cr::Foundation::PWSTR, patch_header_file_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExtractPatchHeaderToFileW(patch_file_name, patch_header_file_name)
+    {% end %}
   end
 
   def extractPatchHeaderToFileByHandles(patch_file_handle : Win32cr::Foundation::HANDLE, patch_header_file_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExtractPatchHeaderToFileByHandles(patch_file_handle, patch_header_file_handle)
+    {% end %}
   end
 
   def testApplyPatchToFileA(patch_file_name : Win32cr::Foundation::PSTR, old_file_name : Win32cr::Foundation::PSTR, apply_option_flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TestApplyPatchToFileA(patch_file_name, old_file_name, apply_option_flags)
+    {% end %}
   end
 
   def testApplyPatchToFileW(patch_file_name : Win32cr::Foundation::PWSTR, old_file_name : Win32cr::Foundation::PWSTR, apply_option_flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TestApplyPatchToFileW(patch_file_name, old_file_name, apply_option_flags)
+    {% end %}
   end
 
   def testApplyPatchToFileByHandles(patch_file_handle : Win32cr::Foundation::HANDLE, old_file_handle : Win32cr::Foundation::HANDLE, apply_option_flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TestApplyPatchToFileByHandles(patch_file_handle, old_file_handle, apply_option_flags)
+    {% end %}
   end
 
   def testApplyPatchToFileByBuffers(patch_file_buffer : UInt8*, patch_file_size : UInt32, old_file_buffer : UInt8*, old_file_size : UInt32, new_file_size : UInt32*, apply_option_flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TestApplyPatchToFileByBuffers(patch_file_buffer, patch_file_size, old_file_buffer, old_file_size, new_file_size, apply_option_flags)
+    {% end %}
   end
 
   def applyPatchToFileA(patch_file_name : Win32cr::Foundation::PSTR, old_file_name : Win32cr::Foundation::PSTR, new_file_name : Win32cr::Foundation::PSTR, apply_option_flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyPatchToFileA(patch_file_name, old_file_name, new_file_name, apply_option_flags)
+    {% end %}
   end
 
   def applyPatchToFileW(patch_file_name : Win32cr::Foundation::PWSTR, old_file_name : Win32cr::Foundation::PWSTR, new_file_name : Win32cr::Foundation::PWSTR, apply_option_flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyPatchToFileW(patch_file_name, old_file_name, new_file_name, apply_option_flags)
+    {% end %}
   end
 
   def applyPatchToFileByHandles(patch_file_handle : Win32cr::Foundation::HANDLE, old_file_handle : Win32cr::Foundation::HANDLE, new_file_handle : Win32cr::Foundation::HANDLE, apply_option_flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyPatchToFileByHandles(patch_file_handle, old_file_handle, new_file_handle, apply_option_flags)
+    {% end %}
   end
 
   def applyPatchToFileExA(patch_file_name : Win32cr::Foundation::PSTR, old_file_name : Win32cr::Foundation::PSTR, new_file_name : Win32cr::Foundation::PSTR, apply_option_flags : UInt32, progress_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_PROGRESS_CALLBACK, callback_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyPatchToFileExA(patch_file_name, old_file_name, new_file_name, apply_option_flags, progress_callback, callback_context)
+    {% end %}
   end
 
   def applyPatchToFileExW(patch_file_name : Win32cr::Foundation::PWSTR, old_file_name : Win32cr::Foundation::PWSTR, new_file_name : Win32cr::Foundation::PWSTR, apply_option_flags : UInt32, progress_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_PROGRESS_CALLBACK, callback_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyPatchToFileExW(patch_file_name, old_file_name, new_file_name, apply_option_flags, progress_callback, callback_context)
+    {% end %}
   end
 
   def applyPatchToFileByHandlesEx(patch_file_handle : Win32cr::Foundation::HANDLE, old_file_handle : Win32cr::Foundation::HANDLE, new_file_handle : Win32cr::Foundation::HANDLE, apply_option_flags : UInt32, progress_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_PROGRESS_CALLBACK, callback_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyPatchToFileByHandlesEx(patch_file_handle, old_file_handle, new_file_handle, apply_option_flags, progress_callback, callback_context)
+    {% end %}
   end
 
   def applyPatchToFileByBuffers(patch_file_mapped : UInt8*, patch_file_size : UInt32, old_file_mapped : UInt8*, old_file_size : UInt32, new_file_buffer : UInt8**, new_file_buffer_size : UInt32, new_file_actual_size : UInt32*, new_file_time : Win32cr::Foundation::FILETIME*, apply_option_flags : UInt32, progress_callback : Win32cr::System::ApplicationInstallationAndServicing::PPATCH_PROGRESS_CALLBACK, callback_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyPatchToFileByBuffers(patch_file_mapped, patch_file_size, old_file_mapped, old_file_size, new_file_buffer, new_file_buffer_size, new_file_actual_size, new_file_time, apply_option_flags, progress_callback, callback_context)
+    {% end %}
   end
 
   def getFilePatchSignatureA(file_name : Win32cr::Foundation::PSTR, option_flags : UInt32, option_data : Void*, ignore_range_count : UInt32, ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, retain_range_count : UInt32, retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*, signature_buffer_size : UInt32, signature_buffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFilePatchSignatureA(file_name, option_flags, option_data, ignore_range_count, ignore_range_array, retain_range_count, retain_range_array, signature_buffer_size, signature_buffer)
+    {% end %}
   end
 
   def getFilePatchSignatureW(file_name : Win32cr::Foundation::PWSTR, option_flags : UInt32, option_data : Void*, ignore_range_count : UInt32, ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, retain_range_count : UInt32, retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*, signature_buffer_size : UInt32, signature_buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFilePatchSignatureW(file_name, option_flags, option_data, ignore_range_count, ignore_range_array, retain_range_count, retain_range_array, signature_buffer_size, signature_buffer)
+    {% end %}
   end
 
   def getFilePatchSignatureByHandle(file_handle : Win32cr::Foundation::HANDLE, option_flags : UInt32, option_data : Void*, ignore_range_count : UInt32, ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, retain_range_count : UInt32, retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*, signature_buffer_size : UInt32, signature_buffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFilePatchSignatureByHandle(file_handle, option_flags, option_data, ignore_range_count, ignore_range_array, retain_range_count, retain_range_array, signature_buffer_size, signature_buffer)
+    {% end %}
   end
 
   def getFilePatchSignatureByBuffer(file_buffer_writable : UInt8*, file_size : UInt32, option_flags : UInt32, option_data : Void*, ignore_range_count : UInt32, ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, retain_range_count : UInt32, retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*, signature_buffer_size : UInt32, signature_buffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFilePatchSignatureByBuffer(file_buffer_writable, file_size, option_flags, option_data, ignore_range_count, ignore_range_array, retain_range_count, retain_range_array, signature_buffer_size, signature_buffer)
+    {% end %}
   end
 
   def normalizeFileForPatchSignature(file_buffer : Void*, file_size : UInt32, option_flags : UInt32, option_data : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OPTION_DATA*, new_file_coff_base : UInt32, new_file_coff_time : UInt32, ignore_range_count : UInt32, ignore_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_IGNORE_RANGE*, retain_range_count : UInt32, retain_range_array : Win32cr::System::ApplicationInstallationAndServicing::PATCH_RETAIN_RANGE*) : Int32
+    {% if !flag?(:docs) %}
     C.NormalizeFileForPatchSignature(file_buffer, file_size, option_flags, option_data, new_file_coff_base, new_file_coff_time, ignore_range_count, ignore_range_array, retain_range_count, retain_range_array)
+    {% end %}
   end
 
   def getDeltaInfoB(delta : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpHeaderInfo : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HEADER_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDeltaInfoB(delta, lpHeaderInfo)
+    {% end %}
   end
 
   def getDeltaInfoA(lpDeltaName : Win32cr::Foundation::PSTR, lpHeaderInfo : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HEADER_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDeltaInfoA(lpDeltaName, lpHeaderInfo)
+    {% end %}
   end
 
   def getDeltaInfoW(lpDeltaName : Win32cr::Foundation::PWSTR, lpHeaderInfo : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HEADER_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDeltaInfoW(lpDeltaName, lpHeaderInfo)
+    {% end %}
   end
 
   def applyDeltaGetReverseB(apply_flags : Int64, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, delta : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpReverseFileTime : Win32cr::Foundation::FILETIME*, lpTarget : Win32cr::System::ApplicationInstallationAndServicing::DELTA_OUTPUT*, lpTargetReverse : Win32cr::System::ApplicationInstallationAndServicing::DELTA_OUTPUT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyDeltaGetReverseB(apply_flags, source, delta, lpReverseFileTime, lpTarget, lpTargetReverse)
+    {% end %}
   end
 
   def applyDeltaB(apply_flags : Int64, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, delta : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTarget : Win32cr::System::ApplicationInstallationAndServicing::DELTA_OUTPUT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyDeltaB(apply_flags, source, delta, lpTarget)
+    {% end %}
   end
 
   def applyDeltaProvidedB(apply_flags : Int64, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, delta : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTarget : Void*, uTargetSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyDeltaProvidedB(apply_flags, source, delta, lpTarget, uTargetSize)
+    {% end %}
   end
 
   def applyDeltaA(apply_flags : Int64, lpSourceName : Win32cr::Foundation::PSTR, lpDeltaName : Win32cr::Foundation::PSTR, lpTargetName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyDeltaA(apply_flags, lpSourceName, lpDeltaName, lpTargetName)
+    {% end %}
   end
 
   def applyDeltaW(apply_flags : Int64, lpSourceName : Win32cr::Foundation::PWSTR, lpDeltaName : Win32cr::Foundation::PWSTR, lpTargetName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApplyDeltaW(apply_flags, lpSourceName, lpDeltaName, lpTargetName)
+    {% end %}
   end
 
-  def createDeltaB(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, target : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, source_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, target_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : UInt32, lpDelta : Win32cr::System::ApplicationInstallationAndServicing::DELTA_OUTPUT*) : Win32cr::Foundation::BOOL
+  def createDeltaB(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, target : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, source_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, target_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpDelta : Win32cr::System::ApplicationInstallationAndServicing::DELTA_OUTPUT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateDeltaB(file_type_set, set_flags, reset_flags, source, target, source_options, target_options, global_options, lpTargetFileTime, hash_alg_id, lpDelta)
+    {% end %}
   end
 
-  def createDeltaA(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, lpSourceName : Win32cr::Foundation::PSTR, lpTargetName : Win32cr::Foundation::PSTR, lpSourceOptionsName : Win32cr::Foundation::PSTR, lpTargetOptionsName : Win32cr::Foundation::PSTR, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : UInt32, lpDeltaName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+  def createDeltaA(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, lpSourceName : Win32cr::Foundation::PSTR, lpTargetName : Win32cr::Foundation::PSTR, lpSourceOptionsName : Win32cr::Foundation::PSTR, lpTargetOptionsName : Win32cr::Foundation::PSTR, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpDeltaName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateDeltaA(file_type_set, set_flags, reset_flags, lpSourceName, lpTargetName, lpSourceOptionsName, lpTargetOptionsName, global_options, lpTargetFileTime, hash_alg_id, lpDeltaName)
+    {% end %}
   end
 
-  def createDeltaW(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, lpSourceName : Win32cr::Foundation::PWSTR, lpTargetName : Win32cr::Foundation::PWSTR, lpSourceOptionsName : Win32cr::Foundation::PWSTR, lpTargetOptionsName : Win32cr::Foundation::PWSTR, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : UInt32, lpDeltaName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+  def createDeltaW(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, lpSourceName : Win32cr::Foundation::PWSTR, lpTargetName : Win32cr::Foundation::PWSTR, lpSourceOptionsName : Win32cr::Foundation::PWSTR, lpTargetOptionsName : Win32cr::Foundation::PWSTR, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpDeltaName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateDeltaW(file_type_set, set_flags, reset_flags, lpSourceName, lpTargetName, lpSourceOptionsName, lpTargetOptionsName, global_options, lpTargetFileTime, hash_alg_id, lpDeltaName)
+    {% end %}
   end
 
-  def getDeltaSignatureB(file_type_set : Int64, hash_alg_id : UInt32, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+  def getDeltaSignatureB(file_type_set : Int64, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDeltaSignatureB(file_type_set, hash_alg_id, source, lpHash)
+    {% end %}
   end
 
-  def getDeltaSignatureA(file_type_set : Int64, hash_alg_id : UInt32, lpSourceName : Win32cr::Foundation::PSTR, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+  def getDeltaSignatureA(file_type_set : Int64, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpSourceName : Win32cr::Foundation::PSTR, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDeltaSignatureA(file_type_set, hash_alg_id, lpSourceName, lpHash)
+    {% end %}
   end
 
-  def getDeltaSignatureW(file_type_set : Int64, hash_alg_id : UInt32, lpSourceName : Win32cr::Foundation::PWSTR, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+  def getDeltaSignatureW(file_type_set : Int64, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpSourceName : Win32cr::Foundation::PWSTR, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDeltaSignatureW(file_type_set, hash_alg_id, lpSourceName, lpHash)
+    {% end %}
   end
 
   def deltaNormalizeProvidedB(file_type_set : Int64, normalize_flags : Int64, normalize_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpSource : Void*, uSourceSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeltaNormalizeProvidedB(file_type_set, normalize_flags, normalize_options, lpSource, uSourceSize)
+    {% end %}
   end
 
   def deltaFree(lpMemory : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeltaFree(lpMemory)
+    {% end %}
   end
 
   def createActCtxA(pActCtx : Win32cr::System::ApplicationInstallationAndServicing::ACTCTXA*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateActCtxA(pActCtx)
+    {% end %}
   end
 
   def createActCtxW(pActCtx : Win32cr::System::ApplicationInstallationAndServicing::ACTCTXW*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateActCtxW(pActCtx)
+    {% end %}
   end
 
   def addRefActCtx(hActCtx : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.AddRefActCtx(hActCtx)
+    {% end %}
   end
 
   def releaseActCtx(hActCtx : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.ReleaseActCtx(hActCtx)
+    {% end %}
   end
 
   def zombifyActCtx(hActCtx : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ZombifyActCtx(hActCtx)
+    {% end %}
   end
 
   def activateActCtx(hActCtx : Win32cr::Foundation::HANDLE, lpCookie : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ActivateActCtx(hActCtx, lpCookie)
+    {% end %}
   end
 
   def deactivateActCtx(dwFlags : UInt32, ulCookie : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeactivateActCtx(dwFlags, ulCookie)
+    {% end %}
   end
 
   def getCurrentActCtx(lphActCtx : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCurrentActCtx(lphActCtx)
+    {% end %}
   end
 
   def findActCtxSectionStringA(dwFlags : UInt32, lpExtensionGuid : LibC::GUID*, ulSectionId : UInt32, lpStringToFind : Win32cr::Foundation::PSTR, returned_data : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_SECTION_KEYED_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindActCtxSectionStringA(dwFlags, lpExtensionGuid, ulSectionId, lpStringToFind, returned_data)
+    {% end %}
   end
 
   def findActCtxSectionStringW(dwFlags : UInt32, lpExtensionGuid : LibC::GUID*, ulSectionId : UInt32, lpStringToFind : Win32cr::Foundation::PWSTR, returned_data : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_SECTION_KEYED_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindActCtxSectionStringW(dwFlags, lpExtensionGuid, ulSectionId, lpStringToFind, returned_data)
+    {% end %}
   end
 
   def findActCtxSectionGuid(dwFlags : UInt32, lpExtensionGuid : LibC::GUID*, ulSectionId : UInt32, lpGuidToFind : LibC::GUID*, returned_data : Win32cr::System::ApplicationInstallationAndServicing::ACTCTX_SECTION_KEYED_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindActCtxSectionGuid(dwFlags, lpExtensionGuid, ulSectionId, lpGuidToFind, returned_data)
+    {% end %}
   end
 
   def queryActCtxW(dwFlags : UInt32, hActCtx : Win32cr::Foundation::HANDLE, pvSubInstance : Void*, ulInfoClass : UInt32, pvBuffer : Void*, cbBuffer : LibC::UIntPtrT, pcbWrittenOrRequired : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryActCtxW(dwFlags, hActCtx, pvSubInstance, ulInfoClass, pvBuffer, cbBuffer, pcbWrittenOrRequired)
+    {% end %}
   end
 
   def queryActCtxSettingsW(dwFlags : UInt32, hActCtx : Win32cr::Foundation::HANDLE, settingsNameSpace : Win32cr::Foundation::PWSTR, settingName : Win32cr::Foundation::PWSTR, pvBuffer : Win32cr::Foundation::PWSTR, dwBuffer : LibC::UIntPtrT, pdwWrittenOrRequired : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryActCtxSettingsW(dwFlags, hActCtx, settingsNameSpace, settingName, pvBuffer, dwBuffer, pdwWrittenOrRequired)
+    {% end %}
   end
 
   @[Link("msi")]
@@ -5469,6 +6158,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
   @[Link("mspatcha")]
   @[Link("msdelta")]
   @[Link("kernel32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun MsiCloseHandle(hAny : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
@@ -5489,10 +6179,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiSetExternalUIRecord(puiHandler : Win32cr::System::ApplicationInstallationAndServicing::PINSTALLUI_HANDLER_RECORD, dwMessageFilter : UInt32, pvContext : Void*, ppuiPrevHandler : Win32cr::System::ApplicationInstallationAndServicing::PINSTALLUI_HANDLER_RECORD) : UInt32
 
     # :nodoc:
-    fun MsiEnableLogA(dwLogMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLOGMODE, szLogFile : Win32cr::Foundation::PSTR, dwLogAttributes : UInt32) : UInt32
+    fun MsiEnableLogA(dwLogMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLLOGMODE, szLogFile : Win32cr::Foundation::PSTR, dwLogAttributes : UInt32) : UInt32
 
     # :nodoc:
-    fun MsiEnableLogW(dwLogMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLOGMODE, szLogFile : Win32cr::Foundation::PWSTR, dwLogAttributes : UInt32) : UInt32
+    fun MsiEnableLogW(dwLogMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLLOGMODE, szLogFile : Win32cr::Foundation::PWSTR, dwLogAttributes : UInt32) : UInt32
 
     # :nodoc:
     fun MsiQueryProductStateA(szProduct : Win32cr::Foundation::PSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
@@ -5501,16 +6191,16 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiQueryProductStateW(szProduct : Win32cr::Foundation::PWSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
 
     # :nodoc:
-    fun MsiGetProductInfoA(szProduct : Win32cr::Foundation::PSTR, szAttribute : Win32cr::Foundation::PSTR, lpValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiGetProductInfoA(szProduct : Win32cr::Foundation::PSTR, szAttribute : Win32cr::Foundation::PSTR, lpValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetProductInfoW(szProduct : Win32cr::Foundation::PWSTR, szAttribute : Win32cr::Foundation::PWSTR, lpValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiGetProductInfoW(szProduct : Win32cr::Foundation::PWSTR, szAttribute : Win32cr::Foundation::PWSTR, lpValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetProductInfoExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PSTR, szValue : UInt8*, pcchValue : UInt32*) : UInt32
+    fun MsiGetProductInfoExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PSTR, szValue : Win32cr::Foundation::PSTR, pcchValue : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetProductInfoExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PWSTR, szValue : UInt16*, pcchValue : UInt32*) : UInt32
+    fun MsiGetProductInfoExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PWSTR, szValue : Win32cr::Foundation::PWSTR, pcchValue : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiInstallProductA(szPackagePath : Win32cr::Foundation::PSTR, szCommandLine : Win32cr::Foundation::PSTR) : UInt32
@@ -5561,10 +6251,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiAdvertiseScriptW(szScriptFile : Win32cr::Foundation::PWSTR, dwFlags : UInt32, phRegData : Win32cr::System::Registry::HKEY*, fRemoveItems : Win32cr::Foundation::BOOL) : UInt32
 
     # :nodoc:
-    fun MsiGetProductInfoFromScriptA(szScriptFile : Win32cr::Foundation::PSTR, lpProductBuf39 : Win32cr::Foundation::PSTR, plgidLanguage : UInt16*, pdwVersion : UInt32*, lpNameBuf : UInt8*, pcchNameBuf : UInt32*, lpPackageBuf : UInt8*, pcchPackageBuf : UInt32*) : UInt32
+    fun MsiGetProductInfoFromScriptA(szScriptFile : Win32cr::Foundation::PSTR, lpProductBuf39 : Win32cr::Foundation::PSTR, plgidLanguage : UInt16*, pdwVersion : UInt32*, lpNameBuf : Win32cr::Foundation::PSTR, pcchNameBuf : UInt32*, lpPackageBuf : Win32cr::Foundation::PSTR, pcchPackageBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetProductInfoFromScriptW(szScriptFile : Win32cr::Foundation::PWSTR, lpProductBuf39 : Win32cr::Foundation::PWSTR, plgidLanguage : UInt16*, pdwVersion : UInt32*, lpNameBuf : UInt16*, pcchNameBuf : UInt32*, lpPackageBuf : UInt16*, pcchPackageBuf : UInt32*) : UInt32
+    fun MsiGetProductInfoFromScriptW(szScriptFile : Win32cr::Foundation::PWSTR, lpProductBuf39 : Win32cr::Foundation::PWSTR, plgidLanguage : UInt16*, pdwVersion : UInt32*, lpNameBuf : Win32cr::Foundation::PWSTR, pcchNameBuf : UInt32*, lpPackageBuf : Win32cr::Foundation::PWSTR, pcchPackageBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiGetProductCodeA(szComponent : Win32cr::Foundation::PSTR, lpBuf39 : Win32cr::Foundation::PSTR) : UInt32
@@ -5573,10 +6263,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiGetProductCodeW(szComponent : Win32cr::Foundation::PWSTR, lpBuf39 : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiGetUserInfoA(szProduct : Win32cr::Foundation::PSTR, lpUserNameBuf : UInt8*, pcchUserNameBuf : UInt32*, lpOrgNameBuf : UInt8*, pcchOrgNameBuf : UInt32*, lpSerialBuf : UInt8*, pcchSerialBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::USERINFOSTATE
+    fun MsiGetUserInfoA(szProduct : Win32cr::Foundation::PSTR, lpUserNameBuf : Win32cr::Foundation::PSTR, pcchUserNameBuf : UInt32*, lpOrgNameBuf : Win32cr::Foundation::PSTR, pcchOrgNameBuf : UInt32*, lpSerialBuf : Win32cr::Foundation::PSTR, pcchSerialBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::USERINFOSTATE
 
     # :nodoc:
-    fun MsiGetUserInfoW(szProduct : Win32cr::Foundation::PWSTR, lpUserNameBuf : UInt16*, pcchUserNameBuf : UInt32*, lpOrgNameBuf : UInt16*, pcchOrgNameBuf : UInt32*, lpSerialBuf : UInt16*, pcchSerialBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::USERINFOSTATE
+    fun MsiGetUserInfoW(szProduct : Win32cr::Foundation::PWSTR, lpUserNameBuf : Win32cr::Foundation::PWSTR, pcchUserNameBuf : UInt32*, lpOrgNameBuf : Win32cr::Foundation::PWSTR, pcchOrgNameBuf : UInt32*, lpSerialBuf : Win32cr::Foundation::PWSTR, pcchSerialBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::USERINFOSTATE
 
     # :nodoc:
     fun MsiCollectUserInfoA(szProduct : Win32cr::Foundation::PSTR) : UInt32
@@ -5591,16 +6281,16 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiApplyPatchW(szPatchPackage : Win32cr::Foundation::PWSTR, szInstallPackage : Win32cr::Foundation::PWSTR, eInstallType : Win32cr::System::ApplicationInstallationAndServicing::INSTALLTYPE, szCommandLine : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiGetPatchInfoA(szPatch : Win32cr::Foundation::PSTR, szAttribute : Win32cr::Foundation::PSTR, lpValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiGetPatchInfoA(szPatch : Win32cr::Foundation::PSTR, szAttribute : Win32cr::Foundation::PSTR, lpValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetPatchInfoW(szPatch : Win32cr::Foundation::PWSTR, szAttribute : Win32cr::Foundation::PWSTR, lpValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiGetPatchInfoW(szPatch : Win32cr::Foundation::PWSTR, szAttribute : Win32cr::Foundation::PWSTR, lpValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumPatchesA(szProduct : Win32cr::Foundation::PSTR, iPatchIndex : UInt32, lpPatchBuf : Win32cr::Foundation::PSTR, lpTransformsBuf : UInt8*, pcchTransformsBuf : UInt32*) : UInt32
+    fun MsiEnumPatchesA(szProduct : Win32cr::Foundation::PSTR, iPatchIndex : UInt32, lpPatchBuf : Win32cr::Foundation::PSTR, lpTransformsBuf : Win32cr::Foundation::PSTR, pcchTransformsBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumPatchesW(szProduct : Win32cr::Foundation::PWSTR, iPatchIndex : UInt32, lpPatchBuf : Win32cr::Foundation::PWSTR, lpTransformsBuf : UInt16*, pcchTransformsBuf : UInt32*) : UInt32
+    fun MsiEnumPatchesW(szProduct : Win32cr::Foundation::PWSTR, iPatchIndex : UInt32, lpPatchBuf : Win32cr::Foundation::PWSTR, lpTransformsBuf : Win32cr::Foundation::PWSTR, pcchTransformsBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiRemovePatchesA(szPatchList : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, eUninstallType : Win32cr::System::ApplicationInstallationAndServicing::INSTALLTYPE, szPropertyList : Win32cr::Foundation::PSTR) : UInt32
@@ -5609,16 +6299,16 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiRemovePatchesW(szPatchList : Win32cr::Foundation::PWSTR, szProductCode : Win32cr::Foundation::PWSTR, eUninstallType : Win32cr::System::ApplicationInstallationAndServicing::INSTALLTYPE, szPropertyList : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiExtractPatchXMLDataA(szPatchPath : Win32cr::Foundation::PSTR, dwReserved : UInt32, szXMLData : UInt8*, pcchXMLData : UInt32*) : UInt32
+    fun MsiExtractPatchXMLDataA(szPatchPath : Win32cr::Foundation::PSTR, dwReserved : UInt32, szXMLData : Win32cr::Foundation::PSTR, pcchXMLData : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiExtractPatchXMLDataW(szPatchPath : Win32cr::Foundation::PWSTR, dwReserved : UInt32, szXMLData : UInt16*, pcchXMLData : UInt32*) : UInt32
+    fun MsiExtractPatchXMLDataW(szPatchPath : Win32cr::Foundation::PWSTR, dwReserved : UInt32, szXMLData : Win32cr::Foundation::PWSTR, pcchXMLData : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetPatchInfoExA(szPatchCode : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PSTR, lpValue : UInt8*, pcchValue : UInt32*) : UInt32
+    fun MsiGetPatchInfoExA(szPatchCode : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PSTR, lpValue : Win32cr::Foundation::PSTR, pcchValue : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetPatchInfoExW(szPatchCode : Win32cr::Foundation::PWSTR, szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PWSTR, lpValue : UInt16*, pcchValue : UInt32*) : UInt32
+    fun MsiGetPatchInfoExW(szPatchCode : Win32cr::Foundation::PWSTR, szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szProperty : Win32cr::Foundation::PWSTR, lpValue : Win32cr::Foundation::PWSTR, pcchValue : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiApplyMultiplePatchesA(szPatchPackages : Win32cr::Foundation::PSTR, szProductCode : Win32cr::Foundation::PSTR, szPropertiesList : Win32cr::Foundation::PSTR) : UInt32
@@ -5639,10 +6329,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiDetermineApplicablePatchesW(szProductPackagePath : Win32cr::Foundation::PWSTR, cPatchInfo : UInt32, pPatchInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIPATCHSEQUENCEINFOW*) : UInt32
 
     # :nodoc:
-    fun MsiEnumPatchesExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwFilter : UInt32, dwIndex : UInt32, szPatchCode : Win32cr::Foundation::PSTR, szTargetProductCode : Win32cr::Foundation::PSTR, pdwTargetProductContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szTargetUserSid : UInt8*, pcchTargetUserSid : UInt32*) : UInt32
+    fun MsiEnumPatchesExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwFilter : UInt32, dwIndex : UInt32, szPatchCode : Win32cr::Foundation::PSTR, szTargetProductCode : Win32cr::Foundation::PSTR, pdwTargetProductContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szTargetUserSid : Win32cr::Foundation::PSTR, pcchTargetUserSid : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumPatchesExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwFilter : UInt32, dwIndex : UInt32, szPatchCode : Win32cr::Foundation::PWSTR, szTargetProductCode : Win32cr::Foundation::PWSTR, pdwTargetProductContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szTargetUserSid : UInt16*, pcchTargetUserSid : UInt32*) : UInt32
+    fun MsiEnumPatchesExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwFilter : UInt32, dwIndex : UInt32, szPatchCode : Win32cr::Foundation::PWSTR, szTargetProductCode : Win32cr::Foundation::PWSTR, pdwTargetProductContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szTargetUserSid : Win32cr::Foundation::PWSTR, pcchTargetUserSid : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiQueryFeatureStateA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
@@ -5687,40 +6377,40 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiReinstallFeatureW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, dwReinstallMode : Win32cr::System::ApplicationInstallationAndServicing::REINSTALLMODE) : UInt32
 
     # :nodoc:
-    fun MsiProvideComponentA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiProvideComponentA(szProduct : Win32cr::Foundation::PSTR, szFeature : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiProvideComponentW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiProvideComponentW(szProduct : Win32cr::Foundation::PWSTR, szFeature : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiProvideQualifiedComponentA(szCategory : Win32cr::Foundation::PSTR, szQualifier : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiProvideQualifiedComponentA(szCategory : Win32cr::Foundation::PSTR, szQualifier : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiProvideQualifiedComponentW(szCategory : Win32cr::Foundation::PWSTR, szQualifier : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiProvideQualifiedComponentW(szCategory : Win32cr::Foundation::PWSTR, szQualifier : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, lpPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiProvideQualifiedComponentExA(szCategory : Win32cr::Foundation::PSTR, szQualifier : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, szProduct : Win32cr::Foundation::PSTR, dwUnused1 : UInt32, dwUnused2 : UInt32, lpPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiProvideQualifiedComponentExA(szCategory : Win32cr::Foundation::PSTR, szQualifier : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, szProduct : Win32cr::Foundation::PSTR, dwUnused1 : UInt32, dwUnused2 : UInt32, lpPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiProvideQualifiedComponentExW(szCategory : Win32cr::Foundation::PWSTR, szQualifier : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, szProduct : Win32cr::Foundation::PWSTR, dwUnused1 : UInt32, dwUnused2 : UInt32, lpPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiProvideQualifiedComponentExW(szCategory : Win32cr::Foundation::PWSTR, szQualifier : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, szProduct : Win32cr::Foundation::PWSTR, dwUnused1 : UInt32, dwUnused2 : UInt32, lpPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetComponentPathA(szProduct : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, lpPathBuf : UInt8*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    fun MsiGetComponentPathA(szProduct : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, lpPathBuf : Win32cr::Foundation::PSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
 
     # :nodoc:
-    fun MsiGetComponentPathW(szProduct : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, lpPathBuf : UInt16*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    fun MsiGetComponentPathW(szProduct : Win32cr::Foundation::PWSTR, szComponent : Win32cr::Foundation::PWSTR, lpPathBuf : Win32cr::Foundation::PWSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
 
     # :nodoc:
-    fun MsiGetComponentPathExA(szProductCode : Win32cr::Foundation::PSTR, szComponentCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, lpOutPathBuffer : UInt8*, pcchOutPathBuffer : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    fun MsiGetComponentPathExA(szProductCode : Win32cr::Foundation::PSTR, szComponentCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, lpOutPathBuffer : Win32cr::Foundation::PSTR, pcchOutPathBuffer : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
 
     # :nodoc:
-    fun MsiGetComponentPathExW(szProductCode : Win32cr::Foundation::PWSTR, szComponentCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, lpOutPathBuffer : UInt16*, pcchOutPathBuffer : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    fun MsiGetComponentPathExW(szProductCode : Win32cr::Foundation::PWSTR, szComponentCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, lpOutPathBuffer : Win32cr::Foundation::PWSTR, pcchOutPathBuffer : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
 
     # :nodoc:
-    fun MsiProvideAssemblyA(szAssemblyName : Win32cr::Foundation::PSTR, szAppContext : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, dwAssemblyInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIASSEMBLYINFO, lpPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiProvideAssemblyA(szAssemblyName : Win32cr::Foundation::PSTR, szAppContext : Win32cr::Foundation::PSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, dwAssemblyInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIASSEMBLYINFO, lpPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiProvideAssemblyW(szAssemblyName : Win32cr::Foundation::PWSTR, szAppContext : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, dwAssemblyInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIASSEMBLYINFO, lpPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiProvideAssemblyW(szAssemblyName : Win32cr::Foundation::PWSTR, szAppContext : Win32cr::Foundation::PWSTR, dwInstallMode : Win32cr::System::ApplicationInstallationAndServicing::INSTALLMODE, dwAssemblyInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIASSEMBLYINFO, lpPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiQueryComponentStateA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, szComponentCode : Win32cr::Foundation::PSTR, pdwState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE*) : UInt32
@@ -5735,10 +6425,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiEnumProductsW(iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiEnumProductsExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledProductCode : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt8*, pcchSid : UInt32*) : UInt32
+    fun MsiEnumProductsExA(szProductCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledProductCode : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PSTR, pcchSid : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumProductsExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledProductCode : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt16*, pcchSid : UInt32*) : UInt32
+    fun MsiEnumProductsExW(szProductCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledProductCode : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PWSTR, pcchSid : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiEnumRelatedProductsA(lpUpgradeCode : Win32cr::Foundation::PSTR, dwReserved : UInt32, iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PSTR) : UInt32
@@ -5759,10 +6449,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiEnumComponentsW(iComponentIndex : UInt32, lpComponentBuf : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiEnumComponentsExA(szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledComponentCode : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt8*, pcchSid : UInt32*) : UInt32
+    fun MsiEnumComponentsExA(szUserSid : Win32cr::Foundation::PSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledComponentCode : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PSTR, pcchSid : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumComponentsExW(szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledComponentCode : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt16*, pcchSid : UInt32*) : UInt32
+    fun MsiEnumComponentsExW(szUserSid : Win32cr::Foundation::PWSTR, dwContext : UInt32, dwIndex : UInt32, szInstalledComponentCode : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PWSTR, pcchSid : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiEnumClientsA(szComponent : Win32cr::Foundation::PSTR, iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PSTR) : UInt32
@@ -5771,16 +6461,16 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiEnumClientsW(szComponent : Win32cr::Foundation::PWSTR, iProductIndex : UInt32, lpProductBuf : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiEnumClientsExA(szComponent : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwProductIndex : UInt32, szProductBuf : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt8*, pcchSid : UInt32*) : UInt32
+    fun MsiEnumClientsExA(szComponent : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwProductIndex : UInt32, szProductBuf : Win32cr::Foundation::PSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PSTR, pcchSid : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumClientsExW(szComponent : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwProductIndex : UInt32, szProductBuf : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : UInt16*, pcchSid : UInt32*) : UInt32
+    fun MsiEnumClientsExW(szComponent : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwProductIndex : UInt32, szProductBuf : Win32cr::Foundation::PWSTR, pdwInstalledContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT*, szSid : Win32cr::Foundation::PWSTR, pcchSid : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumComponentQualifiersA(szComponent : Win32cr::Foundation::PSTR, iIndex : UInt32, lpQualifierBuf : UInt8*, pcchQualifierBuf : UInt32*, lpApplicationDataBuf : UInt8*, pcchApplicationDataBuf : UInt32*) : UInt32
+    fun MsiEnumComponentQualifiersA(szComponent : Win32cr::Foundation::PSTR, iIndex : UInt32, lpQualifierBuf : Win32cr::Foundation::PSTR, pcchQualifierBuf : UInt32*, lpApplicationDataBuf : Win32cr::Foundation::PSTR, pcchApplicationDataBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumComponentQualifiersW(szComponent : Win32cr::Foundation::PWSTR, iIndex : UInt32, lpQualifierBuf : UInt16*, pcchQualifierBuf : UInt32*, lpApplicationDataBuf : UInt16*, pcchApplicationDataBuf : UInt32*) : UInt32
+    fun MsiEnumComponentQualifiersW(szComponent : Win32cr::Foundation::PWSTR, iIndex : UInt32, lpQualifierBuf : Win32cr::Foundation::PWSTR, pcchQualifierBuf : UInt32*, lpApplicationDataBuf : Win32cr::Foundation::PWSTR, pcchApplicationDataBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiOpenProductA(szProduct : Win32cr::Foundation::PSTR, hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
@@ -5807,10 +6497,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiGetPatchFileListW(szProductCode : Win32cr::Foundation::PWSTR, szPatchPackages : Win32cr::Foundation::PWSTR, pcFiles : UInt32*, pphFileRecords : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE**) : UInt32
 
     # :nodoc:
-    fun MsiGetProductPropertyA(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szProperty : Win32cr::Foundation::PSTR, lpValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiGetProductPropertyA(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szProperty : Win32cr::Foundation::PSTR, lpValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetProductPropertyW(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szProperty : Win32cr::Foundation::PWSTR, lpValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiGetProductPropertyW(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szProperty : Win32cr::Foundation::PWSTR, lpValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiVerifyPackageA(szPackagePath : Win32cr::Foundation::PSTR) : UInt32
@@ -5819,10 +6509,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiVerifyPackageW(szPackagePath : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiGetFeatureInfoA(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, lpAttributes : UInt32*, lpTitleBuf : UInt8*, pcchTitleBuf : UInt32*, lpHelpBuf : UInt8*, pcchHelpBuf : UInt32*) : UInt32
+    fun MsiGetFeatureInfoA(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PSTR, lpAttributes : UInt32*, lpTitleBuf : Win32cr::Foundation::PSTR, pcchTitleBuf : UInt32*, lpHelpBuf : Win32cr::Foundation::PSTR, pcchHelpBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetFeatureInfoW(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, lpAttributes : UInt32*, lpTitleBuf : UInt16*, pcchTitleBuf : UInt32*, lpHelpBuf : UInt16*, pcchHelpBuf : UInt32*) : UInt32
+    fun MsiGetFeatureInfoW(hProduct : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, lpAttributes : UInt32*, lpTitleBuf : Win32cr::Foundation::PWSTR, pcchTitleBuf : UInt32*, lpHelpBuf : Win32cr::Foundation::PWSTR, pcchHelpBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiInstallMissingComponentA(szProduct : Win32cr::Foundation::PSTR, szComponent : Win32cr::Foundation::PSTR, eInstallState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE) : UInt32
@@ -5837,10 +6527,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiInstallMissingFileW(szProduct : Win32cr::Foundation::PWSTR, szFile : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiLocateComponentA(szComponent : Win32cr::Foundation::PSTR, lpPathBuf : UInt8*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    fun MsiLocateComponentA(szComponent : Win32cr::Foundation::PSTR, lpPathBuf : Win32cr::Foundation::PSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
 
     # :nodoc:
-    fun MsiLocateComponentW(szComponent : Win32cr::Foundation::PWSTR, lpPathBuf : UInt16*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
+    fun MsiLocateComponentW(szComponent : Win32cr::Foundation::PWSTR, lpPathBuf : Win32cr::Foundation::PWSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE
 
     # :nodoc:
     fun MsiSourceListClearAllA(szProduct : Win32cr::Foundation::PSTR, szUserName : Win32cr::Foundation::PSTR, dwReserved : UInt32) : UInt32
@@ -5903,28 +6593,28 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiSourceListSetInfoW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PWSTR, szValue : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiSourceListGetInfoA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PSTR, szValue : UInt8*, pcchValue : UInt32*) : UInt32
+    fun MsiSourceListGetInfoA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PSTR, szValue : Win32cr::Foundation::PSTR, pcchValue : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiSourceListGetInfoW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PWSTR, szValue : UInt16*, pcchValue : UInt32*) : UInt32
+    fun MsiSourceListGetInfoW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, szProperty : Win32cr::Foundation::PWSTR, szValue : Win32cr::Foundation::PWSTR, pcchValue : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiSourceListEnumSourcesA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, szSource : UInt8*, pcchSource : UInt32*) : UInt32
+    fun MsiSourceListEnumSourcesA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, szSource : Win32cr::Foundation::PSTR, pcchSource : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiSourceListEnumSourcesW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, szSource : UInt16*, pcchSource : UInt32*) : UInt32
+    fun MsiSourceListEnumSourcesW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, szSource : Win32cr::Foundation::PWSTR, pcchSource : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiSourceListEnumMediaDisksA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, pdwDiskId : UInt32*, szVolumeLabel : UInt8*, pcchVolumeLabel : UInt32*, szDiskPrompt : UInt8*, pcchDiskPrompt : UInt32*) : UInt32
+    fun MsiSourceListEnumMediaDisksA(szProductCodeOrPatchCode : Win32cr::Foundation::PSTR, szUserSid : Win32cr::Foundation::PSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, pdwDiskId : UInt32*, szVolumeLabel : Win32cr::Foundation::PSTR, pcchVolumeLabel : UInt32*, szDiskPrompt : Win32cr::Foundation::PSTR, pcchDiskPrompt : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiSourceListEnumMediaDisksW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, pdwDiskId : UInt32*, szVolumeLabel : UInt16*, pcchVolumeLabel : UInt32*, szDiskPrompt : UInt16*, pcchDiskPrompt : UInt32*) : UInt32
+    fun MsiSourceListEnumMediaDisksW(szProductCodeOrPatchCode : Win32cr::Foundation::PWSTR, szUserSid : Win32cr::Foundation::PWSTR, dwContext : Win32cr::System::ApplicationInstallationAndServicing::MSIINSTALLCONTEXT, dwOptions : UInt32, dwIndex : UInt32, pdwDiskId : UInt32*, szVolumeLabel : Win32cr::Foundation::PWSTR, pcchVolumeLabel : UInt32*, szDiskPrompt : Win32cr::Foundation::PWSTR, pcchDiskPrompt : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetFileVersionA(szFilePath : Win32cr::Foundation::PSTR, lpVersionBuf : UInt8*, pcchVersionBuf : UInt32*, lpLangBuf : UInt8*, pcchLangBuf : UInt32*) : UInt32
+    fun MsiGetFileVersionA(szFilePath : Win32cr::Foundation::PSTR, lpVersionBuf : Win32cr::Foundation::PSTR, pcchVersionBuf : UInt32*, lpLangBuf : Win32cr::Foundation::PSTR, pcchLangBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetFileVersionW(szFilePath : Win32cr::Foundation::PWSTR, lpVersionBuf : UInt16*, pcchVersionBuf : UInt32*, lpLangBuf : UInt16*, pcchLangBuf : UInt32*) : UInt32
+    fun MsiGetFileVersionW(szFilePath : Win32cr::Foundation::PWSTR, lpVersionBuf : Win32cr::Foundation::PWSTR, pcchVersionBuf : UInt32*, lpLangBuf : Win32cr::Foundation::PWSTR, pcchLangBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiGetFileHashA(szFilePath : Win32cr::Foundation::PSTR, dwOptions : UInt32, pHash : Win32cr::System::ApplicationInstallationAndServicing::MSIFILEHASHINFO*) : UInt32
@@ -5975,10 +6665,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiDatabaseOpenViewW(hDatabase : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szQuery : Win32cr::Foundation::PWSTR, phView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE*) : UInt32
 
     # :nodoc:
-    fun MsiViewGetErrorA(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szColumnNameBuffer : UInt8*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBERROR
+    fun MsiViewGetErrorA(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szColumnNameBuffer : Win32cr::Foundation::PSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBERROR
 
     # :nodoc:
-    fun MsiViewGetErrorW(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szColumnNameBuffer : UInt16*, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBERROR
+    fun MsiViewGetErrorW(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szColumnNameBuffer : Win32cr::Foundation::PWSTR, pcchBuf : UInt32*) : Win32cr::System::ApplicationInstallationAndServicing::MSIDBERROR
 
     # :nodoc:
     fun MsiViewExecute(hView : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
@@ -6023,10 +6713,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiSummaryInfoSetPropertyW(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, uiDataType : UInt32, iValue : Int32, pftValue : Win32cr::Foundation::FILETIME*, szValue : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiSummaryInfoGetPropertyA(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, puiDataType : UInt32*, piValue : Int32*, pftValue : Win32cr::Foundation::FILETIME*, szValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiSummaryInfoGetPropertyA(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, puiDataType : UInt32*, piValue : Int32*, pftValue : Win32cr::Foundation::FILETIME*, szValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiSummaryInfoGetPropertyW(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, puiDataType : UInt32*, piValue : Int32*, pftValue : Win32cr::Foundation::FILETIME*, szValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiSummaryInfoGetPropertyW(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, uiProperty : UInt32, puiDataType : UInt32*, piValue : Int32*, pftValue : Win32cr::Foundation::FILETIME*, szValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiSummaryInfoPersist(hSummaryInfo : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
@@ -6101,10 +6791,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiRecordGetInteger(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32) : Int32
 
     # :nodoc:
-    fun MsiRecordGetStringA(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiRecordGetStringA(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiRecordGetStringW(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiRecordGetStringW(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iField : UInt32, szValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiRecordGetFieldCount(hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt32
@@ -6131,10 +6821,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiSetPropertyW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PWSTR, szValue : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
-    fun MsiGetPropertyA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PSTR, szValueBuf : UInt8*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiGetPropertyA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PSTR, szValueBuf : Win32cr::Foundation::PSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetPropertyW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PWSTR, szValueBuf : UInt16*, pcchValueBuf : UInt32*) : UInt32
+    fun MsiGetPropertyW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szName : Win32cr::Foundation::PWSTR, szValueBuf : Win32cr::Foundation::PWSTR, pcchValueBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiGetLanguage(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE) : UInt16
@@ -6146,10 +6836,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiSetMode(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, eRunMode : Win32cr::System::ApplicationInstallationAndServicing::MSIRUNMODE, fState : Win32cr::Foundation::BOOL) : UInt32
 
     # :nodoc:
-    fun MsiFormatRecordA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szResultBuf : UInt8*, pcchResultBuf : UInt32*) : UInt32
+    fun MsiFormatRecordA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szResultBuf : Win32cr::Foundation::PSTR, pcchResultBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiFormatRecordW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szResultBuf : UInt16*, pcchResultBuf : UInt32*) : UInt32
+    fun MsiFormatRecordW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, hRecord : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szResultBuf : Win32cr::Foundation::PWSTR, pcchResultBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiDoActionA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szAction : Win32cr::Foundation::PSTR) : UInt32
@@ -6209,10 +6899,10 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiGetFeatureCostW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, iCostTree : Win32cr::System::ApplicationInstallationAndServicing::MSICOSTTREE, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, piCost : Int32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumComponentCostsA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PSTR, dwIndex : UInt32, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szDriveBuf : UInt8*, pcchDriveBuf : UInt32*, piCost : Int32*, piTempCost : Int32*) : UInt32
+    fun MsiEnumComponentCostsA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PSTR, dwIndex : UInt32, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szDriveBuf : Win32cr::Foundation::PSTR, pcchDriveBuf : UInt32*, piCost : Int32*, piTempCost : Int32*) : UInt32
 
     # :nodoc:
-    fun MsiEnumComponentCostsW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PWSTR, dwIndex : UInt32, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szDriveBuf : UInt16*, pcchDriveBuf : UInt32*, piCost : Int32*, piTempCost : Int32*) : UInt32
+    fun MsiEnumComponentCostsW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szComponent : Win32cr::Foundation::PWSTR, dwIndex : UInt32, iState : Win32cr::System::ApplicationInstallationAndServicing::INSTALLSTATE, szDriveBuf : Win32cr::Foundation::PWSTR, pcchDriveBuf : UInt32*, piCost : Int32*, piTempCost : Int32*) : UInt32
 
     # :nodoc:
     fun MsiSetInstallLevel(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, iInstallLevel : Int32) : UInt32
@@ -6224,16 +6914,16 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun MsiGetFeatureValidStatesW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFeature : Win32cr::Foundation::PWSTR, lpInstallStates : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetSourcePathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiGetSourcePathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetSourcePathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiGetSourcePathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetTargetPathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szPathBuf : UInt8*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiGetTargetPathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szPathBuf : Win32cr::Foundation::PSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
-    fun MsiGetTargetPathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szPathBuf : UInt16*, pcchPathBuf : UInt32*) : UInt32
+    fun MsiGetTargetPathW(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PWSTR, szPathBuf : Win32cr::Foundation::PWSTR, pcchPathBuf : UInt32*) : UInt32
 
     # :nodoc:
     fun MsiSetTargetPathA(hInstall : Win32cr::System::ApplicationInstallationAndServicing::MSIHANDLE, szFolder : Win32cr::Foundation::PSTR, szFolderPath : Win32cr::Foundation::PSTR) : UInt32
@@ -6272,7 +6962,7 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun SfcIsKeyProtected(key_handle : Win32cr::System::Registry::HKEY, sub_key_name : Win32cr::Foundation::PWSTR, key_sam : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun SfpVerifyFile(pszFileName : Win32cr::Foundation::PSTR, pszError : UInt8*, dwErrSize : UInt32) : Win32cr::Foundation::BOOL
+    fun SfpVerifyFile(pszFileName : Win32cr::Foundation::PSTR, pszError : Win32cr::Foundation::PSTR, dwErrSize : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CreatePatchFileA(old_file_name : Win32cr::Foundation::PSTR, new_file_name : Win32cr::Foundation::PSTR, patch_file_name : Win32cr::Foundation::PSTR, option_flags : UInt32, option_data : Win32cr::System::ApplicationInstallationAndServicing::PATCH_OPTION_DATA*) : Win32cr::Foundation::BOOL
@@ -6374,22 +7064,22 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun ApplyDeltaW(apply_flags : Int64, lpSourceName : Win32cr::Foundation::PWSTR, lpDeltaName : Win32cr::Foundation::PWSTR, lpTargetName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CreateDeltaB(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, target : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, source_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, target_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : UInt32, lpDelta : Win32cr::System::ApplicationInstallationAndServicing::DELTA_OUTPUT*) : Win32cr::Foundation::BOOL
+    fun CreateDeltaB(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, target : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, source_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, target_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpDelta : Win32cr::System::ApplicationInstallationAndServicing::DELTA_OUTPUT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CreateDeltaA(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, lpSourceName : Win32cr::Foundation::PSTR, lpTargetName : Win32cr::Foundation::PSTR, lpSourceOptionsName : Win32cr::Foundation::PSTR, lpTargetOptionsName : Win32cr::Foundation::PSTR, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : UInt32, lpDeltaName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    fun CreateDeltaA(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, lpSourceName : Win32cr::Foundation::PSTR, lpTargetName : Win32cr::Foundation::PSTR, lpSourceOptionsName : Win32cr::Foundation::PSTR, lpTargetOptionsName : Win32cr::Foundation::PSTR, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpDeltaName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CreateDeltaW(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, lpSourceName : Win32cr::Foundation::PWSTR, lpTargetName : Win32cr::Foundation::PWSTR, lpSourceOptionsName : Win32cr::Foundation::PWSTR, lpTargetOptionsName : Win32cr::Foundation::PWSTR, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : UInt32, lpDeltaName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    fun CreateDeltaW(file_type_set : Int64, set_flags : Int64, reset_flags : Int64, lpSourceName : Win32cr::Foundation::PWSTR, lpTargetName : Win32cr::Foundation::PWSTR, lpSourceOptionsName : Win32cr::Foundation::PWSTR, lpTargetOptionsName : Win32cr::Foundation::PWSTR, global_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpTargetFileTime : Win32cr::Foundation::FILETIME*, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpDeltaName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetDeltaSignatureB(file_type_set : Int64, hash_alg_id : UInt32, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+    fun GetDeltaSignatureB(file_type_set : Int64, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, source : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetDeltaSignatureA(file_type_set : Int64, hash_alg_id : UInt32, lpSourceName : Win32cr::Foundation::PSTR, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+    fun GetDeltaSignatureA(file_type_set : Int64, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpSourceName : Win32cr::Foundation::PSTR, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetDeltaSignatureW(file_type_set : Int64, hash_alg_id : UInt32, lpSourceName : Win32cr::Foundation::PWSTR, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
+    fun GetDeltaSignatureW(file_type_set : Int64, hash_alg_id : Win32cr::Security::Cryptography::ALG_ID, lpSourceName : Win32cr::Foundation::PWSTR, lpHash : Win32cr::System::ApplicationInstallationAndServicing::DELTA_HASH*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun DeltaNormalizeProvidedB(file_type_set : Int64, normalize_flags : Int64, normalize_options : Win32cr::System::ApplicationInstallationAndServicing::DELTA_INPUT, lpSource : Void*, uSourceSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
@@ -6437,4 +7127,5 @@ module Win32cr::System::ApplicationInstallationAndServicing
     fun QueryActCtxSettingsW(dwFlags : UInt32, hActCtx : Win32cr::Foundation::HANDLE, settingsNameSpace : Win32cr::Foundation::PWSTR, settingName : Win32cr::Foundation::PWSTR, pvBuffer : Win32cr::Foundation::PWSTR, dwBuffer : LibC::UIntPtrT, pdwWrittenOrRequired : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

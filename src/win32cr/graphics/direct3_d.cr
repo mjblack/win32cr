@@ -1,5 +1,6 @@
 require "./../foundation.cr"
 require "./../system/com.cr"
+require "./../system/services.cr"
 
 module Win32cr::Graphics::Direct3D
   extend self
@@ -49,16 +50,20 @@ module Win32cr::Graphics::Direct3D
   D3D_SHADER_FEATURE_SAMPLER_DESCRIPTOR_HEAP_INDEXING = 67108864_u32
   D3D_SHADER_FEATURE_WAVE_MMA = 134217728_u32
   D3D_SHADER_FEATURE_ATOMIC_INT64_ON_DESCRIPTOR_HEAP_RESOURCE = 268435456_u32
-  WKPDID_D3DDebugObjectName = "429b8c22-9188-4b0c-8742-acb0bf85c200"
-  WKPDID_D3DDebugObjectNameW = "4cca5fd8-921f-42c8-8566-70caf2a9b741"
-  WKPDID_CommentStringW = "d0149dc0-90e8-4ec8-8144-e900ad266bb2"
-  WKPDID_D3D12UniqueObjectId = "1b39de15-ec04-4bae-ba4d-8cef79fc04c1"
+  D3D_SHADER_FEATURE_ADVANCED_TEXTURE_OPS = 536870912_u32
+  D3D_SHADER_FEATURE_WRITEABLE_MSAA_TEXTURES = 1073741824_u32
+  D3D_SHADER_FEATURE_SAMPLE_CMP_GRADIENT_OR_BIAS = 2147483648_u32
+  WKPDID_D3DDebugObjectName = LibC::GUID.new(0x429b8c22_u32, 0x9188_u16, 0x4b0c_u16, StaticArray[0x87_u8, 0x42_u8, 0xac_u8, 0xb0_u8, 0xbf_u8, 0x85_u8, 0xc2_u8, 0x0_u8])
+  WKPDID_D3DDebugObjectNameW = LibC::GUID.new(0x4cca5fd8_u32, 0x921f_u16, 0x42c8_u16, StaticArray[0x85_u8, 0x66_u8, 0x70_u8, 0xca_u8, 0xf2_u8, 0xa9_u8, 0xb7_u8, 0x41_u8])
+  WKPDID_CommentStringW = LibC::GUID.new(0xd0149dc0_u32, 0x90e8_u16, 0x4ec8_u16, StaticArray[0x81_u8, 0x44_u8, 0xe9_u8, 0x0_u8, 0xad_u8, 0x26_u8, 0x6b_u8, 0xb2_u8])
+  WKPDID_D3D12UniqueObjectId = LibC::GUID.new(0x1b39de15_u32, 0xec04_u16, 0x4bae_u16, StaticArray[0xba_u8, 0x4d_u8, 0x8c_u8, 0xef_u8, 0x79_u8, 0xfc_u8, 0x4_u8, 0xc1_u8])
   D3D_COMPONENT_MASK_X = 1_u32
   D3D_COMPONENT_MASK_Y = 2_u32
   D3D_COMPONENT_MASK_Z = 4_u32
   D3D_COMPONENT_MASK_W = 8_u32
-  D3D_TEXTURE_LAYOUT_ROW_MAJOR = "b5dc234f-72bb-4bec-9705-8cf258df6b6c"
-  D3D_TEXTURE_LAYOUT_64KB_STANDARD_SWIZZLE = "4c0f29e3-3f5f-4d35-84c9-bc0983b62c28"
+  D3D_TEXTURE_LAYOUT_ROW_MAJOR = LibC::GUID.new(0xb5dc234f_u32, 0x72bb_u16, 0x4bec_u16, StaticArray[0x97_u8, 0x5_u8, 0x8c_u8, 0xf2_u8, 0x58_u8, 0xdf_u8, 0x6b_u8, 0x6c_u8])
+  D3D_TEXTURE_LAYOUT_64KB_STANDARD_SWIZZLE = LibC::GUID.new(0x4c0f29e3_u32, 0x3f5f_u16, 0x4d35_u16, StaticArray[0x84_u8, 0xc9_u8, 0xbc_u8, 0x9_u8, 0x83_u8, 0xb6_u8, 0x2c_u8, 0x28_u8])
+  CLSID_D3DShaderCacheInstallerFactory = LibC::GUID.new(0x16195a0b_u32, 0x607c_u16, 0x41f1_u16, StaticArray[0xbf_u8, 0x3_u8, 0xc7_u8, 0x69_u8, 0x4d_u8, 0x60_u8, 0xa8_u8, 0xd4_u8])
 
   enum D3D_DRIVER_TYPE
     D3D_DRIVER_TYPE_UNKNOWN = 0_i32
@@ -69,6 +74,7 @@ module Win32cr::Graphics::Direct3D
     D3D_DRIVER_TYPE_WARP = 5_i32
   end
   enum D3D_FEATURE_LEVEL
+    D3D_FEATURE_LEVEL_1_0_GENERIC = 256_i32
     D3D_FEATURE_LEVEL_1_0_CORE = 4096_i32
     D3D_FEATURE_LEVEL_9_1 = 37120_i32
     D3D_FEATURE_LEVEL_9_2 = 37376_i32
@@ -88,6 +94,7 @@ module Win32cr::Graphics::Direct3D
     D3D_PRIMITIVE_TOPOLOGY_LINESTRIP = 3_i32
     D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST = 4_i32
     D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP = 5_i32
+    D3D_PRIMITIVE_TOPOLOGY_TRIANGLEFAN = 6_i32
     D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ = 10_i32
     D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ = 11_i32
     D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ = 12_i32
@@ -313,7 +320,6 @@ module Win32cr::Graphics::Direct3D
     D3D_INCLUDE_SYSTEM = 1_i32
     D3D10_INCLUDE_LOCAL = 0_i32
     D3D10_INCLUDE_SYSTEM = 1_i32
-    D3D_INCLUDE_FORCE_DWORD = 2147483647_i32
   end
   enum D3D_SHADER_VARIABLE_CLASS
     D3D_SVC_SCALAR = 0_i32
@@ -332,7 +338,6 @@ module Win32cr::Graphics::Direct3D
     D3D10_SVC_STRUCT = 5_i32
     D3D11_SVC_INTERFACE_CLASS = 6_i32
     D3D11_SVC_INTERFACE_POINTER = 7_i32
-    D3D_SVC_FORCE_DWORD = 2147483647_i32
   end
   enum D3D_SHADER_VARIABLE_FLAGS
     D3D_SVF_USERPACKED = 1_i32
@@ -343,7 +348,6 @@ module Win32cr::Graphics::Direct3D
     D3D10_SVF_USED = 2_i32
     D3D11_SVF_INTERFACE_POINTER = 4_i32
     D3D11_SVF_INTERFACE_PARAMETER = 8_i32
-    D3D_SVF_FORCE_DWORD = 2147483647_i32
   end
   enum D3D_SHADER_VARIABLE_TYPE
     D3D_SVT_VOID = 0_i32
@@ -461,7 +465,6 @@ module Win32cr::Graphics::Direct3D
     D3D11_SVT_RWSTRUCTURED_BUFFER = 49_i32
     D3D11_SVT_APPEND_STRUCTURED_BUFFER = 50_i32
     D3D11_SVT_CONSUME_STRUCTURED_BUFFER = 51_i32
-    D3D_SVT_FORCE_DWORD = 2147483647_i32
   end
   enum D3D_SHADER_INPUT_FLAGS
     D3D_SIF_USERPACKED = 1_i32
@@ -475,7 +478,6 @@ module Win32cr::Graphics::Direct3D
     D3D10_SIF_TEXTURE_COMPONENT_0 = 4_i32
     D3D10_SIF_TEXTURE_COMPONENT_1 = 8_i32
     D3D10_SIF_TEXTURE_COMPONENTS = 12_i32
-    D3D_SIF_FORCE_DWORD = 2147483647_i32
   end
   enum D3D_SHADER_INPUT_TYPE
     D3D_SIT_CBUFFER = 0_i32
@@ -508,7 +510,6 @@ module Win32cr::Graphics::Direct3D
   enum D3D_SHADER_CBUFFER_FLAGS
     D3D_CBF_USERPACKED = 1_i32
     D3D10_CBF_USERPACKED = 1_i32
-    D3D_CBF_FORCE_DWORD = 2147483647_i32
   end
   enum D3D_CBUFFER_TYPE
     D3D_CT_CBUFFER = 0_i32
@@ -607,10 +608,22 @@ module Win32cr::Graphics::Direct3D
     D3D_REGISTER_COMPONENT_UINT32 = 1_i32
     D3D_REGISTER_COMPONENT_SINT32 = 2_i32
     D3D_REGISTER_COMPONENT_FLOAT32 = 3_i32
+    D3D_REGISTER_COMPONENT_UINT16 = 4_i32
+    D3D_REGISTER_COMPONENT_SINT16 = 5_i32
+    D3D_REGISTER_COMPONENT_FLOAT16 = 6_i32
+    D3D_REGISTER_COMPONENT_UINT64 = 7_i32
+    D3D_REGISTER_COMPONENT_SINT64 = 8_i32
+    D3D_REGISTER_COMPONENT_FLOAT64 = 9_i32
     D3D10_REGISTER_COMPONENT_UNKNOWN = 0_i32
     D3D10_REGISTER_COMPONENT_UINT32 = 1_i32
     D3D10_REGISTER_COMPONENT_SINT32 = 2_i32
     D3D10_REGISTER_COMPONENT_FLOAT32 = 3_i32
+    D3D10_REGISTER_COMPONENT_UINT16 = 4_i32
+    D3D10_REGISTER_COMPONENT_SINT16 = 5_i32
+    D3D10_REGISTER_COMPONENT_FLOAT16 = 6_i32
+    D3D10_REGISTER_COMPONENT_UINT64 = 7_i32
+    D3D10_REGISTER_COMPONENT_SINT64 = 8_i32
+    D3D10_REGISTER_COMPONENT_FLOAT64 = 9_i32
   end
   enum D3D_TESSELLATOR_DOMAIN
     D3D_TESSELLATOR_DOMAIN_UNDEFINED = 0_i32
@@ -670,7 +683,42 @@ module Win32cr::Graphics::Direct3D
     D3D_PF_NONE = 0_i32
     D3D_PF_IN = 1_i32
     D3D_PF_OUT = 2_i32
-    D3D_PF_FORCE_DWORD = 2147483647_i32
+  end
+  enum D3D_FORMAT_LAYOUT
+    D3DFL_STANDARD = 0_i32
+    D3DFL_CUSTOM = -1_i32
+  end
+  enum D3D_FORMAT_TYPE_LEVEL
+    D3DFTL_NO_TYPE = 0_i32
+    D3DFTL_PARTIAL_TYPE = -2_i32
+    D3DFTL_FULL_TYPE = -1_i32
+  end
+  enum D3D_FORMAT_COMPONENT_NAME
+    D3DFCN_R = -4_i32
+    D3DFCN_G = -3_i32
+    D3DFCN_B = -2_i32
+    D3DFCN_A = -1_i32
+    D3DFCN_D = 0_i32
+    D3DFCN_S = 1_i32
+    D3DFCN_X = 2_i32
+  end
+  enum D3D_FORMAT_COMPONENT_INTERPRETATION
+    D3DFCI_TYPELESS = 0_i32
+    D3DFCI_FLOAT = -4_i32
+    D3DFCI_SNORM = -3_i32
+    D3DFCI_UNORM = -2_i32
+    D3DFCI_SINT = -1_i32
+    D3DFCI_UINT = 1_i32
+    D3DFCI_UNORM_SRGB = 2_i32
+    D3DFCI_BIASED_FIXED_2_8 = 3_i32
+  end
+  enum D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE
+    D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE_USER = 0_i32
+    D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE_SYSTEM = 1_i32
+  end
+  @[Flags]
+  enum D3D_SHADER_CACHE_TARGET_FLAGS
+    D3D_SHADER_CACHE_TARGET_FLAG_NONE = 0_i32
   end
 
   @[Extern]
@@ -678,6 +726,44 @@ module Win32cr::Graphics::Direct3D
     property name : Win32cr::Foundation::PSTR
     property definition : Win32cr::Foundation::PSTR
     def initialize(@name : Win32cr::Foundation::PSTR, @definition : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct D3D_SHADER_CACHE_PSDB_PROPERTIES
+    property pAdapterFamily : Win32cr::Foundation::PWSTR
+    property pPsdbPath : Win32cr::Foundation::PWSTR
+    def initialize(@pAdapterFamily : Win32cr::Foundation::PWSTR, @pPsdbPath : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern(union: true)]
+  struct D3D_VERSION_NUMBER
+    property version : UInt64
+    property version_parts : UInt16[4]
+    def initialize(@version : UInt64, @version_parts : UInt16[4])
+    end
+  end
+
+  @[Extern]
+  struct D3D_SHADER_CACHE_COMPILER_PROPERTIES
+    property szAdapterFamily : UInt16[128]
+    property minimum_abi_support_version : UInt64
+    property maximum_abi_support_version : UInt64
+    property compiler_version : Win32cr::Graphics::Direct3D::D3D_VERSION_NUMBER
+    property application_profile_version : Win32cr::Graphics::Direct3D::D3D_VERSION_NUMBER
+    def initialize(@szAdapterFamily : UInt16[128], @minimum_abi_support_version : UInt64, @maximum_abi_support_version : UInt64, @compiler_version : Win32cr::Graphics::Direct3D::D3D_VERSION_NUMBER, @application_profile_version : Win32cr::Graphics::Direct3D::D3D_VERSION_NUMBER)
+    end
+  end
+
+  @[Extern]
+  struct D3D_SHADER_CACHE_APPLICATION_DESC
+    property pExeFilename : Win32cr::Foundation::PWSTR
+    property pName : Win32cr::Foundation::PWSTR
+    property version : Win32cr::Graphics::Direct3D::D3D_VERSION_NUMBER
+    property pEngineName : Win32cr::Foundation::PWSTR
+    property engine_version : Win32cr::Graphics::Direct3D::D3D_VERSION_NUMBER
+    def initialize(@pExeFilename : Win32cr::Foundation::PWSTR, @pName : Win32cr::Foundation::PWSTR, @version : Win32cr::Graphics::Direct3D::D3D_VERSION_NUMBER, @pEngineName : Win32cr::Foundation::PWSTR, @engine_version : Win32cr::Graphics::Direct3D::D3D_VERSION_NUMBER)
     end
   end
 
@@ -732,7 +818,8 @@ module Win32cr::Graphics::Direct3D
   end
 
   @[Extern]
-  record ID3DBlobVtbl,
+
+  record ID3DBlobVtable,
     query_interface : Proc(ID3DBlob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3DBlob*, UInt32),
     release : Proc(ID3DBlob*, UInt32),
@@ -741,7 +828,7 @@ module Win32cr::Graphics::Direct3D
 
 
   @[Extern]
-  record ID3DBlob, lpVtbl : ID3DBlobVtbl* do
+  record ID3DBlob, lpVtbl : ID3DBlobVtable* do
     GUID = LibC::GUID.new(0x8ba5fb08_u32, 0x5195_u16, 0x40e2_u16, StaticArray[0xac_u8, 0x58_u8, 0xd_u8, 0x98_u8, 0x9c_u8, 0x3a_u8, 0x1_u8, 0x2_u8])
     def query_interface(this : ID3DBlob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -762,7 +849,8 @@ module Win32cr::Graphics::Direct3D
   end
 
   @[Extern]
-  record ID3DDestructionNotifierVtbl,
+
+  record ID3DDestructionNotifierVtable,
     query_interface : Proc(ID3DDestructionNotifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3DDestructionNotifier*, UInt32),
     release : Proc(ID3DDestructionNotifier*, UInt32),
@@ -771,7 +859,7 @@ module Win32cr::Graphics::Direct3D
 
 
   @[Extern]
-  record ID3DDestructionNotifier, lpVtbl : ID3DDestructionNotifierVtbl* do
+  record ID3DDestructionNotifier, lpVtbl : ID3DDestructionNotifierVtable* do
     GUID = LibC::GUID.new(0xa06eb39a_u32, 0x50da_u16, 0x425b_u16, StaticArray[0x8c_u8, 0x31_u8, 0x4e_u8, 0xec_u8, 0xd6_u8, 0xc2_u8, 0x70_u8, 0xf3_u8])
     def query_interface(this : ID3DDestructionNotifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -792,19 +880,270 @@ module Win32cr::Graphics::Direct3D
   end
 
   @[Extern]
-  record ID3DIncludeVtbl,
+
+  record ID3DIncludeVtable,
     open : Proc(ID3DInclude*, Win32cr::Graphics::Direct3D::D3D_INCLUDE_TYPE, Win32cr::Foundation::PSTR, Void*, Void**, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(ID3DInclude*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ID3DInclude, lpVtbl : ID3DIncludeVtbl* do
+  record ID3DInclude, lpVtbl : ID3DIncludeVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def open(this : ID3DInclude*, include_type : Win32cr::Graphics::Direct3D::D3D_INCLUDE_TYPE, pFileName : Win32cr::Foundation::PSTR, pParentData : Void*, ppData : Void**, pBytes : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, include_type, pFileName, pParentData, ppData, pBytes)
     end
     def close(this : ID3DInclude*, pData : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this, pData)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3DShaderCacheInstallerClientVtable,
+    get_installer_name : Proc(ID3DShaderCacheInstallerClient*, LibC::UIntPtrT*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    get_installer_scope : Proc(ID3DShaderCacheInstallerClient*, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE),
+    handle_driver_update : Proc(ID3DShaderCacheInstallerClient*, Void*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3DShaderCacheInstallerClient, lpVtbl : ID3DShaderCacheInstallerClientVtable* do
+    GUID = LibC::GUID.new(0xa16ee930_u32, 0xd9f6_u16, 0x4222_u16, StaticArray[0xa5_u8, 0x14_u8, 0x24_u8, 0x44_u8, 0x73_u8, 0xe5_u8, 0xd2_u8, 0x66_u8])
+    def get_installer_name(this : ID3DShaderCacheInstallerClient*, pNameLength : LibC::UIntPtrT*, pName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_installer_name.call(this, pNameLength, pName)
+    end
+    def get_installer_scope(this : ID3DShaderCacheInstallerClient*) : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE
+      @lpVtbl.try &.value.get_installer_scope.call(this)
+    end
+    def handle_driver_update(this : ID3DShaderCacheInstallerClient*, pInstaller : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.handle_driver_update.call(this, pInstaller)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3DShaderCacheComponentVtable,
+    query_interface : Proc(ID3DShaderCacheComponent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3DShaderCacheComponent*, UInt32),
+    release : Proc(ID3DShaderCacheComponent*, UInt32),
+    get_component_name : Proc(ID3DShaderCacheComponent*, UInt16**, Win32cr::Foundation::HRESULT),
+    get_state_object_database_path : Proc(ID3DShaderCacheComponent*, UInt16**, Win32cr::Foundation::HRESULT),
+    get_precompiled_cache_path : Proc(ID3DShaderCacheComponent*, Win32cr::Foundation::PWSTR, UInt16**, Win32cr::Foundation::HRESULT),
+    get_precompiled_shader_database_count : Proc(ID3DShaderCacheComponent*, UInt32),
+    get_precompiled_shader_databases : Proc(ID3DShaderCacheComponent*, UInt32, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_PSDB_PROPERTIES*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3DShaderCacheComponent, lpVtbl : ID3DShaderCacheComponentVtable* do
+    GUID = LibC::GUID.new(0xeed1bf00_u32, 0xf5c7_u16, 0x4cf7_u16, StaticArray[0x88_u8, 0x5c_u8, 0xd0_u8, 0xf9_u8, 0xc0_u8, 0xcb_u8, 0x48_u8, 0x28_u8])
+    def query_interface(this : ID3DShaderCacheComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3DShaderCacheComponent*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3DShaderCacheComponent*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_component_name(this : ID3DShaderCacheComponent*, pName : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component_name.call(this, pName)
+    end
+    def get_state_object_database_path(this : ID3DShaderCacheComponent*, pPath : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_state_object_database_path.call(this, pPath)
+    end
+    def get_precompiled_cache_path(this : ID3DShaderCacheComponent*, pAdapterFamily : Win32cr::Foundation::PWSTR, pPath : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_precompiled_cache_path.call(this, pAdapterFamily, pPath)
+    end
+    def get_precompiled_shader_database_count(this : ID3DShaderCacheComponent*) : UInt32
+      @lpVtbl.try &.value.get_precompiled_shader_database_count.call(this)
+    end
+    def get_precompiled_shader_databases(this : ID3DShaderCacheComponent*, array_size : UInt32, pPSDBs : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_PSDB_PROPERTIES*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_precompiled_shader_databases.call(this, array_size, pPSDBs)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3DShaderCacheApplicationVtable,
+    query_interface : Proc(ID3DShaderCacheApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3DShaderCacheApplication*, UInt32),
+    release : Proc(ID3DShaderCacheApplication*, UInt32),
+    get_exe_path : Proc(ID3DShaderCacheApplication*, UInt16**, Win32cr::Foundation::HRESULT),
+    get_desc : Proc(ID3DShaderCacheApplication*, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_APPLICATION_DESC*, Win32cr::Foundation::HRESULT),
+    register_component : Proc(ID3DShaderCacheApplication*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_PSDB_PROPERTIES*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    remove_component : Proc(ID3DShaderCacheApplication*, Void*, Win32cr::Foundation::HRESULT),
+    get_component_count : Proc(ID3DShaderCacheApplication*, UInt32),
+    get_component : Proc(ID3DShaderCacheApplication*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    get_precompile_target_count : Proc(ID3DShaderCacheApplication*, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_TARGET_FLAGS, UInt32),
+    get_precompile_targets : Proc(ID3DShaderCacheApplication*, UInt32, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_COMPILER_PROPERTIES*, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_TARGET_FLAGS, Win32cr::Foundation::HRESULT),
+    get_installer_name : Proc(ID3DShaderCacheApplication*, UInt16**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3DShaderCacheApplication, lpVtbl : ID3DShaderCacheApplicationVtable* do
+    GUID = LibC::GUID.new(0xfc688ee2_u32, 0x1b35_u16, 0x4913_u16, StaticArray[0x93_u8, 0xbe_u8, 0x1c_u8, 0xa3_u8, 0xfa_u8, 0x7d_u8, 0xf3_u8, 0x9e_u8])
+    def query_interface(this : ID3DShaderCacheApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3DShaderCacheApplication*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3DShaderCacheApplication*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_exe_path(this : ID3DShaderCacheApplication*, pExePath : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_exe_path.call(this, pExePath)
+    end
+    def get_desc(this : ID3DShaderCacheApplication*, pApplicationDesc : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_APPLICATION_DESC*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desc.call(this, pApplicationDesc)
+    end
+    def register_component(this : ID3DShaderCacheApplication*, pName : Win32cr::Foundation::PWSTR, pStateObjectDBPath : Win32cr::Foundation::PWSTR, num_psdb : UInt32, pPSDBs : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_PSDB_PROPERTIES*, riid : LibC::GUID*, ppvComponent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_component.call(this, pName, pStateObjectDBPath, num_psdb, pPSDBs, riid, ppvComponent)
+    end
+    def remove_component(this : ID3DShaderCacheApplication*, pComponent : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_component.call(this, pComponent)
+    end
+    def get_component_count(this : ID3DShaderCacheApplication*) : UInt32
+      @lpVtbl.try &.value.get_component_count.call(this)
+    end
+    def get_component(this : ID3DShaderCacheApplication*, index : UInt32, riid : LibC::GUID*, ppvComponent : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_component.call(this, index, riid, ppvComponent)
+    end
+    def get_precompile_target_count(this : ID3DShaderCacheApplication*, flags : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_TARGET_FLAGS) : UInt32
+      @lpVtbl.try &.value.get_precompile_target_count.call(this, flags)
+    end
+    def get_precompile_targets(this : ID3DShaderCacheApplication*, array_size : UInt32, pArray : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_COMPILER_PROPERTIES*, flags : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_TARGET_FLAGS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_precompile_targets.call(this, array_size, pArray, flags)
+    end
+    def get_installer_name(this : ID3DShaderCacheApplication*, pInstallerName : UInt16**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_installer_name.call(this, pInstallerName)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3DShaderCacheInstallerVtable,
+    query_interface : Proc(ID3DShaderCacheInstaller*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3DShaderCacheInstaller*, UInt32),
+    release : Proc(ID3DShaderCacheInstaller*, UInt32),
+    register_driver_update_listener : Proc(ID3DShaderCacheInstaller*, Win32cr::Foundation::HRESULT),
+    unregister_driver_update_listener : Proc(ID3DShaderCacheInstaller*, Win32cr::Foundation::HRESULT),
+    register_service_driver_update_trigger : Proc(ID3DShaderCacheInstaller*, Win32cr::System::Services::SC_HANDLE, Win32cr::Foundation::HRESULT),
+    unregister_service_driver_update_trigger : Proc(ID3DShaderCacheInstaller*, Win32cr::System::Services::SC_HANDLE, Win32cr::Foundation::HRESULT),
+    register_application : Proc(ID3DShaderCacheInstaller*, Win32cr::Foundation::PWSTR, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_APPLICATION_DESC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    remove_application : Proc(ID3DShaderCacheInstaller*, Void*, Win32cr::Foundation::HRESULT),
+    get_application_count : Proc(ID3DShaderCacheInstaller*, UInt32),
+    get_application : Proc(ID3DShaderCacheInstaller*, UInt32, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    clear_all_state : Proc(ID3DShaderCacheInstaller*, Win32cr::Foundation::HRESULT),
+    get_max_precompile_target_count : Proc(ID3DShaderCacheInstaller*, UInt32),
+    get_precompile_targets : Proc(ID3DShaderCacheInstaller*, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_APPLICATION_DESC*, UInt32*, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_COMPILER_PROPERTIES*, Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_TARGET_FLAGS, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3DShaderCacheInstaller, lpVtbl : ID3DShaderCacheInstallerVtable* do
+    GUID = LibC::GUID.new(0xbbe30de1_u32, 0x6318_u16, 0x4526_u16, StaticArray[0xae_u8, 0x17_u8, 0x77_u8, 0x66_u8, 0x93_u8, 0x19_u8, 0x1b_u8, 0xb4_u8])
+    def query_interface(this : ID3DShaderCacheInstaller*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3DShaderCacheInstaller*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3DShaderCacheInstaller*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def register_driver_update_listener(this : ID3DShaderCacheInstaller*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_driver_update_listener.call(this)
+    end
+    def unregister_driver_update_listener(this : ID3DShaderCacheInstaller*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_driver_update_listener.call(this)
+    end
+    def register_service_driver_update_trigger(this : ID3DShaderCacheInstaller*, hServiceHandle : Win32cr::System::Services::SC_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_service_driver_update_trigger.call(this, hServiceHandle)
+    end
+    def unregister_service_driver_update_trigger(this : ID3DShaderCacheInstaller*, hServiceHandle : Win32cr::System::Services::SC_HANDLE) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.unregister_service_driver_update_trigger.call(this, hServiceHandle)
+    end
+    def register_application(this : ID3DShaderCacheInstaller*, pExePath : Win32cr::Foundation::PWSTR, pApplicationDesc : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_APPLICATION_DESC*, riid : LibC::GUID*, ppvApp : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.register_application.call(this, pExePath, pApplicationDesc, riid, ppvApp)
+    end
+    def remove_application(this : ID3DShaderCacheInstaller*, pApplication : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.remove_application.call(this, pApplication)
+    end
+    def get_application_count(this : ID3DShaderCacheInstaller*) : UInt32
+      @lpVtbl.try &.value.get_application_count.call(this)
+    end
+    def get_application(this : ID3DShaderCacheInstaller*, index : UInt32, riid : LibC::GUID*, ppvApp : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_application.call(this, index, riid, ppvApp)
+    end
+    def clear_all_state(this : ID3DShaderCacheInstaller*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.clear_all_state.call(this)
+    end
+    def get_max_precompile_target_count(this : ID3DShaderCacheInstaller*) : UInt32
+      @lpVtbl.try &.value.get_max_precompile_target_count.call(this)
+    end
+    def get_precompile_targets(this : ID3DShaderCacheInstaller*, pApplicationDesc : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_APPLICATION_DESC*, pArraySize : UInt32*, pArray : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_COMPILER_PROPERTIES*, flags : Win32cr::Graphics::Direct3D::D3D_SHADER_CACHE_TARGET_FLAGS) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_precompile_targets.call(this, pApplicationDesc, pArraySize, pArray, flags)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3DShaderCacheExplorerVtable,
+    query_interface : Proc(ID3DShaderCacheExplorer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3DShaderCacheExplorer*, UInt32),
+    release : Proc(ID3DShaderCacheExplorer*, UInt32),
+    get_application_from_exe_path : Proc(ID3DShaderCacheExplorer*, Win32cr::Foundation::PWSTR, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3DShaderCacheExplorer, lpVtbl : ID3DShaderCacheExplorerVtable* do
+    GUID = LibC::GUID.new(0x90432322_u32, 0x32f5_u16, 0x487f_u16, StaticArray[0x92_u8, 0x64_u8, 0xe9_u8, 0x39_u8, 0xf_u8, 0xa5_u8, 0x8b_u8, 0x2a_u8])
+    def query_interface(this : ID3DShaderCacheExplorer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3DShaderCacheExplorer*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3DShaderCacheExplorer*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_application_from_exe_path(this : ID3DShaderCacheExplorer*, pFullExePath : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppvApp : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_application_from_exe_path.call(this, pFullExePath, riid, ppvApp)
+    end
+
+  end
+
+  @[Extern]
+
+  record ID3DShaderCacheInstallerFactoryVtable,
+    query_interface : Proc(ID3DShaderCacheInstallerFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(ID3DShaderCacheInstallerFactory*, UInt32),
+    release : Proc(ID3DShaderCacheInstallerFactory*, UInt32),
+    create_installer : Proc(ID3DShaderCacheInstallerFactory*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    create_explorer : Proc(ID3DShaderCacheInstallerFactory*, Void*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record ID3DShaderCacheInstallerFactory, lpVtbl : ID3DShaderCacheInstallerFactoryVtable* do
+    GUID = LibC::GUID.new(0x9b2dfe4_u32, 0x840f_u16, 0x401a_u16, StaticArray[0x80_u8, 0x4c_u8, 0xd_u8, 0xd8_u8, 0xaa_u8, 0xdc_u8, 0x9e_u8, 0x9f_u8])
+    def query_interface(this : ID3DShaderCacheInstallerFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : ID3DShaderCacheInstallerFactory*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : ID3DShaderCacheInstallerFactory*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def create_installer(this : ID3DShaderCacheInstallerFactory*, pClient : Void*, riid : LibC::GUID*, ppvInstaller : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_installer.call(this, pClient, riid, ppvInstaller)
+    end
+    def create_explorer(this : ID3DShaderCacheInstallerFactory*, pUnknown : Void*, riid : LibC::GUID*, ppvExplorer : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_explorer.call(this, pUnknown, riid, ppvExplorer)
     end
 
   end

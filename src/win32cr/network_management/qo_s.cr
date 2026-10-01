@@ -1,20 +1,11 @@
-require "./../networking/win_sock.cr"
 require "./../foundation.cr"
 require "./ndis.cr"
+require "./../networking/win_sock.cr"
 require "./../system/io.cr"
 
 module Win32cr::NetworkManagement::QoS
   extend self
-  alias LPM_HANDLE = LibC::IntPtrT
-  alias RHANDLE = LibC::IntPtrT
-  alias PALLOCMEM = Proc(UInt32, Void*)
-
-  alias PFREEMEM = Proc(Void*, Void)
-
-  alias CBADMITRESULT = Proc(Win32cr::NetworkManagement::QoS::LPM_HANDLE, Win32cr::NetworkManagement::QoS::RHANDLE, UInt32, Int32, Int32, Win32cr::NetworkManagement::QoS::Policy_decision*, UInt32*)
-
-  alias CBGETRSVPOBJECTS = Proc(Win32cr::NetworkManagement::QoS::LPM_HANDLE, Win32cr::NetworkManagement::QoS::RHANDLE, Int32, Int32, Win32cr::NetworkManagement::QoS::RsvpObjHdr**, UInt32*)
-
+  alias RHANDLE = Void*
   alias TCI_NOTIFY_HANDLER = Proc(Win32cr::Foundation::HANDLE, Win32cr::Foundation::HANDLE, UInt32, Win32cr::Foundation::HANDLE, UInt32, Void*, Void)
 
   alias TCI_ADD_FLOW_COMPLETE_HANDLER = Proc(Win32cr::Foundation::HANDLE, UInt32, Void)
@@ -48,195 +39,6 @@ module Win32cr::NetworkManagement::QoS
   TC_NONCONF_SHAPE = 1_u32
   TC_NONCONF_DISCARD = 2_u32
   TC_NONCONF_BORROW_PLUS = 3_u32
-  Class_null = 0_u32
-  Class_session = 1_u32
-  Class_session_group = 2_u32
-  Class_rsvp_hop = 3_u32
-  Class_integrity = 4_u32
-  Class_time_values = 5_u32
-  Class_error_spec = 6_u32
-  Class_scope = 7_u32
-  Class_style = 8_u32
-  Class_flowspec = 9_u32
-  Class_is_flowspec = 9_u32
-  Class_filter_spec = 10_u32
-  Class_sender_template = 11_u32
-  Class_sender_tspec = 12_u32
-  Class_adspec = 13_u32
-  Class_policy_data = 14_u32
-  Class_confirm = 15_u32
-  Class_max = 15_u32
-  Ctype_session_ipv4 = 1_u32
-  Ctype_session_ipv4gpi = 3_u32
-  SESSFLG_E_Police = 1_u32
-  Ctype_rsvp_hop_ipv4 = 1_u32
-  Opt_Share_mask = 24_u32
-  Opt_Distinct = 8_u32
-  Opt_Shared = 16_u32
-  Opt_SndSel_mask = 7_u32
-  Opt_Wildcard = 1_u32
-  Opt_Explicit = 2_u32
-  Ctype_style = 1_u32
-  Ctype_filter_spec_ipv4 = 1_u32
-  Ctype_filter_spec_ipv4gpi = 4_u32
-  Ctype_sender_template_ipv4 = 1_u32
-  Ctype_sender_template_ipv4gpi = 4_u32
-  Ctype_scope_list_ipv4 = 1_u32
-  Ctype_error_spec_ipv4 = 1_u32
-  ERROR_SPECF_InPlace = 1_u32
-  ERROR_SPECF_NotGuilty = 2_u32
-  ERR_FORWARD_OK = 32768_u32
-  ERR_Usage_globl = 0_u32
-  ERR_Usage_local = 16_u32
-  ERR_Usage_serv = 17_u32
-  ERR_global_mask = 4095_u32
-  Ctype_policy_data = 1_u32
-  GENERAL_INFO = 1_u32
-  GUARANTEED_SERV = 2_u32
-  PREDICTIVE_SERV = 3_u32
-  CONTROLLED_DELAY_SERV = 4_u32
-  CONTROLLED_LOAD_SERV = 5_u32
-  QUALITATIVE_SERV = 6_u32
-  INTSERV_VERS_MASK = 240_u32
-  INTSERV_VERSION0 = 0_u32
-  ISSH_BREAK_BIT = 128_u32
-  ISPH_FLG_INV = 128_u32
-  Ctype_sender_tspec = 2_u32
-  Ctype_flowspec_intserv0 = 2_u32
-  Ctype_adspec_intserv = 2_u32
-  RSVP_PATH = 1_u32
-  RSVP_RESV = 2_u32
-  RSVP_PATH_ERR = 3_u32
-  RSVP_RESV_ERR = 4_u32
-  RSVP_PATH_TEAR = 5_u32
-  RSVP_RESV_TEAR = 6_u32
-  RSVP_Err_NONE = 0_u32
-  RSVP_Erv_Nonev = 0_u32
-  RSVP_Err_ADMISSION = 1_u32
-  RSVP_Erv_Other = 0_u32
-  RSVP_Erv_DelayBnd = 1_u32
-  RSVP_Erv_Bandwidth = 2_u32
-  RSVP_Erv_MTU = 3_u32
-  RSVP_Erv_Flow_Rate = 32769_u32
-  RSVP_Erv_Bucket_szie = 32770_u32
-  RSVP_Erv_Peak_Rate = 32771_u32
-  RSVP_Erv_Min_Policied_size = 32772_u32
-  RSVP_Err_POLICY = 2_u32
-  POLICY_ERRV_NO_MORE_INFO = 1_u32
-  POLICY_ERRV_UNSUPPORTED_CREDENTIAL_TYPE = 2_u32
-  POLICY_ERRV_INSUFFICIENT_PRIVILEGES = 3_u32
-  POLICY_ERRV_EXPIRED_CREDENTIALS = 4_u32
-  POLICY_ERRV_IDENTITY_CHANGED = 5_u32
-  POLICY_ERRV_UNKNOWN = 0_u32
-  POLICY_ERRV_GLOBAL_DEF_FLOW_COUNT = 1_u32
-  POLICY_ERRV_GLOBAL_GRP_FLOW_COUNT = 2_u32
-  POLICY_ERRV_GLOBAL_USER_FLOW_COUNT = 3_u32
-  POLICY_ERRV_GLOBAL_UNAUTH_USER_FLOW_COUNT = 4_u32
-  POLICY_ERRV_SUBNET_DEF_FLOW_COUNT = 5_u32
-  POLICY_ERRV_SUBNET_GRP_FLOW_COUNT = 6_u32
-  POLICY_ERRV_SUBNET_USER_FLOW_COUNT = 7_u32
-  POLICY_ERRV_SUBNET_UNAUTH_USER_FLOW_COUNT = 8_u32
-  POLICY_ERRV_GLOBAL_DEF_FLOW_DURATION = 9_u32
-  POLICY_ERRV_GLOBAL_GRP_FLOW_DURATION = 10_u32
-  POLICY_ERRV_GLOBAL_USER_FLOW_DURATION = 11_u32
-  POLICY_ERRV_GLOBAL_UNAUTH_USER_FLOW_DURATION = 12_u32
-  POLICY_ERRV_SUBNET_DEF_FLOW_DURATION = 13_u32
-  POLICY_ERRV_SUBNET_GRP_FLOW_DURATION = 14_u32
-  POLICY_ERRV_SUBNET_USER_FLOW_DURATION = 15_u32
-  POLICY_ERRV_SUBNET_UNAUTH_USER_FLOW_DURATION = 16_u32
-  POLICY_ERRV_GLOBAL_DEF_FLOW_RATE = 17_u32
-  POLICY_ERRV_GLOBAL_GRP_FLOW_RATE = 18_u32
-  POLICY_ERRV_GLOBAL_USER_FLOW_RATE = 19_u32
-  POLICY_ERRV_GLOBAL_UNAUTH_USER_FLOW_RATE = 20_u32
-  POLICY_ERRV_SUBNET_DEF_FLOW_RATE = 21_u32
-  POLICY_ERRV_SUBNET_GRP_FLOW_RATE = 22_u32
-  POLICY_ERRV_SUBNET_USER_FLOW_RATE = 23_u32
-  POLICY_ERRV_SUBNET_UNAUTH_USER_FLOW_RATE = 24_u32
-  POLICY_ERRV_GLOBAL_DEF_PEAK_RATE = 25_u32
-  POLICY_ERRV_GLOBAL_GRP_PEAK_RATE = 26_u32
-  POLICY_ERRV_GLOBAL_USER_PEAK_RATE = 27_u32
-  POLICY_ERRV_GLOBAL_UNAUTH_USER_PEAK_RATE = 28_u32
-  POLICY_ERRV_SUBNET_DEF_PEAK_RATE = 29_u32
-  POLICY_ERRV_SUBNET_GRP_PEAK_RATE = 30_u32
-  POLICY_ERRV_SUBNET_USER_PEAK_RATE = 31_u32
-  POLICY_ERRV_SUBNET_UNAUTH_USER_PEAK_RATE = 32_u32
-  POLICY_ERRV_GLOBAL_DEF_SUM_FLOW_RATE = 33_u32
-  POLICY_ERRV_GLOBAL_GRP_SUM_FLOW_RATE = 34_u32
-  POLICY_ERRV_GLOBAL_USER_SUM_FLOW_RATE = 35_u32
-  POLICY_ERRV_GLOBAL_UNAUTH_USER_SUM_FLOW_RATE = 36_u32
-  POLICY_ERRV_SUBNET_DEF_SUM_FLOW_RATE = 37_u32
-  POLICY_ERRV_SUBNET_GRP_SUM_FLOW_RATE = 38_u32
-  POLICY_ERRV_SUBNET_USER_SUM_FLOW_RATE = 39_u32
-  POLICY_ERRV_SUBNET_UNAUTH_USER_SUM_FLOW_RATE = 40_u32
-  POLICY_ERRV_GLOBAL_DEF_SUM_PEAK_RATE = 41_u32
-  POLICY_ERRV_GLOBAL_GRP_SUM_PEAK_RATE = 42_u32
-  POLICY_ERRV_GLOBAL_USER_SUM_PEAK_RATE = 43_u32
-  POLICY_ERRV_GLOBAL_UNAUTH_USER_SUM_PEAK_RATE = 44_u32
-  POLICY_ERRV_SUBNET_DEF_SUM_PEAK_RATE = 45_u32
-  POLICY_ERRV_SUBNET_GRP_SUM_PEAK_RATE = 46_u32
-  POLICY_ERRV_SUBNET_USER_SUM_PEAK_RATE = 47_u32
-  POLICY_ERRV_SUBNET_UNAUTH_USER_SUM_PEAK_RATE = 48_u32
-  POLICY_ERRV_UNKNOWN_USER = 49_u32
-  POLICY_ERRV_NO_PRIVILEGES = 50_u32
-  POLICY_ERRV_EXPIRED_USER_TOKEN = 51_u32
-  POLICY_ERRV_NO_RESOURCES = 52_u32
-  POLICY_ERRV_PRE_EMPTED = 53_u32
-  POLICY_ERRV_USER_CHANGED = 54_u32
-  POLICY_ERRV_NO_ACCEPTS = 55_u32
-  POLICY_ERRV_NO_MEMORY = 56_u32
-  POLICY_ERRV_CRAZY_FLOWSPEC = 57_u32
-  RSVP_Err_NO_PATH = 3_u32
-  RSVP_Err_NO_SENDER = 4_u32
-  RSVP_Err_BAD_STYLE = 5_u32
-  RSVP_Err_UNKNOWN_STYLE = 6_u32
-  RSVP_Err_BAD_DSTPORT = 7_u32
-  RSVP_Err_BAD_SNDPORT = 8_u32
-  RSVP_Err_AMBIG_FILTER = 9_u32
-  RSVP_Err_PREEMPTED = 12_u32
-  RSVP_Err_UNKN_OBJ_CLASS = 13_u32
-  RSVP_Err_UNKNOWN_CTYPE = 14_u32
-  RSVP_Err_API_ERROR = 20_u32
-  RSVP_Err_TC_ERROR = 21_u32
-  RSVP_Erv_Conflict_Serv = 1_u32
-  RSVP_Erv_No_Serv = 2_u32
-  RSVP_Erv_Crazy_Flowspec = 3_u32
-  RSVP_Erv_Crazy_Tspec = 4_u32
-  RSVP_Err_TC_SYS_ERROR = 22_u32
-  RSVP_Err_RSVP_SYS_ERROR = 23_u32
-  RSVP_Erv_MEMORY = 1_u32
-  RSVP_Erv_API = 2_u32
-  LPM_PE_USER_IDENTITY = 2_u32
-  LPM_PE_APP_IDENTITY = 3_u32
-  ERROR_NO_MORE_INFO = 1_u32
-  UNSUPPORTED_CREDENTIAL_TYPE = 2_u32
-  INSUFFICIENT_PRIVILEGES = 3_u32
-  EXPIRED_CREDENTIAL = 4_u32
-  IDENTITY_CHANGED = 5_u32
-  LPM_OK = 0_u32
-  INV_LPM_HANDLE = 1_u32
-  LPM_TIME_OUT = 2_u32
-  INV_REQ_HANDLE = 3_u32
-  DUP_RESULTS = 4_u32
-  INV_RESULTS = 5_u32
-  LPM_PE_ALL_TYPES = 0_u32
-  LPM_API_VERSION_1 = 1_u32
-  PCM_VERSION_1 = 1_u32
-  LPV_RESERVED = 0_u32
-  LPV_MIN_PRIORITY = 1_u32
-  LPV_MAX_PRIORITY = 65280_u32
-  LPV_DROP_MSG = 65533_u32
-  LPV_DONT_CARE = 65534_u32
-  LPV_REJECT = 65535_u32
-  FORCE_IMMEDIATE_REFRESH = 1_u32
-  LPM_RESULT_READY = 0_u32
-  LPM_RESULT_DEFER = 1_u32
-  RCVD_PATH_TEAR = 1_u32
-  RCVD_RESV_TEAR = 2_u32
-  ADM_CTRL_FAILED = 3_u32
-  STATE_TIMEOUT = 4_u32
-  FLOW_DURATION = 5_u32
-  RESOURCES_ALLOCATED = 1_u32
-  RESOURCES_MODIFIED = 2_u32
   CURRENT_TCI_VERSION = 2_u32
   TC_NOTIFY_IFC_UP = 1_u32
   TC_NOTIFY_IFC_CLOSE = 2_u32
@@ -315,22 +117,22 @@ module Win32cr::NetworkManagement::QoS
   ERROR_INVALID_SHAPE_RATE = 7519_u32
   ERROR_INVALID_DS_CLASS = 7520_u32
   ERROR_TOO_MANY_CLIENTS = 7521_u32
-  GUID_QOS_REMAINING_BANDWIDTH = "c4c51720-40ec-11d1-2c91-00aa00574915"
-  GUID_QOS_BESTEFFORT_BANDWIDTH = "ed885290-40ec-11d1-2c91-00aa00574915"
-  GUID_QOS_LATENCY = "fc408ef0-40ec-11d1-2c91-00aa00574915"
-  GUID_QOS_FLOW_COUNT = "1147f880-40ed-11d1-2c91-00aa00574915"
-  GUID_QOS_NON_BESTEFFORT_LIMIT = "185c44e0-40ed-11d1-2c91-00aa00574915"
-  GUID_QOS_MAX_OUTSTANDING_SENDS = "161ffa86-6120-11d1-2c91-00aa00574915"
-  GUID_QOS_STATISTICS_BUFFER = "bb2c0980-e900-11d1-b07e-0080c71382bf"
-  GUID_QOS_FLOW_MODE = "5c82290a-515a-11d2-8e58-00c04fc9bfcb"
-  GUID_QOS_ISSLOW_FLOW = "abf273a4-ee07-11d2-be1b-00a0c99ee63b"
-  GUID_QOS_TIMER_RESOLUTION = "ba10cc88-f13e-11d2-be1b-00a0c99ee63b"
-  GUID_QOS_FLOW_IP_CONFORMING = "07f99a8b-fcd2-11d2-be1e-00a0c99ee63b"
-  GUID_QOS_FLOW_IP_NONCONFORMING = "087a5987-fcd2-11d2-be1e-00a0c99ee63b"
-  GUID_QOS_FLOW_8021P_CONFORMING = "08c1e013-fcd2-11d2-be1e-00a0c99ee63b"
-  GUID_QOS_FLOW_8021P_NONCONFORMING = "09023f91-fcd2-11d2-be1e-00a0c99ee63b"
-  GUID_QOS_ENABLE_AVG_STATS = "bafb6d11-27c4-4801-a46f-ef8080c188c8"
-  GUID_QOS_ENABLE_WINDOW_ADJUSTMENT = "aa966725-d3e9-4c55-b335-2a00279a1e64"
+  GUID_QOS_REMAINING_BANDWIDTH = LibC::GUID.new(0xc4c51720_u32, 0x40ec_u16, 0x11d1_u16, StaticArray[0x2c_u8, 0x91_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x57_u8, 0x49_u8, 0x15_u8])
+  GUID_QOS_BESTEFFORT_BANDWIDTH = LibC::GUID.new(0xed885290_u32, 0x40ec_u16, 0x11d1_u16, StaticArray[0x2c_u8, 0x91_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x57_u8, 0x49_u8, 0x15_u8])
+  GUID_QOS_LATENCY = LibC::GUID.new(0xfc408ef0_u32, 0x40ec_u16, 0x11d1_u16, StaticArray[0x2c_u8, 0x91_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x57_u8, 0x49_u8, 0x15_u8])
+  GUID_QOS_FLOW_COUNT = LibC::GUID.new(0x1147f880_u32, 0x40ed_u16, 0x11d1_u16, StaticArray[0x2c_u8, 0x91_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x57_u8, 0x49_u8, 0x15_u8])
+  GUID_QOS_NON_BESTEFFORT_LIMIT = LibC::GUID.new(0x185c44e0_u32, 0x40ed_u16, 0x11d1_u16, StaticArray[0x2c_u8, 0x91_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x57_u8, 0x49_u8, 0x15_u8])
+  GUID_QOS_MAX_OUTSTANDING_SENDS = LibC::GUID.new(0x161ffa86_u32, 0x6120_u16, 0x11d1_u16, StaticArray[0x2c_u8, 0x91_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x57_u8, 0x49_u8, 0x15_u8])
+  GUID_QOS_STATISTICS_BUFFER = LibC::GUID.new(0xbb2c0980_u32, 0xe900_u16, 0x11d1_u16, StaticArray[0xb0_u8, 0x7e_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x13_u8, 0x82_u8, 0xbf_u8])
+  GUID_QOS_FLOW_MODE = LibC::GUID.new(0x5c82290a_u32, 0x515a_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0x58_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xbf_u8, 0xcb_u8])
+  GUID_QOS_ISSLOW_FLOW = LibC::GUID.new(0xabf273a4_u32, 0xee07_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x1b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x9e_u8, 0xe6_u8, 0x3b_u8])
+  GUID_QOS_TIMER_RESOLUTION = LibC::GUID.new(0xba10cc88_u32, 0xf13e_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x1b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x9e_u8, 0xe6_u8, 0x3b_u8])
+  GUID_QOS_FLOW_IP_CONFORMING = LibC::GUID.new(0x7f99a8b_u32, 0xfcd2_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x1e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x9e_u8, 0xe6_u8, 0x3b_u8])
+  GUID_QOS_FLOW_IP_NONCONFORMING = LibC::GUID.new(0x87a5987_u32, 0xfcd2_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x1e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x9e_u8, 0xe6_u8, 0x3b_u8])
+  GUID_QOS_FLOW_8021P_CONFORMING = LibC::GUID.new(0x8c1e013_u32, 0xfcd2_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x1e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x9e_u8, 0xe6_u8, 0x3b_u8])
+  GUID_QOS_FLOW_8021P_NONCONFORMING = LibC::GUID.new(0x9023f91_u32, 0xfcd2_u16, 0x11d2_u16, StaticArray[0xbe_u8, 0x1e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x9e_u8, 0xe6_u8, 0x3b_u8])
+  GUID_QOS_ENABLE_AVG_STATS = LibC::GUID.new(0xbafb6d11_u32, 0x27c4_u16, 0x4801_u16, StaticArray[0xa4_u8, 0x6f_u8, 0xef_u8, 0x80_u8, 0x80_u8, 0xc1_u8, 0x88_u8, 0xc8_u8])
+  GUID_QOS_ENABLE_WINDOW_ADJUSTMENT = LibC::GUID.new(0xaa966725_u32, 0xd3e9_u16, 0x4c55_u16, StaticArray[0xb3_u8, 0x35_u8, 0x2a_u8, 0x0_u8, 0x27_u8, 0x9a_u8, 0x1e_u8, 0x64_u8])
   FSCTL_TCP_BASE = 18_u32
   DD_TCP_DEVICE_NAME = "\\Device\\Tcp"
   IF_MIB_STATS_ID = 1_u32
@@ -369,6 +171,7 @@ module Win32cr::NetworkManagement::QoS
   SIPAEV_EFI_HANDOFF_TABLES = 2147483657_u32
   SIPAEV_EFI_PLATFORM_FIRMWARE_BLOB2 = 2147483658_u32
   SIPAEV_EFI_HANDOFF_TABLES2 = 2147483659_u32
+  SIPAEV_EFI_VARIABLE_BOOT2 = 2147483660_u32
   SIPAEV_EFI_HCRTM_EVENT = 2147483664_u32
   SIPAEV_EFI_VARIABLE_AUTHORITY = 2147483872_u32
   SIPAEV_EFI_SPDM_FIRMWARE_BLOB = 2147483873_u32
@@ -405,6 +208,131 @@ module Win32cr::NetworkManagement::QoS
   SIPAEV_AMD_SL_SVN = 32773_u32
   SIPAEV_AMD_SL_LOAD_1 = 32774_u32
   SIPAEV_AMD_SL_SEPARATOR = 32775_u32
+  SIPAEV_AMD_NO_ACTION = 3_u32
+  SIPAEV_AMD_BASE_2 = 33280_u32
+  SIPAEV_AMD_SPL_TABLE_ROM = 33281_u32
+  SIPAEV_AMD_PSP_BL_STAGE_1 = 33282_u32
+  SIPAEV_AMD_PSP_KEYDB = 33283_u32
+  SIPAEV_AMD_SPL_TABLE_FW = 33284_u32
+  SIPAEV_AMD_PSP_BL_STAGE_2 = 33285_u32
+  SIPAEV_AMD_PSP_L0_SEC_POL = 33286_u32
+  SIPAEV_AMD_PMFW0 = 33287_u32
+  SIPAEV_AMD_MP2_CONFIG = 33288_u32
+  SIPAEV_AMD_MP2_FW = 33289_u32
+  SIPAEV_AMD_ABL_1 = 33290_u32
+  SIPAEV_AMD_ABL_2 = 33291_u32
+  SIPAEV_AMD_ABL_3 = 33292_u32
+  SIPAEV_AMD_ABL_4 = 33293_u32
+  SIPAEV_AMD_ABL_5 = 33294_u32
+  SIPAEV_AMD_ABL_6 = 33295_u32
+  SIPAEV_AMD_ABL_7 = 33296_u32
+  SIPAEV_AMD_ABL_8 = 33297_u32
+  SIPAEV_AMD_ABL_9 = 33298_u32
+  SIPAEV_AMD_ABL_10 = 33299_u32
+  SIPAEV_AMD_ABL_11 = 33300_u32
+  SIPAEV_AMD_ABL_12 = 33301_u32
+  SIPAEV_AMD_ABL_13 = 33302_u32
+  SIPAEV_AMD_ABL_14 = 33303_u32
+  SIPAEV_AMD_ABL_15 = 33304_u32
+  SIPAEV_AMD_ABL_16 = 33305_u32
+  SIPAEV_AMD_ABL_17 = 33306_u32
+  SIPAEV_AMD_ABL_18 = 33307_u32
+  SIPAEV_AMD_ABL_19 = 33308_u32
+  SIPAEV_AMD_ABL_20 = 33309_u32
+  SIPAEV_AMD_ABL_21 = 33310_u32
+  SIPAEV_AMD_ABL_22 = 33311_u32
+  SIPAEV_AMD_ABL_23 = 33312_u32
+  SIPAEV_AMD_ABL_24 = 33313_u32
+  SIPAEV_AMD_ABL_25 = 33314_u32
+  SIPAEV_AMD_ABL_26 = 33315_u32
+  SIPAEV_AMD_ABL_27 = 33316_u32
+  SIPAEV_AMD_ABL_28 = 33317_u32
+  SIPAEV_AMD_ABL_29 = 33318_u32
+  SIPAEV_AMD_ABL_30 = 33319_u32
+  SIPAEV_AMD_ABL_31 = 33320_u32
+  SIPAEV_AMD_ABL_32 = 33321_u32
+  SIPAEV_AMD_ABL_33 = 33322_u32
+  SIPAEV_AMD_ABL_34 = 33323_u32
+  SIPAEV_AMD_ABL_35 = 33324_u32
+  SIPAEV_AMD_ABL_36 = 33325_u32
+  SIPAEV_AMD_ABL_37 = 33326_u32
+  SIPAEV_AMD_ABL_38 = 33327_u32
+  SIPAEV_AMD_ABL_39 = 33328_u32
+  SIPAEV_AMD_ABL_40 = 33329_u32
+  SIPAEV_AMD_ABL_41 = 33330_u32
+  SIPAEV_AMD_ABL_42 = 33331_u32
+  SIPAEV_AMD_ABL_43 = 33332_u32
+  SIPAEV_AMD_ABL_44 = 33333_u32
+  SIPAEV_AMD_ABL_45 = 33334_u32
+  SIPAEV_AMD_ABL_46 = 33335_u32
+  SIPAEV_AMD_ABL_47 = 33336_u32
+  SIPAEV_AMD_ABL_48 = 33337_u32
+  SIPAEV_AMD_MID_SMU = 33338_u32
+  SIPAEV_AMD_PM_FW1 = 33339_u32
+  SIPAEV_AMD_VBL_1 = 33340_u32
+  SIPAEV_AMD_VBL_2 = 33341_u32
+  SIPAEV_AMD_VBL_3 = 33342_u32
+  SIPAEV_AMD_VBL_4 = 33343_u32
+  SIPAEV_AMD_VBL_5 = 33344_u32
+  SIPAEV_AMD_VBL_6 = 33345_u32
+  SIPAEV_AMD_VBL_7 = 33346_u32
+  SIPAEV_AMD_VBL_8 = 33347_u32
+  SIPAEV_AMD_VBL_9 = 33348_u32
+  SIPAEV_AMD_VBL_10 = 33349_u32
+  SIPAEV_AMD_PSP_L1_SEC_POL = 33350_u32
+  SIPAEV_AMD_IP_DISCOVERY = 33351_u32
+  SIPAEV_AMD_SYS_DRV = 33352_u32
+  SIPAEV_AMD_TOS = 33353_u32
+  SIPAEV_AMD_PSP_TOS_KEYDB = 33354_u32
+  SIPAEV_AMD_ABL_TOC = 33355_u32
+  SIPAEV_AMD_PMU1_DATA = 33356_u32
+  SIPAEV_AMD_PMU2_DATA = 33357_u32
+  SIPAEV_AMD_PMU1 = 33358_u32
+  SIPAEV_AMD_PMU2 = 33359_u32
+  SIPAEV_AMD_MPIO_FW = 33360_u32
+  SIPAEV_AMD_MP5 = 33361_u32
+  SIPAEV_AMD_MPCCX = 33362_u32
+  SIPAEV_AMD_GMI3 = 33363_u32
+  SIPAEV_AMD_TPMLITE = 33364_u32
+  SIPAEV_AMD_PSP_SPIROM_CONFIG = 33365_u32
+  SIPAEV_AMD_PSP_DF_RIB_TOC = 33366_u32
+  SIPAEV_AMD_PSP_DF_RIB0 = 33367_u32
+  SIPAEV_AMD_PSP_DF_RIB1 = 33368_u32
+  SIPAEV_AMD_PSP_DF_RIB2 = 33369_u32
+  SIPAEV_AMD_PSP_DF_RIB3 = 33370_u32
+  SIPAEV_AMD_PSP_DF_RIB4 = 33371_u32
+  SIPAEV_AMD_PSP_DF_RIB5 = 33372_u32
+  SIPAEV_AMD_PSP_DF_RIB6 = 33373_u32
+  SIPAEV_AMD_PSP_DF_RIB7 = 33374_u32
+  SIPAEV_AMD_PSP_DF_RIB8 = 33375_u32
+  SIPAEV_AMD_PSP_DF_RIB9 = 33376_u32
+  SIPAEV_AMD_PSP_DF_RIB10 = 33377_u32
+  SIPAEV_AMD_PSP_DF_RIB11 = 33378_u32
+  SIPAEV_AMD_PSP_DF_RIB12 = 33379_u32
+  SIPAEV_AMD_PSP_DF_RIB13 = 33380_u32
+  SIPAEV_AMD_PSP_DF_RIB14 = 33381_u32
+  SIPAEV_AMD_PSP_DF_RIB15 = 33382_u32
+  SIPAEV_AMD_SECURE_DEBUG_UNLOCK = 33383_u32
+  SIPAEV_AMD_PSP_BL_END = 33535_u32
+  SIPAEV_AMD_FTPM_DRV = 33536_u32
+  SIPAEV_AMD_DRTM_DRV = 33537_u32
+  SIPAEV_AMD_AGESA_DRV = 33538_u32
+  SIPAEV_AMD_PSP_END = 33791_u32
+  SIPAEV_ARM_BASE = 36864_u32
+  SIPAEV_ARM_PCR_SCHEMA = 36865_u32
+  SIPAEV_ARM_DCE = 36866_u32
+  SIPAEV_ARM_DCE_PUBKEY = 36867_u32
+  SIPAEV_ARM_DLME = 36868_u32
+  SIPAEV_ARM_DLME_ENTRY_POINT = 36869_u32
+  SIPAEV_ARM_DEBUG_CONFIG = 36870_u32
+  SIPAEV_ARM_NONSECURE_CONFIG = 36871_u32
+  SIPAEV_ARM_DCE_SECONDARY = 36872_u32
+  SIPAEV_ARM_TZFW = 36873_u32
+  SIPAEV_ARM_SEPARATOR = 36874_u32
+  SIPAEV_ARM_DLME_PUBKEY = 36875_u32
+  SIPAEV_ARM_DLME_SVN = 36876_u32
+  SIPAEV_ARM_NO_ACTION = 36877_u32
+  SIPAEV_ARM_SECURE_INT_DISABLE = 36878_u32
   SIPAEVENTTYPE_NONMEASURED = 2147483648_u32
   SIPAEVENTTYPE_AGGREGATION = 1073741824_u32
   SIPAEVENTTYPE_CONTAINER = 65536_u32
@@ -421,6 +349,7 @@ module Win32cr::NetworkManagement::QoS
   SIPAEVENTTYPE_DRTM = 786432_u32
   SIPAERROR_FIRMWAREFAILURE = 196609_u32
   SIPAERROR_INTERNALFAILURE = 196611_u32
+  SIPAERROR_HYPERVISORFAILURE = 196613_u32
   SIPAEVENT_INFORMATION = 131073_u32
   SIPAEVENT_BOOTCOUNTER = 131074_u32
   SIPAEVENT_TRANSFER_CONTROL = 131075_u32
@@ -431,6 +360,7 @@ module Win32cr::NetworkManagement::QoS
   SIPAEVENT_MORBIT_NOT_CANCELABLE = 131080_u32
   SIPAEVENT_APPLICATION_SVN = 131081_u32
   SIPAEVENT_SVN_CHAIN_STATUS = 131082_u32
+  SIPAEVENT_IDK_GENERATION_STATUS = 131084_u32
   SIPAEVENT_MORBIT_API_STATUS = 131083_u32
   SIPAEVENT_BOOTDEBUGGING = 262145_u32
   SIPAEVENT_BOOT_REVOCATION_LIST = 262146_u32
@@ -465,6 +395,18 @@ module Win32cr::NetworkManagement::QoS
   SIPAEVENT_LSAISO_CONFIG = 327720_u32
   SIPAEVENT_SBCP_INFO = 327721_u32
   SIPAEVENT_HYPERVISOR_BOOT_DMA_PROTECTION = 327728_u32
+  SIPAEVENT_SI_POLICY_SIGNER = 327729_u32
+  SIPAEVENT_SI_POLICY_UPDATE_SIGNER = 327730_u32
+  SIPAEVENT_REFS_VOLUME_CHECKPOINT_RECORD_CHECKSUM = 327731_u32
+  SIPAEVENT_REFS_ROLLBACK_PROTECTION_FROZEN_VOLUME_CHECKSUM = 327732_u32
+  SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH = 327733_u32
+  SIPAEVENT_REFS_ROLLBACK_PROTECTION_VERIFICATION_SUCCEEDED = 327734_u32
+  SIPAEVENT_REFS_ROLLBACK_PROTECTION_VOLUME_FIRST_EVER_MOUNT = 327735_u32
+  SIPAEVENT_VSM_SEALED_SI_POLICY = 327738_u32
+  SIPAEVENT_VSM_DRTM_KEYROLL_DETECTED = 327739_u32
+  SIPAEVENT_VSM_SRTM_UNSEAL_POLICY = 327740_u32
+  SIPAEVENT_VSM_SRTM_ANTI_ROLLBACK_COUNTER = 327741_u32
+  SIPAEVENT_VTL1_DUMP_CONFIG = 327744_u32
   SIPAEVENT_NOAUTHORITY = 393217_u32
   SIPAEVENT_AUTHORITYPUBKEY = 393218_u32
   SIPAEVENT_FILEPATH = 458753_u32
@@ -478,6 +420,10 @@ module Win32cr::NetworkManagement::QoS
   SIPAEVENT_AUTHORITYSHA1THUMBPRINT = 458761_u32
   SIPAEVENT_IMAGEVALIDATED = 458762_u32
   SIPAEVENT_MODULE_SVN = 458763_u32
+  SIPAEVENT_MODULE_PLUTON = 458764_u32
+  SIPAEVENT_MODULE_ORIGINAL_FILENAME = 458765_u32
+  SIPAEVENT_MODULE_VERSION = 458766_u32
+  SIPAEVENT_PUBLISHER_OEMNAME = 458767_u32
   SIPAEVENT_ELAM_KEYNAME = 589825_u32
   SIPAEVENT_ELAM_CONFIGURATION = 589826_u32
   SIPAEVENT_ELAM_POLICY = 589827_u32
@@ -519,6 +465,7 @@ module Win32cr::NetworkManagement::QoS
   OSDEVICE_TYPE_UDP = 196608_u32
   OSDEVICE_TYPE_VMBUS = 262144_u32
   OSDEVICE_TYPE_COMPOSITE = 327680_u32
+  OSDEVICE_TYPE_CIMFS = 393216_u32
   SIPAHDRSIGNATURE = 1279476311_u32
   SIPALOGVERSION = 1_u32
   SIPAKSRHDRSIGNATURE = 1297240907_u32
@@ -538,23 +485,10 @@ module Win32cr::NetworkManagement::QoS
   WBCL_DIGEST_ALG_BITMAP_SHA3_256 = 32_u32
   WBCL_DIGEST_ALG_BITMAP_SHA3_384 = 64_u32
   WBCL_DIGEST_ALG_BITMAP_SHA3_512 = 128_u32
+  MAX_PLUTON_UPGRADE_FILENAME_LENGTH = 64_u32
+  WBCL_MAX_PLUTON_UPGRADE_HASH_LEN = 64_u32
   WBCL_HASH_LEN_SHA1 = 20_u32
-  IS_GUAR_RSPEC = 130_i32
-  GUAR_ADSPARM_C = 131_i32
-  GUAR_ADSPARM_D = 132_i32
-  GUAR_ADSPARM_Ctot = 133_i32
-  GUAR_ADSPARM_Dtot = 134_i32
-  GUAR_ADSPARM_Csum = 135_i32
-  GUAR_ADSPARM_Dsum = 136_i32
 
-  enum Int_serv_wkp
-    IS_WKP_HOP_CNT = 4_i32
-    IS_WKP_PATH_BW = 6_i32
-    IS_WKP_MIN_LATENCY = 8_i32
-    IS_WKP_COMPOSED_MTU = 10_i32
-    IS_WKP_TB_TSPEC = 127_i32
-    IS_WKP_Q_TSPEC = 128_i32
-  end
   enum QOS_TRAFFIC_TYPE
     QOSTrafficTypeBestEffort = 0_i32
     QOSTrafficTypeBackground = 1_i32
@@ -620,468 +554,6 @@ module Win32cr::NetworkManagement::QoS
     property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
     property shaping_rate : UInt32
     def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @shaping_rate : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct RsvpObjHdr
-    property obj_length : UInt16
-    property obj_class : UInt8
-    property obj_ctype : UInt8
-    def initialize(@obj_length : UInt16, @obj_class : UInt8, @obj_ctype : UInt8)
-    end
-  end
-
-  @[Extern]
-  struct Session_IPv4
-    property sess_destaddr : Win32cr::Networking::WinSock::IN_ADDR
-    property sess_protid : UInt8
-    property sess_flags : UInt8
-    property sess_destport : UInt16
-    def initialize(@sess_destaddr : Win32cr::Networking::WinSock::IN_ADDR, @sess_protid : UInt8, @sess_flags : UInt8, @sess_destport : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct RSVP_SESSION
-    property sess_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property sess_u : Sess_u_e__union_
-
-    # Nested Type Sess_u_e__union_
-    @[Extern(union: true)]
-    struct Sess_u_e__union_
-    property sess_ipv4 : Win32cr::NetworkManagement::QoS::Session_IPv4
-    def initialize(@sess_ipv4 : Win32cr::NetworkManagement::QoS::Session_IPv4)
-    end
-    end
-
-    def initialize(@sess_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @sess_u : Sess_u_e__union_)
-    end
-  end
-
-  @[Extern]
-  struct Rsvp_Hop_IPv4
-    property hop_ipaddr : Win32cr::Networking::WinSock::IN_ADDR
-    property hop_LIH : UInt32
-    def initialize(@hop_ipaddr : Win32cr::Networking::WinSock::IN_ADDR, @hop_LIH : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct RSVP_HOP
-    property hop_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property hop_u : Hop_u_e__union_
-
-    # Nested Type Hop_u_e__union_
-    @[Extern(union: true)]
-    struct Hop_u_e__union_
-    property hop_ipv4 : Win32cr::NetworkManagement::QoS::Rsvp_Hop_IPv4
-    def initialize(@hop_ipv4 : Win32cr::NetworkManagement::QoS::Rsvp_Hop_IPv4)
-    end
-    end
-
-    def initialize(@hop_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @hop_u : Hop_u_e__union_)
-    end
-  end
-
-  @[Extern]
-  struct RESV_STYLE
-    property style_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property style_word : UInt32
-    def initialize(@style_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @style_word : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct Filter_Spec_IPv4
-    property filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR
-    property filt_unused : UInt16
-    property filt_port : UInt16
-    def initialize(@filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR, @filt_unused : UInt16, @filt_port : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct Filter_Spec_IPv4GPI
-    property filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR
-    property filt_gpi : UInt32
-    def initialize(@filt_ipaddr : Win32cr::Networking::WinSock::IN_ADDR, @filt_gpi : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct FILTER_SPEC
-    property filt_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property filt_u : Filt_u_e__union_
-
-    # Nested Type Filt_u_e__union_
-    @[Extern(union: true)]
-    struct Filt_u_e__union_
-    property filt_ipv4 : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4
-    property filt_ipv4gpi : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4GPI
-    def initialize(@filt_ipv4 : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4, @filt_ipv4gpi : Win32cr::NetworkManagement::QoS::Filter_Spec_IPv4GPI)
-    end
-    end
-
-    def initialize(@filt_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @filt_u : Filt_u_e__union_)
-    end
-  end
-
-  @[Extern]
-  struct Scope_list_ipv4
-    property scopl_ipaddr : Win32cr::Networking::WinSock::IN_ADDR*
-    def initialize(@scopl_ipaddr : Win32cr::Networking::WinSock::IN_ADDR*)
-    end
-  end
-
-  @[Extern]
-  struct RSVP_SCOPE
-    property scopl_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property scope_u : Scope_u_e__union_
-
-    # Nested Type Scope_u_e__union_
-    @[Extern(union: true)]
-    struct Scope_u_e__union_
-    property scopl_ipv4 : Win32cr::NetworkManagement::QoS::Scope_list_ipv4
-    def initialize(@scopl_ipv4 : Win32cr::NetworkManagement::QoS::Scope_list_ipv4)
-    end
-    end
-
-    def initialize(@scopl_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @scope_u : Scope_u_e__union_)
-    end
-  end
-
-  @[Extern]
-  struct Error_Spec_IPv4
-    property errs_errnode : Win32cr::Networking::WinSock::IN_ADDR
-    property errs_flags : UInt8
-    property errs_code : UInt8
-    property errs_value : UInt16
-    def initialize(@errs_errnode : Win32cr::Networking::WinSock::IN_ADDR, @errs_flags : UInt8, @errs_code : UInt8, @errs_value : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct ERROR_SPEC
-    property errs_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property errs_u : Errs_u_e__union_
-
-    # Nested Type Errs_u_e__union_
-    @[Extern(union: true)]
-    struct Errs_u_e__union_
-    property errs_ipv4 : Win32cr::NetworkManagement::QoS::Error_Spec_IPv4
-    def initialize(@errs_ipv4 : Win32cr::NetworkManagement::QoS::Error_Spec_IPv4)
-    end
-    end
-
-    def initialize(@errs_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @errs_u : Errs_u_e__union_)
-    end
-  end
-
-  @[Extern]
-  struct POLICY_DATA
-    property policy_obj_hdr : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property usPeOffset : UInt16
-    property usReserved : UInt16
-    def initialize(@policy_obj_hdr : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @usPeOffset : UInt16, @usReserved : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct POLICY_ELEMENT
-    property usPeLength : UInt16
-    property usPeType : UInt16
-    property ucPeData : UInt8[4]
-    def initialize(@usPeLength : UInt16, @usPeType : UInt16, @ucPeData : UInt8[4])
-    end
-  end
-
-  @[Extern]
-  struct IntServMainHdr
-    property ismh_version : UInt8
-    property ismh_unused : UInt8
-    property ismh_len32b : UInt16
-    def initialize(@ismh_version : UInt8, @ismh_unused : UInt8, @ismh_len32b : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct IntServServiceHdr
-    property issh_service : UInt8
-    property issh_flags : UInt8
-    property issh_len32b : UInt16
-    def initialize(@issh_service : UInt8, @issh_flags : UInt8, @issh_len32b : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct IntServParmHdr
-    property isph_parm_num : UInt8
-    property isph_flags : UInt8
-    property isph_len32b : UInt16
-    def initialize(@isph_parm_num : UInt8, @isph_flags : UInt8, @isph_len32b : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct GenTspecParms
-    property tb_tspec_r : Float32
-    property tb_tspec_b : Float32
-    property tb_tspec_p : Float32
-    property tb_tspec_m : UInt32
-    property tb_tspec_m_ : UInt32
-    def initialize(@tb_tspec_r : Float32, @tb_tspec_b : Float32, @tb_tspec_p : Float32, @tb_tspec_m : UInt32, @tb_tspec_m_ : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct GenTspec
-    property gen_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
-    property gen_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gen_Tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms
-    def initialize(@gen_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @gen_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_Tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms)
-    end
-  end
-
-  @[Extern]
-  struct QualTspecParms
-    property tb_tspec_m : UInt32
-    def initialize(@tb_tspec_m : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct QualTspec
-    property qual_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
-    property qual_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property qual_Tspec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms
-    def initialize(@qual_Tspec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @qual_Tspec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @qual_Tspec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms)
-    end
-  end
-
-  @[Extern]
-  struct QualAppFlowSpec
-    property q_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
-    property q_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property q_spec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms
-    def initialize(@q_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @q_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @q_spec_parms : Win32cr::NetworkManagement::QoS::QualTspecParms)
-    end
-  end
-
-  @[Extern]
-  struct IntServTspecBody
-    property st_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr
-    property tspec_u : Tspec_u_e__union_
-
-    # Nested Type Tspec_u_e__union_
-    @[Extern(union: true)]
-    struct Tspec_u_e__union_
-    property gen_stspec : Win32cr::NetworkManagement::QoS::GenTspec
-    property qual_stspec : Win32cr::NetworkManagement::QoS::QualTspec
-    def initialize(@gen_stspec : Win32cr::NetworkManagement::QoS::GenTspec, @qual_stspec : Win32cr::NetworkManagement::QoS::QualTspec)
-    end
-    end
-
-    def initialize(@st_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr, @tspec_u : Tspec_u_e__union_)
-    end
-  end
-
-  @[Extern]
-  struct SENDER_TSPEC
-    property stspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property stspec_body : Win32cr::NetworkManagement::QoS::IntServTspecBody
-    def initialize(@stspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @stspec_body : Win32cr::NetworkManagement::QoS::IntServTspecBody)
-    end
-  end
-
-  @[Extern]
-  struct CtrlLoadFlowspec
-    property cl_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
-    property cl_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property cl_spec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms
-    def initialize(@cl_spec_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @cl_spec_parm_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @cl_spec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms)
-    end
-  end
-
-  @[Extern]
-  struct GuarRspec
-    property guar_r : Float32
-    property guar_s : UInt32
-    def initialize(@guar_r : Float32, @guar_s : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct GuarFlowSpec
-    property guar_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
-    property guar_tspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property guar_tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms
-    property guar_rspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property guar_rspec : Win32cr::NetworkManagement::QoS::GuarRspec
-    def initialize(@guar_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @guar_tspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @guar_tspec_parms : Win32cr::NetworkManagement::QoS::GenTspecParms, @guar_rspec_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @guar_rspec : Win32cr::NetworkManagement::QoS::GuarRspec)
-    end
-  end
-
-  @[Extern]
-  struct IntServFlowSpec
-    property spec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr
-    property spec_u : Spec_u_e__union_
-
-    # Nested Type Spec_u_e__union_
-    @[Extern(union: true)]
-    struct Spec_u_e__union_
-    property cl_spec : Win32cr::NetworkManagement::QoS::CtrlLoadFlowspec
-    property g_spec : Win32cr::NetworkManagement::QoS::GuarFlowSpec
-    property q_spec : Win32cr::NetworkManagement::QoS::QualAppFlowSpec
-    def initialize(@cl_spec : Win32cr::NetworkManagement::QoS::CtrlLoadFlowspec, @g_spec : Win32cr::NetworkManagement::QoS::GuarFlowSpec, @q_spec : Win32cr::NetworkManagement::QoS::QualAppFlowSpec)
-    end
-    end
-
-    def initialize(@spec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr, @spec_u : Spec_u_e__union_)
-    end
-  end
-
-  @[Extern]
-  struct IS_FLOWSPEC
-    property flow_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property flow_body : Win32cr::NetworkManagement::QoS::IntServFlowSpec
-    def initialize(@flow_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @flow_body : Win32cr::NetworkManagement::QoS::IntServFlowSpec)
-    end
-  end
-
-  @[Extern]
-  struct Flow_desc
-    property u1 : U1_e__union_
-    property u2 : U2_e__union_
-
-    # Nested Type U1_e__union_
-    @[Extern(union: true)]
-    struct U1_e__union_
-    property stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*
-    property isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*
-    def initialize(@stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*, @isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*)
-    end
-    end
-
-
-    # Nested Type U2_e__union_
-    @[Extern(union: true)]
-    struct U2_e__union_
-    property stemp : Win32cr::NetworkManagement::QoS::FILTER_SPEC*
-    property fspec : Win32cr::NetworkManagement::QoS::FILTER_SPEC*
-    def initialize(@stemp : Win32cr::NetworkManagement::QoS::FILTER_SPEC*, @fspec : Win32cr::NetworkManagement::QoS::FILTER_SPEC*)
-    end
-    end
-
-    def initialize(@u1 : U1_e__union_, @u2 : U2_e__union_)
-    end
-  end
-
-  @[Extern]
-  struct Gads_parms_t
-    property gads_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
-    property gads_ctot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gads_ctot : UInt32
-    property gads_dtot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gads_dtot : UInt32
-    property gads_csum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gads_csum : UInt32
-    property gads_dsum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gads_dsum : UInt32
-    def initialize(@gads_serv_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @gads_ctot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gads_ctot : UInt32, @gads_dtot_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gads_dtot : UInt32, @gads_csum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gads_csum : UInt32, @gads_dsum_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gads_dsum : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct GenAdspecParams
-    property gen_parm_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr
-    property gen_parm_hopcnt_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gen_parm_hopcnt : UInt32
-    property gen_parm_pathbw_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gen_parm_path_bw : Float32
-    property gen_parm_minlat_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gen_parm_min_latency : UInt32
-    property gen_parm_compmtu_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr
-    property gen_parm_composed_MTU : UInt32
-    def initialize(@gen_parm_hdr : Win32cr::NetworkManagement::QoS::IntServServiceHdr, @gen_parm_hopcnt_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_parm_hopcnt : UInt32, @gen_parm_pathbw_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_parm_path_bw : Float32, @gen_parm_minlat_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_parm_min_latency : UInt32, @gen_parm_compmtu_hdr : Win32cr::NetworkManagement::QoS::IntServParmHdr, @gen_parm_composed_MTU : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct IS_ADSPEC_BODY
-    property adspec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr
-    property adspec_genparms : Win32cr::NetworkManagement::QoS::GenAdspecParams
-    def initialize(@adspec_mh : Win32cr::NetworkManagement::QoS::IntServMainHdr, @adspec_genparms : Win32cr::NetworkManagement::QoS::GenAdspecParams)
-    end
-  end
-
-  @[Extern]
-  struct ADSPEC
-    property adspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr
-    property adspec_body : Win32cr::NetworkManagement::QoS::IS_ADSPEC_BODY
-    def initialize(@adspec_header : Win32cr::NetworkManagement::QoS::RsvpObjHdr, @adspec_body : Win32cr::NetworkManagement::QoS::IS_ADSPEC_BODY)
-    end
-  end
-
-  @[Extern]
-  struct ID_ERROR_OBJECT
-    property usIdErrLength : UInt16
-    property ucAType : UInt8
-    property ucSubType : UInt8
-    property usReserved : UInt16
-    property usIdErrorValue : UInt16
-    property ucIdErrData : UInt8[4]
-    def initialize(@usIdErrLength : UInt16, @ucAType : UInt8, @ucSubType : UInt8, @usReserved : UInt16, @usIdErrorValue : UInt16, @ucIdErrData : UInt8[4])
-    end
-  end
-
-  @[Extern]
-  struct RSVP_MSG_OBJS
-    property rsvp_msg_type : Int32
-    property pRsvpSession : Win32cr::NetworkManagement::QoS::RSVP_SESSION*
-    property pRsvpFromHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*
-    property pRsvpToHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*
-    property pResvStyle : Win32cr::NetworkManagement::QoS::RESV_STYLE*
-    property pRsvpScope : Win32cr::NetworkManagement::QoS::RSVP_SCOPE*
-    property flow_desc_count : Int32
-    property pFlowDescs : Win32cr::NetworkManagement::QoS::Flow_desc*
-    property pd_object_count : Int32
-    property ppPdObjects : Win32cr::NetworkManagement::QoS::POLICY_DATA**
-    property pErrorSpec : Win32cr::NetworkManagement::QoS::ERROR_SPEC*
-    property pAdspec : Win32cr::NetworkManagement::QoS::ADSPEC*
-    def initialize(@rsvp_msg_type : Int32, @pRsvpSession : Win32cr::NetworkManagement::QoS::RSVP_SESSION*, @pRsvpFromHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*, @pRsvpToHop : Win32cr::NetworkManagement::QoS::RSVP_HOP*, @pResvStyle : Win32cr::NetworkManagement::QoS::RESV_STYLE*, @pRsvpScope : Win32cr::NetworkManagement::QoS::RSVP_SCOPE*, @flow_desc_count : Int32, @pFlowDescs : Win32cr::NetworkManagement::QoS::Flow_desc*, @pd_object_count : Int32, @ppPdObjects : Win32cr::NetworkManagement::QoS::POLICY_DATA**, @pErrorSpec : Win32cr::NetworkManagement::QoS::ERROR_SPEC*, @pAdspec : Win32cr::NetworkManagement::QoS::ADSPEC*)
-    end
-  end
-
-  @[Extern]
-  struct Policy_decision
-    property lpvResult : UInt32
-    property wPolicyErrCode : UInt16
-    property wPolicyErrValue : UInt16
-    def initialize(@lpvResult : UInt32, @wPolicyErrCode : UInt16, @wPolicyErrValue : UInt16)
-    end
-  end
-
-  @[Extern]
-  struct LPM_INIT_INFO
-    property pcm_version_number : UInt32
-    property result_time_limit : UInt32
-    property configured_lpm_count : Int32
-    property alloc_memory : Win32cr::NetworkManagement::QoS::PALLOCMEM
-    property free_memory : Win32cr::NetworkManagement::QoS::PFREEMEM
-    property pcm_admit_result_callback : Win32cr::NetworkManagement::QoS::CBADMITRESULT
-    property get_rsvp_objects_callback : Win32cr::NetworkManagement::QoS::CBGETRSVPOBJECTS
-    def initialize(@pcm_version_number : UInt32, @result_time_limit : UInt32, @configured_lpm_count : Int32, @alloc_memory : Win32cr::NetworkManagement::QoS::PALLOCMEM, @free_memory : Win32cr::NetworkManagement::QoS::PFREEMEM, @pcm_admit_result_callback : Win32cr::NetworkManagement::QoS::CBADMITRESULT, @get_rsvp_objects_callback : Win32cr::NetworkManagement::QoS::CBGETRSVPOBJECTS)
-    end
-  end
-
-  @[Extern]
-  struct Lpmiptable
-    property ulIfIndex : UInt32
-    property media_type : UInt32
-    property if_ip_addr : Win32cr::Networking::WinSock::IN_ADDR
-    property if_net_mask : Win32cr::Networking::WinSock::IN_ADDR
-    def initialize(@ulIfIndex : UInt32, @media_type : UInt32, @if_ip_addr : Win32cr::Networking::WinSock::IN_ADDR, @if_net_mask : Win32cr::Networking::WinSock::IN_ADDR)
     end
   end
 
@@ -1152,8 +624,8 @@ module Win32cr::NetworkManagement::QoS
   struct QOS_DIFFSERV
     property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
     property ds_field_count : UInt32
-    property diffserv_rule : UInt8*
-    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @ds_field_count : UInt32, @diffserv_rule : UInt8*)
+    property diffserv_rule : UInt8[1]
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @ds_field_count : UInt32, @diffserv_rule : UInt8[1])
     end
   end
 
@@ -1228,8 +700,8 @@ module Win32cr::NetworkManagement::QoS
     property sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC
     property receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC
     property tc_objects_length : UInt32
-    property tc_objects : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR*
-    def initialize(@sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC, @receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC, @tc_objects_length : UInt32, @tc_objects : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR*)
+    property tc_objects : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR[1]
+    def initialize(@sending_flowspec : Win32cr::Networking::WinSock::FLOWSPEC, @receiving_flowspec : Win32cr::Networking::WinSock::FLOWSPEC, @tc_objects_length : UInt32, @tc_objects : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR[1])
     end
   end
 
@@ -1250,6 +722,16 @@ module Win32cr::NetworkManagement::QoS
     property s_un_icmp : S_un_icmp_e__Struct_
     property s_spi : UInt32
 
+      # Nested Type S_un_ports_e__Struct_
+      @[Extern]
+      struct S_un_ports_e__Struct_
+    property s_srcport : UInt16
+    property s_dstport : UInt16
+    def initialize(@s_srcport : UInt16, @s_dstport : UInt16)
+    end
+      end
+
+
       # Nested Type S_un_icmp_e__Struct_
       @[Extern]
       struct S_un_icmp_e__Struct_
@@ -1257,16 +739,6 @@ module Win32cr::NetworkManagement::QoS
     property s_code : UInt8
     property filler : UInt16
     def initialize(@s_type : UInt8, @s_code : UInt8, @filler : UInt16)
-    end
-      end
-
-
-      # Nested Type S_un_ports_e__Struct_
-      @[Extern]
-      struct S_un_ports_e__Struct_
-    property s_srcport : UInt16
-    property s_dstport : UInt16
-    def initialize(@s_srcport : UInt16, @s_dstport : UInt16)
     end
       end
 
@@ -1305,8 +777,8 @@ module Win32cr::NetworkManagement::QoS
     property flow_name : UInt16[256]
     property pFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*
     property number_of_filters : UInt32
-    property generic_filter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER*
-    def initialize(@length : UInt32, @owner_process_id : UInt32, @flow_name_length : UInt16, @flow_name : UInt16[256], @pFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*, @number_of_filters : UInt32, @generic_filter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER*)
+    property generic_filter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER[1]
+    def initialize(@length : UInt32, @owner_process_id : UInt32, @flow_name_length : UInt16, @flow_name : UInt16[256], @pFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*, @number_of_filters : UInt32, @generic_filter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER[1])
     end
   end
 
@@ -1411,8 +883,8 @@ module Win32cr::NetworkManagement::QoS
   struct RSVP_POLICY_INFO
     property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
     property num_policy_element : UInt32
-    property policy_element : Win32cr::NetworkManagement::QoS::RSVP_POLICY*
-    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @num_policy_element : UInt32, @policy_element : Win32cr::NetworkManagement::QoS::RSVP_POLICY*)
+    property policy_element : Win32cr::NetworkManagement::QoS::RSVP_POLICY[1]
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @num_policy_element : UInt32, @policy_element : Win32cr::NetworkManagement::QoS::RSVP_POLICY[1])
     end
   end
 
@@ -1472,8 +944,8 @@ module Win32cr::NetworkManagement::QoS
   struct PARAM_BUFFER
     property parameter_id : UInt32
     property length : UInt32
-    property buffer : UInt8*
-    def initialize(@parameter_id : UInt32, @length : UInt32, @buffer : UInt8*)
+    property buffer : UInt8[1]
+    def initialize(@parameter_id : UInt32, @length : UInt32, @buffer : UInt8[1])
     end
   end
 
@@ -1488,8 +960,8 @@ module Win32cr::NetworkManagement::QoS
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property guaranteed : Win32cr::NetworkManagement::QoS::AD_GUARANTEED
-    property param_buffer : Win32cr::NetworkManagement::QoS::PARAM_BUFFER*
-    def initialize(@guaranteed : Win32cr::NetworkManagement::QoS::AD_GUARANTEED, @param_buffer : Win32cr::NetworkManagement::QoS::PARAM_BUFFER*)
+    property param_buffer : Win32cr::NetworkManagement::QoS::PARAM_BUFFER[1]
+    def initialize(@guaranteed : Win32cr::NetworkManagement::QoS::AD_GUARANTEED, @param_buffer : Win32cr::NetworkManagement::QoS::PARAM_BUFFER[1])
     end
     end
 
@@ -1502,8 +974,8 @@ module Win32cr::NetworkManagement::QoS
     property object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR
     property general_params : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS
     property number_of_services : UInt32
-    property services : Win32cr::NetworkManagement::QoS::CONTROL_SERVICE*
-    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @general_params : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS, @number_of_services : UInt32, @services : Win32cr::NetworkManagement::QoS::CONTROL_SERVICE*)
+    property services : Win32cr::NetworkManagement::QoS::CONTROL_SERVICE[1]
+    def initialize(@object_hdr : Win32cr::NetworkManagement::QoS::QOS_OBJECT_HDR, @general_params : Win32cr::NetworkManagement::QoS::AD_GENERAL_PARAMS, @number_of_services : UInt32, @services : Win32cr::NetworkManagement::QoS::CONTROL_SERVICE[1])
     end
   end
 
@@ -1514,6 +986,14 @@ module Win32cr::NetworkManagement::QoS
     property pe_attrib_sub_type : UInt8
     property pe_attrib_value : UInt8[4]
     def initialize(@pe_attrib_length : UInt16, @pe_attrib_type : UInt8, @pe_attrib_sub_type : UInt8, @pe_attrib_value : UInt8[4])
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA
+    property checksum_type : UInt16
+    property checksum_buffer : UInt8[1]
+    def initialize(@checksum_type : UInt16, @checksum_buffer : UInt8[1])
     end
   end
 
@@ -1534,13 +1014,23 @@ module Win32cr::NetworkManagement::QoS
   end
 
   @[Extern]
+  struct PLUTON_UPGRADE_IMAGEDATA
+    property hashAlgID : UInt16
+    property digestSize : UInt16
+    property digest : UInt8[64]
+    property fileName : UInt16[64]
+    def initialize(@hashAlgID : UInt16, @digestSize : UInt16, @digest : UInt8[64], @fileName : UInt16[64])
+    end
+  end
+
+  @[Extern]
   struct TCG_PCClientPCREventStruct
     property pcrIndex : UInt32
     property eventType : UInt32
     property digest : UInt8[20]
     property eventDataSize : UInt32
-    property event : UInt8*
-    def initialize(@pcrIndex : UInt32, @eventType : UInt32, @digest : UInt8[20], @eventDataSize : UInt32, @event : UInt8*)
+    property event : UInt8[1]
+    def initialize(@pcrIndex : UInt32, @eventType : UInt32, @digest : UInt8[20], @eventDataSize : UInt32, @event : UInt8[1])
     end
   end
 
@@ -1548,8 +1038,8 @@ module Win32cr::NetworkManagement::QoS
   struct TCG_PCClientTaggedEventStruct
     property event_id : UInt32
     property event_data_size : UInt32
-    property event_data : UInt8*
-    def initialize(@event_id : UInt32, @event_data_size : UInt32, @event_data : UInt8*)
+    property event_data : UInt8[1]
+    def initialize(@event_id : UInt32, @event_data_size : UInt32, @event_data : UInt8[1])
     end
   end
 
@@ -1564,25 +1054,25 @@ module Win32cr::NetworkManagement::QoS
   end
 
   @[Extern]
-  struct SIPAEVENT_VSM_IDK_RSA_INFO_
+  struct SIPAEVENT_VSM_IDK_RSA_INFO
     property key_bit_length : UInt32
     property public_exp_length_bytes : UInt32
     property modulus_size_bytes : UInt32
-    property public_key_data : UInt8*
-    def initialize(@key_bit_length : UInt32, @public_exp_length_bytes : UInt32, @modulus_size_bytes : UInt32, @public_key_data : UInt8*)
+    property public_key_data : UInt8[1]
+    def initialize(@key_bit_length : UInt32, @public_exp_length_bytes : UInt32, @modulus_size_bytes : UInt32, @public_key_data : UInt8[1])
     end
   end
 
   @[Extern]
-  struct SIPAEVENT_VSM_IDK_INFO_PAYLOAD_
+  struct SIPAEVENT_VSM_IDK_INFO_PAYLOAD
     property key_alg_id : UInt32
     property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
     struct Anonymous_e__Union_
-    property rsa_key_info : Win32cr::NetworkManagement::QoS::SIPAEVENT_VSM_IDK_RSA_INFO_
-    def initialize(@rsa_key_info : Win32cr::NetworkManagement::QoS::SIPAEVENT_VSM_IDK_RSA_INFO_)
+    property rsa_key_info : Win32cr::NetworkManagement::QoS::SIPAEVENT_VSM_IDK_RSA_INFO
+    def initialize(@rsa_key_info : Win32cr::NetworkManagement::QoS::SIPAEVENT_VSM_IDK_RSA_INFO)
     end
     end
 
@@ -1591,174 +1081,261 @@ module Win32cr::NetworkManagement::QoS
   end
 
   @[Extern]
-  struct SIPAEVENT_SI_POLICY_PAYLOAD_
+  struct SIPAEVENT_SI_POLICY_PAYLOAD
     property policy_version : UInt64
     property policy_name_length : UInt16
     property hash_alg_id : UInt16
     property digest_length : UInt32
-    property var_length_data : UInt8*
-    def initialize(@policy_version : UInt64, @policy_name_length : UInt16, @hash_alg_id : UInt16, @digest_length : UInt32, @var_length_data : UInt8*)
+    property var_length_data : UInt8[1]
+    def initialize(@policy_version : UInt64, @policy_name_length : UInt16, @hash_alg_id : UInt16, @digest_length : UInt32, @var_length_data : UInt8[1])
     end
   end
 
   @[Extern]
-  struct SIPAEVENT_REVOCATION_LIST_PAYLOAD_
+  struct SIPAEVENT_SI_POLICY_CERTIFICATE_PAYLOAD
+    property publisher_common_name_length : UInt16
+    property issuer_common_name_length : UInt16
+    property hash_alg_id : UInt32
+    property digest_length : UInt16
+    property var_length_data : UInt8[1]
+    def initialize(@publisher_common_name_length : UInt16, @issuer_common_name_length : UInt16, @hash_alg_id : UInt32, @digest_length : UInt16, @var_length_data : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_SI_POLICY_SIGNER_PAYLOAD
+    property root_id : UInt32
+    property certificates_length : UInt32
+    property certificates_count : UInt16
+    property policy_name_length : UInt16
+    property ek_us_length : UInt16
+    property ek_us_count : UInt16
+    property var_length_data : UInt8[1]
+    def initialize(@root_id : UInt32, @certificates_length : UInt32, @certificates_count : UInt16, @policy_name_length : UInt16, @ek_us_length : UInt16, @ek_us_count : UInt16, @var_length_data : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct SIPAEVENT_REVOCATION_LIST_PAYLOAD
     property creation_time : Int64
     property digest_length : UInt32
     property hash_alg_id : UInt16
-    property digest : UInt8*
-    def initialize(@creation_time : Int64, @digest_length : UInt32, @hash_alg_id : UInt16, @digest : UInt8*)
+    property digest : UInt8[1]
+    def initialize(@creation_time : Int64, @digest_length : UInt32, @hash_alg_id : UInt16, @digest : UInt8[1])
     end
   end
 
   @[Extern]
-  struct SIPAEVENT_KSR_SIGNATURE_PAYLOAD_
+  struct SIPAEVENT_KSR_SIGNATURE_PAYLOAD
     property sign_alg_id : UInt32
     property signature_length : UInt32
-    property signature : UInt8*
-    def initialize(@sign_alg_id : UInt32, @signature_length : UInt32, @signature : UInt8*)
+    property signature : UInt8[1]
+    def initialize(@sign_alg_id : UInt32, @signature_length : UInt32, @signature : UInt8[1])
     end
   end
 
   @[Extern]
-  struct SIPAEVENT_SBCP_INFO_PAYLOAD_V1_
+  struct SIPAEVENT_SBCP_INFO_PAYLOAD_V1
     property payload_version : UInt32
     property var_data_offset : UInt32
     property hash_alg_id : UInt16
     property digest_length : UInt16
     property options : UInt32
     property signers_count : UInt32
-    property var_data : UInt8*
-    def initialize(@payload_version : UInt32, @var_data_offset : UInt32, @hash_alg_id : UInt16, @digest_length : UInt16, @options : UInt32, @signers_count : UInt32, @var_data : UInt8*)
+    property var_data : UInt8[1]
+    def initialize(@payload_version : UInt32, @var_data_offset : UInt32, @hash_alg_id : UInt16, @digest_length : UInt16, @options : UInt32, @signers_count : UInt32, @var_data : UInt8[1])
     end
   end
 
   def qOSCreateHandle(version : Win32cr::NetworkManagement::QoS::QOS_VERSION*, qos_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSCreateHandle(version, qos_handle)
+    {% end %}
   end
 
   def qOSCloseHandle(qos_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSCloseHandle(qos_handle)
+    {% end %}
   end
 
   def qOSStartTrackingClient(qos_handle : Win32cr::Foundation::HANDLE, dest_addr : Win32cr::Networking::WinSock::SOCKADDR*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSStartTrackingClient(qos_handle, dest_addr, flags)
+    {% end %}
   end
 
   def qOSStopTrackingClient(qos_handle : Win32cr::Foundation::HANDLE, dest_addr : Win32cr::Networking::WinSock::SOCKADDR*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSStopTrackingClient(qos_handle, dest_addr, flags)
+    {% end %}
   end
 
   def qOSEnumerateFlows(qos_handle : Win32cr::Foundation::HANDLE, size : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSEnumerateFlows(qos_handle, size, buffer)
+    {% end %}
   end
 
   def qOSAddSocketToFlow(qos_handle : Win32cr::Foundation::HANDLE, socket : Win32cr::Networking::WinSock::SOCKET, dest_addr : Win32cr::Networking::WinSock::SOCKADDR*, traffic_type : Win32cr::NetworkManagement::QoS::QOS_TRAFFIC_TYPE, flags : UInt32, flow_id : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSAddSocketToFlow(qos_handle, socket, dest_addr, traffic_type, flags, flow_id)
+    {% end %}
   end
 
   def qOSRemoveSocketFromFlow(qos_handle : Win32cr::Foundation::HANDLE, socket : Win32cr::Networking::WinSock::SOCKET, flow_id : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSRemoveSocketFromFlow(qos_handle, socket, flow_id, flags)
+    {% end %}
   end
 
   def qOSSetFlow(qos_handle : Win32cr::Foundation::HANDLE, flow_id : UInt32, operation : Win32cr::NetworkManagement::QoS::QOS_SET_FLOW, size : UInt32, buffer : Void*, flags : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSSetFlow(qos_handle, flow_id, operation, size, buffer, flags, overlapped)
+    {% end %}
   end
 
   def qOSQueryFlow(qos_handle : Win32cr::Foundation::HANDLE, flow_id : UInt32, operation : Win32cr::NetworkManagement::QoS::QOS_QUERY_FLOW, size : UInt32*, buffer : Void*, flags : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSQueryFlow(qos_handle, flow_id, operation, size, buffer, flags, overlapped)
+    {% end %}
   end
 
   def qOSNotifyFlow(qos_handle : Win32cr::Foundation::HANDLE, flow_id : UInt32, operation : Win32cr::NetworkManagement::QoS::QOS_NOTIFY_FLOW, size : UInt32*, buffer : Void*, flags : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSNotifyFlow(qos_handle, flow_id, operation, size, buffer, flags, overlapped)
+    {% end %}
   end
 
   def qOSCancel(qos_handle : Win32cr::Foundation::HANDLE, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSCancel(qos_handle, overlapped)
+    {% end %}
   end
 
   def tcRegisterClient(tci_version : UInt32, cl_reg_ctx : Win32cr::Foundation::HANDLE, client_handler_list : Win32cr::NetworkManagement::QoS::TCI_CLIENT_FUNC_LIST*, pClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcRegisterClient(tci_version, cl_reg_ctx, client_handler_list, pClientHandle)
+    {% end %}
   end
 
   def tcEnumerateInterfaces(client_handle : Win32cr::Foundation::HANDLE, pBufferSize : UInt32*, interface_buffer : Win32cr::NetworkManagement::QoS::TC_IFC_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcEnumerateInterfaces(client_handle, pBufferSize, interface_buffer)
+    {% end %}
   end
 
   def tcOpenInterfaceA(pInterfaceName : Win32cr::Foundation::PSTR, client_handle : Win32cr::Foundation::HANDLE, cl_ifc_ctx : Win32cr::Foundation::HANDLE, pIfcHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcOpenInterfaceA(pInterfaceName, client_handle, cl_ifc_ctx, pIfcHandle)
+    {% end %}
   end
 
   def tcOpenInterfaceW(pInterfaceName : Win32cr::Foundation::PWSTR, client_handle : Win32cr::Foundation::HANDLE, cl_ifc_ctx : Win32cr::Foundation::HANDLE, pIfcHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcOpenInterfaceW(pInterfaceName, client_handle, cl_ifc_ctx, pIfcHandle)
+    {% end %}
   end
 
   def tcCloseInterface(ifc_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TcCloseInterface(ifc_handle)
+    {% end %}
   end
 
   def tcQueryInterface(ifc_handle : Win32cr::Foundation::HANDLE, pGuidParam : LibC::GUID*, notify_change : Win32cr::Foundation::BOOLEAN, pBufferSize : UInt32*, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcQueryInterface(ifc_handle, pGuidParam, notify_change, pBufferSize, buffer)
+    {% end %}
   end
 
   def tcSetInterface(ifc_handle : Win32cr::Foundation::HANDLE, pGuidParam : LibC::GUID*, buffer_size : UInt32, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcSetInterface(ifc_handle, pGuidParam, buffer_size, buffer)
+    {% end %}
   end
 
   def tcQueryFlowA(pFlowName : Win32cr::Foundation::PSTR, pGuidParam : LibC::GUID*, pBufferSize : UInt32*, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcQueryFlowA(pFlowName, pGuidParam, pBufferSize, buffer)
+    {% end %}
   end
 
   def tcQueryFlowW(pFlowName : Win32cr::Foundation::PWSTR, pGuidParam : LibC::GUID*, pBufferSize : UInt32*, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcQueryFlowW(pFlowName, pGuidParam, pBufferSize, buffer)
+    {% end %}
   end
 
   def tcSetFlowA(pFlowName : Win32cr::Foundation::PSTR, pGuidParam : LibC::GUID*, buffer_size : UInt32, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcSetFlowA(pFlowName, pGuidParam, buffer_size, buffer)
+    {% end %}
   end
 
   def tcSetFlowW(pFlowName : Win32cr::Foundation::PWSTR, pGuidParam : LibC::GUID*, buffer_size : UInt32, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcSetFlowW(pFlowName, pGuidParam, buffer_size, buffer)
+    {% end %}
   end
 
   def tcAddFlow(ifc_handle : Win32cr::Foundation::HANDLE, cl_flow_ctx : Win32cr::Foundation::HANDLE, flags : UInt32, pGenericFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*, pFlowHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcAddFlow(ifc_handle, cl_flow_ctx, flags, pGenericFlow, pFlowHandle)
+    {% end %}
   end
 
-  def tcGetFlowNameA(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : UInt8*) : UInt32
+  def tcGetFlowNameA(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TcGetFlowNameA(flow_handle, str_size, pFlowName)
+    {% end %}
   end
 
-  def tcGetFlowNameW(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : UInt16*) : UInt32
+  def tcGetFlowNameW(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TcGetFlowNameW(flow_handle, str_size, pFlowName)
+    {% end %}
   end
 
   def tcModifyFlow(flow_handle : Win32cr::Foundation::HANDLE, pGenericFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcModifyFlow(flow_handle, pGenericFlow)
+    {% end %}
   end
 
   def tcAddFilter(flow_handle : Win32cr::Foundation::HANDLE, pGenericFilter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER*, pFilterHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcAddFilter(flow_handle, pGenericFilter, pFilterHandle)
+    {% end %}
   end
 
   def tcDeregisterClient(client_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TcDeregisterClient(client_handle)
+    {% end %}
   end
 
   def tcDeleteFlow(flow_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TcDeleteFlow(flow_handle)
+    {% end %}
   end
 
   def tcDeleteFilter(filter_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TcDeleteFilter(filter_handle)
+    {% end %}
   end
 
   def tcEnumerateFlows(ifc_handle : Win32cr::Foundation::HANDLE, pEnumHandle : Win32cr::Foundation::HANDLE*, pFlowCount : UInt32*, pBufSize : UInt32*, buffer : Win32cr::NetworkManagement::QoS::ENUMERATION_BUFFER*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcEnumerateFlows(ifc_handle, pEnumHandle, pFlowCount, pBufSize, buffer)
+    {% end %}
   end
 
   @[Link("qwave")]
   @[Link("traffic")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun QOSCreateHandle(version : Win32cr::NetworkManagement::QoS::QOS_VERSION*, qos_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
@@ -1830,10 +1407,10 @@ module Win32cr::NetworkManagement::QoS
     fun TcAddFlow(ifc_handle : Win32cr::Foundation::HANDLE, cl_flow_ctx : Win32cr::Foundation::HANDLE, flags : UInt32, pGenericFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*, pFlowHandle : Win32cr::Foundation::HANDLE*) : UInt32
 
     # :nodoc:
-    fun TcGetFlowNameA(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : UInt8*) : UInt32
+    fun TcGetFlowNameA(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : Win32cr::Foundation::PSTR) : UInt32
 
     # :nodoc:
-    fun TcGetFlowNameW(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : UInt16*) : UInt32
+    fun TcGetFlowNameW(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
     fun TcModifyFlow(flow_handle : Win32cr::Foundation::HANDLE, pGenericFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*) : UInt32
@@ -1854,4 +1431,5 @@ module Win32cr::NetworkManagement::QoS
     fun TcEnumerateFlows(ifc_handle : Win32cr::Foundation::HANDLE, pEnumHandle : Win32cr::Foundation::HANDLE*, pFlowCount : UInt32*, pBufSize : UInt32*, buffer : Win32cr::NetworkManagement::QoS::ENUMERATION_BUFFER*) : UInt32
 
   end
+  {% end %}
 end

@@ -1,20 +1,11 @@
-require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/com.cr"
 require "./../system/registry.cr"
 require "./../system/com/structured_storage.cr"
 require "./../system/ole.cr"
 
 module Win32cr::UI::LegacyWindowsEnvironmentFeatures
   extend self
-  EVCF_HASSETTINGS = 1_u32
-  EVCF_ENABLEBYDEFAULT = 2_u32
-  EVCF_REMOVEFROMLIST = 4_u32
-  EVCF_ENABLEBYDEFAULT_AUTO = 8_u32
-  EVCF_DONTSHOWIFZERO = 16_u32
-  EVCF_SETTINGSMODE = 32_u32
-  EVCF_OUTOFDISKSPACE = 64_u32
-  EVCF_USERCONSENTOBTAINED = 128_u32
-  EVCF_SYSTEMAUTORUN = 256_u32
   EVCCBF_LASTNOTIFICATION = 1_u32
   STATEBITS_FLAT = 1_u32
   REC_S_IDIDTHEUPDATES = 266240_i32
@@ -26,7 +17,18 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
   REC_E_TOODIFFERENT = -2147217405_i32
   REC_E_INEEDTODOTHEUPDATES = -2147217404_i32
 
-  enum Reconcilef_
+  enum EMPTY_VOLUME_CACHE_FLAGS : UInt32
+    EVCF_HASSETTINGS = 1_u32
+    EVCF_ENABLEBYDEFAULT = 2_u32
+    EVCF_REMOVEFROMLIST = 4_u32
+    EVCF_ENABLEBYDEFAULT_AUTO = 8_u32
+    EVCF_DONTSHOWIFZERO = 16_u32
+    EVCF_SETTINGSMODE = 32_u32
+    EVCF_OUTOFDISKSPACE = 64_u32
+    EVCF_USERCONSENTOBTAINED = 128_u32
+    EVCF_SYSTEMAUTORUN = 256_u32
+  end
+  enum RECONCILEF
     RECONCILEF_MAYBOTHERUSER = 1_i32
     RECONCILEF_FEEDBACKWINDOWVALID = 2_i32
     RECONCILEF_NORESIDUESOK = 4_i32
@@ -38,7 +40,8 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
   end
 
   @[Extern]
-  record IEmptyVolumeCacheCallBackVtbl,
+
+  record IEmptyVolumeCacheCallBackVtable,
     query_interface : Proc(IEmptyVolumeCacheCallBack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEmptyVolumeCacheCallBack*, UInt32),
     release : Proc(IEmptyVolumeCacheCallBack*, UInt32),
@@ -47,7 +50,7 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  record IEmptyVolumeCacheCallBack, lpVtbl : IEmptyVolumeCacheCallBackVtbl* do
+  record IEmptyVolumeCacheCallBack, lpVtbl : IEmptyVolumeCacheCallBackVtable* do
     GUID = LibC::GUID.new(0x6e793361_u32, 0x73c6_u16, 0x11d0_u16, StaticArray[0x84_u8, 0x69_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x29_u8, 0x1_u8])
     def query_interface(this : IEmptyVolumeCacheCallBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68,19 +71,20 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
   end
 
   @[Extern]
-  record IEmptyVolumeCacheVtbl,
+
+  record IEmptyVolumeCacheVtable,
     query_interface : Proc(IEmptyVolumeCache*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEmptyVolumeCache*, UInt32),
     release : Proc(IEmptyVolumeCache*, UInt32),
-    initialize__ : Proc(IEmptyVolumeCache*, Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IEmptyVolumeCache*, Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*, Win32cr::Foundation::HRESULT),
     get_space_used : Proc(IEmptyVolumeCache*, UInt64*, Void*, Win32cr::Foundation::HRESULT),
     purge : Proc(IEmptyVolumeCache*, UInt64, Void*, Win32cr::Foundation::HRESULT),
     show_properties : Proc(IEmptyVolumeCache*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
-    deactivate : Proc(IEmptyVolumeCache*, UInt32*, Win32cr::Foundation::HRESULT)
+    deactivate : Proc(IEmptyVolumeCache*, Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IEmptyVolumeCache, lpVtbl : IEmptyVolumeCacheVtbl* do
+  record IEmptyVolumeCache, lpVtbl : IEmptyVolumeCacheVtable* do
     GUID = LibC::GUID.new(0x8fce5227_u32, 0x4da_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x8a_u8, 0xbe_u8, 0x6_u8])
     def query_interface(this : IEmptyVolumeCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -91,7 +95,7 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
     def release(this : IEmptyVolumeCache*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def initialize__(this : IEmptyVolumeCache*, hkRegKey : Win32cr::System::Registry::HKEY, pcwszVolume : Win32cr::Foundation::PWSTR, ppwszDisplayName : Win32cr::Foundation::PWSTR*, ppwszDescription : Win32cr::Foundation::PWSTR*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    def initialize__(this : IEmptyVolumeCache*, hkRegKey : Win32cr::System::Registry::HKEY, pcwszVolume : Win32cr::Foundation::PWSTR, ppwszDisplayName : Win32cr::Foundation::PWSTR*, ppwszDescription : Win32cr::Foundation::PWSTR*, pdwFlags : Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, hkRegKey, pcwszVolume, ppwszDisplayName, ppwszDescription, pdwFlags)
     end
     def get_space_used(this : IEmptyVolumeCache*, pdwlSpaceUsed : UInt64*, picb : Void*) : Win32cr::Foundation::HRESULT
@@ -103,27 +107,28 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
     def show_properties(this : IEmptyVolumeCache*, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.show_properties.call(this, hwnd)
     end
-    def deactivate(this : IEmptyVolumeCache*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    def deactivate(this : IEmptyVolumeCache*, pdwFlags : Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.deactivate.call(this, pdwFlags)
     end
 
   end
 
   @[Extern]
-  record IEmptyVolumeCache2Vtbl,
+
+  record IEmptyVolumeCache2Vtable,
     query_interface : Proc(IEmptyVolumeCache2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEmptyVolumeCache2*, UInt32),
     release : Proc(IEmptyVolumeCache2*, UInt32),
-    initialize__ : Proc(IEmptyVolumeCache2*, Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IEmptyVolumeCache2*, Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*, Win32cr::Foundation::HRESULT),
     get_space_used : Proc(IEmptyVolumeCache2*, UInt64*, Void*, Win32cr::Foundation::HRESULT),
     purge : Proc(IEmptyVolumeCache2*, UInt64, Void*, Win32cr::Foundation::HRESULT),
     show_properties : Proc(IEmptyVolumeCache2*, Win32cr::Foundation::HWND, Win32cr::Foundation::HRESULT),
-    deactivate : Proc(IEmptyVolumeCache2*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_ex : Proc(IEmptyVolumeCache2*, Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Foundation::HRESULT)
+    deactivate : Proc(IEmptyVolumeCache2*, Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*, Win32cr::Foundation::HRESULT),
+    initialize_ex : Proc(IEmptyVolumeCache2*, Win32cr::System::Registry::HKEY, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR*, Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IEmptyVolumeCache2, lpVtbl : IEmptyVolumeCache2Vtbl* do
+  record IEmptyVolumeCache2, lpVtbl : IEmptyVolumeCache2Vtable* do
     GUID = LibC::GUID.new(0x2b7e3ba_u32, 0x4db3_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xd9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xec_u8, 0x8c_u8])
     def query_interface(this : IEmptyVolumeCache2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -134,7 +139,7 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
     def release(this : IEmptyVolumeCache2*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def initialize__(this : IEmptyVolumeCache2*, hkRegKey : Win32cr::System::Registry::HKEY, pcwszVolume : Win32cr::Foundation::PWSTR, ppwszDisplayName : Win32cr::Foundation::PWSTR*, ppwszDescription : Win32cr::Foundation::PWSTR*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    def initialize__(this : IEmptyVolumeCache2*, hkRegKey : Win32cr::System::Registry::HKEY, pcwszVolume : Win32cr::Foundation::PWSTR, ppwszDisplayName : Win32cr::Foundation::PWSTR*, ppwszDescription : Win32cr::Foundation::PWSTR*, pdwFlags : Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, hkRegKey, pcwszVolume, ppwszDisplayName, ppwszDescription, pdwFlags)
     end
     def get_space_used(this : IEmptyVolumeCache2*, pdwlSpaceUsed : UInt64*, picb : Void*) : Win32cr::Foundation::HRESULT
@@ -146,17 +151,18 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
     def show_properties(this : IEmptyVolumeCache2*, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.show_properties.call(this, hwnd)
     end
-    def deactivate(this : IEmptyVolumeCache2*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    def deactivate(this : IEmptyVolumeCache2*, pdwFlags : Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.deactivate.call(this, pdwFlags)
     end
-    def initialize_ex(this : IEmptyVolumeCache2*, hkRegKey : Win32cr::System::Registry::HKEY, pcwszVolume : Win32cr::Foundation::PWSTR, pcwszKeyName : Win32cr::Foundation::PWSTR, ppwszDisplayName : Win32cr::Foundation::PWSTR*, ppwszDescription : Win32cr::Foundation::PWSTR*, ppwszBtnText : Win32cr::Foundation::PWSTR*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    def initialize_ex(this : IEmptyVolumeCache2*, hkRegKey : Win32cr::System::Registry::HKEY, pcwszVolume : Win32cr::Foundation::PWSTR, pcwszKeyName : Win32cr::Foundation::PWSTR, ppwszDisplayName : Win32cr::Foundation::PWSTR*, ppwszDescription : Win32cr::Foundation::PWSTR*, ppwszBtnText : Win32cr::Foundation::PWSTR*, pdwFlags : Win32cr::UI::LegacyWindowsEnvironmentFeatures::EMPTY_VOLUME_CACHE_FLAGS*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_ex.call(this, hkRegKey, pcwszVolume, pcwszKeyName, ppwszDisplayName, ppwszDescription, ppwszBtnText, pdwFlags)
     end
 
   end
 
   @[Extern]
-  record IReconcileInitiatorVtbl,
+
+  record IReconcileInitiatorVtable,
     query_interface : Proc(IReconcileInitiator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReconcileInitiator*, UInt32),
     release : Proc(IReconcileInitiator*, UInt32),
@@ -165,7 +171,7 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  record IReconcileInitiator, lpVtbl : IReconcileInitiatorVtbl* do
+  record IReconcileInitiator, lpVtbl : IReconcileInitiatorVtable* do
     GUID = LibC::GUID.new(0x99180161_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IReconcileInitiator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -186,7 +192,8 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
   end
 
   @[Extern]
-  record IReconcilableObjectVtbl,
+
+  record IReconcilableObjectVtable,
     query_interface : Proc(IReconcilableObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReconcilableObject*, UInt32),
     release : Proc(IReconcilableObject*, UInt32),
@@ -195,7 +202,7 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  record IReconcilableObject, lpVtbl : IReconcilableObjectVtbl* do
+  record IReconcilableObject, lpVtbl : IReconcilableObjectVtable* do
     GUID = LibC::GUID.new(0x99180162_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IReconcilableObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -216,7 +223,8 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
   end
 
   @[Extern]
-  record IBriefcaseInitiatorVtbl,
+
+  record IBriefcaseInitiatorVtable,
     query_interface : Proc(IBriefcaseInitiator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBriefcaseInitiator*, UInt32),
     release : Proc(IBriefcaseInitiator*, UInt32),
@@ -224,7 +232,7 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  record IBriefcaseInitiator, lpVtbl : IBriefcaseInitiatorVtbl* do
+  record IBriefcaseInitiator, lpVtbl : IBriefcaseInitiatorVtable* do
     GUID = LibC::GUID.new(0x99180164_u32, 0xda16_u16, 0x101a_u16, StaticArray[0x93_u8, 0x5c_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IBriefcaseInitiator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -242,18 +250,19 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
   end
 
   @[Extern]
-  record IActiveDesktopPVtbl,
+
+  record IActiveDesktopPVtable,
     query_interface : Proc(IActiveDesktopP*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveDesktopP*, UInt32),
     release : Proc(IActiveDesktopP*, UInt32),
     set_safe_mode : Proc(IActiveDesktopP*, UInt32, Win32cr::Foundation::HRESULT),
     ensure_update_html : Proc(IActiveDesktopP*, Win32cr::Foundation::HRESULT),
     set_scheme : Proc(IActiveDesktopP*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
-    get_scheme : Proc(IActiveDesktopP*, UInt16*, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+    get_scheme : Proc(IActiveDesktopP*, Win32cr::Foundation::PWSTR, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IActiveDesktopP, lpVtbl : IActiveDesktopPVtbl* do
+  record IActiveDesktopP, lpVtbl : IActiveDesktopPVtable* do
     GUID = LibC::GUID.new(0x52502ee0_u32, 0xec80_u16, 0x11d0_u16, StaticArray[0x89_u8, 0xab_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x97_u8, 0x2d_u8])
     def query_interface(this : IActiveDesktopP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -273,14 +282,15 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
     def set_scheme(this : IActiveDesktopP*, pwszSchemeName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_scheme.call(this, pwszSchemeName, dwFlags)
     end
-    def get_scheme(this : IActiveDesktopP*, pwszSchemeName : UInt16*, pdwcchBuffer : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    def get_scheme(this : IActiveDesktopP*, pwszSchemeName : Win32cr::Foundation::PWSTR, pdwcchBuffer : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_scheme.call(this, pwszSchemeName, pdwcchBuffer, dwFlags)
     end
 
   end
 
   @[Extern]
-  record IADesktopP2Vtbl,
+
+  record IADesktopP2Vtable,
     query_interface : Proc(IADesktopP2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADesktopP2*, UInt32),
     release : Proc(IADesktopP2*, UInt32),
@@ -291,7 +301,7 @@ module Win32cr::UI::LegacyWindowsEnvironmentFeatures
 
 
   @[Extern]
-  record IADesktopP2, lpVtbl : IADesktopP2Vtbl* do
+  record IADesktopP2, lpVtbl : IADesktopP2Vtable* do
     GUID = LibC::GUID.new(0xb22754e2_u32, 0x4574_u16, 0x11d1_u16, StaticArray[0x98_u8, 0x88_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xde_u8, 0xac_u8, 0xf9_u8])
     def query_interface(this : IADesktopP2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

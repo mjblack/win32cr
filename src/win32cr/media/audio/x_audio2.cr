@@ -1,46 +1,46 @@
+require "./../../foundation.cr"
 require "./../audio.cr"
 require "./../../system/com.cr"
-require "./../../foundation.cr"
 
 module Win32cr::Media::Audio::XAudio2
   extend self
   FXEQ_MIN_FRAMERATE = 22000_u32
   FXEQ_MAX_FRAMERATE = 48000_u32
-  FXEQ_MIN_FREQUENCY_CENTER = 20
-  FXEQ_MAX_FREQUENCY_CENTER = 20000
-  FXEQ_DEFAULT_FREQUENCY_CENTER_0 = 100
-  FXEQ_DEFAULT_FREQUENCY_CENTER_1 = 800
-  FXEQ_DEFAULT_FREQUENCY_CENTER_2 = 2000
-  FXEQ_DEFAULT_FREQUENCY_CENTER_3 = 10000
+  FXEQ_MIN_FREQUENCY_CENTER = 20.0
+  FXEQ_MAX_FREQUENCY_CENTER = 20000.0
+  FXEQ_DEFAULT_FREQUENCY_CENTER_0 = 100.0
+  FXEQ_DEFAULT_FREQUENCY_CENTER_1 = 800.0
+  FXEQ_DEFAULT_FREQUENCY_CENTER_2 = 2000.0
+  FXEQ_DEFAULT_FREQUENCY_CENTER_3 = 10000.0
   FXEQ_MIN_GAIN = 0.126
   FXEQ_MAX_GAIN = 7.94
-  FXEQ_DEFAULT_GAIN = 1
+  FXEQ_DEFAULT_GAIN = 1.0
   FXEQ_MIN_BANDWIDTH = 0.1
-  FXEQ_MAX_BANDWIDTH = 2
-  FXEQ_DEFAULT_BANDWIDTH = 1
+  FXEQ_MAX_BANDWIDTH = 2.0
+  FXEQ_DEFAULT_BANDWIDTH = 1.0
   FXMASTERINGLIMITER_MIN_RELEASE = 1_u32
   FXMASTERINGLIMITER_MAX_RELEASE = 20_u32
   FXMASTERINGLIMITER_DEFAULT_RELEASE = 6_u32
   FXMASTERINGLIMITER_MIN_LOUDNESS = 1_u32
   FXMASTERINGLIMITER_MAX_LOUDNESS = 1800_u32
   FXMASTERINGLIMITER_DEFAULT_LOUDNESS = 1000_u32
-  FXREVERB_MIN_DIFFUSION = 0
-  FXREVERB_MAX_DIFFUSION = 1
+  FXREVERB_MIN_DIFFUSION = 0.0
+  FXREVERB_MAX_DIFFUSION = 1.0
   FXREVERB_DEFAULT_DIFFUSION = 0.9
   FXREVERB_MIN_ROOMSIZE = 0.0001
-  FXREVERB_MAX_ROOMSIZE = 1
+  FXREVERB_MAX_ROOMSIZE = 1.0
   FXREVERB_DEFAULT_ROOMSIZE = 0.6
   FXLOUDNESS_DEFAULT_MOMENTARY_MS = 400_u32
   FXLOUDNESS_DEFAULT_SHORTTERM_MS = 3000_u32
-  FXECHO_MIN_WETDRYMIX = 0
-  FXECHO_MAX_WETDRYMIX = 1
+  FXECHO_MIN_WETDRYMIX = 0.0
+  FXECHO_MAX_WETDRYMIX = 1.0
   FXECHO_DEFAULT_WETDRYMIX = 0.5
-  FXECHO_MIN_FEEDBACK = 0
-  FXECHO_MAX_FEEDBACK = 1
+  FXECHO_MIN_FEEDBACK = 0.0
+  FXECHO_MAX_FEEDBACK = 1.0
   FXECHO_DEFAULT_FEEDBACK = 0.5
-  FXECHO_MIN_DELAY = 1
-  FXECHO_MAX_DELAY = 2000
-  FXECHO_DEFAULT_DELAY = 500
+  FXECHO_MIN_DELAY = 1.0
+  FXECHO_MAX_DELAY = 2000.0
+  FXECHO_DEFAULT_DELAY = 500.0
   XAUDIO2_DLL_A = "xaudio2_9.dll"
   XAUDIO2_DLL_W = "xaudio2_9.dll"
   XAUDIO2D_DLL_A = "xaudio2_9d.dll"
@@ -53,11 +53,11 @@ module Win32cr::Media::Audio::XAudio2
   XAUDIO2_MAX_AUDIO_CHANNELS = 64_u32
   XAUDIO2_MIN_SAMPLE_RATE = 1000_u32
   XAUDIO2_MAX_SAMPLE_RATE = 200000_u32
-  XAUDIO2_MAX_VOLUME_LEVEL = 16777216
-  XAUDIO2_MAX_FREQ_RATIO = 1024
-  XAUDIO2_DEFAULT_FREQ_RATIO = 2
+  XAUDIO2_MAX_VOLUME_LEVEL = 16777216.0
+  XAUDIO2_MAX_FREQ_RATIO = 1024.0
+  XAUDIO2_DEFAULT_FREQ_RATIO = 2.0
   XAUDIO2_MAX_FILTER_ONEOVERQ = 1.5
-  XAUDIO2_MAX_FILTER_FREQUENCY = 1
+  XAUDIO2_MAX_FILTER_FREQUENCY = 1.0
   XAUDIO2_MAX_LOOP_COUNT = 254_u32
   XAUDIO2_MAX_INSTANCES = 8_u32
   XAUDIO2_MAX_RATIO_TIMES_RATE_XMA_MONO = 600000_u32
@@ -79,8 +79,8 @@ module Win32cr::Media::Audio::XAudio2
   XAUDIO2_STOP_ENGINE_WHEN_IDLE = 8192_u32
   XAUDIO2_1024_QUANTUM = 32768_u32
   XAUDIO2_NO_VIRTUAL_AUDIO_CLIENT = 65536_u32
-  XAUDIO2_DEFAULT_FILTER_FREQUENCY = 1
-  XAUDIO2_DEFAULT_FILTER_ONEOVERQ = 1
+  XAUDIO2_DEFAULT_FILTER_FREQUENCY = 1.0
+  XAUDIO2_DEFAULT_FILTER_ONEOVERQ = 1.0
   XAUDIO2_QUANTUM_NUMERATOR = 1_u32
   XAUDIO2_QUANTUM_DENOMINATOR = 100_u32
   FACILITY_XAUDIO2 = 2198_u32
@@ -135,7 +135,7 @@ module Win32cr::Media::Audio::XAudio2
   XAUDIO2_LOG_STREAMING = 4096_u32
   XAUDIO2FX_REVERB_MIN_FRAMERATE = 20000_u32
   XAUDIO2FX_REVERB_MAX_FRAMERATE = 48000_u32
-  XAUDIO2FX_REVERB_MIN_WET_DRY_MIX = 0
+  XAUDIO2FX_REVERB_MIN_WET_DRY_MIX = 0.0
   XAUDIO2FX_REVERB_MIN_REFLECTIONS_DELAY = 0_u32
   XAUDIO2FX_REVERB_MIN_REVERB_DELAY = 0_u32
   XAUDIO2FX_REVERB_MIN_REAR_DELAY = 0_u32
@@ -147,15 +147,15 @@ module Win32cr::Media::Audio::XAudio2
   XAUDIO2FX_REVERB_MIN_LOW_EQ_CUTOFF = 0_u32
   XAUDIO2FX_REVERB_MIN_HIGH_EQ_GAIN = 0_u32
   XAUDIO2FX_REVERB_MIN_HIGH_EQ_CUTOFF = 0_u32
-  XAUDIO2FX_REVERB_MIN_ROOM_FILTER_FREQ = 20
-  XAUDIO2FX_REVERB_MIN_ROOM_FILTER_MAIN = -100
-  XAUDIO2FX_REVERB_MIN_ROOM_FILTER_HF = -100
-  XAUDIO2FX_REVERB_MIN_REFLECTIONS_GAIN = -100
-  XAUDIO2FX_REVERB_MIN_REVERB_GAIN = -100
+  XAUDIO2FX_REVERB_MIN_ROOM_FILTER_FREQ = 20.0
+  XAUDIO2FX_REVERB_MIN_ROOM_FILTER_MAIN = -100.0
+  XAUDIO2FX_REVERB_MIN_ROOM_FILTER_HF = -100.0
+  XAUDIO2FX_REVERB_MIN_REFLECTIONS_GAIN = -100.0
+  XAUDIO2FX_REVERB_MIN_REVERB_GAIN = -100.0
   XAUDIO2FX_REVERB_MIN_DECAY_TIME = 0.1
-  XAUDIO2FX_REVERB_MIN_DENSITY = 0
-  XAUDIO2FX_REVERB_MIN_ROOM_SIZE = 0
-  XAUDIO2FX_REVERB_MAX_WET_DRY_MIX = 100
+  XAUDIO2FX_REVERB_MIN_DENSITY = 0.0
+  XAUDIO2FX_REVERB_MIN_ROOM_SIZE = 0.0
+  XAUDIO2FX_REVERB_MAX_WET_DRY_MIX = 100.0
   XAUDIO2FX_REVERB_MAX_REFLECTIONS_DELAY = 300_u32
   XAUDIO2FX_REVERB_MAX_REVERB_DELAY = 85_u32
   XAUDIO2FX_REVERB_MAX_REAR_DELAY = 5_u32
@@ -167,14 +167,14 @@ module Win32cr::Media::Audio::XAudio2
   XAUDIO2FX_REVERB_MAX_LOW_EQ_CUTOFF = 9_u32
   XAUDIO2FX_REVERB_MAX_HIGH_EQ_GAIN = 8_u32
   XAUDIO2FX_REVERB_MAX_HIGH_EQ_CUTOFF = 14_u32
-  XAUDIO2FX_REVERB_MAX_ROOM_FILTER_FREQ = 20000
-  XAUDIO2FX_REVERB_MAX_ROOM_FILTER_MAIN = 0
-  XAUDIO2FX_REVERB_MAX_ROOM_FILTER_HF = 0
-  XAUDIO2FX_REVERB_MAX_REFLECTIONS_GAIN = 20
-  XAUDIO2FX_REVERB_MAX_REVERB_GAIN = 20
-  XAUDIO2FX_REVERB_MAX_DENSITY = 100
-  XAUDIO2FX_REVERB_MAX_ROOM_SIZE = 100
-  XAUDIO2FX_REVERB_DEFAULT_WET_DRY_MIX = 100
+  XAUDIO2FX_REVERB_MAX_ROOM_FILTER_FREQ = 20000.0
+  XAUDIO2FX_REVERB_MAX_ROOM_FILTER_MAIN = 0.0
+  XAUDIO2FX_REVERB_MAX_ROOM_FILTER_HF = 0.0
+  XAUDIO2FX_REVERB_MAX_REFLECTIONS_GAIN = 20.0
+  XAUDIO2FX_REVERB_MAX_REVERB_GAIN = 20.0
+  XAUDIO2FX_REVERB_MAX_DENSITY = 100.0
+  XAUDIO2FX_REVERB_MAX_ROOM_SIZE = 100.0
+  XAUDIO2FX_REVERB_DEFAULT_WET_DRY_MIX = 100.0
   XAUDIO2FX_REVERB_DEFAULT_REFLECTIONS_DELAY = 5_u32
   XAUDIO2FX_REVERB_DEFAULT_REVERB_DELAY = 5_u32
   XAUDIO2FX_REVERB_DEFAULT_REAR_DELAY = 5_u32
@@ -188,19 +188,19 @@ module Win32cr::Media::Audio::XAudio2
   XAUDIO2FX_REVERB_DEFAULT_LOW_EQ_CUTOFF = 4_u32
   XAUDIO2FX_REVERB_DEFAULT_HIGH_EQ_GAIN = 8_u32
   XAUDIO2FX_REVERB_DEFAULT_HIGH_EQ_CUTOFF = 4_u32
-  XAUDIO2FX_REVERB_DEFAULT_ROOM_FILTER_FREQ = 5000
-  XAUDIO2FX_REVERB_DEFAULT_ROOM_FILTER_MAIN = 0
-  XAUDIO2FX_REVERB_DEFAULT_ROOM_FILTER_HF = 0
-  XAUDIO2FX_REVERB_DEFAULT_REFLECTIONS_GAIN = 0
-  XAUDIO2FX_REVERB_DEFAULT_REVERB_GAIN = 0
-  XAUDIO2FX_REVERB_DEFAULT_DECAY_TIME = 1
-  XAUDIO2FX_REVERB_DEFAULT_DENSITY = 100
-  XAUDIO2FX_REVERB_DEFAULT_ROOM_SIZE = 100
+  XAUDIO2FX_REVERB_DEFAULT_ROOM_FILTER_FREQ = 5000.0
+  XAUDIO2FX_REVERB_DEFAULT_ROOM_FILTER_MAIN = 0.0
+  XAUDIO2FX_REVERB_DEFAULT_ROOM_FILTER_HF = 0.0
+  XAUDIO2FX_REVERB_DEFAULT_REFLECTIONS_GAIN = 0.0
+  XAUDIO2FX_REVERB_DEFAULT_REVERB_GAIN = 0.0
+  XAUDIO2FX_REVERB_DEFAULT_DECAY_TIME = 1.0
+  XAUDIO2FX_REVERB_DEFAULT_DENSITY = 100.0
+  XAUDIO2FX_REVERB_DEFAULT_ROOM_SIZE = 100.0
   XAUDIO2FX_REVERB_DEFAULT_DISABLE_LATE_FIELD = 0_u32
-  HRTF_MAX_GAIN_LIMIT = 12
-  HRTF_MIN_GAIN_LIMIT = -96
+  HRTF_MAX_GAIN_LIMIT = 12.0
+  HRTF_MIN_GAIN_LIMIT = -96.0
   HRTF_MIN_UNITY_GAIN_DISTANCE = 0.05
-  HRTF_DEFAULT_UNITY_GAIN_DISTANCE = 1
+  HRTF_DEFAULT_UNITY_GAIN_DISTANCE = 1.0
   FACILITY_XAPO = 2199_u32
   XAPO_E_FORMAT_UNSUPPORTED = -2003369983_i32
   XAPO_MIN_CHANNELS = 1_u32
@@ -587,7 +587,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAPOVtbl,
+
+  record IXAPOVtable,
     query_interface : Proc(IXAPO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXAPO*, UInt32),
     release : Proc(IXAPO*, UInt32),
@@ -604,7 +605,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAPO, lpVtbl : IXAPOVtbl* do
+  record IXAPO, lpVtbl : IXAPOVtable* do
     GUID = LibC::GUID.new(0xa410b984_u32, 0x9839_u16, 0x4819_u16, StaticArray[0xa0_u8, 0xbe_u8, 0x28_u8, 0x56_u8, 0xae_u8, 0x6b_u8, 0x3a_u8, 0xdb_u8])
     def query_interface(this : IXAPO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -649,7 +650,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAPOParametersVtbl,
+
+  record IXAPOParametersVtable,
     query_interface : Proc(IXAPOParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXAPOParameters*, UInt32),
     release : Proc(IXAPOParameters*, UInt32),
@@ -658,7 +660,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAPOParameters, lpVtbl : IXAPOParametersVtbl* do
+  record IXAPOParameters, lpVtbl : IXAPOParametersVtable* do
     GUID = LibC::GUID.new(0x26d95c66_u32, 0x80f2_u16, 0x499a_u16, StaticArray[0xad_u8, 0x54_u8, 0x5a_u8, 0xe7_u8, 0xf0_u8, 0x1c_u8, 0x6d_u8, 0x98_u8])
     def query_interface(this : IXAPOParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -679,7 +681,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAudio2Vtbl,
+
+  record IXAudio2Vtable,
     query_interface : Proc(IXAudio2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXAudio2*, UInt32),
     release : Proc(IXAudio2*, UInt32),
@@ -696,7 +699,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAudio2, lpVtbl : IXAudio2Vtbl* do
+  record IXAudio2, lpVtbl : IXAudio2Vtable* do
     GUID = LibC::GUID.new(0x2b02e3cf_u32, 0x2e0b_u16, 0x4ec3_u16, StaticArray[0xbe_u8, 0x45_u8, 0x1b_u8, 0x2a_u8, 0x3f_u8, 0xe7_u8, 0x21_u8, 0xd_u8])
     def query_interface(this : IXAudio2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -741,7 +744,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAudio2ExtensionVtbl,
+
+  record IXAudio2ExtensionVtable,
     query_interface : Proc(IXAudio2Extension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXAudio2Extension*, UInt32),
     release : Proc(IXAudio2Extension*, UInt32),
@@ -750,7 +754,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAudio2Extension, lpVtbl : IXAudio2ExtensionVtbl* do
+  record IXAudio2Extension, lpVtbl : IXAudio2ExtensionVtable* do
     GUID = LibC::GUID.new(0x84ac29bb_u32, 0xd619_u16, 0x44d2_u16, StaticArray[0xb1_u8, 0x97_u8, 0xe4_u8, 0xac_u8, 0xf7_u8, 0xdf_u8, 0x3e_u8, 0xd6_u8])
     def query_interface(this : IXAudio2Extension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -771,7 +775,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAudio2VoiceVtbl,
+
+  record IXAudio2VoiceVtable,
     get_voice_details : Proc(IXAudio2Voice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_DETAILS*, Void),
     set_output_voices : Proc(IXAudio2Voice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_SENDS*, Win32cr::Foundation::HRESULT),
     set_effect_chain : Proc(IXAudio2Voice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_EFFECT_CHAIN*, Win32cr::Foundation::HRESULT),
@@ -794,7 +799,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAudio2Voice, lpVtbl : IXAudio2VoiceVtbl* do
+  record IXAudio2Voice, lpVtbl : IXAudio2VoiceVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def get_voice_details(this : IXAudio2Voice*, pVoiceDetails : Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_DETAILS*) : Void
       @lpVtbl.try &.value.get_voice_details.call(this, pVoiceDetails)
@@ -857,7 +862,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAudio2SourceVoiceVtbl,
+
+  record IXAudio2SourceVoiceVtable,
     get_voice_details : Proc(IXAudio2SourceVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_DETAILS*, Void),
     set_output_voices : Proc(IXAudio2SourceVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_SENDS*, Win32cr::Foundation::HRESULT),
     set_effect_chain : Proc(IXAudio2SourceVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_EFFECT_CHAIN*, Win32cr::Foundation::HRESULT),
@@ -890,7 +896,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAudio2SourceVoice, lpVtbl : IXAudio2SourceVoiceVtbl* do
+  record IXAudio2SourceVoice, lpVtbl : IXAudio2SourceVoiceVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def get_voice_details(this : IXAudio2SourceVoice*, pVoiceDetails : Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_DETAILS*) : Void
       @lpVtbl.try &.value.get_voice_details.call(this, pVoiceDetails)
@@ -983,7 +989,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAudio2SubmixVoiceVtbl,
+
+  record IXAudio2SubmixVoiceVtable,
     get_voice_details : Proc(IXAudio2SubmixVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_DETAILS*, Void),
     set_output_voices : Proc(IXAudio2SubmixVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_SENDS*, Win32cr::Foundation::HRESULT),
     set_effect_chain : Proc(IXAudio2SubmixVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_EFFECT_CHAIN*, Win32cr::Foundation::HRESULT),
@@ -1006,7 +1013,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAudio2SubmixVoice, lpVtbl : IXAudio2SubmixVoiceVtbl* do
+  record IXAudio2SubmixVoice, lpVtbl : IXAudio2SubmixVoiceVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def get_voice_details(this : IXAudio2SubmixVoice*, pVoiceDetails : Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_DETAILS*) : Void
       @lpVtbl.try &.value.get_voice_details.call(this, pVoiceDetails)
@@ -1069,7 +1076,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAudio2MasteringVoiceVtbl,
+
+  record IXAudio2MasteringVoiceVtable,
     get_voice_details : Proc(IXAudio2MasteringVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_DETAILS*, Void),
     set_output_voices : Proc(IXAudio2MasteringVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_SENDS*, Win32cr::Foundation::HRESULT),
     set_effect_chain : Proc(IXAudio2MasteringVoice*, Win32cr::Media::Audio::XAudio2::XAUDIO2_EFFECT_CHAIN*, Win32cr::Foundation::HRESULT),
@@ -1093,7 +1101,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAudio2MasteringVoice, lpVtbl : IXAudio2MasteringVoiceVtbl* do
+  record IXAudio2MasteringVoice, lpVtbl : IXAudio2MasteringVoiceVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def get_voice_details(this : IXAudio2MasteringVoice*, pVoiceDetails : Win32cr::Media::Audio::XAudio2::XAUDIO2_VOICE_DETAILS*) : Void
       @lpVtbl.try &.value.get_voice_details.call(this, pVoiceDetails)
@@ -1159,14 +1167,15 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAudio2EngineCallbackVtbl,
+
+  record IXAudio2EngineCallbackVtable,
     on_processing_pass_start : Proc(IXAudio2EngineCallback*, Void),
     on_processing_pass_end : Proc(IXAudio2EngineCallback*, Void),
     on_critical_error : Proc(IXAudio2EngineCallback*, Win32cr::Foundation::HRESULT, Void)
 
 
   @[Extern]
-  record IXAudio2EngineCallback, lpVtbl : IXAudio2EngineCallbackVtbl* do
+  record IXAudio2EngineCallback, lpVtbl : IXAudio2EngineCallbackVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def on_processing_pass_start(this : IXAudio2EngineCallback*) : Void
       @lpVtbl.try &.value.on_processing_pass_start.call(this)
@@ -1181,7 +1190,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAudio2VoiceCallbackVtbl,
+
+  record IXAudio2VoiceCallbackVtable,
     on_voice_processing_pass_start : Proc(IXAudio2VoiceCallback*, UInt32, Void),
     on_voice_processing_pass_end : Proc(IXAudio2VoiceCallback*, Void),
     on_stream_end : Proc(IXAudio2VoiceCallback*, Void),
@@ -1192,7 +1202,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAudio2VoiceCallback, lpVtbl : IXAudio2VoiceCallbackVtbl* do
+  record IXAudio2VoiceCallback, lpVtbl : IXAudio2VoiceCallbackVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def on_voice_processing_pass_start(this : IXAudio2VoiceCallback*, bytes_required : UInt32) : Void
       @lpVtbl.try &.value.on_voice_processing_pass_start.call(this, bytes_required)
@@ -1219,7 +1229,8 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   @[Extern]
-  record IXAPOHrtfParametersVtbl,
+
+  record IXAPOHrtfParametersVtable,
     query_interface : Proc(IXAPOHrtfParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXAPOHrtfParameters*, UInt32),
     release : Proc(IXAPOHrtfParameters*, UInt32),
@@ -1230,7 +1241,7 @@ module Win32cr::Media::Audio::XAudio2
 
 
   @[Extern]
-  record IXAPOHrtfParameters, lpVtbl : IXAPOHrtfParametersVtbl* do
+  record IXAPOHrtfParameters, lpVtbl : IXAPOHrtfParametersVtable* do
     GUID = LibC::GUID.new(0x15b3cd66_u32, 0xe9de_u16, 0x4464_u16, StaticArray[0xb6_u8, 0xe6_u8, 0x2b_u8, 0xc3_u8, 0xcf_u8, 0x63_u8, 0xd4_u8, 0x55_u8])
     def query_interface(this : IXAPOHrtfParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1257,27 +1268,38 @@ module Win32cr::Media::Audio::XAudio2
   end
 
   def createFX(clsid : LibC::GUID*, pEffect : Void**, pInitDat : Void*, init_data_byte_size : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateFX(clsid, pEffect, pInitDat, init_data_byte_size)
+    {% end %}
   end
 
   def xAudio2CreateWithVersionInfo(ppXAudio2 : Void**, flags : UInt32, x_audio2_processor : UInt32, ntddiVersion : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.XAudio2CreateWithVersionInfo(ppXAudio2, flags, x_audio2_processor, ntddiVersion)
+    {% end %}
   end
 
   def createAudioVolumeMeter(ppApo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateAudioVolumeMeter(ppApo)
+    {% end %}
   end
 
   def createAudioReverb(ppApo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateAudioReverb(ppApo)
+    {% end %}
   end
 
   def createHrtfApo(init : Win32cr::Media::Audio::XAudio2::HrtfApoInit*, xApo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateHrtfApo(init, xApo)
+    {% end %}
   end
 
   @[Link("xaudio2_8")]
   @[Link("hrtfapo")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateFX(clsid : LibC::GUID*, pEffect : Void**, pInitDat : Void*, init_data_byte_size : UInt32) : Win32cr::Foundation::HRESULT
@@ -1295,4 +1317,5 @@ module Win32cr::Media::Audio::XAudio2
     fun CreateHrtfApo(init : Win32cr::Media::Audio::XAudio2::HrtfApoInit*, xApo : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

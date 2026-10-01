@@ -1,20 +1,31 @@
-require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/com.cr"
+require "./../system/variant.cr"
 require "./../media/media_foundation.cr"
 require "./../media/direct_show.cr"
 require "./../system/address_book.cr"
+require "./../ui/windows_and_messaging.cr"
 
 module Win32cr::Devices::Tapi
   extend self
+  alias HDRVCALL = Void*
+  alias HDRVLINE = Void*
+  alias HDRVPHONE = Void*
+  alias HDRVMSPLINE = Void*
+  alias HDRVDIALOGINSTANCE = Void*
+  alias HTAPICALL = Void*
+  alias HTAPILINE = Void*
+  alias HTAPIPHONE = Void*
+  alias HPROVIDER = Void*
   alias LINECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
   alias PHONECALLBACK = Proc(UInt32, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
   alias ASYNC_COMPLETION = Proc(UInt32, Int32, Void)
 
-  alias LINEEVENT = Proc(Win32cr::Devices::Tapi::HTAPILINE__*, Win32cr::Devices::Tapi::HTAPICALL__*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
+  alias LINEEVENT = Proc(Win32cr::Devices::Tapi::HTAPILINE, Win32cr::Devices::Tapi::HTAPICALL, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
-  alias PHONEEVENT = Proc(Win32cr::Devices::Tapi::HTAPIPHONE__*, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
+  alias PHONEEVENT = Proc(Win32cr::Devices::Tapi::HTAPIPHONE, UInt32, LibC::UIntPtrT, LibC::UIntPtrT, LibC::UIntPtrT, Void)
 
   alias TUISPIDLLCALLBACK = Proc(LibC::UIntPtrT, UInt32, Void*, UInt32, Int32)
 
@@ -2404,8 +2415,8 @@ module Win32cr::Devices::Tapi
   struct LINEFORWARDLIST
     property dwTotalSize : UInt32
     property dwNumEntries : UInt32
-    property forward_list : Win32cr::Devices::Tapi::LINEFORWARD*
-    def initialize(@dwTotalSize : UInt32, @dwNumEntries : UInt32, @forward_list : Win32cr::Devices::Tapi::LINEFORWARD*)
+    property forward_list : Win32cr::Devices::Tapi::LINEFORWARD[1]
+    def initialize(@dwTotalSize : UInt32, @dwNumEntries : UInt32, @forward_list : Win32cr::Devices::Tapi::LINEFORWARD[1])
     end
   end
 
@@ -2581,32 +2592,129 @@ module Win32cr::Devices::Tapi
     property get_queue_info : GetQueueInfo_e__Struct_
     property get_group_list : GetGroupList_e__Struct_
 
-      # Nested Type GetQueueInfo_e__Struct_
+      # Nested Type SetAgentGroup_e__Struct_
       @[Extern]
-      struct GetQueueInfo_e__Struct_
-    property dwQueueID : UInt32
-    property queue_info : Win32cr::Devices::Tapi::LINEQUEUEINFO
-    def initialize(@dwQueueID : UInt32, @queue_info : Win32cr::Devices::Tapi::LINEQUEUEINFO)
+      struct SetAgentGroup_e__Struct_
+    property dwAddressID : UInt32
+    property group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
+    def initialize(@dwAddressID : UInt32, @group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST)
     end
       end
 
 
-      # Nested Type GetQueueList_e__Struct_
+      # Nested Type SetAgentState_e__Struct_
       @[Extern]
-      struct GetQueueList_e__Struct_
-    property group_id : LibC::GUID
-    property queue_list : Win32cr::Devices::Tapi::LINEQUEUELIST
-    def initialize(@group_id : LibC::GUID, @queue_list : Win32cr::Devices::Tapi::LINEQUEUELIST)
+      struct SetAgentState_e__Struct_
+    property dwAddressID : UInt32
+    property dwAgentState : UInt32
+    property dwNextAgentState : UInt32
+    def initialize(@dwAddressID : UInt32, @dwAgentState : UInt32, @dwNextAgentState : UInt32)
     end
       end
 
 
-      # Nested Type GetAgentSessionInfo_e__Struct_
+      # Nested Type SetAgentActivity_e__Struct_
       @[Extern]
-      struct GetAgentSessionInfo_e__Struct_
-    property hAgentSession : UInt32
-    property session_info : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO
-    def initialize(@hAgentSession : UInt32, @session_info : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO)
+      struct SetAgentActivity_e__Struct_
+    property dwAddressID : UInt32
+    property dwActivityID : UInt32
+    def initialize(@dwAddressID : UInt32, @dwActivityID : UInt32)
+    end
+      end
+
+
+      # Nested Type GetAgentCaps_e__Struct_
+      @[Extern]
+      struct GetAgentCaps_e__Struct_
+    property dwAddressID : UInt32
+    property agent_caps : Win32cr::Devices::Tapi::LINEAGENTCAPS
+    def initialize(@dwAddressID : UInt32, @agent_caps : Win32cr::Devices::Tapi::LINEAGENTCAPS)
+    end
+      end
+
+
+      # Nested Type GetAgentStatus_e__Struct_
+      @[Extern]
+      struct GetAgentStatus_e__Struct_
+    property dwAddressID : UInt32
+    property agent_status : Win32cr::Devices::Tapi::LINEAGENTSTATUS
+    def initialize(@dwAddressID : UInt32, @agent_status : Win32cr::Devices::Tapi::LINEAGENTSTATUS)
+    end
+      end
+
+
+      # Nested Type AgentSpecific_e__Struct_
+      @[Extern]
+      struct AgentSpecific_e__Struct_
+    property dwAddressID : UInt32
+    property dwAgentExtensionIDIndex : UInt32
+    property dwSize : UInt32
+    property params : UInt8[1]
+    def initialize(@dwAddressID : UInt32, @dwAgentExtensionIDIndex : UInt32, @dwSize : UInt32, @params : UInt8[1])
+    end
+      end
+
+
+      # Nested Type GetAgentActivityList_e__Struct_
+      @[Extern]
+      struct GetAgentActivityList_e__Struct_
+    property dwAddressID : UInt32
+    property activity_list : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST
+    def initialize(@dwAddressID : UInt32, @activity_list : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST)
+    end
+      end
+
+
+      # Nested Type GetAgentGroupList_e__Struct_
+      @[Extern]
+      struct GetAgentGroupList_e__Struct_
+    property dwAddressID : UInt32
+    property group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
+    def initialize(@dwAddressID : UInt32, @group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST)
+    end
+      end
+
+
+      # Nested Type CreateAgent_e__Struct_
+      @[Extern]
+      struct CreateAgent_e__Struct_
+    property hAgent : UInt32
+    property dwAgentIDSize : UInt32
+    property dwAgentIDOffset : UInt32
+    property dwAgentPINSize : UInt32
+    property dwAgentPINOffset : UInt32
+    def initialize(@hAgent : UInt32, @dwAgentIDSize : UInt32, @dwAgentIDOffset : UInt32, @dwAgentPINSize : UInt32, @dwAgentPINOffset : UInt32)
+    end
+      end
+
+
+      # Nested Type SetAgentStateEx_e__Struct_
+      @[Extern]
+      struct SetAgentStateEx_e__Struct_
+    property hAgent : UInt32
+    property dwAgentState : UInt32
+    property dwNextAgentState : UInt32
+    def initialize(@hAgent : UInt32, @dwAgentState : UInt32, @dwNextAgentState : UInt32)
+    end
+      end
+
+
+      # Nested Type SetAgentMeasurementPeriod_e__Struct_
+      @[Extern]
+      struct SetAgentMeasurementPeriod_e__Struct_
+    property hAgent : UInt32
+    property dwMeasurementPeriod : UInt32
+    def initialize(@hAgent : UInt32, @dwMeasurementPeriod : UInt32)
+    end
+      end
+
+
+      # Nested Type GetAgentInfo_e__Struct_
+      @[Extern]
+      struct GetAgentInfo_e__Struct_
+    property hAgent : UInt32
+    property agent_info : Win32cr::Devices::Tapi::LINEAGENTINFO
+    def initialize(@hAgent : UInt32, @agent_info : Win32cr::Devices::Tapi::LINEAGENTINFO)
     end
       end
 
@@ -2625,79 +2733,6 @@ module Win32cr::Devices::Tapi
       end
 
 
-      # Nested Type SetAgentMeasurementPeriod_e__Struct_
-      @[Extern]
-      struct SetAgentMeasurementPeriod_e__Struct_
-    property hAgent : UInt32
-    property dwMeasurementPeriod : UInt32
-    def initialize(@hAgent : UInt32, @dwMeasurementPeriod : UInt32)
-    end
-      end
-
-
-      # Nested Type CreateAgent_e__Struct_
-      @[Extern]
-      struct CreateAgent_e__Struct_
-    property hAgent : UInt32
-    property dwAgentIDSize : UInt32
-    property dwAgentIDOffset : UInt32
-    property dwAgentPINSize : UInt32
-    property dwAgentPINOffset : UInt32
-    def initialize(@hAgent : UInt32, @dwAgentIDSize : UInt32, @dwAgentIDOffset : UInt32, @dwAgentPINSize : UInt32, @dwAgentPINOffset : UInt32)
-    end
-      end
-
-
-      # Nested Type GetAgentActivityList_e__Struct_
-      @[Extern]
-      struct GetAgentActivityList_e__Struct_
-    property dwAddressID : UInt32
-    property activity_list : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST
-    def initialize(@dwAddressID : UInt32, @activity_list : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST)
-    end
-      end
-
-
-      # Nested Type GetAgentStatus_e__Struct_
-      @[Extern]
-      struct GetAgentStatus_e__Struct_
-    property dwAddressID : UInt32
-    property agent_status : Win32cr::Devices::Tapi::LINEAGENTSTATUS
-    def initialize(@dwAddressID : UInt32, @agent_status : Win32cr::Devices::Tapi::LINEAGENTSTATUS)
-    end
-      end
-
-
-      # Nested Type SetAgentActivity_e__Struct_
-      @[Extern]
-      struct SetAgentActivity_e__Struct_
-    property dwAddressID : UInt32
-    property dwActivityID : UInt32
-    def initialize(@dwAddressID : UInt32, @dwActivityID : UInt32)
-    end
-      end
-
-
-      # Nested Type SetAgentGroup_e__Struct_
-      @[Extern]
-      struct SetAgentGroup_e__Struct_
-    property dwAddressID : UInt32
-    property group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
-    def initialize(@dwAddressID : UInt32, @group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST)
-    end
-      end
-
-
-      # Nested Type SetQueueMeasurementPeriod_e__Struct_
-      @[Extern]
-      struct SetQueueMeasurementPeriod_e__Struct_
-    property dwQueueID : UInt32
-    property dwMeasurementPeriod : UInt32
-    def initialize(@dwQueueID : UInt32, @dwMeasurementPeriod : UInt32)
-    end
-      end
-
-
       # Nested Type GetAgentSessionList_e__Struct_
       @[Extern]
       struct GetAgentSessionList_e__Struct_
@@ -2708,36 +2743,12 @@ module Win32cr::Devices::Tapi
       end
 
 
-      # Nested Type SetAgentStateEx_e__Struct_
+      # Nested Type GetAgentSessionInfo_e__Struct_
       @[Extern]
-      struct SetAgentStateEx_e__Struct_
-    property hAgent : UInt32
-    property dwAgentState : UInt32
-    property dwNextAgentState : UInt32
-    def initialize(@hAgent : UInt32, @dwAgentState : UInt32, @dwNextAgentState : UInt32)
-    end
-      end
-
-
-      # Nested Type AgentSpecific_e__Struct_
-      @[Extern]
-      struct AgentSpecific_e__Struct_
-    property dwAddressID : UInt32
-    property dwAgentExtensionIDIndex : UInt32
-    property dwSize : UInt32
-    property params : UInt8*
-    def initialize(@dwAddressID : UInt32, @dwAgentExtensionIDIndex : UInt32, @dwSize : UInt32, @params : UInt8*)
-    end
-      end
-
-
-      # Nested Type SetAgentState_e__Struct_
-      @[Extern]
-      struct SetAgentState_e__Struct_
-    property dwAddressID : UInt32
-    property dwAgentState : UInt32
-    property dwNextAgentState : UInt32
-    def initialize(@dwAddressID : UInt32, @dwAgentState : UInt32, @dwNextAgentState : UInt32)
+      struct GetAgentSessionInfo_e__Struct_
+    property hAgentSession : UInt32
+    property session_info : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO
+    def initialize(@hAgentSession : UInt32, @session_info : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO)
     end
       end
 
@@ -2753,12 +2764,32 @@ module Win32cr::Devices::Tapi
       end
 
 
-      # Nested Type GetAgentGroupList_e__Struct_
+      # Nested Type GetQueueList_e__Struct_
       @[Extern]
-      struct GetAgentGroupList_e__Struct_
-    property dwAddressID : UInt32
-    property group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
-    def initialize(@dwAddressID : UInt32, @group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST)
+      struct GetQueueList_e__Struct_
+    property group_id : LibC::GUID
+    property queue_list : Win32cr::Devices::Tapi::LINEQUEUELIST
+    def initialize(@group_id : LibC::GUID, @queue_list : Win32cr::Devices::Tapi::LINEQUEUELIST)
+    end
+      end
+
+
+      # Nested Type SetQueueMeasurementPeriod_e__Struct_
+      @[Extern]
+      struct SetQueueMeasurementPeriod_e__Struct_
+    property dwQueueID : UInt32
+    property dwMeasurementPeriod : UInt32
+    def initialize(@dwQueueID : UInt32, @dwMeasurementPeriod : UInt32)
+    end
+      end
+
+
+      # Nested Type GetQueueInfo_e__Struct_
+      @[Extern]
+      struct GetQueueInfo_e__Struct_
+    property dwQueueID : UInt32
+    property queue_info : Win32cr::Devices::Tapi::LINEQUEUEINFO
+    def initialize(@dwQueueID : UInt32, @queue_info : Win32cr::Devices::Tapi::LINEQUEUEINFO)
     end
       end
 
@@ -2768,26 +2799,6 @@ module Win32cr::Devices::Tapi
       struct GetGroupList_e__Struct_
     property group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST
     def initialize(@group_list : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST)
-    end
-      end
-
-
-      # Nested Type GetAgentCaps_e__Struct_
-      @[Extern]
-      struct GetAgentCaps_e__Struct_
-    property dwAddressID : UInt32
-    property agent_caps : Win32cr::Devices::Tapi::LINEAGENTCAPS
-    def initialize(@dwAddressID : UInt32, @agent_caps : Win32cr::Devices::Tapi::LINEAGENTCAPS)
-    end
-      end
-
-
-      # Nested Type GetAgentInfo_e__Struct_
-      @[Extern]
-      struct GetAgentInfo_e__Struct_
-    property hAgent : UInt32
-    property agent_info : Win32cr::Devices::Tapi::LINEAGENTINFO
-    def initialize(@hAgent : UInt32, @agent_info : Win32cr::Devices::Tapi::LINEAGENTINFO)
     end
       end
 
@@ -2810,7 +2821,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  struct Linereqmakecallw_tag
+  struct LINEREQMAKECALLW
     property szDestAddress : UInt16[80]
     property szAppName : UInt16[40]
     property szCalledParty : UInt16[40]
@@ -2836,7 +2847,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  struct Linereqmediacallw_tag
+  struct LINEREQMEDIACALLW
     property hWnd : Win32cr::Foundation::HWND
     property wRequestID : Win32cr::Foundation::WPARAM
     property szDeviceClass : UInt16[40]
@@ -3050,77 +3061,14 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  struct HDRVCALL__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
-  struct HDRVLINE__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
-  struct HDRVPHONE__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
-  struct HDRVMSPLINE__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
-  struct HDRVDIALOGINSTANCE__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
-  struct HTAPICALL__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
-  struct HTAPILINE__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
-  struct HTAPIPHONE__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
-  struct HPROVIDER__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
   struct TUISPICREATEDIALOGINSTANCEPARAMS
     property dwRequestID : UInt32
-    property hdDlgInst : Win32cr::Devices::Tapi::HDRVDIALOGINSTANCE__*
+    property hdDlgInst : Win32cr::Devices::Tapi::HDRVDIALOGINSTANCE
     property htDlgInst : UInt32
     property lpszUIDLLName : Win32cr::Foundation::PWSTR
     property lpParams : Void*
     property dwSize : UInt32
-    def initialize(@dwRequestID : UInt32, @hdDlgInst : Win32cr::Devices::Tapi::HDRVDIALOGINSTANCE__*, @htDlgInst : UInt32, @lpszUIDLLName : Win32cr::Foundation::PWSTR, @lpParams : Void*, @dwSize : UInt32)
+    def initialize(@dwRequestID : UInt32, @hdDlgInst : Win32cr::Devices::Tapi::HDRVDIALOGINSTANCE, @htDlgInst : UInt32, @lpszUIDLLName : Win32cr::Foundation::PWSTR, @lpParams : Void*, @dwSize : UInt32)
     end
   end
 
@@ -3164,32 +3112,12 @@ module Win32cr::Devices::Tapi
     property msp_tts_terminal_event_info : MSP_TTS_TERMINAL_EVENT_INFO_e__Struct_
     property msp_tone_terminal_event_info : MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_
 
-      # Nested Type MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_
+      # Nested Type MSP_ADDRESS_EVENT_INFO_e__Struct_
       @[Extern]
-      struct MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_
-    property pToneTerminal : Void*
-    property hrErrorCode : Win32cr::Foundation::HRESULT
-    def initialize(@pToneTerminal : Void*, @hrErrorCode : Win32cr::Foundation::HRESULT)
-    end
-      end
-
-
-      # Nested Type MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_
-      @[Extern]
-      struct MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_
-    property pASRTerminal : Void*
-    property hrErrorCode : Win32cr::Foundation::HRESULT
-    def initialize(@pASRTerminal : Void*, @hrErrorCode : Win32cr::Foundation::HRESULT)
-    end
-      end
-
-
-      # Nested Type MSP_PRIVATE_EVENT_INFO_e__Struct_
-      @[Extern]
-      struct MSP_PRIVATE_EVENT_INFO_e__Struct_
-    property pEvent : Void*
-    property lEventCode : Int32
-    def initialize(@pEvent : Void*, @lEventCode : Int32)
+      struct MSP_ADDRESS_EVENT_INFO_e__Struct_
+    property type__ : Win32cr::Devices::Tapi::MSP_ADDRESS_EVENT
+    property pTerminal : Void*
+    def initialize(@type__ : Win32cr::Devices::Tapi::MSP_ADDRESS_EVENT, @pTerminal : Void*)
     end
       end
 
@@ -3207,6 +3135,26 @@ module Win32cr::Devices::Tapi
       end
 
 
+      # Nested Type MSP_TSP_DATA_e__Struct_
+      @[Extern]
+      struct MSP_TSP_DATA_e__Struct_
+    property dwBufferSize : UInt32
+    property pBuffer : UInt8[1]
+    def initialize(@dwBufferSize : UInt32, @pBuffer : UInt8[1])
+    end
+      end
+
+
+      # Nested Type MSP_PRIVATE_EVENT_INFO_e__Struct_
+      @[Extern]
+      struct MSP_PRIVATE_EVENT_INFO_e__Struct_
+    property pEvent : Void*
+    property lEventCode : Int32
+    def initialize(@pEvent : Void*, @lEventCode : Int32)
+    end
+      end
+
+
       # Nested Type MSP_FILE_TERMINAL_EVENT_INFO_e__Struct_
       @[Extern]
       struct MSP_FILE_TERMINAL_EVENT_INFO_e__Struct_
@@ -3220,22 +3168,12 @@ module Win32cr::Devices::Tapi
       end
 
 
-      # Nested Type MSP_ADDRESS_EVENT_INFO_e__Struct_
+      # Nested Type MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_
       @[Extern]
-      struct MSP_ADDRESS_EVENT_INFO_e__Struct_
-    property type__ : Win32cr::Devices::Tapi::MSP_ADDRESS_EVENT
-    property pTerminal : Void*
-    def initialize(@type__ : Win32cr::Devices::Tapi::MSP_ADDRESS_EVENT, @pTerminal : Void*)
-    end
-      end
-
-
-      # Nested Type MSP_TSP_DATA_e__Struct_
-      @[Extern]
-      struct MSP_TSP_DATA_e__Struct_
-    property dwBufferSize : UInt32
-    property pBuffer : UInt8*
-    def initialize(@dwBufferSize : UInt32, @pBuffer : UInt8*)
+      struct MSP_ASR_TERMINAL_EVENT_INFO_e__Struct_
+    property pASRTerminal : Void*
+    property hrErrorCode : Win32cr::Foundation::HRESULT
+    def initialize(@pASRTerminal : Void*, @hrErrorCode : Win32cr::Foundation::HRESULT)
     end
       end
 
@@ -3246,6 +3184,16 @@ module Win32cr::Devices::Tapi
     property pTTSTerminal : Void*
     property hrErrorCode : Win32cr::Foundation::HRESULT
     def initialize(@pTTSTerminal : Void*, @hrErrorCode : Win32cr::Foundation::HRESULT)
+    end
+      end
+
+
+      # Nested Type MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_
+      @[Extern]
+      struct MSP_TONE_TERMINAL_EVENT_INFO_e__Struct_
+    property pToneTerminal : Void*
+    property hrErrorCode : Win32cr::Foundation::HRESULT
+    def initialize(@pToneTerminal : Void*, @hrErrorCode : Win32cr::Foundation::HRESULT)
     end
       end
 
@@ -3270,13 +3218,13 @@ module Win32cr::Devices::Tapi
   @[Extern]
   struct STnefProblemArray
     property cProblem : UInt32
-    property aProblem : Win32cr::Devices::Tapi::STnefProblem*
-    def initialize(@cProblem : UInt32, @aProblem : Win32cr::Devices::Tapi::STnefProblem*)
+    property aProblem : Win32cr::Devices::Tapi::STnefProblem[1]
+    def initialize(@cProblem : UInt32, @aProblem : Win32cr::Devices::Tapi::STnefProblem[1])
     end
   end
 
   @[Extern]
-  struct Renddata_
+  struct RENDDATA
     property atyp : UInt16
     property ulPosition : UInt32
     property dxWidth : UInt16
@@ -3287,7 +3235,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  struct Dtr_
+  struct DTR
     property wYear : UInt16
     property wMonth : UInt16
     property wDay : UInt16
@@ -3300,7 +3248,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  struct Trp_
+  struct TRP
     property trpid : UInt16
     property cbgrtrp : UInt16
     property cch : UInt16
@@ -3310,7 +3258,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  struct ADDR_ALIAS_
+  struct ADDRALIAS
     property rgchName : Win32cr::Foundation::CHAR[41]
     property rgchEName : Win32cr::Foundation::CHAR[11]
     property rgchSrvr : Win32cr::Foundation::CHAR[12]
@@ -3331,9 +3279,9 @@ module Win32cr::Devices::Tapi
     # Nested Type Address_e__union_
     @[Extern(union: true)]
     struct Address_e__union_
-    property alias__ : Win32cr::Devices::Tapi::ADDR_ALIAS_
-    property rgchInterNet : Win32cr::Foundation::CHAR*
-    def initialize(@alias__ : Win32cr::Devices::Tapi::ADDR_ALIAS_, @rgchInterNet : Win32cr::Foundation::CHAR*)
+    property alias__ : Win32cr::Devices::Tapi::ADDRALIAS
+    property rgchInterNet : Win32cr::Foundation::CHAR[1]
+    def initialize(@alias__ : Win32cr::Devices::Tapi::ADDRALIAS, @rgchInterNet : Win32cr::Foundation::CHAR[1])
     end
     end
 
@@ -3342,34 +3290,35 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIVtbl,
+
+  record ITTAPIVtable,
     query_interface : Proc(ITTAPI*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPI*, UInt32),
     release : Proc(ITTAPI*, UInt32),
     get_type_info_count : Proc(ITTAPI*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTAPI*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTAPI*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTAPI*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTAPI*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ITTAPI*, Win32cr::Foundation::HRESULT),
     shutdown : Proc(ITTAPI*, Win32cr::Foundation::HRESULT),
-    get_Addresses : Proc(ITTAPI*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Addresses : Proc(ITTAPI*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_addresses : Proc(ITTAPI*, Void**, Win32cr::Foundation::HRESULT),
-    register_call_notifications : Proc(ITTAPI*, Void*, Int16, Int16, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    register_call_notifications : Proc(ITTAPI*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     unregister_notifications : Proc(ITTAPI*, Int32, Win32cr::Foundation::HRESULT),
-    get_CallHubs : Proc(ITTAPI*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CallHubs : Proc(ITTAPI*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_call_hubs : Proc(ITTAPI*, Void**, Win32cr::Foundation::HRESULT),
-    set_call_hub_tracking : Proc(ITTAPI*, Win32cr::System::Com::VARIANT, Int16, Win32cr::Foundation::HRESULT),
+    set_call_hub_tracking : Proc(ITTAPI*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     enumerate_private_tapi_objects : Proc(ITTAPI*, Void**, Win32cr::Foundation::HRESULT),
-    get_PrivateTAPIObjects : Proc(ITTAPI*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    register_request_recipient : Proc(ITTAPI*, Int32, Int32, Int16, Win32cr::Foundation::HRESULT),
-    set_assisted_telephony_priority : Proc(ITTAPI*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    set_application_priority : Proc(ITTAPI*, Win32cr::Foundation::BSTR, Int32, Int16, Win32cr::Foundation::HRESULT),
+    get_PrivateTAPIObjects : Proc(ITTAPI*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    register_request_recipient : Proc(ITTAPI*, Int32, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_assisted_telephony_priority : Proc(ITTAPI*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_application_priority : Proc(ITTAPI*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     put_EventFilter : Proc(ITTAPI*, Int32, Win32cr::Foundation::HRESULT),
     get_EventFilter : Proc(ITTAPI*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITTAPI, lpVtbl : ITTAPIVtbl* do
+  record ITTAPI, lpVtbl : ITTAPIVtable* do
     GUID = LibC::GUID.new(0xb1efc382_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTAPI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3389,8 +3338,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTAPI*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTAPI*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTAPI*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ITTAPI*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this)
@@ -3398,40 +3347,40 @@ module Win32cr::Devices::Tapi
     def shutdown(this : ITTAPI*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.shutdown.call(this)
     end
-    def get_Addresses(this : ITTAPI*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Addresses(this : ITTAPI*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Addresses.call(this, pVariant)
     end
     def enumerate_addresses(this : ITTAPI*, ppEnumAddress : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_addresses.call(this, ppEnumAddress)
     end
-    def register_call_notifications(this : ITTAPI*, pAddress : Void*, fMonitor : Int16, fOwner : Int16, lMediaTypes : Int32, lCallbackInstance : Int32, plRegister : Int32*) : Win32cr::Foundation::HRESULT
+    def register_call_notifications(this : ITTAPI*, pAddress : Void*, fMonitor : Win32cr::Foundation::VARIANT_BOOL, fOwner : Win32cr::Foundation::VARIANT_BOOL, lMediaTypes : Int32, lCallbackInstance : Int32, plRegister : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_call_notifications.call(this, pAddress, fMonitor, fOwner, lMediaTypes, lCallbackInstance, plRegister)
     end
     def unregister_notifications(this : ITTAPI*, lRegister : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_notifications.call(this, lRegister)
     end
-    def get_CallHubs(this : ITTAPI*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CallHubs(this : ITTAPI*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CallHubs.call(this, pVariant)
     end
     def enumerate_call_hubs(this : ITTAPI*, ppEnumCallHub : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_call_hubs.call(this, ppEnumCallHub)
     end
-    def set_call_hub_tracking(this : ITTAPI*, pAddresses : Win32cr::System::Com::VARIANT, bTracking : Int16) : Win32cr::Foundation::HRESULT
+    def set_call_hub_tracking(this : ITTAPI*, pAddresses : Win32cr::System::Variant::VARIANT, bTracking : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_call_hub_tracking.call(this, pAddresses, bTracking)
     end
     def enumerate_private_tapi_objects(this : ITTAPI*, ppEnumUnknown : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_private_tapi_objects.call(this, ppEnumUnknown)
     end
-    def get_PrivateTAPIObjects(this : ITTAPI*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PrivateTAPIObjects(this : ITTAPI*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateTAPIObjects.call(this, pVariant)
     end
-    def register_request_recipient(this : ITTAPI*, lRegistrationInstance : Int32, lRequestMode : Int32, fEnable : Int16) : Win32cr::Foundation::HRESULT
+    def register_request_recipient(this : ITTAPI*, lRegistrationInstance : Int32, lRequestMode : Int32, fEnable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_request_recipient.call(this, lRegistrationInstance, lRequestMode, fEnable)
     end
-    def set_assisted_telephony_priority(this : ITTAPI*, pAppFilename : Win32cr::Foundation::BSTR, fPriority : Int16) : Win32cr::Foundation::HRESULT
+    def set_assisted_telephony_priority(this : ITTAPI*, pAppFilename : Win32cr::Foundation::BSTR, fPriority : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_assisted_telephony_priority.call(this, pAppFilename, fPriority)
     end
-    def set_application_priority(this : ITTAPI*, pAppFilename : Win32cr::Foundation::BSTR, lMediaType : Int32, fPriority : Int16) : Win32cr::Foundation::HRESULT
+    def set_application_priority(this : ITTAPI*, pAppFilename : Win32cr::Foundation::BSTR, lMediaType : Int32, fPriority : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_application_priority.call(this, pAppFilename, lMediaType, fPriority)
     end
     def put_EventFilter(this : ITTAPI*, lFilterMask : Int32) : Win32cr::Foundation::HRESULT
@@ -3444,37 +3393,38 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPI2Vtbl,
+
+  record ITTAPI2Vtable,
     query_interface : Proc(ITTAPI2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPI2*, UInt32),
     release : Proc(ITTAPI2*, UInt32),
     get_type_info_count : Proc(ITTAPI2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTAPI2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTAPI2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTAPI2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTAPI2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ITTAPI2*, Win32cr::Foundation::HRESULT),
     shutdown : Proc(ITTAPI2*, Win32cr::Foundation::HRESULT),
-    get_Addresses : Proc(ITTAPI2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Addresses : Proc(ITTAPI2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_addresses : Proc(ITTAPI2*, Void**, Win32cr::Foundation::HRESULT),
-    register_call_notifications : Proc(ITTAPI2*, Void*, Int16, Int16, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
+    register_call_notifications : Proc(ITTAPI2*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     unregister_notifications : Proc(ITTAPI2*, Int32, Win32cr::Foundation::HRESULT),
-    get_CallHubs : Proc(ITTAPI2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CallHubs : Proc(ITTAPI2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_call_hubs : Proc(ITTAPI2*, Void**, Win32cr::Foundation::HRESULT),
-    set_call_hub_tracking : Proc(ITTAPI2*, Win32cr::System::Com::VARIANT, Int16, Win32cr::Foundation::HRESULT),
+    set_call_hub_tracking : Proc(ITTAPI2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     enumerate_private_tapi_objects : Proc(ITTAPI2*, Void**, Win32cr::Foundation::HRESULT),
-    get_PrivateTAPIObjects : Proc(ITTAPI2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    register_request_recipient : Proc(ITTAPI2*, Int32, Int32, Int16, Win32cr::Foundation::HRESULT),
-    set_assisted_telephony_priority : Proc(ITTAPI2*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    set_application_priority : Proc(ITTAPI2*, Win32cr::Foundation::BSTR, Int32, Int16, Win32cr::Foundation::HRESULT),
+    get_PrivateTAPIObjects : Proc(ITTAPI2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    register_request_recipient : Proc(ITTAPI2*, Int32, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_assisted_telephony_priority : Proc(ITTAPI2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_application_priority : Proc(ITTAPI2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     put_EventFilter : Proc(ITTAPI2*, Int32, Win32cr::Foundation::HRESULT),
     get_EventFilter : Proc(ITTAPI2*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Phones : Proc(ITTAPI2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Phones : Proc(ITTAPI2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_phones : Proc(ITTAPI2*, Void**, Win32cr::Foundation::HRESULT),
     create_empty_collection_object : Proc(ITTAPI2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITTAPI2, lpVtbl : ITTAPI2Vtbl* do
+  record ITTAPI2, lpVtbl : ITTAPI2Vtable* do
     GUID = LibC::GUID.new(0x54fbdc8c_u32, 0xd90f_u16, 0x4dad_u16, StaticArray[0x96_u8, 0x95_u8, 0xb3_u8, 0x73_u8, 0x9_u8, 0x7f_u8, 0x9_u8, 0x4b_u8])
     def query_interface(this : ITTAPI2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3494,8 +3444,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTAPI2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTAPI2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTAPI2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ITTAPI2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this)
@@ -3503,40 +3453,40 @@ module Win32cr::Devices::Tapi
     def shutdown(this : ITTAPI2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.shutdown.call(this)
     end
-    def get_Addresses(this : ITTAPI2*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Addresses(this : ITTAPI2*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Addresses.call(this, pVariant)
     end
     def enumerate_addresses(this : ITTAPI2*, ppEnumAddress : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_addresses.call(this, ppEnumAddress)
     end
-    def register_call_notifications(this : ITTAPI2*, pAddress : Void*, fMonitor : Int16, fOwner : Int16, lMediaTypes : Int32, lCallbackInstance : Int32, plRegister : Int32*) : Win32cr::Foundation::HRESULT
+    def register_call_notifications(this : ITTAPI2*, pAddress : Void*, fMonitor : Win32cr::Foundation::VARIANT_BOOL, fOwner : Win32cr::Foundation::VARIANT_BOOL, lMediaTypes : Int32, lCallbackInstance : Int32, plRegister : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_call_notifications.call(this, pAddress, fMonitor, fOwner, lMediaTypes, lCallbackInstance, plRegister)
     end
     def unregister_notifications(this : ITTAPI2*, lRegister : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_notifications.call(this, lRegister)
     end
-    def get_CallHubs(this : ITTAPI2*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CallHubs(this : ITTAPI2*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CallHubs.call(this, pVariant)
     end
     def enumerate_call_hubs(this : ITTAPI2*, ppEnumCallHub : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_call_hubs.call(this, ppEnumCallHub)
     end
-    def set_call_hub_tracking(this : ITTAPI2*, pAddresses : Win32cr::System::Com::VARIANT, bTracking : Int16) : Win32cr::Foundation::HRESULT
+    def set_call_hub_tracking(this : ITTAPI2*, pAddresses : Win32cr::System::Variant::VARIANT, bTracking : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_call_hub_tracking.call(this, pAddresses, bTracking)
     end
     def enumerate_private_tapi_objects(this : ITTAPI2*, ppEnumUnknown : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_private_tapi_objects.call(this, ppEnumUnknown)
     end
-    def get_PrivateTAPIObjects(this : ITTAPI2*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PrivateTAPIObjects(this : ITTAPI2*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateTAPIObjects.call(this, pVariant)
     end
-    def register_request_recipient(this : ITTAPI2*, lRegistrationInstance : Int32, lRequestMode : Int32, fEnable : Int16) : Win32cr::Foundation::HRESULT
+    def register_request_recipient(this : ITTAPI2*, lRegistrationInstance : Int32, lRequestMode : Int32, fEnable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_request_recipient.call(this, lRegistrationInstance, lRequestMode, fEnable)
     end
-    def set_assisted_telephony_priority(this : ITTAPI2*, pAppFilename : Win32cr::Foundation::BSTR, fPriority : Int16) : Win32cr::Foundation::HRESULT
+    def set_assisted_telephony_priority(this : ITTAPI2*, pAppFilename : Win32cr::Foundation::BSTR, fPriority : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_assisted_telephony_priority.call(this, pAppFilename, fPriority)
     end
-    def set_application_priority(this : ITTAPI2*, pAppFilename : Win32cr::Foundation::BSTR, lMediaType : Int32, fPriority : Int16) : Win32cr::Foundation::HRESULT
+    def set_application_priority(this : ITTAPI2*, pAppFilename : Win32cr::Foundation::BSTR, lMediaType : Int32, fPriority : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_application_priority.call(this, pAppFilename, lMediaType, fPriority)
     end
     def put_EventFilter(this : ITTAPI2*, lFilterMask : Int32) : Win32cr::Foundation::HRESULT
@@ -3545,7 +3495,7 @@ module Win32cr::Devices::Tapi
     def get_EventFilter(this : ITTAPI2*, plFilterMask : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventFilter.call(this, plFilterMask)
     end
-    def get_Phones(this : ITTAPI2*, pPhones : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Phones(this : ITTAPI2*, pPhones : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Phones.call(this, pPhones)
     end
     def enumerate_phones(this : ITTAPI2*, ppEnumPhone : Void**) : Win32cr::Foundation::HRESULT
@@ -3558,20 +3508,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMediaSupportVtbl,
+
+  record ITMediaSupportVtable,
     query_interface : Proc(ITMediaSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMediaSupport*, UInt32),
     release : Proc(ITMediaSupport*, UInt32),
     get_type_info_count : Proc(ITMediaSupport*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITMediaSupport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITMediaSupport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITMediaSupport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITMediaSupport*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_MediaTypes : Proc(ITMediaSupport*, Int32*, Win32cr::Foundation::HRESULT),
-    query_media_type : Proc(ITMediaSupport*, Int32, Int16*, Win32cr::Foundation::HRESULT)
+    query_media_type : Proc(ITMediaSupport*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITMediaSupport, lpVtbl : ITMediaSupportVtbl* do
+  record ITMediaSupport, lpVtbl : ITMediaSupportVtable* do
     GUID = LibC::GUID.new(0xb1efc384_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITMediaSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3591,27 +3542,28 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITMediaSupport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITMediaSupport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITMediaSupport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_MediaTypes(this : ITMediaSupport*, plMediaTypes : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MediaTypes.call(this, plMediaTypes)
     end
-    def query_media_type(this : ITMediaSupport*, lMediaType : Int32, pfSupport : Int16*) : Win32cr::Foundation::HRESULT
+    def query_media_type(this : ITMediaSupport*, lMediaType : Int32, pfSupport : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_media_type.call(this, lMediaType, pfSupport)
     end
 
   end
 
   @[Extern]
-  record ITPluggableTerminalClassInfoVtbl,
+
+  record ITPluggableTerminalClassInfoVtable,
     query_interface : Proc(ITPluggableTerminalClassInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPluggableTerminalClassInfo*, UInt32),
     release : Proc(ITPluggableTerminalClassInfo*, UInt32),
     get_type_info_count : Proc(ITPluggableTerminalClassInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITPluggableTerminalClassInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITPluggableTerminalClassInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITPluggableTerminalClassInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITPluggableTerminalClassInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITPluggableTerminalClassInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Company : Proc(ITPluggableTerminalClassInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Version : Proc(ITPluggableTerminalClassInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3622,7 +3574,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPluggableTerminalClassInfo, lpVtbl : ITPluggableTerminalClassInfoVtbl* do
+  record ITPluggableTerminalClassInfo, lpVtbl : ITPluggableTerminalClassInfoVtable* do
     GUID = LibC::GUID.new(0x41757f4a_u32, 0xcf09_u16, 0x4b34_u16, StaticArray[0xbc_u8, 0x96_u8, 0xa_u8, 0x79_u8, 0xd2_u8, 0x39_u8, 0x0_u8, 0x76_u8])
     def query_interface(this : ITPluggableTerminalClassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3642,8 +3594,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITPluggableTerminalClassInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITPluggableTerminalClassInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITPluggableTerminalClassInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ITPluggableTerminalClassInfo*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pName)
@@ -3670,20 +3622,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPluggableTerminalSuperclassInfoVtbl,
+
+  record ITPluggableTerminalSuperclassInfoVtable,
     query_interface : Proc(ITPluggableTerminalSuperclassInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPluggableTerminalSuperclassInfo*, UInt32),
     release : Proc(ITPluggableTerminalSuperclassInfo*, UInt32),
     get_type_info_count : Proc(ITPluggableTerminalSuperclassInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITPluggableTerminalSuperclassInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITPluggableTerminalSuperclassInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITPluggableTerminalSuperclassInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITPluggableTerminalSuperclassInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITPluggableTerminalSuperclassInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_CLSID : Proc(ITPluggableTerminalSuperclassInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITPluggableTerminalSuperclassInfo, lpVtbl : ITPluggableTerminalSuperclassInfoVtbl* do
+  record ITPluggableTerminalSuperclassInfo, lpVtbl : ITPluggableTerminalSuperclassInfoVtable* do
     GUID = LibC::GUID.new(0x6d54e42c_u32, 0x4625_u16, 0x4359_u16, StaticArray[0xa6_u8, 0xf7_u8, 0x63_u8, 0x19_u8, 0x99_u8, 0x10_u8, 0x7e_u8, 0x5_u8])
     def query_interface(this : ITPluggableTerminalSuperclassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3703,8 +3656,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITPluggableTerminalSuperclassInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITPluggableTerminalSuperclassInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITPluggableTerminalSuperclassInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ITPluggableTerminalSuperclassInfo*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pName)
@@ -3716,24 +3669,25 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTerminalSupportVtbl,
+
+  record ITTerminalSupportVtable,
     query_interface : Proc(ITTerminalSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTerminalSupport*, UInt32),
     release : Proc(ITTerminalSupport*, UInt32),
     get_type_info_count : Proc(ITTerminalSupport*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTerminalSupport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTerminalSupport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTerminalSupport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_StaticTerminals : Proc(ITTerminalSupport*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTerminalSupport*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StaticTerminals : Proc(ITTerminalSupport*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_static_terminals : Proc(ITTerminalSupport*, Void**, Win32cr::Foundation::HRESULT),
-    get_DynamicTerminalClasses : Proc(ITTerminalSupport*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DynamicTerminalClasses : Proc(ITTerminalSupport*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_dynamic_terminal_classes : Proc(ITTerminalSupport*, Void**, Win32cr::Foundation::HRESULT),
     create_terminal : Proc(ITTerminalSupport*, Win32cr::Foundation::BSTR, Int32, Win32cr::Devices::Tapi::TERMINAL_DIRECTION, Void**, Win32cr::Foundation::HRESULT),
     get_default_static_terminal : Proc(ITTerminalSupport*, Int32, Win32cr::Devices::Tapi::TERMINAL_DIRECTION, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITTerminalSupport, lpVtbl : ITTerminalSupportVtbl* do
+  record ITTerminalSupport, lpVtbl : ITTerminalSupportVtable* do
     GUID = LibC::GUID.new(0xb1efc385_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTerminalSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3753,16 +3707,16 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTerminalSupport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTerminalSupport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTerminalSupport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_StaticTerminals(this : ITTerminalSupport*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_StaticTerminals(this : ITTerminalSupport*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StaticTerminals.call(this, pVariant)
     end
     def enumerate_static_terminals(this : ITTerminalSupport*, ppTerminalEnumerator : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_static_terminals.call(this, ppTerminalEnumerator)
     end
-    def get_DynamicTerminalClasses(this : ITTerminalSupport*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DynamicTerminalClasses(this : ITTerminalSupport*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DynamicTerminalClasses.call(this, pVariant)
     end
     def enumerate_dynamic_terminal_classes(this : ITTerminalSupport*, ppTerminalClassEnumerator : Void**) : Win32cr::Foundation::HRESULT
@@ -3778,28 +3732,29 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTerminalSupport2Vtbl,
+
+  record ITTerminalSupport2Vtable,
     query_interface : Proc(ITTerminalSupport2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTerminalSupport2*, UInt32),
     release : Proc(ITTerminalSupport2*, UInt32),
     get_type_info_count : Proc(ITTerminalSupport2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTerminalSupport2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTerminalSupport2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTerminalSupport2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_StaticTerminals : Proc(ITTerminalSupport2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTerminalSupport2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_StaticTerminals : Proc(ITTerminalSupport2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_static_terminals : Proc(ITTerminalSupport2*, Void**, Win32cr::Foundation::HRESULT),
-    get_DynamicTerminalClasses : Proc(ITTerminalSupport2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DynamicTerminalClasses : Proc(ITTerminalSupport2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_dynamic_terminal_classes : Proc(ITTerminalSupport2*, Void**, Win32cr::Foundation::HRESULT),
     create_terminal : Proc(ITTerminalSupport2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Devices::Tapi::TERMINAL_DIRECTION, Void**, Win32cr::Foundation::HRESULT),
     get_default_static_terminal : Proc(ITTerminalSupport2*, Int32, Win32cr::Devices::Tapi::TERMINAL_DIRECTION, Void**, Win32cr::Foundation::HRESULT),
-    get_PluggableSuperclasses : Proc(ITTerminalSupport2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PluggableSuperclasses : Proc(ITTerminalSupport2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_pluggable_superclasses : Proc(ITTerminalSupport2*, Void**, Win32cr::Foundation::HRESULT),
-    get_PluggableTerminalClasses : Proc(ITTerminalSupport2*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PluggableTerminalClasses : Proc(ITTerminalSupport2*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_pluggable_terminal_classes : Proc(ITTerminalSupport2*, LibC::GUID, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITTerminalSupport2, lpVtbl : ITTerminalSupport2Vtbl* do
+  record ITTerminalSupport2, lpVtbl : ITTerminalSupport2Vtable* do
     GUID = LibC::GUID.new(0xf3eb39bc_u32, 0x1b1f_u16, 0x4e99_u16, StaticArray[0xa0_u8, 0xc0_u8, 0x56_u8, 0x30_u8, 0x5c_u8, 0x4d_u8, 0xd5_u8, 0x91_u8])
     def query_interface(this : ITTerminalSupport2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3819,16 +3774,16 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTerminalSupport2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTerminalSupport2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTerminalSupport2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_StaticTerminals(this : ITTerminalSupport2*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_StaticTerminals(this : ITTerminalSupport2*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StaticTerminals.call(this, pVariant)
     end
     def enumerate_static_terminals(this : ITTerminalSupport2*, ppTerminalEnumerator : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_static_terminals.call(this, ppTerminalEnumerator)
     end
-    def get_DynamicTerminalClasses(this : ITTerminalSupport2*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DynamicTerminalClasses(this : ITTerminalSupport2*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DynamicTerminalClasses.call(this, pVariant)
     end
     def enumerate_dynamic_terminal_classes(this : ITTerminalSupport2*, ppTerminalClassEnumerator : Void**) : Win32cr::Foundation::HRESULT
@@ -3840,13 +3795,13 @@ module Win32cr::Devices::Tapi
     def get_default_static_terminal(this : ITTerminalSupport2*, lMediaType : Int32, direction : Win32cr::Devices::Tapi::TERMINAL_DIRECTION, ppTerminal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_default_static_terminal.call(this, lMediaType, direction, ppTerminal)
     end
-    def get_PluggableSuperclasses(this : ITTerminalSupport2*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PluggableSuperclasses(this : ITTerminalSupport2*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PluggableSuperclasses.call(this, pVariant)
     end
     def enumerate_pluggable_superclasses(this : ITTerminalSupport2*, ppSuperclassEnumerator : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_pluggable_superclasses.call(this, ppSuperclassEnumerator)
     end
-    def get_PluggableTerminalClasses(this : ITTerminalSupport2*, bstrTerminalSuperclass : Win32cr::Foundation::BSTR, lMediaType : Int32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PluggableTerminalClasses(this : ITTerminalSupport2*, bstrTerminalSuperclass : Win32cr::Foundation::BSTR, lMediaType : Int32, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PluggableTerminalClasses.call(this, bstrTerminalSuperclass, lMediaType, pVariant)
     end
     def enumerate_pluggable_terminal_classes(this : ITTerminalSupport2*, iidTerminalSuperclass : LibC::GUID, lMediaType : Int32, ppClassEnumerator : Void**) : Win32cr::Foundation::HRESULT
@@ -3856,33 +3811,34 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressVtbl,
+
+  record ITAddressVtable,
     query_interface : Proc(ITAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddress*, UInt32),
     release : Proc(ITAddress*, UInt32),
     get_type_info_count : Proc(ITAddress*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAddress*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAddress*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAddress*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAddress*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_State : Proc(ITAddress*, Win32cr::Devices::Tapi::ADDRESS_STATE*, Win32cr::Foundation::HRESULT),
     get_AddressName : Proc(ITAddress*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ServiceProviderName : Proc(ITAddress*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_TAPIObject : Proc(ITAddress*, Void**, Win32cr::Foundation::HRESULT),
     create_call : Proc(ITAddress*, Win32cr::Foundation::BSTR, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
-    get_Calls : Proc(ITAddress*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Calls : Proc(ITAddress*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_calls : Proc(ITAddress*, Void**, Win32cr::Foundation::HRESULT),
     get_DialableAddress : Proc(ITAddress*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     create_forward_info_object : Proc(ITAddress*, Void**, Win32cr::Foundation::HRESULT),
     forward : Proc(ITAddress*, Void*, Void*, Win32cr::Foundation::HRESULT),
     get_CurrentForwardInfo : Proc(ITAddress*, Void**, Win32cr::Foundation::HRESULT),
-    put_MessageWaiting : Proc(ITAddress*, Int16, Win32cr::Foundation::HRESULT),
-    get_MessageWaiting : Proc(ITAddress*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DoNotDisturb : Proc(ITAddress*, Int16, Win32cr::Foundation::HRESULT),
-    get_DoNotDisturb : Proc(ITAddress*, Int16*, Win32cr::Foundation::HRESULT)
+    put_MessageWaiting : Proc(ITAddress*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_MessageWaiting : Proc(ITAddress*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DoNotDisturb : Proc(ITAddress*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_DoNotDisturb : Proc(ITAddress*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAddress, lpVtbl : ITAddressVtbl* do
+  record ITAddress, lpVtbl : ITAddressVtable* do
     GUID = LibC::GUID.new(0xb1efc386_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3902,8 +3858,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAddress*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAddress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAddress*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_State(this : ITAddress*, pAddressState : Win32cr::Devices::Tapi::ADDRESS_STATE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_State.call(this, pAddressState)
@@ -3920,7 +3876,7 @@ module Win32cr::Devices::Tapi
     def create_call(this : ITAddress*, pDestAddress : Win32cr::Foundation::BSTR, lAddressType : Int32, lMediaTypes : Int32, ppCall : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_call.call(this, pDestAddress, lAddressType, lMediaTypes, ppCall)
     end
-    def get_Calls(this : ITAddress*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Calls(this : ITAddress*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Calls.call(this, pVariant)
     end
     def enumerate_calls(this : ITAddress*, ppCallEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -3938,59 +3894,60 @@ module Win32cr::Devices::Tapi
     def get_CurrentForwardInfo(this : ITAddress*, ppForwardInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CurrentForwardInfo.call(this, ppForwardInfo)
     end
-    def put_MessageWaiting(this : ITAddress*, fMessageWaiting : Int16) : Win32cr::Foundation::HRESULT
+    def put_MessageWaiting(this : ITAddress*, fMessageWaiting : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MessageWaiting.call(this, fMessageWaiting)
     end
-    def get_MessageWaiting(this : ITAddress*, pfMessageWaiting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MessageWaiting(this : ITAddress*, pfMessageWaiting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MessageWaiting.call(this, pfMessageWaiting)
     end
-    def put_DoNotDisturb(this : ITAddress*, fDoNotDisturb : Int16) : Win32cr::Foundation::HRESULT
+    def put_DoNotDisturb(this : ITAddress*, fDoNotDisturb : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DoNotDisturb.call(this, fDoNotDisturb)
     end
-    def get_DoNotDisturb(this : ITAddress*, pfDoNotDisturb : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DoNotDisturb(this : ITAddress*, pfDoNotDisturb : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DoNotDisturb.call(this, pfDoNotDisturb)
     end
 
   end
 
   @[Extern]
-  record ITAddress2Vtbl,
+
+  record ITAddress2Vtable,
     query_interface : Proc(ITAddress2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddress2*, UInt32),
     release : Proc(ITAddress2*, UInt32),
     get_type_info_count : Proc(ITAddress2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAddress2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAddress2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAddress2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAddress2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_State : Proc(ITAddress2*, Win32cr::Devices::Tapi::ADDRESS_STATE*, Win32cr::Foundation::HRESULT),
     get_AddressName : Proc(ITAddress2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ServiceProviderName : Proc(ITAddress2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_TAPIObject : Proc(ITAddress2*, Void**, Win32cr::Foundation::HRESULT),
     create_call : Proc(ITAddress2*, Win32cr::Foundation::BSTR, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
-    get_Calls : Proc(ITAddress2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Calls : Proc(ITAddress2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_calls : Proc(ITAddress2*, Void**, Win32cr::Foundation::HRESULT),
     get_DialableAddress : Proc(ITAddress2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     create_forward_info_object : Proc(ITAddress2*, Void**, Win32cr::Foundation::HRESULT),
     forward : Proc(ITAddress2*, Void*, Void*, Win32cr::Foundation::HRESULT),
     get_CurrentForwardInfo : Proc(ITAddress2*, Void**, Win32cr::Foundation::HRESULT),
-    put_MessageWaiting : Proc(ITAddress2*, Int16, Win32cr::Foundation::HRESULT),
-    get_MessageWaiting : Proc(ITAddress2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DoNotDisturb : Proc(ITAddress2*, Int16, Win32cr::Foundation::HRESULT),
-    get_DoNotDisturb : Proc(ITAddress2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Phones : Proc(ITAddress2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_MessageWaiting : Proc(ITAddress2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_MessageWaiting : Proc(ITAddress2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DoNotDisturb : Proc(ITAddress2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_DoNotDisturb : Proc(ITAddress2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Phones : Proc(ITAddress2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_phones : Proc(ITAddress2*, Void**, Win32cr::Foundation::HRESULT),
     get_phone_from_terminal : Proc(ITAddress2*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    get_PreferredPhones : Proc(ITAddress2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PreferredPhones : Proc(ITAddress2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_preferred_phones : Proc(ITAddress2*, Void**, Win32cr::Foundation::HRESULT),
-    get_EventFilter : Proc(ITAddress2*, Win32cr::Devices::Tapi::TAPI_EVENT, Int32, Int16*, Win32cr::Foundation::HRESULT),
-    put_EventFilter : Proc(ITAddress2*, Win32cr::Devices::Tapi::TAPI_EVENT, Int32, Int16, Win32cr::Foundation::HRESULT),
+    get_EventFilter : Proc(ITAddress2*, Win32cr::Devices::Tapi::TAPI_EVENT, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_EventFilter : Proc(ITAddress2*, Win32cr::Devices::Tapi::TAPI_EVENT, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     device_specific : Proc(ITAddress2*, Void*, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
-    device_specific_variant : Proc(ITAddress2*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    device_specific_variant : Proc(ITAddress2*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     negotiate_ext_version : Proc(ITAddress2*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAddress2, lpVtbl : ITAddress2Vtbl* do
+  record ITAddress2, lpVtbl : ITAddress2Vtable* do
     GUID = LibC::GUID.new(0xb0ae5d9b_u32, 0xbe51_u16, 0x46c9_u16, StaticArray[0xb0_u8, 0xf7_u8, 0xdf_u8, 0xa8_u8, 0xa2_u8, 0x2a_u8, 0x8b_u8, 0xc4_u8])
     def query_interface(this : ITAddress2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4010,8 +3967,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAddress2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAddress2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAddress2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_State(this : ITAddress2*, pAddressState : Win32cr::Devices::Tapi::ADDRESS_STATE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_State.call(this, pAddressState)
@@ -4028,7 +3985,7 @@ module Win32cr::Devices::Tapi
     def create_call(this : ITAddress2*, pDestAddress : Win32cr::Foundation::BSTR, lAddressType : Int32, lMediaTypes : Int32, ppCall : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_call.call(this, pDestAddress, lAddressType, lMediaTypes, ppCall)
     end
-    def get_Calls(this : ITAddress2*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Calls(this : ITAddress2*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Calls.call(this, pVariant)
     end
     def enumerate_calls(this : ITAddress2*, ppCallEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -4046,19 +4003,19 @@ module Win32cr::Devices::Tapi
     def get_CurrentForwardInfo(this : ITAddress2*, ppForwardInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CurrentForwardInfo.call(this, ppForwardInfo)
     end
-    def put_MessageWaiting(this : ITAddress2*, fMessageWaiting : Int16) : Win32cr::Foundation::HRESULT
+    def put_MessageWaiting(this : ITAddress2*, fMessageWaiting : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MessageWaiting.call(this, fMessageWaiting)
     end
-    def get_MessageWaiting(this : ITAddress2*, pfMessageWaiting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MessageWaiting(this : ITAddress2*, pfMessageWaiting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MessageWaiting.call(this, pfMessageWaiting)
     end
-    def put_DoNotDisturb(this : ITAddress2*, fDoNotDisturb : Int16) : Win32cr::Foundation::HRESULT
+    def put_DoNotDisturb(this : ITAddress2*, fDoNotDisturb : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DoNotDisturb.call(this, fDoNotDisturb)
     end
-    def get_DoNotDisturb(this : ITAddress2*, pfDoNotDisturb : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DoNotDisturb(this : ITAddress2*, pfDoNotDisturb : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DoNotDisturb.call(this, pfDoNotDisturb)
     end
-    def get_Phones(this : ITAddress2*, pPhones : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Phones(this : ITAddress2*, pPhones : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Phones.call(this, pPhones)
     end
     def enumerate_phones(this : ITAddress2*, ppEnumPhone : Void**) : Win32cr::Foundation::HRESULT
@@ -4067,22 +4024,22 @@ module Win32cr::Devices::Tapi
     def get_phone_from_terminal(this : ITAddress2*, pTerminal : Void*, ppPhone : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_phone_from_terminal.call(this, pTerminal, ppPhone)
     end
-    def get_PreferredPhones(this : ITAddress2*, pPhones : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PreferredPhones(this : ITAddress2*, pPhones : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PreferredPhones.call(this, pPhones)
     end
     def enumerate_preferred_phones(this : ITAddress2*, ppEnumPhone : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_preferred_phones.call(this, ppEnumPhone)
     end
-    def get_EventFilter(this : ITAddress2*, tapi_event : Win32cr::Devices::Tapi::TAPI_EVENT, lSubEvent : Int32, pEnable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EventFilter(this : ITAddress2*, tapi_event : Win32cr::Devices::Tapi::TAPI_EVENT, lSubEvent : Int32, pEnable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventFilter.call(this, tapi_event, lSubEvent, pEnable)
     end
-    def put_EventFilter(this : ITAddress2*, tapi_event : Win32cr::Devices::Tapi::TAPI_EVENT, lSubEvent : Int32, bEnable : Int16) : Win32cr::Foundation::HRESULT
+    def put_EventFilter(this : ITAddress2*, tapi_event : Win32cr::Devices::Tapi::TAPI_EVENT, lSubEvent : Int32, bEnable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EventFilter.call(this, tapi_event, lSubEvent, bEnable)
     end
     def device_specific(this : ITAddress2*, pCall : Void*, pParams : UInt8*, dwSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.device_specific.call(this, pCall, pParams, dwSize)
     end
-    def device_specific_variant(this : ITAddress2*, pCall : Void*, varDevSpecificByteArray : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def device_specific_variant(this : ITAddress2*, pCall : Void*, varDevSpecificByteArray : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.device_specific_variant.call(this, pCall, varDevSpecificByteArray)
     end
     def negotiate_ext_version(this : ITAddress2*, lLowVersion : Int32, lHighVersion : Int32, plExtVersion : Int32*) : Win32cr::Foundation::HRESULT
@@ -4092,26 +4049,27 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressCapabilitiesVtbl,
+
+  record ITAddressCapabilitiesVtable,
     query_interface : Proc(ITAddressCapabilities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressCapabilities*, UInt32),
     release : Proc(ITAddressCapabilities*, UInt32),
     get_type_info_count : Proc(ITAddressCapabilities*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAddressCapabilities*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAddressCapabilities*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAddressCapabilities*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAddressCapabilities*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_AddressCapability : Proc(ITAddressCapabilities*, Win32cr::Devices::Tapi::ADDRESS_CAPABILITY, Int32*, Win32cr::Foundation::HRESULT),
     get_AddressCapabilityString : Proc(ITAddressCapabilities*, Win32cr::Devices::Tapi::ADDRESS_CAPABILITY_STRING, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_CallTreatments : Proc(ITAddressCapabilities*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CallTreatments : Proc(ITAddressCapabilities*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_call_treatments : Proc(ITAddressCapabilities*, Void**, Win32cr::Foundation::HRESULT),
-    get_CompletionMessages : Proc(ITAddressCapabilities*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CompletionMessages : Proc(ITAddressCapabilities*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_completion_messages : Proc(ITAddressCapabilities*, Void**, Win32cr::Foundation::HRESULT),
-    get_DeviceClasses : Proc(ITAddressCapabilities*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DeviceClasses : Proc(ITAddressCapabilities*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_device_classes : Proc(ITAddressCapabilities*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAddressCapabilities, lpVtbl : ITAddressCapabilitiesVtbl* do
+  record ITAddressCapabilities, lpVtbl : ITAddressCapabilitiesVtable* do
     GUID = LibC::GUID.new(0x8df232f5_u32, 0x821b_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITAddressCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4131,8 +4089,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAddressCapabilities*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAddressCapabilities*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAddressCapabilities*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_AddressCapability(this : ITAddressCapabilities*, address_cap : Win32cr::Devices::Tapi::ADDRESS_CAPABILITY, plCapability : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AddressCapability.call(this, address_cap, plCapability)
@@ -4140,19 +4098,19 @@ module Win32cr::Devices::Tapi
     def get_AddressCapabilityString(this : ITAddressCapabilities*, address_cap_string : Win32cr::Devices::Tapi::ADDRESS_CAPABILITY_STRING, ppCapabilityString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AddressCapabilityString.call(this, address_cap_string, ppCapabilityString)
     end
-    def get_CallTreatments(this : ITAddressCapabilities*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CallTreatments(this : ITAddressCapabilities*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CallTreatments.call(this, pVariant)
     end
     def enumerate_call_treatments(this : ITAddressCapabilities*, ppEnumCallTreatment : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_call_treatments.call(this, ppEnumCallTreatment)
     end
-    def get_CompletionMessages(this : ITAddressCapabilities*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CompletionMessages(this : ITAddressCapabilities*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CompletionMessages.call(this, pVariant)
     end
     def enumerate_completion_messages(this : ITAddressCapabilities*, ppEnumCompletionMessage : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_completion_messages.call(this, ppEnumCompletionMessage)
     end
-    def get_DeviceClasses(this : ITAddressCapabilities*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DeviceClasses(this : ITAddressCapabilities*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeviceClasses.call(this, pVariant)
     end
     def enumerate_device_classes(this : ITAddressCapabilities*, ppEnumDeviceClass : Void**) : Win32cr::Foundation::HRESULT
@@ -4162,21 +4120,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPhoneVtbl,
+
+  record ITPhoneVtable,
     query_interface : Proc(ITPhone*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPhone*, UInt32),
     release : Proc(ITPhone*, UInt32),
     get_type_info_count : Proc(ITPhone*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITPhone*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITPhone*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITPhone*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITPhone*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open : Proc(ITPhone*, Win32cr::Devices::Tapi::PHONE_PRIVILEGE, Win32cr::Foundation::HRESULT),
     close : Proc(ITPhone*, Win32cr::Foundation::HRESULT),
-    get_Addresses : Proc(ITPhone*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Addresses : Proc(ITPhone*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_addresses : Proc(ITPhone*, Void**, Win32cr::Foundation::HRESULT),
     get_PhoneCapsLong : Proc(ITPhone*, Win32cr::Devices::Tapi::PHONECAPS_LONG, Int32*, Win32cr::Foundation::HRESULT),
     get_PhoneCapsString : Proc(ITPhone*, Win32cr::Devices::Tapi::PHONECAPS_STRING, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Terminals : Proc(ITPhone*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Terminals : Proc(ITPhone*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_terminals : Proc(ITPhone*, Void*, Void**, Win32cr::Foundation::HRESULT),
     get_ButtonMode : Proc(ITPhone*, Int32, Win32cr::Devices::Tapi::PHONE_BUTTON_MODE*, Win32cr::Foundation::HRESULT),
     put_ButtonMode : Proc(ITPhone*, Int32, Win32cr::Devices::Tapi::PHONE_BUTTON_MODE, Win32cr::Foundation::HRESULT),
@@ -4193,20 +4152,20 @@ module Win32cr::Devices::Tapi
     get_RingVolume : Proc(ITPhone*, Int32*, Win32cr::Foundation::HRESULT),
     get_Privilege : Proc(ITPhone*, Win32cr::Devices::Tapi::PHONE_PRIVILEGE*, Win32cr::Foundation::HRESULT),
     get_phone_caps_buffer : Proc(ITPhone*, Win32cr::Devices::Tapi::PHONECAPS_BUFFER, UInt32*, UInt8**, Win32cr::Foundation::HRESULT),
-    get_PhoneCapsBuffer : Proc(ITPhone*, Win32cr::Devices::Tapi::PHONECAPS_BUFFER, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PhoneCapsBuffer : Proc(ITPhone*, Win32cr::Devices::Tapi::PHONECAPS_BUFFER, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_LampMode : Proc(ITPhone*, Int32, Win32cr::Devices::Tapi::PHONE_LAMP_MODE*, Win32cr::Foundation::HRESULT),
     put_LampMode : Proc(ITPhone*, Int32, Win32cr::Devices::Tapi::PHONE_LAMP_MODE, Win32cr::Foundation::HRESULT),
     get_Display : Proc(ITPhone*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_display : Proc(ITPhone*, Int32, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_PreferredAddresses : Proc(ITPhone*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PreferredAddresses : Proc(ITPhone*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_preferred_addresses : Proc(ITPhone*, Void**, Win32cr::Foundation::HRESULT),
     device_specific : Proc(ITPhone*, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
-    device_specific_variant : Proc(ITPhone*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    device_specific_variant : Proc(ITPhone*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     negotiate_ext_version : Proc(ITPhone*, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITPhone, lpVtbl : ITPhoneVtbl* do
+  record ITPhone, lpVtbl : ITPhoneVtable* do
     GUID = LibC::GUID.new(0x9d48db4_u32, 0x10cc_u16, 0x4388_u16, StaticArray[0x9d_u8, 0xe7_u8, 0xa8_u8, 0x46_u8, 0x56_u8, 0x18_u8, 0x97_u8, 0x5a_u8])
     def query_interface(this : ITPhone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4226,8 +4185,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITPhone*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITPhone*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITPhone*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open(this : ITPhone*, privilege : Win32cr::Devices::Tapi::PHONE_PRIVILEGE) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, privilege)
@@ -4235,7 +4194,7 @@ module Win32cr::Devices::Tapi
     def close(this : ITPhone*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
-    def get_Addresses(this : ITPhone*, pAddresses : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Addresses(this : ITPhone*, pAddresses : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Addresses.call(this, pAddresses)
     end
     def enumerate_addresses(this : ITPhone*, ppEnumAddress : Void**) : Win32cr::Foundation::HRESULT
@@ -4247,7 +4206,7 @@ module Win32cr::Devices::Tapi
     def get_PhoneCapsString(this : ITPhone*, pcsCap : Win32cr::Devices::Tapi::PHONECAPS_STRING, ppCapability : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PhoneCapsString.call(this, pcsCap, ppCapability)
     end
-    def get_Terminals(this : ITPhone*, pAddress : Void*, pTerminals : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Terminals(this : ITPhone*, pAddress : Void*, pTerminals : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Terminals.call(this, pAddress, pTerminals)
     end
     def enumerate_terminals(this : ITPhone*, pAddress : Void*, ppEnumTerminal : Void**) : Win32cr::Foundation::HRESULT
@@ -4298,7 +4257,7 @@ module Win32cr::Devices::Tapi
     def get_phone_caps_buffer(this : ITPhone*, pcbCaps : Win32cr::Devices::Tapi::PHONECAPS_BUFFER, pdwSize : UInt32*, ppPhoneCapsBuffer : UInt8**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_phone_caps_buffer.call(this, pcbCaps, pdwSize, ppPhoneCapsBuffer)
     end
-    def get_PhoneCapsBuffer(this : ITPhone*, pcbCaps : Win32cr::Devices::Tapi::PHONECAPS_BUFFER, pVarBuffer : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PhoneCapsBuffer(this : ITPhone*, pcbCaps : Win32cr::Devices::Tapi::PHONECAPS_BUFFER, pVarBuffer : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PhoneCapsBuffer.call(this, pcbCaps, pVarBuffer)
     end
     def get_LampMode(this : ITPhone*, lLampID : Int32, pLampMode : Win32cr::Devices::Tapi::PHONE_LAMP_MODE*) : Win32cr::Foundation::HRESULT
@@ -4313,7 +4272,7 @@ module Win32cr::Devices::Tapi
     def set_display(this : ITPhone*, lRow : Int32, lColumn : Int32, bstrDisplay : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_display.call(this, lRow, lColumn, bstrDisplay)
     end
-    def get_PreferredAddresses(this : ITPhone*, pAddresses : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PreferredAddresses(this : ITPhone*, pAddresses : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PreferredAddresses.call(this, pAddresses)
     end
     def enumerate_preferred_addresses(this : ITPhone*, ppEnumAddress : Void**) : Win32cr::Foundation::HRESULT
@@ -4322,7 +4281,7 @@ module Win32cr::Devices::Tapi
     def device_specific(this : ITPhone*, pParams : UInt8*, dwSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.device_specific.call(this, pParams, dwSize)
     end
-    def device_specific_variant(this : ITPhone*, varDevSpecificByteArray : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def device_specific_variant(this : ITPhone*, varDevSpecificByteArray : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.device_specific_variant.call(this, varDevSpecificByteArray)
     end
     def negotiate_ext_version(this : ITPhone*, lLowVersion : Int32, lHighVersion : Int32, plExtVersion : Int32*) : Win32cr::Foundation::HRESULT
@@ -4332,50 +4291,51 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAutomatedPhoneControlVtbl,
+
+  record ITAutomatedPhoneControlVtable,
     query_interface : Proc(ITAutomatedPhoneControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAutomatedPhoneControl*, UInt32),
     release : Proc(ITAutomatedPhoneControl*, UInt32),
     get_type_info_count : Proc(ITAutomatedPhoneControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAutomatedPhoneControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAutomatedPhoneControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAutomatedPhoneControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAutomatedPhoneControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     start_tone : Proc(ITAutomatedPhoneControl*, Win32cr::Devices::Tapi::PHONE_TONE, Int32, Win32cr::Foundation::HRESULT),
     stop_tone : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::HRESULT),
     get_Tone : Proc(ITAutomatedPhoneControl*, Win32cr::Devices::Tapi::PHONE_TONE*, Win32cr::Foundation::HRESULT),
     start_ringer : Proc(ITAutomatedPhoneControl*, Int32, Int32, Win32cr::Foundation::HRESULT),
     stop_ringer : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::HRESULT),
-    get_Ringer : Proc(ITAutomatedPhoneControl*, Int16*, Win32cr::Foundation::HRESULT),
-    put_PhoneHandlingEnabled : Proc(ITAutomatedPhoneControl*, Int16, Win32cr::Foundation::HRESULT),
-    get_PhoneHandlingEnabled : Proc(ITAutomatedPhoneControl*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Ringer : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_PhoneHandlingEnabled : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_PhoneHandlingEnabled : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     put_AutoEndOfNumberTimeout : Proc(ITAutomatedPhoneControl*, Int32, Win32cr::Foundation::HRESULT),
     get_AutoEndOfNumberTimeout : Proc(ITAutomatedPhoneControl*, Int32*, Win32cr::Foundation::HRESULT),
-    put_AutoDialtone : Proc(ITAutomatedPhoneControl*, Int16, Win32cr::Foundation::HRESULT),
-    get_AutoDialtone : Proc(ITAutomatedPhoneControl*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoStopTonesOnOnHook : Proc(ITAutomatedPhoneControl*, Int16, Win32cr::Foundation::HRESULT),
-    get_AutoStopTonesOnOnHook : Proc(ITAutomatedPhoneControl*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoStopRingOnOffHook : Proc(ITAutomatedPhoneControl*, Int16, Win32cr::Foundation::HRESULT),
-    get_AutoStopRingOnOffHook : Proc(ITAutomatedPhoneControl*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoKeypadTones : Proc(ITAutomatedPhoneControl*, Int16, Win32cr::Foundation::HRESULT),
-    get_AutoKeypadTones : Proc(ITAutomatedPhoneControl*, Int16*, Win32cr::Foundation::HRESULT),
+    put_AutoDialtone : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AutoDialtone : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoStopTonesOnOnHook : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AutoStopTonesOnOnHook : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoStopRingOnOffHook : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AutoStopRingOnOffHook : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoKeypadTones : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AutoKeypadTones : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     put_AutoKeypadTonesMinimumDuration : Proc(ITAutomatedPhoneControl*, Int32, Win32cr::Foundation::HRESULT),
     get_AutoKeypadTonesMinimumDuration : Proc(ITAutomatedPhoneControl*, Int32*, Win32cr::Foundation::HRESULT),
-    put_AutoVolumeControl : Proc(ITAutomatedPhoneControl*, Int16, Win32cr::Foundation::HRESULT),
-    get_AutoVolumeControl : Proc(ITAutomatedPhoneControl*, Int16*, Win32cr::Foundation::HRESULT),
+    put_AutoVolumeControl : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AutoVolumeControl : Proc(ITAutomatedPhoneControl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     put_AutoVolumeControlStep : Proc(ITAutomatedPhoneControl*, Int32, Win32cr::Foundation::HRESULT),
     get_AutoVolumeControlStep : Proc(ITAutomatedPhoneControl*, Int32*, Win32cr::Foundation::HRESULT),
     put_AutoVolumeControlRepeatDelay : Proc(ITAutomatedPhoneControl*, Int32, Win32cr::Foundation::HRESULT),
     get_AutoVolumeControlRepeatDelay : Proc(ITAutomatedPhoneControl*, Int32*, Win32cr::Foundation::HRESULT),
     put_AutoVolumeControlRepeatPeriod : Proc(ITAutomatedPhoneControl*, Int32, Win32cr::Foundation::HRESULT),
     get_AutoVolumeControlRepeatPeriod : Proc(ITAutomatedPhoneControl*, Int32*, Win32cr::Foundation::HRESULT),
-    select_call : Proc(ITAutomatedPhoneControl*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    select_call : Proc(ITAutomatedPhoneControl*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     unselect_call : Proc(ITAutomatedPhoneControl*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_selected_calls : Proc(ITAutomatedPhoneControl*, Void**, Win32cr::Foundation::HRESULT),
-    get_SelectedCalls : Proc(ITAutomatedPhoneControl*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_SelectedCalls : Proc(ITAutomatedPhoneControl*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAutomatedPhoneControl, lpVtbl : ITAutomatedPhoneControlVtbl* do
+  record ITAutomatedPhoneControl, lpVtbl : ITAutomatedPhoneControlVtable* do
     GUID = LibC::GUID.new(0x1ee1af0e_u32, 0x6159_u16, 0x4a61_u16, StaticArray[0xb7_u8, 0x9b_u8, 0x6a_u8, 0x4b_u8, 0xa3_u8, 0xfc_u8, 0x9d_u8, 0xfc_u8])
     def query_interface(this : ITAutomatedPhoneControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4395,8 +4355,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAutomatedPhoneControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAutomatedPhoneControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAutomatedPhoneControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def start_tone(this : ITAutomatedPhoneControl*, tone : Win32cr::Devices::Tapi::PHONE_TONE, lDuration : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start_tone.call(this, tone, lDuration)
@@ -4413,13 +4373,13 @@ module Win32cr::Devices::Tapi
     def stop_ringer(this : ITAutomatedPhoneControl*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.stop_ringer.call(this)
     end
-    def get_Ringer(this : ITAutomatedPhoneControl*, pfRinging : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Ringer(this : ITAutomatedPhoneControl*, pfRinging : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Ringer.call(this, pfRinging)
     end
-    def put_PhoneHandlingEnabled(this : ITAutomatedPhoneControl*, fEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_PhoneHandlingEnabled(this : ITAutomatedPhoneControl*, fEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PhoneHandlingEnabled.call(this, fEnabled)
     end
-    def get_PhoneHandlingEnabled(this : ITAutomatedPhoneControl*, pfEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_PhoneHandlingEnabled(this : ITAutomatedPhoneControl*, pfEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PhoneHandlingEnabled.call(this, pfEnabled)
     end
     def put_AutoEndOfNumberTimeout(this : ITAutomatedPhoneControl*, lTimeout : Int32) : Win32cr::Foundation::HRESULT
@@ -4428,28 +4388,28 @@ module Win32cr::Devices::Tapi
     def get_AutoEndOfNumberTimeout(this : ITAutomatedPhoneControl*, plTimeout : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoEndOfNumberTimeout.call(this, plTimeout)
     end
-    def put_AutoDialtone(this : ITAutomatedPhoneControl*, fEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoDialtone(this : ITAutomatedPhoneControl*, fEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoDialtone.call(this, fEnabled)
     end
-    def get_AutoDialtone(this : ITAutomatedPhoneControl*, pfEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoDialtone(this : ITAutomatedPhoneControl*, pfEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoDialtone.call(this, pfEnabled)
     end
-    def put_AutoStopTonesOnOnHook(this : ITAutomatedPhoneControl*, fEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoStopTonesOnOnHook(this : ITAutomatedPhoneControl*, fEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoStopTonesOnOnHook.call(this, fEnabled)
     end
-    def get_AutoStopTonesOnOnHook(this : ITAutomatedPhoneControl*, pfEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoStopTonesOnOnHook(this : ITAutomatedPhoneControl*, pfEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoStopTonesOnOnHook.call(this, pfEnabled)
     end
-    def put_AutoStopRingOnOffHook(this : ITAutomatedPhoneControl*, fEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoStopRingOnOffHook(this : ITAutomatedPhoneControl*, fEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoStopRingOnOffHook.call(this, fEnabled)
     end
-    def get_AutoStopRingOnOffHook(this : ITAutomatedPhoneControl*, pfEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoStopRingOnOffHook(this : ITAutomatedPhoneControl*, pfEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoStopRingOnOffHook.call(this, pfEnabled)
     end
-    def put_AutoKeypadTones(this : ITAutomatedPhoneControl*, fEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoKeypadTones(this : ITAutomatedPhoneControl*, fEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoKeypadTones.call(this, fEnabled)
     end
-    def get_AutoKeypadTones(this : ITAutomatedPhoneControl*, pfEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoKeypadTones(this : ITAutomatedPhoneControl*, pfEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoKeypadTones.call(this, pfEnabled)
     end
     def put_AutoKeypadTonesMinimumDuration(this : ITAutomatedPhoneControl*, lDuration : Int32) : Win32cr::Foundation::HRESULT
@@ -4458,10 +4418,10 @@ module Win32cr::Devices::Tapi
     def get_AutoKeypadTonesMinimumDuration(this : ITAutomatedPhoneControl*, plDuration : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoKeypadTonesMinimumDuration.call(this, plDuration)
     end
-    def put_AutoVolumeControl(this : ITAutomatedPhoneControl*, fEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoVolumeControl(this : ITAutomatedPhoneControl*, fEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoVolumeControl.call(this, fEnabled)
     end
-    def get_AutoVolumeControl(this : ITAutomatedPhoneControl*, fEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoVolumeControl(this : ITAutomatedPhoneControl*, fEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoVolumeControl.call(this, fEnabled)
     end
     def put_AutoVolumeControlStep(this : ITAutomatedPhoneControl*, lStepSize : Int32) : Win32cr::Foundation::HRESULT
@@ -4482,7 +4442,7 @@ module Win32cr::Devices::Tapi
     def get_AutoVolumeControlRepeatPeriod(this : ITAutomatedPhoneControl*, plPeriod : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoVolumeControlRepeatPeriod.call(this, plPeriod)
     end
-    def select_call(this : ITAutomatedPhoneControl*, pCall : Void*, fSelectDefaultTerminals : Int16) : Win32cr::Foundation::HRESULT
+    def select_call(this : ITAutomatedPhoneControl*, pCall : Void*, fSelectDefaultTerminals : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.select_call.call(this, pCall, fSelectDefaultTerminals)
     end
     def unselect_call(this : ITAutomatedPhoneControl*, pCall : Void*) : Win32cr::Foundation::HRESULT
@@ -4491,29 +4451,30 @@ module Win32cr::Devices::Tapi
     def enumerate_selected_calls(this : ITAutomatedPhoneControl*, ppCallEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_selected_calls.call(this, ppCallEnum)
     end
-    def get_SelectedCalls(this : ITAutomatedPhoneControl*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SelectedCalls(this : ITAutomatedPhoneControl*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SelectedCalls.call(this, pVariant)
     end
 
   end
 
   @[Extern]
-  record ITBasicCallControlVtbl,
+
+  record ITBasicCallControlVtable,
     query_interface : Proc(ITBasicCallControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITBasicCallControl*, UInt32),
     release : Proc(ITBasicCallControl*, UInt32),
     get_type_info_count : Proc(ITBasicCallControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITBasicCallControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITBasicCallControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITBasicCallControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    connect : Proc(ITBasicCallControl*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITBasicCallControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    connect : Proc(ITBasicCallControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     answer : Proc(ITBasicCallControl*, Win32cr::Foundation::HRESULT),
     disconnect : Proc(ITBasicCallControl*, Win32cr::Devices::Tapi::DISCONNECT_CODE, Win32cr::Foundation::HRESULT),
-    hold : Proc(ITBasicCallControl*, Int16, Win32cr::Foundation::HRESULT),
+    hold : Proc(ITBasicCallControl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     handoff_direct : Proc(ITBasicCallControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     handoff_indirect : Proc(ITBasicCallControl*, Int32, Win32cr::Foundation::HRESULT),
-    conference : Proc(ITBasicCallControl*, Void*, Int16, Win32cr::Foundation::HRESULT),
-    transfer : Proc(ITBasicCallControl*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    conference : Proc(ITBasicCallControl*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    transfer : Proc(ITBasicCallControl*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     blind_transfer : Proc(ITBasicCallControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     swap_hold : Proc(ITBasicCallControl*, Void*, Win32cr::Foundation::HRESULT),
     park_direct : Proc(ITBasicCallControl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4527,7 +4488,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITBasicCallControl, lpVtbl : ITBasicCallControlVtbl* do
+  record ITBasicCallControl, lpVtbl : ITBasicCallControlVtable* do
     GUID = LibC::GUID.new(0xb1efc389_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITBasicCallControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4547,10 +4508,10 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITBasicCallControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITBasicCallControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITBasicCallControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def connect(this : ITBasicCallControl*, fSync : Int16) : Win32cr::Foundation::HRESULT
+    def connect(this : ITBasicCallControl*, fSync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connect.call(this, fSync)
     end
     def answer(this : ITBasicCallControl*) : Win32cr::Foundation::HRESULT
@@ -4559,7 +4520,7 @@ module Win32cr::Devices::Tapi
     def disconnect(this : ITBasicCallControl*, code : Win32cr::Devices::Tapi::DISCONNECT_CODE) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disconnect.call(this, code)
     end
-    def hold(this : ITBasicCallControl*, fHold : Int16) : Win32cr::Foundation::HRESULT
+    def hold(this : ITBasicCallControl*, fHold : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hold.call(this, fHold)
     end
     def handoff_direct(this : ITBasicCallControl*, pApplicationName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4568,10 +4529,10 @@ module Win32cr::Devices::Tapi
     def handoff_indirect(this : ITBasicCallControl*, lMediaType : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.handoff_indirect.call(this, lMediaType)
     end
-    def conference(this : ITBasicCallControl*, pCall : Void*, fSync : Int16) : Win32cr::Foundation::HRESULT
+    def conference(this : ITBasicCallControl*, pCall : Void*, fSync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.conference.call(this, pCall, fSync)
     end
-    def transfer(this : ITBasicCallControl*, pCall : Void*, fSync : Int16) : Win32cr::Foundation::HRESULT
+    def transfer(this : ITBasicCallControl*, pCall : Void*, fSync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transfer.call(this, pCall, fSync)
     end
     def blind_transfer(this : ITBasicCallControl*, pDestAddress : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4608,14 +4569,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallInfoVtbl,
+
+  record ITCallInfoVtable,
     query_interface : Proc(ITCallInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallInfo*, UInt32),
     release : Proc(ITCallInfo*, UInt32),
     get_type_info_count : Proc(ITCallInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Address : Proc(ITCallInfo*, Void**, Win32cr::Foundation::HRESULT),
     get_CallState : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALL_STATE*, Win32cr::Foundation::HRESULT),
     get_Privilege : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALL_PRIVILEGE*, Win32cr::Foundation::HRESULT),
@@ -4624,15 +4586,15 @@ module Win32cr::Devices::Tapi
     put_CallInfoLong : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_LONG, Int32, Win32cr::Foundation::HRESULT),
     get_CallInfoString : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_STRING, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_CallInfoString : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_STRING, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_CallInfoBuffer : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_CallInfoBuffer : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_CallInfoBuffer : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_CallInfoBuffer : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_call_info_buffer : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, UInt32*, UInt8**, Win32cr::Foundation::HRESULT),
     set_call_info_buffer : Proc(ITCallInfo*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
     release_user_user_info : Proc(ITCallInfo*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITCallInfo, lpVtbl : ITCallInfoVtbl* do
+  record ITCallInfo, lpVtbl : ITCallInfoVtable* do
     GUID = LibC::GUID.new(0x350f85d1_u32, 0x1227_u16, 0x11d3_u16, StaticArray[0x83_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4652,8 +4614,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Address(this : ITCallInfo*, ppAddress : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Address.call(this, ppAddress)
@@ -4679,10 +4641,10 @@ module Win32cr::Devices::Tapi
     def put_CallInfoString(this : ITCallInfo*, call_info_string : Win32cr::Devices::Tapi::CALLINFO_STRING, pCallInfoString : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CallInfoString.call(this, call_info_string, pCallInfoString)
     end
-    def get_CallInfoBuffer(this : ITCallInfo*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, ppCallInfoBuffer : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CallInfoBuffer(this : ITCallInfo*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, ppCallInfoBuffer : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CallInfoBuffer.call(this, call_info_buffer, ppCallInfoBuffer)
     end
-    def put_CallInfoBuffer(this : ITCallInfo*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, pCallInfoBuffer : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_CallInfoBuffer(this : ITCallInfo*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, pCallInfoBuffer : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CallInfoBuffer.call(this, call_info_buffer, pCallInfoBuffer)
     end
     def get_call_info_buffer(this : ITCallInfo*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, pdwSize : UInt32*, ppCallInfoBuffer : UInt8**) : Win32cr::Foundation::HRESULT
@@ -4698,14 +4660,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallInfo2Vtbl,
+
+  record ITCallInfo2Vtable,
     query_interface : Proc(ITCallInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallInfo2*, UInt32),
     release : Proc(ITCallInfo2*, UInt32),
     get_type_info_count : Proc(ITCallInfo2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallInfo2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallInfo2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallInfo2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallInfo2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Address : Proc(ITCallInfo2*, Void**, Win32cr::Foundation::HRESULT),
     get_CallState : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALL_STATE*, Win32cr::Foundation::HRESULT),
     get_Privilege : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALL_PRIVILEGE*, Win32cr::Foundation::HRESULT),
@@ -4714,17 +4677,17 @@ module Win32cr::Devices::Tapi
     put_CallInfoLong : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_LONG, Int32, Win32cr::Foundation::HRESULT),
     get_CallInfoString : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_STRING, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_CallInfoString : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_STRING, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_CallInfoBuffer : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_CallInfoBuffer : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_CallInfoBuffer : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_CallInfoBuffer : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_call_info_buffer : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, UInt32*, UInt8**, Win32cr::Foundation::HRESULT),
     set_call_info_buffer : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::CALLINFO_BUFFER, UInt32, UInt8*, Win32cr::Foundation::HRESULT),
     release_user_user_info : Proc(ITCallInfo2*, Win32cr::Foundation::HRESULT),
-    get_EventFilter : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::TAPI_EVENT, Int32, Int16*, Win32cr::Foundation::HRESULT),
-    put_EventFilter : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::TAPI_EVENT, Int32, Int16, Win32cr::Foundation::HRESULT)
+    get_EventFilter : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::TAPI_EVENT, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_EventFilter : Proc(ITCallInfo2*, Win32cr::Devices::Tapi::TAPI_EVENT, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITCallInfo2, lpVtbl : ITCallInfo2Vtbl* do
+  record ITCallInfo2, lpVtbl : ITCallInfo2Vtable* do
     GUID = LibC::GUID.new(0x94d70ca6_u32, 0x7ab0_u16, 0x4daa_u16, StaticArray[0x81_u8, 0xca_u8, 0xb8_u8, 0xf8_u8, 0x64_u8, 0x3f_u8, 0xae_u8, 0xc1_u8])
     def query_interface(this : ITCallInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4744,8 +4707,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallInfo2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallInfo2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallInfo2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Address(this : ITCallInfo2*, ppAddress : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Address.call(this, ppAddress)
@@ -4771,10 +4734,10 @@ module Win32cr::Devices::Tapi
     def put_CallInfoString(this : ITCallInfo2*, call_info_string : Win32cr::Devices::Tapi::CALLINFO_STRING, pCallInfoString : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CallInfoString.call(this, call_info_string, pCallInfoString)
     end
-    def get_CallInfoBuffer(this : ITCallInfo2*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, ppCallInfoBuffer : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CallInfoBuffer(this : ITCallInfo2*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, ppCallInfoBuffer : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CallInfoBuffer.call(this, call_info_buffer, ppCallInfoBuffer)
     end
-    def put_CallInfoBuffer(this : ITCallInfo2*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, pCallInfoBuffer : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_CallInfoBuffer(this : ITCallInfo2*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, pCallInfoBuffer : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CallInfoBuffer.call(this, call_info_buffer, pCallInfoBuffer)
     end
     def get_call_info_buffer(this : ITCallInfo2*, call_info_buffer : Win32cr::Devices::Tapi::CALLINFO_BUFFER, pdwSize : UInt32*, ppCallInfoBuffer : UInt8**) : Win32cr::Foundation::HRESULT
@@ -4786,24 +4749,25 @@ module Win32cr::Devices::Tapi
     def release_user_user_info(this : ITCallInfo2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.release_user_user_info.call(this)
     end
-    def get_EventFilter(this : ITCallInfo2*, tapi_event : Win32cr::Devices::Tapi::TAPI_EVENT, lSubEvent : Int32, pEnable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EventFilter(this : ITCallInfo2*, tapi_event : Win32cr::Devices::Tapi::TAPI_EVENT, lSubEvent : Int32, pEnable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventFilter.call(this, tapi_event, lSubEvent, pEnable)
     end
-    def put_EventFilter(this : ITCallInfo2*, tapi_event : Win32cr::Devices::Tapi::TAPI_EVENT, lSubEvent : Int32, bEnable : Int16) : Win32cr::Foundation::HRESULT
+    def put_EventFilter(this : ITCallInfo2*, tapi_event : Win32cr::Devices::Tapi::TAPI_EVENT, lSubEvent : Int32, bEnable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EventFilter.call(this, tapi_event, lSubEvent, bEnable)
     end
 
   end
 
   @[Extern]
-  record ITTerminalVtbl,
+
+  record ITTerminalVtable,
     query_interface : Proc(ITTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTerminal*, UInt32),
     release : Proc(ITTerminal*, UInt32),
     get_type_info_count : Proc(ITTerminal*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTerminal*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTerminal*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTerminal*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTerminal*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITTerminal*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_State : Proc(ITTerminal*, Win32cr::Devices::Tapi::TERMINAL_STATE*, Win32cr::Foundation::HRESULT),
     get_TerminalType : Proc(ITTerminal*, Win32cr::Devices::Tapi::TERMINAL_TYPE*, Win32cr::Foundation::HRESULT),
@@ -4813,7 +4777,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTerminal, lpVtbl : ITTerminalVtbl* do
+  record ITTerminal, lpVtbl : ITTerminalVtable* do
     GUID = LibC::GUID.new(0xb1efc38a_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4833,8 +4797,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTerminal*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTerminal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTerminal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ITTerminal*, ppName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, ppName)
@@ -4858,15 +4822,16 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMultiTrackTerminalVtbl,
+
+  record ITMultiTrackTerminalVtable,
     query_interface : Proc(ITMultiTrackTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMultiTrackTerminal*, UInt32),
     release : Proc(ITMultiTrackTerminal*, UInt32),
     get_type_info_count : Proc(ITMultiTrackTerminal*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITMultiTrackTerminal*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITMultiTrackTerminal*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITMultiTrackTerminal*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_TrackTerminals : Proc(ITMultiTrackTerminal*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITMultiTrackTerminal*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_TrackTerminals : Proc(ITMultiTrackTerminal*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_track_terminals : Proc(ITMultiTrackTerminal*, Void**, Win32cr::Foundation::HRESULT),
     create_track_terminal : Proc(ITMultiTrackTerminal*, Int32, Win32cr::Devices::Tapi::TERMINAL_DIRECTION, Void**, Win32cr::Foundation::HRESULT),
     get_MediaTypesInUse : Proc(ITMultiTrackTerminal*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4875,7 +4840,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMultiTrackTerminal, lpVtbl : ITMultiTrackTerminalVtbl* do
+  record ITMultiTrackTerminal, lpVtbl : ITMultiTrackTerminalVtable* do
     GUID = LibC::GUID.new(0xfe040091_u32, 0xade8_u16, 0x4072_u16, StaticArray[0x95_u8, 0xc9_u8, 0xbf_u8, 0x7d_u8, 0xe8_u8, 0xc5_u8, 0x4b_u8, 0x44_u8])
     def query_interface(this : ITMultiTrackTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4895,10 +4860,10 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITMultiTrackTerminal*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITMultiTrackTerminal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITMultiTrackTerminal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_TrackTerminals(this : ITMultiTrackTerminal*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_TrackTerminals(this : ITMultiTrackTerminal*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TrackTerminals.call(this, pVariant)
     end
     def enumerate_track_terminals(this : ITMultiTrackTerminal*, ppEnumTerminal : Void**) : Win32cr::Foundation::HRESULT
@@ -4920,14 +4885,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITFileTrackVtbl,
+
+  record ITFileTrackVtable,
     query_interface : Proc(ITFileTrack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITFileTrack*, UInt32),
     release : Proc(ITFileTrack*, UInt32),
     get_type_info_count : Proc(ITFileTrack*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITFileTrack*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITFileTrack*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITFileTrack*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITFileTrack*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Format : Proc(ITFileTrack*, Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE**, Win32cr::Foundation::HRESULT),
     put_Format : Proc(ITFileTrack*, Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE*, Win32cr::Foundation::HRESULT),
     get_ControllingTerminal : Proc(ITFileTrack*, Void**, Win32cr::Foundation::HRESULT),
@@ -4937,7 +4903,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITFileTrack, lpVtbl : ITFileTrackVtbl* do
+  record ITFileTrack, lpVtbl : ITFileTrackVtable* do
     GUID = LibC::GUID.new(0x31ca6ea9_u32, 0xc08a_u16, 0x4bea_u16, StaticArray[0x88_u8, 0x11_u8, 0x8e_u8, 0x9c_u8, 0x1b_u8, 0xa3_u8, 0xea_u8, 0x3a_u8])
     def query_interface(this : ITFileTrack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4957,8 +4923,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITFileTrack*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITFileTrack*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITFileTrack*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Format(this : ITFileTrack*, ppmt : Win32cr::Media::MediaFoundation::AM_MEDIA_TYPE**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Format.call(this, ppmt)
@@ -4982,20 +4948,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMediaPlaybackVtbl,
+
+  record ITMediaPlaybackVtable,
     query_interface : Proc(ITMediaPlayback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMediaPlayback*, UInt32),
     release : Proc(ITMediaPlayback*, UInt32),
     get_type_info_count : Proc(ITMediaPlayback*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITMediaPlayback*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITMediaPlayback*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITMediaPlayback*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    put_PlayList : Proc(ITMediaPlayback*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PlayList : Proc(ITMediaPlayback*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ITMediaPlayback*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_PlayList : Proc(ITMediaPlayback*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PlayList : Proc(ITMediaPlayback*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITMediaPlayback, lpVtbl : ITMediaPlaybackVtbl* do
+  record ITMediaPlayback, lpVtbl : ITMediaPlaybackVtable* do
     GUID = LibC::GUID.new(0x627e8ae6_u32, 0xae4c_u16, 0x4a69_u16, StaticArray[0xbb_u8, 0x63_u8, 0x2a_u8, 0xd6_u8, 0x25_u8, 0x40_u8, 0x4b_u8, 0x77_u8])
     def query_interface(this : ITMediaPlayback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5015,33 +4982,34 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITMediaPlayback*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITMediaPlayback*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITMediaPlayback*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def put_PlayList(this : ITMediaPlayback*, play_list_variant : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_PlayList(this : ITMediaPlayback*, play_list_variant : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PlayList.call(this, play_list_variant)
     end
-    def get_PlayList(this : ITMediaPlayback*, pPlayListVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PlayList(this : ITMediaPlayback*, pPlayListVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PlayList.call(this, pPlayListVariant)
     end
 
   end
 
   @[Extern]
-  record ITMediaRecordVtbl,
+
+  record ITMediaRecordVtable,
     query_interface : Proc(ITMediaRecord*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMediaRecord*, UInt32),
     release : Proc(ITMediaRecord*, UInt32),
     get_type_info_count : Proc(ITMediaRecord*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITMediaRecord*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITMediaRecord*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITMediaRecord*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITMediaRecord*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_FileName : Proc(ITMediaRecord*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_FileName : Proc(ITMediaRecord*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITMediaRecord, lpVtbl : ITMediaRecordVtbl* do
+  record ITMediaRecord, lpVtbl : ITMediaRecordVtable* do
     GUID = LibC::GUID.new(0xf5dd4592_u32, 0x5476_u16, 0x4cc1_u16, StaticArray[0x9d_u8, 0x4d_u8, 0xfa_u8, 0xd3_u8, 0xee_u8, 0xfe_u8, 0x7d_u8, 0xb2_u8])
     def query_interface(this : ITMediaRecord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5061,8 +5029,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITMediaRecord*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITMediaRecord*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITMediaRecord*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_FileName(this : ITMediaRecord*, bstrFileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_FileName.call(this, bstrFileName)
@@ -5074,14 +5042,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMediaControlVtbl,
+
+  record ITMediaControlVtable,
     query_interface : Proc(ITMediaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMediaControl*, UInt32),
     release : Proc(ITMediaControl*, UInt32),
     get_type_info_count : Proc(ITMediaControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITMediaControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITMediaControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITMediaControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITMediaControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     start : Proc(ITMediaControl*, Win32cr::Foundation::HRESULT),
     stop : Proc(ITMediaControl*, Win32cr::Foundation::HRESULT),
     pause : Proc(ITMediaControl*, Win32cr::Foundation::HRESULT),
@@ -5089,7 +5058,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMediaControl, lpVtbl : ITMediaControlVtbl* do
+  record ITMediaControl, lpVtbl : ITMediaControlVtable* do
     GUID = LibC::GUID.new(0xc445dde8_u32, 0x5199_u16, 0x4bc7_u16, StaticArray[0x98_u8, 0x7_u8, 0x5f_u8, 0xfb_u8, 0x92_u8, 0xe4_u8, 0x2e_u8, 0x9_u8])
     def query_interface(this : ITMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5109,8 +5078,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITMediaControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITMediaControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITMediaControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def start(this : ITMediaControl*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start.call(this)
@@ -5128,14 +5097,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITBasicAudioTerminalVtbl,
+
+  record ITBasicAudioTerminalVtable,
     query_interface : Proc(ITBasicAudioTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITBasicAudioTerminal*, UInt32),
     release : Proc(ITBasicAudioTerminal*, UInt32),
     get_type_info_count : Proc(ITBasicAudioTerminal*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITBasicAudioTerminal*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITBasicAudioTerminal*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITBasicAudioTerminal*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITBasicAudioTerminal*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_Volume : Proc(ITBasicAudioTerminal*, Int32, Win32cr::Foundation::HRESULT),
     get_Volume : Proc(ITBasicAudioTerminal*, Int32*, Win32cr::Foundation::HRESULT),
     put_Balance : Proc(ITBasicAudioTerminal*, Int32, Win32cr::Foundation::HRESULT),
@@ -5143,7 +5113,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITBasicAudioTerminal, lpVtbl : ITBasicAudioTerminalVtbl* do
+  record ITBasicAudioTerminal, lpVtbl : ITBasicAudioTerminalVtable* do
     GUID = LibC::GUID.new(0xb1efc38d_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITBasicAudioTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5163,8 +5133,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITBasicAudioTerminal*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITBasicAudioTerminal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITBasicAudioTerminal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_Volume(this : ITBasicAudioTerminal*, lVolume : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Volume.call(this, lVolume)
@@ -5182,19 +5152,20 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITStaticAudioTerminalVtbl,
+
+  record ITStaticAudioTerminalVtable,
     query_interface : Proc(ITStaticAudioTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITStaticAudioTerminal*, UInt32),
     release : Proc(ITStaticAudioTerminal*, UInt32),
     get_type_info_count : Proc(ITStaticAudioTerminal*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITStaticAudioTerminal*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITStaticAudioTerminal*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITStaticAudioTerminal*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITStaticAudioTerminal*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_WaveId : Proc(ITStaticAudioTerminal*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITStaticAudioTerminal, lpVtbl : ITStaticAudioTerminalVtbl* do
+  record ITStaticAudioTerminal, lpVtbl : ITStaticAudioTerminalVtable* do
     GUID = LibC::GUID.new(0xa86b7871_u32, 0xd14c_u16, 0x48e6_u16, StaticArray[0x92_u8, 0x2e_u8, 0xa8_u8, 0xd1_u8, 0x5f_u8, 0x98_u8, 0x48_u8, 0x0_u8])
     def query_interface(this : ITStaticAudioTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5214,8 +5185,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITStaticAudioTerminal*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITStaticAudioTerminal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITStaticAudioTerminal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_WaveId(this : ITStaticAudioTerminal*, plWaveId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WaveId.call(this, plWaveId)
@@ -5224,23 +5195,24 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallHubVtbl,
+
+  record ITCallHubVtable,
     query_interface : Proc(ITCallHub*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallHub*, UInt32),
     release : Proc(ITCallHub*, UInt32),
     get_type_info_count : Proc(ITCallHub*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallHub*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallHub*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallHub*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallHub*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     clear : Proc(ITCallHub*, Win32cr::Foundation::HRESULT),
     enumerate_calls : Proc(ITCallHub*, Void**, Win32cr::Foundation::HRESULT),
-    get_Calls : Proc(ITCallHub*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Calls : Proc(ITCallHub*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_NumCalls : Proc(ITCallHub*, Int32*, Win32cr::Foundation::HRESULT),
     get_State : Proc(ITCallHub*, Win32cr::Devices::Tapi::CALLHUB_STATE*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITCallHub, lpVtbl : ITCallHubVtbl* do
+  record ITCallHub, lpVtbl : ITCallHubVtable* do
     GUID = LibC::GUID.new(0xa3c1544e_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallHub*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5260,8 +5232,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallHub*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallHub*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallHub*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def clear(this : ITCallHub*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clear.call(this)
@@ -5269,7 +5241,7 @@ module Win32cr::Devices::Tapi
     def enumerate_calls(this : ITCallHub*, ppEnumCall : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_calls.call(this, ppEnumCall)
     end
-    def get_Calls(this : ITCallHub*, pCalls : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Calls(this : ITCallHub*, pCalls : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Calls.call(this, pCalls)
     end
     def get_NumCalls(this : ITCallHub*, plCalls : Int32*) : Win32cr::Foundation::HRESULT
@@ -5282,7 +5254,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyAddressMediaControlVtbl,
+
+  record ITLegacyAddressMediaControlVtable,
     query_interface : Proc(ITLegacyAddressMediaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyAddressMediaControl*, UInt32),
     release : Proc(ITLegacyAddressMediaControl*, UInt32),
@@ -5292,7 +5265,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLegacyAddressMediaControl, lpVtbl : ITLegacyAddressMediaControlVtbl* do
+  record ITLegacyAddressMediaControl, lpVtbl : ITLegacyAddressMediaControlVtable* do
     GUID = LibC::GUID.new(0xab493640_u32, 0x4c0b_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x46_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITLegacyAddressMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5316,14 +5289,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPrivateEventVtbl,
+
+  record ITPrivateEventVtable,
     query_interface : Proc(ITPrivateEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPrivateEvent*, UInt32),
     release : Proc(ITPrivateEvent*, UInt32),
     get_type_info_count : Proc(ITPrivateEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITPrivateEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITPrivateEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITPrivateEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITPrivateEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Address : Proc(ITPrivateEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITPrivateEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_CallHub : Proc(ITPrivateEvent*, Void**, Win32cr::Foundation::HRESULT),
@@ -5332,7 +5306,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPrivateEvent, lpVtbl : ITPrivateEventVtbl* do
+  record ITPrivateEvent, lpVtbl : ITPrivateEventVtable* do
     GUID = LibC::GUID.new(0xe269cd0_u32, 0x10d4_u16, 0x4121_u16, StaticArray[0x9c_u8, 0x22_u8, 0x9c_u8, 0x85_u8, 0xd6_u8, 0x25_u8, 0x65_u8, 0xd_u8])
     def query_interface(this : ITPrivateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5352,8 +5326,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITPrivateEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITPrivateEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITPrivateEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Address(this : ITPrivateEvent*, ppAddress : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Address.call(this, ppAddress)
@@ -5374,7 +5348,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyAddressMediaControl2Vtbl,
+
+  record ITLegacyAddressMediaControl2Vtable,
     query_interface : Proc(ITLegacyAddressMediaControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyAddressMediaControl2*, UInt32),
     release : Proc(ITLegacyAddressMediaControl2*, UInt32),
@@ -5386,7 +5361,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLegacyAddressMediaControl2, lpVtbl : ITLegacyAddressMediaControl2Vtbl* do
+  record ITLegacyAddressMediaControl2, lpVtbl : ITLegacyAddressMediaControl2Vtable* do
     GUID = LibC::GUID.new(0xb0ee512b_u32, 0xa531_u16, 0x409e_u16, StaticArray[0x9d_u8, 0xd9_u8, 0x40_u8, 0x99_u8, 0xfe_u8, 0x86_u8, 0xc7_u8, 0x38_u8])
     def query_interface(this : ITLegacyAddressMediaControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5416,14 +5391,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyCallMediaControlVtbl,
+
+  record ITLegacyCallMediaControlVtable,
     query_interface : Proc(ITLegacyCallMediaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyCallMediaControl*, UInt32),
     release : Proc(ITLegacyCallMediaControl*, UInt32),
     get_type_info_count : Proc(ITLegacyCallMediaControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITLegacyCallMediaControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITLegacyCallMediaControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITLegacyCallMediaControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITLegacyCallMediaControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     detect_digits : Proc(ITLegacyCallMediaControl*, Int32, Win32cr::Foundation::HRESULT),
     generate_digits : Proc(ITLegacyCallMediaControl*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     get_id : Proc(ITLegacyCallMediaControl*, Win32cr::Foundation::BSTR, UInt32*, UInt8**, Win32cr::Foundation::HRESULT),
@@ -5432,7 +5408,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLegacyCallMediaControl, lpVtbl : ITLegacyCallMediaControlVtbl* do
+  record ITLegacyCallMediaControl, lpVtbl : ITLegacyCallMediaControlVtable* do
     GUID = LibC::GUID.new(0xd624582f_u32, 0xcc23_u16, 0x4436_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x47_u8, 0xc6_u8, 0x25_u8, 0xc8_u8, 0x4_u8, 0x5d_u8])
     def query_interface(this : ITLegacyCallMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5452,8 +5428,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITLegacyCallMediaControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITLegacyCallMediaControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITLegacyCallMediaControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def detect_digits(this : ITLegacyCallMediaControl*, digit_mode : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.detect_digits.call(this, digit_mode)
@@ -5474,14 +5450,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyCallMediaControl2Vtbl,
+
+  record ITLegacyCallMediaControl2Vtable,
     query_interface : Proc(ITLegacyCallMediaControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyCallMediaControl2*, UInt32),
     release : Proc(ITLegacyCallMediaControl2*, UInt32),
     get_type_info_count : Proc(ITLegacyCallMediaControl2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITLegacyCallMediaControl2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITLegacyCallMediaControl2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITLegacyCallMediaControl2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITLegacyCallMediaControl2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     detect_digits : Proc(ITLegacyCallMediaControl2*, Int32, Win32cr::Foundation::HRESULT),
     generate_digits : Proc(ITLegacyCallMediaControl2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     get_id : Proc(ITLegacyCallMediaControl2*, Win32cr::Foundation::BSTR, UInt32*, UInt8**, Win32cr::Foundation::HRESULT),
@@ -5496,11 +5473,11 @@ module Win32cr::Devices::Tapi
     generate_custom_tones_by_collection : Proc(ITLegacyCallMediaControl2*, Void*, Int32, Win32cr::Foundation::HRESULT),
     create_detect_tone_object : Proc(ITLegacyCallMediaControl2*, Void**, Win32cr::Foundation::HRESULT),
     create_custom_tone_object : Proc(ITLegacyCallMediaControl2*, Void**, Win32cr::Foundation::HRESULT),
-    get_id_as_variant : Proc(ITLegacyCallMediaControl2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_id_as_variant : Proc(ITLegacyCallMediaControl2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITLegacyCallMediaControl2, lpVtbl : ITLegacyCallMediaControl2Vtbl* do
+  record ITLegacyCallMediaControl2, lpVtbl : ITLegacyCallMediaControl2Vtable* do
     GUID = LibC::GUID.new(0x57ca332d_u32, 0x7bc2_u16, 0x44f1_u16, StaticArray[0xa6_u8, 0xc_u8, 0x93_u8, 0x6f_u8, 0xe8_u8, 0xd7_u8, 0xce_u8, 0x73_u8])
     def query_interface(this : ITLegacyCallMediaControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5520,8 +5497,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITLegacyCallMediaControl2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITLegacyCallMediaControl2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITLegacyCallMediaControl2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def detect_digits(this : ITLegacyCallMediaControl2*, digit_mode : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.detect_digits.call(this, digit_mode)
@@ -5565,21 +5542,22 @@ module Win32cr::Devices::Tapi
     def create_custom_tone_object(this : ITLegacyCallMediaControl2*, ppCustomTone : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_custom_tone_object.call(this, ppCustomTone)
     end
-    def get_id_as_variant(this : ITLegacyCallMediaControl2*, bstrDeviceClass : Win32cr::Foundation::BSTR, pVarDeviceID : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_id_as_variant(this : ITLegacyCallMediaControl2*, bstrDeviceClass : Win32cr::Foundation::BSTR, pVarDeviceID : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_id_as_variant.call(this, bstrDeviceClass, pVarDeviceID)
     end
 
   end
 
   @[Extern]
-  record ITDetectToneVtbl,
+
+  record ITDetectToneVtable,
     query_interface : Proc(ITDetectTone*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDetectTone*, UInt32),
     release : Proc(ITDetectTone*, UInt32),
     get_type_info_count : Proc(ITDetectTone*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDetectTone*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDetectTone*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDetectTone*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDetectTone*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_AppSpecific : Proc(ITDetectTone*, Int32*, Win32cr::Foundation::HRESULT),
     put_AppSpecific : Proc(ITDetectTone*, Int32, Win32cr::Foundation::HRESULT),
     get_Duration : Proc(ITDetectTone*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5589,7 +5567,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDetectTone, lpVtbl : ITDetectToneVtbl* do
+  record ITDetectTone, lpVtbl : ITDetectToneVtable* do
     GUID = LibC::GUID.new(0x961f79bd_u32, 0x3097_u16, 0x49df_u16, StaticArray[0xa1_u8, 0xd6_u8, 0x90_u8, 0x9b_u8, 0x77_u8, 0xe8_u8, 0x9c_u8, 0xa0_u8])
     def query_interface(this : ITDetectTone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5609,8 +5587,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDetectTone*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDetectTone*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDetectTone*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_AppSpecific(this : ITDetectTone*, plAppSpecific : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AppSpecific.call(this, plAppSpecific)
@@ -5634,14 +5612,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCustomToneVtbl,
+
+  record ITCustomToneVtable,
     query_interface : Proc(ITCustomTone*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCustomTone*, UInt32),
     release : Proc(ITCustomTone*, UInt32),
     get_type_info_count : Proc(ITCustomTone*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCustomTone*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCustomTone*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCustomTone*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCustomTone*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Frequency : Proc(ITCustomTone*, Int32*, Win32cr::Foundation::HRESULT),
     put_Frequency : Proc(ITCustomTone*, Int32, Win32cr::Foundation::HRESULT),
     get_CadenceOn : Proc(ITCustomTone*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5653,7 +5632,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCustomTone, lpVtbl : ITCustomToneVtbl* do
+  record ITCustomTone, lpVtbl : ITCustomToneVtable* do
     GUID = LibC::GUID.new(0x357ad764_u32, 0xb3c6_u16, 0x4b2a_u16, StaticArray[0x8f_u8, 0xa5_u8, 0x7_u8, 0x22_u8, 0x82_u8, 0x7a_u8, 0x92_u8, 0x54_u8])
     def query_interface(this : ITCustomTone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5673,8 +5652,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCustomTone*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCustomTone*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCustomTone*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Frequency(this : ITCustomTone*, plFrequency : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Frequency.call(this, plFrequency)
@@ -5704,7 +5683,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumPhoneVtbl,
+
+  record IEnumPhoneVtable,
     query_interface : Proc(IEnumPhone*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPhone*, UInt32),
     release : Proc(IEnumPhone*, UInt32),
@@ -5715,7 +5695,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumPhone, lpVtbl : IEnumPhoneVtbl* do
+  record IEnumPhone, lpVtbl : IEnumPhoneVtable* do
     GUID = LibC::GUID.new(0xf15b7669_u32, 0x4780_u16, 0x4595_u16, StaticArray[0x8c_u8, 0x89_u8, 0xfb_u8, 0x36_u8, 0x9c_u8, 0x8c_u8, 0xf7_u8, 0xaa_u8])
     def query_interface(this : IEnumPhone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5742,7 +5722,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumTerminalVtbl,
+
+  record IEnumTerminalVtable,
     query_interface : Proc(IEnumTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTerminal*, UInt32),
     release : Proc(IEnumTerminal*, UInt32),
@@ -5753,7 +5734,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumTerminal, lpVtbl : IEnumTerminalVtbl* do
+  record IEnumTerminal, lpVtbl : IEnumTerminalVtable* do
     GUID = LibC::GUID.new(0xae269cf4_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5780,7 +5761,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumTerminalClassVtbl,
+
+  record IEnumTerminalClassVtable,
     query_interface : Proc(IEnumTerminalClass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTerminalClass*, UInt32),
     release : Proc(IEnumTerminalClass*, UInt32),
@@ -5791,7 +5773,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumTerminalClass, lpVtbl : IEnumTerminalClassVtbl* do
+  record IEnumTerminalClass, lpVtbl : IEnumTerminalClassVtable* do
     GUID = LibC::GUID.new(0xae269cf5_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumTerminalClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5818,7 +5800,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumCallVtbl,
+
+  record IEnumCallVtable,
     query_interface : Proc(IEnumCall*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCall*, UInt32),
     release : Proc(IEnumCall*, UInt32),
@@ -5829,7 +5812,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumCall, lpVtbl : IEnumCallVtbl* do
+  record IEnumCall, lpVtbl : IEnumCallVtable* do
     GUID = LibC::GUID.new(0xae269cf6_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumCall*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5856,7 +5839,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumAddressVtbl,
+
+  record IEnumAddressVtable,
     query_interface : Proc(IEnumAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumAddress*, UInt32),
     release : Proc(IEnumAddress*, UInt32),
@@ -5867,7 +5851,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumAddress, lpVtbl : IEnumAddressVtbl* do
+  record IEnumAddress, lpVtbl : IEnumAddressVtable* do
     GUID = LibC::GUID.new(0x1666fca1_u32, 0x9363_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5894,7 +5878,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumCallHubVtbl,
+
+  record IEnumCallHubVtable,
     query_interface : Proc(IEnumCallHub*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCallHub*, UInt32),
     release : Proc(IEnumCallHub*, UInt32),
@@ -5905,7 +5890,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumCallHub, lpVtbl : IEnumCallHubVtbl* do
+  record IEnumCallHub, lpVtbl : IEnumCallHubVtable* do
     GUID = LibC::GUID.new(0xa3c15450_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumCallHub*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5932,7 +5917,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumBstrVtbl,
+
+  record IEnumBstrVtable,
     query_interface : Proc(IEnumBstr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumBstr*, UInt32),
     release : Proc(IEnumBstr*, UInt32),
@@ -5943,7 +5929,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumBstr, lpVtbl : IEnumBstrVtbl* do
+  record IEnumBstr, lpVtbl : IEnumBstrVtable* do
     GUID = LibC::GUID.new(0x35372049_u32, 0xbc6_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumBstr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5970,7 +5956,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumPluggableTerminalClassInfoVtbl,
+
+  record IEnumPluggableTerminalClassInfoVtable,
     query_interface : Proc(IEnumPluggableTerminalClassInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPluggableTerminalClassInfo*, UInt32),
     release : Proc(IEnumPluggableTerminalClassInfo*, UInt32),
@@ -5981,7 +5968,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumPluggableTerminalClassInfo, lpVtbl : IEnumPluggableTerminalClassInfoVtbl* do
+  record IEnumPluggableTerminalClassInfo, lpVtbl : IEnumPluggableTerminalClassInfoVtable* do
     GUID = LibC::GUID.new(0x4567450c_u32, 0xdbee_u16, 0x4e3f_u16, StaticArray[0xaa_u8, 0xf5_u8, 0x37_u8, 0xbf_u8, 0x9e_u8, 0xbf_u8, 0x5e_u8, 0x29_u8])
     def query_interface(this : IEnumPluggableTerminalClassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6008,7 +5995,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumPluggableSuperclassInfoVtbl,
+
+  record IEnumPluggableSuperclassInfoVtable,
     query_interface : Proc(IEnumPluggableSuperclassInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPluggableSuperclassInfo*, UInt32),
     release : Proc(IEnumPluggableSuperclassInfo*, UInt32),
@@ -6019,7 +6007,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumPluggableSuperclassInfo, lpVtbl : IEnumPluggableSuperclassInfoVtbl* do
+  record IEnumPluggableSuperclassInfo, lpVtbl : IEnumPluggableSuperclassInfoVtable* do
     GUID = LibC::GUID.new(0xe9586a80_u32, 0x89e6_u16, 0x4cff_u16, StaticArray[0x93_u8, 0x1d_u8, 0x47_u8, 0x8d_u8, 0x57_u8, 0x51_u8, 0xf4_u8, 0xc0_u8])
     def query_interface(this : IEnumPluggableSuperclassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6046,14 +6034,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPhoneEventVtbl,
+
+  record ITPhoneEventVtable,
     query_interface : Proc(ITPhoneEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPhoneEvent*, UInt32),
     release : Proc(ITPhoneEvent*, UInt32),
     get_type_info_count : Proc(ITPhoneEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITPhoneEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITPhoneEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITPhoneEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITPhoneEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Phone : Proc(ITPhoneEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITPhoneEvent*, Win32cr::Devices::Tapi::PHONE_EVENT*, Win32cr::Foundation::HRESULT),
     get_ButtonState : Proc(ITPhoneEvent*, Win32cr::Devices::Tapi::PHONE_BUTTON_STATE*, Win32cr::Foundation::HRESULT),
@@ -6066,7 +6055,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPhoneEvent, lpVtbl : ITPhoneEventVtbl* do
+  record ITPhoneEvent, lpVtbl : ITPhoneEventVtable* do
     GUID = LibC::GUID.new(0x8f942dd8_u32, 0x64ed_u16, 0x4aaf_u16, StaticArray[0xa7_u8, 0x7d_u8, 0xb2_u8, 0x3d_u8, 0xb0_u8, 0x83_u8, 0x7e_u8, 0xad_u8])
     def query_interface(this : ITPhoneEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6086,8 +6075,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITPhoneEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITPhoneEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITPhoneEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Phone(this : ITPhoneEvent*, ppPhone : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Phone.call(this, ppPhone)
@@ -6120,14 +6109,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallStateEventVtbl,
+
+  record ITCallStateEventVtable,
     query_interface : Proc(ITCallStateEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallStateEvent*, UInt32),
     release : Proc(ITCallStateEvent*, UInt32),
     get_type_info_count : Proc(ITCallStateEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallStateEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallStateEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallStateEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallStateEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITCallStateEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_State : Proc(ITCallStateEvent*, Win32cr::Devices::Tapi::CALL_STATE*, Win32cr::Foundation::HRESULT),
     get_Cause : Proc(ITCallStateEvent*, Win32cr::Devices::Tapi::CALL_STATE_EVENT_CAUSE*, Win32cr::Foundation::HRESULT),
@@ -6135,7 +6125,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallStateEvent, lpVtbl : ITCallStateEventVtbl* do
+  record ITCallStateEvent, lpVtbl : ITCallStateEventVtable* do
     GUID = LibC::GUID.new(0x62f47097_u32, 0x95c9_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITCallStateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6155,8 +6145,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallStateEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallStateEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallStateEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITCallStateEvent*, ppCallInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCallInfo)
@@ -6174,14 +6164,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPhoneDeviceSpecificEventVtbl,
+
+  record ITPhoneDeviceSpecificEventVtable,
     query_interface : Proc(ITPhoneDeviceSpecificEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPhoneDeviceSpecificEvent*, UInt32),
     release : Proc(ITPhoneDeviceSpecificEvent*, UInt32),
     get_type_info_count : Proc(ITPhoneDeviceSpecificEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITPhoneDeviceSpecificEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITPhoneDeviceSpecificEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITPhoneDeviceSpecificEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITPhoneDeviceSpecificEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Phone : Proc(ITPhoneDeviceSpecificEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_lParam1 : Proc(ITPhoneDeviceSpecificEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_lParam2 : Proc(ITPhoneDeviceSpecificEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -6189,7 +6180,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPhoneDeviceSpecificEvent, lpVtbl : ITPhoneDeviceSpecificEventVtbl* do
+  record ITPhoneDeviceSpecificEvent, lpVtbl : ITPhoneDeviceSpecificEventVtable* do
     GUID = LibC::GUID.new(0x63ffb2a6_u32, 0x872b_u16, 0x4cd3_u16, StaticArray[0xa5_u8, 0x1_u8, 0x32_u8, 0x6e_u8, 0x8f_u8, 0xb4_u8, 0xa_u8, 0xf7_u8])
     def query_interface(this : ITPhoneDeviceSpecificEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6209,8 +6200,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITPhoneDeviceSpecificEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITPhoneDeviceSpecificEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITPhoneDeviceSpecificEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Phone(this : ITPhoneDeviceSpecificEvent*, ppPhone : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Phone.call(this, ppPhone)
@@ -6228,14 +6219,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallMediaEventVtbl,
+
+  record ITCallMediaEventVtable,
     query_interface : Proc(ITCallMediaEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallMediaEvent*, UInt32),
     release : Proc(ITCallMediaEvent*, UInt32),
     get_type_info_count : Proc(ITCallMediaEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallMediaEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallMediaEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallMediaEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallMediaEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITCallMediaEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITCallMediaEvent*, Win32cr::Devices::Tapi::CALL_MEDIA_EVENT*, Win32cr::Foundation::HRESULT),
     get_Error : Proc(ITCallMediaEvent*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT),
@@ -6245,7 +6237,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallMediaEvent, lpVtbl : ITCallMediaEventVtbl* do
+  record ITCallMediaEvent, lpVtbl : ITCallMediaEventVtable* do
     GUID = LibC::GUID.new(0xff36b87f_u32, 0xec3a_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallMediaEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6265,8 +6257,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallMediaEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallMediaEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallMediaEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITCallMediaEvent*, ppCallInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCallInfo)
@@ -6290,14 +6282,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDigitDetectionEventVtbl,
+
+  record ITDigitDetectionEventVtable,
     query_interface : Proc(ITDigitDetectionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDigitDetectionEvent*, UInt32),
     release : Proc(ITDigitDetectionEvent*, UInt32),
     get_type_info_count : Proc(ITDigitDetectionEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDigitDetectionEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDigitDetectionEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDigitDetectionEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDigitDetectionEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITDigitDetectionEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Digit : Proc(ITDigitDetectionEvent*, UInt8*, Win32cr::Foundation::HRESULT),
     get_DigitMode : Proc(ITDigitDetectionEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -6306,7 +6299,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDigitDetectionEvent, lpVtbl : ITDigitDetectionEventVtbl* do
+  record ITDigitDetectionEvent, lpVtbl : ITDigitDetectionEventVtable* do
     GUID = LibC::GUID.new(0x80d3bfac_u32, 0x57d9_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDigitDetectionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6326,8 +6319,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDigitDetectionEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDigitDetectionEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDigitDetectionEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITDigitDetectionEvent*, ppCallInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCallInfo)
@@ -6348,14 +6341,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDigitGenerationEventVtbl,
+
+  record ITDigitGenerationEventVtable,
     query_interface : Proc(ITDigitGenerationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDigitGenerationEvent*, UInt32),
     release : Proc(ITDigitGenerationEvent*, UInt32),
     get_type_info_count : Proc(ITDigitGenerationEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDigitGenerationEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDigitGenerationEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDigitGenerationEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDigitGenerationEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITDigitGenerationEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_GenerationTermination : Proc(ITDigitGenerationEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_TickCount : Proc(ITDigitGenerationEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -6363,7 +6357,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDigitGenerationEvent, lpVtbl : ITDigitGenerationEventVtbl* do
+  record ITDigitGenerationEvent, lpVtbl : ITDigitGenerationEventVtable* do
     GUID = LibC::GUID.new(0x80d3bfad_u32, 0x57d9_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDigitGenerationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6383,8 +6377,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDigitGenerationEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDigitGenerationEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDigitGenerationEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITDigitGenerationEvent*, ppCallInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCallInfo)
@@ -6402,14 +6396,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDigitsGatheredEventVtbl,
+
+  record ITDigitsGatheredEventVtable,
     query_interface : Proc(ITDigitsGatheredEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDigitsGatheredEvent*, UInt32),
     release : Proc(ITDigitsGatheredEvent*, UInt32),
     get_type_info_count : Proc(ITDigitsGatheredEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDigitsGatheredEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDigitsGatheredEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDigitsGatheredEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDigitsGatheredEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITDigitsGatheredEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Digits : Proc(ITDigitsGatheredEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_GatherTermination : Proc(ITDigitsGatheredEvent*, Win32cr::Devices::Tapi::TAPI_GATHERTERM*, Win32cr::Foundation::HRESULT),
@@ -6418,7 +6413,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDigitsGatheredEvent, lpVtbl : ITDigitsGatheredEventVtbl* do
+  record ITDigitsGatheredEvent, lpVtbl : ITDigitsGatheredEventVtable* do
     GUID = LibC::GUID.new(0xe52ec4c1_u32, 0xcba3_u16, 0x441a_u16, StaticArray[0x9e_u8, 0x6a_u8, 0x93_u8, 0xcb_u8, 0x90_u8, 0x9e_u8, 0x97_u8, 0x24_u8])
     def query_interface(this : ITDigitsGatheredEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6438,8 +6433,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDigitsGatheredEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDigitsGatheredEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDigitsGatheredEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITDigitsGatheredEvent*, ppCallInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCallInfo)
@@ -6460,14 +6455,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITToneDetectionEventVtbl,
+
+  record ITToneDetectionEventVtable,
     query_interface : Proc(ITToneDetectionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITToneDetectionEvent*, UInt32),
     release : Proc(ITToneDetectionEvent*, UInt32),
     get_type_info_count : Proc(ITToneDetectionEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITToneDetectionEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITToneDetectionEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITToneDetectionEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITToneDetectionEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITToneDetectionEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_AppSpecific : Proc(ITToneDetectionEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_TickCount : Proc(ITToneDetectionEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -6475,7 +6471,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITToneDetectionEvent, lpVtbl : ITToneDetectionEventVtbl* do
+  record ITToneDetectionEvent, lpVtbl : ITToneDetectionEventVtable* do
     GUID = LibC::GUID.new(0x407e0faf_u32, 0xd047_u16, 0x4753_u16, StaticArray[0xb0_u8, 0xc6_u8, 0x8e_u8, 0x6_u8, 0x3_u8, 0x73_u8, 0xfe_u8, 0xcd_u8])
     def query_interface(this : ITToneDetectionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6495,8 +6491,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITToneDetectionEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITToneDetectionEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITToneDetectionEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITToneDetectionEvent*, ppCallInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCallInfo)
@@ -6514,14 +6510,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIObjectEventVtbl,
+
+  record ITTAPIObjectEventVtable,
     query_interface : Proc(ITTAPIObjectEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPIObjectEvent*, UInt32),
     release : Proc(ITTAPIObjectEvent*, UInt32),
     get_type_info_count : Proc(ITTAPIObjectEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTAPIObjectEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTAPIObjectEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTAPIObjectEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTAPIObjectEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_TAPIObject : Proc(ITTAPIObjectEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITTAPIObjectEvent*, Win32cr::Devices::Tapi::TAPIOBJECT_EVENT*, Win32cr::Foundation::HRESULT),
     get_Address : Proc(ITTAPIObjectEvent*, Void**, Win32cr::Foundation::HRESULT),
@@ -6529,7 +6526,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPIObjectEvent, lpVtbl : ITTAPIObjectEventVtbl* do
+  record ITTAPIObjectEvent, lpVtbl : ITTAPIObjectEventVtable* do
     GUID = LibC::GUID.new(0xf4854d48_u32, 0x937a_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x58_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITTAPIObjectEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6549,8 +6546,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTAPIObjectEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTAPIObjectEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTAPIObjectEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_TAPIObject(this : ITTAPIObjectEvent*, ppTAPIObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TAPIObject.call(this, ppTAPIObject)
@@ -6568,14 +6565,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIObjectEvent2Vtbl,
+
+  record ITTAPIObjectEvent2Vtable,
     query_interface : Proc(ITTAPIObjectEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPIObjectEvent2*, UInt32),
     release : Proc(ITTAPIObjectEvent2*, UInt32),
     get_type_info_count : Proc(ITTAPIObjectEvent2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTAPIObjectEvent2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTAPIObjectEvent2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTAPIObjectEvent2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTAPIObjectEvent2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_TAPIObject : Proc(ITTAPIObjectEvent2*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITTAPIObjectEvent2*, Win32cr::Devices::Tapi::TAPIOBJECT_EVENT*, Win32cr::Foundation::HRESULT),
     get_Address : Proc(ITTAPIObjectEvent2*, Void**, Win32cr::Foundation::HRESULT),
@@ -6584,7 +6582,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPIObjectEvent2, lpVtbl : ITTAPIObjectEvent2Vtbl* do
+  record ITTAPIObjectEvent2, lpVtbl : ITTAPIObjectEvent2Vtable* do
     GUID = LibC::GUID.new(0x359dda6e_u32, 0x68ce_u16, 0x4383_u16, StaticArray[0xbf_u8, 0xb_u8, 0x16_u8, 0x91_u8, 0x33_u8, 0xc4_u8, 0x1b_u8, 0x46_u8])
     def query_interface(this : ITTAPIObjectEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6604,8 +6602,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTAPIObjectEvent2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTAPIObjectEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTAPIObjectEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_TAPIObject(this : ITTAPIObjectEvent2*, ppTAPIObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TAPIObject.call(this, ppTAPIObject)
@@ -6626,7 +6624,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIEventNotificationVtbl,
+
+  record ITTAPIEventNotificationVtable,
     query_interface : Proc(ITTAPIEventNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPIEventNotification*, UInt32),
     release : Proc(ITTAPIEventNotification*, UInt32),
@@ -6634,7 +6633,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPIEventNotification, lpVtbl : ITTAPIEventNotificationVtbl* do
+  record ITTAPIEventNotification, lpVtbl : ITTAPIEventNotificationVtable* do
     GUID = LibC::GUID.new(0xeddb9426_u32, 0x3b91_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITTAPIEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6652,21 +6651,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallHubEventVtbl,
+
+  record ITCallHubEventVtable,
     query_interface : Proc(ITCallHubEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallHubEvent*, UInt32),
     release : Proc(ITCallHubEvent*, UInt32),
     get_type_info_count : Proc(ITCallHubEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallHubEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallHubEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallHubEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallHubEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITCallHubEvent*, Win32cr::Devices::Tapi::CALLHUB_EVENT*, Win32cr::Foundation::HRESULT),
     get_CallHub : Proc(ITCallHubEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITCallHubEvent*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITCallHubEvent, lpVtbl : ITCallHubEventVtbl* do
+  record ITCallHubEvent, lpVtbl : ITCallHubEventVtable* do
     GUID = LibC::GUID.new(0xa3c15451_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallHubEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6686,8 +6686,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallHubEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallHubEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallHubEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Event(this : ITCallHubEvent*, pEvent : Win32cr::Devices::Tapi::CALLHUB_EVENT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Event.call(this, pEvent)
@@ -6702,21 +6702,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressEventVtbl,
+
+  record ITAddressEventVtable,
     query_interface : Proc(ITAddressEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressEvent*, UInt32),
     release : Proc(ITAddressEvent*, UInt32),
     get_type_info_count : Proc(ITAddressEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAddressEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAddressEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAddressEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAddressEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Address : Proc(ITAddressEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITAddressEvent*, Win32cr::Devices::Tapi::ADDRESS_EVENT*, Win32cr::Foundation::HRESULT),
     get_Terminal : Proc(ITAddressEvent*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAddressEvent, lpVtbl : ITAddressEventVtbl* do
+  record ITAddressEvent, lpVtbl : ITAddressEventVtable* do
     GUID = LibC::GUID.new(0x831ce2d1_u32, 0x83b5_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITAddressEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6736,8 +6737,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAddressEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAddressEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAddressEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Address(this : ITAddressEvent*, ppAddress : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Address.call(this, ppAddress)
@@ -6752,14 +6753,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressDeviceSpecificEventVtbl,
+
+  record ITAddressDeviceSpecificEventVtable,
     query_interface : Proc(ITAddressDeviceSpecificEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressDeviceSpecificEvent*, UInt32),
     release : Proc(ITAddressDeviceSpecificEvent*, UInt32),
     get_type_info_count : Proc(ITAddressDeviceSpecificEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAddressDeviceSpecificEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAddressDeviceSpecificEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAddressDeviceSpecificEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAddressDeviceSpecificEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Address : Proc(ITAddressDeviceSpecificEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITAddressDeviceSpecificEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_lParam1 : Proc(ITAddressDeviceSpecificEvent*, Int32*, Win32cr::Foundation::HRESULT),
@@ -6768,7 +6770,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddressDeviceSpecificEvent, lpVtbl : ITAddressDeviceSpecificEventVtbl* do
+  record ITAddressDeviceSpecificEvent, lpVtbl : ITAddressDeviceSpecificEventVtable* do
     GUID = LibC::GUID.new(0x3acb216b_u32, 0x40bd_u16, 0x487a_u16, StaticArray[0x86_u8, 0x72_u8, 0x5c_u8, 0xe7_u8, 0x7b_u8, 0xd7_u8, 0xe3_u8, 0xa3_u8])
     def query_interface(this : ITAddressDeviceSpecificEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6788,8 +6790,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAddressDeviceSpecificEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAddressDeviceSpecificEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAddressDeviceSpecificEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Address(this : ITAddressDeviceSpecificEvent*, ppAddress : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Address.call(this, ppAddress)
@@ -6810,14 +6812,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITFileTerminalEventVtbl,
+
+  record ITFileTerminalEventVtable,
     query_interface : Proc(ITFileTerminalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITFileTerminalEvent*, UInt32),
     release : Proc(ITFileTerminalEvent*, UInt32),
     get_type_info_count : Proc(ITFileTerminalEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITFileTerminalEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITFileTerminalEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITFileTerminalEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITFileTerminalEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Terminal : Proc(ITFileTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Track : Proc(ITFileTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITFileTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
@@ -6827,7 +6830,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITFileTerminalEvent, lpVtbl : ITFileTerminalEventVtbl* do
+  record ITFileTerminalEvent, lpVtbl : ITFileTerminalEventVtable* do
     GUID = LibC::GUID.new(0xe4a7fbac_u32, 0x8c17_u16, 0x4427_u16, StaticArray[0x9f_u8, 0x55_u8, 0x9f_u8, 0x58_u8, 0x9a_u8, 0xc8_u8, 0xaf_u8, 0x0_u8])
     def query_interface(this : ITFileTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6847,8 +6850,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITFileTerminalEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITFileTerminalEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITFileTerminalEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Terminal(this : ITFileTerminalEvent*, ppTerminal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Terminal.call(this, ppTerminal)
@@ -6872,21 +6875,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTTSTerminalEventVtbl,
+
+  record ITTTSTerminalEventVtable,
     query_interface : Proc(ITTTSTerminalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTTSTerminalEvent*, UInt32),
     release : Proc(ITTTSTerminalEvent*, UInt32),
     get_type_info_count : Proc(ITTTSTerminalEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTTSTerminalEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTTSTerminalEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTTSTerminalEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTTSTerminalEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Terminal : Proc(ITTTSTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITTTSTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Error : Proc(ITTTSTerminalEvent*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITTTSTerminalEvent, lpVtbl : ITTTSTerminalEventVtbl* do
+  record ITTTSTerminalEvent, lpVtbl : ITTTSTerminalEventVtable* do
     GUID = LibC::GUID.new(0xd964788f_u32, 0x95a5_u16, 0x461d_u16, StaticArray[0xab_u8, 0xc_u8, 0xb9_u8, 0x90_u8, 0xa_u8, 0x6c_u8, 0x27_u8, 0x13_u8])
     def query_interface(this : ITTTSTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6906,8 +6910,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTTSTerminalEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTTSTerminalEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTTSTerminalEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Terminal(this : ITTTSTerminalEvent*, ppTerminal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Terminal.call(this, ppTerminal)
@@ -6922,21 +6926,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITASRTerminalEventVtbl,
+
+  record ITASRTerminalEventVtable,
     query_interface : Proc(ITASRTerminalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITASRTerminalEvent*, UInt32),
     release : Proc(ITASRTerminalEvent*, UInt32),
     get_type_info_count : Proc(ITASRTerminalEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITASRTerminalEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITASRTerminalEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITASRTerminalEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITASRTerminalEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Terminal : Proc(ITASRTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITASRTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Error : Proc(ITASRTerminalEvent*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITASRTerminalEvent, lpVtbl : ITASRTerminalEventVtbl* do
+  record ITASRTerminalEvent, lpVtbl : ITASRTerminalEventVtable* do
     GUID = LibC::GUID.new(0xee016a02_u32, 0x4fa9_u16, 0x467c_u16, StaticArray[0x93_u8, 0x3f_u8, 0x5a_u8, 0x15_u8, 0xb1_u8, 0x23_u8, 0x77_u8, 0xd7_u8])
     def query_interface(this : ITASRTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6956,8 +6961,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITASRTerminalEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITASRTerminalEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITASRTerminalEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Terminal(this : ITASRTerminalEvent*, ppTerminal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Terminal.call(this, ppTerminal)
@@ -6972,21 +6977,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITToneTerminalEventVtbl,
+
+  record ITToneTerminalEventVtable,
     query_interface : Proc(ITToneTerminalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITToneTerminalEvent*, UInt32),
     release : Proc(ITToneTerminalEvent*, UInt32),
     get_type_info_count : Proc(ITToneTerminalEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITToneTerminalEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITToneTerminalEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITToneTerminalEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITToneTerminalEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Terminal : Proc(ITToneTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITToneTerminalEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Error : Proc(ITToneTerminalEvent*, Win32cr::Foundation::HRESULT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITToneTerminalEvent, lpVtbl : ITToneTerminalEventVtbl* do
+  record ITToneTerminalEvent, lpVtbl : ITToneTerminalEventVtable* do
     GUID = LibC::GUID.new(0xe6f56009_u32, 0x611f_u16, 0x4945_u16, StaticArray[0xbb_u8, 0xd2_u8, 0x2d_u8, 0xc_u8, 0xe5_u8, 0x61_u8, 0x20_u8, 0x56_u8])
     def query_interface(this : ITToneTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7006,8 +7012,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITToneTerminalEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITToneTerminalEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITToneTerminalEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Terminal(this : ITToneTerminalEvent*, ppTerminal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Terminal.call(this, ppTerminal)
@@ -7022,21 +7028,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITQOSEventVtbl,
+
+  record ITQOSEventVtable,
     query_interface : Proc(ITQOSEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITQOSEvent*, UInt32),
     release : Proc(ITQOSEvent*, UInt32),
     get_type_info_count : Proc(ITQOSEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITQOSEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITQOSEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITQOSEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITQOSEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITQOSEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITQOSEvent*, Win32cr::Devices::Tapi::QOS_EVENT*, Win32cr::Foundation::HRESULT),
     get_MediaType : Proc(ITQOSEvent*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITQOSEvent, lpVtbl : ITQOSEventVtbl* do
+  record ITQOSEvent, lpVtbl : ITQOSEventVtable* do
     GUID = LibC::GUID.new(0xcfa3357c_u32, 0xad77_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x68_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITQOSEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7056,8 +7063,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITQOSEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITQOSEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITQOSEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITQOSEvent*, ppCall : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCall)
@@ -7072,21 +7079,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallInfoChangeEventVtbl,
+
+  record ITCallInfoChangeEventVtable,
     query_interface : Proc(ITCallInfoChangeEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallInfoChangeEvent*, UInt32),
     release : Proc(ITCallInfoChangeEvent*, UInt32),
     get_type_info_count : Proc(ITCallInfoChangeEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallInfoChangeEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallInfoChangeEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallInfoChangeEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallInfoChangeEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITCallInfoChangeEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Cause : Proc(ITCallInfoChangeEvent*, Win32cr::Devices::Tapi::CALLINFOCHANGE_CAUSE*, Win32cr::Foundation::HRESULT),
     get_CallbackInstance : Proc(ITCallInfoChangeEvent*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITCallInfoChangeEvent, lpVtbl : ITCallInfoChangeEventVtbl* do
+  record ITCallInfoChangeEvent, lpVtbl : ITCallInfoChangeEventVtable* do
     GUID = LibC::GUID.new(0x5d4b65f9_u32, 0xe51c_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallInfoChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7106,8 +7114,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallInfoChangeEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallInfoChangeEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallInfoChangeEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITCallInfoChangeEvent*, ppCall : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCall)
@@ -7122,19 +7130,20 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITRequestVtbl,
+
+  record ITRequestVtable,
     query_interface : Proc(ITRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITRequest*, UInt32),
     release : Proc(ITRequest*, UInt32),
     get_type_info_count : Proc(ITRequest*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITRequest*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITRequest*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITRequest*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITRequest*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     make_call : Proc(ITRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITRequest, lpVtbl : ITRequestVtbl* do
+  record ITRequest, lpVtbl : ITRequestVtable* do
     GUID = LibC::GUID.new(0xac48ffdf_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7154,8 +7163,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITRequest*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def make_call(this : ITRequest*, pDestAddress : Win32cr::Foundation::BSTR, pAppName : Win32cr::Foundation::BSTR, pCalledParty : Win32cr::Foundation::BSTR, pComment : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.make_call.call(this, pDestAddress, pAppName, pCalledParty, pComment)
@@ -7164,14 +7173,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITRequestEventVtbl,
+
+  record ITRequestEventVtable,
     query_interface : Proc(ITRequestEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITRequestEvent*, UInt32),
     release : Proc(ITRequestEvent*, UInt32),
     get_type_info_count : Proc(ITRequestEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITRequestEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITRequestEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITRequestEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITRequestEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_RegistrationInstance : Proc(ITRequestEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_RequestMode : Proc(ITRequestEvent*, Int32*, Win32cr::Foundation::HRESULT),
     get_DestAddress : Proc(ITRequestEvent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7181,7 +7191,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITRequestEvent, lpVtbl : ITRequestEventVtbl* do
+  record ITRequestEvent, lpVtbl : ITRequestEventVtable* do
     GUID = LibC::GUID.new(0xac48ffde_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITRequestEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7201,8 +7211,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITRequestEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITRequestEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITRequestEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_RegistrationInstance(this : ITRequestEvent*, plRegistrationInstance : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RegistrationInstance.call(this, plRegistrationInstance)
@@ -7226,21 +7236,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCollectionVtbl,
+
+  record ITCollectionVtable,
     query_interface : Proc(ITCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCollection*, UInt32),
     release : Proc(ITCollection*, UInt32),
     get_type_info_count : Proc(ITCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ITCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ITCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ITCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ITCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITCollection, lpVtbl : ITCollectionVtbl* do
+  record ITCollection, lpVtbl : ITCollectionVtable* do
     GUID = LibC::GUID.new(0x5ec5acf2_u32, 0x9c02_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x62_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7260,13 +7271,13 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ITCollection*, lCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, lCount)
     end
-    def get_Item(this : ITCollection*, index : Int32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ITCollection*, index : Int32, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pVariant)
     end
     def get__NewEnum(this : ITCollection*, ppNewEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -7276,23 +7287,24 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCollection2Vtbl,
+
+  record ITCollection2Vtable,
     query_interface : Proc(ITCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCollection2*, UInt32),
     release : Proc(ITCollection2*, UInt32),
     get_type_info_count : Proc(ITCollection2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCollection2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCollection2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCollection2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCollection2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ITCollection2*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ITCollection2*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ITCollection2*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ITCollection2*, Void**, Win32cr::Foundation::HRESULT),
-    add : Proc(ITCollection2*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    add : Proc(ITCollection2*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     remove : Proc(ITCollection2*, Int32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITCollection2, lpVtbl : ITCollection2Vtbl* do
+  record ITCollection2, lpVtbl : ITCollection2Vtable* do
     GUID = LibC::GUID.new(0xe6dddda5_u32, 0xa6d3_u16, 0x48ff_u16, StaticArray[0x87_u8, 0x37_u8, 0xd3_u8, 0x2f_u8, 0xc4_u8, 0xd9_u8, 0x54_u8, 0x77_u8])
     def query_interface(this : ITCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7312,19 +7324,19 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCollection2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCollection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCollection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ITCollection2*, lCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, lCount)
     end
-    def get_Item(this : ITCollection2*, index : Int32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ITCollection2*, index : Int32, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pVariant)
     end
     def get__NewEnum(this : ITCollection2*, ppNewEnum : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppNewEnum)
     end
-    def add(this : ITCollection2*, index : Int32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def add(this : ITCollection2*, index : Int32, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, index, pVariant)
     end
     def remove(this : ITCollection2*, index : Int32) : Win32cr::Foundation::HRESULT
@@ -7334,14 +7346,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITForwardInformationVtbl,
+
+  record ITForwardInformationVtable,
     query_interface : Proc(ITForwardInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITForwardInformation*, UInt32),
     release : Proc(ITForwardInformation*, UInt32),
     get_type_info_count : Proc(ITForwardInformation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITForwardInformation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITForwardInformation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITForwardInformation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITForwardInformation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_NumRingsNoAnswer : Proc(ITForwardInformation*, Int32, Win32cr::Foundation::HRESULT),
     get_NumRingsNoAnswer : Proc(ITForwardInformation*, Int32*, Win32cr::Foundation::HRESULT),
     set_forward_type : Proc(ITForwardInformation*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -7352,7 +7365,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITForwardInformation, lpVtbl : ITForwardInformationVtbl* do
+  record ITForwardInformation, lpVtbl : ITForwardInformationVtable* do
     GUID = LibC::GUID.new(0x449f659e_u32, 0x88a3_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITForwardInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7372,8 +7385,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITForwardInformation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITForwardInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITForwardInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_NumRingsNoAnswer(this : ITForwardInformation*, lNumRings : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NumRingsNoAnswer.call(this, lNumRings)
@@ -7400,14 +7413,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITForwardInformation2Vtbl,
+
+  record ITForwardInformation2Vtable,
     query_interface : Proc(ITForwardInformation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITForwardInformation2*, UInt32),
     release : Proc(ITForwardInformation2*, UInt32),
     get_type_info_count : Proc(ITForwardInformation2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITForwardInformation2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITForwardInformation2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITForwardInformation2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITForwardInformation2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_NumRingsNoAnswer : Proc(ITForwardInformation2*, Int32, Win32cr::Foundation::HRESULT),
     get_NumRingsNoAnswer : Proc(ITForwardInformation2*, Int32*, Win32cr::Foundation::HRESULT),
     set_forward_type : Proc(ITForwardInformation2*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -7422,7 +7436,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITForwardInformation2, lpVtbl : ITForwardInformation2Vtbl* do
+  record ITForwardInformation2, lpVtbl : ITForwardInformation2Vtable* do
     GUID = LibC::GUID.new(0x5229b4ed_u32, 0xb260_u16, 0x4382_u16, StaticArray[0x8e_u8, 0x1a_u8, 0x5d_u8, 0xf3_u8, 0xa8_u8, 0xa4_u8, 0xcc_u8, 0xc0_u8])
     def query_interface(this : ITForwardInformation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7442,8 +7456,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITForwardInformation2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITForwardInformation2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITForwardInformation2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_NumRingsNoAnswer(this : ITForwardInformation2*, lNumRings : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NumRingsNoAnswer.call(this, lNumRings)
@@ -7482,24 +7496,25 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressTranslationVtbl,
+
+  record ITAddressTranslationVtable,
     query_interface : Proc(ITAddressTranslation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressTranslation*, UInt32),
     release : Proc(ITAddressTranslation*, UInt32),
     get_type_info_count : Proc(ITAddressTranslation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAddressTranslation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAddressTranslation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAddressTranslation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAddressTranslation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     translate_address : Proc(ITAddressTranslation*, Win32cr::Foundation::BSTR, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     translate_dialog : Proc(ITAddressTranslation*, LibC::IntPtrT, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     enumerate_locations : Proc(ITAddressTranslation*, Void**, Win32cr::Foundation::HRESULT),
-    get_Locations : Proc(ITAddressTranslation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Locations : Proc(ITAddressTranslation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_calling_cards : Proc(ITAddressTranslation*, Void**, Win32cr::Foundation::HRESULT),
-    get_CallingCards : Proc(ITAddressTranslation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_CallingCards : Proc(ITAddressTranslation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAddressTranslation, lpVtbl : ITAddressTranslationVtbl* do
+  record ITAddressTranslation, lpVtbl : ITAddressTranslationVtable* do
     GUID = LibC::GUID.new(0xc4d8f03_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAddressTranslation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7519,8 +7534,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAddressTranslation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAddressTranslation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAddressTranslation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def translate_address(this : ITAddressTranslation*, pAddressToTranslate : Win32cr::Foundation::BSTR, lCard : Int32, lTranslateOptions : Int32, ppTranslated : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.translate_address.call(this, pAddressToTranslate, lCard, lTranslateOptions, ppTranslated)
@@ -7531,27 +7546,28 @@ module Win32cr::Devices::Tapi
     def enumerate_locations(this : ITAddressTranslation*, ppEnumLocation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_locations.call(this, ppEnumLocation)
     end
-    def get_Locations(this : ITAddressTranslation*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Locations(this : ITAddressTranslation*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Locations.call(this, pVariant)
     end
     def enumerate_calling_cards(this : ITAddressTranslation*, ppEnumCallingCard : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_calling_cards.call(this, ppEnumCallingCard)
     end
-    def get_CallingCards(this : ITAddressTranslation*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CallingCards(this : ITAddressTranslation*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CallingCards.call(this, pVariant)
     end
 
   end
 
   @[Extern]
-  record ITAddressTranslationInfoVtbl,
+
+  record ITAddressTranslationInfoVtable,
     query_interface : Proc(ITAddressTranslationInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressTranslationInfo*, UInt32),
     release : Proc(ITAddressTranslationInfo*, UInt32),
     get_type_info_count : Proc(ITAddressTranslationInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAddressTranslationInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAddressTranslationInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAddressTranslationInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAddressTranslationInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DialableString : Proc(ITAddressTranslationInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DisplayableString : Proc(ITAddressTranslationInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_CurrentCountryCode : Proc(ITAddressTranslationInfo*, Int32*, Win32cr::Foundation::HRESULT),
@@ -7560,7 +7576,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddressTranslationInfo, lpVtbl : ITAddressTranslationInfoVtbl* do
+  record ITAddressTranslationInfo, lpVtbl : ITAddressTranslationInfoVtable* do
     GUID = LibC::GUID.new(0xafc15945_u32, 0x8d40_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAddressTranslationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7580,8 +7596,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAddressTranslationInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAddressTranslationInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAddressTranslationInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DialableString(this : ITAddressTranslationInfo*, ppDialableString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DialableString.call(this, ppDialableString)
@@ -7602,14 +7618,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLocationInfoVtbl,
+
+  record ITLocationInfoVtable,
     query_interface : Proc(ITLocationInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLocationInfo*, UInt32),
     release : Proc(ITLocationInfo*, UInt32),
     get_type_info_count : Proc(ITLocationInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITLocationInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITLocationInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITLocationInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITLocationInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_PermanentLocationID : Proc(ITLocationInfo*, Int32*, Win32cr::Foundation::HRESULT),
     get_CountryCode : Proc(ITLocationInfo*, Int32*, Win32cr::Foundation::HRESULT),
     get_CountryID : Proc(ITLocationInfo*, Int32*, Win32cr::Foundation::HRESULT),
@@ -7624,7 +7641,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLocationInfo, lpVtbl : ITLocationInfoVtbl* do
+  record ITLocationInfo, lpVtbl : ITLocationInfoVtable* do
     GUID = LibC::GUID.new(0xc4d8eff_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITLocationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7644,8 +7661,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITLocationInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITLocationInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITLocationInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_PermanentLocationID(this : ITLocationInfo*, plLocationID : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PermanentLocationID.call(this, plLocationID)
@@ -7684,7 +7701,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumLocationVtbl,
+
+  record IEnumLocationVtable,
     query_interface : Proc(IEnumLocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumLocation*, UInt32),
     release : Proc(IEnumLocation*, UInt32),
@@ -7695,7 +7713,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumLocation, lpVtbl : IEnumLocationVtbl* do
+  record IEnumLocation, lpVtbl : IEnumLocationVtable* do
     GUID = LibC::GUID.new(0xc4d8f01_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7722,14 +7740,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallingCardVtbl,
+
+  record ITCallingCardVtable,
     query_interface : Proc(ITCallingCard*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallingCard*, UInt32),
     release : Proc(ITCallingCard*, UInt32),
     get_type_info_count : Proc(ITCallingCard*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallingCard*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallingCard*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallingCard*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallingCard*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_PermanentCardID : Proc(ITCallingCard*, Int32*, Win32cr::Foundation::HRESULT),
     get_NumberOfDigits : Proc(ITCallingCard*, Int32*, Win32cr::Foundation::HRESULT),
     get_Options : Proc(ITCallingCard*, Int32*, Win32cr::Foundation::HRESULT),
@@ -7740,7 +7759,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallingCard, lpVtbl : ITCallingCardVtbl* do
+  record ITCallingCard, lpVtbl : ITCallingCardVtable* do
     GUID = LibC::GUID.new(0xc4d8f00_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITCallingCard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7760,8 +7779,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallingCard*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallingCard*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallingCard*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_PermanentCardID(this : ITCallingCard*, plCardID : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PermanentCardID.call(this, plCardID)
@@ -7788,7 +7807,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumCallingCardVtbl,
+
+  record IEnumCallingCardVtable,
     query_interface : Proc(IEnumCallingCard*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCallingCard*, UInt32),
     release : Proc(IEnumCallingCard*, UInt32),
@@ -7799,7 +7819,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumCallingCard, lpVtbl : IEnumCallingCardVtbl* do
+  record IEnumCallingCard, lpVtbl : IEnumCallingCardVtable* do
     GUID = LibC::GUID.new(0xc4d8f02_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumCallingCard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7826,21 +7846,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallNotificationEventVtbl,
+
+  record ITCallNotificationEventVtable,
     query_interface : Proc(ITCallNotificationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallNotificationEvent*, UInt32),
     release : Proc(ITCallNotificationEvent*, UInt32),
     get_type_info_count : Proc(ITCallNotificationEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITCallNotificationEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITCallNotificationEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITCallNotificationEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITCallNotificationEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Call : Proc(ITCallNotificationEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITCallNotificationEvent*, Win32cr::Devices::Tapi::CALL_NOTIFICATION_EVENT*, Win32cr::Foundation::HRESULT),
     get_CallbackInstance : Proc(ITCallNotificationEvent*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITCallNotificationEvent, lpVtbl : ITCallNotificationEventVtbl* do
+  record ITCallNotificationEvent, lpVtbl : ITCallNotificationEventVtable* do
     GUID = LibC::GUID.new(0x895801df_u32, 0x3dd6_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallNotificationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7860,8 +7881,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITCallNotificationEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITCallNotificationEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITCallNotificationEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Call(this : ITCallNotificationEvent*, ppCall : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Call.call(this, ppCall)
@@ -7876,19 +7897,20 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDispatchMapperVtbl,
+
+  record ITDispatchMapperVtable,
     query_interface : Proc(ITDispatchMapper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDispatchMapper*, UInt32),
     release : Proc(ITDispatchMapper*, UInt32),
     get_type_info_count : Proc(ITDispatchMapper*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDispatchMapper*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDispatchMapper*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDispatchMapper*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDispatchMapper*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     query_dispatch_interface : Proc(ITDispatchMapper*, Win32cr::Foundation::BSTR, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITDispatchMapper, lpVtbl : ITDispatchMapperVtbl* do
+  record ITDispatchMapper, lpVtbl : ITDispatchMapperVtable* do
     GUID = LibC::GUID.new(0xe9225295_u32, 0xc759_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDispatchMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7908,8 +7930,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDispatchMapper*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDispatchMapper*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDispatchMapper*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def query_dispatch_interface(this : ITDispatchMapper*, pIID : Win32cr::Foundation::BSTR, pInterfaceToMap : Void*, ppReturnedInterface : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_dispatch_interface.call(this, pIID, pInterfaceToMap, ppReturnedInterface)
@@ -7918,22 +7940,23 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITStreamControlVtbl,
+
+  record ITStreamControlVtable,
     query_interface : Proc(ITStreamControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITStreamControl*, UInt32),
     release : Proc(ITStreamControl*, UInt32),
     get_type_info_count : Proc(ITStreamControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITStreamControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITStreamControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITStreamControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITStreamControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_stream : Proc(ITStreamControl*, Int32, Win32cr::Devices::Tapi::TERMINAL_DIRECTION, Void**, Win32cr::Foundation::HRESULT),
     remove_stream : Proc(ITStreamControl*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_streams : Proc(ITStreamControl*, Void**, Win32cr::Foundation::HRESULT),
-    get_Streams : Proc(ITStreamControl*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_Streams : Proc(ITStreamControl*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITStreamControl, lpVtbl : ITStreamControlVtbl* do
+  record ITStreamControl, lpVtbl : ITStreamControlVtable* do
     GUID = LibC::GUID.new(0xee3bd604_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7953,8 +7976,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITStreamControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITStreamControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITStreamControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_stream(this : ITStreamControl*, lMediaType : Int32, td : Win32cr::Devices::Tapi::TERMINAL_DIRECTION, ppStream : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_stream.call(this, lMediaType, td, ppStream)
@@ -7965,21 +7988,22 @@ module Win32cr::Devices::Tapi
     def enumerate_streams(this : ITStreamControl*, ppEnumStream : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_streams.call(this, ppEnumStream)
     end
-    def get_Streams(this : ITStreamControl*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Streams(this : ITStreamControl*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Streams.call(this, pVariant)
     end
 
   end
 
   @[Extern]
-  record ITStreamVtbl,
+
+  record ITStreamVtable,
     query_interface : Proc(ITStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITStream*, UInt32),
     release : Proc(ITStream*, UInt32),
     get_type_info_count : Proc(ITStream*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITStream*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITStream*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITStream*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITStream*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_MediaType : Proc(ITStream*, Int32*, Win32cr::Foundation::HRESULT),
     get_Direction : Proc(ITStream*, Win32cr::Devices::Tapi::TERMINAL_DIRECTION*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITStream*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7989,11 +8013,11 @@ module Win32cr::Devices::Tapi
     select_terminal : Proc(ITStream*, Void*, Win32cr::Foundation::HRESULT),
     unselect_terminal : Proc(ITStream*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_terminals : Proc(ITStream*, Void**, Win32cr::Foundation::HRESULT),
-    get_Terminals : Proc(ITStream*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_Terminals : Proc(ITStream*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITStream, lpVtbl : ITStreamVtbl* do
+  record ITStream, lpVtbl : ITStreamVtable* do
     GUID = LibC::GUID.new(0xee3bd605_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8013,8 +8037,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITStream*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITStream*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITStream*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_MediaType(this : ITStream*, plMediaType : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MediaType.call(this, plMediaType)
@@ -8043,14 +8067,15 @@ module Win32cr::Devices::Tapi
     def enumerate_terminals(this : ITStream*, ppEnumTerminal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_terminals.call(this, ppEnumTerminal)
     end
-    def get_Terminals(this : ITStream*, pTerminals : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Terminals(this : ITStream*, pTerminals : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Terminals.call(this, pTerminals)
     end
 
   end
 
   @[Extern]
-  record IEnumStreamVtbl,
+
+  record IEnumStreamVtable,
     query_interface : Proc(IEnumStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumStream*, UInt32),
     release : Proc(IEnumStream*, UInt32),
@@ -8061,7 +8086,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumStream, lpVtbl : IEnumStreamVtbl* do
+  record IEnumStream, lpVtbl : IEnumStreamVtable* do
     GUID = LibC::GUID.new(0xee3bd606_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8088,22 +8113,23 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITSubStreamControlVtbl,
+
+  record ITSubStreamControlVtable,
     query_interface : Proc(ITSubStreamControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSubStreamControl*, UInt32),
     release : Proc(ITSubStreamControl*, UInt32),
     get_type_info_count : Proc(ITSubStreamControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITSubStreamControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITSubStreamControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITSubStreamControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITSubStreamControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_sub_stream : Proc(ITSubStreamControl*, Void**, Win32cr::Foundation::HRESULT),
     remove_sub_stream : Proc(ITSubStreamControl*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_sub_streams : Proc(ITSubStreamControl*, Void**, Win32cr::Foundation::HRESULT),
-    get_SubStreams : Proc(ITSubStreamControl*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_SubStreams : Proc(ITSubStreamControl*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITSubStreamControl, lpVtbl : ITSubStreamControlVtbl* do
+  record ITSubStreamControl, lpVtbl : ITSubStreamControlVtable* do
     GUID = LibC::GUID.new(0xee3bd607_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITSubStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8123,8 +8149,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITSubStreamControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITSubStreamControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITSubStreamControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_sub_stream(this : ITSubStreamControl*, ppSubStream : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_sub_stream.call(this, ppSubStream)
@@ -8135,33 +8161,34 @@ module Win32cr::Devices::Tapi
     def enumerate_sub_streams(this : ITSubStreamControl*, ppEnumSubStream : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_sub_streams.call(this, ppEnumSubStream)
     end
-    def get_SubStreams(this : ITSubStreamControl*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SubStreams(this : ITSubStreamControl*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SubStreams.call(this, pVariant)
     end
 
   end
 
   @[Extern]
-  record ITSubStreamVtbl,
+
+  record ITSubStreamVtable,
     query_interface : Proc(ITSubStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSubStream*, UInt32),
     release : Proc(ITSubStream*, UInt32),
     get_type_info_count : Proc(ITSubStream*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITSubStream*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITSubStream*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITSubStream*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITSubStream*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     start_sub_stream : Proc(ITSubStream*, Win32cr::Foundation::HRESULT),
     pause_sub_stream : Proc(ITSubStream*, Win32cr::Foundation::HRESULT),
     stop_sub_stream : Proc(ITSubStream*, Win32cr::Foundation::HRESULT),
     select_terminal : Proc(ITSubStream*, Void*, Win32cr::Foundation::HRESULT),
     unselect_terminal : Proc(ITSubStream*, Void*, Win32cr::Foundation::HRESULT),
     enumerate_terminals : Proc(ITSubStream*, Void**, Win32cr::Foundation::HRESULT),
-    get_Terminals : Proc(ITSubStream*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Terminals : Proc(ITSubStream*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Stream : Proc(ITSubStream*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITSubStream, lpVtbl : ITSubStreamVtbl* do
+  record ITSubStream, lpVtbl : ITSubStreamVtable* do
     GUID = LibC::GUID.new(0xee3bd608_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITSubStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8181,8 +8208,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITSubStream*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITSubStream*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITSubStream*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def start_sub_stream(this : ITSubStream*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start_sub_stream.call(this)
@@ -8202,7 +8229,7 @@ module Win32cr::Devices::Tapi
     def enumerate_terminals(this : ITSubStream*, ppEnumTerminal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_terminals.call(this, ppEnumTerminal)
     end
-    def get_Terminals(this : ITSubStream*, pTerminals : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Terminals(this : ITSubStream*, pTerminals : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Terminals.call(this, pTerminals)
     end
     def get_Stream(this : ITSubStream*, ppITStream : Void**) : Win32cr::Foundation::HRESULT
@@ -8212,7 +8239,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumSubStreamVtbl,
+
+  record IEnumSubStreamVtable,
     query_interface : Proc(IEnumSubStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSubStream*, UInt32),
     release : Proc(IEnumSubStream*, UInt32),
@@ -8223,7 +8251,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumSubStream, lpVtbl : IEnumSubStreamVtbl* do
+  record IEnumSubStream, lpVtbl : IEnumSubStreamVtable* do
     GUID = LibC::GUID.new(0xee3bd609_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumSubStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8250,19 +8278,20 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyWaveSupportVtbl,
+
+  record ITLegacyWaveSupportVtable,
     query_interface : Proc(ITLegacyWaveSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyWaveSupport*, UInt32),
     release : Proc(ITLegacyWaveSupport*, UInt32),
     get_type_info_count : Proc(ITLegacyWaveSupport*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITLegacyWaveSupport*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITLegacyWaveSupport*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITLegacyWaveSupport*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITLegacyWaveSupport*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     is_full_duplex : Proc(ITLegacyWaveSupport*, Win32cr::Devices::Tapi::FULLDUPLEX_SUPPORT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITLegacyWaveSupport, lpVtbl : ITLegacyWaveSupportVtbl* do
+  record ITLegacyWaveSupport, lpVtbl : ITLegacyWaveSupportVtable* do
     GUID = LibC::GUID.new(0x207823ea_u32, 0xe252_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x7e_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x13_u8, 0x53_u8, 0x81_u8])
     def query_interface(this : ITLegacyWaveSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8282,8 +8311,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITLegacyWaveSupport*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITLegacyWaveSupport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITLegacyWaveSupport*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def is_full_duplex(this : ITLegacyWaveSupport*, pSupport : Win32cr::Devices::Tapi::FULLDUPLEX_SUPPORT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_full_duplex.call(this, pSupport)
@@ -8292,22 +8321,23 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITBasicCallControl2Vtbl,
+
+  record ITBasicCallControl2Vtable,
     query_interface : Proc(ITBasicCallControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITBasicCallControl2*, UInt32),
     release : Proc(ITBasicCallControl2*, UInt32),
     get_type_info_count : Proc(ITBasicCallControl2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITBasicCallControl2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITBasicCallControl2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITBasicCallControl2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    connect : Proc(ITBasicCallControl2*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITBasicCallControl2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    connect : Proc(ITBasicCallControl2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     answer : Proc(ITBasicCallControl2*, Win32cr::Foundation::HRESULT),
     disconnect : Proc(ITBasicCallControl2*, Win32cr::Devices::Tapi::DISCONNECT_CODE, Win32cr::Foundation::HRESULT),
-    hold : Proc(ITBasicCallControl2*, Int16, Win32cr::Foundation::HRESULT),
+    hold : Proc(ITBasicCallControl2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     handoff_direct : Proc(ITBasicCallControl2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     handoff_indirect : Proc(ITBasicCallControl2*, Int32, Win32cr::Foundation::HRESULT),
-    conference : Proc(ITBasicCallControl2*, Void*, Int16, Win32cr::Foundation::HRESULT),
-    transfer : Proc(ITBasicCallControl2*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    conference : Proc(ITBasicCallControl2*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    transfer : Proc(ITBasicCallControl2*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     blind_transfer : Proc(ITBasicCallControl2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     swap_hold : Proc(ITBasicCallControl2*, Void*, Win32cr::Foundation::HRESULT),
     park_direct : Proc(ITBasicCallControl2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -8324,7 +8354,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITBasicCallControl2, lpVtbl : ITBasicCallControl2Vtbl* do
+  record ITBasicCallControl2, lpVtbl : ITBasicCallControl2Vtable* do
     GUID = LibC::GUID.new(0x161a4a56_u32, 0x1e99_u16, 0x4b3f_u16, StaticArray[0xa4_u8, 0x6a_u8, 0x16_u8, 0x8f_u8, 0x38_u8, 0xa5_u8, 0xee_u8, 0x4c_u8])
     def query_interface(this : ITBasicCallControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8344,10 +8374,10 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITBasicCallControl2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITBasicCallControl2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITBasicCallControl2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def connect(this : ITBasicCallControl2*, fSync : Int16) : Win32cr::Foundation::HRESULT
+    def connect(this : ITBasicCallControl2*, fSync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connect.call(this, fSync)
     end
     def answer(this : ITBasicCallControl2*) : Win32cr::Foundation::HRESULT
@@ -8356,7 +8386,7 @@ module Win32cr::Devices::Tapi
     def disconnect(this : ITBasicCallControl2*, code : Win32cr::Devices::Tapi::DISCONNECT_CODE) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disconnect.call(this, code)
     end
-    def hold(this : ITBasicCallControl2*, fHold : Int16) : Win32cr::Foundation::HRESULT
+    def hold(this : ITBasicCallControl2*, fHold : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hold.call(this, fHold)
     end
     def handoff_direct(this : ITBasicCallControl2*, pApplicationName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8365,10 +8395,10 @@ module Win32cr::Devices::Tapi
     def handoff_indirect(this : ITBasicCallControl2*, lMediaType : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.handoff_indirect.call(this, lMediaType)
     end
-    def conference(this : ITBasicCallControl2*, pCall : Void*, fSync : Int16) : Win32cr::Foundation::HRESULT
+    def conference(this : ITBasicCallControl2*, pCall : Void*, fSync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.conference.call(this, pCall, fSync)
     end
-    def transfer(this : ITBasicCallControl2*, pCall : Void*, fSync : Int16) : Win32cr::Foundation::HRESULT
+    def transfer(this : ITBasicCallControl2*, pCall : Void*, fSync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transfer.call(this, pCall, fSync)
     end
     def blind_transfer(this : ITBasicCallControl2*, pDestAddress : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8414,14 +8444,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITScriptableAudioFormatVtbl,
+
+  record ITScriptableAudioFormatVtable,
     query_interface : Proc(ITScriptableAudioFormat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITScriptableAudioFormat*, UInt32),
     release : Proc(ITScriptableAudioFormat*, UInt32),
     get_type_info_count : Proc(ITScriptableAudioFormat*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITScriptableAudioFormat*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITScriptableAudioFormat*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITScriptableAudioFormat*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITScriptableAudioFormat*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Channels : Proc(ITScriptableAudioFormat*, Int32*, Win32cr::Foundation::HRESULT),
     put_Channels : Proc(ITScriptableAudioFormat*, Int32, Win32cr::Foundation::HRESULT),
     get_SamplesPerSec : Proc(ITScriptableAudioFormat*, Int32*, Win32cr::Foundation::HRESULT),
@@ -8437,7 +8468,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITScriptableAudioFormat, lpVtbl : ITScriptableAudioFormatVtbl* do
+  record ITScriptableAudioFormat, lpVtbl : ITScriptableAudioFormatVtable* do
     GUID = LibC::GUID.new(0xb87658bd_u32, 0x3c59_u16, 0x4f64_u16, StaticArray[0xbe_u8, 0x74_u8, 0xae_u8, 0xde_u8, 0x3e_u8, 0x86_u8, 0xa8_u8, 0x1e_u8])
     def query_interface(this : ITScriptableAudioFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8457,8 +8488,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITScriptableAudioFormat*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITScriptableAudioFormat*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITScriptableAudioFormat*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Channels(this : ITScriptableAudioFormat*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Channels.call(this, pVal)
@@ -8500,14 +8531,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentVtbl,
+
+  record ITAgentVtable,
     query_interface : Proc(ITAgent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgent*, UInt32),
     release : Proc(ITAgent*, UInt32),
     get_type_info_count : Proc(ITAgent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAgent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAgent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAgent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAgent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     enumerate_agent_sessions : Proc(ITAgent*, Void**, Win32cr::Foundation::HRESULT),
     create_session : Proc(ITAgent*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     create_session_with_pin : Proc(ITAgent*, Void*, Void*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -8524,11 +8556,11 @@ module Win32cr::Devices::Tapi
     get_TotalACDTalkTime : Proc(ITAgent*, Int32*, Win32cr::Foundation::HRESULT),
     get_TotalACDCallTime : Proc(ITAgent*, Int32*, Win32cr::Foundation::HRESULT),
     get_TotalWrapUpTime : Proc(ITAgent*, Int32*, Win32cr::Foundation::HRESULT),
-    get_AgentSessions : Proc(ITAgent*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_AgentSessions : Proc(ITAgent*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAgent, lpVtbl : ITAgentVtbl* do
+  record ITAgent, lpVtbl : ITAgentVtable* do
     GUID = LibC::GUID.new(0x5770ece5_u32, 0x4b27_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8548,8 +8580,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAgent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAgent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAgent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def enumerate_agent_sessions(this : ITAgent*, ppEnumAgentSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_agent_sessions.call(this, ppEnumAgentSession)
@@ -8599,21 +8631,22 @@ module Win32cr::Devices::Tapi
     def get_TotalWrapUpTime(this : ITAgent*, plWrapUpTime : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TotalWrapUpTime.call(this, plWrapUpTime)
     end
-    def get_AgentSessions(this : ITAgent*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AgentSessions(this : ITAgent*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AgentSessions.call(this, pVariant)
     end
 
   end
 
   @[Extern]
-  record ITAgentSessionVtbl,
+
+  record ITAgentSessionVtable,
     query_interface : Proc(ITAgentSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentSession*, UInt32),
     release : Proc(ITAgentSession*, UInt32),
     get_type_info_count : Proc(ITAgentSession*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAgentSession*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAgentSession*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAgentSession*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAgentSession*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Agent : Proc(ITAgentSession*, Void**, Win32cr::Foundation::HRESULT),
     get_Address : Proc(ITAgentSession*, Void**, Win32cr::Foundation::HRESULT),
     get_ACDGroup : Proc(ITAgentSession*, Void**, Win32cr::Foundation::HRESULT),
@@ -8634,7 +8667,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAgentSession, lpVtbl : ITAgentSessionVtbl* do
+  record ITAgentSession, lpVtbl : ITAgentSessionVtable* do
     GUID = LibC::GUID.new(0x5afc3147_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8654,8 +8687,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAgentSession*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAgentSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAgentSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Agent(this : ITAgentSession*, ppAgent : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Agent.call(this, ppAgent)
@@ -8712,21 +8745,22 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITACDGroupVtbl,
+
+  record ITACDGroupVtable,
     query_interface : Proc(ITACDGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITACDGroup*, UInt32),
     release : Proc(ITACDGroup*, UInt32),
     get_type_info_count : Proc(ITACDGroup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITACDGroup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITACDGroup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITACDGroup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITACDGroup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITACDGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     enumerate_queues : Proc(ITACDGroup*, Void**, Win32cr::Foundation::HRESULT),
-    get_Queues : Proc(ITACDGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_Queues : Proc(ITACDGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITACDGroup, lpVtbl : ITACDGroupVtbl* do
+  record ITACDGroup, lpVtbl : ITACDGroupVtable* do
     GUID = LibC::GUID.new(0x5afc3148_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITACDGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8746,8 +8780,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITACDGroup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITACDGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITACDGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ITACDGroup*, ppName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, ppName)
@@ -8755,21 +8789,22 @@ module Win32cr::Devices::Tapi
     def enumerate_queues(this : ITACDGroup*, ppEnumQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_queues.call(this, ppEnumQueue)
     end
-    def get_Queues(this : ITACDGroup*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Queues(this : ITACDGroup*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Queues.call(this, pVariant)
     end
 
   end
 
   @[Extern]
-  record ITQueueVtbl,
+
+  record ITQueueVtable,
     query_interface : Proc(ITQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITQueue*, UInt32),
     release : Proc(ITQueue*, UInt32),
     get_type_info_count : Proc(ITQueue*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITQueue*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITQueue*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITQueue*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITQueue*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_MeasurementPeriod : Proc(ITQueue*, Int32, Win32cr::Foundation::HRESULT),
     get_MeasurementPeriod : Proc(ITQueue*, Int32*, Win32cr::Foundation::HRESULT),
     get_TotalCallsQueued : Proc(ITQueue*, Int32*, Win32cr::Foundation::HRESULT),
@@ -8785,7 +8820,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITQueue, lpVtbl : ITQueueVtbl* do
+  record ITQueue, lpVtbl : ITQueueVtable* do
     GUID = LibC::GUID.new(0x5afc3149_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8805,8 +8840,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITQueue*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_MeasurementPeriod(this : ITQueue*, lPeriod : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MeasurementPeriod.call(this, lPeriod)
@@ -8848,20 +8883,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentEventVtbl,
+
+  record ITAgentEventVtable,
     query_interface : Proc(ITAgentEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentEvent*, UInt32),
     release : Proc(ITAgentEvent*, UInt32),
     get_type_info_count : Proc(ITAgentEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAgentEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAgentEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAgentEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAgentEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Agent : Proc(ITAgentEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITAgentEvent*, Win32cr::Devices::Tapi::AGENT_EVENT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAgentEvent, lpVtbl : ITAgentEventVtbl* do
+  record ITAgentEvent, lpVtbl : ITAgentEventVtable* do
     GUID = LibC::GUID.new(0x5afc314a_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8881,8 +8917,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAgentEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAgentEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAgentEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Agent(this : ITAgentEvent*, ppAgent : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Agent.call(this, ppAgent)
@@ -8894,20 +8930,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentSessionEventVtbl,
+
+  record ITAgentSessionEventVtable,
     query_interface : Proc(ITAgentSessionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentSessionEvent*, UInt32),
     release : Proc(ITAgentSessionEvent*, UInt32),
     get_type_info_count : Proc(ITAgentSessionEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAgentSessionEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAgentSessionEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAgentSessionEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAgentSessionEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(ITAgentSessionEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITAgentSessionEvent*, Win32cr::Devices::Tapi::AGENT_SESSION_EVENT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAgentSessionEvent, lpVtbl : ITAgentSessionEventVtbl* do
+  record ITAgentSessionEvent, lpVtbl : ITAgentSessionEventVtable* do
     GUID = LibC::GUID.new(0x5afc314b_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentSessionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8927,8 +8964,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAgentSessionEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAgentSessionEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAgentSessionEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : ITAgentSessionEvent*, ppSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppSession)
@@ -8940,20 +8977,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITACDGroupEventVtbl,
+
+  record ITACDGroupEventVtable,
     query_interface : Proc(ITACDGroupEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITACDGroupEvent*, UInt32),
     release : Proc(ITACDGroupEvent*, UInt32),
     get_type_info_count : Proc(ITACDGroupEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITACDGroupEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITACDGroupEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITACDGroupEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITACDGroupEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Group : Proc(ITACDGroupEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITACDGroupEvent*, Win32cr::Devices::Tapi::ACDGROUP_EVENT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITACDGroupEvent, lpVtbl : ITACDGroupEventVtbl* do
+  record ITACDGroupEvent, lpVtbl : ITACDGroupEventVtable* do
     GUID = LibC::GUID.new(0x297f3032_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITACDGroupEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8973,8 +9011,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITACDGroupEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITACDGroupEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITACDGroupEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Group(this : ITACDGroupEvent*, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Group.call(this, ppGroup)
@@ -8986,20 +9024,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITQueueEventVtbl,
+
+  record ITQueueEventVtable,
     query_interface : Proc(ITQueueEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITQueueEvent*, UInt32),
     release : Proc(ITQueueEvent*, UInt32),
     get_type_info_count : Proc(ITQueueEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITQueueEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITQueueEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITQueueEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITQueueEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Queue : Proc(ITQueueEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITQueueEvent*, Win32cr::Devices::Tapi::ACDQUEUE_EVENT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITQueueEvent, lpVtbl : ITQueueEventVtbl* do
+  record ITQueueEvent, lpVtbl : ITQueueEventVtable* do
     GUID = LibC::GUID.new(0x297f3033_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITQueueEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9019,8 +9058,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITQueueEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITQueueEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITQueueEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Queue(this : ITQueueEvent*, ppQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Queue.call(this, ppQueue)
@@ -9032,20 +9071,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentHandlerEventVtbl,
+
+  record ITAgentHandlerEventVtable,
     query_interface : Proc(ITAgentHandlerEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentHandlerEvent*, UInt32),
     release : Proc(ITAgentHandlerEvent*, UInt32),
     get_type_info_count : Proc(ITAgentHandlerEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAgentHandlerEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAgentHandlerEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAgentHandlerEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAgentHandlerEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_AgentHandler : Proc(ITAgentHandlerEvent*, Void**, Win32cr::Foundation::HRESULT),
     get_Event : Proc(ITAgentHandlerEvent*, Win32cr::Devices::Tapi::AGENTHANDLER_EVENT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAgentHandlerEvent, lpVtbl : ITAgentHandlerEventVtbl* do
+  record ITAgentHandlerEvent, lpVtbl : ITAgentHandlerEventVtable* do
     GUID = LibC::GUID.new(0x297f3034_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentHandlerEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9065,8 +9105,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAgentHandlerEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAgentHandlerEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAgentHandlerEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_AgentHandler(this : ITAgentHandlerEvent*, ppAgentHandler : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AgentHandler.call(this, ppAgentHandler)
@@ -9078,20 +9118,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPICallCenterVtbl,
+
+  record ITTAPICallCenterVtable,
     query_interface : Proc(ITTAPICallCenter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPICallCenter*, UInt32),
     release : Proc(ITTAPICallCenter*, UInt32),
     get_type_info_count : Proc(ITTAPICallCenter*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTAPICallCenter*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTAPICallCenter*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTAPICallCenter*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITTAPICallCenter*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     enumerate_agent_handlers : Proc(ITTAPICallCenter*, Void**, Win32cr::Foundation::HRESULT),
-    get_AgentHandlers : Proc(ITTAPICallCenter*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_AgentHandlers : Proc(ITTAPICallCenter*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITTAPICallCenter, lpVtbl : ITTAPICallCenterVtbl* do
+  record ITTAPICallCenter, lpVtbl : ITTAPICallCenterVtable* do
     GUID = LibC::GUID.new(0x5afc3154_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITTAPICallCenter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9111,38 +9152,39 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTAPICallCenter*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTAPICallCenter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTAPICallCenter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def enumerate_agent_handlers(this : ITTAPICallCenter*, ppEnumHandler : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_agent_handlers.call(this, ppEnumHandler)
     end
-    def get_AgentHandlers(this : ITTAPICallCenter*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AgentHandlers(this : ITTAPICallCenter*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AgentHandlers.call(this, pVariant)
     end
 
   end
 
   @[Extern]
-  record ITAgentHandlerVtbl,
+
+  record ITAgentHandlerVtable,
     query_interface : Proc(ITAgentHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentHandler*, UInt32),
     release : Proc(ITAgentHandler*, UInt32),
     get_type_info_count : Proc(ITAgentHandler*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITAgentHandler*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITAgentHandler*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITAgentHandler*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITAgentHandler*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITAgentHandler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     create_agent : Proc(ITAgentHandler*, Void**, Win32cr::Foundation::HRESULT),
     create_agent_with_id : Proc(ITAgentHandler*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     enumerate_acd_groups : Proc(ITAgentHandler*, Void**, Win32cr::Foundation::HRESULT),
     enumerate_usable_addresses : Proc(ITAgentHandler*, Void**, Win32cr::Foundation::HRESULT),
-    get_ACDGroups : Proc(ITAgentHandler*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_UsableAddresses : Proc(ITAgentHandler*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_ACDGroups : Proc(ITAgentHandler*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_UsableAddresses : Proc(ITAgentHandler*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITAgentHandler, lpVtbl : ITAgentHandlerVtbl* do
+  record ITAgentHandler, lpVtbl : ITAgentHandlerVtable* do
     GUID = LibC::GUID.new(0x587e8c22_u32, 0x9802_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9162,8 +9204,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITAgentHandler*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITAgentHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITAgentHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ITAgentHandler*, ppName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, ppName)
@@ -9180,17 +9222,18 @@ module Win32cr::Devices::Tapi
     def enumerate_usable_addresses(this : ITAgentHandler*, ppEnumAddress : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_usable_addresses.call(this, ppEnumAddress)
     end
-    def get_ACDGroups(this : ITAgentHandler*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ACDGroups(this : ITAgentHandler*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ACDGroups.call(this, pVariant)
     end
-    def get_UsableAddresses(this : ITAgentHandler*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_UsableAddresses(this : ITAgentHandler*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UsableAddresses.call(this, pVariant)
     end
 
   end
 
   @[Extern]
-  record IEnumAgentVtbl,
+
+  record IEnumAgentVtable,
     query_interface : Proc(IEnumAgent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumAgent*, UInt32),
     release : Proc(IEnumAgent*, UInt32),
@@ -9201,7 +9244,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumAgent, lpVtbl : IEnumAgentVtbl* do
+  record IEnumAgent, lpVtbl : IEnumAgentVtable* do
     GUID = LibC::GUID.new(0x5afc314d_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9228,7 +9271,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumAgentSessionVtbl,
+
+  record IEnumAgentSessionVtable,
     query_interface : Proc(IEnumAgentSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumAgentSession*, UInt32),
     release : Proc(IEnumAgentSession*, UInt32),
@@ -9239,7 +9283,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumAgentSession, lpVtbl : IEnumAgentSessionVtbl* do
+  record IEnumAgentSession, lpVtbl : IEnumAgentSessionVtable* do
     GUID = LibC::GUID.new(0x5afc314e_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgentSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9266,7 +9310,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumQueueVtbl,
+
+  record IEnumQueueVtable,
     query_interface : Proc(IEnumQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumQueue*, UInt32),
     release : Proc(IEnumQueue*, UInt32),
@@ -9277,7 +9322,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumQueue, lpVtbl : IEnumQueueVtbl* do
+  record IEnumQueue, lpVtbl : IEnumQueueVtable* do
     GUID = LibC::GUID.new(0x5afc3158_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9304,7 +9349,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumACDGroupVtbl,
+
+  record IEnumACDGroupVtable,
     query_interface : Proc(IEnumACDGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumACDGroup*, UInt32),
     release : Proc(IEnumACDGroup*, UInt32),
@@ -9315,7 +9361,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumACDGroup, lpVtbl : IEnumACDGroupVtbl* do
+  record IEnumACDGroup, lpVtbl : IEnumACDGroupVtable* do
     GUID = LibC::GUID.new(0x5afc3157_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumACDGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9342,7 +9388,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumAgentHandlerVtbl,
+
+  record IEnumAgentHandlerVtable,
     query_interface : Proc(IEnumAgentHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumAgentHandler*, UInt32),
     release : Proc(IEnumAgentHandler*, UInt32),
@@ -9353,7 +9400,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumAgentHandler, lpVtbl : IEnumAgentHandlerVtbl* do
+  record IEnumAgentHandler, lpVtbl : IEnumAgentHandlerVtable* do
     GUID = LibC::GUID.new(0x587e8c28_u32, 0x9802_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9380,7 +9427,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAMMediaFormatVtbl,
+
+  record ITAMMediaFormatVtable,
     query_interface : Proc(ITAMMediaFormat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAMMediaFormat*, UInt32),
     release : Proc(ITAMMediaFormat*, UInt32),
@@ -9389,7 +9437,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAMMediaFormat, lpVtbl : ITAMMediaFormatVtbl* do
+  record ITAMMediaFormat, lpVtbl : ITAMMediaFormatVtable* do
     GUID = LibC::GUID.new(0x364eb00_u32, 0x4a77_u16, 0x11d1_u16, StaticArray[0xa6_u8, 0x71_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa2_u8, 0xe8_u8])
     def query_interface(this : ITAMMediaFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9410,7 +9458,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAllocatorPropertiesVtbl,
+
+  record ITAllocatorPropertiesVtable,
     query_interface : Proc(ITAllocatorProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAllocatorProperties*, UInt32),
     release : Proc(ITAllocatorProperties*, UInt32),
@@ -9423,7 +9472,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAllocatorProperties, lpVtbl : ITAllocatorPropertiesVtbl* do
+  record ITAllocatorProperties, lpVtbl : ITAllocatorPropertiesVtable* do
     GUID = LibC::GUID.new(0xc1bc3c90_u32, 0xbcfe_u16, 0x11d1_u16, StaticArray[0x97_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : ITAllocatorProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9456,7 +9505,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPluggableTerminalEventSinkVtbl,
+
+  record ITPluggableTerminalEventSinkVtable,
     query_interface : Proc(ITPluggableTerminalEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPluggableTerminalEventSink*, UInt32),
     release : Proc(ITPluggableTerminalEventSink*, UInt32),
@@ -9464,7 +9514,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPluggableTerminalEventSink, lpVtbl : ITPluggableTerminalEventSinkVtbl* do
+  record ITPluggableTerminalEventSink, lpVtbl : ITPluggableTerminalEventSinkVtable* do
     GUID = LibC::GUID.new(0x6e0887be_u32, 0xba1a_u16, 0x492e_u16, StaticArray[0xbd_u8, 0x10_u8, 0x40_u8, 0x20_u8, 0xec_u8, 0x5e_u8, 0x33_u8, 0xe0_u8])
     def query_interface(this : ITPluggableTerminalEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9482,7 +9532,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPluggableTerminalEventSinkRegistrationVtbl,
+
+  record ITPluggableTerminalEventSinkRegistrationVtable,
     query_interface : Proc(ITPluggableTerminalEventSinkRegistration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPluggableTerminalEventSinkRegistration*, UInt32),
     release : Proc(ITPluggableTerminalEventSinkRegistration*, UInt32),
@@ -9491,7 +9542,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPluggableTerminalEventSinkRegistration, lpVtbl : ITPluggableTerminalEventSinkRegistrationVtbl* do
+  record ITPluggableTerminalEventSinkRegistration, lpVtbl : ITPluggableTerminalEventSinkRegistrationVtable* do
     GUID = LibC::GUID.new(0xf7115709_u32, 0xa216_u16, 0x4957_u16, StaticArray[0xa7_u8, 0x59_u8, 0x6_u8, 0xa_u8, 0xb3_u8, 0x2a_u8, 0x90_u8, 0xd1_u8])
     def query_interface(this : ITPluggableTerminalEventSinkRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9512,7 +9563,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMSPAddressVtbl,
+
+  record ITMSPAddressVtable,
     query_interface : Proc(ITMSPAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMSPAddress*, UInt32),
     release : Proc(ITMSPAddress*, UInt32),
@@ -9525,7 +9577,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMSPAddress, lpVtbl : ITMSPAddressVtbl* do
+  record ITMSPAddress, lpVtbl : ITMSPAddressVtable* do
     GUID = LibC::GUID.new(0xee3bd600_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITMSPAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9558,18 +9610,19 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIDispatchEventNotificationVtbl,
+
+  record ITTAPIDispatchEventNotificationVtable,
     query_interface : Proc(ITTAPIDispatchEventNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPIDispatchEventNotification*, UInt32),
     release : Proc(ITTAPIDispatchEventNotification*, UInt32),
     get_type_info_count : Proc(ITTAPIDispatchEventNotification*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITTAPIDispatchEventNotification*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITTAPIDispatchEventNotification*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITTAPIDispatchEventNotification*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ITTAPIDispatchEventNotification*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITTAPIDispatchEventNotification, lpVtbl : ITTAPIDispatchEventNotificationVtbl* do
+  record ITTAPIDispatchEventNotification, lpVtbl : ITTAPIDispatchEventNotificationVtable* do
     GUID = LibC::GUID.new(0x9f34325b_u32, 0x7e62_u16, 0x11d2_u16, StaticArray[0x94_u8, 0x57_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xc8_u8, 0x88_u8])
     def query_interface(this : ITTAPIDispatchEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9589,21 +9642,22 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITTAPIDispatchEventNotification*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITTAPIDispatchEventNotification*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITTAPIDispatchEventNotification*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record ITDirectoryObjectConferenceVtbl,
+
+  record ITDirectoryObjectConferenceVtable,
     query_interface : Proc(ITDirectoryObjectConference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDirectoryObjectConference*, UInt32),
     release : Proc(ITDirectoryObjectConference*, UInt32),
     get_type_info_count : Proc(ITDirectoryObjectConference*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDirectoryObjectConference*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDirectoryObjectConference*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDirectoryObjectConference*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDirectoryObjectConference*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Protocol : Proc(ITDirectoryObjectConference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Originator : Proc(ITDirectoryObjectConference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Originator : Proc(ITDirectoryObjectConference*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -9613,8 +9667,8 @@ module Win32cr::Devices::Tapi
     put_Url : Proc(ITDirectoryObjectConference*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(ITDirectoryObjectConference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(ITDirectoryObjectConference*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IsEncrypted : Proc(ITDirectoryObjectConference*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IsEncrypted : Proc(ITDirectoryObjectConference*, Int16, Win32cr::Foundation::HRESULT),
+    get_IsEncrypted : Proc(ITDirectoryObjectConference*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IsEncrypted : Proc(ITDirectoryObjectConference*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_StartTime : Proc(ITDirectoryObjectConference*, Float64*, Win32cr::Foundation::HRESULT),
     put_StartTime : Proc(ITDirectoryObjectConference*, Float64, Win32cr::Foundation::HRESULT),
     get_StopTime : Proc(ITDirectoryObjectConference*, Float64*, Win32cr::Foundation::HRESULT),
@@ -9622,7 +9676,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDirectoryObjectConference, lpVtbl : ITDirectoryObjectConferenceVtbl* do
+  record ITDirectoryObjectConference, lpVtbl : ITDirectoryObjectConferenceVtable* do
     GUID = LibC::GUID.new(0xf1029e5d_u32, 0xcb5b_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x59_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : ITDirectoryObjectConference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9642,8 +9696,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDirectoryObjectConference*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDirectoryObjectConference*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDirectoryObjectConference*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Protocol(this : ITDirectoryObjectConference*, ppProtocol : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Protocol.call(this, ppProtocol)
@@ -9672,10 +9726,10 @@ module Win32cr::Devices::Tapi
     def put_Description(this : ITDirectoryObjectConference*, pDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Description.call(this, pDescription)
     end
-    def get_IsEncrypted(this : ITDirectoryObjectConference*, pfEncrypted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsEncrypted(this : ITDirectoryObjectConference*, pfEncrypted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsEncrypted.call(this, pfEncrypted)
     end
-    def put_IsEncrypted(this : ITDirectoryObjectConference*, fEncrypted : Int16) : Win32cr::Foundation::HRESULT
+    def put_IsEncrypted(this : ITDirectoryObjectConference*, fEncrypted : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsEncrypted.call(this, fEncrypted)
     end
     def get_StartTime(this : ITDirectoryObjectConference*, pDate : Float64*) : Win32cr::Foundation::HRESULT
@@ -9694,20 +9748,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDirectoryObjectUserVtbl,
+
+  record ITDirectoryObjectUserVtable,
     query_interface : Proc(ITDirectoryObjectUser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDirectoryObjectUser*, UInt32),
     release : Proc(ITDirectoryObjectUser*, UInt32),
     get_type_info_count : Proc(ITDirectoryObjectUser*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDirectoryObjectUser*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDirectoryObjectUser*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDirectoryObjectUser*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDirectoryObjectUser*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_IPPhonePrimary : Proc(ITDirectoryObjectUser*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_IPPhonePrimary : Proc(ITDirectoryObjectUser*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITDirectoryObjectUser, lpVtbl : ITDirectoryObjectUserVtbl* do
+  record ITDirectoryObjectUser, lpVtbl : ITDirectoryObjectUserVtable* do
     GUID = LibC::GUID.new(0x34621d6f_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectoryObjectUser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9727,8 +9782,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDirectoryObjectUser*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDirectoryObjectUser*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDirectoryObjectUser*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_IPPhonePrimary(this : ITDirectoryObjectUser*, ppName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IPPhonePrimary.call(this, ppName)
@@ -9740,7 +9795,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumDialableAddrsVtbl,
+
+  record IEnumDialableAddrsVtable,
     query_interface : Proc(IEnumDialableAddrs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDialableAddrs*, UInt32),
     release : Proc(IEnumDialableAddrs*, UInt32),
@@ -9751,7 +9807,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumDialableAddrs, lpVtbl : IEnumDialableAddrsVtbl* do
+  record IEnumDialableAddrs, lpVtbl : IEnumDialableAddrsVtable* do
     GUID = LibC::GUID.new(0x34621d70_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : IEnumDialableAddrs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9778,25 +9834,26 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDirectoryObjectVtbl,
+
+  record ITDirectoryObjectVtable,
     query_interface : Proc(ITDirectoryObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDirectoryObject*, UInt32),
     release : Proc(ITDirectoryObject*, UInt32),
     get_type_info_count : Proc(ITDirectoryObject*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDirectoryObject*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDirectoryObject*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDirectoryObject*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDirectoryObject*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ObjectType : Proc(ITDirectoryObject*, Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITDirectoryObject*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(ITDirectoryObject*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_DialableAddrs : Proc(ITDirectoryObject*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DialableAddrs : Proc(ITDirectoryObject*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_dialable_addrs : Proc(ITDirectoryObject*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_SecurityDescriptor : Proc(ITDirectoryObject*, Void**, Win32cr::Foundation::HRESULT),
     put_SecurityDescriptor : Proc(ITDirectoryObject*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITDirectoryObject, lpVtbl : ITDirectoryObjectVtbl* do
+  record ITDirectoryObject, lpVtbl : ITDirectoryObjectVtable* do
     GUID = LibC::GUID.new(0x34621d6e_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectoryObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9816,8 +9873,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDirectoryObject*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDirectoryObject*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDirectoryObject*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ObjectType(this : ITDirectoryObject*, pObjectType : Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ObjectType.call(this, pObjectType)
@@ -9828,7 +9885,7 @@ module Win32cr::Devices::Tapi
     def put_Name(this : ITDirectoryObject*, pName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Name.call(this, pName)
     end
-    def get_DialableAddrs(this : ITDirectoryObject*, dwAddressType : Int32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DialableAddrs(this : ITDirectoryObject*, dwAddressType : Int32, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DialableAddrs.call(this, dwAddressType, pVariant)
     end
     def enumerate_dialable_addrs(this : ITDirectoryObject*, dwAddressType : UInt32, ppEnumDialableAddrs : Void**) : Win32cr::Foundation::HRESULT
@@ -9844,7 +9901,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumDirectoryObjectVtbl,
+
+  record IEnumDirectoryObjectVtable,
     query_interface : Proc(IEnumDirectoryObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDirectoryObject*, UInt32),
     release : Proc(IEnumDirectoryObject*, UInt32),
@@ -9855,7 +9913,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumDirectoryObject, lpVtbl : IEnumDirectoryObjectVtbl* do
+  record IEnumDirectoryObject, lpVtbl : IEnumDirectoryObjectVtable* do
     GUID = LibC::GUID.new(0x6c9b64a_u32, 0x306d_u16, 0x11d1_u16, StaticArray[0x97_u8, 0x74_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : IEnumDirectoryObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9882,20 +9940,21 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITILSConfigVtbl,
+
+  record ITILSConfigVtable,
     query_interface : Proc(ITILSConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITILSConfig*, UInt32),
     release : Proc(ITILSConfig*, UInt32),
     get_type_info_count : Proc(ITILSConfig*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITILSConfig*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITILSConfig*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITILSConfig*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITILSConfig*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Port : Proc(ITILSConfig*, Int32*, Win32cr::Foundation::HRESULT),
     put_Port : Proc(ITILSConfig*, Int32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITILSConfig, lpVtbl : ITILSConfigVtbl* do
+  record ITILSConfig, lpVtbl : ITILSConfigVtable* do
     GUID = LibC::GUID.new(0x34621d72_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITILSConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9915,8 +9974,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITILSConfig*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITILSConfig*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITILSConfig*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Port(this : ITILSConfig*, pPort : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Port.call(this, pPort)
@@ -9928,32 +9987,33 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDirectoryVtbl,
+
+  record ITDirectoryVtable,
     query_interface : Proc(ITDirectory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDirectory*, UInt32),
     release : Proc(ITDirectory*, UInt32),
     get_type_info_count : Proc(ITDirectory*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITDirectory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITDirectory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITDirectory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITDirectory*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_DirectoryType : Proc(ITDirectory*, Win32cr::Devices::Tapi::DIRECTORY_TYPE*, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(ITDirectory*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsDynamic : Proc(ITDirectory*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsDynamic : Proc(ITDirectory*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_DefaultObjectTTL : Proc(ITDirectory*, Int32*, Win32cr::Foundation::HRESULT),
     put_DefaultObjectTTL : Proc(ITDirectory*, Int32, Win32cr::Foundation::HRESULT),
-    enable_auto_refresh : Proc(ITDirectory*, Int16, Win32cr::Foundation::HRESULT),
-    connect : Proc(ITDirectory*, Int16, Win32cr::Foundation::HRESULT),
+    enable_auto_refresh : Proc(ITDirectory*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    connect : Proc(ITDirectory*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     bind : Proc(ITDirectory*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     add_directory_object : Proc(ITDirectory*, Void*, Win32cr::Foundation::HRESULT),
     modify_directory_object : Proc(ITDirectory*, Void*, Win32cr::Foundation::HRESULT),
     refresh_directory_object : Proc(ITDirectory*, Void*, Win32cr::Foundation::HRESULT),
     delete_directory_object : Proc(ITDirectory*, Void*, Win32cr::Foundation::HRESULT),
-    get_DirectoryObjects : Proc(ITDirectory*, Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_DirectoryObjects : Proc(ITDirectory*, Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_directory_objects : Proc(ITDirectory*, Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITDirectory, lpVtbl : ITDirectoryVtbl* do
+  record ITDirectory, lpVtbl : ITDirectoryVtable* do
     GUID = LibC::GUID.new(0x34621d6c_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9973,8 +10033,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITDirectory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITDirectory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITDirectory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_DirectoryType(this : ITDirectory*, pDirectoryType : Win32cr::Devices::Tapi::DIRECTORY_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DirectoryType.call(this, pDirectoryType)
@@ -9982,7 +10042,7 @@ module Win32cr::Devices::Tapi
     def get_DisplayName(this : ITDirectory*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisplayName.call(this, pName)
     end
-    def get_IsDynamic(this : ITDirectory*, pfDynamic : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDynamic(this : ITDirectory*, pfDynamic : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDynamic.call(this, pfDynamic)
     end
     def get_DefaultObjectTTL(this : ITDirectory*, pTTL : Int32*) : Win32cr::Foundation::HRESULT
@@ -9991,10 +10051,10 @@ module Win32cr::Devices::Tapi
     def put_DefaultObjectTTL(this : ITDirectory*, ttl : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DefaultObjectTTL.call(this, ttl)
     end
-    def enable_auto_refresh(this : ITDirectory*, fEnable : Int16) : Win32cr::Foundation::HRESULT
+    def enable_auto_refresh(this : ITDirectory*, fEnable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_auto_refresh.call(this, fEnable)
     end
-    def connect(this : ITDirectory*, fSecure : Int16) : Win32cr::Foundation::HRESULT
+    def connect(this : ITDirectory*, fSecure : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connect.call(this, fSecure)
     end
     def bind(this : ITDirectory*, pDomainName : Win32cr::Foundation::BSTR, pUserName : Win32cr::Foundation::BSTR, pPassword : Win32cr::Foundation::BSTR, lFlags : Int32) : Win32cr::Foundation::HRESULT
@@ -10012,7 +10072,7 @@ module Win32cr::Devices::Tapi
     def delete_directory_object(this : ITDirectory*, pDirectoryObject : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_directory_object.call(this, pDirectoryObject)
     end
-    def get_DirectoryObjects(this : ITDirectory*, directory_object_type : Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE, pName : Win32cr::Foundation::BSTR, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DirectoryObjects(this : ITDirectory*, directory_object_type : Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE, pName : Win32cr::Foundation::BSTR, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DirectoryObjects.call(this, directory_object_type, pName, pVariant)
     end
     def enumerate_directory_objects(this : ITDirectory*, directory_object_type : Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE, pName : Win32cr::Foundation::BSTR, ppEnumObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10022,7 +10082,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumDirectoryVtbl,
+
+  record IEnumDirectoryVtable,
     query_interface : Proc(IEnumDirectory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDirectory*, UInt32),
     release : Proc(IEnumDirectory*, UInt32),
@@ -10033,7 +10094,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumDirectory, lpVtbl : IEnumDirectoryVtbl* do
+  record IEnumDirectory, lpVtbl : IEnumDirectoryVtable* do
     GUID = LibC::GUID.new(0x34621d6d_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : IEnumDirectory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10060,22 +10121,23 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITRendezvousVtbl,
+
+  record ITRendezvousVtable,
     query_interface : Proc(ITRendezvous*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITRendezvous*, UInt32),
     release : Proc(ITRendezvous*, UInt32),
     get_type_info_count : Proc(ITRendezvous*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITRendezvous*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITRendezvous*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITRendezvous*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_DefaultDirectories : Proc(ITRendezvous*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITRendezvous*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DefaultDirectories : Proc(ITRendezvous*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_default_directories : Proc(ITRendezvous*, Void**, Win32cr::Foundation::HRESULT),
     create_directory : Proc(ITRendezvous*, Win32cr::Devices::Tapi::DIRECTORY_TYPE, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     create_directory_object : Proc(ITRendezvous*, Win32cr::Devices::Tapi::DIRECTORY_OBJECT_TYPE, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITRendezvous, lpVtbl : ITRendezvousVtbl* do
+  record ITRendezvous, lpVtbl : ITRendezvousVtable* do
     GUID = LibC::GUID.new(0x34621d6b_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITRendezvous*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10095,10 +10157,10 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : ITRendezvous*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITRendezvous*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITRendezvous*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_DefaultDirectories(this : ITRendezvous*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DefaultDirectories(this : ITRendezvous*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DefaultDirectories.call(this, pVariant)
     end
     def enumerate_default_directories(this : ITRendezvous*, ppEnumDirectory : Void**) : Win32cr::Foundation::HRESULT
@@ -10114,14 +10176,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IMcastScopeVtbl,
+
+  record IMcastScopeVtable,
     query_interface : Proc(IMcastScope*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMcastScope*, UInt32),
     release : Proc(IMcastScope*, UInt32),
     get_type_info_count : Proc(IMcastScope*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMcastScope*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMcastScope*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMcastScope*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMcastScope*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ScopeID : Proc(IMcastScope*, Int32*, Win32cr::Foundation::HRESULT),
     get_ServerID : Proc(IMcastScope*, Int32*, Win32cr::Foundation::HRESULT),
     get_InterfaceID : Proc(IMcastScope*, Int32*, Win32cr::Foundation::HRESULT),
@@ -10130,7 +10193,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IMcastScope, lpVtbl : IMcastScopeVtbl* do
+  record IMcastScope, lpVtbl : IMcastScopeVtable* do
     GUID = LibC::GUID.new(0xdf0daef4_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10150,8 +10213,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : IMcastScope*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMcastScope*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMcastScope*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ScopeID(this : IMcastScope*, pID : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ScopeID.call(this, pID)
@@ -10172,14 +10235,15 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IMcastLeaseInfoVtbl,
+
+  record IMcastLeaseInfoVtable,
     query_interface : Proc(IMcastLeaseInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMcastLeaseInfo*, UInt32),
     release : Proc(IMcastLeaseInfo*, UInt32),
     get_type_info_count : Proc(IMcastLeaseInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMcastLeaseInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMcastLeaseInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMcastLeaseInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMcastLeaseInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_RequestID : Proc(IMcastLeaseInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_LeaseStartTime : Proc(IMcastLeaseInfo*, Float64*, Win32cr::Foundation::HRESULT),
     put_LeaseStartTime : Proc(IMcastLeaseInfo*, Float64, Win32cr::Foundation::HRESULT),
@@ -10188,12 +10252,12 @@ module Win32cr::Devices::Tapi
     get_AddressCount : Proc(IMcastLeaseInfo*, Int32*, Win32cr::Foundation::HRESULT),
     get_ServerAddress : Proc(IMcastLeaseInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_TTL : Proc(IMcastLeaseInfo*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Addresses : Proc(IMcastLeaseInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Addresses : Proc(IMcastLeaseInfo*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_addresses : Proc(IMcastLeaseInfo*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMcastLeaseInfo, lpVtbl : IMcastLeaseInfoVtbl* do
+  record IMcastLeaseInfo, lpVtbl : IMcastLeaseInfoVtable* do
     GUID = LibC::GUID.new(0xdf0daefd_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastLeaseInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10213,8 +10277,8 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : IMcastLeaseInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMcastLeaseInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMcastLeaseInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_RequestID(this : IMcastLeaseInfo*, ppRequestID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RequestID.call(this, ppRequestID)
@@ -10240,7 +10304,7 @@ module Win32cr::Devices::Tapi
     def get_TTL(this : IMcastLeaseInfo*, pTTL : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TTL.call(this, pTTL)
     end
-    def get_Addresses(this : IMcastLeaseInfo*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Addresses(this : IMcastLeaseInfo*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Addresses.call(this, pVariant)
     end
     def enumerate_addresses(this : IMcastLeaseInfo*, ppEnumAddresses : Void**) : Win32cr::Foundation::HRESULT
@@ -10250,7 +10314,8 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumMcastScopeVtbl,
+
+  record IEnumMcastScopeVtable,
     query_interface : Proc(IEnumMcastScope*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumMcastScope*, UInt32),
     release : Proc(IEnumMcastScope*, UInt32),
@@ -10261,7 +10326,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumMcastScope, lpVtbl : IEnumMcastScopeVtbl* do
+  record IEnumMcastScope, lpVtbl : IEnumMcastScopeVtable* do
     GUID = LibC::GUID.new(0xdf0daf09_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IEnumMcastScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10288,25 +10353,26 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IMcastAddressAllocationVtbl,
+
+  record IMcastAddressAllocationVtable,
     query_interface : Proc(IMcastAddressAllocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMcastAddressAllocation*, UInt32),
     release : Proc(IMcastAddressAllocation*, UInt32),
     get_type_info_count : Proc(IMcastAddressAllocation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMcastAddressAllocation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMcastAddressAllocation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMcastAddressAllocation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Scopes : Proc(IMcastAddressAllocation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMcastAddressAllocation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Scopes : Proc(IMcastAddressAllocation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_scopes : Proc(IMcastAddressAllocation*, Void**, Win32cr::Foundation::HRESULT),
     request_address : Proc(IMcastAddressAllocation*, Void*, Float64, Float64, Int32, Void**, Win32cr::Foundation::HRESULT),
     renew_address : Proc(IMcastAddressAllocation*, Int32, Void*, Void**, Win32cr::Foundation::HRESULT),
     release_address : Proc(IMcastAddressAllocation*, Void*, Win32cr::Foundation::HRESULT),
     create_lease_info : Proc(IMcastAddressAllocation*, Float64, Float64, UInt32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
-    create_lease_info_from_variant : Proc(IMcastAddressAllocation*, Float64, Float64, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
+    create_lease_info_from_variant : Proc(IMcastAddressAllocation*, Float64, Float64, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMcastAddressAllocation, lpVtbl : IMcastAddressAllocationVtbl* do
+  record IMcastAddressAllocation, lpVtbl : IMcastAddressAllocationVtable* do
     GUID = LibC::GUID.new(0xdf0daef1_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastAddressAllocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10326,10 +10392,10 @@ module Win32cr::Devices::Tapi
     def get_i_ds_of_names(this : IMcastAddressAllocation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMcastAddressAllocation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMcastAddressAllocation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Scopes(this : IMcastAddressAllocation*, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Scopes(this : IMcastAddressAllocation*, pVariant : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Scopes.call(this, pVariant)
     end
     def enumerate_scopes(this : IMcastAddressAllocation*, ppEnumMcastScope : Void**) : Win32cr::Foundation::HRESULT
@@ -10347,14 +10413,15 @@ module Win32cr::Devices::Tapi
     def create_lease_info(this : IMcastAddressAllocation*, lease_start_time : Float64, lease_stop_time : Float64, dwNumAddresses : UInt32, ppAddresses : Win32cr::Foundation::PWSTR*, pRequestID : Win32cr::Foundation::PWSTR, pServerAddress : Win32cr::Foundation::PWSTR, ppReleaseRequest : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_lease_info.call(this, lease_start_time, lease_stop_time, dwNumAddresses, ppAddresses, pRequestID, pServerAddress, ppReleaseRequest)
     end
-    def create_lease_info_from_variant(this : IMcastAddressAllocation*, lease_start_time : Float64, lease_stop_time : Float64, vAddresses : Win32cr::System::Com::VARIANT, pRequestID : Win32cr::Foundation::BSTR, pServerAddress : Win32cr::Foundation::BSTR, ppReleaseRequest : Void**) : Win32cr::Foundation::HRESULT
+    def create_lease_info_from_variant(this : IMcastAddressAllocation*, lease_start_time : Float64, lease_stop_time : Float64, vAddresses : Win32cr::System::Variant::VARIANT, pRequestID : Win32cr::Foundation::BSTR, pServerAddress : Win32cr::Foundation::BSTR, ppReleaseRequest : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_lease_info_from_variant.call(this, lease_start_time, lease_stop_time, vAddresses, pRequestID, pServerAddress, ppReleaseRequest)
     end
 
   end
 
   @[Extern]
-  record ITnefVtbl,
+
+  record ITnefVtable,
     query_interface : Proc(ITnef*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITnef*, UInt32),
     release : Proc(ITnef*, UInt32),
@@ -10368,7 +10435,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITnef, lpVtbl : ITnefVtbl* do
+  record ITnef, lpVtbl : ITnefVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITnef*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10404,1015 +10471,1520 @@ module Win32cr::Devices::Tapi
   end
 
   def lineAccept(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineAccept(hCall, lpsUserUserInfo, dwSize)
+    {% end %}
   end
 
   def lineAddProvider(lpszProviderFilename : Win32cr::Foundation::PSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineAddProvider(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+    {% end %}
   end
 
   def lineAddProviderA(lpszProviderFilename : Win32cr::Foundation::PSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineAddProviderA(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+    {% end %}
   end
 
   def lineAddProviderW(lpszProviderFilename : Win32cr::Foundation::PWSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineAddProviderW(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+    {% end %}
   end
 
   def lineAddToConference(hConfCall : UInt32, hConsultCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineAddToConference(hConfCall, hConsultCall)
+    {% end %}
   end
 
   def lineAgentSpecific(hLine : UInt32, dwAddressID : UInt32, dwAgentExtensionIDIndex : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineAgentSpecific(hLine, dwAddressID, dwAgentExtensionIDIndex, lpParams, dwSize)
+    {% end %}
   end
 
   def lineAnswer(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineAnswer(hCall, lpsUserUserInfo, dwSize)
+    {% end %}
   end
 
   def lineBlindTransfer(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineBlindTransfer(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineBlindTransferA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineBlindTransferA(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineBlindTransferW(hCall : UInt32, lpszDestAddressW : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineBlindTransferW(hCall, lpszDestAddressW, dwCountryCode)
+    {% end %}
   end
 
   def lineClose(hLine : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineClose(hLine)
+    {% end %}
   end
 
   def lineCompleteCall(hCall : UInt32, lpdwCompletionID : UInt32*, dwCompletionMode : UInt32, dwMessageID : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineCompleteCall(hCall, lpdwCompletionID, dwCompletionMode, dwMessageID)
+    {% end %}
   end
 
   def lineCompleteTransfer(hCall : UInt32, hConsultCall : UInt32, lphConfCall : UInt32*, dwTransferMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineCompleteTransfer(hCall, hConsultCall, lphConfCall, dwTransferMode)
+    {% end %}
   end
 
   def lineConfigDialog(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialog(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def lineConfigDialogA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogA(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def lineConfigDialogW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogW(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def lineConfigDialogEdit(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogEdit(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+    {% end %}
   end
 
   def lineConfigDialogEditA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogEditA(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+    {% end %}
   end
 
   def lineConfigDialogEditW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogEditW(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+    {% end %}
   end
 
   def lineConfigProvider(hwndOwner : Win32cr::Foundation::HWND, dwPermanentProviderID : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigProvider(hwndOwner, dwPermanentProviderID)
+    {% end %}
   end
 
   def lineCreateAgentW(hLine : UInt32, lpszAgentID : Win32cr::Foundation::PWSTR, lpszAgentPIN : Win32cr::Foundation::PWSTR, lphAgent : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineCreateAgentW(hLine, lpszAgentID, lpszAgentPIN, lphAgent)
+    {% end %}
   end
 
   def lineCreateAgentA(hLine : UInt32, lpszAgentID : Win32cr::Foundation::PSTR, lpszAgentPIN : Win32cr::Foundation::PSTR, lphAgent : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineCreateAgentA(hLine, lpszAgentID, lpszAgentPIN, lphAgent)
+    {% end %}
   end
 
   def lineCreateAgentSessionW(hLine : UInt32, hAgent : UInt32, lpszAgentPIN : Win32cr::Foundation::PWSTR, dwWorkingAddressID : UInt32, lpGroupID : LibC::GUID*, lphAgentSession : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineCreateAgentSessionW(hLine, hAgent, lpszAgentPIN, dwWorkingAddressID, lpGroupID, lphAgentSession)
+    {% end %}
   end
 
   def lineCreateAgentSessionA(hLine : UInt32, hAgent : UInt32, lpszAgentPIN : Win32cr::Foundation::PSTR, dwWorkingAddressID : UInt32, lpGroupID : LibC::GUID*, lphAgentSession : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineCreateAgentSessionA(hLine, hAgent, lpszAgentPIN, dwWorkingAddressID, lpGroupID, lphAgentSession)
+    {% end %}
   end
 
   def lineDeallocateCall(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDeallocateCall(hCall)
+    {% end %}
   end
 
   def lineDevSpecific(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDevSpecific(hLine, dwAddressID, hCall, lpParams, dwSize)
+    {% end %}
   end
 
   def lineDevSpecificFeature(hLine : UInt32, dwFeature : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDevSpecificFeature(hLine, dwFeature, lpParams, dwSize)
+    {% end %}
   end
 
   def lineDial(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDial(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineDialA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDialA(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineDialW(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDialW(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineDrop(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDrop(hCall, lpsUserUserInfo, dwSize)
+    {% end %}
   end
 
   def lineForward(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineForward(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineForwardA(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineForwardA(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineForwardW(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineForwardW(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
-  def lineGatherDigits(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+  def lineGatherDigits(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : Win32cr::Foundation::PSTR, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGatherDigits(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+    {% end %}
   end
 
-  def lineGatherDigitsA(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+  def lineGatherDigitsA(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : Win32cr::Foundation::PSTR, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGatherDigitsA(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+    {% end %}
   end
 
-  def lineGatherDigitsW(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt16*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PWSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+  def lineGatherDigitsW(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : Win32cr::Foundation::PWSTR, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PWSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGatherDigitsW(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+    {% end %}
   end
 
   def lineGenerateDigits(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGenerateDigits(hCall, dwDigitMode, lpszDigits, dwDuration)
+    {% end %}
   end
 
   def lineGenerateDigitsA(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGenerateDigitsA(hCall, dwDigitMode, lpszDigits, dwDuration)
+    {% end %}
   end
 
   def lineGenerateDigitsW(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PWSTR, dwDuration : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGenerateDigitsW(hCall, dwDigitMode, lpszDigits, dwDuration)
+    {% end %}
   end
 
   def lineGenerateTone(hCall : UInt32, dwToneMode : UInt32, dwDuration : UInt32, dwNumTones : UInt32, lpTones : Win32cr::Devices::Tapi::LINEGENERATETONE*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGenerateTone(hCall, dwToneMode, dwDuration, dwNumTones, lpTones)
+    {% end %}
   end
 
   def lineGetAddressCaps(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressCaps(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+    {% end %}
   end
 
   def lineGetAddressCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressCapsA(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+    {% end %}
   end
 
   def lineGetAddressCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressCapsW(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+    {% end %}
   end
 
   def lineGetAddressID(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressID(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+    {% end %}
   end
 
   def lineGetAddressIDA(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressIDA(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+    {% end %}
   end
 
   def lineGetAddressIDW(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PWSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressIDW(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+    {% end %}
   end
 
   def lineGetAddressStatus(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressStatus(hLine, dwAddressID, lpAddressStatus)
+    {% end %}
   end
 
   def lineGetAddressStatusA(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressStatusA(hLine, dwAddressID, lpAddressStatus)
+    {% end %}
   end
 
   def lineGetAddressStatusW(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressStatusW(hLine, dwAddressID, lpAddressStatus)
+    {% end %}
   end
 
   def lineGetAgentActivityListA(hLine : UInt32, dwAddressID : UInt32, lpAgentActivityList : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentActivityListA(hLine, dwAddressID, lpAgentActivityList)
+    {% end %}
   end
 
   def lineGetAgentActivityListW(hLine : UInt32, dwAddressID : UInt32, lpAgentActivityList : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentActivityListW(hLine, dwAddressID, lpAgentActivityList)
+    {% end %}
   end
 
   def lineGetAgentCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAppAPIVersion : UInt32, lpAgentCaps : Win32cr::Devices::Tapi::LINEAGENTCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentCapsA(hLineApp, dwDeviceID, dwAddressID, dwAppAPIVersion, lpAgentCaps)
+    {% end %}
   end
 
   def lineGetAgentCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAppAPIVersion : UInt32, lpAgentCaps : Win32cr::Devices::Tapi::LINEAGENTCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentCapsW(hLineApp, dwDeviceID, dwAddressID, dwAppAPIVersion, lpAgentCaps)
+    {% end %}
   end
 
   def lineGetAgentGroupListA(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentGroupListA(hLine, dwAddressID, lpAgentGroupList)
+    {% end %}
   end
 
   def lineGetAgentGroupListW(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentGroupListW(hLine, dwAddressID, lpAgentGroupList)
+    {% end %}
   end
 
   def lineGetAgentInfo(hLine : UInt32, hAgent : UInt32, lpAgentInfo : Win32cr::Devices::Tapi::LINEAGENTINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentInfo(hLine, hAgent, lpAgentInfo)
+    {% end %}
   end
 
   def lineGetAgentSessionInfo(hLine : UInt32, hAgentSession : UInt32, lpAgentSessionInfo : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentSessionInfo(hLine, hAgentSession, lpAgentSessionInfo)
+    {% end %}
   end
 
   def lineGetAgentSessionList(hLine : UInt32, hAgent : UInt32, lpAgentSessionList : Win32cr::Devices::Tapi::LINEAGENTSESSIONLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentSessionList(hLine, hAgent, lpAgentSessionList)
+    {% end %}
   end
 
   def lineGetAgentStatusA(hLine : UInt32, dwAddressID : UInt32, lpAgentStatus : Win32cr::Devices::Tapi::LINEAGENTSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentStatusA(hLine, dwAddressID, lpAgentStatus)
+    {% end %}
   end
 
   def lineGetAgentStatusW(hLine : UInt32, dwAddressID : UInt32, lpAgentStatus : Win32cr::Devices::Tapi::LINEAGENTSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentStatusW(hLine, dwAddressID, lpAgentStatus)
+    {% end %}
   end
 
   def lineGetAppPriority(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAppPriority(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+    {% end %}
   end
 
   def lineGetAppPriorityA(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAppPriorityA(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+    {% end %}
   end
 
   def lineGetAppPriorityW(lpszAppFilename : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAppPriorityW(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+    {% end %}
   end
 
   def lineGetCallInfo(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCallInfo(hCall, lpCallInfo)
+    {% end %}
   end
 
   def lineGetCallInfoA(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCallInfoA(hCall, lpCallInfo)
+    {% end %}
   end
 
   def lineGetCallInfoW(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCallInfoW(hCall, lpCallInfo)
+    {% end %}
   end
 
   def lineGetCallStatus(hCall : UInt32, lpCallStatus : Win32cr::Devices::Tapi::LINECALLSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCallStatus(hCall, lpCallStatus)
+    {% end %}
   end
 
   def lineGetConfRelatedCalls(hCall : UInt32, lpCallList : Win32cr::Devices::Tapi::LINECALLLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetConfRelatedCalls(hCall, lpCallList)
+    {% end %}
   end
 
   def lineGetCountry(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCountry(dwCountryID, dwAPIVersion, lpLineCountryList)
+    {% end %}
   end
 
   def lineGetCountryA(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCountryA(dwCountryID, dwAPIVersion, lpLineCountryList)
+    {% end %}
   end
 
   def lineGetCountryW(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCountryW(dwCountryID, dwAPIVersion, lpLineCountryList)
+    {% end %}
   end
 
   def lineGetDevCaps(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevCaps(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+    {% end %}
   end
 
   def lineGetDevCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevCapsA(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+    {% end %}
   end
 
   def lineGetDevCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevCapsW(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+    {% end %}
   end
 
   def lineGetDevConfig(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevConfig(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetDevConfigA(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevConfigA(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetDevConfigW(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevConfigW(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetGroupListA(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetGroupListA(hLine, lpGroupList)
+    {% end %}
   end
 
   def lineGetGroupListW(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetGroupListW(hLine, lpGroupList)
+    {% end %}
   end
 
-  def lineGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+  def lineGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIcon(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
-  def lineGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+  def lineGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIconA(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
-  def lineGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
+  def lineGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIconW(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
   def lineGetID(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetID(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetIDA(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIDA(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetIDW(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIDW(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetLineDevStatus(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetLineDevStatus(hLine, lpLineDevStatus)
+    {% end %}
   end
 
   def lineGetLineDevStatusA(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetLineDevStatusA(hLine, lpLineDevStatus)
+    {% end %}
   end
 
   def lineGetLineDevStatusW(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetLineDevStatusW(hLine, lpLineDevStatus)
+    {% end %}
   end
 
   def lineGetMessage(hLineApp : UInt32, lpMessage : Win32cr::Devices::Tapi::LINEMESSAGE*, dwTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetMessage(hLineApp, lpMessage, dwTimeout)
+    {% end %}
   end
 
   def lineGetNewCalls(hLine : UInt32, dwAddressID : UInt32, dwSelect : UInt32, lpCallList : Win32cr::Devices::Tapi::LINECALLLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetNewCalls(hLine, dwAddressID, dwSelect, lpCallList)
+    {% end %}
   end
 
   def lineGetNumRings(hLine : UInt32, dwAddressID : UInt32, lpdwNumRings : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetNumRings(hLine, dwAddressID, lpdwNumRings)
+    {% end %}
   end
 
   def lineGetProviderList(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetProviderList(dwAPIVersion, lpProviderList)
+    {% end %}
   end
 
   def lineGetProviderListA(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetProviderListA(dwAPIVersion, lpProviderList)
+    {% end %}
   end
 
   def lineGetProviderListW(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetProviderListW(dwAPIVersion, lpProviderList)
+    {% end %}
   end
 
   def lineGetProxyStatus(hLineApp : UInt32, dwDeviceID : UInt32, dwAppAPIVersion : UInt32, lpLineProxyReqestList : Win32cr::Devices::Tapi::LINEPROXYREQUESTLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetProxyStatus(hLineApp, dwDeviceID, dwAppAPIVersion, lpLineProxyReqestList)
+    {% end %}
   end
 
   def lineGetQueueInfo(hLine : UInt32, dwQueueID : UInt32, lpLineQueueInfo : Win32cr::Devices::Tapi::LINEQUEUEINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetQueueInfo(hLine, dwQueueID, lpLineQueueInfo)
+    {% end %}
   end
 
   def lineGetQueueListA(hLine : UInt32, lpGroupID : LibC::GUID*, lpQueueList : Win32cr::Devices::Tapi::LINEQUEUELIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetQueueListA(hLine, lpGroupID, lpQueueList)
+    {% end %}
   end
 
   def lineGetQueueListW(hLine : UInt32, lpGroupID : LibC::GUID*, lpQueueList : Win32cr::Devices::Tapi::LINEQUEUELIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetQueueListW(hLine, lpGroupID, lpQueueList)
+    {% end %}
   end
 
   def lineGetRequest(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetRequest(hLineApp, dwRequestMode, lpRequestBuffer)
+    {% end %}
   end
 
   def lineGetRequestA(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetRequestA(hLineApp, dwRequestMode, lpRequestBuffer)
+    {% end %}
   end
 
   def lineGetRequestW(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetRequestW(hLineApp, dwRequestMode, lpRequestBuffer)
+    {% end %}
   end
 
   def lineGetStatusMessages(hLine : UInt32, lpdwLineStates : UInt32*, lpdwAddressStates : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetStatusMessages(hLine, lpdwLineStates, lpdwAddressStates)
+    {% end %}
   end
 
   def lineGetTranslateCaps(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetTranslateCaps(hLineApp, dwAPIVersion, lpTranslateCaps)
+    {% end %}
   end
 
   def lineGetTranslateCapsA(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetTranslateCapsA(hLineApp, dwAPIVersion, lpTranslateCaps)
+    {% end %}
   end
 
   def lineGetTranslateCapsW(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetTranslateCapsW(hLineApp, dwAPIVersion, lpTranslateCaps)
+    {% end %}
   end
 
   def lineHandoff(hCall : UInt32, lpszFileName : Win32cr::Foundation::PSTR, dwMediaMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineHandoff(hCall, lpszFileName, dwMediaMode)
+    {% end %}
   end
 
   def lineHandoffA(hCall : UInt32, lpszFileName : Win32cr::Foundation::PSTR, dwMediaMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineHandoffA(hCall, lpszFileName, dwMediaMode)
+    {% end %}
   end
 
   def lineHandoffW(hCall : UInt32, lpszFileName : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineHandoffW(hCall, lpszFileName, dwMediaMode)
+    {% end %}
   end
 
   def lineHold(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineHold(hCall)
+    {% end %}
   end
 
   def lineInitialize(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineInitialize(lphLineApp, hInstance, lpfnCallback, lpszAppName, lpdwNumDevs)
+    {% end %}
   end
 
   def lineInitializeExA(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpLineInitializeExParams : Win32cr::Devices::Tapi::LINEINITIALIZEEXPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineInitializeExA(lphLineApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams)
+    {% end %}
   end
 
   def lineInitializeExW(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PWSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpLineInitializeExParams : Win32cr::Devices::Tapi::LINEINITIALIZEEXPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineInitializeExW(lphLineApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams)
+    {% end %}
   end
 
   def lineMakeCall(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineMakeCall(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+    {% end %}
   end
 
   def lineMakeCallA(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineMakeCallA(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+    {% end %}
   end
 
   def lineMakeCallW(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineMakeCallW(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+    {% end %}
   end
 
   def lineMonitorDigits(hCall : UInt32, dwDigitModes : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineMonitorDigits(hCall, dwDigitModes)
+    {% end %}
   end
 
   def lineMonitorMedia(hCall : UInt32, dwMediaModes : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineMonitorMedia(hCall, dwMediaModes)
+    {% end %}
   end
 
   def lineMonitorTones(hCall : UInt32, lpToneList : Win32cr::Devices::Tapi::LINEMONITORTONE*, dwNumEntries : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineMonitorTones(hCall, lpToneList, dwNumEntries)
+    {% end %}
   end
 
   def lineNegotiateAPIVersion(hLineApp : UInt32, dwDeviceID : UInt32, dwAPILowVersion : UInt32, dwAPIHighVersion : UInt32, lpdwAPIVersion : UInt32*, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*) : Int32
+    {% if !flag?(:docs) %}
     C.lineNegotiateAPIVersion(hLineApp, dwDeviceID, dwAPILowVersion, dwAPIHighVersion, lpdwAPIVersion, lpExtensionID)
+    {% end %}
   end
 
   def lineNegotiateExtVersion(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtLowVersion : UInt32, dwExtHighVersion : UInt32, lpdwExtVersion : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineNegotiateExtVersion(hLineApp, dwDeviceID, dwAPIVersion, dwExtLowVersion, dwExtHighVersion, lpdwExtVersion)
+    {% end %}
   end
 
   def lineOpen(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineOpen(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+    {% end %}
   end
 
   def lineOpenA(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineOpenA(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+    {% end %}
   end
 
   def lineOpenW(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineOpenW(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+    {% end %}
   end
 
   def linePark(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.linePark(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+    {% end %}
   end
 
   def lineParkA(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineParkA(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+    {% end %}
   end
 
   def lineParkW(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PWSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineParkW(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+    {% end %}
   end
 
   def linePickup(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, lpszGroupID : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.linePickup(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+    {% end %}
   end
 
   def linePickupA(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, lpszGroupID : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.linePickupA(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+    {% end %}
   end
 
   def linePickupW(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR, lpszGroupID : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.linePickupW(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+    {% end %}
   end
 
   def linePrepareAddToConference(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.linePrepareAddToConference(hConfCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def linePrepareAddToConferenceA(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.linePrepareAddToConferenceA(hConfCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def linePrepareAddToConferenceW(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.linePrepareAddToConferenceW(hConfCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineProxyMessage(hLine : UInt32, hCall : UInt32, dwMsg : UInt32, dwParam1 : UInt32, dwParam2 : UInt32, dwParam3 : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineProxyMessage(hLine, hCall, dwMsg, dwParam1, dwParam2, dwParam3)
+    {% end %}
   end
 
   def lineProxyResponse(hLine : UInt32, lpProxyRequest : Win32cr::Devices::Tapi::LINEPROXYREQUEST*, dwResult : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineProxyResponse(hLine, lpProxyRequest, dwResult)
+    {% end %}
   end
 
   def lineRedirect(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRedirect(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineRedirectA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRedirectA(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineRedirectW(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRedirectW(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineRegisterRequestRecipient(hLineApp : UInt32, dwRegistrationInstance : UInt32, dwRequestMode : UInt32, bEnable : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRegisterRequestRecipient(hLineApp, dwRegistrationInstance, dwRequestMode, bEnable)
+    {% end %}
   end
 
   def lineReleaseUserUserInfo(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineReleaseUserUserInfo(hCall)
+    {% end %}
   end
 
   def lineRemoveFromConference(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRemoveFromConference(hCall)
+    {% end %}
   end
 
   def lineRemoveProvider(dwPermanentProviderID : UInt32, hwndOwner : Win32cr::Foundation::HWND) : Int32
+    {% if !flag?(:docs) %}
     C.lineRemoveProvider(dwPermanentProviderID, hwndOwner)
+    {% end %}
   end
 
   def lineSecureCall(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSecureCall(hCall)
+    {% end %}
   end
 
   def lineSendUserUserInfo(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSendUserUserInfo(hCall, lpsUserUserInfo, dwSize)
+    {% end %}
   end
 
   def lineSetAgentActivity(hLine : UInt32, dwAddressID : UInt32, dwActivityID : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentActivity(hLine, dwAddressID, dwActivityID)
+    {% end %}
   end
 
   def lineSetAgentGroup(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentGroup(hLine, dwAddressID, lpAgentGroupList)
+    {% end %}
   end
 
   def lineSetAgentMeasurementPeriod(hLine : UInt32, hAgent : UInt32, dwMeasurementPeriod : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentMeasurementPeriod(hLine, hAgent, dwMeasurementPeriod)
+    {% end %}
   end
 
   def lineSetAgentSessionState(hLine : UInt32, hAgentSession : UInt32, dwAgentSessionState : UInt32, dwNextAgentSessionState : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentSessionState(hLine, hAgentSession, dwAgentSessionState, dwNextAgentSessionState)
+    {% end %}
   end
 
   def lineSetAgentStateEx(hLine : UInt32, hAgent : UInt32, dwAgentState : UInt32, dwNextAgentState : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentStateEx(hLine, hAgent, dwAgentState, dwNextAgentState)
+    {% end %}
   end
 
   def lineSetAgentState(hLine : UInt32, dwAddressID : UInt32, dwAgentState : UInt32, dwNextAgentState : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentState(hLine, dwAddressID, dwAgentState, dwNextAgentState)
+    {% end %}
   end
 
   def lineSetAppPriority(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PSTR, dwPriority : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAppPriority(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+    {% end %}
   end
 
   def lineSetAppPriorityA(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PSTR, dwPriority : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAppPriorityA(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+    {% end %}
   end
 
   def lineSetAppPriorityW(lpszAppFilename : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PWSTR, dwPriority : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAppPriorityW(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+    {% end %}
   end
 
   def lineSetAppSpecific(hCall : UInt32, dwAppSpecific : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAppSpecific(hCall, dwAppSpecific)
+    {% end %}
   end
 
   def lineSetCallData(hCall : UInt32, lpCallData : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallData(hCall, lpCallData, dwSize)
+    {% end %}
   end
 
   def lineSetCallParams(hCall : UInt32, dwBearerMode : UInt32, dwMinRate : UInt32, dwMaxRate : UInt32, lpDialParams : Win32cr::Devices::Tapi::LINEDIALPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallParams(hCall, dwBearerMode, dwMinRate, dwMaxRate, lpDialParams)
+    {% end %}
   end
 
   def lineSetCallPrivilege(hCall : UInt32, dwCallPrivilege : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallPrivilege(hCall, dwCallPrivilege)
+    {% end %}
   end
 
   def lineSetCallQualityOfService(hCall : UInt32, lpSendingFlowspec : Void*, dwSendingFlowspecSize : UInt32, lpReceivingFlowspec : Void*, dwReceivingFlowspecSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallQualityOfService(hCall, lpSendingFlowspec, dwSendingFlowspecSize, lpReceivingFlowspec, dwReceivingFlowspecSize)
+    {% end %}
   end
 
   def lineSetCallTreatment(hCall : UInt32, dwTreatment : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallTreatment(hCall, dwTreatment)
+    {% end %}
   end
 
   def lineSetCurrentLocation(hLineApp : UInt32, dwLocation : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCurrentLocation(hLineApp, dwLocation)
+    {% end %}
   end
 
   def lineSetDevConfig(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetDevConfig(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+    {% end %}
   end
 
   def lineSetDevConfigA(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetDevConfigA(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+    {% end %}
   end
 
   def lineSetDevConfigW(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetDevConfigW(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+    {% end %}
   end
 
   def lineSetLineDevStatus(hLine : UInt32, dwStatusToChange : UInt32, fStatus : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetLineDevStatus(hLine, dwStatusToChange, fStatus)
+    {% end %}
   end
 
   def lineSetMediaControl(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDigitList : Win32cr::Devices::Tapi::LINEMEDIACONTROLDIGIT*, dwDigitNumEntries : UInt32, lpMediaList : Win32cr::Devices::Tapi::LINEMEDIACONTROLMEDIA*, dwMediaNumEntries : UInt32, lpToneList : Win32cr::Devices::Tapi::LINEMEDIACONTROLTONE*, dwToneNumEntries : UInt32, lpCallStateList : Win32cr::Devices::Tapi::LINEMEDIACONTROLCALLSTATE*, dwCallStateNumEntries : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetMediaControl(hLine, dwAddressID, hCall, dwSelect, lpDigitList, dwDigitNumEntries, lpMediaList, dwMediaNumEntries, lpToneList, dwToneNumEntries, lpCallStateList, dwCallStateNumEntries)
+    {% end %}
   end
 
   def lineSetMediaMode(hCall : UInt32, dwMediaModes : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetMediaMode(hCall, dwMediaModes)
+    {% end %}
   end
 
   def lineSetQueueMeasurementPeriod(hLine : UInt32, dwQueueID : UInt32, dwMeasurementPeriod : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetQueueMeasurementPeriod(hLine, dwQueueID, dwMeasurementPeriod)
+    {% end %}
   end
 
   def lineSetNumRings(hLine : UInt32, dwAddressID : UInt32, dwNumRings : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetNumRings(hLine, dwAddressID, dwNumRings)
+    {% end %}
   end
 
   def lineSetStatusMessages(hLine : UInt32, dwLineStates : UInt32, dwAddressStates : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetStatusMessages(hLine, dwLineStates, dwAddressStates)
+    {% end %}
   end
 
   def lineSetTerminal(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, dwTerminalModes : UInt32, dwTerminalID : UInt32, bEnable : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetTerminal(hLine, dwAddressID, hCall, dwSelect, dwTerminalModes, dwTerminalID, bEnable)
+    {% end %}
   end
 
   def lineSetTollList(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwTollListOption : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetTollList(hLineApp, dwDeviceID, lpszAddressIn, dwTollListOption)
+    {% end %}
   end
 
   def lineSetTollListA(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwTollListOption : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetTollListA(hLineApp, dwDeviceID, lpszAddressIn, dwTollListOption)
+    {% end %}
   end
 
   def lineSetTollListW(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressInW : Win32cr::Foundation::PWSTR, dwTollListOption : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetTollListW(hLineApp, dwDeviceID, lpszAddressInW, dwTollListOption)
+    {% end %}
   end
 
   def lineSetupConference(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupConference(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+    {% end %}
   end
 
   def lineSetupConferenceA(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupConferenceA(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+    {% end %}
   end
 
   def lineSetupConferenceW(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupConferenceW(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+    {% end %}
   end
 
   def lineSetupTransfer(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupTransfer(hCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineSetupTransferA(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupTransferA(hCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineSetupTransferW(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupTransferW(hCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineShutdown(hLineApp : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineShutdown(hLineApp)
+    {% end %}
   end
 
   def lineSwapHold(hActiveCall : UInt32, hHeldCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSwapHold(hActiveCall, hHeldCall)
+    {% end %}
   end
 
   def lineTranslateAddress(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateAddress(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+    {% end %}
   end
 
   def lineTranslateAddressA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateAddressA(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+    {% end %}
   end
 
   def lineTranslateAddressW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PWSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateAddressW(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+    {% end %}
   end
 
   def lineTranslateDialog(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateDialog(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+    {% end %}
   end
 
   def lineTranslateDialogA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateDialogA(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+    {% end %}
   end
 
   def lineTranslateDialogW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateDialogW(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+    {% end %}
   end
 
   def lineUncompleteCall(hLine : UInt32, dwCompletionID : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineUncompleteCall(hLine, dwCompletionID)
+    {% end %}
   end
 
   def lineUnhold(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineUnhold(hCall)
+    {% end %}
   end
 
   def lineUnpark(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineUnpark(hLine, dwAddressID, lphCall, lpszDestAddress)
+    {% end %}
   end
 
   def lineUnparkA(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineUnparkA(hLine, dwAddressID, lphCall, lpszDestAddress)
+    {% end %}
   end
 
   def lineUnparkW(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineUnparkW(hLine, dwAddressID, lphCall, lpszDestAddress)
+    {% end %}
   end
 
   def phoneClose(hPhone : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneClose(hPhone)
+    {% end %}
   end
 
   def phoneConfigDialog(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneConfigDialog(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneConfigDialogA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneConfigDialogA(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneConfigDialogW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneConfigDialogW(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneDevSpecific(hPhone : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneDevSpecific(hPhone, lpParams, dwSize)
+    {% end %}
   end
 
   def phoneGetButtonInfo(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetButtonInfo(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneGetButtonInfoA(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetButtonInfoA(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneGetButtonInfoW(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetButtonInfoW(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneGetData(hPhone : UInt32, dwDataID : UInt32, lpData : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetData(hPhone, dwDataID, lpData, dwSize)
+    {% end %}
   end
 
   def phoneGetDevCaps(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetDevCaps(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+    {% end %}
   end
 
   def phoneGetDevCapsA(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetDevCapsA(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+    {% end %}
   end
 
   def phoneGetDevCapsW(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetDevCapsW(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+    {% end %}
   end
 
   def phoneGetDisplay(hPhone : UInt32, lpDisplay : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetDisplay(hPhone, lpDisplay)
+    {% end %}
   end
 
   def phoneGetGain(hPhone : UInt32, dwHookSwitchDev : UInt32, lpdwGain : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetGain(hPhone, dwHookSwitchDev, lpdwGain)
+    {% end %}
   end
 
   def phoneGetHookSwitch(hPhone : UInt32, lpdwHookSwitchDevs : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetHookSwitch(hPhone, lpdwHookSwitchDevs)
+    {% end %}
   end
 
-  def phoneGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+  def phoneGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIcon(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
-  def phoneGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+  def phoneGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIconA(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
-  def phoneGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
+  def phoneGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIconW(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
   def phoneGetID(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetID(hPhone, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneGetIDA(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIDA(hPhone, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneGetIDW(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIDW(hPhone, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneGetLamp(hPhone : UInt32, dwButtonLampID : UInt32, lpdwLampMode : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetLamp(hPhone, dwButtonLampID, lpdwLampMode)
+    {% end %}
   end
 
   def phoneGetMessage(hPhoneApp : UInt32, lpMessage : Win32cr::Devices::Tapi::PHONEMESSAGE*, dwTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetMessage(hPhoneApp, lpMessage, dwTimeout)
+    {% end %}
   end
 
   def phoneGetRing(hPhone : UInt32, lpdwRingMode : UInt32*, lpdwVolume : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetRing(hPhone, lpdwRingMode, lpdwVolume)
+    {% end %}
   end
 
   def phoneGetStatus(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetStatus(hPhone, lpPhoneStatus)
+    {% end %}
   end
 
   def phoneGetStatusA(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetStatusA(hPhone, lpPhoneStatus)
+    {% end %}
   end
 
   def phoneGetStatusW(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetStatusW(hPhone, lpPhoneStatus)
+    {% end %}
   end
 
   def phoneGetStatusMessages(hPhone : UInt32, lpdwPhoneStates : UInt32*, lpdwButtonModes : UInt32*, lpdwButtonStates : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetStatusMessages(hPhone, lpdwPhoneStates, lpdwButtonModes, lpdwButtonStates)
+    {% end %}
   end
 
   def phoneGetVolume(hPhone : UInt32, dwHookSwitchDev : UInt32, lpdwVolume : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetVolume(hPhone, dwHookSwitchDev, lpdwVolume)
+    {% end %}
   end
 
   def phoneInitialize(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneInitialize(lphPhoneApp, hInstance, lpfnCallback, lpszAppName, lpdwNumDevs)
+    {% end %}
   end
 
   def phoneInitializeExA(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpPhoneInitializeExParams : Win32cr::Devices::Tapi::PHONEINITIALIZEEXPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneInitializeExA(lphPhoneApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpPhoneInitializeExParams)
+    {% end %}
   end
 
   def phoneInitializeExW(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PWSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpPhoneInitializeExParams : Win32cr::Devices::Tapi::PHONEINITIALIZEEXPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneInitializeExW(lphPhoneApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpPhoneInitializeExParams)
+    {% end %}
   end
 
   def phoneNegotiateAPIVersion(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPILowVersion : UInt32, dwAPIHighVersion : UInt32, lpdwAPIVersion : UInt32*, lpExtensionID : Win32cr::Devices::Tapi::PHONEEXTENSIONID*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneNegotiateAPIVersion(hPhoneApp, dwDeviceID, dwAPILowVersion, dwAPIHighVersion, lpdwAPIVersion, lpExtensionID)
+    {% end %}
   end
 
   def phoneNegotiateExtVersion(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtLowVersion : UInt32, dwExtHighVersion : UInt32, lpdwExtVersion : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneNegotiateExtVersion(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtLowVersion, dwExtHighVersion, lpdwExtVersion)
+    {% end %}
   end
 
   def phoneOpen(hPhoneApp : UInt32, dwDeviceID : UInt32, lphPhone : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivilege : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneOpen(hPhoneApp, dwDeviceID, lphPhone, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivilege)
+    {% end %}
   end
 
   def phoneSetButtonInfo(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetButtonInfo(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneSetButtonInfoA(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetButtonInfoA(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneSetButtonInfoW(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetButtonInfoW(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneSetData(hPhone : UInt32, dwDataID : UInt32, lpData : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetData(hPhone, dwDataID, lpData, dwSize)
+    {% end %}
   end
 
   def phoneSetDisplay(hPhone : UInt32, dwRow : UInt32, dwColumn : UInt32, lpsDisplay : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetDisplay(hPhone, dwRow, dwColumn, lpsDisplay, dwSize)
+    {% end %}
   end
 
   def phoneSetGain(hPhone : UInt32, dwHookSwitchDev : UInt32, dwGain : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetGain(hPhone, dwHookSwitchDev, dwGain)
+    {% end %}
   end
 
   def phoneSetHookSwitch(hPhone : UInt32, dwHookSwitchDevs : UInt32, dwHookSwitchMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetHookSwitch(hPhone, dwHookSwitchDevs, dwHookSwitchMode)
+    {% end %}
   end
 
   def phoneSetLamp(hPhone : UInt32, dwButtonLampID : UInt32, dwLampMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetLamp(hPhone, dwButtonLampID, dwLampMode)
+    {% end %}
   end
 
   def phoneSetRing(hPhone : UInt32, dwRingMode : UInt32, dwVolume : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetRing(hPhone, dwRingMode, dwVolume)
+    {% end %}
   end
 
   def phoneSetStatusMessages(hPhone : UInt32, dwPhoneStates : UInt32, dwButtonModes : UInt32, dwButtonStates : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetStatusMessages(hPhone, dwPhoneStates, dwButtonModes, dwButtonStates)
+    {% end %}
   end
 
   def phoneSetVolume(hPhone : UInt32, dwHookSwitchDev : UInt32, dwVolume : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetVolume(hPhone, dwHookSwitchDev, dwVolume)
+    {% end %}
   end
 
   def phoneShutdown(hPhoneApp : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneShutdown(hPhoneApp)
+    {% end %}
   end
 
-  def tapiGetLocationInfo(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
+  def tapiGetLocationInfo(lpszCountryCode : Win32cr::Foundation::PSTR, lpszCityCode : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiGetLocationInfo(lpszCountryCode, lpszCityCode)
+    {% end %}
   end
 
-  def tapiGetLocationInfoA(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
+  def tapiGetLocationInfoA(lpszCountryCode : Win32cr::Foundation::PSTR, lpszCityCode : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiGetLocationInfoA(lpszCountryCode, lpszCityCode)
+    {% end %}
   end
 
-  def tapiGetLocationInfoW(lpszCountryCodeW : UInt16*, lpszCityCodeW : UInt16*) : Int32
+  def tapiGetLocationInfoW(lpszCountryCodeW : Win32cr::Foundation::PWSTR, lpszCityCodeW : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiGetLocationInfoW(lpszCountryCodeW, lpszCityCodeW)
+    {% end %}
   end
 
   def tapiRequestDrop(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestDrop(hwnd, wRequestID)
+    {% end %}
   end
 
   def tapiRequestMakeCall(lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMakeCall(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMakeCallA(lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMakeCallA(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMakeCallW(lpszDestAddress : Win32cr::Foundation::PWSTR, lpszAppName : Win32cr::Foundation::PWSTR, lpszCalledParty : Win32cr::Foundation::PWSTR, lpszComment : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMakeCallW(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMediaCall(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceID : Win32cr::Foundation::PSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMediaCall(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMediaCallA(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceID : Win32cr::Foundation::PSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMediaCallA(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMediaCallW(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PWSTR, lpDeviceID : Win32cr::Foundation::PWSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, lpszAppName : Win32cr::Foundation::PWSTR, lpszCalledParty : Win32cr::Foundation::PWSTR, lpszComment : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMediaCallW(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def openTnefStream(lpvSupport : Void*, lpStream : Void*, lpszStreamName : Int8*, ulFlags : UInt32, lpMessage : Void*, wKeyVal : UInt16, lppTNEF : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OpenTnefStream(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lppTNEF)
+    {% end %}
   end
 
   def openTnefStreamEx(lpvSupport : Void*, lpStream : Void*, lpszStreamName : Int8*, ulFlags : UInt32, lpMessage : Void*, wKeyVal : UInt16, lpAdressBook : Void*, lppTNEF : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OpenTnefStreamEx(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lpAdressBook, lppTNEF)
+    {% end %}
   end
 
   def getTnefStreamCodepage(lpStream : Void*, lpulCodepage : UInt32*, lpulSubCodepage : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetTnefStreamCodepage(lpStream, lpulCodepage, lpulSubCodepage)
+    {% end %}
   end
 
   @[Link("tapi32")]
   @[Link("mapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun lineAccept(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
@@ -11517,13 +12089,13 @@ module Win32cr::Devices::Tapi
     fun lineForwardW(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
 
     # :nodoc:
-    fun lineGatherDigits(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    fun lineGatherDigits(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : Win32cr::Foundation::PSTR, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
 
     # :nodoc:
-    fun lineGatherDigitsA(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    fun lineGatherDigitsA(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : Win32cr::Foundation::PSTR, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
 
     # :nodoc:
-    fun lineGatherDigitsW(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt16*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PWSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    fun lineGatherDigitsW(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : Win32cr::Foundation::PWSTR, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PWSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
 
     # :nodoc:
     fun lineGenerateDigits(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
@@ -11655,13 +12227,13 @@ module Win32cr::Devices::Tapi
     fun lineGetGroupListW(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
 
     # :nodoc:
-    fun lineGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    fun lineGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
 
     # :nodoc:
-    fun lineGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    fun lineGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
 
     # :nodoc:
-    fun lineGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
+    fun lineGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
 
     # :nodoc:
     fun lineGetID(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
@@ -12036,13 +12608,13 @@ module Win32cr::Devices::Tapi
     fun phoneGetHookSwitch(hPhone : UInt32, lpdwHookSwitchDevs : UInt32*) : Int32
 
     # :nodoc:
-    fun phoneGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    fun phoneGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
 
     # :nodoc:
-    fun phoneGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    fun phoneGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
 
     # :nodoc:
-    fun phoneGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
+    fun phoneGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : Win32cr::UI::WindowsAndMessaging::HICON*) : Int32
 
     # :nodoc:
     fun phoneGetID(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
@@ -12132,13 +12704,13 @@ module Win32cr::Devices::Tapi
     fun phoneShutdown(hPhoneApp : UInt32) : Int32
 
     # :nodoc:
-    fun tapiGetLocationInfo(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
+    fun tapiGetLocationInfo(lpszCountryCode : Win32cr::Foundation::PSTR, lpszCityCode : Win32cr::Foundation::PSTR) : Int32
 
     # :nodoc:
-    fun tapiGetLocationInfoA(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
+    fun tapiGetLocationInfoA(lpszCountryCode : Win32cr::Foundation::PSTR, lpszCityCode : Win32cr::Foundation::PSTR) : Int32
 
     # :nodoc:
-    fun tapiGetLocationInfoW(lpszCountryCodeW : UInt16*, lpszCityCodeW : UInt16*) : Int32
+    fun tapiGetLocationInfoW(lpszCountryCodeW : Win32cr::Foundation::PWSTR, lpszCityCodeW : Win32cr::Foundation::PWSTR) : Int32
 
     # :nodoc:
     fun tapiRequestDrop(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM) : Int32
@@ -12171,4 +12743,5 @@ module Win32cr::Devices::Tapi
     fun GetTnefStreamCodepage(lpStream : Void*, lpulCodepage : UInt32*, lpulSubCodepage : UInt32*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

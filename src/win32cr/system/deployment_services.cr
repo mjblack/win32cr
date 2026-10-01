@@ -8,13 +8,13 @@ module Win32cr::System::DeploymentServices
 
   alias PFN_WdsCliCallback = Proc(Win32cr::System::DeploymentServices::PFN_WDS_CLI_CALLBACK_MESSAGE_ID, Win32cr::Foundation::WPARAM, Win32cr::Foundation::LPARAM, Void*, Void)
 
-  alias PFN_WdsTransportClientSessionStart = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::Foundation::ULARGE_INTEGER*, Void)
+  alias PFN_WdsTransportClientSessionStart = Proc(Win32cr::Foundation::HANDLE, Void*, UInt64*, Void)
 
   alias PFN_WdsTransportClientSessionStartEx = Proc(Win32cr::Foundation::HANDLE, Void*, Win32cr::System::DeploymentServices::TRANSPORTCLIENT_SESSION_INFO*, Void)
 
   alias PFN_WdsTransportClientReceiveMetadata = Proc(Win32cr::Foundation::HANDLE, Void*, Void*, UInt32, Void)
 
-  alias PFN_WdsTransportClientReceiveContents = Proc(Win32cr::Foundation::HANDLE, Void*, Void*, UInt32, Win32cr::Foundation::ULARGE_INTEGER*, Void)
+  alias PFN_WdsTransportClientReceiveContents = Proc(Win32cr::Foundation::HANDLE, Void*, Void*, UInt32, UInt64*, Void)
 
   alias PFN_WdsTransportClientSessionComplete = Proc(Win32cr::Foundation::HANDLE, Void*, UInt32, Void)
 
@@ -390,8 +390,8 @@ module Win32cr::System::DeploymentServices
   struct PXE_DHCP_OPTION
     property option_type : UInt8
     property option_length : UInt8
-    property option_value : UInt8*
-    def initialize(@option_type : UInt8, @option_length : UInt8, @option_value : UInt8*)
+    property option_value : UInt8[1]
+    def initialize(@option_type : UInt8, @option_length : UInt8, @option_value : UInt8[1])
     end
   end
 
@@ -431,16 +431,16 @@ module Win32cr::System::DeploymentServices
   struct PXE_DHCPV6_OPTION
     property option_code : UInt16
     property data_length : UInt16
-    property data : UInt8*
-    def initialize(@option_code : UInt16, @data_length : UInt16, @data : UInt8*)
+    property data : UInt8[1]
+    def initialize(@option_code : UInt16, @data_length : UInt16, @data : UInt8[1])
     end
   end
 
   @[Extern]
   struct PXE_DHCPV6_MESSAGE_HEADER
     property message_type : UInt8
-    property message : UInt8*
-    def initialize(@message_type : UInt8, @message : UInt8*)
+    property message : UInt8[1]
+    def initialize(@message_type : UInt8, @message : UInt8[1])
     end
   end
 
@@ -450,8 +450,8 @@ module Win32cr::System::DeploymentServices
     property transaction_id_byte1 : UInt8
     property transaction_id_byte2 : UInt8
     property transaction_id_byte3 : UInt8
-    property options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*
-    def initialize(@message_type : UInt8, @transaction_id_byte1 : UInt8, @transaction_id_byte2 : UInt8, @transaction_id_byte3 : UInt8, @options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*)
+    property options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION[1]
+    def initialize(@message_type : UInt8, @transaction_id_byte1 : UInt8, @transaction_id_byte2 : UInt8, @transaction_id_byte3 : UInt8, @options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION[1])
     end
   end
 
@@ -461,8 +461,8 @@ module Win32cr::System::DeploymentServices
     property hop_count : UInt8
     property link_address : UInt8[16]
     property peer_address : UInt8[16]
-    property options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*
-    def initialize(@message_type : UInt8, @hop_count : UInt8, @link_address : UInt8[16], @peer_address : UInt8[16], @options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION*)
+    property options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION[1]
+    def initialize(@message_type : UInt8, @hop_count : UInt8, @link_address : UInt8[16], @peer_address : UInt8[16], @options : Win32cr::System::DeploymentServices::PXE_DHCPV6_OPTION[1])
     end
   end
 
@@ -528,9 +528,9 @@ module Win32cr::System::DeploymentServices
   @[Extern]
   struct TRANSPORTCLIENT_SESSION_INFO
     property ulStructureLength : UInt32
-    property ullFileSize : Win32cr::Foundation::ULARGE_INTEGER
+    property ullFileSize : UInt64
     property ulBlockSize : UInt32
-    def initialize(@ulStructureLength : UInt32, @ullFileSize : Win32cr::Foundation::ULARGE_INTEGER, @ulBlockSize : UInt32)
+    def initialize(@ulStructureLength : UInt32, @ullFileSize : UInt64, @ulBlockSize : UInt32)
     end
   end
 
@@ -563,22 +563,23 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportCacheableVtbl,
+
+  record IWdsTransportCacheableVtable,
     query_interface : Proc(IWdsTransportCacheable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportCacheable*, UInt32),
     release : Proc(IWdsTransportCacheable*, UInt32),
     get_type_info_count : Proc(IWdsTransportCacheable*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportCacheable*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportCacheable*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportCacheable*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Dirty : Proc(IWdsTransportCacheable*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportCacheable*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Dirty : Proc(IWdsTransportCacheable*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     discard : Proc(IWdsTransportCacheable*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportCacheable*, Win32cr::Foundation::HRESULT),
     commit : Proc(IWdsTransportCacheable*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportCacheable, lpVtbl : IWdsTransportCacheableVtbl* do
+  record IWdsTransportCacheable, lpVtbl : IWdsTransportCacheableVtable* do
     GUID = LibC::GUID.new(0x46ad894b_u32, 0xbab_u16, 0x47dc_u16, StaticArray[0x84_u8, 0xb2_u8, 0x7b_u8, 0x55_u8, 0x3f_u8, 0x1d_u8, 0x8f_u8, 0x80_u8])
     def query_interface(this : IWdsTransportCacheable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -598,10 +599,10 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportCacheable*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportCacheable*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportCacheable*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Dirty(this : IWdsTransportCacheable*, pbDirty : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Dirty(this : IWdsTransportCacheable*, pbDirty : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Dirty.call(this, pbDirty)
     end
     def discard(this : IWdsTransportCacheable*) : Win32cr::Foundation::HRESULT
@@ -617,21 +618,22 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportCollectionVtbl,
+
+  record IWdsTransportCollectionVtable,
     query_interface : Proc(IWdsTransportCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportCollection*, UInt32),
     release : Proc(IWdsTransportCollection*, UInt32),
     get_type_info_count : Proc(IWdsTransportCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IWdsTransportCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IWdsTransportCollection*, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IWdsTransportCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportCollection, lpVtbl : IWdsTransportCollectionVtbl* do
+  record IWdsTransportCollection, lpVtbl : IWdsTransportCollectionVtable* do
     GUID = LibC::GUID.new(0xb8ba4b1a_u32, 0x2ff4_u16, 0x43ab_u16, StaticArray[0x99_u8, 0x6c_u8, 0xb2_u8, 0xb1_u8, 0xa_u8, 0x91_u8, 0xa6_u8, 0xeb_u8])
     def query_interface(this : IWdsTransportCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -651,8 +653,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IWdsTransportCollection*, pulCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pulCount)
@@ -667,19 +669,20 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportManagerVtbl,
+
+  record IWdsTransportManagerVtable,
     query_interface : Proc(IWdsTransportManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportManager*, UInt32),
     release : Proc(IWdsTransportManager*, UInt32),
     get_type_info_count : Proc(IWdsTransportManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_wds_transport_server : Proc(IWdsTransportManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportManager, lpVtbl : IWdsTransportManagerVtbl* do
+  record IWdsTransportManager, lpVtbl : IWdsTransportManagerVtable* do
     GUID = LibC::GUID.new(0x5b0d35f5_u32, 0x1b13_u16, 0x4afd_u16, StaticArray[0xb8_u8, 0x78_u8, 0x65_u8, 0x26_u8, 0xdc_u8, 0x34_u8, 0xb_u8, 0x5d_u8])
     def query_interface(this : IWdsTransportManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -699,8 +702,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_wds_transport_server(this : IWdsTransportManager*, bszServerName : Win32cr::Foundation::BSTR, ppWdsTransportServer : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_wds_transport_server.call(this, bszServerName, ppWdsTransportServer)
@@ -709,14 +712,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportServerVtbl,
+
+  record IWdsTransportServerVtable,
     query_interface : Proc(IWdsTransportServer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportServer*, UInt32),
     release : Proc(IWdsTransportServer*, UInt32),
     get_type_info_count : Proc(IWdsTransportServer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportServer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportServer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportServer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportServer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_SetupManager : Proc(IWdsTransportServer*, Void**, Win32cr::Foundation::HRESULT),
     get_ConfigurationManager : Proc(IWdsTransportServer*, Void**, Win32cr::Foundation::HRESULT),
@@ -725,7 +729,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportServer, lpVtbl : IWdsTransportServerVtbl* do
+  record IWdsTransportServer, lpVtbl : IWdsTransportServerVtable* do
     GUID = LibC::GUID.new(0x9ccd093_u32, 0x830d_u16, 0x4344_u16, StaticArray[0xa3_u8, 0xa_u8, 0x73_u8, 0xae_u8, 0x8e_u8, 0x8f_u8, 0xca_u8, 0x90_u8])
     def query_interface(this : IWdsTransportServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -745,8 +749,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportServer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportServer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportServer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IWdsTransportServer*, pbszName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbszName)
@@ -767,14 +771,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportServer2Vtbl,
+
+  record IWdsTransportServer2Vtable,
     query_interface : Proc(IWdsTransportServer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportServer2*, UInt32),
     release : Proc(IWdsTransportServer2*, UInt32),
     get_type_info_count : Proc(IWdsTransportServer2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportServer2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportServer2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportServer2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportServer2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportServer2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_SetupManager : Proc(IWdsTransportServer2*, Void**, Win32cr::Foundation::HRESULT),
     get_ConfigurationManager : Proc(IWdsTransportServer2*, Void**, Win32cr::Foundation::HRESULT),
@@ -784,7 +789,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportServer2, lpVtbl : IWdsTransportServer2Vtbl* do
+  record IWdsTransportServer2, lpVtbl : IWdsTransportServer2Vtable* do
     GUID = LibC::GUID.new(0x256e999f_u32, 0x6df4_u16, 0x4538_u16, StaticArray[0x81_u8, 0xb9_u8, 0x85_u8, 0x7b_u8, 0x9a_u8, 0xb8_u8, 0xfb_u8, 0x47_u8])
     def query_interface(this : IWdsTransportServer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -804,8 +809,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportServer2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportServer2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportServer2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IWdsTransportServer2*, pbszName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbszName)
@@ -829,14 +834,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportSetupManagerVtbl,
+
+  record IWdsTransportSetupManagerVtable,
     query_interface : Proc(IWdsTransportSetupManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportSetupManager*, UInt32),
     release : Proc(IWdsTransportSetupManager*, UInt32),
     get_type_info_count : Proc(IWdsTransportSetupManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportSetupManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportSetupManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportSetupManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportSetupManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Version : Proc(IWdsTransportSetupManager*, UInt64*, Win32cr::Foundation::HRESULT),
     get_InstalledFeatures : Proc(IWdsTransportSetupManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Protocols : Proc(IWdsTransportSetupManager*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -845,7 +851,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportSetupManager, lpVtbl : IWdsTransportSetupManagerVtbl* do
+  record IWdsTransportSetupManager, lpVtbl : IWdsTransportSetupManagerVtable* do
     GUID = LibC::GUID.new(0xf7238425_u32, 0xefa8_u16, 0x40a4_u16, StaticArray[0xae_u8, 0xf9_u8, 0xc9_u8, 0x8d_u8, 0x96_u8, 0x9c_u8, 0xb_u8, 0x75_u8])
     def query_interface(this : IWdsTransportSetupManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -865,8 +871,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportSetupManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportSetupManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportSetupManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Version(this : IWdsTransportSetupManager*, pullVersion : UInt64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Version.call(this, pullVersion)
@@ -887,14 +893,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportSetupManager2Vtbl,
+
+  record IWdsTransportSetupManager2Vtable,
     query_interface : Proc(IWdsTransportSetupManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportSetupManager2*, UInt32),
     release : Proc(IWdsTransportSetupManager2*, UInt32),
     get_type_info_count : Proc(IWdsTransportSetupManager2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportSetupManager2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportSetupManager2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportSetupManager2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportSetupManager2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Version : Proc(IWdsTransportSetupManager2*, UInt64*, Win32cr::Foundation::HRESULT),
     get_InstalledFeatures : Proc(IWdsTransportSetupManager2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Protocols : Proc(IWdsTransportSetupManager2*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -905,7 +912,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportSetupManager2, lpVtbl : IWdsTransportSetupManager2Vtbl* do
+  record IWdsTransportSetupManager2, lpVtbl : IWdsTransportSetupManager2Vtable* do
     GUID = LibC::GUID.new(0x2be79da_u32, 0x7e9e_u16, 0x4366_u16, StaticArray[0x8b_u8, 0x6e_u8, 0x2a_u8, 0xa9_u8, 0xa9_u8, 0x1b_u8, 0xe4_u8, 0x7f_u8])
     def query_interface(this : IWdsTransportSetupManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -925,8 +932,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportSetupManager2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportSetupManager2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportSetupManager2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Version(this : IWdsTransportSetupManager2*, pullVersion : UInt64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Version.call(this, pullVersion)
@@ -953,17 +960,18 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportConfigurationManagerVtbl,
+
+  record IWdsTransportConfigurationManagerVtable,
     query_interface : Proc(IWdsTransportConfigurationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportConfigurationManager*, UInt32),
     release : Proc(IWdsTransportConfigurationManager*, UInt32),
     get_type_info_count : Proc(IWdsTransportConfigurationManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportConfigurationManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportConfigurationManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportConfigurationManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportConfigurationManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ServicePolicy : Proc(IWdsTransportConfigurationManager*, Void**, Win32cr::Foundation::HRESULT),
     get_DiagnosticsPolicy : Proc(IWdsTransportConfigurationManager*, Void**, Win32cr::Foundation::HRESULT),
-    get_WdsTransportServicesRunning : Proc(IWdsTransportConfigurationManager*, Int16, Int16*, Win32cr::Foundation::HRESULT),
+    get_WdsTransportServicesRunning : Proc(IWdsTransportConfigurationManager*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     enable_wds_transport_services : Proc(IWdsTransportConfigurationManager*, Win32cr::Foundation::HRESULT),
     disable_wds_transport_services : Proc(IWdsTransportConfigurationManager*, Win32cr::Foundation::HRESULT),
     start_wds_transport_services : Proc(IWdsTransportConfigurationManager*, Win32cr::Foundation::HRESULT),
@@ -973,7 +981,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportConfigurationManager, lpVtbl : IWdsTransportConfigurationManagerVtbl* do
+  record IWdsTransportConfigurationManager, lpVtbl : IWdsTransportConfigurationManagerVtable* do
     GUID = LibC::GUID.new(0x84cc4779_u32, 0x42dd_u16, 0x4792_u16, StaticArray[0x89_u8, 0x1e_u8, 0x13_u8, 0x21_u8, 0xd6_u8, 0xd7_u8, 0x4b_u8, 0x44_u8])
     def query_interface(this : IWdsTransportConfigurationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -993,8 +1001,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportConfigurationManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportConfigurationManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportConfigurationManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ServicePolicy(this : IWdsTransportConfigurationManager*, ppWdsTransportServicePolicy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ServicePolicy.call(this, ppWdsTransportServicePolicy)
@@ -1002,7 +1010,7 @@ module Win32cr::System::DeploymentServices
     def get_DiagnosticsPolicy(this : IWdsTransportConfigurationManager*, ppWdsTransportDiagnosticsPolicy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DiagnosticsPolicy.call(this, ppWdsTransportDiagnosticsPolicy)
     end
-    def get_WdsTransportServicesRunning(this : IWdsTransportConfigurationManager*, bRealtimeStatus : Int16, pbServicesRunning : Int16*) : Win32cr::Foundation::HRESULT
+    def get_WdsTransportServicesRunning(this : IWdsTransportConfigurationManager*, bRealtimeStatus : Win32cr::Foundation::VARIANT_BOOL, pbServicesRunning : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WdsTransportServicesRunning.call(this, bRealtimeStatus, pbServicesRunning)
     end
     def enable_wds_transport_services(this : IWdsTransportConfigurationManager*) : Win32cr::Foundation::HRESULT
@@ -1027,17 +1035,18 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportConfigurationManager2Vtbl,
+
+  record IWdsTransportConfigurationManager2Vtable,
     query_interface : Proc(IWdsTransportConfigurationManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportConfigurationManager2*, UInt32),
     release : Proc(IWdsTransportConfigurationManager2*, UInt32),
     get_type_info_count : Proc(IWdsTransportConfigurationManager2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportConfigurationManager2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportConfigurationManager2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportConfigurationManager2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportConfigurationManager2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ServicePolicy : Proc(IWdsTransportConfigurationManager2*, Void**, Win32cr::Foundation::HRESULT),
     get_DiagnosticsPolicy : Proc(IWdsTransportConfigurationManager2*, Void**, Win32cr::Foundation::HRESULT),
-    get_WdsTransportServicesRunning : Proc(IWdsTransportConfigurationManager2*, Int16, Int16*, Win32cr::Foundation::HRESULT),
+    get_WdsTransportServicesRunning : Proc(IWdsTransportConfigurationManager2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     enable_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, Win32cr::Foundation::HRESULT),
     disable_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, Win32cr::Foundation::HRESULT),
     start_wds_transport_services : Proc(IWdsTransportConfigurationManager2*, Win32cr::Foundation::HRESULT),
@@ -1048,7 +1057,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportConfigurationManager2, lpVtbl : IWdsTransportConfigurationManager2Vtbl* do
+  record IWdsTransportConfigurationManager2, lpVtbl : IWdsTransportConfigurationManager2Vtable* do
     GUID = LibC::GUID.new(0xd0d85caf_u32, 0xa153_u16, 0x4f1d_u16, StaticArray[0xa9_u8, 0xdd_u8, 0x96_u8, 0xf4_u8, 0x31_u8, 0xc5_u8, 0x7_u8, 0x17_u8])
     def query_interface(this : IWdsTransportConfigurationManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1068,8 +1077,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportConfigurationManager2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportConfigurationManager2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportConfigurationManager2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ServicePolicy(this : IWdsTransportConfigurationManager2*, ppWdsTransportServicePolicy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ServicePolicy.call(this, ppWdsTransportServicePolicy)
@@ -1077,7 +1086,7 @@ module Win32cr::System::DeploymentServices
     def get_DiagnosticsPolicy(this : IWdsTransportConfigurationManager2*, ppWdsTransportDiagnosticsPolicy : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DiagnosticsPolicy.call(this, ppWdsTransportDiagnosticsPolicy)
     end
-    def get_WdsTransportServicesRunning(this : IWdsTransportConfigurationManager2*, bRealtimeStatus : Int16, pbServicesRunning : Int16*) : Win32cr::Foundation::HRESULT
+    def get_WdsTransportServicesRunning(this : IWdsTransportConfigurationManager2*, bRealtimeStatus : Win32cr::Foundation::VARIANT_BOOL, pbServicesRunning : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WdsTransportServicesRunning.call(this, bRealtimeStatus, pbServicesRunning)
     end
     def enable_wds_transport_services(this : IWdsTransportConfigurationManager2*) : Win32cr::Foundation::HRESULT
@@ -1105,21 +1114,22 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportNamespaceManagerVtbl,
+
+  record IWdsTransportNamespaceManagerVtable,
     query_interface : Proc(IWdsTransportNamespaceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportNamespaceManager*, UInt32),
     release : Proc(IWdsTransportNamespaceManager*, UInt32),
     get_type_info_count : Proc(IWdsTransportNamespaceManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportNamespaceManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportNamespaceManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportNamespaceManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportNamespaceManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_namespace : Proc(IWdsTransportNamespaceManager*, Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     retrieve_namespace : Proc(IWdsTransportNamespaceManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    retrieve_namespaces : Proc(IWdsTransportNamespaceManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT)
+    retrieve_namespaces : Proc(IWdsTransportNamespaceManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportNamespaceManager, lpVtbl : IWdsTransportNamespaceManagerVtbl* do
+  record IWdsTransportNamespaceManager, lpVtbl : IWdsTransportNamespaceManagerVtable* do
     GUID = LibC::GUID.new(0x3e22d9f6_u32, 0x3777_u16, 0x4d98_u16, StaticArray[0x83_u8, 0xe1_u8, 0xf9_u8, 0x86_u8, 0x96_u8, 0x71_u8, 0x7b_u8, 0xa3_u8])
     def query_interface(this : IWdsTransportNamespaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1139,8 +1149,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportNamespaceManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportNamespaceManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportNamespaceManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_namespace(this : IWdsTransportNamespaceManager*, namespace_type : Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE, bszNamespaceName : Win32cr::Foundation::BSTR, bszContentProvider : Win32cr::Foundation::BSTR, bszConfiguration : Win32cr::Foundation::BSTR, ppWdsTransportNamespace : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_namespace.call(this, namespace_type, bszNamespaceName, bszContentProvider, bszConfiguration, ppWdsTransportNamespace)
@@ -1148,26 +1158,27 @@ module Win32cr::System::DeploymentServices
     def retrieve_namespace(this : IWdsTransportNamespaceManager*, bszNamespaceName : Win32cr::Foundation::BSTR, ppWdsTransportNamespace : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.retrieve_namespace.call(this, bszNamespaceName, ppWdsTransportNamespace)
     end
-    def retrieve_namespaces(this : IWdsTransportNamespaceManager*, bszContentProvider : Win32cr::Foundation::BSTR, bszNamespaceName : Win32cr::Foundation::BSTR, bIncludeTombstones : Int16, ppWdsTransportNamespaces : Void**) : Win32cr::Foundation::HRESULT
+    def retrieve_namespaces(this : IWdsTransportNamespaceManager*, bszContentProvider : Win32cr::Foundation::BSTR, bszNamespaceName : Win32cr::Foundation::BSTR, bIncludeTombstones : Win32cr::Foundation::VARIANT_BOOL, ppWdsTransportNamespaces : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.retrieve_namespaces.call(this, bszContentProvider, bszNamespaceName, bIncludeTombstones, ppWdsTransportNamespaces)
     end
 
   end
 
   @[Extern]
-  record IWdsTransportTftpManagerVtbl,
+
+  record IWdsTransportTftpManagerVtable,
     query_interface : Proc(IWdsTransportTftpManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportTftpManager*, UInt32),
     release : Proc(IWdsTransportTftpManager*, UInt32),
     get_type_info_count : Proc(IWdsTransportTftpManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportTftpManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportTftpManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportTftpManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportTftpManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     retrieve_tftp_clients : Proc(IWdsTransportTftpManager*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportTftpManager, lpVtbl : IWdsTransportTftpManagerVtbl* do
+  record IWdsTransportTftpManager, lpVtbl : IWdsTransportTftpManagerVtable* do
     GUID = LibC::GUID.new(0x1327a7c8_u32, 0xae8a_u16, 0x4fb3_u16, StaticArray[0x81_u8, 0x50_u8, 0x13_u8, 0x62_u8, 0x27_u8, 0xc3_u8, 0x7e_u8, 0x9a_u8])
     def query_interface(this : IWdsTransportTftpManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1187,8 +1198,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportTftpManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportTftpManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportTftpManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def retrieve_tftp_clients(this : IWdsTransportTftpManager*, ppWdsTransportTftpClients : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.retrieve_tftp_clients.call(this, ppWdsTransportTftpClients)
@@ -1197,15 +1208,16 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportServicePolicyVtbl,
+
+  record IWdsTransportServicePolicyVtable,
     query_interface : Proc(IWdsTransportServicePolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportServicePolicy*, UInt32),
     release : Proc(IWdsTransportServicePolicy*, UInt32),
     get_type_info_count : Proc(IWdsTransportServicePolicy*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportServicePolicy*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportServicePolicy*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportServicePolicy*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Dirty : Proc(IWdsTransportServicePolicy*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportServicePolicy*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Dirty : Proc(IWdsTransportServicePolicy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     discard : Proc(IWdsTransportServicePolicy*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportServicePolicy*, Win32cr::Foundation::HRESULT),
     commit : Proc(IWdsTransportServicePolicy*, Win32cr::Foundation::HRESULT),
@@ -1224,7 +1236,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportServicePolicy, lpVtbl : IWdsTransportServicePolicyVtbl* do
+  record IWdsTransportServicePolicy, lpVtbl : IWdsTransportServicePolicyVtable* do
     GUID = LibC::GUID.new(0xb9468578_u32, 0x9f2b_u16, 0x48cc_u16, StaticArray[0xb2_u8, 0x7a_u8, 0xa6_u8, 0x7_u8, 0x99_u8, 0xc2_u8, 0x75_u8, 0xc_u8])
     def query_interface(this : IWdsTransportServicePolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1244,10 +1256,10 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportServicePolicy*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportServicePolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportServicePolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Dirty(this : IWdsTransportServicePolicy*, pbDirty : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Dirty(this : IWdsTransportServicePolicy*, pbDirty : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Dirty.call(this, pbDirty)
     end
     def discard(this : IWdsTransportServicePolicy*) : Win32cr::Foundation::HRESULT
@@ -1299,15 +1311,16 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportServicePolicy2Vtbl,
+
+  record IWdsTransportServicePolicy2Vtable,
     query_interface : Proc(IWdsTransportServicePolicy2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportServicePolicy2*, UInt32),
     release : Proc(IWdsTransportServicePolicy2*, UInt32),
     get_type_info_count : Proc(IWdsTransportServicePolicy2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportServicePolicy2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportServicePolicy2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportServicePolicy2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Dirty : Proc(IWdsTransportServicePolicy2*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportServicePolicy2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Dirty : Proc(IWdsTransportServicePolicy2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     discard : Proc(IWdsTransportServicePolicy2*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportServicePolicy2*, Win32cr::Foundation::HRESULT),
     commit : Proc(IWdsTransportServicePolicy2*, Win32cr::Foundation::HRESULT),
@@ -1327,12 +1340,12 @@ module Win32cr::System::DeploymentServices
     put_UdpPortPolicy : Proc(IWdsTransportServicePolicy2*, Win32cr::System::DeploymentServices::WDSTRANSPORT_UDP_PORT_POLICY, Win32cr::Foundation::HRESULT),
     get_TftpMaximumBlockSize : Proc(IWdsTransportServicePolicy2*, UInt32*, Win32cr::Foundation::HRESULT),
     put_TftpMaximumBlockSize : Proc(IWdsTransportServicePolicy2*, UInt32, Win32cr::Foundation::HRESULT),
-    get_EnableTftpVariableWindowExtension : Proc(IWdsTransportServicePolicy2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_EnableTftpVariableWindowExtension : Proc(IWdsTransportServicePolicy2*, Int16, Win32cr::Foundation::HRESULT)
+    get_EnableTftpVariableWindowExtension : Proc(IWdsTransportServicePolicy2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_EnableTftpVariableWindowExtension : Proc(IWdsTransportServicePolicy2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportServicePolicy2, lpVtbl : IWdsTransportServicePolicy2Vtbl* do
+  record IWdsTransportServicePolicy2, lpVtbl : IWdsTransportServicePolicy2Vtable* do
     GUID = LibC::GUID.new(0x65c19e5c_u32, 0xaa7e_u16, 0x4b91_u16, StaticArray[0x89_u8, 0x44_u8, 0x91_u8, 0xe0_u8, 0xe5_u8, 0x57_u8, 0x27_u8, 0x97_u8])
     def query_interface(this : IWdsTransportServicePolicy2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1352,10 +1365,10 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportServicePolicy2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportServicePolicy2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportServicePolicy2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Dirty(this : IWdsTransportServicePolicy2*, pbDirty : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Dirty(this : IWdsTransportServicePolicy2*, pbDirty : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Dirty.call(this, pbDirty)
     end
     def discard(this : IWdsTransportServicePolicy2*) : Win32cr::Foundation::HRESULT
@@ -1415,36 +1428,37 @@ module Win32cr::System::DeploymentServices
     def put_TftpMaximumBlockSize(this : IWdsTransportServicePolicy2*, ulTftpMaximumBlockSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_TftpMaximumBlockSize.call(this, ulTftpMaximumBlockSize)
     end
-    def get_EnableTftpVariableWindowExtension(this : IWdsTransportServicePolicy2*, pbEnableTftpVariableWindowExtension : Int16*) : Win32cr::Foundation::HRESULT
+    def get_EnableTftpVariableWindowExtension(this : IWdsTransportServicePolicy2*, pbEnableTftpVariableWindowExtension : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnableTftpVariableWindowExtension.call(this, pbEnableTftpVariableWindowExtension)
     end
-    def put_EnableTftpVariableWindowExtension(this : IWdsTransportServicePolicy2*, bEnableTftpVariableWindowExtension : Int16) : Win32cr::Foundation::HRESULT
+    def put_EnableTftpVariableWindowExtension(this : IWdsTransportServicePolicy2*, bEnableTftpVariableWindowExtension : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EnableTftpVariableWindowExtension.call(this, bEnableTftpVariableWindowExtension)
     end
 
   end
 
   @[Extern]
-  record IWdsTransportDiagnosticsPolicyVtbl,
+
+  record IWdsTransportDiagnosticsPolicyVtable,
     query_interface : Proc(IWdsTransportDiagnosticsPolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportDiagnosticsPolicy*, UInt32),
     release : Proc(IWdsTransportDiagnosticsPolicy*, UInt32),
     get_type_info_count : Proc(IWdsTransportDiagnosticsPolicy*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportDiagnosticsPolicy*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportDiagnosticsPolicy*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportDiagnosticsPolicy*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Dirty : Proc(IWdsTransportDiagnosticsPolicy*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportDiagnosticsPolicy*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Dirty : Proc(IWdsTransportDiagnosticsPolicy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     discard : Proc(IWdsTransportDiagnosticsPolicy*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportDiagnosticsPolicy*, Win32cr::Foundation::HRESULT),
     commit : Proc(IWdsTransportDiagnosticsPolicy*, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IWdsTransportDiagnosticsPolicy*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IWdsTransportDiagnosticsPolicy*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IWdsTransportDiagnosticsPolicy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IWdsTransportDiagnosticsPolicy*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Components : Proc(IWdsTransportDiagnosticsPolicy*, UInt32*, Win32cr::Foundation::HRESULT),
     put_Components : Proc(IWdsTransportDiagnosticsPolicy*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportDiagnosticsPolicy, lpVtbl : IWdsTransportDiagnosticsPolicyVtbl* do
+  record IWdsTransportDiagnosticsPolicy, lpVtbl : IWdsTransportDiagnosticsPolicyVtable* do
     GUID = LibC::GUID.new(0x13b33efc_u32, 0x7856_u16, 0x4f61_u16, StaticArray[0x9a_u8, 0x59_u8, 0x8d_u8, 0xe6_u8, 0x7b_u8, 0x6b_u8, 0x87_u8, 0xb6_u8])
     def query_interface(this : IWdsTransportDiagnosticsPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1464,10 +1478,10 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportDiagnosticsPolicy*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportDiagnosticsPolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportDiagnosticsPolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Dirty(this : IWdsTransportDiagnosticsPolicy*, pbDirty : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Dirty(this : IWdsTransportDiagnosticsPolicy*, pbDirty : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Dirty.call(this, pbDirty)
     end
     def discard(this : IWdsTransportDiagnosticsPolicy*) : Win32cr::Foundation::HRESULT
@@ -1479,10 +1493,10 @@ module Win32cr::System::DeploymentServices
     def commit(this : IWdsTransportDiagnosticsPolicy*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this)
     end
-    def get_Enabled(this : IWdsTransportDiagnosticsPolicy*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IWdsTransportDiagnosticsPolicy*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pbEnabled)
     end
-    def put_Enabled(this : IWdsTransportDiagnosticsPolicy*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IWdsTransportDiagnosticsPolicy*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, bEnabled)
     end
     def get_Components(this : IWdsTransportDiagnosticsPolicy*, pulComponents : UInt32*) : Win32cr::Foundation::HRESULT
@@ -1495,15 +1509,16 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportMulticastSessionPolicyVtbl,
+
+  record IWdsTransportMulticastSessionPolicyVtable,
     query_interface : Proc(IWdsTransportMulticastSessionPolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportMulticastSessionPolicy*, UInt32),
     release : Proc(IWdsTransportMulticastSessionPolicy*, UInt32),
     get_type_info_count : Proc(IWdsTransportMulticastSessionPolicy*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportMulticastSessionPolicy*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportMulticastSessionPolicy*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportMulticastSessionPolicy*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Dirty : Proc(IWdsTransportMulticastSessionPolicy*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportMulticastSessionPolicy*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Dirty : Proc(IWdsTransportMulticastSessionPolicy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     discard : Proc(IWdsTransportMulticastSessionPolicy*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportMulticastSessionPolicy*, Win32cr::Foundation::HRESULT),
     commit : Proc(IWdsTransportMulticastSessionPolicy*, Win32cr::Foundation::HRESULT),
@@ -1513,12 +1528,12 @@ module Win32cr::System::DeploymentServices
     put_AutoDisconnectThreshold : Proc(IWdsTransportMulticastSessionPolicy*, UInt32, Win32cr::Foundation::HRESULT),
     get_MultistreamStreamCount : Proc(IWdsTransportMulticastSessionPolicy*, UInt32*, Win32cr::Foundation::HRESULT),
     put_MultistreamStreamCount : Proc(IWdsTransportMulticastSessionPolicy*, UInt32, Win32cr::Foundation::HRESULT),
-    get_SlowClientFallback : Proc(IWdsTransportMulticastSessionPolicy*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SlowClientFallback : Proc(IWdsTransportMulticastSessionPolicy*, Int16, Win32cr::Foundation::HRESULT)
+    get_SlowClientFallback : Proc(IWdsTransportMulticastSessionPolicy*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SlowClientFallback : Proc(IWdsTransportMulticastSessionPolicy*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportMulticastSessionPolicy, lpVtbl : IWdsTransportMulticastSessionPolicyVtbl* do
+  record IWdsTransportMulticastSessionPolicy, lpVtbl : IWdsTransportMulticastSessionPolicyVtable* do
     GUID = LibC::GUID.new(0x4e5753cf_u32, 0x68ec_u16, 0x4504_u16, StaticArray[0xa9_u8, 0x51_u8, 0x4a_u8, 0x0_u8, 0x32_u8, 0x66_u8, 0x60_u8, 0x6b_u8])
     def query_interface(this : IWdsTransportMulticastSessionPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1538,10 +1553,10 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportMulticastSessionPolicy*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportMulticastSessionPolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportMulticastSessionPolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Dirty(this : IWdsTransportMulticastSessionPolicy*, pbDirty : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Dirty(this : IWdsTransportMulticastSessionPolicy*, pbDirty : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Dirty.call(this, pbDirty)
     end
     def discard(this : IWdsTransportMulticastSessionPolicy*) : Win32cr::Foundation::HRESULT
@@ -1571,24 +1586,25 @@ module Win32cr::System::DeploymentServices
     def put_MultistreamStreamCount(this : IWdsTransportMulticastSessionPolicy*, ulStreamCount : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MultistreamStreamCount.call(this, ulStreamCount)
     end
-    def get_SlowClientFallback(this : IWdsTransportMulticastSessionPolicy*, pbClientFallback : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SlowClientFallback(this : IWdsTransportMulticastSessionPolicy*, pbClientFallback : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SlowClientFallback.call(this, pbClientFallback)
     end
-    def put_SlowClientFallback(this : IWdsTransportMulticastSessionPolicy*, bClientFallback : Int16) : Win32cr::Foundation::HRESULT
+    def put_SlowClientFallback(this : IWdsTransportMulticastSessionPolicy*, bClientFallback : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SlowClientFallback.call(this, bClientFallback)
     end
 
   end
 
   @[Extern]
-  record IWdsTransportNamespaceVtbl,
+
+  record IWdsTransportNamespaceVtable,
     query_interface : Proc(IWdsTransportNamespace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportNamespace*, UInt32),
     release : Proc(IWdsTransportNamespace*, UInt32),
     get_type_info_count : Proc(IWdsTransportNamespace*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportNamespace*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportNamespace*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportNamespace*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportNamespace*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IWdsTransportNamespace*, Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWdsTransportNamespace*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportNamespace*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1601,19 +1617,19 @@ module Win32cr::System::DeploymentServices
     put_ContentProvider : Proc(IWdsTransportNamespace*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Configuration : Proc(IWdsTransportNamespace*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Configuration : Proc(IWdsTransportNamespace*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Registered : Proc(IWdsTransportNamespace*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Tombstoned : Proc(IWdsTransportNamespace*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Registered : Proc(IWdsTransportNamespace*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Tombstoned : Proc(IWdsTransportNamespace*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TombstoneTime : Proc(IWdsTransportNamespace*, Float64*, Win32cr::Foundation::HRESULT),
-    get_TransmissionStarted : Proc(IWdsTransportNamespace*, Int16*, Win32cr::Foundation::HRESULT),
+    get_TransmissionStarted : Proc(IWdsTransportNamespace*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     register : Proc(IWdsTransportNamespace*, Win32cr::Foundation::HRESULT),
-    deregister : Proc(IWdsTransportNamespace*, Int16, Win32cr::Foundation::HRESULT),
+    deregister : Proc(IWdsTransportNamespace*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     clone : Proc(IWdsTransportNamespace*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportNamespace*, Win32cr::Foundation::HRESULT),
     retrieve_contents : Proc(IWdsTransportNamespace*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportNamespace, lpVtbl : IWdsTransportNamespaceVtbl* do
+  record IWdsTransportNamespace, lpVtbl : IWdsTransportNamespaceVtable* do
     GUID = LibC::GUID.new(0xfa561f57_u32, 0xfbef_u16, 0x4ed3_u16, StaticArray[0xb0_u8, 0x56_u8, 0x12_u8, 0x7c_u8, 0xb1_u8, 0xb3_u8, 0x3b_u8, 0x84_u8])
     def query_interface(this : IWdsTransportNamespace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1633,8 +1649,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportNamespace*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportNamespace*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportNamespace*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IWdsTransportNamespace*, pType : Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1672,22 +1688,22 @@ module Win32cr::System::DeploymentServices
     def put_Configuration(this : IWdsTransportNamespace*, bszConfiguration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Configuration.call(this, bszConfiguration)
     end
-    def get_Registered(this : IWdsTransportNamespace*, pbRegistered : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Registered(this : IWdsTransportNamespace*, pbRegistered : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Registered.call(this, pbRegistered)
     end
-    def get_Tombstoned(this : IWdsTransportNamespace*, pbTombstoned : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Tombstoned(this : IWdsTransportNamespace*, pbTombstoned : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tombstoned.call(this, pbTombstoned)
     end
     def get_TombstoneTime(this : IWdsTransportNamespace*, pTombstoneTime : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TombstoneTime.call(this, pTombstoneTime)
     end
-    def get_TransmissionStarted(this : IWdsTransportNamespace*, pbTransmissionStarted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_TransmissionStarted(this : IWdsTransportNamespace*, pbTransmissionStarted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransmissionStarted.call(this, pbTransmissionStarted)
     end
     def register(this : IWdsTransportNamespace*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register.call(this)
     end
-    def deregister(this : IWdsTransportNamespace*, bTerminateSessions : Int16) : Win32cr::Foundation::HRESULT
+    def deregister(this : IWdsTransportNamespace*, bTerminateSessions : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.deregister.call(this, bTerminateSessions)
     end
     def clone(this : IWdsTransportNamespace*, ppWdsTransportNamespaceClone : Void**) : Win32cr::Foundation::HRESULT
@@ -1703,14 +1719,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportNamespaceAutoCastVtbl,
+
+  record IWdsTransportNamespaceAutoCastVtable,
     query_interface : Proc(IWdsTransportNamespaceAutoCast*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportNamespaceAutoCast*, UInt32),
     release : Proc(IWdsTransportNamespaceAutoCast*, UInt32),
     get_type_info_count : Proc(IWdsTransportNamespaceAutoCast*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportNamespaceAutoCast*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportNamespaceAutoCast*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportNamespaceAutoCast*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportNamespaceAutoCast*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWdsTransportNamespaceAutoCast*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1723,19 +1740,19 @@ module Win32cr::System::DeploymentServices
     put_ContentProvider : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Configuration : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Configuration : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Registered : Proc(IWdsTransportNamespaceAutoCast*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Tombstoned : Proc(IWdsTransportNamespaceAutoCast*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Registered : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Tombstoned : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TombstoneTime : Proc(IWdsTransportNamespaceAutoCast*, Float64*, Win32cr::Foundation::HRESULT),
-    get_TransmissionStarted : Proc(IWdsTransportNamespaceAutoCast*, Int16*, Win32cr::Foundation::HRESULT),
+    get_TransmissionStarted : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     register : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::HRESULT),
-    deregister : Proc(IWdsTransportNamespaceAutoCast*, Int16, Win32cr::Foundation::HRESULT),
+    deregister : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     clone : Proc(IWdsTransportNamespaceAutoCast*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportNamespaceAutoCast*, Win32cr::Foundation::HRESULT),
     retrieve_contents : Proc(IWdsTransportNamespaceAutoCast*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IWdsTransportNamespaceAutoCast, lpVtbl : IWdsTransportNamespaceAutoCastVtbl* do
+  record IWdsTransportNamespaceAutoCast, lpVtbl : IWdsTransportNamespaceAutoCastVtable* do
     GUID = LibC::GUID.new(0xad931a72_u32, 0xc4bd_u16, 0x4c41_u16, StaticArray[0x8f_u8, 0xbc_u8, 0x59_u8, 0xc9_u8, 0xc7_u8, 0x48_u8, 0xdf_u8, 0x9e_u8])
     def query_interface(this : IWdsTransportNamespaceAutoCast*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1755,8 +1772,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportNamespaceAutoCast*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportNamespaceAutoCast*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportNamespaceAutoCast*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IWdsTransportNamespaceAutoCast*, pType : Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1794,22 +1811,22 @@ module Win32cr::System::DeploymentServices
     def put_Configuration(this : IWdsTransportNamespaceAutoCast*, bszConfiguration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Configuration.call(this, bszConfiguration)
     end
-    def get_Registered(this : IWdsTransportNamespaceAutoCast*, pbRegistered : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Registered(this : IWdsTransportNamespaceAutoCast*, pbRegistered : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Registered.call(this, pbRegistered)
     end
-    def get_Tombstoned(this : IWdsTransportNamespaceAutoCast*, pbTombstoned : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Tombstoned(this : IWdsTransportNamespaceAutoCast*, pbTombstoned : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tombstoned.call(this, pbTombstoned)
     end
     def get_TombstoneTime(this : IWdsTransportNamespaceAutoCast*, pTombstoneTime : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TombstoneTime.call(this, pTombstoneTime)
     end
-    def get_TransmissionStarted(this : IWdsTransportNamespaceAutoCast*, pbTransmissionStarted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_TransmissionStarted(this : IWdsTransportNamespaceAutoCast*, pbTransmissionStarted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransmissionStarted.call(this, pbTransmissionStarted)
     end
     def register(this : IWdsTransportNamespaceAutoCast*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register.call(this)
     end
-    def deregister(this : IWdsTransportNamespaceAutoCast*, bTerminateSessions : Int16) : Win32cr::Foundation::HRESULT
+    def deregister(this : IWdsTransportNamespaceAutoCast*, bTerminateSessions : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.deregister.call(this, bTerminateSessions)
     end
     def clone(this : IWdsTransportNamespaceAutoCast*, ppWdsTransportNamespaceClone : Void**) : Win32cr::Foundation::HRESULT
@@ -1825,14 +1842,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportNamespaceScheduledCastVtbl,
+
+  record IWdsTransportNamespaceScheduledCastVtable,
     query_interface : Proc(IWdsTransportNamespaceScheduledCast*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportNamespaceScheduledCast*, UInt32),
     release : Proc(IWdsTransportNamespaceScheduledCast*, UInt32),
     get_type_info_count : Proc(IWdsTransportNamespaceScheduledCast*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportNamespaceScheduledCast*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportNamespaceScheduledCast*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportNamespaceScheduledCast*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportNamespaceScheduledCast*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWdsTransportNamespaceScheduledCast*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1845,12 +1863,12 @@ module Win32cr::System::DeploymentServices
     put_ContentProvider : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Configuration : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Configuration : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Registered : Proc(IWdsTransportNamespaceScheduledCast*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Tombstoned : Proc(IWdsTransportNamespaceScheduledCast*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Registered : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Tombstoned : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TombstoneTime : Proc(IWdsTransportNamespaceScheduledCast*, Float64*, Win32cr::Foundation::HRESULT),
-    get_TransmissionStarted : Proc(IWdsTransportNamespaceScheduledCast*, Int16*, Win32cr::Foundation::HRESULT),
+    get_TransmissionStarted : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     register : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::HRESULT),
-    deregister : Proc(IWdsTransportNamespaceScheduledCast*, Int16, Win32cr::Foundation::HRESULT),
+    deregister : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     clone : Proc(IWdsTransportNamespaceScheduledCast*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportNamespaceScheduledCast*, Win32cr::Foundation::HRESULT),
     retrieve_contents : Proc(IWdsTransportNamespaceScheduledCast*, Void**, Win32cr::Foundation::HRESULT),
@@ -1858,7 +1876,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportNamespaceScheduledCast, lpVtbl : IWdsTransportNamespaceScheduledCastVtbl* do
+  record IWdsTransportNamespaceScheduledCast, lpVtbl : IWdsTransportNamespaceScheduledCastVtable* do
     GUID = LibC::GUID.new(0x3840cecf_u32, 0xd76c_u16, 0x416e_u16, StaticArray[0xa4_u8, 0xcc_u8, 0x31_u8, 0xc7_u8, 0x41_u8, 0xd2_u8, 0x87_u8, 0x4b_u8])
     def query_interface(this : IWdsTransportNamespaceScheduledCast*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1878,8 +1896,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportNamespaceScheduledCast*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportNamespaceScheduledCast*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportNamespaceScheduledCast*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IWdsTransportNamespaceScheduledCast*, pType : Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1917,22 +1935,22 @@ module Win32cr::System::DeploymentServices
     def put_Configuration(this : IWdsTransportNamespaceScheduledCast*, bszConfiguration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Configuration.call(this, bszConfiguration)
     end
-    def get_Registered(this : IWdsTransportNamespaceScheduledCast*, pbRegistered : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Registered(this : IWdsTransportNamespaceScheduledCast*, pbRegistered : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Registered.call(this, pbRegistered)
     end
-    def get_Tombstoned(this : IWdsTransportNamespaceScheduledCast*, pbTombstoned : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Tombstoned(this : IWdsTransportNamespaceScheduledCast*, pbTombstoned : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tombstoned.call(this, pbTombstoned)
     end
     def get_TombstoneTime(this : IWdsTransportNamespaceScheduledCast*, pTombstoneTime : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TombstoneTime.call(this, pTombstoneTime)
     end
-    def get_TransmissionStarted(this : IWdsTransportNamespaceScheduledCast*, pbTransmissionStarted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_TransmissionStarted(this : IWdsTransportNamespaceScheduledCast*, pbTransmissionStarted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransmissionStarted.call(this, pbTransmissionStarted)
     end
     def register(this : IWdsTransportNamespaceScheduledCast*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register.call(this)
     end
-    def deregister(this : IWdsTransportNamespaceScheduledCast*, bTerminateSessions : Int16) : Win32cr::Foundation::HRESULT
+    def deregister(this : IWdsTransportNamespaceScheduledCast*, bTerminateSessions : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.deregister.call(this, bTerminateSessions)
     end
     def clone(this : IWdsTransportNamespaceScheduledCast*, ppWdsTransportNamespaceClone : Void**) : Win32cr::Foundation::HRESULT
@@ -1951,14 +1969,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportNamespaceScheduledCastManualStartVtbl,
+
+  record IWdsTransportNamespaceScheduledCastManualStartVtable,
     query_interface : Proc(IWdsTransportNamespaceScheduledCastManualStart*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32),
     release : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32),
     get_type_info_count : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportNamespaceScheduledCastManualStart*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWdsTransportNamespaceScheduledCastManualStart*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1971,12 +1990,12 @@ module Win32cr::System::DeploymentServices
     put_ContentProvider : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Configuration : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Configuration : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Registered : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Tombstoned : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Registered : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Tombstoned : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TombstoneTime : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Float64*, Win32cr::Foundation::HRESULT),
-    get_TransmissionStarted : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int16*, Win32cr::Foundation::HRESULT),
+    get_TransmissionStarted : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     register : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::HRESULT),
-    deregister : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Int16, Win32cr::Foundation::HRESULT),
+    deregister : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     clone : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Win32cr::Foundation::HRESULT),
     retrieve_contents : Proc(IWdsTransportNamespaceScheduledCastManualStart*, Void**, Win32cr::Foundation::HRESULT),
@@ -1984,7 +2003,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportNamespaceScheduledCastManualStart, lpVtbl : IWdsTransportNamespaceScheduledCastManualStartVtbl* do
+  record IWdsTransportNamespaceScheduledCastManualStart, lpVtbl : IWdsTransportNamespaceScheduledCastManualStartVtable* do
     GUID = LibC::GUID.new(0x13e6e4c_u32, 0xe6a7_u16, 0x4fb5_u16, StaticArray[0xb7_u8, 0xff_u8, 0xd9_u8, 0xf5_u8, 0xda_u8, 0x80_u8, 0x5c_u8, 0x31_u8])
     def query_interface(this : IWdsTransportNamespaceScheduledCastManualStart*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2004,8 +2023,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportNamespaceScheduledCastManualStart*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportNamespaceScheduledCastManualStart*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportNamespaceScheduledCastManualStart*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IWdsTransportNamespaceScheduledCastManualStart*, pType : Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -2043,22 +2062,22 @@ module Win32cr::System::DeploymentServices
     def put_Configuration(this : IWdsTransportNamespaceScheduledCastManualStart*, bszConfiguration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Configuration.call(this, bszConfiguration)
     end
-    def get_Registered(this : IWdsTransportNamespaceScheduledCastManualStart*, pbRegistered : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Registered(this : IWdsTransportNamespaceScheduledCastManualStart*, pbRegistered : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Registered.call(this, pbRegistered)
     end
-    def get_Tombstoned(this : IWdsTransportNamespaceScheduledCastManualStart*, pbTombstoned : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Tombstoned(this : IWdsTransportNamespaceScheduledCastManualStart*, pbTombstoned : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tombstoned.call(this, pbTombstoned)
     end
     def get_TombstoneTime(this : IWdsTransportNamespaceScheduledCastManualStart*, pTombstoneTime : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TombstoneTime.call(this, pTombstoneTime)
     end
-    def get_TransmissionStarted(this : IWdsTransportNamespaceScheduledCastManualStart*, pbTransmissionStarted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_TransmissionStarted(this : IWdsTransportNamespaceScheduledCastManualStart*, pbTransmissionStarted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransmissionStarted.call(this, pbTransmissionStarted)
     end
     def register(this : IWdsTransportNamespaceScheduledCastManualStart*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register.call(this)
     end
-    def deregister(this : IWdsTransportNamespaceScheduledCastManualStart*, bTerminateSessions : Int16) : Win32cr::Foundation::HRESULT
+    def deregister(this : IWdsTransportNamespaceScheduledCastManualStart*, bTerminateSessions : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.deregister.call(this, bTerminateSessions)
     end
     def clone(this : IWdsTransportNamespaceScheduledCastManualStart*, ppWdsTransportNamespaceClone : Void**) : Win32cr::Foundation::HRESULT
@@ -2077,14 +2096,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportNamespaceScheduledCastAutoStartVtbl,
+
+  record IWdsTransportNamespaceScheduledCastAutoStartVtable,
     query_interface : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32),
     release : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32),
     get_type_info_count : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2097,12 +2117,12 @@ module Win32cr::System::DeploymentServices
     put_ContentProvider : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Configuration : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Configuration : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Registered : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Tombstoned : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Registered : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Tombstoned : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TombstoneTime : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Float64*, Win32cr::Foundation::HRESULT),
-    get_TransmissionStarted : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int16*, Win32cr::Foundation::HRESULT),
+    get_TransmissionStarted : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     register : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::HRESULT),
-    deregister : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Int16, Win32cr::Foundation::HRESULT),
+    deregister : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     clone : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Win32cr::Foundation::HRESULT),
     retrieve_contents : Proc(IWdsTransportNamespaceScheduledCastAutoStart*, Void**, Win32cr::Foundation::HRESULT),
@@ -2114,7 +2134,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportNamespaceScheduledCastAutoStart, lpVtbl : IWdsTransportNamespaceScheduledCastAutoStartVtbl* do
+  record IWdsTransportNamespaceScheduledCastAutoStart, lpVtbl : IWdsTransportNamespaceScheduledCastAutoStartVtable* do
     GUID = LibC::GUID.new(0xd606af3d_u32, 0xea9c_u16, 0x4219_u16, StaticArray[0x96_u8, 0x1e_u8, 0x74_u8, 0x91_u8, 0xd6_u8, 0x18_u8, 0xd9_u8, 0xb9_u8])
     def query_interface(this : IWdsTransportNamespaceScheduledCastAutoStart*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2134,8 +2154,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportNamespaceScheduledCastAutoStart*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportNamespaceScheduledCastAutoStart*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportNamespaceScheduledCastAutoStart*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IWdsTransportNamespaceScheduledCastAutoStart*, pType : Win32cr::System::DeploymentServices::WDSTRANSPORT_NAMESPACE_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -2173,22 +2193,22 @@ module Win32cr::System::DeploymentServices
     def put_Configuration(this : IWdsTransportNamespaceScheduledCastAutoStart*, bszConfiguration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Configuration.call(this, bszConfiguration)
     end
-    def get_Registered(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbRegistered : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Registered(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbRegistered : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Registered.call(this, pbRegistered)
     end
-    def get_Tombstoned(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbTombstoned : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Tombstoned(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbTombstoned : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tombstoned.call(this, pbTombstoned)
     end
     def get_TombstoneTime(this : IWdsTransportNamespaceScheduledCastAutoStart*, pTombstoneTime : Float64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TombstoneTime.call(this, pTombstoneTime)
     end
-    def get_TransmissionStarted(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbTransmissionStarted : Int16*) : Win32cr::Foundation::HRESULT
+    def get_TransmissionStarted(this : IWdsTransportNamespaceScheduledCastAutoStart*, pbTransmissionStarted : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransmissionStarted.call(this, pbTransmissionStarted)
     end
     def register(this : IWdsTransportNamespaceScheduledCastAutoStart*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register.call(this)
     end
-    def deregister(this : IWdsTransportNamespaceScheduledCastAutoStart*, bTerminateSessions : Int16) : Win32cr::Foundation::HRESULT
+    def deregister(this : IWdsTransportNamespaceScheduledCastAutoStart*, bTerminateSessions : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.deregister.call(this, bTerminateSessions)
     end
     def clone(this : IWdsTransportNamespaceScheduledCastAutoStart*, ppWdsTransportNamespaceClone : Void**) : Win32cr::Foundation::HRESULT
@@ -2219,14 +2239,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportContentVtbl,
+
+  record IWdsTransportContentVtable,
     query_interface : Proc(IWdsTransportContent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportContent*, UInt32),
     release : Proc(IWdsTransportContent*, UInt32),
     get_type_info_count : Proc(IWdsTransportContent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportContent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportContent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportContent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportContent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Namespace : Proc(IWdsTransportContent*, Void**, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWdsTransportContent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportContent*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2235,7 +2256,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportContent, lpVtbl : IWdsTransportContentVtbl* do
+  record IWdsTransportContent, lpVtbl : IWdsTransportContentVtable* do
     GUID = LibC::GUID.new(0xd405d711_u32, 0x296_u16, 0x4ab4_u16, StaticArray[0xa8_u8, 0x60_u8, 0xac_u8, 0x7d_u8, 0x32_u8, 0xe6_u8, 0x57_u8, 0x98_u8])
     def query_interface(this : IWdsTransportContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2255,8 +2276,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportContent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportContent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportContent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Namespace(this : IWdsTransportContent*, ppWdsTransportNamespace : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Namespace.call(this, ppWdsTransportNamespace)
@@ -2277,14 +2298,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportSessionVtbl,
+
+  record IWdsTransportSessionVtable,
     query_interface : Proc(IWdsTransportSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportSession*, UInt32),
     release : Proc(IWdsTransportSession*, UInt32),
     get_type_info_count : Proc(IWdsTransportSession*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportSession*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportSession*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportSession*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportSession*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Content : Proc(IWdsTransportSession*, Void**, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWdsTransportSession*, UInt32*, Win32cr::Foundation::HRESULT),
     get_NetworkInterfaceName : Proc(IWdsTransportSession*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2296,7 +2318,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportSession, lpVtbl : IWdsTransportSessionVtbl* do
+  record IWdsTransportSession, lpVtbl : IWdsTransportSessionVtable* do
     GUID = LibC::GUID.new(0xf4efea88_u32, 0x65b1_u16, 0x4f30_u16, StaticArray[0xa4_u8, 0xb9_u8, 0x27_u8, 0x93_u8, 0x98_u8, 0x77_u8, 0x96_u8, 0xfb_u8])
     def query_interface(this : IWdsTransportSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2316,8 +2338,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportSession*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Content(this : IWdsTransportSession*, ppWdsTransportContent : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Content.call(this, ppWdsTransportContent)
@@ -2347,14 +2369,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportClientVtbl,
+
+  record IWdsTransportClientVtable,
     query_interface : Proc(IWdsTransportClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportClient*, UInt32),
     release : Proc(IWdsTransportClient*, UInt32),
     get_type_info_count : Proc(IWdsTransportClient*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportClient*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportClient*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportClient*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportClient*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Session : Proc(IWdsTransportClient*, Void**, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWdsTransportClient*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportClient*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2370,7 +2393,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportClient, lpVtbl : IWdsTransportClientVtbl* do
+  record IWdsTransportClient, lpVtbl : IWdsTransportClientVtable* do
     GUID = LibC::GUID.new(0xb5dbc93a_u32, 0xcabe_u16, 0x46ca_u16, StaticArray[0x83_u8, 0x7f_u8, 0x3e_u8, 0x44_u8, 0xe9_u8, 0x3c_u8, 0x65_u8, 0x45_u8])
     def query_interface(this : IWdsTransportClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2390,8 +2413,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportClient*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportClient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportClient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Session(this : IWdsTransportClient*, ppWdsTransportSession : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Session.call(this, ppWdsTransportSession)
@@ -2433,14 +2456,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportTftpClientVtbl,
+
+  record IWdsTransportTftpClientVtable,
     query_interface : Proc(IWdsTransportTftpClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportTftpClient*, UInt32),
     release : Proc(IWdsTransportTftpClient*, UInt32),
     get_type_info_count : Proc(IWdsTransportTftpClient*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportTftpClient*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportTftpClient*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportTftpClient*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportTftpClient*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_FileName : Proc(IWdsTransportTftpClient*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_IpAddress : Proc(IWdsTransportTftpClient*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Timeout : Proc(IWdsTransportTftpClient*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -2451,7 +2475,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportTftpClient, lpVtbl : IWdsTransportTftpClientVtbl* do
+  record IWdsTransportTftpClient, lpVtbl : IWdsTransportTftpClientVtable* do
     GUID = LibC::GUID.new(0xb022d3ae_u32, 0x884d_u16, 0x4d85_u16, StaticArray[0xb1_u8, 0x46_u8, 0x53_u8, 0x32_u8, 0xe_u8, 0x76_u8, 0xef_u8, 0x62_u8])
     def query_interface(this : IWdsTransportTftpClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2471,8 +2495,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportTftpClient*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportTftpClient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportTftpClient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_FileName(this : IWdsTransportTftpClient*, pbszFileName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FileName.call(this, pbszFileName)
@@ -2499,14 +2523,15 @@ module Win32cr::System::DeploymentServices
   end
 
   @[Extern]
-  record IWdsTransportContentProviderVtbl,
+
+  record IWdsTransportContentProviderVtable,
     query_interface : Proc(IWdsTransportContentProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWdsTransportContentProvider*, UInt32),
     release : Proc(IWdsTransportContentProvider*, UInt32),
     get_type_info_count : Proc(IWdsTransportContentProvider*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWdsTransportContentProvider*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWdsTransportContentProvider*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWdsTransportContentProvider*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWdsTransportContentProvider*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IWdsTransportContentProvider*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IWdsTransportContentProvider*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_FilePath : Proc(IWdsTransportContentProvider*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2514,7 +2539,7 @@ module Win32cr::System::DeploymentServices
 
 
   @[Extern]
-  record IWdsTransportContentProvider, lpVtbl : IWdsTransportContentProviderVtbl* do
+  record IWdsTransportContentProvider, lpVtbl : IWdsTransportContentProviderVtable* do
     GUID = LibC::GUID.new(0xb9489f24_u32, 0xf219_u16, 0x4acf_u16, StaticArray[0xaa_u8, 0xd7_u8, 0x26_u8, 0x5c_u8, 0x7c_u8, 0x8_u8, 0xa6_u8, 0xae_u8])
     def query_interface(this : IWdsTransportContentProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2534,8 +2559,8 @@ module Win32cr::System::DeploymentServices
     def get_i_ds_of_names(this : IWdsTransportContentProvider*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWdsTransportContentProvider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWdsTransportContentProvider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IWdsTransportContentProvider*, pbszName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbszName)
@@ -2553,379 +2578,567 @@ module Win32cr::System::DeploymentServices
   end
 
   def wdsCliClose(handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliClose(handle)
+    {% end %}
   end
 
   def wdsCliRegisterTrace(pfn : Win32cr::System::DeploymentServices::PFN_WdsCliTraceFunction) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliRegisterTrace(pfn)
+    {% end %}
   end
 
   def wdsCliFreeStringArray(ppwszArray : Win32cr::Foundation::PWSTR*, ulCount : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliFreeStringArray(ppwszArray, ulCount)
+    {% end %}
   end
 
   def wdsCliFindFirstImage(hSession : Win32cr::Foundation::HANDLE, phFindHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliFindFirstImage(hSession, phFindHandle)
+    {% end %}
   end
 
   def wdsCliFindNextImage(handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliFindNextImage(handle)
+    {% end %}
   end
 
   def wdsCliGetEnumerationFlags(handle : Win32cr::Foundation::HANDLE, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetEnumerationFlags(handle, pdwFlags)
+    {% end %}
   end
 
   def wdsCliGetImageHandleFromFindHandle(find_handle : Win32cr::Foundation::HANDLE, phImageHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageHandleFromFindHandle(find_handle, phImageHandle)
+    {% end %}
   end
 
   def wdsCliGetImageHandleFromTransferHandle(hTransfer : Win32cr::Foundation::HANDLE, phImageHandle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageHandleFromTransferHandle(hTransfer, phImageHandle)
+    {% end %}
   end
 
   def wdsCliCreateSession(pwszServer : Win32cr::Foundation::PWSTR, pCred : Win32cr::System::DeploymentServices::WDS_CLI_CRED*, phSession : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliCreateSession(pwszServer, pCred, phSession)
+    {% end %}
   end
 
   def wdsCliAuthorizeSession(hSession : Win32cr::Foundation::HANDLE, pCred : Win32cr::System::DeploymentServices::WDS_CLI_CRED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliAuthorizeSession(hSession, pCred)
+    {% end %}
   end
 
   def wdsCliInitializeLog(hSession : Win32cr::Foundation::HANDLE, ulClientArchitecture : Win32cr::System::DeploymentServices::CPU_ARCHITECTURE, pwszClientId : Win32cr::Foundation::PWSTR, pwszClientAddress : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliInitializeLog(hSession, ulClientArchitecture, pwszClientId, pwszClientAddress)
+    {% end %}
   end
 
   def wdsCliLog(hSession : Win32cr::Foundation::HANDLE, ulLogLevel : UInt32, ulMessageCode : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliLog(hSession, ulLogLevel, ulMessageCode)
+    {% end %}
   end
 
   def wdsCliGetImageName(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageName(hIfh, ppwszValue)
+    {% end %}
   end
 
   def wdsCliGetImageDescription(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageDescription(hIfh, ppwszValue)
+    {% end %}
   end
 
   def wdsCliGetImageType(hIfh : Win32cr::Foundation::HANDLE, pImageType : Win32cr::System::DeploymentServices::WDS_CLI_IMAGE_TYPE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageType(hIfh, pImageType)
+    {% end %}
   end
 
   def wdsCliGetImageFiles(hIfh : Win32cr::Foundation::HANDLE, pppwszFiles : Win32cr::Foundation::PWSTR**, pdwCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageFiles(hIfh, pppwszFiles, pdwCount)
+    {% end %}
   end
 
   def wdsCliGetImageLanguage(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageLanguage(hIfh, ppwszValue)
+    {% end %}
   end
 
   def wdsCliGetImageLanguages(hIfh : Win32cr::Foundation::HANDLE, pppszValues : Int8***, pdwNumValues : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageLanguages(hIfh, pppszValues, pdwNumValues)
+    {% end %}
   end
 
   def wdsCliGetImageVersion(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageVersion(hIfh, ppwszValue)
+    {% end %}
   end
 
   def wdsCliGetImagePath(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImagePath(hIfh, ppwszValue)
+    {% end %}
   end
 
   def wdsCliGetImageIndex(hIfh : Win32cr::Foundation::HANDLE, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageIndex(hIfh, pdwValue)
+    {% end %}
   end
 
   def wdsCliGetImageArchitecture(hIfh : Win32cr::Foundation::HANDLE, pdwValue : Win32cr::System::DeploymentServices::CPU_ARCHITECTURE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageArchitecture(hIfh, pdwValue)
+    {% end %}
   end
 
   def wdsCliGetImageLastModifiedTime(hIfh : Win32cr::Foundation::HANDLE, ppSysTimeValue : Win32cr::Foundation::SYSTEMTIME**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageLastModifiedTime(hIfh, ppSysTimeValue)
+    {% end %}
   end
 
   def wdsCliGetImageSize(hIfh : Win32cr::Foundation::HANDLE, pullValue : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageSize(hIfh, pullValue)
+    {% end %}
   end
 
   def wdsCliGetImageHalName(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageHalName(hIfh, ppwszValue)
+    {% end %}
   end
 
   def wdsCliGetImageGroup(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageGroup(hIfh, ppwszValue)
+    {% end %}
   end
 
   def wdsCliGetImageNamespace(hIfh : Win32cr::Foundation::HANDLE, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageNamespace(hIfh, ppwszValue)
+    {% end %}
   end
 
   def wdsCliGetImageParameter(hIfh : Win32cr::Foundation::HANDLE, param_type : Win32cr::System::DeploymentServices::WDS_CLI_IMAGE_PARAM_TYPE, pResponse : Void*, uResponseLen : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetImageParameter(hIfh, param_type, pResponse, uResponseLen)
+    {% end %}
   end
 
   def wdsCliGetTransferSize(hIfh : Win32cr::Foundation::HANDLE, pullValue : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetTransferSize(hIfh, pullValue)
+    {% end %}
   end
 
   def wdsCliSetTransferBufferSize(ulSizeInBytes : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.WdsCliSetTransferBufferSize(ulSizeInBytes)
+    {% end %}
   end
 
   def wdsCliTransferImage(hImage : Win32cr::Foundation::HANDLE, pwszLocalPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : UInt32, pfnWdsCliCallback : Win32cr::System::DeploymentServices::PFN_WdsCliCallback, pvUserData : Void*, phTransfer : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliTransferImage(hImage, pwszLocalPath, dwFlags, dwReserved, pfnWdsCliCallback, pvUserData, phTransfer)
+    {% end %}
   end
 
   def wdsCliTransferFile(pwszServer : Win32cr::Foundation::PWSTR, pwszNamespace : Win32cr::Foundation::PWSTR, pwszRemoteFilePath : Win32cr::Foundation::PWSTR, pwszLocalFilePath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : UInt32, pfnWdsCliCallback : Win32cr::System::DeploymentServices::PFN_WdsCliCallback, pvUserData : Void*, phTransfer : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliTransferFile(pwszServer, pwszNamespace, pwszRemoteFilePath, pwszLocalFilePath, dwFlags, dwReserved, pfnWdsCliCallback, pvUserData, phTransfer)
+    {% end %}
   end
 
   def wdsCliCancelTransfer(hTransfer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliCancelTransfer(hTransfer)
+    {% end %}
   end
 
   def wdsCliWaitForTransfer(hTransfer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliWaitForTransfer(hTransfer)
+    {% end %}
   end
 
   def wdsCliObtainDriverPackages(hImage : Win32cr::Foundation::HANDLE, ppwszServerName : Win32cr::Foundation::PWSTR*, pppwszDriverPackages : Win32cr::Foundation::PWSTR**, pulCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliObtainDriverPackages(hImage, ppwszServerName, pppwszDriverPackages, pulCount)
+    {% end %}
   end
 
   def wdsCliObtainDriverPackagesEx(hSession : Win32cr::Foundation::HANDLE, pwszMachineInfo : Win32cr::Foundation::PWSTR, ppwszServerName : Win32cr::Foundation::PWSTR*, pppwszDriverPackages : Win32cr::Foundation::PWSTR**, pulCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliObtainDriverPackagesEx(hSession, pwszMachineInfo, ppwszServerName, pppwszDriverPackages, pulCount)
+    {% end %}
   end
 
   def wdsCliGetDriverQueryXml(pwszWinDirPath : Win32cr::Foundation::PWSTR, ppwszDriverQuery : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsCliGetDriverQueryXml(pwszWinDirPath, ppwszDriverQuery)
+    {% end %}
   end
 
   def pxeProviderRegister(pszProviderName : Win32cr::Foundation::PWSTR, pszModulePath : Win32cr::Foundation::PWSTR, index : UInt32, bIsCritical : Win32cr::Foundation::BOOL, phProviderKey : Win32cr::System::Registry::HKEY*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeProviderRegister(pszProviderName, pszModulePath, index, bIsCritical, phProviderKey)
+    {% end %}
   end
 
   def pxeProviderUnRegister(pszProviderName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeProviderUnRegister(pszProviderName)
+    {% end %}
   end
 
   def pxeProviderQueryIndex(pszProviderName : Win32cr::Foundation::PWSTR, puIndex : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeProviderQueryIndex(pszProviderName, puIndex)
+    {% end %}
   end
 
   def pxeProviderEnumFirst(phEnum : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeProviderEnumFirst(phEnum)
+    {% end %}
   end
 
   def pxeProviderEnumNext(hEnum : Win32cr::Foundation::HANDLE, ppProvider : Win32cr::System::DeploymentServices::PXE_PROVIDER**) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeProviderEnumNext(hEnum, ppProvider)
+    {% end %}
   end
 
   def pxeProviderEnumClose(hEnum : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeProviderEnumClose(hEnum)
+    {% end %}
   end
 
   def pxeProviderFreeInfo(pProvider : Win32cr::System::DeploymentServices::PXE_PROVIDER*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeProviderFreeInfo(pProvider)
+    {% end %}
   end
 
   def pxeRegisterCallback(hProvider : Win32cr::Foundation::HANDLE, callback_type : UInt32, pCallbackFunction : Void*, pContext : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeRegisterCallback(hProvider, callback_type, pCallbackFunction, pContext)
+    {% end %}
   end
 
   def pxeSendReply(hClientRequest : Win32cr::Foundation::HANDLE, pPacket : Void*, uPacketLen : UInt32, pAddress : Win32cr::System::DeploymentServices::PXE_ADDRESS*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeSendReply(hClientRequest, pPacket, uPacketLen, pAddress)
+    {% end %}
   end
 
   def pxeAsyncRecvDone(hClientRequest : Win32cr::Foundation::HANDLE, action : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeAsyncRecvDone(hClientRequest, action)
+    {% end %}
   end
 
   def pxeTrace(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pszFormat : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeTrace(hProvider, severity, pszFormat)
+    {% end %}
   end
 
   def pxeTraceV(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pszFormat : Win32cr::Foundation::PWSTR, params : Int8*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeTraceV(hProvider, severity, pszFormat, params)
+    {% end %}
   end
 
   def pxePacketAllocate(hProvider : Win32cr::Foundation::HANDLE, hClientRequest : Win32cr::Foundation::HANDLE, uSize : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.PxePacketAllocate(hProvider, hClientRequest, uSize)
+    {% end %}
   end
 
   def pxePacketFree(hProvider : Win32cr::Foundation::HANDLE, hClientRequest : Win32cr::Foundation::HANDLE, pPacket : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxePacketFree(hProvider, hClientRequest, pPacket)
+    {% end %}
   end
 
   def pxeProviderSetAttribute(hProvider : Win32cr::Foundation::HANDLE, attribute : UInt32, pParameterBuffer : Void*, uParamLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeProviderSetAttribute(hProvider, attribute, pParameterBuffer, uParamLen)
+    {% end %}
   end
 
   def pxeDhcpInitialize(pRecvPacket : Void*, uRecvPacketLen : UInt32, pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpInitialize(pRecvPacket, uRecvPacketLen, pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen)
+    {% end %}
   end
 
   def pxeDhcpv6Initialize(pRequest : Void*, cbRequest : UInt32, pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpv6Initialize(pRequest, cbRequest, pReply, cbReply, pcbReplyUsed)
+    {% end %}
   end
 
   def pxeDhcpAppendOption(pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*, bOption : UInt8, bOptionLen : UInt8, pValue : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpAppendOption(pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen, bOption, bOptionLen, pValue)
+    {% end %}
   end
 
   def pxeDhcpv6AppendOption(pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*, wOptionType : UInt16, cbOption : UInt16, pOption : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpv6AppendOption(pReply, cbReply, pcbReplyUsed, wOptionType, cbOption, pOption)
+    {% end %}
   end
 
   def pxeDhcpAppendOptionRaw(pReplyPacket : Void*, uMaxReplyPacketLen : UInt32, puReplyPacketLen : UInt32*, uBufferLen : UInt16, pBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpAppendOptionRaw(pReplyPacket, uMaxReplyPacketLen, puReplyPacketLen, uBufferLen, pBuffer)
+    {% end %}
   end
 
   def pxeDhcpv6AppendOptionRaw(pReply : Void*, cbReply : UInt32, pcbReplyUsed : UInt32*, cbBuffer : UInt16, pBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpv6AppendOptionRaw(pReply, cbReply, pcbReplyUsed, cbBuffer, pBuffer)
+    {% end %}
   end
 
   def pxeDhcpIsValid(pPacket : Void*, uPacketLen : UInt32, bRequestPacket : Win32cr::Foundation::BOOL, pbPxeOptionPresent : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpIsValid(pPacket, uPacketLen, bRequestPacket, pbPxeOptionPresent)
+    {% end %}
   end
 
   def pxeDhcpv6IsValid(pPacket : Void*, uPacketLen : UInt32, bRequestPacket : Win32cr::Foundation::BOOL, pbPxeOptionPresent : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpv6IsValid(pPacket, uPacketLen, bRequestPacket, pbPxeOptionPresent)
+    {% end %}
   end
 
   def pxeDhcpGetOptionValue(pPacket : Void*, uPacketLen : UInt32, uInstance : UInt32, bOption : UInt8, pbOptionLen : UInt8*, ppOptionValue : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpGetOptionValue(pPacket, uPacketLen, uInstance, bOption, pbOptionLen, ppOptionValue)
+    {% end %}
   end
 
   def pxeDhcpv6GetOptionValue(pPacket : Void*, uPacketLen : UInt32, uInstance : UInt32, wOption : UInt16, pwOptionLen : UInt16*, ppOptionValue : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpv6GetOptionValue(pPacket, uPacketLen, uInstance, wOption, pwOptionLen, ppOptionValue)
+    {% end %}
   end
 
   def pxeDhcpGetVendorOptionValue(pPacket : Void*, uPacketLen : UInt32, bOption : UInt8, uInstance : UInt32, pbOptionLen : UInt8*, ppOptionValue : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpGetVendorOptionValue(pPacket, uPacketLen, bOption, uInstance, pbOptionLen, ppOptionValue)
+    {% end %}
   end
 
   def pxeDhcpv6GetVendorOptionValue(pPacket : Void*, uPacketLen : UInt32, dwEnterpriseNumber : UInt32, wOption : UInt16, uInstance : UInt32, pwOptionLen : UInt16*, ppOptionValue : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpv6GetVendorOptionValue(pPacket, uPacketLen, dwEnterpriseNumber, wOption, uInstance, pwOptionLen, ppOptionValue)
+    {% end %}
   end
 
   def pxeDhcpv6ParseRelayForw(pRelayForwPacket : Void*, uRelayForwPacketLen : UInt32, pRelayMessages : Win32cr::System::DeploymentServices::PXE_DHCPV6_NESTED_RELAY_MESSAGE*, nRelayMessages : UInt32, pnRelayMessages : UInt32*, ppInnerPacket : UInt8**, pcbInnerPacket : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpv6ParseRelayForw(pRelayForwPacket, uRelayForwPacketLen, pRelayMessages, nRelayMessages, pnRelayMessages, ppInnerPacket, pcbInnerPacket)
+    {% end %}
   end
 
   def pxeDhcpv6CreateRelayRepl(pRelayMessages : Win32cr::System::DeploymentServices::PXE_DHCPV6_NESTED_RELAY_MESSAGE*, nRelayMessages : UInt32, pInnerPacket : UInt8*, cbInnerPacket : UInt32, pReplyBuffer : Void*, cbReplyBuffer : UInt32, pcbReplyBuffer : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeDhcpv6CreateRelayRepl(pRelayMessages, nRelayMessages, pInnerPacket, cbInnerPacket, pReplyBuffer, cbReplyBuffer, pcbReplyBuffer)
+    {% end %}
   end
 
   def pxeGetServerInfo(uInfoType : UInt32, pBuffer : Void*, uBufferLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeGetServerInfo(uInfoType, pBuffer, uBufferLen)
+    {% end %}
   end
 
   def pxeGetServerInfoEx(uInfoType : UInt32, pBuffer : Void*, uBufferLen : UInt32, puBufferUsed : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PxeGetServerInfoEx(uInfoType, pBuffer, uBufferLen, puBufferUsed)
+    {% end %}
   end
 
   def wdsTransportServerRegisterCallback(hProvider : Win32cr::Foundation::HANDLE, callback_id : Win32cr::System::DeploymentServices::TRANSPORTPROVIDER_CALLBACK_ID, pfnCallback : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsTransportServerRegisterCallback(hProvider, callback_id, pfnCallback)
+    {% end %}
   end
 
   def wdsTransportServerCompleteRead(hProvider : Win32cr::Foundation::HANDLE, ulBytesRead : UInt32, pvUserData : Void*, hReadResult : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsTransportServerCompleteRead(hProvider, ulBytesRead, pvUserData, hReadResult)
+    {% end %}
   end
 
   def wdsTransportServerTrace(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pwszFormat : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsTransportServerTrace(hProvider, severity, pwszFormat)
+    {% end %}
   end
 
   def wdsTransportServerTraceV(hProvider : Win32cr::Foundation::HANDLE, severity : UInt32, pwszFormat : Win32cr::Foundation::PWSTR, params : Int8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsTransportServerTraceV(hProvider, severity, pwszFormat, params)
+    {% end %}
   end
 
   def wdsTransportServerAllocateBuffer(hProvider : Win32cr::Foundation::HANDLE, ulBufferSize : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.WdsTransportServerAllocateBuffer(hProvider, ulBufferSize)
+    {% end %}
   end
 
   def wdsTransportServerFreeBuffer(hProvider : Win32cr::Foundation::HANDLE, pvBuffer : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WdsTransportServerFreeBuffer(hProvider, pvBuffer)
+    {% end %}
   end
 
   def wdsTransportClientInitialize : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientInitialize
+    {% end %}
   end
 
   def wdsTransportClientInitializeSession(pSessionRequest : Win32cr::System::DeploymentServices::WDS_TRANSPORTCLIENT_REQUEST*, pCallerData : Void*, hSessionKey : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientInitializeSession(pSessionRequest, pCallerData, hSessionKey)
+    {% end %}
   end
 
   def wdsTransportClientRegisterCallback(hSessionKey : Win32cr::Foundation::HANDLE, callback_id : Win32cr::System::DeploymentServices::TRANSPORTCLIENT_CALLBACK_ID, pfnCallback : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientRegisterCallback(hSessionKey, callback_id, pfnCallback)
+    {% end %}
   end
 
   def wdsTransportClientStartSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientStartSession(hSessionKey)
+    {% end %}
   end
 
-  def wdsTransportClientCompleteReceive(hSessionKey : Win32cr::Foundation::HANDLE, ulSize : UInt32, pullOffset : Win32cr::Foundation::ULARGE_INTEGER*) : UInt32
+  def wdsTransportClientCompleteReceive(hSessionKey : Win32cr::Foundation::HANDLE, ulSize : UInt32, pullOffset : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientCompleteReceive(hSessionKey, ulSize, pullOffset)
+    {% end %}
   end
 
   def wdsTransportClientCancelSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientCancelSession(hSessionKey)
+    {% end %}
   end
 
   def wdsTransportClientCancelSessionEx(hSessionKey : Win32cr::Foundation::HANDLE, dwErrorCode : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientCancelSessionEx(hSessionKey, dwErrorCode)
+    {% end %}
   end
 
   def wdsTransportClientWaitForCompletion(hSessionKey : Win32cr::Foundation::HANDLE, uTimeout : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientWaitForCompletion(hSessionKey, uTimeout)
+    {% end %}
   end
 
   def wdsTransportClientQueryStatus(hSessionKey : Win32cr::Foundation::HANDLE, puStatus : UInt32*, puErrorCode : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientQueryStatus(hSessionKey, puStatus, puErrorCode)
+    {% end %}
   end
 
   def wdsTransportClientCloseSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientCloseSession(hSessionKey)
+    {% end %}
   end
 
   def wdsTransportClientAddRefBuffer(pvBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientAddRefBuffer(pvBuffer)
+    {% end %}
   end
 
   def wdsTransportClientReleaseBuffer(pvBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientReleaseBuffer(pvBuffer)
+    {% end %}
   end
 
   def wdsTransportClientShutdown : UInt32
+    {% if !flag?(:docs) %}
     C.WdsTransportClientShutdown
+    {% end %}
   end
 
   def wdsBpParseInitialize(pPacket : Void*, uPacketLen : UInt32, pbPacketType : UInt8*, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsBpParseInitialize(pPacket, uPacketLen, pbPacketType, phHandle)
+    {% end %}
   end
 
   def wdsBpParseInitializev6(pPacket : Void*, uPacketLen : UInt32, pbPacketType : UInt8*, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsBpParseInitializev6(pPacket, uPacketLen, pbPacketType, phHandle)
+    {% end %}
   end
 
   def wdsBpInitialize(bPacketType : UInt8, phHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsBpInitialize(bPacketType, phHandle)
+    {% end %}
   end
 
   def wdsBpCloseHandle(hHandle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsBpCloseHandle(hHandle)
+    {% end %}
   end
 
   def wdsBpQueryOption(hHandle : Win32cr::Foundation::HANDLE, uOption : UInt32, uValueLen : UInt32, pValue : Void*, puBytes : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsBpQueryOption(hHandle, uOption, uValueLen, pValue, puBytes)
+    {% end %}
   end
 
   def wdsBpAddOption(hHandle : Win32cr::Foundation::HANDLE, uOption : UInt32, uValueLen : UInt32, pValue : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsBpAddOption(hHandle, uOption, uValueLen, pValue)
+    {% end %}
   end
 
   def wdsBpGetOptionBuffer(hHandle : Win32cr::Foundation::HANDLE, uBufferLen : UInt32, pBuffer : Void*, puBytes : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WdsBpGetOptionBuffer(hHandle, uBufferLen, pBuffer, puBytes)
+    {% end %}
   end
 
   @[Link("wdsclientapi")]
@@ -2933,6 +3146,7 @@ module Win32cr::System::DeploymentServices
   @[Link("wdsmc")]
   @[Link("wdstptc")]
   @[Link("wdsbp")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WdsCliClose(handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
@@ -3169,7 +3383,7 @@ module Win32cr::System::DeploymentServices
     fun WdsTransportClientStartSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
 
     # :nodoc:
-    fun WdsTransportClientCompleteReceive(hSessionKey : Win32cr::Foundation::HANDLE, ulSize : UInt32, pullOffset : Win32cr::Foundation::ULARGE_INTEGER*) : UInt32
+    fun WdsTransportClientCompleteReceive(hSessionKey : Win32cr::Foundation::HANDLE, ulSize : UInt32, pullOffset : UInt64*) : UInt32
 
     # :nodoc:
     fun WdsTransportClientCancelSession(hSessionKey : Win32cr::Foundation::HANDLE) : UInt32
@@ -3217,4 +3431,5 @@ module Win32cr::System::DeploymentServices
     fun WdsBpGetOptionBuffer(hHandle : Win32cr::Foundation::HANDLE, uBufferLen : UInt32, pBuffer : Void*, puBytes : UInt32*) : UInt32
 
   end
+  {% end %}
 end

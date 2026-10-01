@@ -4,6 +4,15 @@ require "./../security/cryptography.cr"
 
 module Win32cr::System::Iis
   extend self
+  alias HCONN = Void*
+  alias PFN_IIS_GETSERVERVARIABLE = Proc(Win32cr::System::Iis::HCONN, Win32cr::Foundation::PSTR, Void*, UInt32*, Win32cr::Foundation::BOOL)
+
+  alias PFN_IIS_WRITECLIENT = Proc(Win32cr::System::Iis::HCONN, Void*, UInt32*, UInt32, Win32cr::Foundation::BOOL)
+
+  alias PFN_IIS_READCLIENT = Proc(Win32cr::System::Iis::HCONN, Void*, UInt32*, Win32cr::Foundation::BOOL)
+
+  alias PFN_IIS_SERVERSUPPORTFUNCTION = Proc(Win32cr::System::Iis::HCONN, UInt32, Void*, UInt32*, UInt32*, Win32cr::Foundation::BOOL)
+
   alias PFN_HSE_IO_COMPLETION = Proc(Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*, Void*, UInt32, UInt32, Void)
 
   alias PFN_HSE_CACHE_INVALIDATION_CALLBACK = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
@@ -29,7 +38,7 @@ module Win32cr::System::Iis
   IISADMIN_EXTENSIONS_CLSID_MD_KEYW = "LM/IISADMIN/EXTENSIONS/DCOMCLSIDS"
   IISADMIN_EXTENSIONS_CLSID_MD_KEY = "LM/IISADMIN/EXTENSIONS/DCOMCLSIDS"
   ADMINDATA_MAX_NAME_LEN = 256_u32
-  CLSID_MSAdminBase_W = "a9e69610-b80d-11d0-b9b9-00a0c922e750"
+  CLSID_MSAdminBase_W = LibC::GUID.new(0xa9e69610_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
   IMGCHG_SIZE = 1_u32
   IMGCHG_VIEW = 2_u32
   IMGCHG_COMPLETE = 4_u32
@@ -54,7 +63,7 @@ module Win32cr::System::Iis
   DWN_FORCEDITHER = 128_u32
   DWN_RAWIMAGE = 256_u32
   DWN_MIRRORIMAGE = 512_u32
-  CLSID_IImgCtx = "3050f3d6-98b5-11cf-bb82-00aa00bdce0b"
+  CLSID_IImgCtx = LibC::GUID.new(0x3050f3d6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
   IIS_MD_LOCAL_MACHINE_PATH = "LM"
   IIS_MD_INSTANCE_ROOT = "Root"
   IIS_MD_ISAPI_FILTERS = "/Filters"
@@ -494,6 +503,7 @@ module Win32cr::System::Iis
   MD_APPPOOL_32_BIT_APP_ON_WIN64 = 9040_u32
   MD_APPPOOL_MANAGED_PIPELINE_MODE = 9041_u32
   MD_APP_POOL_LOG_EVENT_ON_PROCESSMODEL = 9042_u32
+  MD_APPPOOL_EMULATION_ON_WINARM64 = 9043_u32
   MD_APP_POOL_PROCESSMODEL_IDLE_TIMEOUT = 1_u32
   MD_APP_POOL_RECYCLE_TIME = 1_u32
   MD_APP_POOL_RECYCLE_REQUESTS = 2_u32
@@ -743,12 +753,12 @@ module Win32cr::System::Iis
   IIS_CLASS_CERTMAPPER_W = "IIsCertMapper"
   IIS_CLASS_COMPRESS_SCHEMES_W = "IIsCompressionSchemes"
   IIS_CLASS_COMPRESS_SCHEME_W = "IIsCompressionScheme"
-  CLSID_IisServiceControl = "e8fb8621-588f-11d2-9d61-00c04f79c5fe"
-  LIBID_IISRSTALib = "e8fb8614-588f-11d2-9d61-00c04f79c5fe"
+  CLSID_IisServiceControl = LibC::GUID.new(0xe8fb8621_u32, 0x588f_u16, 0x11d2_u16, StaticArray[0x9d_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xc5_u8, 0xfe_u8])
+  LIBID_IISRSTALib = LibC::GUID.new(0xe8fb8614_u32, 0x588f_u16, 0x11d2_u16, StaticArray[0x9d_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xc5_u8, 0xfe_u8])
   IIS_WEBSOCKET = "websockets"
   IIS_WEBSOCKET_SERVER_VARIABLE = "IIS_WEBSOCK"
-  LIBID_WAMREGLib = "29822aa8-f302-11d0-9953-00c04fd919c1"
-  CLSID_WamAdmin = "61738644-f196-11d0-9953-00c04fd919c1"
+  LIBID_WAMREGLib = LibC::GUID.new(0x29822aa8_u32, 0xf302_u16, 0x11d0_u16, StaticArray[0x99_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x19_u8, 0xc1_u8])
+  CLSID_WamAdmin = LibC::GUID.new(0x61738644_u32, 0xf196_u16, 0x11d0_u16, StaticArray[0x99_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x19_u8, 0xc1_u8])
   APPSTATUS_STOPPED = 0_u32
   APPSTATUS_RUNNING = 1_u32
   APPSTATUS_NOTDEFINED = 2_u32
@@ -803,12 +813,12 @@ module Win32cr::System::Iis
   MD_ERROR_IISAO_INVALID_SCHEMA = -2146646000_i32
   MD_ERROR_READ_METABASE_FILE = -2146645991_i32
   MD_ERROR_NO_SESSION_KEY = -2146645987_i32
-  LIBID_ASPTypeLibrary = "d97a6da0-a85c-11cf-83ae-00a0c90c2bd8"
-  CLSID_Request = "920c25d0-25d9-11d0-a55f-00a0c90c2091"
-  CLSID_Response = "46e19ba0-25dd-11d0-a55f-00a0c90c2091"
-  CLSID_Session = "509f8f20-25de-11d0-a55f-00a0c90c2091"
-  CLSID_Server = "a506d160-25e0-11d0-a55f-00a0c90c2091"
-  CLSID_ScriptingContext = "d97a6da0-a868-11cf-83ae-11b0c90c2bd8"
+  LIBID_ASPTypeLibrary = LibC::GUID.new(0xd97a6da0_u32, 0xa85c_u16, 0x11cf_u16, StaticArray[0x83_u8, 0xae_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x2b_u8, 0xd8_u8])
+  CLSID_Request = LibC::GUID.new(0x920c25d0_u32, 0x25d9_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x5f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x20_u8, 0x91_u8])
+  CLSID_Response = LibC::GUID.new(0x46e19ba0_u32, 0x25dd_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x5f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x20_u8, 0x91_u8])
+  CLSID_Session = LibC::GUID.new(0x509f8f20_u32, 0x25de_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x5f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x20_u8, 0x91_u8])
+  CLSID_Server = LibC::GUID.new(0xa506d160_u32, 0x25e0_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x5f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x20_u8, 0x91_u8])
+  CLSID_ScriptingContext = LibC::GUID.new(0xd97a6da0_u32, 0xa868_u16, 0x11cf_u16, StaticArray[0x83_u8, 0xae_u8, 0x11_u8, 0xb0_u8, 0xc9_u8, 0xc_u8, 0x2b_u8, 0xd8_u8])
   HSE_VERSION_MAJOR = 8_u32
   HSE_VERSION_MINOR = 0_u32
   HSE_LOG_BUFFER_LEN = 80_u32
@@ -940,13 +950,13 @@ module Win32cr::System::Iis
   HTTP_TRACE_EVENT_FLAG_STATIC_DESCRIPTIVE_FIELDS = 1_u32
   HTTP_TRACE_LEVEL_START = 6_u32
   HTTP_TRACE_LEVEL_END = 7_u32
-  GUID_IIS_ALL_TRACE_PROVIDERS = "00000000-0000-0000-0000-000000000000"
-  GUID_IIS_WWW_SERVER_TRACE_PROVIDER = "3a2a4e84-4c21-4981-ae10-3fda0d9b0f83"
-  GUID_IIS_WWW_SERVER_V2_TRACE_PROVIDER = "de4649c9-15e8-4fea-9d85-1cdda520c334"
-  GUID_IIS_ASPNET_TRACE_PROVIDER = "aff081fe-0247-4275-9c4e-021f3dc1da35"
-  GUID_IIS_ASP_TRACE_TRACE_PROVIDER = "06b94d9a-b15e-456e-a4ef-37c984a2cb4b"
-  GUID_IIS_WWW_GLOBAL_TRACE_PROVIDER = "d55d3bc9-cba9-44df-827e-132d3a4596c2"
-  GUID_IIS_ISAPI_TRACE_PROVIDER = "a1c2040e-8840-4c31-ba11-9871031a19ea"
+  GUID_IIS_ALL_TRACE_PROVIDERS = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
+  GUID_IIS_WWW_SERVER_TRACE_PROVIDER = LibC::GUID.new(0x3a2a4e84_u32, 0x4c21_u16, 0x4981_u16, StaticArray[0xae_u8, 0x10_u8, 0x3f_u8, 0xda_u8, 0xd_u8, 0x9b_u8, 0xf_u8, 0x83_u8])
+  GUID_IIS_WWW_SERVER_V2_TRACE_PROVIDER = LibC::GUID.new(0xde4649c9_u32, 0x15e8_u16, 0x4fea_u16, StaticArray[0x9d_u8, 0x85_u8, 0x1c_u8, 0xdd_u8, 0xa5_u8, 0x20_u8, 0xc3_u8, 0x34_u8])
+  GUID_IIS_ASPNET_TRACE_PROVIDER = LibC::GUID.new(0xaff081fe_u32, 0x247_u16, 0x4275_u16, StaticArray[0x9c_u8, 0x4e_u8, 0x2_u8, 0x1f_u8, 0x3d_u8, 0xc1_u8, 0xda_u8, 0x35_u8])
+  GUID_IIS_ASP_TRACE_TRACE_PROVIDER = LibC::GUID.new(0x6b94d9a_u32, 0xb15e_u16, 0x456e_u16, StaticArray[0xa4_u8, 0xef_u8, 0x37_u8, 0xc9_u8, 0x84_u8, 0xa2_u8, 0xcb_u8, 0x4b_u8])
+  GUID_IIS_WWW_GLOBAL_TRACE_PROVIDER = LibC::GUID.new(0xd55d3bc9_u32, 0xcba9_u16, 0x44df_u16, StaticArray[0x82_u8, 0x7e_u8, 0x13_u8, 0x2d_u8, 0x3a_u8, 0x45_u8, 0x96_u8, 0xc2_u8])
+  GUID_IIS_ISAPI_TRACE_PROVIDER = LibC::GUID.new(0xa1c2040e_u32, 0x8840_u16, 0x4c31_u16, StaticArray[0xba_u8, 0x11_u8, 0x98_u8, 0x71_u8, 0x3_u8, 0x1a_u8, 0x19_u8, 0xea_u8])
   WEB_CORE_DLL_NAME = "hwebcore.dll"
   WEB_CORE_ACTIVATE_DLL_ENTRY = "WebCoreActivate"
   WEB_CORE_SHUTDOWN_DLL_ENTRY = "WebCoreShutdown"
@@ -1158,12 +1168,6 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  struct IIS_CRYPTO_BLOB_
-    def initialize()
-    end
-  end
-
-  @[Extern]
   struct HSE_VERSION_INFO
     property dwExtensionVersion : UInt32
     property lpszExtensionDesc : Win32cr::Foundation::CHAR[256]
@@ -1175,7 +1179,7 @@ module Win32cr::System::Iis
   struct EXTENSION_CONTROL_BLOCK
     property cbSize : UInt32
     property dwVersion : UInt32
-    property conn_id : Void*
+    property conn_id : Win32cr::System::Iis::HCONN
     property dwHttpStatusCode : UInt32
     property lpszLogData : Win32cr::Foundation::CHAR[80]
     property lpszMethod : Win32cr::Foundation::PSTR
@@ -1186,11 +1190,11 @@ module Win32cr::System::Iis
     property cbAvailable : UInt32
     property lpbData : UInt8*
     property lpszContentType : Win32cr::Foundation::PSTR
-    property get_server_variable : LibC::IntPtrT
-    property write_client : LibC::IntPtrT
-    property read_client : LibC::IntPtrT
-    property server_support_function : LibC::IntPtrT
-    def initialize(@cbSize : UInt32, @dwVersion : UInt32, @conn_id : Void*, @dwHttpStatusCode : UInt32, @lpszLogData : Win32cr::Foundation::CHAR[80], @lpszMethod : Win32cr::Foundation::PSTR, @lpszQueryString : Win32cr::Foundation::PSTR, @lpszPathInfo : Win32cr::Foundation::PSTR, @lpszPathTranslated : Win32cr::Foundation::PSTR, @cbTotalBytes : UInt32, @cbAvailable : UInt32, @lpbData : UInt8*, @lpszContentType : Win32cr::Foundation::PSTR, @get_server_variable : LibC::IntPtrT, @write_client : LibC::IntPtrT, @read_client : LibC::IntPtrT, @server_support_function : LibC::IntPtrT)
+    property get_server_variable : Win32cr::System::Iis::PFN_IIS_GETSERVERVARIABLE
+    property write_client : Win32cr::System::Iis::PFN_IIS_WRITECLIENT
+    property read_client : Win32cr::System::Iis::PFN_IIS_READCLIENT
+    property server_support_function : Win32cr::System::Iis::PFN_IIS_SERVERSUPPORTFUNCTION
+    def initialize(@cbSize : UInt32, @dwVersion : UInt32, @conn_id : Win32cr::System::Iis::HCONN, @dwHttpStatusCode : UInt32, @lpszLogData : Win32cr::Foundation::CHAR[80], @lpszMethod : Win32cr::Foundation::PSTR, @lpszQueryString : Win32cr::Foundation::PSTR, @lpszPathInfo : Win32cr::Foundation::PSTR, @lpszPathTranslated : Win32cr::Foundation::PSTR, @cbTotalBytes : UInt32, @cbAvailable : UInt32, @lpbData : UInt8*, @lpszContentType : Win32cr::Foundation::PSTR, @get_server_variable : Win32cr::System::Iis::PFN_IIS_GETSERVERVARIABLE, @write_client : Win32cr::System::Iis::PFN_IIS_WRITECLIENT, @read_client : Win32cr::System::Iis::PFN_IIS_READCLIENT, @server_support_function : Win32cr::System::Iis::PFN_IIS_SERVERSUPPORTFUNCTION)
     end
   end
 
@@ -1512,7 +1516,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpProviderConstructVtbl,
+
+  record IFtpProviderConstructVtable,
     query_interface : Proc(IFtpProviderConstruct*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpProviderConstruct*, UInt32),
     release : Proc(IFtpProviderConstruct*, UInt32),
@@ -1520,7 +1525,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpProviderConstruct, lpVtbl : IFtpProviderConstructVtbl* do
+  record IFtpProviderConstruct, lpVtbl : IFtpProviderConstructVtable* do
     GUID = LibC::GUID.new(0x4d1a3f7b_u32, 0x412d_u16, 0x447c_u16, StaticArray[0xb1_u8, 0x99_u8, 0x64_u8, 0xf9_u8, 0x67_u8, 0xe9_u8, 0xa2_u8, 0xda_u8])
     def query_interface(this : IFtpProviderConstruct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1538,7 +1543,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpAuthenticationProviderVtbl,
+
+  record IFtpAuthenticationProviderVtable,
     query_interface : Proc(IFtpAuthenticationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpAuthenticationProvider*, UInt32),
     release : Proc(IFtpAuthenticationProvider*, UInt32),
@@ -1546,7 +1552,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpAuthenticationProvider, lpVtbl : IFtpAuthenticationProviderVtbl* do
+  record IFtpAuthenticationProvider, lpVtbl : IFtpAuthenticationProviderVtable* do
     GUID = LibC::GUID.new(0x4659f95c_u32, 0xd5a8_u16, 0x4707_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x6f_u8, 0xd5_u8, 0x79_u8, 0x42_u8, 0x46_u8, 0xcf_u8])
     def query_interface(this : IFtpAuthenticationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1564,7 +1570,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpAuthenticationProviderVtbl,
+
+  record AsyncIFtpAuthenticationProviderVtable,
     query_interface : Proc(AsyncIFtpAuthenticationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpAuthenticationProvider*, UInt32),
     release : Proc(AsyncIFtpAuthenticationProvider*, UInt32),
@@ -1573,7 +1580,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpAuthenticationProvider, lpVtbl : AsyncIFtpAuthenticationProviderVtbl* do
+  record AsyncIFtpAuthenticationProvider, lpVtbl : AsyncIFtpAuthenticationProviderVtable* do
     GUID = LibC::GUID.new(0xc24efb65_u32, 0x9f3e_u16, 0x4996_u16, StaticArray[0x8f_u8, 0xb1_u8, 0xce_u8, 0x16_u8, 0x69_u8, 0x16_u8, 0xba_u8, 0xb5_u8])
     def query_interface(this : AsyncIFtpAuthenticationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1594,7 +1601,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpRoleProviderVtbl,
+
+  record IFtpRoleProviderVtable,
     query_interface : Proc(IFtpRoleProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpRoleProvider*, UInt32),
     release : Proc(IFtpRoleProvider*, UInt32),
@@ -1602,7 +1610,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpRoleProvider, lpVtbl : IFtpRoleProviderVtbl* do
+  record IFtpRoleProvider, lpVtbl : IFtpRoleProviderVtable* do
     GUID = LibC::GUID.new(0x909c850d_u32, 0x8ca0_u16, 0x4674_u16, StaticArray[0x96_u8, 0xb8_u8, 0xcc_u8, 0x29_u8, 0x41_u8, 0x53_u8, 0x57_u8, 0x25_u8])
     def query_interface(this : IFtpRoleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1620,7 +1628,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpRoleProviderVtbl,
+
+  record AsyncIFtpRoleProviderVtable,
     query_interface : Proc(AsyncIFtpRoleProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpRoleProvider*, UInt32),
     release : Proc(AsyncIFtpRoleProvider*, UInt32),
@@ -1629,7 +1638,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpRoleProvider, lpVtbl : AsyncIFtpRoleProviderVtbl* do
+  record AsyncIFtpRoleProvider, lpVtbl : AsyncIFtpRoleProviderVtable* do
     GUID = LibC::GUID.new(0x3e83bf99_u32, 0x70ec_u16, 0x41ca_u16, StaticArray[0x84_u8, 0xb6_u8, 0xac_u8, 0xa7_u8, 0xc7_u8, 0xa6_u8, 0x2c_u8, 0xaf_u8])
     def query_interface(this : AsyncIFtpRoleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1650,7 +1659,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpHomeDirectoryProviderVtbl,
+
+  record IFtpHomeDirectoryProviderVtable,
     query_interface : Proc(IFtpHomeDirectoryProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpHomeDirectoryProvider*, UInt32),
     release : Proc(IFtpHomeDirectoryProvider*, UInt32),
@@ -1658,7 +1668,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpHomeDirectoryProvider, lpVtbl : IFtpHomeDirectoryProviderVtbl* do
+  record IFtpHomeDirectoryProvider, lpVtbl : IFtpHomeDirectoryProviderVtable* do
     GUID = LibC::GUID.new(0x933b392_u32, 0x18dd_u16, 0x4097_u16, StaticArray[0x8b_u8, 0x9c_u8, 0x83_u8, 0x32_u8, 0x5c_u8, 0x35_u8, 0xd9_u8, 0xa6_u8])
     def query_interface(this : IFtpHomeDirectoryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1676,7 +1686,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpHomeDirectoryProviderVtbl,
+
+  record AsyncIFtpHomeDirectoryProviderVtable,
     query_interface : Proc(AsyncIFtpHomeDirectoryProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpHomeDirectoryProvider*, UInt32),
     release : Proc(AsyncIFtpHomeDirectoryProvider*, UInt32),
@@ -1685,7 +1696,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpHomeDirectoryProvider, lpVtbl : AsyncIFtpHomeDirectoryProviderVtbl* do
+  record AsyncIFtpHomeDirectoryProvider, lpVtbl : AsyncIFtpHomeDirectoryProviderVtable* do
     GUID = LibC::GUID.new(0x73f81638_u32, 0x6295_u16, 0x42bd_u16, StaticArray[0xa2_u8, 0xbe_u8, 0x4a_u8, 0x65_u8, 0x7f_u8, 0x7c_u8, 0x47_u8, 0x9c_u8])
     def query_interface(this : AsyncIFtpHomeDirectoryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1706,7 +1717,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpLogProviderVtbl,
+
+  record IFtpLogProviderVtable,
     query_interface : Proc(IFtpLogProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpLogProvider*, UInt32),
     release : Proc(IFtpLogProvider*, UInt32),
@@ -1714,7 +1726,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpLogProvider, lpVtbl : IFtpLogProviderVtbl* do
+  record IFtpLogProvider, lpVtbl : IFtpLogProviderVtable* do
     GUID = LibC::GUID.new(0xa18a94cc_u32, 0x8299_u16, 0x4408_u16, StaticArray[0x81_u8, 0x6c_u8, 0x7c_u8, 0x3b_u8, 0xac_u8, 0xa1_u8, 0xa4_u8, 0xe_u8])
     def query_interface(this : IFtpLogProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1732,7 +1744,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpLogProviderVtbl,
+
+  record AsyncIFtpLogProviderVtable,
     query_interface : Proc(AsyncIFtpLogProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpLogProvider*, UInt32),
     release : Proc(AsyncIFtpLogProvider*, UInt32),
@@ -1741,7 +1754,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpLogProvider, lpVtbl : AsyncIFtpLogProviderVtbl* do
+  record AsyncIFtpLogProvider, lpVtbl : AsyncIFtpLogProviderVtable* do
     GUID = LibC::GUID.new(0xa0ae46_u32, 0x2498_u16, 0x48b2_u16, StaticArray[0x95_u8, 0xe6_u8, 0xdf_u8, 0x67_u8, 0x8e_u8, 0xd7_u8, 0xd4_u8, 0x9f_u8])
     def query_interface(this : AsyncIFtpLogProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1762,7 +1775,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpAuthorizationProviderVtbl,
+
+  record IFtpAuthorizationProviderVtable,
     query_interface : Proc(IFtpAuthorizationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpAuthorizationProvider*, UInt32),
     release : Proc(IFtpAuthorizationProvider*, UInt32),
@@ -1770,7 +1784,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpAuthorizationProvider, lpVtbl : IFtpAuthorizationProviderVtbl* do
+  record IFtpAuthorizationProvider, lpVtbl : IFtpAuthorizationProviderVtable* do
     GUID = LibC::GUID.new(0xa50ae7a1_u32, 0xa35a_u16, 0x42b4_u16, StaticArray[0xa4_u8, 0xf3_u8, 0xf4_u8, 0xf7_u8, 0x5_u8, 0x7a_u8, 0x5_u8, 0xd1_u8])
     def query_interface(this : IFtpAuthorizationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1788,7 +1802,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpAuthorizationProviderVtbl,
+
+  record AsyncIFtpAuthorizationProviderVtable,
     query_interface : Proc(AsyncIFtpAuthorizationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpAuthorizationProvider*, UInt32),
     release : Proc(AsyncIFtpAuthorizationProvider*, UInt32),
@@ -1797,7 +1812,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpAuthorizationProvider, lpVtbl : AsyncIFtpAuthorizationProviderVtbl* do
+  record AsyncIFtpAuthorizationProvider, lpVtbl : AsyncIFtpAuthorizationProviderVtable* do
     GUID = LibC::GUID.new(0x860dc339_u32, 0x7e5_u16, 0x4a5c_u16, StaticArray[0x9c_u8, 0x61_u8, 0x88_u8, 0x20_u8, 0xce_u8, 0xa0_u8, 0x12_u8, 0xbc_u8])
     def query_interface(this : AsyncIFtpAuthorizationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1818,7 +1833,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpPreprocessProviderVtbl,
+
+  record IFtpPreprocessProviderVtable,
     query_interface : Proc(IFtpPreprocessProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpPreprocessProvider*, UInt32),
     release : Proc(IFtpPreprocessProvider*, UInt32),
@@ -1826,7 +1842,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpPreprocessProvider, lpVtbl : IFtpPreprocessProviderVtbl* do
+  record IFtpPreprocessProvider, lpVtbl : IFtpPreprocessProviderVtable* do
     GUID = LibC::GUID.new(0xa3c19b60_u32, 0x5a28_u16, 0x471a_u16, StaticArray[0x8f_u8, 0x93_u8, 0xab_u8, 0x30_u8, 0x41_u8, 0x1c_u8, 0xee_u8, 0x82_u8])
     def query_interface(this : IFtpPreprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1844,7 +1860,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpPreprocessProviderVtbl,
+
+  record AsyncIFtpPreprocessProviderVtable,
     query_interface : Proc(AsyncIFtpPreprocessProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpPreprocessProvider*, UInt32),
     release : Proc(AsyncIFtpPreprocessProvider*, UInt32),
@@ -1853,7 +1870,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpPreprocessProvider, lpVtbl : AsyncIFtpPreprocessProviderVtbl* do
+  record AsyncIFtpPreprocessProvider, lpVtbl : AsyncIFtpPreprocessProviderVtable* do
     GUID = LibC::GUID.new(0x6ff5fd8f_u32, 0xfd8e_u16, 0x48b1_u16, StaticArray[0xa3_u8, 0xe0_u8, 0xbf_u8, 0x70_u8, 0x73_u8, 0xdb_u8, 0x4d_u8, 0xb5_u8])
     def query_interface(this : AsyncIFtpPreprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1874,7 +1891,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpPostprocessProviderVtbl,
+
+  record IFtpPostprocessProviderVtable,
     query_interface : Proc(IFtpPostprocessProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpPostprocessProvider*, UInt32),
     release : Proc(IFtpPostprocessProvider*, UInt32),
@@ -1882,7 +1900,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpPostprocessProvider, lpVtbl : IFtpPostprocessProviderVtbl* do
+  record IFtpPostprocessProvider, lpVtbl : IFtpPostprocessProviderVtable* do
     GUID = LibC::GUID.new(0x4522cbc6_u32, 0x16cd_u16, 0x49ad_u16, StaticArray[0x86_u8, 0x53_u8, 0x9a_u8, 0x2c_u8, 0x57_u8, 0x9e_u8, 0x42_u8, 0x80_u8])
     def query_interface(this : IFtpPostprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1900,7 +1918,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpPostprocessProviderVtbl,
+
+  record AsyncIFtpPostprocessProviderVtable,
     query_interface : Proc(AsyncIFtpPostprocessProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpPostprocessProvider*, UInt32),
     release : Proc(AsyncIFtpPostprocessProvider*, UInt32),
@@ -1909,7 +1928,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpPostprocessProvider, lpVtbl : AsyncIFtpPostprocessProviderVtbl* do
+  record AsyncIFtpPostprocessProvider, lpVtbl : AsyncIFtpPostprocessProviderVtable* do
     GUID = LibC::GUID.new(0xa16b2542_u32, 0x9694_u16, 0x4eb1_u16, StaticArray[0xa5_u8, 0x64_u8, 0x6c_u8, 0x2e_u8, 0x91_u8, 0xfd_u8, 0xc1_u8, 0x33_u8])
     def query_interface(this : AsyncIFtpPostprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1930,7 +1949,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IADMEXTVtbl,
+
+  record IADMEXTVtable,
     query_interface : Proc(IADMEXT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADMEXT*, UInt32),
     release : Proc(IADMEXT*, UInt32),
@@ -1940,7 +1960,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IADMEXT, lpVtbl : IADMEXTVtbl* do
+  record IADMEXT, lpVtbl : IADMEXTVtable* do
     GUID = LibC::GUID.new(0x51dfe970_u32, 0xf6f2_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xbd_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IADMEXT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1964,14 +1984,15 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IMSAdminBaseWVtbl,
+
+  record IMSAdminBaseWVtable,
     query_interface : Proc(IMSAdminBaseW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSAdminBaseW*, UInt32),
     release : Proc(IMSAdminBaseW*, UInt32),
     add_key : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     delete_key : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     delete_child_keys : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    enum_keys : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     copy_key : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     rename_key : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     set_data : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::System::Iis::METADATA_RECORD*, Win32cr::Foundation::HRESULT),
@@ -1981,7 +2002,7 @@ module Win32cr::System::Iis
     get_all_data : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
     delete_all_data : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     copy_data : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_data_paths : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_data_paths : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
     open_key : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     close_key : Proc(IMSAdminBaseW*, UInt32, Win32cr::Foundation::HRESULT),
     change_permissions : Proc(IMSAdminBaseW*, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
@@ -1995,14 +2016,14 @@ module Win32cr::System::Iis
     key_exchange_phase2 : Proc(IMSAdminBaseW*, Win32cr::Foundation::HRESULT),
     backup : Proc(IMSAdminBaseW*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     restore : Proc(IMSAdminBaseW*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    enum_backups : Proc(IMSAdminBaseW*, UInt16*, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT),
+    enum_backups : Proc(IMSAdminBaseW*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT),
     delete_backup : Proc(IMSAdminBaseW*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     unmarshal_interface : Proc(IMSAdminBaseW*, Void**, Win32cr::Foundation::HRESULT),
     get_server_guid : Proc(IMSAdminBaseW*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSAdminBaseW, lpVtbl : IMSAdminBaseWVtbl* do
+  record IMSAdminBaseW, lpVtbl : IMSAdminBaseWVtable* do
     GUID = LibC::GUID.new(0x70b51430_u32, 0xb6ca_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IMSAdminBaseW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2022,7 +2043,7 @@ module Win32cr::System::Iis
     def delete_child_keys(this : IMSAdminBaseW*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_child_keys.call(this, hMDHandle, pszMDPath)
     end
-    def enum_keys(this : IMSAdminBaseW*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, pszMDName : UInt16*, dwMDEnumObjectIndex : UInt32) : Win32cr::Foundation::HRESULT
+    def enum_keys(this : IMSAdminBaseW*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, pszMDName : Win32cr::Foundation::PWSTR, dwMDEnumObjectIndex : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_keys.call(this, hMDHandle, pszMDPath, pszMDName, dwMDEnumObjectIndex)
     end
     def copy_key(this : IMSAdminBaseW*, hMDSourceHandle : UInt32, pszMDSourcePath : Win32cr::Foundation::PWSTR, hMDDestHandle : UInt32, pszMDDestPath : Win32cr::Foundation::PWSTR, bMDOverwriteFlag : Win32cr::Foundation::BOOL, bMDCopyFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -2052,7 +2073,7 @@ module Win32cr::System::Iis
     def copy_data(this : IMSAdminBaseW*, hMDSourceHandle : UInt32, pszMDSourcePath : Win32cr::Foundation::PWSTR, hMDDestHandle : UInt32, pszMDDestPath : Win32cr::Foundation::PWSTR, dwMDAttributes : UInt32, dwMDUserType : UInt32, dwMDDataType : UInt32, bMDCopyFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_data.call(this, hMDSourceHandle, pszMDSourcePath, hMDDestHandle, pszMDDestPath, dwMDAttributes, dwMDUserType, dwMDDataType, bMDCopyFlag)
     end
-    def get_data_paths(this : IMSAdminBaseW*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDIdentifier : UInt32, dwMDDataType : UInt32, dwMDBufferSize : UInt32, pszBuffer : UInt16*, pdwMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_data_paths(this : IMSAdminBaseW*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDIdentifier : UInt32, dwMDDataType : UInt32, dwMDBufferSize : UInt32, pszBuffer : Win32cr::Foundation::PWSTR, pdwMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_data_paths.call(this, hMDHandle, pszMDPath, dwMDIdentifier, dwMDDataType, dwMDBufferSize, pszBuffer, pdwMDRequiredBufferSize)
     end
     def open_key(this : IMSAdminBaseW*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDAccessRequested : UInt32, dwMDTimeOut : UInt32, phMDNewHandle : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2094,7 +2115,7 @@ module Win32cr::System::Iis
     def restore(this : IMSAdminBaseW*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, dwMDVersion : UInt32, dwMDFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore.call(this, pszMDBackupLocation, dwMDVersion, dwMDFlags)
     end
-    def enum_backups(this : IMSAdminBaseW*, pszMDBackupLocation : UInt16*, pdwMDVersion : UInt32*, pftMDBackupTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
+    def enum_backups(this : IMSAdminBaseW*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, pdwMDVersion : UInt32*, pftMDBackupTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_backups.call(this, pszMDBackupLocation, pdwMDVersion, pftMDBackupTime, dwMDEnumIndex)
     end
     def delete_backup(this : IMSAdminBaseW*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, dwMDVersion : UInt32) : Win32cr::Foundation::HRESULT
@@ -2110,14 +2131,15 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IMSAdminBase2WVtbl,
+
+  record IMSAdminBase2WVtable,
     query_interface : Proc(IMSAdminBase2W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSAdminBase2W*, UInt32),
     release : Proc(IMSAdminBase2W*, UInt32),
     add_key : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     delete_key : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     delete_child_keys : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    enum_keys : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     copy_key : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     rename_key : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     set_data : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::System::Iis::METADATA_RECORD*, Win32cr::Foundation::HRESULT),
@@ -2127,7 +2149,7 @@ module Win32cr::System::Iis
     get_all_data : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
     delete_all_data : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     copy_data : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_data_paths : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_data_paths : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
     open_key : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     close_key : Proc(IMSAdminBase2W*, UInt32, Win32cr::Foundation::HRESULT),
     change_permissions : Proc(IMSAdminBase2W*, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
@@ -2141,7 +2163,7 @@ module Win32cr::System::Iis
     key_exchange_phase2 : Proc(IMSAdminBase2W*, Win32cr::Foundation::HRESULT),
     backup : Proc(IMSAdminBase2W*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     restore : Proc(IMSAdminBase2W*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    enum_backups : Proc(IMSAdminBase2W*, UInt16*, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT),
+    enum_backups : Proc(IMSAdminBase2W*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT),
     delete_backup : Proc(IMSAdminBase2W*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     unmarshal_interface : Proc(IMSAdminBase2W*, Void**, Win32cr::Foundation::HRESULT),
     get_server_guid : Proc(IMSAdminBase2W*, Win32cr::Foundation::HRESULT),
@@ -2150,11 +2172,11 @@ module Win32cr::System::Iis
     export : Proc(IMSAdminBase2W*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     import : Proc(IMSAdminBase2W*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     restore_history : Proc(IMSAdminBase2W*, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    enum_history : Proc(IMSAdminBase2W*, UInt16*, UInt32*, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT)
+    enum_history : Proc(IMSAdminBase2W*, Win32cr::Foundation::PWSTR, UInt32*, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSAdminBase2W, lpVtbl : IMSAdminBase2WVtbl* do
+  record IMSAdminBase2W, lpVtbl : IMSAdminBase2WVtable* do
     GUID = LibC::GUID.new(0x8298d101_u32, 0xf992_u16, 0x43b7_u16, StaticArray[0x8e_u8, 0xca_u8, 0x50_u8, 0x52_u8, 0xd8_u8, 0x85_u8, 0xb9_u8, 0x95_u8])
     def query_interface(this : IMSAdminBase2W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2174,7 +2196,7 @@ module Win32cr::System::Iis
     def delete_child_keys(this : IMSAdminBase2W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_child_keys.call(this, hMDHandle, pszMDPath)
     end
-    def enum_keys(this : IMSAdminBase2W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, pszMDName : UInt16*, dwMDEnumObjectIndex : UInt32) : Win32cr::Foundation::HRESULT
+    def enum_keys(this : IMSAdminBase2W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, pszMDName : Win32cr::Foundation::PWSTR, dwMDEnumObjectIndex : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_keys.call(this, hMDHandle, pszMDPath, pszMDName, dwMDEnumObjectIndex)
     end
     def copy_key(this : IMSAdminBase2W*, hMDSourceHandle : UInt32, pszMDSourcePath : Win32cr::Foundation::PWSTR, hMDDestHandle : UInt32, pszMDDestPath : Win32cr::Foundation::PWSTR, bMDOverwriteFlag : Win32cr::Foundation::BOOL, bMDCopyFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -2204,7 +2226,7 @@ module Win32cr::System::Iis
     def copy_data(this : IMSAdminBase2W*, hMDSourceHandle : UInt32, pszMDSourcePath : Win32cr::Foundation::PWSTR, hMDDestHandle : UInt32, pszMDDestPath : Win32cr::Foundation::PWSTR, dwMDAttributes : UInt32, dwMDUserType : UInt32, dwMDDataType : UInt32, bMDCopyFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_data.call(this, hMDSourceHandle, pszMDSourcePath, hMDDestHandle, pszMDDestPath, dwMDAttributes, dwMDUserType, dwMDDataType, bMDCopyFlag)
     end
-    def get_data_paths(this : IMSAdminBase2W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDIdentifier : UInt32, dwMDDataType : UInt32, dwMDBufferSize : UInt32, pszBuffer : UInt16*, pdwMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_data_paths(this : IMSAdminBase2W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDIdentifier : UInt32, dwMDDataType : UInt32, dwMDBufferSize : UInt32, pszBuffer : Win32cr::Foundation::PWSTR, pdwMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_data_paths.call(this, hMDHandle, pszMDPath, dwMDIdentifier, dwMDDataType, dwMDBufferSize, pszBuffer, pdwMDRequiredBufferSize)
     end
     def open_key(this : IMSAdminBase2W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDAccessRequested : UInt32, dwMDTimeOut : UInt32, phMDNewHandle : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2246,7 +2268,7 @@ module Win32cr::System::Iis
     def restore(this : IMSAdminBase2W*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, dwMDVersion : UInt32, dwMDFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore.call(this, pszMDBackupLocation, dwMDVersion, dwMDFlags)
     end
-    def enum_backups(this : IMSAdminBase2W*, pszMDBackupLocation : UInt16*, pdwMDVersion : UInt32*, pftMDBackupTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
+    def enum_backups(this : IMSAdminBase2W*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, pdwMDVersion : UInt32*, pftMDBackupTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_backups.call(this, pszMDBackupLocation, pdwMDVersion, pftMDBackupTime, dwMDEnumIndex)
     end
     def delete_backup(this : IMSAdminBase2W*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, dwMDVersion : UInt32) : Win32cr::Foundation::HRESULT
@@ -2273,21 +2295,22 @@ module Win32cr::System::Iis
     def restore_history(this : IMSAdminBase2W*, pszMDHistoryLocation : Win32cr::Foundation::PWSTR, dwMDMajorVersion : UInt32, dwMDMinorVersion : UInt32, dwMDFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore_history.call(this, pszMDHistoryLocation, dwMDMajorVersion, dwMDMinorVersion, dwMDFlags)
     end
-    def enum_history(this : IMSAdminBase2W*, pszMDHistoryLocation : UInt16*, pdwMDMajorVersion : UInt32*, pdwMDMinorVersion : UInt32*, pftMDHistoryTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
+    def enum_history(this : IMSAdminBase2W*, pszMDHistoryLocation : Win32cr::Foundation::PWSTR, pdwMDMajorVersion : UInt32*, pdwMDMinorVersion : UInt32*, pftMDHistoryTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_history.call(this, pszMDHistoryLocation, pdwMDMajorVersion, pdwMDMinorVersion, pftMDHistoryTime, dwMDEnumIndex)
     end
 
   end
 
   @[Extern]
-  record IMSAdminBase3WVtbl,
+
+  record IMSAdminBase3WVtable,
     query_interface : Proc(IMSAdminBase3W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSAdminBase3W*, UInt32),
     release : Proc(IMSAdminBase3W*, UInt32),
     add_key : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     delete_key : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     delete_child_keys : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    enum_keys : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    enum_keys : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     copy_key : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     rename_key : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     set_data : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::System::Iis::METADATA_RECORD*, Win32cr::Foundation::HRESULT),
@@ -2297,7 +2320,7 @@ module Win32cr::System::Iis
     get_all_data : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, UInt32*, UInt32*, UInt32, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
     delete_all_data : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     copy_data : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_data_paths : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_data_paths : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT),
     open_key : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     close_key : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::HRESULT),
     change_permissions : Proc(IMSAdminBase3W*, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
@@ -2311,7 +2334,7 @@ module Win32cr::System::Iis
     key_exchange_phase2 : Proc(IMSAdminBase3W*, Win32cr::Foundation::HRESULT),
     backup : Proc(IMSAdminBase3W*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     restore : Proc(IMSAdminBase3W*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    enum_backups : Proc(IMSAdminBase3W*, UInt16*, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT),
+    enum_backups : Proc(IMSAdminBase3W*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT),
     delete_backup : Proc(IMSAdminBase3W*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     unmarshal_interface : Proc(IMSAdminBase3W*, Void**, Win32cr::Foundation::HRESULT),
     get_server_guid : Proc(IMSAdminBase3W*, Win32cr::Foundation::HRESULT),
@@ -2320,12 +2343,12 @@ module Win32cr::System::Iis
     export : Proc(IMSAdminBase3W*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     import : Proc(IMSAdminBase3W*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     restore_history : Proc(IMSAdminBase3W*, Win32cr::Foundation::PWSTR, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT),
-    enum_history : Proc(IMSAdminBase3W*, UInt16*, UInt32*, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT),
-    get_child_paths : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT)
+    enum_history : Proc(IMSAdminBase3W*, Win32cr::Foundation::PWSTR, UInt32*, UInt32*, Win32cr::Foundation::FILETIME*, UInt32, Win32cr::Foundation::HRESULT),
+    get_child_paths : Proc(IMSAdminBase3W*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSAdminBase3W, lpVtbl : IMSAdminBase3WVtbl* do
+  record IMSAdminBase3W, lpVtbl : IMSAdminBase3WVtable* do
     GUID = LibC::GUID.new(0xf612954d_u32, 0x3b0b_u16, 0x4c56_u16, StaticArray[0x95_u8, 0x63_u8, 0x22_u8, 0x7b_u8, 0x7b_u8, 0xe6_u8, 0x24_u8, 0xb4_u8])
     def query_interface(this : IMSAdminBase3W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2345,7 +2368,7 @@ module Win32cr::System::Iis
     def delete_child_keys(this : IMSAdminBase3W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_child_keys.call(this, hMDHandle, pszMDPath)
     end
-    def enum_keys(this : IMSAdminBase3W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, pszMDName : UInt16*, dwMDEnumObjectIndex : UInt32) : Win32cr::Foundation::HRESULT
+    def enum_keys(this : IMSAdminBase3W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, pszMDName : Win32cr::Foundation::PWSTR, dwMDEnumObjectIndex : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_keys.call(this, hMDHandle, pszMDPath, pszMDName, dwMDEnumObjectIndex)
     end
     def copy_key(this : IMSAdminBase3W*, hMDSourceHandle : UInt32, pszMDSourcePath : Win32cr::Foundation::PWSTR, hMDDestHandle : UInt32, pszMDDestPath : Win32cr::Foundation::PWSTR, bMDOverwriteFlag : Win32cr::Foundation::BOOL, bMDCopyFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -2375,7 +2398,7 @@ module Win32cr::System::Iis
     def copy_data(this : IMSAdminBase3W*, hMDSourceHandle : UInt32, pszMDSourcePath : Win32cr::Foundation::PWSTR, hMDDestHandle : UInt32, pszMDDestPath : Win32cr::Foundation::PWSTR, dwMDAttributes : UInt32, dwMDUserType : UInt32, dwMDDataType : UInt32, bMDCopyFlag : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.copy_data.call(this, hMDSourceHandle, pszMDSourcePath, hMDDestHandle, pszMDDestPath, dwMDAttributes, dwMDUserType, dwMDDataType, bMDCopyFlag)
     end
-    def get_data_paths(this : IMSAdminBase3W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDIdentifier : UInt32, dwMDDataType : UInt32, dwMDBufferSize : UInt32, pszBuffer : UInt16*, pdwMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_data_paths(this : IMSAdminBase3W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDIdentifier : UInt32, dwMDDataType : UInt32, dwMDBufferSize : UInt32, pszBuffer : Win32cr::Foundation::PWSTR, pdwMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_data_paths.call(this, hMDHandle, pszMDPath, dwMDIdentifier, dwMDDataType, dwMDBufferSize, pszBuffer, pdwMDRequiredBufferSize)
     end
     def open_key(this : IMSAdminBase3W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, dwMDAccessRequested : UInt32, dwMDTimeOut : UInt32, phMDNewHandle : UInt32*) : Win32cr::Foundation::HRESULT
@@ -2417,7 +2440,7 @@ module Win32cr::System::Iis
     def restore(this : IMSAdminBase3W*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, dwMDVersion : UInt32, dwMDFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore.call(this, pszMDBackupLocation, dwMDVersion, dwMDFlags)
     end
-    def enum_backups(this : IMSAdminBase3W*, pszMDBackupLocation : UInt16*, pdwMDVersion : UInt32*, pftMDBackupTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
+    def enum_backups(this : IMSAdminBase3W*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, pdwMDVersion : UInt32*, pftMDBackupTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_backups.call(this, pszMDBackupLocation, pdwMDVersion, pftMDBackupTime, dwMDEnumIndex)
     end
     def delete_backup(this : IMSAdminBase3W*, pszMDBackupLocation : Win32cr::Foundation::PWSTR, dwMDVersion : UInt32) : Win32cr::Foundation::HRESULT
@@ -2444,25 +2467,26 @@ module Win32cr::System::Iis
     def restore_history(this : IMSAdminBase3W*, pszMDHistoryLocation : Win32cr::Foundation::PWSTR, dwMDMajorVersion : UInt32, dwMDMinorVersion : UInt32, dwMDFlags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.restore_history.call(this, pszMDHistoryLocation, dwMDMajorVersion, dwMDMinorVersion, dwMDFlags)
     end
-    def enum_history(this : IMSAdminBase3W*, pszMDHistoryLocation : UInt16*, pdwMDMajorVersion : UInt32*, pdwMDMinorVersion : UInt32*, pftMDHistoryTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
+    def enum_history(this : IMSAdminBase3W*, pszMDHistoryLocation : Win32cr::Foundation::PWSTR, pdwMDMajorVersion : UInt32*, pdwMDMinorVersion : UInt32*, pftMDHistoryTime : Win32cr::Foundation::FILETIME*, dwMDEnumIndex : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_history.call(this, pszMDHistoryLocation, pdwMDMajorVersion, pdwMDMinorVersion, pftMDHistoryTime, dwMDEnumIndex)
     end
-    def get_child_paths(this : IMSAdminBase3W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, cchMDBufferSize : UInt32, pszBuffer : UInt16*, pcchMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
+    def get_child_paths(this : IMSAdminBase3W*, hMDHandle : UInt32, pszMDPath : Win32cr::Foundation::PWSTR, cchMDBufferSize : UInt32, pszBuffer : Win32cr::Foundation::PWSTR, pcchMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_child_paths.call(this, hMDHandle, pszMDPath, cchMDBufferSize, pszBuffer, pcchMDRequiredBufferSize)
     end
 
   end
 
   @[Extern]
-  record IMSImpExpHelpWVtbl,
+
+  record IMSImpExpHelpWVtable,
     query_interface : Proc(IMSImpExpHelpW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSImpExpHelpW*, UInt32),
     release : Proc(IMSImpExpHelpW*, UInt32),
-    enumerate_paths_in_file : Proc(IMSImpExpHelpW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt16*, UInt32*, Win32cr::Foundation::HRESULT)
+    enumerate_paths_in_file : Proc(IMSImpExpHelpW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSImpExpHelpW, lpVtbl : IMSImpExpHelpWVtbl* do
+  record IMSImpExpHelpW, lpVtbl : IMSImpExpHelpWVtable* do
     GUID = LibC::GUID.new(0x29ff67ff_u32, 0x8050_u16, 0x480f_u16, StaticArray[0x9f_u8, 0x30_u8, 0xcc_u8, 0x41_u8, 0x63_u8, 0x5f_u8, 0x2f_u8, 0x9d_u8])
     def query_interface(this : IMSImpExpHelpW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2473,14 +2497,15 @@ module Win32cr::System::Iis
     def release(this : IMSImpExpHelpW*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def enumerate_paths_in_file(this : IMSImpExpHelpW*, pszFileName : Win32cr::Foundation::PWSTR, pszKeyType : Win32cr::Foundation::PWSTR, dwMDBufferSize : UInt32, pszBuffer : UInt16*, pdwMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
+    def enumerate_paths_in_file(this : IMSImpExpHelpW*, pszFileName : Win32cr::Foundation::PWSTR, pszKeyType : Win32cr::Foundation::PWSTR, dwMDBufferSize : UInt32, pszBuffer : Win32cr::Foundation::PWSTR, pdwMDRequiredBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumerate_paths_in_file.call(this, pszFileName, pszKeyType, dwMDBufferSize, pszBuffer, pdwMDRequiredBufferSize)
     end
 
   end
 
   @[Extern]
-  record IMSAdminBaseSinkWVtbl,
+
+  record IMSAdminBaseSinkWVtable,
     query_interface : Proc(IMSAdminBaseSinkW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSAdminBaseSinkW*, UInt32),
     release : Proc(IMSAdminBaseSinkW*, UInt32),
@@ -2489,7 +2514,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IMSAdminBaseSinkW, lpVtbl : IMSAdminBaseSinkWVtbl* do
+  record IMSAdminBaseSinkW, lpVtbl : IMSAdminBaseSinkWVtable* do
     GUID = LibC::GUID.new(0xa9e69612_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IMSAdminBaseSinkW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2510,7 +2535,8 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIMSAdminBaseSinkWVtbl,
+
+  record AsyncIMSAdminBaseSinkWVtable,
     query_interface : Proc(AsyncIMSAdminBaseSinkW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIMSAdminBaseSinkW*, UInt32),
     release : Proc(AsyncIMSAdminBaseSinkW*, UInt32),
@@ -2521,7 +2547,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIMSAdminBaseSinkW, lpVtbl : AsyncIMSAdminBaseSinkWVtbl* do
+  record AsyncIMSAdminBaseSinkW, lpVtbl : AsyncIMSAdminBaseSinkWVtable* do
     GUID = LibC::GUID.new(0xa9e69613_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : AsyncIMSAdminBaseSinkW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2548,22 +2574,31 @@ module Win32cr::System::Iis
   end
 
   def getExtensionVersion(pVer : Win32cr::System::Iis::HSE_VERSION_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetExtensionVersion(pVer)
+    {% end %}
   end
 
   def httpExtensionProc(pECB : Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpExtensionProc(pECB)
+    {% end %}
   end
 
   def httpFilterProc(pfc : Win32cr::System::Iis::HTTP_FILTER_CONTEXT*, notification_type : UInt32, pvNotification : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpFilterProc(pfc, notification_type, pvNotification)
+    {% end %}
   end
 
   def getFilterVersion(pVer : Win32cr::System::Iis::HTTP_FILTER_VERSION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFilterVersion(pVer)
+    {% end %}
   end
 
   @[Link("rpcproxy")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetExtensionVersion(pVer : Win32cr::System::Iis::HSE_VERSION_INFO*) : Win32cr::Foundation::BOOL
@@ -2578,4 +2613,5 @@ module Win32cr::System::Iis
     fun GetFilterVersion(pVer : Win32cr::System::Iis::HTTP_FILTER_VERSION*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

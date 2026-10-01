@@ -1,5 +1,6 @@
 require "./../../system/com.cr"
 require "./../../foundation.cr"
+require "./../../system/variant.cr"
 require "./../cryptography.cr"
 require "./../authentication/identity.cr"
 
@@ -13,7 +14,7 @@ module Win32cr::Security::Cryptography::Certificates
 
   alias FNCERTSRVBACKUPGETDATABASENAMESW = Proc(Void*, UInt16**, UInt32*, Win32cr::Foundation::HRESULT)
 
-  alias FNCERTSRVBACKUPOPENFILEW = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::LARGE_INTEGER*, Win32cr::Foundation::HRESULT)
+  alias FNCERTSRVBACKUPOPENFILEW = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, Int64*, Win32cr::Foundation::HRESULT)
 
   alias FNCERTSRVBACKUPREAD = Proc(Void*, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT)
 
@@ -102,6 +103,8 @@ module Win32cr::Security::Cryptography::Certificates
   Wszocsprevprop_deltacrl = "DeltaCrl"
   Wszocsprevprop_refreshtimeout = "RefreshTimeOut"
   Wszocsprevprop_errorcode = "RevocationErrorCode"
+  Wszocsprevprop_allowuseronlycrls = "AllowUserOnlyCrls"
+  Wszocsprevprop_allowcaonlycrls = "AllowCAOnlyCrls"
   Szbackupannotation = "Cert Server Backup Interface"
   Szrestoreannotation = "Cert Server Restore Interface"
   CSBACKUP_TYPE_MASK = 3_u32
@@ -161,6 +164,7 @@ module Win32cr::Security::Cryptography::Certificates
   CR_IN_RETURNCHALLENGE = 16777216_u32
   CR_IN_SCEPPOST = 33554432_u32
   CR_IN_CERTIFICATETRANSPARENCY = 67108864_u32
+  CR_IN_PRESIGN = 134217728_u32
   CR_DISP_REVOKED = 6_u32
   CR_OUT_BASE64REQUESTHEADER = 3_u32
   CR_OUT_HEX = 4_u32
@@ -223,6 +227,11 @@ module Win32cr::Security::Cryptography::Certificates
   CR_PROP_CERTAIAOCSPURLS = 43_u32
   CR_PROP_LOCALENAME = 44_u32
   CR_PROP_SUBJECTTEMPLATE_OIDS = 45_u32
+  CR_PROP_CRLPARTITIONCOUNT = 46_u32
+  CR_PROP_PARTITIONED_BASECRL = 47_u32
+  CR_PROP_PARTITIONED_DELTACRL = 48_u32
+  CR_PROP_PARTITIONED_BASECRLPUBLISHSTATUS = 49_u32
+  CR_PROP_PARTITIONED_DELTACRLPUBLISHSTATUS = 50_u32
   CR_PROP_SCEPSERVERCERTS = 1000_u32
   CR_PROP_SCEPSERVERCAPABILITIES = 1001_u32
   CR_PROP_SCEPSERVERCERTSCHAIN = 1002_u32
@@ -318,6 +327,9 @@ module Win32cr::Security::Cryptography::Certificates
   Wszregcrldeltaoverlapperiodcount = "CRLDeltaOverlapUnits"
   Wszregcrlpublicationurls = "CRLPublicationURLs"
   Wszregcacertpublicationurls = "CACertPublicationURLs"
+  Wszregcrlmaxpartitions = "CRLMaxPartitions"
+  Wszregcrlsuspendedpartitions = "CRLSuspendedPartitions"
+  Wszregcrlcurrentpartition = "CRLCurrentPartition"
   Wszregcaxchgvalidityperiodstring = "CAXchgValidityPeriod"
   Wszregcaxchgvalidityperiodcount = "CAXchgValidityPeriodUnits"
   Wszregcaxchgoverlapperiodstring = "CAXchgOverlapPeriod"
@@ -423,6 +435,10 @@ module Win32cr::Security::Cryptography::Certificates
   CRLF_PRESERVE_REVOKED_CA_CERTS = 524288_u32
   CRLF_DISABLE_CHAIN_VERIFICATION = 1048576_u32
   CRLF_BUILD_ROOTCA_CRLENTRIES_BASEDONKEY = 2097152_u32
+  CRLF_ENABLE_CRL_PARTITION = 4194304_u32
+  CRLF_PARTITION_ZERO_EXCLUSIVE = 8388608_u32
+  CRLF_CONTAINS_ONLY_CACERTS = 16777216_u32
+  CRLF_CONTAINS_ONLY_USERCERTS = 33554432_u32
   KRAF_ENABLEFOREIGN = 1_u32
   KRAF_SAVEBADREQUESTKEY = 2_u32
   KRAF_ENABLEARCHIVEALL = 4_u32
@@ -440,6 +456,7 @@ module Win32cr::Security::Cryptography::Certificates
   IF_ENFORCEENCRYPTICERTADMIN = 1024_u32
   IF_ENABLEEXITKEYRETRIEVAL = 2048_u32
   IF_ENABLEADMINASAUDITOR = 4096_u32
+  IF_ENABLEPRESIGNSUPPORT = 8192_u32
   PROCFLG_NONE = 0_u32
   PROCFLG_ENFORCEGOODKEYS = 1_u32
   CSURL_SERVERPUBLISH = 1_u32
@@ -738,6 +755,11 @@ module Win32cr::Security::Cryptography::Certificates
   Wszregkeyrepair = "KeyRepair"
   KR_ENABLE_MACHINE = 1_u32
   KR_ENABLE_USER = 2_u32
+  CONFIGURATION_STATUS_PARENT_REG_PATH = "Software\\Microsoft\\ADCS"
+  CONFIGURATION_STATUS_REG_VALUE_NAME = "ConfigurationStatus"
+  CONFIGURATION_REG_EPTOKENCHECKVALUE = "EPTokenCheckValue"
+  EP_TOKENCHECK_DEFAULT_VALUE = 2_u32
+  CONFIGURATION_REG_DISABLE_HTTPSONLY = "DisableHTTPSOnly"
   Wszpropdistinguishedname = "DistinguishedName"
   Wszproprawname = "RawName"
   Wszpropcountry = "Country"
@@ -786,6 +808,8 @@ module Win32cr::Security::Cryptography::Certificates
   Wszpropendorsementkeyhash = "EndorsementKeyHash"
   Wszpropendorsementcertificatehash = "EndorsementCertificateHash"
   Wszproprawprecertificate = "RawPrecertificate"
+  Wszpropcrlpartitionindex = "CRLPartitionIndex"
+  Wszproplintercertificate = "LinterCertificate"
   Wszpropchallenge = "Challenge"
   Wszpropexpectedchallenge = "ExpectedChallenge"
   Wszpropdisposition = "Disposition"
@@ -822,6 +846,7 @@ module Win32cr::Security::Cryptography::Certificates
   Wszpropfiletag = "{file}"
   Wszat_ekcertinf = "@EKCert"
   Wszat_testroot = "@TestRoot"
+  Wszproplintcertificate = "LintCertificate"
   Wszpropcatype = "CAType"
   Wszpropsanitizedcaname = "SanitizedCAName"
   Wszpropsanitizedshortname = "SanitizedShortName"
@@ -1039,18 +1064,6 @@ module Win32cr::Security::Cryptography::Certificates
 
   CLSID_CCertServerExit = LibC::GUID.new(0x4c4a5e40_u32, 0x732c_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
 
-  CLSID_CCertEncodeStringArray = LibC::GUID.new(0x19a76fe0_u32, 0x7494_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
-
-  CLSID_CCertEncodeLongArray = LibC::GUID.new(0x4e0680a0_u32, 0xa0a2_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x21_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
-
-  CLSID_CCertEncodeDateArray = LibC::GUID.new(0x301f77b0_u32, 0xa470_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x21_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
-
-  CLSID_CCertEncodeCRLDistInfo = LibC::GUID.new(0x1fa60a0_u32, 0xbbff_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x25_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
-
-  CLSID_CCertEncodeAltName = LibC::GUID.new(0x1cfc4cda_u32, 0x1271_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
-
-  CLSID_CCertEncodeBitString = LibC::GUID.new(0x6d6b3cd8_u32, 0x1278_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
-
   CLSID_CObjectId = LibC::GUID.new(0x884e2000_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
 
   CLSID_CObjectIds = LibC::GUID.new(0x884e2001_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
@@ -1205,6 +1218,18 @@ module Win32cr::Security::Cryptography::Certificates
 
   CLSID_CX509SCEPEnrollmentHelper = LibC::GUID.new(0x884e2062_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
 
+  CLSID_CCertEncodeStringArray = LibC::GUID.new(0x19a76fe0_u32, 0x7494_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
+
+  CLSID_CCertEncodeLongArray = LibC::GUID.new(0x4e0680a0_u32, 0xa0a2_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x21_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
+
+  CLSID_CCertEncodeDateArray = LibC::GUID.new(0x301f77b0_u32, 0xa470_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x21_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
+
+  CLSID_CCertEncodeCRLDistInfo = LibC::GUID.new(0x1fa60a0_u32, 0xbbff_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x25_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
+
+  CLSID_CCertEncodeAltName = LibC::GUID.new(0x1cfc4cda_u32, 0x1271_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
+
+  CLSID_CCertEncodeBitString = LibC::GUID.new(0x6d6b3cd8_u32, 0x1278_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
+
   CLSID_CEnroll2 = LibC::GUID.new(0x127698e4_u32, 0xe730_u16, 0x4e5c_u16, StaticArray[0xa2_u8, 0xb1_u8, 0x21_u8, 0x49_u8, 0xa_u8, 0x70_u8, 0xc8_u8, 0xa1_u8])
 
   CLSID_CEnroll = LibC::GUID.new(0x43f8f289_u32, 0x7a20_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0x6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xe1_u8])
@@ -1214,70 +1239,70 @@ module Win32cr::Security::Cryptography::Certificates
     CV_COLUMN_LOG_FAILED_DEFAULT = -3_i32
     CV_COLUMN_QUEUE_DEFAULT = -1_i32
   end
-  enum CERT_DELETE_ROW_FLAGS : UInt32
-    CDR_EXPIRED = 1_u32
-    CDR_REQUEST_LAST_CHANGED = 2_u32
+  enum CERT_DELETE_ROW_FLAGS
+    CDR_EXPIRED = 1_i32
+    CDR_REQUEST_LAST_CHANGED = 2_i32
   end
-  enum FULL_RESPONSE_PROPERTY_ID : UInt32
-    FR_PROP_NONE = 0_u32
-    FR_PROP_FULLRESPONSE = 1_u32
-    FR_PROP_STATUSINFOCOUNT = 2_u32
-    FR_PROP_BODYPARTSTRING = 3_u32
-    FR_PROP_STATUS = 4_u32
-    FR_PROP_STATUSSTRING = 5_u32
-    FR_PROP_OTHERINFOCHOICE = 6_u32
-    FR_PROP_FAILINFO = 7_u32
-    FR_PROP_PENDINFOTOKEN = 8_u32
-    FR_PROP_PENDINFOTIME = 9_u32
-    FR_PROP_ISSUEDCERTIFICATEHASH = 10_u32
-    FR_PROP_ISSUEDCERTIFICATE = 11_u32
-    FR_PROP_ISSUEDCERTIFICATECHAIN = 12_u32
-    FR_PROP_ISSUEDCERTIFICATECRLCHAIN = 13_u32
-    FR_PROP_ENCRYPTEDKEYHASH = 14_u32
-    FR_PROP_FULLRESPONSENOPKCS7 = 15_u32
-    FR_PROP_CAEXCHANGECERTIFICATEHASH = 16_u32
-    FR_PROP_CAEXCHANGECERTIFICATE = 17_u32
-    FR_PROP_CAEXCHANGECERTIFICATECHAIN = 18_u32
-    FR_PROP_CAEXCHANGECERTIFICATECRLCHAIN = 19_u32
-    FR_PROP_ATTESTATIONCHALLENGE = 20_u32
-    FR_PROP_ATTESTATIONPROVIDERNAME = 21_u32
+  enum FULL_RESPONSE_PROPERTY_ID
+    FR_PROP_NONE = 0_i32
+    FR_PROP_FULLRESPONSE = 1_i32
+    FR_PROP_STATUSINFOCOUNT = 2_i32
+    FR_PROP_BODYPARTSTRING = 3_i32
+    FR_PROP_STATUS = 4_i32
+    FR_PROP_STATUSSTRING = 5_i32
+    FR_PROP_OTHERINFOCHOICE = 6_i32
+    FR_PROP_FAILINFO = 7_i32
+    FR_PROP_PENDINFOTOKEN = 8_i32
+    FR_PROP_PENDINFOTIME = 9_i32
+    FR_PROP_ISSUEDCERTIFICATEHASH = 10_i32
+    FR_PROP_ISSUEDCERTIFICATE = 11_i32
+    FR_PROP_ISSUEDCERTIFICATECHAIN = 12_i32
+    FR_PROP_ISSUEDCERTIFICATECRLCHAIN = 13_i32
+    FR_PROP_ENCRYPTEDKEYHASH = 14_i32
+    FR_PROP_FULLRESPONSENOPKCS7 = 15_i32
+    FR_PROP_CAEXCHANGECERTIFICATEHASH = 16_i32
+    FR_PROP_CAEXCHANGECERTIFICATE = 17_i32
+    FR_PROP_CAEXCHANGECERTIFICATECHAIN = 18_i32
+    FR_PROP_CAEXCHANGECERTIFICATECRLCHAIN = 19_i32
+    FR_PROP_ATTESTATIONCHALLENGE = 20_i32
+    FR_PROP_ATTESTATIONPROVIDERNAME = 21_i32
   end
-  enum CVRC_COLUMN : UInt32
-    CVRC_COLUMN_SCHEMA = 0_u32
-    CVRC_COLUMN_RESULT = 1_u32
-    CVRC_COLUMN_VALUE = 2_u32
-    CVRC_COLUMN_MASK = 4095_u32
+  enum CVRC_COLUMN
+    CVRC_COLUMN_SCHEMA = 0_i32
+    CVRC_COLUMN_RESULT = 1_i32
+    CVRC_COLUMN_VALUE = 2_i32
+    CVRC_COLUMN_MASK = 4095_i32
   end
-  enum CERT_IMPORT_FLAGS : UInt32
-    CR_IN_BASE64HEADER = 0_u32
-    CR_IN_BASE64 = 1_u32
-    CR_IN_BINARY = 2_u32
+  enum CERT_IMPORT_FLAGS
+    CR_IN_BASE64HEADER = 0_i32
+    CR_IN_BASE64 = 1_i32
+    CR_IN_BINARY = 2_i32
   end
-  enum CERT_GET_CONFIG_FLAGS : UInt32
-    CC_DEFAULTCONFIG = 0_u32
-    CC_FIRSTCONFIG = 2_u32
-    CC_LOCALACTIVECONFIG = 4_u32
-    CC_LOCALCONFIG = 3_u32
-    CC_UIPICKCONFIG = 1_u32
-    CC_UIPICKCONFIGSKIPLOCALCA = 5_u32
+  enum CERT_GET_CONFIG_FLAGS
+    CC_DEFAULTCONFIG = 0_i32
+    CC_FIRSTCONFIG = 2_i32
+    CC_LOCALACTIVECONFIG = 4_i32
+    CC_LOCALCONFIG = 3_i32
+    CC_UIPICKCONFIG = 1_i32
+    CC_UIPICKCONFIGSKIPLOCALCA = 5_i32
   end
-  enum ENUM_CERT_COLUMN_VALUE_FLAGS : UInt32
-    CV_OUT_BASE64 = 1_u32
-    CV_OUT_BASE64HEADER = 0_u32
-    CV_OUT_BASE64REQUESTHEADER = 3_u32
-    CV_OUT_BASE64X509CRLHEADER = 9_u32
-    CV_OUT_BINARY = 2_u32
-    CV_OUT_HEX = 4_u32
-    CV_OUT_HEXADDR = 10_u32
-    CV_OUT_HEXASCII = 5_u32
-    CV_OUT_HEXASCIIADDR = 11_u32
+  enum ENUM_CERT_COLUMN_VALUE_FLAGS
+    CV_OUT_BASE64 = 1_i32
+    CV_OUT_BASE64HEADER = 0_i32
+    CV_OUT_BASE64REQUESTHEADER = 3_i32
+    CV_OUT_BASE64X509CRLHEADER = 9_i32
+    CV_OUT_BINARY = 2_i32
+    CV_OUT_HEX = 4_i32
+    CV_OUT_HEXADDR = 10_i32
+    CV_OUT_HEXASCII = 5_i32
+    CV_OUT_HEXASCIIADDR = 11_i32
   end
-  enum PENDING_REQUEST_DESIRED_PROPERTY : UInt32
-    XEPR_CADNS = 1_u32
-    XEPR_CAFRIENDLYNAME = 3_u32
-    XEPR_CANAME = 2_u32
-    XEPR_HASH = 8_u32
-    XEPR_REQUESTID = 4_u32
+  enum PENDING_REQUEST_DESIRED_PROPERTY
+    XEPR_CADNS = 1_i32
+    XEPR_CAFRIENDLYNAME = 3_i32
+    XEPR_CANAME = 2_i32
+    XEPR_HASH = 8_i32
+    XEPR_REQUESTID = 4_i32
   end
   @[Flags]
   enum CERTADMIN_GET_ROLES_FLAGS : UInt32
@@ -1296,16 +1321,16 @@ module Win32cr::Security::Cryptography::Certificates
     CR_DISP_ISSUED_OUT_OF_BAND = 4_u32
     CR_DISP_UNDER_SUBMISSION = 5_u32
   end
-  enum XEKL_KEYSIZE : UInt32
-    XEKL_KEYSIZE_MIN = 1_u32
-    XEKL_KEYSIZE_MAX = 2_u32
-    XEKL_KEYSIZE_INC = 3_u32
+  enum XEKL_KEYSIZE
+    XEKL_KEYSIZE_MIN = 1_i32
+    XEKL_KEYSIZE_MAX = 2_i32
+    XEKL_KEYSIZE_INC = 3_i32
   end
-  enum CERT_CREATE_REQUEST_FLAGS : UInt32
-    XECR_CMC = 3_u32
-    XECR_PKCS10_V1_5 = 4_u32
-    XECR_PKCS10_V2_0 = 1_u32
-    XECR_PKCS7 = 2_u32
+  enum CERT_CREATE_REQUEST_FLAGS
+    XECR_CMC = 3_i32
+    XECR_PKCS10_V1_5 = 4_i32
+    XECR_PKCS10_V2_0 = 1_i32
+    XECR_PKCS7 = 2_i32
   end
   @[Flags]
   enum CERT_EXIT_EVENT_MASK : UInt32
@@ -1317,50 +1342,50 @@ module Win32cr::Security::Cryptography::Certificates
     EXITEVENT_CRLISSUED = 32_u32
     EXITEVENT_SHUTDOWN = 64_u32
   end
-  enum ADDED_CERT_TYPE : UInt32
-    XECT_EXTENSION_V1 = 1_u32
-    XECT_EXTENSION_V2 = 2_u32
+  enum ADDED_CERT_TYPE
+    XECT_EXTENSION_V1 = 1_i32
+    XECT_EXTENSION_V2 = 2_i32
   end
-  enum CVRC_TABLE : UInt32
-    CVRC_TABLE_ATTRIBUTES = 16384_u32
-    CVRC_TABLE_CRL = 20480_u32
-    CVRC_TABLE_EXTENSIONS = 12288_u32
-    CVRC_TABLE_REQCERT = 0_u32
+  enum CVRC_TABLE
+    CVRC_TABLE_ATTRIBUTES = 16384_i32
+    CVRC_TABLE_CRL = 20480_i32
+    CVRC_TABLE_EXTENSIONS = 12288_i32
+    CVRC_TABLE_REQCERT = 0_i32
   end
-  enum CERT_PROPERTY_TYPE : UInt32
-    PROPTYPE_BINARY = 3_u32
-    PROPTYPE_DATE = 2_u32
-    PROPTYPE_LONG = 1_u32
-    PROPTYPE_STRING = 4_u32
+  enum CERT_PROPERTY_TYPE
+    PROPTYPE_BINARY = 3_i32
+    PROPTYPE_DATE = 2_i32
+    PROPTYPE_LONG = 1_i32
+    PROPTYPE_STRING = 4_i32
   end
-  enum CERT_ALT_NAME : UInt32
-    CERT_ALT_NAME_RFC822_NAME = 2_u32
-    CERT_ALT_NAME_DNS_NAME = 3_u32
-    CERT_ALT_NAME_URL = 7_u32
-    CERT_ALT_NAME_REGISTERED_ID = 9_u32
-    CERT_ALT_NAME_DIRECTORY_NAME = 5_u32
-    CERT_ALT_NAME_IP_ADDRESS = 8_u32
-    CERT_ALT_NAME_OTHER_NAME = 1_u32
+  enum CERT_ALT_NAME
+    CERT_ALT_NAME_RFC822_NAME = 2_i32
+    CERT_ALT_NAME_DNS_NAME = 3_i32
+    CERT_ALT_NAME_URL = 7_i32
+    CERT_ALT_NAME_REGISTERED_ID = 9_i32
+    CERT_ALT_NAME_DIRECTORY_NAME = 5_i32
+    CERT_ALT_NAME_IP_ADDRESS = 8_i32
+    CERT_ALT_NAME_OTHER_NAME = 1_i32
   end
   enum CSBACKUP_TYPE : UInt32
     CSBACKUP_TYPE_FULL = 1_u32
     CSBACKUP_TYPE_LOGS_ONLY = 2_u32
   end
-  enum XEKL_KEYSPEC : UInt32
-    XEKL_KEYSPEC_KEYX = 1_u32
-    XEKL_KEYSPEC_SIG = 2_u32
+  enum XEKL_KEYSPEC
+    XEKL_KEYSPEC_KEYX = 1_i32
+    XEKL_KEYSPEC_SIG = 2_i32
   end
-  enum CERT_REQUEST_OUT_TYPE : UInt32
-    CR_OUT_BASE64HEADER = 0_u32
-    CR_OUT_BASE64 = 1_u32
-    CR_OUT_BINARY = 2_u32
+  enum CERT_REQUEST_OUT_TYPE
+    CR_OUT_BASE64HEADER = 0_i32
+    CR_OUT_BASE64 = 1_i32
+    CR_OUT_BINARY = 2_i32
   end
-  enum CERT_VIEW_SEEK_OPERATOR_FLAGS : UInt32
-    CVR_SEEK_EQ = 1_u32
-    CVR_SEEK_LE = 4_u32
-    CVR_SEEK_LT = 2_u32
-    CVR_SEEK_GE = 8_u32
-    CVR_SEEK_GT = 16_u32
+  enum CERT_VIEW_SEEK_OPERATOR_FLAGS
+    CVR_SEEK_EQ = 1_i32
+    CVR_SEEK_LE = 4_i32
+    CVR_SEEK_LT = 2_i32
+    CVR_SEEK_GE = 8_i32
+    CVR_SEEK_GT = 16_i32
   end
   enum OCSPSigningFlag
     OCSP_SF_SILENT = 1_i32
@@ -1997,7 +2022,8 @@ module Win32cr::Security::Cryptography::Certificates
     XCN_NCRYPT_SIGNATURE_OPERATION = 16_i32
     XCN_NCRYPT_RNG_OPERATION = 32_i32
     XCN_NCRYPT_KEY_DERIVATION_OPERATION = 64_i32
-    XCN_NCRYPT_ANY_ASYMMETRIC_OPERATION = 28_i32
+    XCN_NCRYPT_KEY_ENCAPSULATION_OPERATION = 128_i32
+    XCN_NCRYPT_ANY_ASYMMETRIC_OPERATION = 156_i32
     XCN_NCRYPT_PREFER_SIGNATURE_ONLY_OPERATION = 2097152_i32
     XCN_NCRYPT_PREFER_NON_SIGNATURE_OPERATION = 4194304_i32
     XCN_NCRYPT_EXACT_MATCH_OPERATION = 8388608_i32
@@ -2202,7 +2228,7 @@ module Win32cr::Security::Cryptography::Certificates
     XCN_CERT_CLR_DELETE_KEY_PROP_ID = 125_i32
     XCN_CERT_NOT_BEFORE_FILETIME_PROP_ID = 126_i32
     XCN_CERT_CERT_NOT_BEFORE_ENHKEY_USAGE_PROP_ID = 127_i32
-    XCN_CERT_FIRST_RESERVED_PROP_ID = 128_i32
+    XCN_CERT_FIRST_RESERVED_PROP_ID = 130_i32
     XCN_CERT_LAST_RESERVED_PROP_ID = 32767_i32
     XCN_CERT_FIRST_USER_PROP_ID = 32768_i32
     XCN_CERT_LAST_USER_PROP_ID = 65535_i32
@@ -2496,28 +2522,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnumCERTVIEWCOLUMNVtbl,
+
+  record IEnumCERTVIEWCOLUMNVtable,
     query_interface : Proc(IEnumCERTVIEWCOLUMN*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCERTVIEWCOLUMN*, UInt32),
     release : Proc(IEnumCERTVIEWCOLUMN*, UInt32),
     get_type_info_count : Proc(IEnumCERTVIEWCOLUMN*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IEnumCERTVIEWCOLUMN*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IEnumCERTVIEWCOLUMN*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IEnumCERTVIEWCOLUMN*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IEnumCERTVIEWCOLUMN*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IEnumCERTVIEWCOLUMN*, Int32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(IEnumCERTVIEWCOLUMN*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_display_name : Proc(IEnumCERTVIEWCOLUMN*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_type : Proc(IEnumCERTVIEWCOLUMN*, Int32*, Win32cr::Foundation::HRESULT),
     is_indexed : Proc(IEnumCERTVIEWCOLUMN*, Int32*, Win32cr::Foundation::HRESULT),
     get_max_length : Proc(IEnumCERTVIEWCOLUMN*, Int32*, Win32cr::Foundation::HRESULT),
-    get_value : Proc(IEnumCERTVIEWCOLUMN*, Win32cr::Security::Cryptography::Certificates::ENUM_CERT_COLUMN_VALUE_FLAGS, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(IEnumCERTVIEWCOLUMN*, Win32cr::Security::Cryptography::Certificates::ENUM_CERT_COLUMN_VALUE_FLAGS, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     skip : Proc(IEnumCERTVIEWCOLUMN*, Int32, Win32cr::Foundation::HRESULT),
     reset : Proc(IEnumCERTVIEWCOLUMN*, Win32cr::Foundation::HRESULT),
     clone : Proc(IEnumCERTVIEWCOLUMN*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IEnumCERTVIEWCOLUMN, lpVtbl : IEnumCERTVIEWCOLUMNVtbl* do
+  record IEnumCERTVIEWCOLUMN, lpVtbl : IEnumCERTVIEWCOLUMNVtable* do
     GUID = LibC::GUID.new(0x9c735be2_u32, 0x57a5_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xdb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : IEnumCERTVIEWCOLUMN*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2537,8 +2564,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IEnumCERTVIEWCOLUMN*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IEnumCERTVIEWCOLUMN*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IEnumCERTVIEWCOLUMN*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def next__(this : IEnumCERTVIEWCOLUMN*, pIndex : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.next__.call(this, pIndex)
@@ -2558,7 +2585,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_max_length(this : IEnumCERTVIEWCOLUMN*, pMaxLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_max_length.call(this, pMaxLength)
     end
-    def get_value(this : IEnumCERTVIEWCOLUMN*, flags : Win32cr::Security::Cryptography::Certificates::ENUM_CERT_COLUMN_VALUE_FLAGS, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_value(this : IEnumCERTVIEWCOLUMN*, flags : Win32cr::Security::Cryptography::Certificates::ENUM_CERT_COLUMN_VALUE_FLAGS, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, flags, pvarValue)
     end
     def skip(this : IEnumCERTVIEWCOLUMN*, celt : Int32) : Win32cr::Foundation::HRESULT
@@ -2574,14 +2601,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnumCERTVIEWATTRIBUTEVtbl,
+
+  record IEnumCERTVIEWATTRIBUTEVtable,
     query_interface : Proc(IEnumCERTVIEWATTRIBUTE*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCERTVIEWATTRIBUTE*, UInt32),
     release : Proc(IEnumCERTVIEWATTRIBUTE*, UInt32),
     get_type_info_count : Proc(IEnumCERTVIEWATTRIBUTE*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IEnumCERTVIEWATTRIBUTE*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IEnumCERTVIEWATTRIBUTE*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IEnumCERTVIEWATTRIBUTE*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IEnumCERTVIEWATTRIBUTE*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IEnumCERTVIEWATTRIBUTE*, Int32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(IEnumCERTVIEWATTRIBUTE*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_value : Proc(IEnumCERTVIEWATTRIBUTE*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2591,7 +2619,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnumCERTVIEWATTRIBUTE, lpVtbl : IEnumCERTVIEWATTRIBUTEVtbl* do
+  record IEnumCERTVIEWATTRIBUTE, lpVtbl : IEnumCERTVIEWATTRIBUTEVtable* do
     GUID = LibC::GUID.new(0xe77db656_u32, 0x7653_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : IEnumCERTVIEWATTRIBUTE*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2611,8 +2639,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IEnumCERTVIEWATTRIBUTE*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IEnumCERTVIEWATTRIBUTE*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IEnumCERTVIEWATTRIBUTE*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def next__(this : IEnumCERTVIEWATTRIBUTE*, pIndex : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.next__.call(this, pIndex)
@@ -2636,25 +2664,26 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnumCERTVIEWEXTENSIONVtbl,
+
+  record IEnumCERTVIEWEXTENSIONVtable,
     query_interface : Proc(IEnumCERTVIEWEXTENSION*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCERTVIEWEXTENSION*, UInt32),
     release : Proc(IEnumCERTVIEWEXTENSION*, UInt32),
     get_type_info_count : Proc(IEnumCERTVIEWEXTENSION*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IEnumCERTVIEWEXTENSION*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IEnumCERTVIEWEXTENSION*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IEnumCERTVIEWEXTENSION*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IEnumCERTVIEWEXTENSION*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IEnumCERTVIEWEXTENSION*, Int32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(IEnumCERTVIEWEXTENSION*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_flags : Proc(IEnumCERTVIEWEXTENSION*, Int32*, Win32cr::Foundation::HRESULT),
-    get_value : Proc(IEnumCERTVIEWEXTENSION*, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::Security::Cryptography::Certificates::ENUM_CERT_COLUMN_VALUE_FLAGS, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(IEnumCERTVIEWEXTENSION*, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::Security::Cryptography::Certificates::ENUM_CERT_COLUMN_VALUE_FLAGS, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     skip : Proc(IEnumCERTVIEWEXTENSION*, Int32, Win32cr::Foundation::HRESULT),
     reset : Proc(IEnumCERTVIEWEXTENSION*, Win32cr::Foundation::HRESULT),
     clone : Proc(IEnumCERTVIEWEXTENSION*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IEnumCERTVIEWEXTENSION, lpVtbl : IEnumCERTVIEWEXTENSIONVtbl* do
+  record IEnumCERTVIEWEXTENSION, lpVtbl : IEnumCERTVIEWEXTENSIONVtable* do
     GUID = LibC::GUID.new(0xe7dd1466_u32, 0x7653_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : IEnumCERTVIEWEXTENSION*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2674,8 +2703,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IEnumCERTVIEWEXTENSION*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IEnumCERTVIEWEXTENSION*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IEnumCERTVIEWEXTENSION*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def next__(this : IEnumCERTVIEWEXTENSION*, pIndex : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.next__.call(this, pIndex)
@@ -2686,7 +2715,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_flags(this : IEnumCERTVIEWEXTENSION*, pFlags : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_flags.call(this, pFlags)
     end
-    def get_value(this : IEnumCERTVIEWEXTENSION*, type__ : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Win32cr::Security::Cryptography::Certificates::ENUM_CERT_COLUMN_VALUE_FLAGS, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_value(this : IEnumCERTVIEWEXTENSION*, type__ : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Win32cr::Security::Cryptography::Certificates::ENUM_CERT_COLUMN_VALUE_FLAGS, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, type__, flags, pvarValue)
     end
     def skip(this : IEnumCERTVIEWEXTENSION*, celt : Int32) : Win32cr::Foundation::HRESULT
@@ -2702,14 +2731,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnumCERTVIEWROWVtbl,
+
+  record IEnumCERTVIEWROWVtable,
     query_interface : Proc(IEnumCERTVIEWROW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCERTVIEWROW*, UInt32),
     release : Proc(IEnumCERTVIEWROW*, UInt32),
     get_type_info_count : Proc(IEnumCERTVIEWROW*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IEnumCERTVIEWROW*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IEnumCERTVIEWROW*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IEnumCERTVIEWROW*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IEnumCERTVIEWROW*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IEnumCERTVIEWROW*, Int32*, Win32cr::Foundation::HRESULT),
     enum_cert_view_column : Proc(IEnumCERTVIEWROW*, Void**, Win32cr::Foundation::HRESULT),
     enum_cert_view_attribute : Proc(IEnumCERTVIEWROW*, Int32, Void**, Win32cr::Foundation::HRESULT),
@@ -2721,7 +2751,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnumCERTVIEWROW, lpVtbl : IEnumCERTVIEWROWVtbl* do
+  record IEnumCERTVIEWROW, lpVtbl : IEnumCERTVIEWROWVtable* do
     GUID = LibC::GUID.new(0xd1157f4c_u32, 0x5af2_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xdc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : IEnumCERTVIEWROW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2741,8 +2771,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IEnumCERTVIEWROW*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IEnumCERTVIEWROW*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IEnumCERTVIEWROW*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def next__(this : IEnumCERTVIEWROW*, pIndex : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.next__.call(this, pIndex)
@@ -2772,26 +2802,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertViewVtbl,
+
+  record ICertViewVtable,
     query_interface : Proc(ICertView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertView*, UInt32),
     release : Proc(ICertView*, UInt32),
     get_type_info_count : Proc(ICertView*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertView*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertView*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertView*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertView*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open_connection : Proc(ICertView*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     enum_cert_view_column : Proc(ICertView*, Win32cr::Security::Cryptography::Certificates::CVRC_COLUMN, Void**, Win32cr::Foundation::HRESULT),
     get_column_count : Proc(ICertView*, Win32cr::Security::Cryptography::Certificates::CVRC_COLUMN, Int32*, Win32cr::Foundation::HRESULT),
     get_column_index : Proc(ICertView*, Win32cr::Security::Cryptography::Certificates::CVRC_COLUMN, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     set_result_column_count : Proc(ICertView*, Int32, Win32cr::Foundation::HRESULT),
     set_result_column : Proc(ICertView*, Int32, Win32cr::Foundation::HRESULT),
-    set_restriction : Proc(ICertView*, Win32cr::Security::Cryptography::Certificates::CERT_VIEW_COLUMN_INDEX, Win32cr::Security::Cryptography::Certificates::CERT_VIEW_SEEK_OPERATOR_FLAGS, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_restriction : Proc(ICertView*, Win32cr::Security::Cryptography::Certificates::CERT_VIEW_COLUMN_INDEX, Win32cr::Security::Cryptography::Certificates::CERT_VIEW_SEEK_OPERATOR_FLAGS, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     open_view : Proc(ICertView*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertView, lpVtbl : ICertViewVtbl* do
+  record ICertView, lpVtbl : ICertViewVtable* do
     GUID = LibC::GUID.new(0xc3fac344_u32, 0x1e84_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : ICertView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2811,8 +2842,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertView*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertView*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertView*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open_connection(this : ICertView*, strConfig : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_connection.call(this, strConfig)
@@ -2832,7 +2863,7 @@ module Win32cr::Security::Cryptography::Certificates
     def set_result_column(this : ICertView*, column_index : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_result_column.call(this, column_index)
     end
-    def set_restriction(this : ICertView*, column_index : Win32cr::Security::Cryptography::Certificates::CERT_VIEW_COLUMN_INDEX, seek_operator : Win32cr::Security::Cryptography::Certificates::CERT_VIEW_SEEK_OPERATOR_FLAGS, sort_order : Int32, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_restriction(this : ICertView*, column_index : Win32cr::Security::Cryptography::Certificates::CERT_VIEW_COLUMN_INDEX, seek_operator : Win32cr::Security::Cryptography::Certificates::CERT_VIEW_SEEK_OPERATOR_FLAGS, sort_order : Int32, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_restriction.call(this, column_index, seek_operator, sort_order, pvarValue)
     end
     def open_view(this : ICertView*, ppenum : Void**) : Win32cr::Foundation::HRESULT
@@ -2842,27 +2873,28 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertView2Vtbl,
+
+  record ICertView2Vtable,
     query_interface : Proc(ICertView2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertView2*, UInt32),
     release : Proc(ICertView2*, UInt32),
     get_type_info_count : Proc(ICertView2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertView2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertView2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertView2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertView2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open_connection : Proc(ICertView2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     enum_cert_view_column : Proc(ICertView2*, Win32cr::Security::Cryptography::Certificates::CVRC_COLUMN, Void**, Win32cr::Foundation::HRESULT),
     get_column_count : Proc(ICertView2*, Win32cr::Security::Cryptography::Certificates::CVRC_COLUMN, Int32*, Win32cr::Foundation::HRESULT),
     get_column_index : Proc(ICertView2*, Win32cr::Security::Cryptography::Certificates::CVRC_COLUMN, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     set_result_column_count : Proc(ICertView2*, Int32, Win32cr::Foundation::HRESULT),
     set_result_column : Proc(ICertView2*, Int32, Win32cr::Foundation::HRESULT),
-    set_restriction : Proc(ICertView2*, Win32cr::Security::Cryptography::Certificates::CERT_VIEW_COLUMN_INDEX, Win32cr::Security::Cryptography::Certificates::CERT_VIEW_SEEK_OPERATOR_FLAGS, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_restriction : Proc(ICertView2*, Win32cr::Security::Cryptography::Certificates::CERT_VIEW_COLUMN_INDEX, Win32cr::Security::Cryptography::Certificates::CERT_VIEW_SEEK_OPERATOR_FLAGS, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     open_view : Proc(ICertView2*, Void**, Win32cr::Foundation::HRESULT),
     set_table : Proc(ICertView2*, Win32cr::Security::Cryptography::Certificates::CVRC_TABLE, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertView2, lpVtbl : ICertView2Vtbl* do
+  record ICertView2, lpVtbl : ICertView2Vtable* do
     GUID = LibC::GUID.new(0xd594b282_u32, 0x8851_u16, 0x4b61_u16, StaticArray[0x9c_u8, 0x66_u8, 0x3e_u8, 0xda_u8, 0xdf_u8, 0x84_u8, 0x88_u8, 0x63_u8])
     def query_interface(this : ICertView2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2882,8 +2914,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertView2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertView2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertView2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open_connection(this : ICertView2*, strConfig : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_connection.call(this, strConfig)
@@ -2903,7 +2935,7 @@ module Win32cr::Security::Cryptography::Certificates
     def set_result_column(this : ICertView2*, column_index : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_result_column.call(this, column_index)
     end
-    def set_restriction(this : ICertView2*, column_index : Win32cr::Security::Cryptography::Certificates::CERT_VIEW_COLUMN_INDEX, seek_operator : Win32cr::Security::Cryptography::Certificates::CERT_VIEW_SEEK_OPERATOR_FLAGS, sort_order : Int32, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_restriction(this : ICertView2*, column_index : Win32cr::Security::Cryptography::Certificates::CERT_VIEW_COLUMN_INDEX, seek_operator : Win32cr::Security::Cryptography::Certificates::CERT_VIEW_SEEK_OPERATOR_FLAGS, sort_order : Int32, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_restriction.call(this, column_index, seek_operator, sort_order, pvarValue)
     end
     def open_view(this : ICertView2*, ppenum : Void**) : Win32cr::Foundation::HRESULT
@@ -2916,19 +2948,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertAdminVtbl,
+
+  record ICertAdminVtable,
     query_interface : Proc(ICertAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertAdmin*, UInt32),
     release : Proc(ICertAdmin*, UInt32),
     get_type_info_count : Proc(ICertAdmin*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertAdmin*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertAdmin*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertAdmin*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertAdmin*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     is_valid_certificate : Proc(ICertAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     get_revocation_reason : Proc(ICertAdmin*, Int32*, Win32cr::Foundation::HRESULT),
     revoke_certificate : Proc(ICertAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Float64, Win32cr::Foundation::HRESULT),
     set_request_attributes : Proc(ICertAdmin*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_certificate_extension : Proc(ICertAdmin*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_certificate_extension : Proc(ICertAdmin*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     deny_request : Proc(ICertAdmin*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     resubmit_request : Proc(ICertAdmin*, Win32cr::Foundation::BSTR, Int32, Int32*, Win32cr::Foundation::HRESULT),
     publish_crl : Proc(ICertAdmin*, Win32cr::Foundation::BSTR, Float64, Win32cr::Foundation::HRESULT),
@@ -2937,7 +2970,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertAdmin, lpVtbl : ICertAdminVtbl* do
+  record ICertAdmin, lpVtbl : ICertAdminVtable* do
     GUID = LibC::GUID.new(0x34df6950_u32, 0x7fb6_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x17_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2957,8 +2990,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertAdmin*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertAdmin*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertAdmin*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def is_valid_certificate(this : ICertAdmin*, strConfig : Win32cr::Foundation::BSTR, strSerialNumber : Win32cr::Foundation::BSTR, pDisposition : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_valid_certificate.call(this, strConfig, strSerialNumber, pDisposition)
@@ -2972,7 +3005,7 @@ module Win32cr::Security::Cryptography::Certificates
     def set_request_attributes(this : ICertAdmin*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32, strAttributes : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_request_attributes.call(this, strConfig, request_id, strAttributes)
     end
-    def set_certificate_extension(this : ICertAdmin*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32, strExtensionName : Win32cr::Foundation::BSTR, type__ : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Int32, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_certificate_extension(this : ICertAdmin*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32, strExtensionName : Win32cr::Foundation::BSTR, type__ : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Int32, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_certificate_extension.call(this, strConfig, request_id, strExtensionName, type__, flags, pvarValue)
     end
     def deny_request(this : ICertAdmin*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32) : Win32cr::Foundation::HRESULT
@@ -2994,39 +3027,40 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertAdmin2Vtbl,
+
+  record ICertAdmin2Vtable,
     query_interface : Proc(ICertAdmin2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertAdmin2*, UInt32),
     release : Proc(ICertAdmin2*, UInt32),
     get_type_info_count : Proc(ICertAdmin2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertAdmin2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertAdmin2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertAdmin2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertAdmin2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     is_valid_certificate : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     get_revocation_reason : Proc(ICertAdmin2*, Int32*, Win32cr::Foundation::HRESULT),
     revoke_certificate : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Float64, Win32cr::Foundation::HRESULT),
     set_request_attributes : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_certificate_extension : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_certificate_extension : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     deny_request : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     resubmit_request : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Int32*, Win32cr::Foundation::HRESULT),
     publish_crl : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Float64, Win32cr::Foundation::HRESULT),
     get_crl : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     import_certificate : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_IMPORT_FLAGS, Int32*, Win32cr::Foundation::HRESULT),
     publish_cr_ls : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Float64, Int32, Win32cr::Foundation::HRESULT),
-    get_ca_property : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_ca_property : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ca_property : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_ca_property : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_ca_property_flags : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Int32*, Win32cr::Foundation::HRESULT),
     get_ca_property_display_name : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_archived_key : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_config_entry : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_config_entry : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_config_entry : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_config_entry : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     import_key : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_IMPORT_FLAGS, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_my_roles : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERTADMIN_GET_ROLES_FLAGS*, Win32cr::Foundation::HRESULT),
     delete_row : Proc(ICertAdmin2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_DELETE_ROW_FLAGS, Float64, Win32cr::Security::Cryptography::Certificates::CVRC_TABLE, Int32, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertAdmin2, lpVtbl : ICertAdmin2Vtbl* do
+  record ICertAdmin2, lpVtbl : ICertAdmin2Vtable* do
     GUID = LibC::GUID.new(0xf7c3ac41_u32, 0xb8ce_u16, 0x4fb4_u16, StaticArray[0xaa_u8, 0x58_u8, 0x3d_u8, 0x1d_u8, 0xc0_u8, 0xe3_u8, 0x6b_u8, 0x39_u8])
     def query_interface(this : ICertAdmin2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3046,8 +3080,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertAdmin2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertAdmin2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertAdmin2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def is_valid_certificate(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, strSerialNumber : Win32cr::Foundation::BSTR, pDisposition : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_valid_certificate.call(this, strConfig, strSerialNumber, pDisposition)
@@ -3061,7 +3095,7 @@ module Win32cr::Security::Cryptography::Certificates
     def set_request_attributes(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32, strAttributes : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_request_attributes.call(this, strConfig, request_id, strAttributes)
     end
-    def set_certificate_extension(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32, strExtensionName : Win32cr::Foundation::BSTR, type__ : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Int32, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_certificate_extension(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32, strExtensionName : Win32cr::Foundation::BSTR, type__ : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Int32, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_certificate_extension.call(this, strConfig, request_id, strExtensionName, type__, flags, pvarValue)
     end
     def deny_request(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32) : Win32cr::Foundation::HRESULT
@@ -3082,10 +3116,10 @@ module Win32cr::Security::Cryptography::Certificates
     def publish_cr_ls(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, date : Float64, crl_flags : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.publish_cr_ls.call(this, strConfig, date, crl_flags)
     end
-    def get_ca_property(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, prop_index : Int32, prop_type : Int32, flags : Int32, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ca_property(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, prop_index : Int32, prop_type : Int32, flags : Int32, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ca_property.call(this, strConfig, prop_id, prop_index, prop_type, flags, pvarPropertyValue)
     end
-    def set_ca_property(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, prop_index : Int32, prop_type : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_ca_property(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, prop_index : Int32, prop_type : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_ca_property.call(this, strConfig, prop_id, prop_index, prop_type, pvarPropertyValue)
     end
     def get_ca_property_flags(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, pPropFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -3097,10 +3131,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_archived_key(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32, flags : Int32, pstrArchivedKey : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_archived_key.call(this, strConfig, request_id, flags, pstrArchivedKey)
     end
-    def get_config_entry(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, strNodePath : Win32cr::Foundation::BSTR, strEntryName : Win32cr::Foundation::BSTR, pvarEntry : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_config_entry(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, strNodePath : Win32cr::Foundation::BSTR, strEntryName : Win32cr::Foundation::BSTR, pvarEntry : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_config_entry.call(this, strConfig, strNodePath, strEntryName, pvarEntry)
     end
-    def set_config_entry(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, strNodePath : Win32cr::Foundation::BSTR, strEntryName : Win32cr::Foundation::BSTR, pvarEntry : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_config_entry(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, strNodePath : Win32cr::Foundation::BSTR, strEntryName : Win32cr::Foundation::BSTR, pvarEntry : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_config_entry.call(this, strConfig, strNodePath, strEntryName, pvarEntry)
     end
     def import_key(this : ICertAdmin2*, strConfig : Win32cr::Foundation::BSTR, request_id : Int32, strCertHash : Win32cr::Foundation::BSTR, flags : Win32cr::Security::Cryptography::Certificates::CERT_IMPORT_FLAGS, strKey : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3116,22 +3150,23 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IOCSPPropertyVtbl,
+
+  record IOCSPPropertyVtable,
     query_interface : Proc(IOCSPProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPProperty*, UInt32),
     release : Proc(IOCSPProperty*, UInt32),
     get_type_info_count : Proc(IOCSPProperty*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IOCSPProperty*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IOCSPProperty*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IOCSPProperty*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IOCSPProperty*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IOCSPProperty*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Value : Proc(IOCSPProperty*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Value : Proc(IOCSPProperty*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_Modified : Proc(IOCSPProperty*, Int16*, Win32cr::Foundation::HRESULT)
+    get_Value : Proc(IOCSPProperty*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Value : Proc(IOCSPProperty*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Modified : Proc(IOCSPProperty*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IOCSPProperty, lpVtbl : IOCSPPropertyVtbl* do
+  record IOCSPProperty, lpVtbl : IOCSPPropertyVtable* do
     GUID = LibC::GUID.new(0x66fb7839_u32, 0x5f04_u16, 0x4c25_u16, StaticArray[0xad_u8, 0x18_u8, 0x9f_u8, 0xf1_u8, 0xa8_u8, 0x37_u8, 0x6e_u8, 0xe0_u8])
     def query_interface(this : IOCSPProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3151,45 +3186,46 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IOCSPProperty*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IOCSPProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IOCSPProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IOCSPProperty*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pVal)
     end
-    def get_Value(this : IOCSPProperty*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Value(this : IOCSPProperty*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Value.call(this, pVal)
     end
-    def put_Value(this : IOCSPProperty*, newVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Value(this : IOCSPProperty*, newVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Value.call(this, newVal)
     end
-    def get_Modified(this : IOCSPProperty*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Modified(this : IOCSPProperty*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Modified.call(this, pVal)
     end
 
   end
 
   @[Extern]
-  record IOCSPPropertyCollectionVtbl,
+
+  record IOCSPPropertyCollectionVtable,
     query_interface : Proc(IOCSPPropertyCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPPropertyCollection*, UInt32),
     release : Proc(IOCSPPropertyCollection*, UInt32),
     get_type_info_count : Proc(IOCSPPropertyCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IOCSPPropertyCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IOCSPPropertyCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IOCSPPropertyCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IOCSPPropertyCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IOCSPPropertyCollection*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IOCSPPropertyCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IOCSPPropertyCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IOCSPPropertyCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_ItemByName : Proc(IOCSPPropertyCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    create_property : Proc(IOCSPPropertyCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    get_ItemByName : Proc(IOCSPPropertyCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    create_property : Proc(IOCSPPropertyCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     delete_property : Proc(IOCSPPropertyCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_properties : Proc(IOCSPPropertyCollection*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_all_properties : Proc(IOCSPPropertyCollection*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    initialize_from_properties : Proc(IOCSPPropertyCollection*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_all_properties : Proc(IOCSPPropertyCollection*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IOCSPPropertyCollection, lpVtbl : IOCSPPropertyCollectionVtbl* do
+  record IOCSPPropertyCollection, lpVtbl : IOCSPPropertyCollectionVtable* do
     GUID = LibC::GUID.new(0x2597c18d_u32, 0x54e6_u16, 0x4b74_u16, StaticArray[0x9f_u8, 0xa9_u8, 0xa6_u8, 0xbf_u8, 0xda_u8, 0x99_u8, 0xcb_u8, 0xbe_u8])
     def query_interface(this : IOCSPPropertyCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3209,53 +3245,54 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IOCSPPropertyCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IOCSPPropertyCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IOCSPPropertyCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IOCSPPropertyCollection*, ppVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppVal)
     end
-    def get_Item(this : IOCSPPropertyCollection*, index : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IOCSPPropertyCollection*, index : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pVal)
     end
     def get_Count(this : IOCSPPropertyCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_ItemByName(this : IOCSPPropertyCollection*, bstrPropName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ItemByName(this : IOCSPPropertyCollection*, bstrPropName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByName.call(this, bstrPropName, pVal)
     end
-    def create_property(this : IOCSPPropertyCollection*, bstrPropName : Win32cr::Foundation::BSTR, pVarPropValue : Win32cr::System::Com::VARIANT*, ppVal : Void**) : Win32cr::Foundation::HRESULT
+    def create_property(this : IOCSPPropertyCollection*, bstrPropName : Win32cr::Foundation::BSTR, pVarPropValue : Win32cr::System::Variant::VARIANT*, ppVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_property.call(this, bstrPropName, pVarPropValue, ppVal)
     end
     def delete_property(this : IOCSPPropertyCollection*, bstrPropName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property.call(this, bstrPropName)
     end
-    def initialize_from_properties(this : IOCSPPropertyCollection*, pVarProperties : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def initialize_from_properties(this : IOCSPPropertyCollection*, pVarProperties : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_properties.call(this, pVarProperties)
     end
-    def get_all_properties(this : IOCSPPropertyCollection*, pVarProperties : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_all_properties(this : IOCSPPropertyCollection*, pVarProperties : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_all_properties.call(this, pVarProperties)
     end
 
   end
 
   @[Extern]
-  record IOCSPCAConfigurationVtbl,
+
+  record IOCSPCAConfigurationVtable,
     query_interface : Proc(IOCSPCAConfiguration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPCAConfiguration*, UInt32),
     release : Proc(IOCSPCAConfiguration*, UInt32),
     get_type_info_count : Proc(IOCSPCAConfiguration*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IOCSPCAConfiguration*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IOCSPCAConfiguration*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IOCSPCAConfiguration*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IOCSPCAConfiguration*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Identifier : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_CACertificate : Proc(IOCSPCAConfiguration*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CACertificate : Proc(IOCSPCAConfiguration*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SigningFlags : Proc(IOCSPCAConfiguration*, UInt32*, Win32cr::Foundation::HRESULT),
     put_SigningFlags : Proc(IOCSPCAConfiguration*, UInt32, Win32cr::Foundation::HRESULT),
-    get_SigningCertificate : Proc(IOCSPCAConfiguration*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SigningCertificate : Proc(IOCSPCAConfiguration*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SigningCertificate : Proc(IOCSPCAConfiguration*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SigningCertificate : Proc(IOCSPCAConfiguration*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ReminderDuration : Proc(IOCSPCAConfiguration*, UInt32*, Win32cr::Foundation::HRESULT),
     put_ReminderDuration : Proc(IOCSPCAConfiguration*, UInt32, Win32cr::Foundation::HRESULT),
     get_ErrorCode : Proc(IOCSPCAConfiguration*, UInt32*, Win32cr::Foundation::HRESULT),
@@ -3263,11 +3300,11 @@ module Win32cr::Security::Cryptography::Certificates
     get_KeySpec : Proc(IOCSPCAConfiguration*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ProviderCLSID : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ProviderCLSID : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_ProviderProperties : Proc(IOCSPCAConfiguration*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_ProviderProperties : Proc(IOCSPCAConfiguration*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_Modified : Proc(IOCSPCAConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    get_LocalRevocationInformation : Proc(IOCSPCAConfiguration*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_LocalRevocationInformation : Proc(IOCSPCAConfiguration*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_ProviderProperties : Proc(IOCSPCAConfiguration*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_ProviderProperties : Proc(IOCSPCAConfiguration*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Modified : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_LocalRevocationInformation : Proc(IOCSPCAConfiguration*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_LocalRevocationInformation : Proc(IOCSPCAConfiguration*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_SigningCertificateTemplate : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SigningCertificateTemplate : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_CAConfig : Proc(IOCSPCAConfiguration*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3275,7 +3312,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IOCSPCAConfiguration, lpVtbl : IOCSPCAConfigurationVtbl* do
+  record IOCSPCAConfiguration, lpVtbl : IOCSPCAConfigurationVtable* do
     GUID = LibC::GUID.new(0xaec92b40_u32, 0x3d46_u16, 0x433f_u16, StaticArray[0x87_u8, 0xd1_u8, 0xb8_u8, 0x4d_u8, 0x5c_u8, 0x1e_u8, 0x79_u8, 0xd_u8])
     def query_interface(this : IOCSPCAConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3295,13 +3332,13 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IOCSPCAConfiguration*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IOCSPCAConfiguration*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IOCSPCAConfiguration*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Identifier(this : IOCSPCAConfiguration*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Identifier.call(this, pVal)
     end
-    def get_CACertificate(this : IOCSPCAConfiguration*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CACertificate(this : IOCSPCAConfiguration*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CACertificate.call(this, pVal)
     end
     def get_HashAlgorithm(this : IOCSPCAConfiguration*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3316,10 +3353,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_SigningFlags(this : IOCSPCAConfiguration*, newVal : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SigningFlags.call(this, newVal)
     end
-    def get_SigningCertificate(this : IOCSPCAConfiguration*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SigningCertificate(this : IOCSPCAConfiguration*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SigningCertificate.call(this, pVal)
     end
-    def put_SigningCertificate(this : IOCSPCAConfiguration*, newVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SigningCertificate(this : IOCSPCAConfiguration*, newVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SigningCertificate.call(this, newVal)
     end
     def get_ReminderDuration(this : IOCSPCAConfiguration*, pVal : UInt32*) : Win32cr::Foundation::HRESULT
@@ -3343,19 +3380,19 @@ module Win32cr::Security::Cryptography::Certificates
     def put_ProviderCLSID(this : IOCSPCAConfiguration*, newVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ProviderCLSID.call(this, newVal)
     end
-    def get_ProviderProperties(this : IOCSPCAConfiguration*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ProviderProperties(this : IOCSPCAConfiguration*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ProviderProperties.call(this, pVal)
     end
-    def put_ProviderProperties(this : IOCSPCAConfiguration*, newVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_ProviderProperties(this : IOCSPCAConfiguration*, newVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ProviderProperties.call(this, newVal)
     end
-    def get_Modified(this : IOCSPCAConfiguration*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Modified(this : IOCSPCAConfiguration*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Modified.call(this, pVal)
     end
-    def get_LocalRevocationInformation(this : IOCSPCAConfiguration*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LocalRevocationInformation(this : IOCSPCAConfiguration*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LocalRevocationInformation.call(this, pVal)
     end
-    def put_LocalRevocationInformation(this : IOCSPCAConfiguration*, newVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_LocalRevocationInformation(this : IOCSPCAConfiguration*, newVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LocalRevocationInformation.call(this, newVal)
     end
     def get_SigningCertificateTemplate(this : IOCSPCAConfiguration*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3374,24 +3411,25 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IOCSPCAConfigurationCollectionVtbl,
+
+  record IOCSPCAConfigurationCollectionVtable,
     query_interface : Proc(IOCSPCAConfigurationCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPCAConfigurationCollection*, UInt32),
     release : Proc(IOCSPCAConfigurationCollection*, UInt32),
     get_type_info_count : Proc(IOCSPCAConfigurationCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IOCSPCAConfigurationCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IOCSPCAConfigurationCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IOCSPCAConfigurationCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IOCSPCAConfigurationCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IOCSPCAConfigurationCollection*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IOCSPCAConfigurationCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IOCSPCAConfigurationCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IOCSPCAConfigurationCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_ItemByName : Proc(IOCSPCAConfigurationCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    create_ca_configuration : Proc(IOCSPCAConfigurationCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_ItemByName : Proc(IOCSPCAConfigurationCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    create_ca_configuration : Proc(IOCSPCAConfigurationCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     delete_ca_configuration : Proc(IOCSPCAConfigurationCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IOCSPCAConfigurationCollection, lpVtbl : IOCSPCAConfigurationCollectionVtbl* do
+  record IOCSPCAConfigurationCollection, lpVtbl : IOCSPCAConfigurationCollectionVtable* do
     GUID = LibC::GUID.new(0x2bebea0b_u32, 0x5ece_u16, 0x4f28_u16, StaticArray[0xa9_u8, 0x1c_u8, 0x86_u8, 0xb4_u8, 0xbb_u8, 0x20_u8, 0xf0_u8, 0xd3_u8])
     def query_interface(this : IOCSPCAConfigurationCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3411,22 +3449,22 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IOCSPCAConfigurationCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IOCSPCAConfigurationCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IOCSPCAConfigurationCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IOCSPCAConfigurationCollection*, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, pVal)
     end
-    def get_Item(this : IOCSPCAConfigurationCollection*, index : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IOCSPCAConfigurationCollection*, index : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pVal)
     end
     def get_Count(this : IOCSPCAConfigurationCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pVal)
     end
-    def get_ItemByName(this : IOCSPCAConfigurationCollection*, bstrIdentifier : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ItemByName(this : IOCSPCAConfigurationCollection*, bstrIdentifier : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByName.call(this, bstrIdentifier, pVal)
     end
-    def create_ca_configuration(this : IOCSPCAConfigurationCollection*, bstrIdentifier : Win32cr::Foundation::BSTR, varCACert : Win32cr::System::Com::VARIANT, ppVal : Void**) : Win32cr::Foundation::HRESULT
+    def create_ca_configuration(this : IOCSPCAConfigurationCollection*, bstrIdentifier : Win32cr::Foundation::BSTR, varCACert : Win32cr::System::Variant::VARIANT, ppVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_ca_configuration.call(this, bstrIdentifier, varCACert, ppVal)
     end
     def delete_ca_configuration(this : IOCSPCAConfigurationCollection*, bstrIdentifier : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3436,28 +3474,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IOCSPAdminVtbl,
+
+  record IOCSPAdminVtable,
     query_interface : Proc(IOCSPAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPAdmin*, UInt32),
     release : Proc(IOCSPAdmin*, UInt32),
     get_type_info_count : Proc(IOCSPAdmin*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IOCSPAdmin*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IOCSPAdmin*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IOCSPAdmin*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IOCSPAdmin*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_OCSPServiceProperties : Proc(IOCSPAdmin*, Void**, Win32cr::Foundation::HRESULT),
     get_OCSPCAConfigurationCollection : Proc(IOCSPAdmin*, Void**, Win32cr::Foundation::HRESULT),
-    get_configuration : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    set_configuration : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    get_configuration : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_configuration : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_my_roles : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     ping : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     set_security : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_security : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_signing_certificates : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_hash_algorithms : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_signing_certificates : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_hash_algorithms : Proc(IOCSPAdmin*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IOCSPAdmin, lpVtbl : IOCSPAdminVtbl* do
+  record IOCSPAdmin, lpVtbl : IOCSPAdminVtable* do
     GUID = LibC::GUID.new(0x322e830d_u32, 0x67db_u16, 0x4fe9_u16, StaticArray[0x95_u8, 0x77_u8, 0x45_u8, 0x96_u8, 0xd9_u8, 0xf0_u8, 0x92_u8, 0x94_u8])
     def query_interface(this : IOCSPAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3477,8 +3516,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IOCSPAdmin*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IOCSPAdmin*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IOCSPAdmin*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_OCSPServiceProperties(this : IOCSPAdmin*, ppVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OCSPServiceProperties.call(this, ppVal)
@@ -3486,10 +3525,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_OCSPCAConfigurationCollection(this : IOCSPAdmin*, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OCSPCAConfigurationCollection.call(this, pVal)
     end
-    def get_configuration(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, bForce : Int16) : Win32cr::Foundation::HRESULT
+    def get_configuration(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, bForce : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_configuration.call(this, bstrServerName, bForce)
     end
-    def set_configuration(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, bForce : Int16) : Win32cr::Foundation::HRESULT
+    def set_configuration(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, bForce : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_configuration.call(this, bstrServerName, bForce)
     end
     def get_my_roles(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, pRoles : Int32*) : Win32cr::Foundation::HRESULT
@@ -3504,32 +3543,33 @@ module Win32cr::Security::Cryptography::Certificates
     def get_security(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_security.call(this, bstrServerName, pVal)
     end
-    def get_signing_certificates(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, pCACertVar : Win32cr::System::Com::VARIANT*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_signing_certificates(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, pCACertVar : Win32cr::System::Variant::VARIANT*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_signing_certificates.call(this, bstrServerName, pCACertVar, pVal)
     end
-    def get_hash_algorithms(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, bstrCAId : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_hash_algorithms(this : IOCSPAdmin*, bstrServerName : Win32cr::Foundation::BSTR, bstrCAId : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_hash_algorithms.call(this, bstrServerName, bstrCAId, pVal)
     end
 
   end
 
   @[Extern]
-  record ICertServerPolicyVtbl,
+
+  record ICertServerPolicyVtable,
     query_interface : Proc(ICertServerPolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertServerPolicy*, UInt32),
     release : Proc(ICertServerPolicy*, UInt32),
     get_type_info_count : Proc(ICertServerPolicy*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertServerPolicy*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertServerPolicy*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertServerPolicy*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertServerPolicy*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     set_context : Proc(ICertServerPolicy*, Int32, Win32cr::Foundation::HRESULT),
-    get_request_property : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_request_property : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_request_attribute : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_certificate_property : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_certificate_property : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_certificate_extension : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_certificate_property : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_certificate_property : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_certificate_extension : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_certificate_extension_flags : Proc(ICertServerPolicy*, Int32*, Win32cr::Foundation::HRESULT),
-    set_certificate_extension : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_certificate_extension : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     enumerate_extensions_setup : Proc(ICertServerPolicy*, Int32, Win32cr::Foundation::HRESULT),
     enumerate_extensions : Proc(ICertServerPolicy*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     enumerate_extensions_close : Proc(ICertServerPolicy*, Win32cr::Foundation::HRESULT),
@@ -3539,7 +3579,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertServerPolicy, lpVtbl : ICertServerPolicyVtbl* do
+  record ICertServerPolicy, lpVtbl : ICertServerPolicyVtable* do
     GUID = LibC::GUID.new(0xaa000922_u32, 0xffbe_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertServerPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3559,31 +3599,31 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertServerPolicy*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertServerPolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertServerPolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def set_context(this : ICertServerPolicy*, context : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_context.call(this, context)
     end
-    def get_request_property(this : ICertServerPolicy*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Int32, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_request_property(this : ICertServerPolicy*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Int32, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_request_property.call(this, strPropertyName, property_type, pvarPropertyValue)
     end
     def get_request_attribute(this : ICertServerPolicy*, strAttributeName : Win32cr::Foundation::BSTR, pstrAttributeValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_request_attribute.call(this, strAttributeName, pstrAttributeValue)
     end
-    def get_certificate_property(this : ICertServerPolicy*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_certificate_property(this : ICertServerPolicy*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_certificate_property.call(this, strPropertyName, property_type, pvarPropertyValue)
     end
-    def set_certificate_property(this : ICertServerPolicy*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Int32, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_certificate_property(this : ICertServerPolicy*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Int32, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_certificate_property.call(this, strPropertyName, property_type, pvarPropertyValue)
     end
-    def get_certificate_extension(this : ICertServerPolicy*, strExtensionName : Win32cr::Foundation::BSTR, type__ : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_certificate_extension(this : ICertServerPolicy*, strExtensionName : Win32cr::Foundation::BSTR, type__ : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_certificate_extension.call(this, strExtensionName, type__, pvarValue)
     end
     def get_certificate_extension_flags(this : ICertServerPolicy*, pExtFlags : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_certificate_extension_flags.call(this, pExtFlags)
     end
-    def set_certificate_extension(this : ICertServerPolicy*, strExtensionName : Win32cr::Foundation::BSTR, type__ : Int32, ext_flags : Int32, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_certificate_extension(this : ICertServerPolicy*, strExtensionName : Win32cr::Foundation::BSTR, type__ : Int32, ext_flags : Int32, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_certificate_extension.call(this, strExtensionName, type__, ext_flags, pvarValue)
     end
     def enumerate_extensions_setup(this : ICertServerPolicy*, flags : Int32) : Win32cr::Foundation::HRESULT
@@ -3608,19 +3648,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertServerExitVtbl,
+
+  record ICertServerExitVtable,
     query_interface : Proc(ICertServerExit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertServerExit*, UInt32),
     release : Proc(ICertServerExit*, UInt32),
     get_type_info_count : Proc(ICertServerExit*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertServerExit*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertServerExit*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertServerExit*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertServerExit*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     set_context : Proc(ICertServerExit*, Int32, Win32cr::Foundation::HRESULT),
-    get_request_property : Proc(ICertServerExit*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_request_property : Proc(ICertServerExit*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_request_attribute : Proc(ICertServerExit*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_certificate_property : Proc(ICertServerExit*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_certificate_extension : Proc(ICertServerExit*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_certificate_property : Proc(ICertServerExit*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_certificate_extension : Proc(ICertServerExit*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_certificate_extension_flags : Proc(ICertServerExit*, Int32*, Win32cr::Foundation::HRESULT),
     enumerate_extensions_setup : Proc(ICertServerExit*, Int32, Win32cr::Foundation::HRESULT),
     enumerate_extensions : Proc(ICertServerExit*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3631,7 +3672,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertServerExit, lpVtbl : ICertServerExitVtbl* do
+  record ICertServerExit, lpVtbl : ICertServerExitVtable* do
     GUID = LibC::GUID.new(0x4ba9eb90_u32, 0x732c_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertServerExit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3651,22 +3692,22 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertServerExit*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertServerExit*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertServerExit*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def set_context(this : ICertServerExit*, context : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_context.call(this, context)
     end
-    def get_request_property(this : ICertServerExit*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Int32, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_request_property(this : ICertServerExit*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Int32, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_request_property.call(this, strPropertyName, property_type, pvarPropertyValue)
     end
     def get_request_attribute(this : ICertServerExit*, strAttributeName : Win32cr::Foundation::BSTR, pstrAttributeValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_request_attribute.call(this, strAttributeName, pstrAttributeValue)
     end
-    def get_certificate_property(this : ICertServerExit*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Int32, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_certificate_property(this : ICertServerExit*, strPropertyName : Win32cr::Foundation::BSTR, property_type : Int32, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_certificate_property.call(this, strPropertyName, property_type, pvarPropertyValue)
     end
-    def get_certificate_extension(this : ICertServerExit*, strExtensionName : Win32cr::Foundation::BSTR, type__ : Int32, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_certificate_extension(this : ICertServerExit*, strExtensionName : Win32cr::Foundation::BSTR, type__ : Int32, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_certificate_extension.call(this, strExtensionName, type__, pvarValue)
     end
     def get_certificate_extension_flags(this : ICertServerExit*, pExtFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -3694,19 +3735,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertGetConfigVtbl,
+
+  record ICertGetConfigVtable,
     query_interface : Proc(ICertGetConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertGetConfig*, UInt32),
     release : Proc(ICertGetConfig*, UInt32),
     get_type_info_count : Proc(ICertGetConfig*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertGetConfig*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertGetConfig*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertGetConfig*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertGetConfig*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_config : Proc(ICertGetConfig*, Win32cr::Security::Cryptography::Certificates::CERT_GET_CONFIG_FLAGS, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertGetConfig, lpVtbl : ICertGetConfigVtbl* do
+  record ICertGetConfig, lpVtbl : ICertGetConfigVtable* do
     GUID = LibC::GUID.new(0xc7ea09c0_u32, 0xce17_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x33_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertGetConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3726,8 +3768,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertGetConfig*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertGetConfig*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertGetConfig*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_config(this : ICertGetConfig*, flags : Win32cr::Security::Cryptography::Certificates::CERT_GET_CONFIG_FLAGS, pstrOut : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_config.call(this, flags, pstrOut)
@@ -3736,14 +3778,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertConfigVtbl,
+
+  record ICertConfigVtable,
     query_interface : Proc(ICertConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertConfig*, UInt32),
     release : Proc(ICertConfig*, UInt32),
     get_type_info_count : Proc(ICertConfig*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertConfig*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertConfig*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertConfig*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertConfig*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     reset : Proc(ICertConfig*, Int32, Int32*, Win32cr::Foundation::HRESULT),
     next__ : Proc(ICertConfig*, Int32*, Win32cr::Foundation::HRESULT),
     get_field : Proc(ICertConfig*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3751,7 +3794,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertConfig, lpVtbl : ICertConfigVtbl* do
+  record ICertConfig, lpVtbl : ICertConfigVtable* do
     GUID = LibC::GUID.new(0x372fce34_u32, 0x4324_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x10_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3771,8 +3814,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertConfig*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertConfig*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertConfig*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def reset(this : ICertConfig*, index : Int32, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this, index, pCount)
@@ -3790,14 +3833,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertConfig2Vtbl,
+
+  record ICertConfig2Vtable,
     query_interface : Proc(ICertConfig2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertConfig2*, UInt32),
     release : Proc(ICertConfig2*, UInt32),
     get_type_info_count : Proc(ICertConfig2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertConfig2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertConfig2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertConfig2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertConfig2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     reset : Proc(ICertConfig2*, Int32, Int32*, Win32cr::Foundation::HRESULT),
     next__ : Proc(ICertConfig2*, Int32*, Win32cr::Foundation::HRESULT),
     get_field : Proc(ICertConfig2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3806,7 +3850,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertConfig2, lpVtbl : ICertConfig2Vtbl* do
+  record ICertConfig2, lpVtbl : ICertConfig2Vtable* do
     GUID = LibC::GUID.new(0x7a18edde_u32, 0x7e78_u16, 0x4163_u16, StaticArray[0x8d_u8, 0xed_u8, 0x78_u8, 0xe2_u8, 0xc9_u8, 0xce_u8, 0xe9_u8, 0x24_u8])
     def query_interface(this : ICertConfig2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3826,8 +3870,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertConfig2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertConfig2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertConfig2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def reset(this : ICertConfig2*, index : Int32, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this, index, pCount)
@@ -3848,14 +3892,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequestVtbl,
+
+  record ICertRequestVtable,
     query_interface : Proc(ICertRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequest*, UInt32),
     release : Proc(ICertRequest*, UInt32),
     get_type_info_count : Proc(ICertRequest*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertRequest*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertRequest*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertRequest*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertRequest*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     submit : Proc(ICertRequest*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     retrieve_pending : Proc(ICertRequest*, Int32, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     get_last_status : Proc(ICertRequest*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3866,7 +3911,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertRequest, lpVtbl : ICertRequestVtbl* do
+  record ICertRequest, lpVtbl : ICertRequestVtable* do
     GUID = LibC::GUID.new(0x14e4840_u32, 0x5523_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x12_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3886,8 +3931,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertRequest*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def submit(this : ICertRequest*, flags : Int32, strRequest : Win32cr::Foundation::BSTR, strAttributes : Win32cr::Foundation::BSTR, strConfig : Win32cr::Foundation::BSTR, pDisposition : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, flags, strRequest, strAttributes, strConfig, pDisposition)
@@ -3914,14 +3959,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequest2Vtbl,
+
+  record ICertRequest2Vtable,
     query_interface : Proc(ICertRequest2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequest2*, UInt32),
     release : Proc(ICertRequest2*, UInt32),
     get_type_info_count : Proc(ICertRequest2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertRequest2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertRequest2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertRequest2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertRequest2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     submit : Proc(ICertRequest2*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     retrieve_pending : Proc(ICertRequest2*, Int32, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     get_last_status : Proc(ICertRequest2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3931,14 +3977,14 @@ module Win32cr::Security::Cryptography::Certificates
     get_certificate : Proc(ICertRequest2*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_issued_certificate : Proc(ICertRequest2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CR_DISP*, Win32cr::Foundation::HRESULT),
     get_error_message_text : Proc(ICertRequest2*, Int32, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_ca_property : Proc(ICertRequest2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ca_property : Proc(ICertRequest2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_ca_property_flags : Proc(ICertRequest2*, Win32cr::Foundation::BSTR, Int32, Int32*, Win32cr::Foundation::HRESULT),
     get_ca_property_display_name : Proc(ICertRequest2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_full_response_property : Proc(ICertRequest2*, Win32cr::Security::Cryptography::Certificates::FULL_RESPONSE_PROPERTY_ID, Int32, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::Security::Cryptography::Certificates::CERT_REQUEST_OUT_TYPE, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_full_response_property : Proc(ICertRequest2*, Win32cr::Security::Cryptography::Certificates::FULL_RESPONSE_PROPERTY_ID, Int32, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::Security::Cryptography::Certificates::CERT_REQUEST_OUT_TYPE, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertRequest2, lpVtbl : ICertRequest2Vtbl* do
+  record ICertRequest2, lpVtbl : ICertRequest2Vtable* do
     GUID = LibC::GUID.new(0xa4772988_u32, 0x4a85_u16, 0x4fa9_u16, StaticArray[0x82_u8, 0x4e_u8, 0xb5_u8, 0xcf_u8, 0x5c_u8, 0x16_u8, 0x40_u8, 0x5a_u8])
     def query_interface(this : ICertRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3958,8 +4004,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertRequest2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertRequest2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertRequest2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def submit(this : ICertRequest2*, flags : Int32, strRequest : Win32cr::Foundation::BSTR, strAttributes : Win32cr::Foundation::BSTR, strConfig : Win32cr::Foundation::BSTR, pDisposition : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, flags, strRequest, strAttributes, strConfig, pDisposition)
@@ -3988,7 +4034,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_error_message_text(this : ICertRequest2*, hrMessage : Int32, flags : Int32, pstrErrorMessageText : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_error_message_text.call(this, hrMessage, flags, pstrErrorMessageText)
     end
-    def get_ca_property(this : ICertRequest2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, prop_index : Int32, prop_type : Int32, flags : Int32, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ca_property(this : ICertRequest2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, prop_index : Int32, prop_type : Int32, flags : Int32, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ca_property.call(this, strConfig, prop_id, prop_index, prop_type, flags, pvarPropertyValue)
     end
     def get_ca_property_flags(this : ICertRequest2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, pPropFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -3997,21 +4043,22 @@ module Win32cr::Security::Cryptography::Certificates
     def get_ca_property_display_name(this : ICertRequest2*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, pstrDisplayName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ca_property_display_name.call(this, strConfig, prop_id, pstrDisplayName)
     end
-    def get_full_response_property(this : ICertRequest2*, prop_id : Win32cr::Security::Cryptography::Certificates::FULL_RESPONSE_PROPERTY_ID, prop_index : Int32, prop_type : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Win32cr::Security::Cryptography::Certificates::CERT_REQUEST_OUT_TYPE, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_full_response_property(this : ICertRequest2*, prop_id : Win32cr::Security::Cryptography::Certificates::FULL_RESPONSE_PROPERTY_ID, prop_index : Int32, prop_type : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Win32cr::Security::Cryptography::Certificates::CERT_REQUEST_OUT_TYPE, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_full_response_property.call(this, prop_id, prop_index, prop_type, flags, pvarPropertyValue)
     end
 
   end
 
   @[Extern]
-  record ICertRequest3Vtbl,
+
+  record ICertRequest3Vtable,
     query_interface : Proc(ICertRequest3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequest3*, UInt32),
     release : Proc(ICertRequest3*, UInt32),
     get_type_info_count : Proc(ICertRequest3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertRequest3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertRequest3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertRequest3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertRequest3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     submit : Proc(ICertRequest3*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     retrieve_pending : Proc(ICertRequest3*, Int32, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
     get_last_status : Proc(ICertRequest3*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4021,18 +4068,18 @@ module Win32cr::Security::Cryptography::Certificates
     get_certificate : Proc(ICertRequest3*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_issued_certificate : Proc(ICertRequest3*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CR_DISP*, Win32cr::Foundation::HRESULT),
     get_error_message_text : Proc(ICertRequest3*, Int32, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_ca_property : Proc(ICertRequest3*, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ca_property : Proc(ICertRequest3*, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_ca_property_flags : Proc(ICertRequest3*, Win32cr::Foundation::BSTR, Int32, Int32*, Win32cr::Foundation::HRESULT),
     get_ca_property_display_name : Proc(ICertRequest3*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_full_response_property : Proc(ICertRequest3*, Win32cr::Security::Cryptography::Certificates::FULL_RESPONSE_PROPERTY_ID, Int32, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::Security::Cryptography::Certificates::CERT_REQUEST_OUT_TYPE, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_full_response_property : Proc(ICertRequest3*, Win32cr::Security::Cryptography::Certificates::FULL_RESPONSE_PROPERTY_ID, Int32, Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, Win32cr::Security::Cryptography::Certificates::CERT_REQUEST_OUT_TYPE, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     set_credential : Proc(ICertRequest3*, Int32, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_request_id_string : Proc(ICertRequest3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_issued_certificate2 : Proc(ICertRequest3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CR_DISP*, Win32cr::Foundation::HRESULT),
-    get_refresh_policy : Proc(ICertRequest3*, Int16*, Win32cr::Foundation::HRESULT)
+    get_refresh_policy : Proc(ICertRequest3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertRequest3, lpVtbl : ICertRequest3Vtbl* do
+  record ICertRequest3, lpVtbl : ICertRequest3Vtable* do
     GUID = LibC::GUID.new(0xafc8f92b_u32, 0x33a2_u16, 0x4861_u16, StaticArray[0xbf_u8, 0x36_u8, 0x29_u8, 0x33_u8, 0xb7_u8, 0xcd_u8, 0x67_u8, 0xb3_u8])
     def query_interface(this : ICertRequest3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4052,8 +4099,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertRequest3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertRequest3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertRequest3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def submit(this : ICertRequest3*, flags : Int32, strRequest : Win32cr::Foundation::BSTR, strAttributes : Win32cr::Foundation::BSTR, strConfig : Win32cr::Foundation::BSTR, pDisposition : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, flags, strRequest, strAttributes, strConfig, pDisposition)
@@ -4082,7 +4129,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_error_message_text(this : ICertRequest3*, hrMessage : Int32, flags : Int32, pstrErrorMessageText : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_error_message_text.call(this, hrMessage, flags, pstrErrorMessageText)
     end
-    def get_ca_property(this : ICertRequest3*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, prop_index : Int32, prop_type : Int32, flags : Int32, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ca_property(this : ICertRequest3*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, prop_index : Int32, prop_type : Int32, flags : Int32, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ca_property.call(this, strConfig, prop_id, prop_index, prop_type, flags, pvarPropertyValue)
     end
     def get_ca_property_flags(this : ICertRequest3*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, pPropFlags : Int32*) : Win32cr::Foundation::HRESULT
@@ -4091,7 +4138,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_ca_property_display_name(this : ICertRequest3*, strConfig : Win32cr::Foundation::BSTR, prop_id : Int32, pstrDisplayName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ca_property_display_name.call(this, strConfig, prop_id, pstrDisplayName)
     end
-    def get_full_response_property(this : ICertRequest3*, prop_id : Win32cr::Security::Cryptography::Certificates::FULL_RESPONSE_PROPERTY_ID, prop_index : Int32, prop_type : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Win32cr::Security::Cryptography::Certificates::CERT_REQUEST_OUT_TYPE, pvarPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_full_response_property(this : ICertRequest3*, prop_id : Win32cr::Security::Cryptography::Certificates::FULL_RESPONSE_PROPERTY_ID, prop_index : Int32, prop_type : Win32cr::Security::Cryptography::Certificates::CERT_PROPERTY_TYPE, flags : Win32cr::Security::Cryptography::Certificates::CERT_REQUEST_OUT_TYPE, pvarPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_full_response_property.call(this, prop_id, prop_index, prop_type, flags, pvarPropertyValue)
     end
     def set_credential(this : ICertRequest3*, hWnd : Int32, auth_type : Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, strCredential : Win32cr::Foundation::BSTR, strPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4103,28 +4150,29 @@ module Win32cr::Security::Cryptography::Certificates
     def get_issued_certificate2(this : ICertRequest3*, strConfig : Win32cr::Foundation::BSTR, strRequestId : Win32cr::Foundation::BSTR, strSerialNumber : Win32cr::Foundation::BSTR, pDisposition : Win32cr::Security::Cryptography::Certificates::CR_DISP*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_issued_certificate2.call(this, strConfig, strRequestId, strSerialNumber, pDisposition)
     end
-    def get_refresh_policy(this : ICertRequest3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_refresh_policy(this : ICertRequest3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_refresh_policy.call(this, pValue)
     end
 
   end
 
   @[Extern]
-  record ICertManageModuleVtbl,
+
+  record ICertManageModuleVtable,
     query_interface : Proc(ICertManageModule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertManageModule*, UInt32),
     release : Proc(ICertManageModule*, UInt32),
     get_type_info_count : Proc(ICertManageModule*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertManageModule*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertManageModule*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertManageModule*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(ICertManageModule*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(ICertManageModule*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertManageModule*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(ICertManageModule*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(ICertManageModule*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     configure : Proc(ICertManageModule*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertManageModule, lpVtbl : ICertManageModuleVtbl* do
+  record ICertManageModule, lpVtbl : ICertManageModuleVtable* do
     GUID = LibC::GUID.new(0xe7d7ad42_u32, 0xbd3d_u16, 0x11d1_u16, StaticArray[0x9a_u8, 0x4d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x97_u8, 0xeb_u8])
     def query_interface(this : ICertManageModule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4144,13 +4192,13 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertManageModule*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertManageModule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertManageModule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_property(this : ICertManageModule*, strConfig : Win32cr::Foundation::BSTR, strStorageLocation : Win32cr::Foundation::BSTR, strPropertyName : Win32cr::Foundation::BSTR, flags : Int32, pvarProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : ICertManageModule*, strConfig : Win32cr::Foundation::BSTR, strStorageLocation : Win32cr::Foundation::BSTR, strPropertyName : Win32cr::Foundation::BSTR, flags : Int32, pvarProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, strConfig, strStorageLocation, strPropertyName, flags, pvarProperty)
     end
-    def set_property(this : ICertManageModule*, strConfig : Win32cr::Foundation::BSTR, strStorageLocation : Win32cr::Foundation::BSTR, strPropertyName : Win32cr::Foundation::BSTR, flags : Int32, pvarProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_property(this : ICertManageModule*, strConfig : Win32cr::Foundation::BSTR, strStorageLocation : Win32cr::Foundation::BSTR, strPropertyName : Win32cr::Foundation::BSTR, flags : Int32, pvarProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, strConfig, strStorageLocation, strPropertyName, flags, pvarProperty)
     end
     def configure(this : ICertManageModule*, strConfig : Win32cr::Foundation::BSTR, strStorageLocation : Win32cr::Foundation::BSTR, flags : Int32) : Win32cr::Foundation::HRESULT
@@ -4160,14 +4208,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPolicyVtbl,
+
+  record ICertPolicyVtable,
     query_interface : Proc(ICertPolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPolicy*, UInt32),
     release : Proc(ICertPolicy*, UInt32),
     get_type_info_count : Proc(ICertPolicy*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPolicy*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPolicy*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPolicy*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPolicy*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPolicy*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     verify_request : Proc(ICertPolicy*, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     get_description : Proc(ICertPolicy*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4175,7 +4224,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPolicy, lpVtbl : ICertPolicyVtbl* do
+  record ICertPolicy, lpVtbl : ICertPolicyVtable* do
     GUID = LibC::GUID.new(0x38bb5a00_u32, 0x7636_u16, 0x11d0_u16, StaticArray[0xb4_u8, 0x13_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1b_u8, 0xbf_u8, 0x8c_u8])
     def query_interface(this : ICertPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4195,8 +4244,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPolicy*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ICertPolicy*, strConfig : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, strConfig)
@@ -4214,14 +4263,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPolicy2Vtbl,
+
+  record ICertPolicy2Vtable,
     query_interface : Proc(ICertPolicy2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPolicy2*, UInt32),
     release : Proc(ICertPolicy2*, UInt32),
     get_type_info_count : Proc(ICertPolicy2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPolicy2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPolicy2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPolicy2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPolicy2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPolicy2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     verify_request : Proc(ICertPolicy2*, Win32cr::Foundation::BSTR, Int32, Int32, Int32, Int32*, Win32cr::Foundation::HRESULT),
     get_description : Proc(ICertPolicy2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4230,7 +4280,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPolicy2, lpVtbl : ICertPolicy2Vtbl* do
+  record ICertPolicy2, lpVtbl : ICertPolicy2Vtable* do
     GUID = LibC::GUID.new(0x3db4910e_u32, 0x8001_u16, 0x4bf1_u16, StaticArray[0xaa_u8, 0x1b_u8, 0xf4_u8, 0x3a_u8, 0x80_u8, 0x83_u8, 0x17_u8, 0xa0_u8])
     def query_interface(this : ICertPolicy2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4250,8 +4300,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPolicy2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPolicy2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPolicy2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ICertPolicy2*, strConfig : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, strConfig)
@@ -4272,7 +4322,8 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record INDESPolicyVtbl,
+
+  record INDESPolicyVtable,
     query_interface : Proc(INDESPolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INDESPolicy*, UInt32),
     release : Proc(INDESPolicy*, UInt32),
@@ -4284,7 +4335,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record INDESPolicy, lpVtbl : INDESPolicyVtbl* do
+  record INDESPolicy, lpVtbl : INDESPolicyVtable* do
     GUID = LibC::GUID.new(0x13ca515d_u32, 0x431d_u16, 0x46cc_u16, StaticArray[0x8c_u8, 0x2e_u8, 0x1d_u8, 0xa2_u8, 0x69_u8, 0xbb_u8, 0xd6_u8, 0x25_u8])
     def query_interface(this : INDESPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4314,14 +4365,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IObjectIdVtbl,
+
+  record IObjectIdVtable,
     query_interface : Proc(IObjectId*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectId*, UInt32),
     release : Proc(IObjectId*, UInt32),
     get_type_info_count : Proc(IObjectId*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IObjectId*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IObjectId*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IObjectId*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IObjectId*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize_from_name : Proc(IObjectId*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_OBJECTID, Win32cr::Foundation::HRESULT),
     initialize_from_value : Proc(IObjectId*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_algorithm_name : Proc(IObjectId*, Win32cr::Security::Cryptography::Certificates::ObjectIdGroupId, Win32cr::Security::Cryptography::Certificates::ObjectIdPublicKeyFlags, Win32cr::Security::Cryptography::Certificates::AlgorithmFlags, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4333,7 +4385,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IObjectId, lpVtbl : IObjectIdVtbl* do
+  record IObjectId, lpVtbl : IObjectIdVtable* do
     GUID = LibC::GUID.new(0x728ab300_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IObjectId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4353,8 +4405,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IObjectId*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IObjectId*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IObjectId*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize_from_name(this : IObjectId*, name : Win32cr::Security::Cryptography::Certificates::CERTENROLL_OBJECTID) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_name.call(this, name)
@@ -4384,14 +4436,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IObjectIdsVtbl,
+
+  record IObjectIdsVtable,
     query_interface : Proc(IObjectIds*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectIds*, UInt32),
     release : Proc(IObjectIds*, UInt32),
     get_type_info_count : Proc(IObjectIds*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IObjectIds*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IObjectIds*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IObjectIds*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IObjectIds*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IObjectIds*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IObjectIds*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IObjectIds*, Void**, Win32cr::Foundation::HRESULT),
@@ -4402,7 +4455,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IObjectIds, lpVtbl : IObjectIdsVtbl* do
+  record IObjectIds, lpVtbl : IObjectIdsVtable* do
     GUID = LibC::GUID.new(0x728ab301_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IObjectIds*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4422,8 +4475,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IObjectIds*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IObjectIds*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IObjectIds*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IObjectIds*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -4450,21 +4503,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IBinaryConverterVtbl,
+
+  record IBinaryConverterVtable,
     query_interface : Proc(IBinaryConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBinaryConverter*, UInt32),
     release : Proc(IBinaryConverter*, UInt32),
     get_type_info_count : Proc(IBinaryConverter*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IBinaryConverter*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IBinaryConverter*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IBinaryConverter*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IBinaryConverter*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     string_to_string : Proc(IBinaryConverter*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    variant_byte_array_to_string : Proc(IBinaryConverter*, Win32cr::System::Com::VARIANT*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    string_to_variant_byte_array : Proc(IBinaryConverter*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    variant_byte_array_to_string : Proc(IBinaryConverter*, Win32cr::System::Variant::VARIANT*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    string_to_variant_byte_array : Proc(IBinaryConverter*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IBinaryConverter, lpVtbl : IBinaryConverterVtbl* do
+  record IBinaryConverter, lpVtbl : IBinaryConverterVtable* do
     GUID = LibC::GUID.new(0x728ab302_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IBinaryConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4484,39 +4538,40 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IBinaryConverter*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IBinaryConverter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IBinaryConverter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def string_to_string(this : IBinaryConverter*, strEncodedIn : Win32cr::Foundation::BSTR, encoding_in : Win32cr::Security::Cryptography::Certificates::EncodingType, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pstrEncoded : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.string_to_string.call(this, strEncodedIn, encoding_in, encoding, pstrEncoded)
     end
-    def variant_byte_array_to_string(this : IBinaryConverter*, pvarByteArray : Win32cr::System::Com::VARIANT*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pstrEncoded : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def variant_byte_array_to_string(this : IBinaryConverter*, pvarByteArray : Win32cr::System::Variant::VARIANT*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pstrEncoded : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.variant_byte_array_to_string.call(this, pvarByteArray, encoding, pstrEncoded)
     end
-    def string_to_variant_byte_array(this : IBinaryConverter*, strEncoded : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pvarByteArray : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def string_to_variant_byte_array(this : IBinaryConverter*, strEncoded : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pvarByteArray : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.string_to_variant_byte_array.call(this, strEncoded, encoding, pvarByteArray)
     end
 
   end
 
   @[Extern]
-  record IBinaryConverter2Vtbl,
+
+  record IBinaryConverter2Vtable,
     query_interface : Proc(IBinaryConverter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBinaryConverter2*, UInt32),
     release : Proc(IBinaryConverter2*, UInt32),
     get_type_info_count : Proc(IBinaryConverter2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IBinaryConverter2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IBinaryConverter2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IBinaryConverter2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IBinaryConverter2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     string_to_string : Proc(IBinaryConverter2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    variant_byte_array_to_string : Proc(IBinaryConverter2*, Win32cr::System::Com::VARIANT*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    string_to_variant_byte_array : Proc(IBinaryConverter2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    string_array_to_variant_array : Proc(IBinaryConverter2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    variant_array_to_string_array : Proc(IBinaryConverter2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    variant_byte_array_to_string : Proc(IBinaryConverter2*, Win32cr::System::Variant::VARIANT*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    string_to_variant_byte_array : Proc(IBinaryConverter2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    string_array_to_variant_array : Proc(IBinaryConverter2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    variant_array_to_string_array : Proc(IBinaryConverter2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IBinaryConverter2, lpVtbl : IBinaryConverter2Vtbl* do
+  record IBinaryConverter2, lpVtbl : IBinaryConverter2Vtable* do
     GUID = LibC::GUID.new(0x8d7928b4_u32, 0x4e17_u16, 0x428d_u16, StaticArray[0x9a_u8, 0x17_u8, 0x72_u8, 0x8d_u8, 0xf0_u8, 0xd_u8, 0x1b_u8, 0x2b_u8])
     def query_interface(this : IBinaryConverter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4536,36 +4591,37 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IBinaryConverter2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IBinaryConverter2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IBinaryConverter2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def string_to_string(this : IBinaryConverter2*, strEncodedIn : Win32cr::Foundation::BSTR, encoding_in : Win32cr::Security::Cryptography::Certificates::EncodingType, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pstrEncoded : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.string_to_string.call(this, strEncodedIn, encoding_in, encoding, pstrEncoded)
     end
-    def variant_byte_array_to_string(this : IBinaryConverter2*, pvarByteArray : Win32cr::System::Com::VARIANT*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pstrEncoded : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def variant_byte_array_to_string(this : IBinaryConverter2*, pvarByteArray : Win32cr::System::Variant::VARIANT*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pstrEncoded : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.variant_byte_array_to_string.call(this, pvarByteArray, encoding, pstrEncoded)
     end
-    def string_to_variant_byte_array(this : IBinaryConverter2*, strEncoded : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pvarByteArray : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def string_to_variant_byte_array(this : IBinaryConverter2*, strEncoded : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pvarByteArray : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.string_to_variant_byte_array.call(this, strEncoded, encoding, pvarByteArray)
     end
-    def string_array_to_variant_array(this : IBinaryConverter2*, pvarStringArray : Win32cr::System::Com::VARIANT*, pvarVariantArray : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def string_array_to_variant_array(this : IBinaryConverter2*, pvarStringArray : Win32cr::System::Variant::VARIANT*, pvarVariantArray : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.string_array_to_variant_array.call(this, pvarStringArray, pvarVariantArray)
     end
-    def variant_array_to_string_array(this : IBinaryConverter2*, pvarVariantArray : Win32cr::System::Com::VARIANT*, pvarStringArray : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def variant_array_to_string_array(this : IBinaryConverter2*, pvarVariantArray : Win32cr::System::Variant::VARIANT*, pvarStringArray : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.variant_array_to_string_array.call(this, pvarVariantArray, pvarStringArray)
     end
 
   end
 
   @[Extern]
-  record IX500DistinguishedNameVtbl,
+
+  record IX500DistinguishedNameVtable,
     query_interface : Proc(IX500DistinguishedName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX500DistinguishedName*, UInt32),
     release : Proc(IX500DistinguishedName*, UInt32),
     get_type_info_count : Proc(IX500DistinguishedName*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX500DistinguishedName*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX500DistinguishedName*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX500DistinguishedName*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX500DistinguishedName*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(IX500DistinguishedName*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X500NameFlags, Win32cr::Foundation::HRESULT),
     encode : Proc(IX500DistinguishedName*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::X500NameFlags, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IX500DistinguishedName*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4573,7 +4629,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX500DistinguishedName, lpVtbl : IX500DistinguishedNameVtbl* do
+  record IX500DistinguishedName, lpVtbl : IX500DistinguishedNameVtable* do
     GUID = LibC::GUID.new(0x728ab303_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX500DistinguishedName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4593,8 +4649,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX500DistinguishedName*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX500DistinguishedName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX500DistinguishedName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : IX500DistinguishedName*, strEncodedName : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, name_flags : Win32cr::Security::Cryptography::Certificates::X500NameFlags) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strEncodedName, encoding, name_flags)
@@ -4612,14 +4668,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentStatusVtbl,
+
+  record IX509EnrollmentStatusVtable,
     query_interface : Proc(IX509EnrollmentStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EnrollmentStatus*, UInt32),
     release : Proc(IX509EnrollmentStatus*, UInt32),
     get_type_info_count : Proc(IX509EnrollmentStatus*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509EnrollmentStatus*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509EnrollmentStatus*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509EnrollmentStatus*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509EnrollmentStatus*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     append_text : Proc(IX509EnrollmentStatus*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Text : Proc(IX509EnrollmentStatus*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Text : Proc(IX509EnrollmentStatus*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4635,7 +4692,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509EnrollmentStatus, lpVtbl : IX509EnrollmentStatusVtbl* do
+  record IX509EnrollmentStatus, lpVtbl : IX509EnrollmentStatusVtable* do
     GUID = LibC::GUID.new(0x728ab304_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509EnrollmentStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4655,8 +4712,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509EnrollmentStatus*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509EnrollmentStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509EnrollmentStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def append_text(this : IX509EnrollmentStatus*, strText : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.append_text.call(this, strText)
@@ -4698,19 +4755,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspAlgorithmVtbl,
+
+  record ICspAlgorithmVtable,
     query_interface : Proc(ICspAlgorithm*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspAlgorithm*, UInt32),
     release : Proc(ICspAlgorithm*, UInt32),
     get_type_info_count : Proc(ICspAlgorithm*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICspAlgorithm*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICspAlgorithm*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICspAlgorithm*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICspAlgorithm*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_algorithm_oid : Proc(ICspAlgorithm*, Int32, Win32cr::Security::Cryptography::Certificates::AlgorithmFlags, Void**, Win32cr::Foundation::HRESULT),
     get_DefaultLength : Proc(ICspAlgorithm*, Int32*, Win32cr::Foundation::HRESULT),
     get_IncrementLength : Proc(ICspAlgorithm*, Int32*, Win32cr::Foundation::HRESULT),
     get_LongName : Proc(ICspAlgorithm*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Valid : Proc(ICspAlgorithm*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Valid : Proc(ICspAlgorithm*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_MaxLength : Proc(ICspAlgorithm*, Int32*, Win32cr::Foundation::HRESULT),
     get_MinLength : Proc(ICspAlgorithm*, Int32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ICspAlgorithm*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4719,7 +4777,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspAlgorithm, lpVtbl : ICspAlgorithmVtbl* do
+  record ICspAlgorithm, lpVtbl : ICspAlgorithmVtable* do
     GUID = LibC::GUID.new(0x728ab305_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspAlgorithm*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4739,8 +4797,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICspAlgorithm*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICspAlgorithm*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICspAlgorithm*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_algorithm_oid(this : ICspAlgorithm*, length : Int32, alg_flags : Win32cr::Security::Cryptography::Certificates::AlgorithmFlags, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_algorithm_oid.call(this, length, alg_flags, ppValue)
@@ -4754,7 +4812,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_LongName(this : ICspAlgorithm*, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LongName.call(this, pValue)
     end
-    def get_Valid(this : ICspAlgorithm*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Valid(this : ICspAlgorithm*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Valid.call(this, pValue)
     end
     def get_MaxLength(this : ICspAlgorithm*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -4776,14 +4834,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspAlgorithmsVtbl,
+
+  record ICspAlgorithmsVtable,
     query_interface : Proc(ICspAlgorithms*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspAlgorithms*, UInt32),
     release : Proc(ICspAlgorithms*, UInt32),
     get_type_info_count : Proc(ICspAlgorithms*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICspAlgorithms*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICspAlgorithms*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICspAlgorithms*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICspAlgorithms*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ICspAlgorithms*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICspAlgorithms*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICspAlgorithms*, Void**, Win32cr::Foundation::HRESULT),
@@ -4795,7 +4854,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspAlgorithms, lpVtbl : ICspAlgorithmsVtbl* do
+  record ICspAlgorithms, lpVtbl : ICspAlgorithmsVtable* do
     GUID = LibC::GUID.new(0x728ab306_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspAlgorithms*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4815,8 +4874,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICspAlgorithms*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICspAlgorithms*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICspAlgorithms*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ICspAlgorithms*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -4846,35 +4905,36 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspInformationVtbl,
+
+  record ICspInformationVtable,
     query_interface : Proc(ICspInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspInformation*, UInt32),
     release : Proc(ICspInformation*, UInt32),
     get_type_info_count : Proc(ICspInformation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICspInformation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICspInformation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICspInformation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICspInformation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize_from_name : Proc(ICspInformation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_type : Proc(ICspInformation*, Win32cr::Security::Cryptography::Certificates::X509ProviderType, Void*, Int16, Win32cr::Foundation::HRESULT),
+    initialize_from_type : Proc(ICspInformation*, Win32cr::Security::Cryptography::Certificates::X509ProviderType, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_CspAlgorithms : Proc(ICspInformation*, Void**, Win32cr::Foundation::HRESULT),
-    get_HasHardwareRandomNumberGenerator : Proc(ICspInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsHardwareDevice : Proc(ICspInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsRemovable : Proc(ICspInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsSoftwareDevice : Proc(ICspInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Valid : Proc(ICspInformation*, Int16*, Win32cr::Foundation::HRESULT),
+    get_HasHardwareRandomNumberGenerator : Proc(ICspInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsHardwareDevice : Proc(ICspInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsRemovable : Proc(ICspInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsSoftwareDevice : Proc(ICspInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Valid : Proc(ICspInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_MaxKeyContainerNameLength : Proc(ICspInformation*, Int32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ICspInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(ICspInformation*, Win32cr::Security::Cryptography::Certificates::X509ProviderType*, Win32cr::Foundation::HRESULT),
     get_Version : Proc(ICspInformation*, Int32*, Win32cr::Foundation::HRESULT),
     get_KeySpec : Proc(ICspInformation*, Win32cr::Security::Cryptography::Certificates::X509KeySpec*, Win32cr::Foundation::HRESULT),
-    get_IsSmartCard : Proc(ICspInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    get_default_security_descriptor : Proc(ICspInformation*, Int16, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_LegacyCsp : Proc(ICspInformation*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsSmartCard : Proc(ICspInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_default_security_descriptor : Proc(ICspInformation*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_LegacyCsp : Proc(ICspInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_csp_status_from_operations : Proc(ICspInformation*, Void*, Win32cr::Security::Cryptography::Certificates::AlgorithmOperationFlags, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICspInformation, lpVtbl : ICspInformationVtbl* do
+  record ICspInformation, lpVtbl : ICspInformationVtable* do
     GUID = LibC::GUID.new(0x728ab307_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4894,31 +4954,31 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICspInformation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICspInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICspInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize_from_name(this : ICspInformation*, strName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_name.call(this, strName)
     end
-    def initialize_from_type(this : ICspInformation*, type__ : Win32cr::Security::Cryptography::Certificates::X509ProviderType, pAlgorithm : Void*, machine_context : Int16) : Win32cr::Foundation::HRESULT
+    def initialize_from_type(this : ICspInformation*, type__ : Win32cr::Security::Cryptography::Certificates::X509ProviderType, pAlgorithm : Void*, machine_context : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_type.call(this, type__, pAlgorithm, machine_context)
     end
     def get_CspAlgorithms(this : ICspInformation*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CspAlgorithms.call(this, ppValue)
     end
-    def get_HasHardwareRandomNumberGenerator(this : ICspInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_HasHardwareRandomNumberGenerator(this : ICspInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HasHardwareRandomNumberGenerator.call(this, pValue)
     end
-    def get_IsHardwareDevice(this : ICspInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsHardwareDevice(this : ICspInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsHardwareDevice.call(this, pValue)
     end
-    def get_IsRemovable(this : ICspInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsRemovable(this : ICspInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsRemovable.call(this, pValue)
     end
-    def get_IsSoftwareDevice(this : ICspInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsSoftwareDevice(this : ICspInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsSoftwareDevice.call(this, pValue)
     end
-    def get_Valid(this : ICspInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Valid(this : ICspInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Valid.call(this, pValue)
     end
     def get_MaxKeyContainerNameLength(this : ICspInformation*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -4936,13 +4996,13 @@ module Win32cr::Security::Cryptography::Certificates
     def get_KeySpec(this : ICspInformation*, pValue : Win32cr::Security::Cryptography::Certificates::X509KeySpec*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_KeySpec.call(this, pValue)
     end
-    def get_IsSmartCard(this : ICspInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsSmartCard(this : ICspInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsSmartCard.call(this, pValue)
     end
-    def get_default_security_descriptor(this : ICspInformation*, machine_context : Int16, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_default_security_descriptor(this : ICspInformation*, machine_context : Win32cr::Foundation::VARIANT_BOOL, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_default_security_descriptor.call(this, machine_context, pValue)
     end
-    def get_LegacyCsp(this : ICspInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_LegacyCsp(this : ICspInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LegacyCsp.call(this, pValue)
     end
     def get_csp_status_from_operations(this : ICspInformation*, pAlgorithm : Void*, operations : Win32cr::Security::Cryptography::Certificates::AlgorithmOperationFlags, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -4952,14 +5012,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspInformationsVtbl,
+
+  record ICspInformationsVtable,
     query_interface : Proc(ICspInformations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspInformations*, UInt32),
     release : Proc(ICspInformations*, UInt32),
     get_type_info_count : Proc(ICspInformations*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICspInformations*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICspInformations*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICspInformations*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICspInformations*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ICspInformations*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICspInformations*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICspInformations*, Void**, Win32cr::Foundation::HRESULT),
@@ -4975,7 +5036,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspInformations, lpVtbl : ICspInformationsVtbl* do
+  record ICspInformations, lpVtbl : ICspInformationsVtable* do
     GUID = LibC::GUID.new(0x728ab308_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspInformations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4995,8 +5056,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICspInformations*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICspInformations*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICspInformations*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ICspInformations*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -5038,14 +5099,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspStatusVtbl,
+
+  record ICspStatusVtable,
     query_interface : Proc(ICspStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspStatus*, UInt32),
     release : Proc(ICspStatus*, UInt32),
     get_type_info_count : Proc(ICspStatus*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICspStatus*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICspStatus*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICspStatus*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICspStatus*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICspStatus*, Void*, Void*, Win32cr::Foundation::HRESULT),
     get_Ordinal : Proc(ICspStatus*, Int32*, Win32cr::Foundation::HRESULT),
     put_Ordinal : Proc(ICspStatus*, Int32, Win32cr::Foundation::HRESULT),
@@ -5056,7 +5118,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspStatus, lpVtbl : ICspStatusVtbl* do
+  record ICspStatus, lpVtbl : ICspStatusVtable* do
     GUID = LibC::GUID.new(0x728ab309_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5076,8 +5138,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICspStatus*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICspStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICspStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ICspStatus*, pCsp : Void*, pAlgorithm : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pCsp, pAlgorithm)
@@ -5104,14 +5166,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspStatusesVtbl,
+
+  record ICspStatusesVtable,
     query_interface : Proc(ICspStatuses*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspStatuses*, UInt32),
     release : Proc(ICspStatuses*, UInt32),
     get_type_info_count : Proc(ICspStatuses*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICspStatuses*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICspStatuses*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICspStatuses*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICspStatuses*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ICspStatuses*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICspStatuses*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICspStatuses*, Void**, Win32cr::Foundation::HRESULT),
@@ -5125,7 +5188,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspStatuses, lpVtbl : ICspStatusesVtbl* do
+  record ICspStatuses, lpVtbl : ICspStatusesVtable* do
     GUID = LibC::GUID.new(0x728ab30a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspStatuses*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5145,8 +5208,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICspStatuses*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICspStatuses*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICspStatuses*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ICspStatuses*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -5182,14 +5245,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PublicKeyVtbl,
+
+  record IX509PublicKeyVtable,
     query_interface : Proc(IX509PublicKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PublicKey*, UInt32),
     release : Proc(IX509PublicKey*, UInt32),
     get_type_info_count : Proc(IX509PublicKey*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509PublicKey*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509PublicKey*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509PublicKey*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509PublicKey*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509PublicKey*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     initialize_from_encoded_public_key_info : Proc(IX509PublicKey*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     get_Algorithm : Proc(IX509PublicKey*, Void**, Win32cr::Foundation::HRESULT),
@@ -5200,7 +5264,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PublicKey, lpVtbl : IX509PublicKeyVtbl* do
+  record IX509PublicKey, lpVtbl : IX509PublicKeyVtable* do
     GUID = LibC::GUID.new(0x728ab30b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PublicKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5220,8 +5284,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509PublicKey*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509PublicKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509PublicKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509PublicKey*, pObjectId : Void*, strEncodedKey : Win32cr::Foundation::BSTR, strEncodedParameters : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, strEncodedKey, strEncodedParameters, encoding)
@@ -5248,14 +5312,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PrivateKeyVtbl,
+
+  record IX509PrivateKeyVtable,
     query_interface : Proc(IX509PrivateKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PrivateKey*, UInt32),
     release : Proc(IX509PrivateKey*, UInt32),
     get_type_info_count : Proc(IX509PrivateKey*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509PrivateKey*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509PrivateKey*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509PrivateKey*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509PrivateKey*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open : Proc(IX509PrivateKey*, Win32cr::Foundation::HRESULT),
     create : Proc(IX509PrivateKey*, Win32cr::Foundation::HRESULT),
     close : Proc(IX509PrivateKey*, Win32cr::Foundation::HRESULT),
@@ -5278,8 +5343,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_ProviderName : Proc(IX509PrivateKey*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ProviderType : Proc(IX509PrivateKey*, Win32cr::Security::Cryptography::Certificates::X509ProviderType*, Win32cr::Foundation::HRESULT),
     put_ProviderType : Proc(IX509PrivateKey*, Win32cr::Security::Cryptography::Certificates::X509ProviderType, Win32cr::Foundation::HRESULT),
-    get_LegacyCsp : Proc(IX509PrivateKey*, Int16*, Win32cr::Foundation::HRESULT),
-    put_LegacyCsp : Proc(IX509PrivateKey*, Int16, Win32cr::Foundation::HRESULT),
+    get_LegacyCsp : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_LegacyCsp : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Algorithm : Proc(IX509PrivateKey*, Void**, Win32cr::Foundation::HRESULT),
     put_Algorithm : Proc(IX509PrivateKey*, Void*, Win32cr::Foundation::HRESULT),
     get_KeySpec : Proc(IX509PrivateKey*, Win32cr::Security::Cryptography::Certificates::X509KeySpec*, Win32cr::Foundation::HRESULT),
@@ -5292,19 +5357,19 @@ module Win32cr::Security::Cryptography::Certificates
     put_KeyUsage : Proc(IX509PrivateKey*, Win32cr::Security::Cryptography::Certificates::X509PrivateKeyUsageFlags, Win32cr::Foundation::HRESULT),
     get_KeyProtection : Proc(IX509PrivateKey*, Win32cr::Security::Cryptography::Certificates::X509PrivateKeyProtection*, Win32cr::Foundation::HRESULT),
     put_KeyProtection : Proc(IX509PrivateKey*, Win32cr::Security::Cryptography::Certificates::X509PrivateKeyProtection, Win32cr::Foundation::HRESULT),
-    get_MachineContext : Proc(IX509PrivateKey*, Int16*, Win32cr::Foundation::HRESULT),
-    put_MachineContext : Proc(IX509PrivateKey*, Int16, Win32cr::Foundation::HRESULT),
+    get_MachineContext : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_MachineContext : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SecurityDescriptor : Proc(IX509PrivateKey*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SecurityDescriptor : Proc(IX509PrivateKey*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Certificate : Proc(IX509PrivateKey*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Certificate : Proc(IX509PrivateKey*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_UniqueContainerName : Proc(IX509PrivateKey*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Opened : Proc(IX509PrivateKey*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DefaultContainer : Proc(IX509PrivateKey*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Existing : Proc(IX509PrivateKey*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Existing : Proc(IX509PrivateKey*, Int16, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509PrivateKey*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509PrivateKey*, Int16, Win32cr::Foundation::HRESULT),
+    get_Opened : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DefaultContainer : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Existing : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Existing : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509PrivateKey*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509PrivateKey*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509PrivateKey*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509PrivateKey*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -5317,7 +5382,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PrivateKey, lpVtbl : IX509PrivateKeyVtbl* do
+  record IX509PrivateKey, lpVtbl : IX509PrivateKeyVtable* do
     GUID = LibC::GUID.new(0x728ab30c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PrivateKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5337,8 +5402,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509PrivateKey*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509PrivateKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509PrivateKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open(this : IX509PrivateKey*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this)
@@ -5406,10 +5471,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_ProviderType(this : IX509PrivateKey*, value : Win32cr::Security::Cryptography::Certificates::X509ProviderType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ProviderType.call(this, value)
     end
-    def get_LegacyCsp(this : IX509PrivateKey*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_LegacyCsp(this : IX509PrivateKey*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LegacyCsp.call(this, pValue)
     end
-    def put_LegacyCsp(this : IX509PrivateKey*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_LegacyCsp(this : IX509PrivateKey*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LegacyCsp.call(this, value)
     end
     def get_Algorithm(this : IX509PrivateKey*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -5448,10 +5513,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_KeyProtection(this : IX509PrivateKey*, value : Win32cr::Security::Cryptography::Certificates::X509PrivateKeyProtection) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_KeyProtection.call(this, value)
     end
-    def get_MachineContext(this : IX509PrivateKey*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MachineContext(this : IX509PrivateKey*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MachineContext.call(this, pValue)
     end
-    def put_MachineContext(this : IX509PrivateKey*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_MachineContext(this : IX509PrivateKey*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MachineContext.call(this, value)
     end
     def get_SecurityDescriptor(this : IX509PrivateKey*, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5469,22 +5534,22 @@ module Win32cr::Security::Cryptography::Certificates
     def get_UniqueContainerName(this : IX509PrivateKey*, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UniqueContainerName.call(this, pValue)
     end
-    def get_Opened(this : IX509PrivateKey*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Opened(this : IX509PrivateKey*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Opened.call(this, pValue)
     end
-    def get_DefaultContainer(this : IX509PrivateKey*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DefaultContainer(this : IX509PrivateKey*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DefaultContainer.call(this, pValue)
     end
-    def get_Existing(this : IX509PrivateKey*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Existing(this : IX509PrivateKey*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Existing.call(this, pValue)
     end
-    def put_Existing(this : IX509PrivateKey*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Existing(this : IX509PrivateKey*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Existing.call(this, value)
     end
-    def get_Silent(this : IX509PrivateKey*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509PrivateKey*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509PrivateKey*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509PrivateKey*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509PrivateKey*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -5518,14 +5583,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PrivateKey2Vtbl,
+
+  record IX509PrivateKey2Vtable,
     query_interface : Proc(IX509PrivateKey2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PrivateKey2*, UInt32),
     release : Proc(IX509PrivateKey2*, UInt32),
     get_type_info_count : Proc(IX509PrivateKey2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509PrivateKey2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509PrivateKey2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509PrivateKey2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509PrivateKey2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open : Proc(IX509PrivateKey2*, Win32cr::Foundation::HRESULT),
     create : Proc(IX509PrivateKey2*, Win32cr::Foundation::HRESULT),
     close : Proc(IX509PrivateKey2*, Win32cr::Foundation::HRESULT),
@@ -5548,8 +5614,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_ProviderName : Proc(IX509PrivateKey2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ProviderType : Proc(IX509PrivateKey2*, Win32cr::Security::Cryptography::Certificates::X509ProviderType*, Win32cr::Foundation::HRESULT),
     put_ProviderType : Proc(IX509PrivateKey2*, Win32cr::Security::Cryptography::Certificates::X509ProviderType, Win32cr::Foundation::HRESULT),
-    get_LegacyCsp : Proc(IX509PrivateKey2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_LegacyCsp : Proc(IX509PrivateKey2*, Int16, Win32cr::Foundation::HRESULT),
+    get_LegacyCsp : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_LegacyCsp : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Algorithm : Proc(IX509PrivateKey2*, Void**, Win32cr::Foundation::HRESULT),
     put_Algorithm : Proc(IX509PrivateKey2*, Void*, Win32cr::Foundation::HRESULT),
     get_KeySpec : Proc(IX509PrivateKey2*, Win32cr::Security::Cryptography::Certificates::X509KeySpec*, Win32cr::Foundation::HRESULT),
@@ -5562,19 +5628,19 @@ module Win32cr::Security::Cryptography::Certificates
     put_KeyUsage : Proc(IX509PrivateKey2*, Win32cr::Security::Cryptography::Certificates::X509PrivateKeyUsageFlags, Win32cr::Foundation::HRESULT),
     get_KeyProtection : Proc(IX509PrivateKey2*, Win32cr::Security::Cryptography::Certificates::X509PrivateKeyProtection*, Win32cr::Foundation::HRESULT),
     put_KeyProtection : Proc(IX509PrivateKey2*, Win32cr::Security::Cryptography::Certificates::X509PrivateKeyProtection, Win32cr::Foundation::HRESULT),
-    get_MachineContext : Proc(IX509PrivateKey2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_MachineContext : Proc(IX509PrivateKey2*, Int16, Win32cr::Foundation::HRESULT),
+    get_MachineContext : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_MachineContext : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SecurityDescriptor : Proc(IX509PrivateKey2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SecurityDescriptor : Proc(IX509PrivateKey2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Certificate : Proc(IX509PrivateKey2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Certificate : Proc(IX509PrivateKey2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_UniqueContainerName : Proc(IX509PrivateKey2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Opened : Proc(IX509PrivateKey2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_DefaultContainer : Proc(IX509PrivateKey2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Existing : Proc(IX509PrivateKey2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Existing : Proc(IX509PrivateKey2*, Int16, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509PrivateKey2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509PrivateKey2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Opened : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_DefaultContainer : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Existing : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Existing : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509PrivateKey2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509PrivateKey2*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509PrivateKey2*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509PrivateKey2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -5597,7 +5663,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PrivateKey2, lpVtbl : IX509PrivateKey2Vtbl* do
+  record IX509PrivateKey2, lpVtbl : IX509PrivateKey2Vtable* do
     GUID = LibC::GUID.new(0x728ab362_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PrivateKey2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5617,8 +5683,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509PrivateKey2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509PrivateKey2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509PrivateKey2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open(this : IX509PrivateKey2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this)
@@ -5686,10 +5752,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_ProviderType(this : IX509PrivateKey2*, value : Win32cr::Security::Cryptography::Certificates::X509ProviderType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ProviderType.call(this, value)
     end
-    def get_LegacyCsp(this : IX509PrivateKey2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_LegacyCsp(this : IX509PrivateKey2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LegacyCsp.call(this, pValue)
     end
-    def put_LegacyCsp(this : IX509PrivateKey2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_LegacyCsp(this : IX509PrivateKey2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LegacyCsp.call(this, value)
     end
     def get_Algorithm(this : IX509PrivateKey2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -5728,10 +5794,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_KeyProtection(this : IX509PrivateKey2*, value : Win32cr::Security::Cryptography::Certificates::X509PrivateKeyProtection) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_KeyProtection.call(this, value)
     end
-    def get_MachineContext(this : IX509PrivateKey2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_MachineContext(this : IX509PrivateKey2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MachineContext.call(this, pValue)
     end
-    def put_MachineContext(this : IX509PrivateKey2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_MachineContext(this : IX509PrivateKey2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MachineContext.call(this, value)
     end
     def get_SecurityDescriptor(this : IX509PrivateKey2*, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5749,22 +5815,22 @@ module Win32cr::Security::Cryptography::Certificates
     def get_UniqueContainerName(this : IX509PrivateKey2*, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UniqueContainerName.call(this, pValue)
     end
-    def get_Opened(this : IX509PrivateKey2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Opened(this : IX509PrivateKey2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Opened.call(this, pValue)
     end
-    def get_DefaultContainer(this : IX509PrivateKey2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DefaultContainer(this : IX509PrivateKey2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DefaultContainer.call(this, pValue)
     end
-    def get_Existing(this : IX509PrivateKey2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Existing(this : IX509PrivateKey2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Existing.call(this, pValue)
     end
-    def put_Existing(this : IX509PrivateKey2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Existing(this : IX509PrivateKey2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Existing.call(this, value)
     end
-    def get_Silent(this : IX509PrivateKey2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509PrivateKey2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509PrivateKey2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509PrivateKey2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509PrivateKey2*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -5828,29 +5894,30 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EndorsementKeyVtbl,
+
+  record IX509EndorsementKeyVtable,
     query_interface : Proc(IX509EndorsementKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EndorsementKey*, UInt32),
     release : Proc(IX509EndorsementKey*, UInt32),
     get_type_info_count : Proc(IX509EndorsementKey*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509EndorsementKey*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509EndorsementKey*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509EndorsementKey*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509EndorsementKey*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ProviderName : Proc(IX509EndorsementKey*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ProviderName : Proc(IX509EndorsementKey*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Length : Proc(IX509EndorsementKey*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Opened : Proc(IX509EndorsementKey*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Opened : Proc(IX509EndorsementKey*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     add_certificate : Proc(IX509EndorsementKey*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     remove_certificate : Proc(IX509EndorsementKey*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_certificate_by_index : Proc(IX509EndorsementKey*, Int16, Int32, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_certificate_count : Proc(IX509EndorsementKey*, Int16, Int32*, Win32cr::Foundation::HRESULT),
+    get_certificate_by_index : Proc(IX509EndorsementKey*, Win32cr::Foundation::VARIANT_BOOL, Int32, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    get_certificate_count : Proc(IX509EndorsementKey*, Win32cr::Foundation::VARIANT_BOOL, Int32*, Win32cr::Foundation::HRESULT),
     export_public_key : Proc(IX509EndorsementKey*, Void**, Win32cr::Foundation::HRESULT),
     open : Proc(IX509EndorsementKey*, Win32cr::Foundation::HRESULT),
     close : Proc(IX509EndorsementKey*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509EndorsementKey, lpVtbl : IX509EndorsementKeyVtbl* do
+  record IX509EndorsementKey, lpVtbl : IX509EndorsementKeyVtable* do
     GUID = LibC::GUID.new(0xb11cd855_u32, 0xf4c4_u16, 0x4fc6_u16, StaticArray[0xb7_u8, 0x10_u8, 0x44_u8, 0x22_u8, 0x23_u8, 0x7f_u8, 0x9_u8, 0xe9_u8])
     def query_interface(this : IX509EndorsementKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5870,8 +5937,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509EndorsementKey*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509EndorsementKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509EndorsementKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ProviderName(this : IX509EndorsementKey*, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ProviderName.call(this, pValue)
@@ -5882,7 +5949,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_Length(this : IX509EndorsementKey*, pValue : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Length.call(this, pValue)
     end
-    def get_Opened(this : IX509EndorsementKey*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Opened(this : IX509EndorsementKey*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Opened.call(this, pValue)
     end
     def add_certificate(this : IX509EndorsementKey*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -5891,10 +5958,10 @@ module Win32cr::Security::Cryptography::Certificates
     def remove_certificate(this : IX509EndorsementKey*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_certificate.call(this, encoding, strCertificate)
     end
-    def get_certificate_by_index(this : IX509EndorsementKey*, manufacturer_only : Int16, dwIndex : Int32, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_certificate_by_index(this : IX509EndorsementKey*, manufacturer_only : Win32cr::Foundation::VARIANT_BOOL, dwIndex : Int32, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_certificate_by_index.call(this, manufacturer_only, dwIndex, encoding, pValue)
     end
-    def get_certificate_count(this : IX509EndorsementKey*, manufacturer_only : Int16, pCount : Int32*) : Win32cr::Foundation::HRESULT
+    def get_certificate_count(this : IX509EndorsementKey*, manufacturer_only : Win32cr::Foundation::VARIANT_BOOL, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_certificate_count.call(this, manufacturer_only, pCount)
     end
     def export_public_key(this : IX509EndorsementKey*, ppPublicKey : Void**) : Win32cr::Foundation::HRESULT
@@ -5910,23 +5977,24 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionVtbl,
+
+  record IX509ExtensionVtable,
     query_interface : Proc(IX509Extension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Extension*, UInt32),
     release : Proc(IX509Extension*, UInt32),
     get_type_info_count : Proc(IX509Extension*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509Extension*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509Extension*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509Extension*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509Extension*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509Extension*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509Extension*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509Extension*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509Extension*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509Extension*, Int16, Win32cr::Foundation::HRESULT)
+    get_Critical : Proc(IX509Extension*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509Extension*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509Extension, lpVtbl : IX509ExtensionVtbl* do
+  record IX509Extension, lpVtbl : IX509ExtensionVtable* do
     GUID = LibC::GUID.new(0x728ab30d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Extension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5946,8 +6014,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509Extension*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509Extension*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509Extension*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509Extension*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -5958,24 +6026,25 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509Extension*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509Extension*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509Extension*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509Extension*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509Extension*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
 
   end
 
   @[Extern]
-  record IX509ExtensionsVtbl,
+
+  record IX509ExtensionsVtable,
     query_interface : Proc(IX509Extensions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Extensions*, UInt32),
     release : Proc(IX509Extensions*, UInt32),
     get_type_info_count : Proc(IX509Extensions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509Extensions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509Extensions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509Extensions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509Extensions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IX509Extensions*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IX509Extensions*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IX509Extensions*, Void**, Win32cr::Foundation::HRESULT),
@@ -5987,7 +6056,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Extensions, lpVtbl : IX509ExtensionsVtbl* do
+  record IX509Extensions, lpVtbl : IX509ExtensionsVtable* do
     GUID = LibC::GUID.new(0x728ab30e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Extensions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6007,8 +6076,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509Extensions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509Extensions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509Extensions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IX509Extensions*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -6038,26 +6107,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionKeyUsageVtbl,
+
+  record IX509ExtensionKeyUsageVtable,
     query_interface : Proc(IX509ExtensionKeyUsage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionKeyUsage*, UInt32),
     release : Proc(IX509ExtensionKeyUsage*, UInt32),
     get_type_info_count : Proc(IX509ExtensionKeyUsage*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionKeyUsage*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionKeyUsage*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionKeyUsage*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionKeyUsage*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionKeyUsage*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionKeyUsage*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionKeyUsage*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionKeyUsage*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionKeyUsage*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionKeyUsage*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionKeyUsage*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionKeyUsage*, Win32cr::Security::Cryptography::Certificates::X509KeyUsageFlags, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionKeyUsage*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_KeyUsage : Proc(IX509ExtensionKeyUsage*, Win32cr::Security::Cryptography::Certificates::X509KeyUsageFlags*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionKeyUsage, lpVtbl : IX509ExtensionKeyUsageVtbl* do
+  record IX509ExtensionKeyUsage, lpVtbl : IX509ExtensionKeyUsageVtable* do
     GUID = LibC::GUID.new(0x728ab30f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionKeyUsage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6077,8 +6147,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionKeyUsage*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionKeyUsage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionKeyUsage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionKeyUsage*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6089,10 +6159,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionKeyUsage*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionKeyUsage*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionKeyUsage*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionKeyUsage*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionKeyUsage*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionKeyUsage*, usage_flags : Win32cr::Security::Cryptography::Certificates::X509KeyUsageFlags) : Win32cr::Foundation::HRESULT
@@ -6108,26 +6178,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionEnhancedKeyUsageVtbl,
+
+  record IX509ExtensionEnhancedKeyUsageVtable,
     query_interface : Proc(IX509ExtensionEnhancedKeyUsage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionEnhancedKeyUsage*, UInt32),
     release : Proc(IX509ExtensionEnhancedKeyUsage*, UInt32),
     get_type_info_count : Proc(IX509ExtensionEnhancedKeyUsage*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionEnhancedKeyUsage*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionEnhancedKeyUsage*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionEnhancedKeyUsage*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionEnhancedKeyUsage*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionEnhancedKeyUsage*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionEnhancedKeyUsage*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionEnhancedKeyUsage*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionEnhancedKeyUsage*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionEnhancedKeyUsage*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionEnhancedKeyUsage*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionEnhancedKeyUsage*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionEnhancedKeyUsage*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionEnhancedKeyUsage*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EnhancedKeyUsage : Proc(IX509ExtensionEnhancedKeyUsage*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionEnhancedKeyUsage, lpVtbl : IX509ExtensionEnhancedKeyUsageVtbl* do
+  record IX509ExtensionEnhancedKeyUsage, lpVtbl : IX509ExtensionEnhancedKeyUsageVtable* do
     GUID = LibC::GUID.new(0x728ab310_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionEnhancedKeyUsage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6147,8 +6218,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionEnhancedKeyUsage*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionEnhancedKeyUsage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionEnhancedKeyUsage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionEnhancedKeyUsage*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6159,10 +6230,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionEnhancedKeyUsage*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionEnhancedKeyUsage*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionEnhancedKeyUsage*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionEnhancedKeyUsage*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionEnhancedKeyUsage*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionEnhancedKeyUsage*, pValue : Void*) : Win32cr::Foundation::HRESULT
@@ -6178,26 +6249,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionTemplateNameVtbl,
+
+  record IX509ExtensionTemplateNameVtable,
     query_interface : Proc(IX509ExtensionTemplateName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionTemplateName*, UInt32),
     release : Proc(IX509ExtensionTemplateName*, UInt32),
     get_type_info_count : Proc(IX509ExtensionTemplateName*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionTemplateName*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionTemplateName*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionTemplateName*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionTemplateName*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionTemplateName*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionTemplateName*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionTemplateName*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionTemplateName*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionTemplateName*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionTemplateName*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionTemplateName*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionTemplateName*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionTemplateName*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TemplateName : Proc(IX509ExtensionTemplateName*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionTemplateName, lpVtbl : IX509ExtensionTemplateNameVtbl* do
+  record IX509ExtensionTemplateName, lpVtbl : IX509ExtensionTemplateNameVtable* do
     GUID = LibC::GUID.new(0x728ab311_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionTemplateName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6217,8 +6289,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionTemplateName*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionTemplateName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionTemplateName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionTemplateName*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6229,10 +6301,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionTemplateName*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionTemplateName*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionTemplateName*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionTemplateName*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionTemplateName*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionTemplateName*, strTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6248,19 +6320,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionTemplateVtbl,
+
+  record IX509ExtensionTemplateVtable,
     query_interface : Proc(IX509ExtensionTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionTemplate*, UInt32),
     release : Proc(IX509ExtensionTemplate*, UInt32),
     get_type_info_count : Proc(IX509ExtensionTemplate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionTemplate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionTemplate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionTemplate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionTemplate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionTemplate*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionTemplate*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionTemplate*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionTemplate*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionTemplate*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionTemplate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionTemplate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionTemplate*, Void*, Int32, Int32, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionTemplate*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TemplateOid : Proc(IX509ExtensionTemplate*, Void**, Win32cr::Foundation::HRESULT),
@@ -6269,7 +6342,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionTemplate, lpVtbl : IX509ExtensionTemplateVtbl* do
+  record IX509ExtensionTemplate, lpVtbl : IX509ExtensionTemplateVtable* do
     GUID = LibC::GUID.new(0x728ab312_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6289,8 +6362,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionTemplate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionTemplate*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6301,10 +6374,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionTemplate*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionTemplate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionTemplate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionTemplate*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionTemplate*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionTemplate*, pTemplateOid : Void*, major_version : Int32, minor_version : Int32) : Win32cr::Foundation::HRESULT
@@ -6326,17 +6399,18 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IAlternativeNameVtbl,
+
+  record IAlternativeNameVtable,
     query_interface : Proc(IAlternativeName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAlternativeName*, UInt32),
     release : Proc(IAlternativeName*, UInt32),
     get_type_info_count : Proc(IAlternativeName*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAlternativeName*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAlternativeName*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAlternativeName*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAlternativeName*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize_from_string : Proc(IAlternativeName*, Win32cr::Security::Cryptography::Certificates::AlternativeNameType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_raw_data : Proc(IAlternativeName*, Win32cr::Security::Cryptography::Certificates::AlternativeNameType, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_other_name : Proc(IAlternativeName*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    initialize_from_other_name : Proc(IAlternativeName*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IAlternativeName*, Win32cr::Security::Cryptography::Certificates::AlternativeNameType*, Win32cr::Foundation::HRESULT),
     get_StrValue : Proc(IAlternativeName*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IAlternativeName*, Void**, Win32cr::Foundation::HRESULT),
@@ -6344,7 +6418,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IAlternativeName, lpVtbl : IAlternativeNameVtbl* do
+  record IAlternativeName, lpVtbl : IAlternativeNameVtable* do
     GUID = LibC::GUID.new(0x728ab313_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IAlternativeName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6364,8 +6438,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IAlternativeName*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAlternativeName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAlternativeName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize_from_string(this : IAlternativeName*, type__ : Win32cr::Security::Cryptography::Certificates::AlternativeNameType, strValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_string.call(this, type__, strValue)
@@ -6373,7 +6447,7 @@ module Win32cr::Security::Cryptography::Certificates
     def initialize_from_raw_data(this : IAlternativeName*, type__ : Win32cr::Security::Cryptography::Certificates::AlternativeNameType, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strRawData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_raw_data.call(this, type__, encoding, strRawData)
     end
-    def initialize_from_other_name(this : IAlternativeName*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strRawData : Win32cr::Foundation::BSTR, to_be_wrapped : Int16) : Win32cr::Foundation::HRESULT
+    def initialize_from_other_name(this : IAlternativeName*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strRawData : Win32cr::Foundation::BSTR, to_be_wrapped : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_other_name.call(this, pObjectId, encoding, strRawData, to_be_wrapped)
     end
     def get_Type(this : IAlternativeName*, pValue : Win32cr::Security::Cryptography::Certificates::AlternativeNameType*) : Win32cr::Foundation::HRESULT
@@ -6392,14 +6466,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IAlternativeNamesVtbl,
+
+  record IAlternativeNamesVtable,
     query_interface : Proc(IAlternativeNames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAlternativeNames*, UInt32),
     release : Proc(IAlternativeNames*, UInt32),
     get_type_info_count : Proc(IAlternativeNames*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAlternativeNames*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAlternativeNames*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAlternativeNames*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAlternativeNames*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IAlternativeNames*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAlternativeNames*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAlternativeNames*, Void**, Win32cr::Foundation::HRESULT),
@@ -6409,7 +6484,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IAlternativeNames, lpVtbl : IAlternativeNamesVtbl* do
+  record IAlternativeNames, lpVtbl : IAlternativeNamesVtable* do
     GUID = LibC::GUID.new(0x728ab314_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IAlternativeNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6429,8 +6504,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IAlternativeNames*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAlternativeNames*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAlternativeNames*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IAlternativeNames*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -6454,26 +6529,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionAlternativeNamesVtbl,
+
+  record IX509ExtensionAlternativeNamesVtable,
     query_interface : Proc(IX509ExtensionAlternativeNames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionAlternativeNames*, UInt32),
     release : Proc(IX509ExtensionAlternativeNames*, UInt32),
     get_type_info_count : Proc(IX509ExtensionAlternativeNames*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionAlternativeNames*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionAlternativeNames*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionAlternativeNames*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionAlternativeNames*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionAlternativeNames*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionAlternativeNames*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionAlternativeNames*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionAlternativeNames*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionAlternativeNames*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionAlternativeNames*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionAlternativeNames*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionAlternativeNames*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionAlternativeNames*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_AlternativeNames : Proc(IX509ExtensionAlternativeNames*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionAlternativeNames, lpVtbl : IX509ExtensionAlternativeNamesVtbl* do
+  record IX509ExtensionAlternativeNames, lpVtbl : IX509ExtensionAlternativeNamesVtable* do
     GUID = LibC::GUID.new(0x728ab315_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionAlternativeNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6493,8 +6569,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionAlternativeNames*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionAlternativeNames*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionAlternativeNames*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionAlternativeNames*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6505,10 +6581,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionAlternativeNames*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionAlternativeNames*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionAlternativeNames*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionAlternativeNames*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionAlternativeNames*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionAlternativeNames*, pValue : Void*) : Win32cr::Foundation::HRESULT
@@ -6524,27 +6600,28 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionBasicConstraintsVtbl,
+
+  record IX509ExtensionBasicConstraintsVtable,
     query_interface : Proc(IX509ExtensionBasicConstraints*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionBasicConstraints*, UInt32),
     release : Proc(IX509ExtensionBasicConstraints*, UInt32),
     get_type_info_count : Proc(IX509ExtensionBasicConstraints*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionBasicConstraints*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionBasicConstraints*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionBasicConstraints*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionBasicConstraints*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionBasicConstraints*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionBasicConstraints*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionBasicConstraints*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionBasicConstraints*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionBasicConstraints*, Int16, Win32cr::Foundation::HRESULT),
-    initialize_encode : Proc(IX509ExtensionBasicConstraints*, Int16, Int32, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionBasicConstraints*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionBasicConstraints*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    initialize_encode : Proc(IX509ExtensionBasicConstraints*, Win32cr::Foundation::VARIANT_BOOL, Int32, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionBasicConstraints*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_IsCA : Proc(IX509ExtensionBasicConstraints*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsCA : Proc(IX509ExtensionBasicConstraints*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_PathLenConstraint : Proc(IX509ExtensionBasicConstraints*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionBasicConstraints, lpVtbl : IX509ExtensionBasicConstraintsVtbl* do
+  record IX509ExtensionBasicConstraints, lpVtbl : IX509ExtensionBasicConstraintsVtable* do
     GUID = LibC::GUID.new(0x728ab316_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionBasicConstraints*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6564,8 +6641,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionBasicConstraints*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionBasicConstraints*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionBasicConstraints*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionBasicConstraints*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6576,19 +6653,19 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionBasicConstraints*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionBasicConstraints*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionBasicConstraints*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionBasicConstraints*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionBasicConstraints*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
-    def initialize_encode(this : IX509ExtensionBasicConstraints*, is_ca : Int16, path_len_constraint : Int32) : Win32cr::Foundation::HRESULT
+    def initialize_encode(this : IX509ExtensionBasicConstraints*, is_ca : Win32cr::Foundation::VARIANT_BOOL, path_len_constraint : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_encode.call(this, is_ca, path_len_constraint)
     end
     def initialize_decode(this : IX509ExtensionBasicConstraints*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_decode.call(this, encoding, strEncodedData)
     end
-    def get_IsCA(this : IX509ExtensionBasicConstraints*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsCA(this : IX509ExtensionBasicConstraints*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsCA.call(this, pValue)
     end
     def get_PathLenConstraint(this : IX509ExtensionBasicConstraints*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -6598,26 +6675,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionSubjectKeyIdentifierVtbl,
+
+  record IX509ExtensionSubjectKeyIdentifierVtable,
     query_interface : Proc(IX509ExtensionSubjectKeyIdentifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionSubjectKeyIdentifier*, UInt32),
     release : Proc(IX509ExtensionSubjectKeyIdentifier*, UInt32),
     get_type_info_count : Proc(IX509ExtensionSubjectKeyIdentifier*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionSubjectKeyIdentifier*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionSubjectKeyIdentifier*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionSubjectKeyIdentifier*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionSubjectKeyIdentifier*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionSubjectKeyIdentifier*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionSubjectKeyIdentifier*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionSubjectKeyIdentifier*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionSubjectKeyIdentifier*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionSubjectKeyIdentifier*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionSubjectKeyIdentifier*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionSubjectKeyIdentifier*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionSubjectKeyIdentifier*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionSubjectKeyIdentifier*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SubjectKeyIdentifier : Proc(IX509ExtensionSubjectKeyIdentifier*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionSubjectKeyIdentifier, lpVtbl : IX509ExtensionSubjectKeyIdentifierVtbl* do
+  record IX509ExtensionSubjectKeyIdentifier, lpVtbl : IX509ExtensionSubjectKeyIdentifierVtable* do
     GUID = LibC::GUID.new(0x728ab317_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionSubjectKeyIdentifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6637,8 +6715,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionSubjectKeyIdentifier*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionSubjectKeyIdentifier*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionSubjectKeyIdentifier*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionSubjectKeyIdentifier*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6649,10 +6727,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionSubjectKeyIdentifier*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionSubjectKeyIdentifier*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionSubjectKeyIdentifier*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionSubjectKeyIdentifier*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionSubjectKeyIdentifier*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionSubjectKeyIdentifier*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strKeyIdentifier : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6668,26 +6746,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionAuthorityKeyIdentifierVtbl,
+
+  record IX509ExtensionAuthorityKeyIdentifierVtable,
     query_interface : Proc(IX509ExtensionAuthorityKeyIdentifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionAuthorityKeyIdentifier*, UInt32),
     release : Proc(IX509ExtensionAuthorityKeyIdentifier*, UInt32),
     get_type_info_count : Proc(IX509ExtensionAuthorityKeyIdentifier*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionAuthorityKeyIdentifier*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionAuthorityKeyIdentifier*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionAuthorityKeyIdentifier*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionAuthorityKeyIdentifier*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionAuthorityKeyIdentifier*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionAuthorityKeyIdentifier*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionAuthorityKeyIdentifier*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionAuthorityKeyIdentifier*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionAuthorityKeyIdentifier*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionAuthorityKeyIdentifier*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionAuthorityKeyIdentifier*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionAuthorityKeyIdentifier*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionAuthorityKeyIdentifier*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_AuthorityKeyIdentifier : Proc(IX509ExtensionAuthorityKeyIdentifier*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionAuthorityKeyIdentifier, lpVtbl : IX509ExtensionAuthorityKeyIdentifierVtbl* do
+  record IX509ExtensionAuthorityKeyIdentifier, lpVtbl : IX509ExtensionAuthorityKeyIdentifierVtable* do
     GUID = LibC::GUID.new(0x728ab318_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionAuthorityKeyIdentifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6707,8 +6786,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionAuthorityKeyIdentifier*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionAuthorityKeyIdentifier*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionAuthorityKeyIdentifier*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionAuthorityKeyIdentifier*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6719,10 +6798,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionAuthorityKeyIdentifier*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionAuthorityKeyIdentifier*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionAuthorityKeyIdentifier*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionAuthorityKeyIdentifier*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionAuthorityKeyIdentifier*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionAuthorityKeyIdentifier*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strKeyIdentifier : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6738,21 +6817,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ISmimeCapabilityVtbl,
+
+  record ISmimeCapabilityVtable,
     query_interface : Proc(ISmimeCapability*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISmimeCapability*, UInt32),
     release : Proc(ISmimeCapability*, UInt32),
     get_type_info_count : Proc(ISmimeCapability*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISmimeCapability*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISmimeCapability*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISmimeCapability*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISmimeCapability*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ISmimeCapability*, Void*, Int32, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(ISmimeCapability*, Void**, Win32cr::Foundation::HRESULT),
     get_BitCount : Proc(ISmimeCapability*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISmimeCapability, lpVtbl : ISmimeCapabilityVtbl* do
+  record ISmimeCapability, lpVtbl : ISmimeCapabilityVtable* do
     GUID = LibC::GUID.new(0x728ab319_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ISmimeCapability*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6772,8 +6852,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ISmimeCapability*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISmimeCapability*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISmimeCapability*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ISmimeCapability*, pObjectId : Void*, bit_count : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, bit_count)
@@ -6788,14 +6868,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ISmimeCapabilitiesVtbl,
+
+  record ISmimeCapabilitiesVtable,
     query_interface : Proc(ISmimeCapabilities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISmimeCapabilities*, UInt32),
     release : Proc(ISmimeCapabilities*, UInt32),
     get_type_info_count : Proc(ISmimeCapabilities*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISmimeCapabilities*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISmimeCapabilities*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISmimeCapabilities*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISmimeCapabilities*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ISmimeCapabilities*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISmimeCapabilities*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISmimeCapabilities*, Void**, Win32cr::Foundation::HRESULT),
@@ -6803,11 +6884,11 @@ module Win32cr::Security::Cryptography::Certificates
     remove : Proc(ISmimeCapabilities*, Int32, Win32cr::Foundation::HRESULT),
     clear : Proc(ISmimeCapabilities*, Win32cr::Foundation::HRESULT),
     add_from_csp : Proc(ISmimeCapabilities*, Void*, Win32cr::Foundation::HRESULT),
-    add_available_smime_capabilities : Proc(ISmimeCapabilities*, Int16, Win32cr::Foundation::HRESULT)
+    add_available_smime_capabilities : Proc(ISmimeCapabilities*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISmimeCapabilities, lpVtbl : ISmimeCapabilitiesVtbl* do
+  record ISmimeCapabilities, lpVtbl : ISmimeCapabilitiesVtable* do
     GUID = LibC::GUID.new(0x728ab31a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ISmimeCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6827,8 +6908,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ISmimeCapabilities*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISmimeCapabilities*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISmimeCapabilities*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ISmimeCapabilities*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -6851,33 +6932,34 @@ module Win32cr::Security::Cryptography::Certificates
     def add_from_csp(this : ISmimeCapabilities*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_from_csp.call(this, pValue)
     end
-    def add_available_smime_capabilities(this : ISmimeCapabilities*, machine_context : Int16) : Win32cr::Foundation::HRESULT
+    def add_available_smime_capabilities(this : ISmimeCapabilities*, machine_context : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_available_smime_capabilities.call(this, machine_context)
     end
 
   end
 
   @[Extern]
-  record IX509ExtensionSmimeCapabilitiesVtbl,
+
+  record IX509ExtensionSmimeCapabilitiesVtable,
     query_interface : Proc(IX509ExtensionSmimeCapabilities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionSmimeCapabilities*, UInt32),
     release : Proc(IX509ExtensionSmimeCapabilities*, UInt32),
     get_type_info_count : Proc(IX509ExtensionSmimeCapabilities*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionSmimeCapabilities*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionSmimeCapabilities*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionSmimeCapabilities*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionSmimeCapabilities*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionSmimeCapabilities*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionSmimeCapabilities*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionSmimeCapabilities*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionSmimeCapabilities*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionSmimeCapabilities*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionSmimeCapabilities*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionSmimeCapabilities*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionSmimeCapabilities*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionSmimeCapabilities*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SmimeCapabilities : Proc(IX509ExtensionSmimeCapabilities*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionSmimeCapabilities, lpVtbl : IX509ExtensionSmimeCapabilitiesVtbl* do
+  record IX509ExtensionSmimeCapabilities, lpVtbl : IX509ExtensionSmimeCapabilitiesVtable* do
     GUID = LibC::GUID.new(0x728ab31b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionSmimeCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6897,8 +6979,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionSmimeCapabilities*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionSmimeCapabilities*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionSmimeCapabilities*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionSmimeCapabilities*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -6909,10 +6991,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionSmimeCapabilities*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionSmimeCapabilities*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionSmimeCapabilities*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionSmimeCapabilities*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionSmimeCapabilities*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionSmimeCapabilities*, pValue : Void*) : Win32cr::Foundation::HRESULT
@@ -6928,14 +7010,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IPolicyQualifierVtbl,
+
+  record IPolicyQualifierVtable,
     query_interface : Proc(IPolicyQualifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPolicyQualifier*, UInt32),
     release : Proc(IPolicyQualifier*, UInt32),
     get_type_info_count : Proc(IPolicyQualifier*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IPolicyQualifier*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IPolicyQualifier*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IPolicyQualifier*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IPolicyQualifier*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IPolicyQualifier*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::PolicyQualifierType, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IPolicyQualifier*, Void**, Win32cr::Foundation::HRESULT),
     get_Qualifier : Proc(IPolicyQualifier*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -6944,7 +7027,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IPolicyQualifier, lpVtbl : IPolicyQualifierVtbl* do
+  record IPolicyQualifier, lpVtbl : IPolicyQualifierVtable* do
     GUID = LibC::GUID.new(0x728ab31c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IPolicyQualifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6964,8 +7047,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IPolicyQualifier*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IPolicyQualifier*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IPolicyQualifier*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize_encode(this : IPolicyQualifier*, strQualifier : Win32cr::Foundation::BSTR, type__ : Win32cr::Security::Cryptography::Certificates::PolicyQualifierType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_encode.call(this, strQualifier, type__)
@@ -6986,14 +7069,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IPolicyQualifiersVtbl,
+
+  record IPolicyQualifiersVtable,
     query_interface : Proc(IPolicyQualifiers*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPolicyQualifiers*, UInt32),
     release : Proc(IPolicyQualifiers*, UInt32),
     get_type_info_count : Proc(IPolicyQualifiers*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IPolicyQualifiers*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IPolicyQualifiers*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IPolicyQualifiers*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IPolicyQualifiers*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IPolicyQualifiers*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IPolicyQualifiers*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IPolicyQualifiers*, Void**, Win32cr::Foundation::HRESULT),
@@ -7003,7 +7087,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IPolicyQualifiers, lpVtbl : IPolicyQualifiersVtbl* do
+  record IPolicyQualifiers, lpVtbl : IPolicyQualifiersVtable* do
     GUID = LibC::GUID.new(0x728ab31d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IPolicyQualifiers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7023,8 +7107,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IPolicyQualifiers*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IPolicyQualifiers*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IPolicyQualifiers*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IPolicyQualifiers*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -7048,21 +7132,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificatePolicyVtbl,
+
+  record ICertificatePolicyVtable,
     query_interface : Proc(ICertificatePolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificatePolicy*, UInt32),
     release : Proc(ICertificatePolicy*, UInt32),
     get_type_info_count : Proc(ICertificatePolicy*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertificatePolicy*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertificatePolicy*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertificatePolicy*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertificatePolicy*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertificatePolicy*, Void*, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(ICertificatePolicy*, Void**, Win32cr::Foundation::HRESULT),
     get_PolicyQualifiers : Proc(ICertificatePolicy*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertificatePolicy, lpVtbl : ICertificatePolicyVtbl* do
+  record ICertificatePolicy, lpVtbl : ICertificatePolicyVtable* do
     GUID = LibC::GUID.new(0x728ab31e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertificatePolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7082,8 +7167,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertificatePolicy*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertificatePolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertificatePolicy*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ICertificatePolicy*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pValue)
@@ -7098,14 +7183,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificatePoliciesVtbl,
+
+  record ICertificatePoliciesVtable,
     query_interface : Proc(ICertificatePolicies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificatePolicies*, UInt32),
     release : Proc(ICertificatePolicies*, UInt32),
     get_type_info_count : Proc(ICertificatePolicies*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertificatePolicies*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertificatePolicies*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertificatePolicies*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertificatePolicies*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ICertificatePolicies*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICertificatePolicies*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICertificatePolicies*, Void**, Win32cr::Foundation::HRESULT),
@@ -7115,7 +7201,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificatePolicies, lpVtbl : ICertificatePoliciesVtbl* do
+  record ICertificatePolicies, lpVtbl : ICertificatePoliciesVtable* do
     GUID = LibC::GUID.new(0x728ab31f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertificatePolicies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7135,8 +7221,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertificatePolicies*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertificatePolicies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertificatePolicies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ICertificatePolicies*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -7160,26 +7246,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionCertificatePoliciesVtbl,
+
+  record IX509ExtensionCertificatePoliciesVtable,
     query_interface : Proc(IX509ExtensionCertificatePolicies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionCertificatePolicies*, UInt32),
     release : Proc(IX509ExtensionCertificatePolicies*, UInt32),
     get_type_info_count : Proc(IX509ExtensionCertificatePolicies*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionCertificatePolicies*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionCertificatePolicies*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionCertificatePolicies*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionCertificatePolicies*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionCertificatePolicies*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionCertificatePolicies*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionCertificatePolicies*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionCertificatePolicies*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionCertificatePolicies*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionCertificatePolicies*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionCertificatePolicies*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionCertificatePolicies*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionCertificatePolicies*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Policies : Proc(IX509ExtensionCertificatePolicies*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionCertificatePolicies, lpVtbl : IX509ExtensionCertificatePoliciesVtbl* do
+  record IX509ExtensionCertificatePolicies, lpVtbl : IX509ExtensionCertificatePoliciesVtable* do
     GUID = LibC::GUID.new(0x728ab320_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionCertificatePolicies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7199,8 +7286,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionCertificatePolicies*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionCertificatePolicies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionCertificatePolicies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionCertificatePolicies*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7211,10 +7298,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionCertificatePolicies*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionCertificatePolicies*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionCertificatePolicies*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionCertificatePolicies*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionCertificatePolicies*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionCertificatePolicies*, pValue : Void*) : Win32cr::Foundation::HRESULT
@@ -7230,26 +7317,27 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionMSApplicationPoliciesVtbl,
+
+  record IX509ExtensionMSApplicationPoliciesVtable,
     query_interface : Proc(IX509ExtensionMSApplicationPolicies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionMSApplicationPolicies*, UInt32),
     release : Proc(IX509ExtensionMSApplicationPolicies*, UInt32),
     get_type_info_count : Proc(IX509ExtensionMSApplicationPolicies*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509ExtensionMSApplicationPolicies*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509ExtensionMSApplicationPolicies*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509ExtensionMSApplicationPolicies*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509ExtensionMSApplicationPolicies*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509ExtensionMSApplicationPolicies*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509ExtensionMSApplicationPolicies*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509ExtensionMSApplicationPolicies*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Critical : Proc(IX509ExtensionMSApplicationPolicies*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Critical : Proc(IX509ExtensionMSApplicationPolicies*, Int16, Win32cr::Foundation::HRESULT),
+    get_Critical : Proc(IX509ExtensionMSApplicationPolicies*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Critical : Proc(IX509ExtensionMSApplicationPolicies*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     initialize_encode : Proc(IX509ExtensionMSApplicationPolicies*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509ExtensionMSApplicationPolicies*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Policies : Proc(IX509ExtensionMSApplicationPolicies*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509ExtensionMSApplicationPolicies, lpVtbl : IX509ExtensionMSApplicationPoliciesVtbl* do
+  record IX509ExtensionMSApplicationPolicies, lpVtbl : IX509ExtensionMSApplicationPoliciesVtable* do
     GUID = LibC::GUID.new(0x728ab321_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionMSApplicationPolicies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7269,8 +7357,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509ExtensionMSApplicationPolicies*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509ExtensionMSApplicationPolicies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509ExtensionMSApplicationPolicies*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509ExtensionMSApplicationPolicies*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7281,10 +7369,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : IX509ExtensionMSApplicationPolicies*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def get_Critical(this : IX509ExtensionMSApplicationPolicies*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Critical(this : IX509ExtensionMSApplicationPolicies*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Critical.call(this, pValue)
     end
-    def put_Critical(this : IX509ExtensionMSApplicationPolicies*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Critical(this : IX509ExtensionMSApplicationPolicies*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Critical.call(this, value)
     end
     def initialize_encode(this : IX509ExtensionMSApplicationPolicies*, pValue : Void*) : Win32cr::Foundation::HRESULT
@@ -7300,21 +7388,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeVtbl,
+
+  record IX509AttributeVtable,
     query_interface : Proc(IX509Attribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Attribute*, UInt32),
     release : Proc(IX509Attribute*, UInt32),
     get_type_info_count : Proc(IX509Attribute*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509Attribute*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509Attribute*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509Attribute*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509Attribute*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509Attribute*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509Attribute*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509Attribute*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509Attribute, lpVtbl : IX509AttributeVtbl* do
+  record IX509Attribute, lpVtbl : IX509AttributeVtable* do
     GUID = LibC::GUID.new(0x728ab322_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Attribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7334,8 +7423,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509Attribute*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509Attribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509Attribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509Attribute*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7350,14 +7439,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributesVtbl,
+
+  record IX509AttributesVtable,
     query_interface : Proc(IX509Attributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Attributes*, UInt32),
     release : Proc(IX509Attributes*, UInt32),
     get_type_info_count : Proc(IX509Attributes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509Attributes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509Attributes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509Attributes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509Attributes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IX509Attributes*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IX509Attributes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IX509Attributes*, Void**, Win32cr::Foundation::HRESULT),
@@ -7367,7 +7457,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Attributes, lpVtbl : IX509AttributesVtbl* do
+  record IX509Attributes, lpVtbl : IX509AttributesVtable* do
     GUID = LibC::GUID.new(0x728ab323_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Attributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7387,8 +7477,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509Attributes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509Attributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509Attributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IX509Attributes*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -7412,14 +7502,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeExtensionsVtbl,
+
+  record IX509AttributeExtensionsVtable,
     query_interface : Proc(IX509AttributeExtensions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeExtensions*, UInt32),
     release : Proc(IX509AttributeExtensions*, UInt32),
     get_type_info_count : Proc(IX509AttributeExtensions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509AttributeExtensions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509AttributeExtensions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509AttributeExtensions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509AttributeExtensions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509AttributeExtensions*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509AttributeExtensions*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509AttributeExtensions*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7429,7 +7520,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeExtensions, lpVtbl : IX509AttributeExtensionsVtbl* do
+  record IX509AttributeExtensions, lpVtbl : IX509AttributeExtensionsVtable* do
     GUID = LibC::GUID.new(0x728ab324_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeExtensions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7449,8 +7540,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509AttributeExtensions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509AttributeExtensions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509AttributeExtensions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509AttributeExtensions*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7474,14 +7565,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeClientIdVtbl,
+
+  record IX509AttributeClientIdVtable,
     query_interface : Proc(IX509AttributeClientId*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeClientId*, UInt32),
     release : Proc(IX509AttributeClientId*, UInt32),
     get_type_info_count : Proc(IX509AttributeClientId*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509AttributeClientId*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509AttributeClientId*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509AttributeClientId*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509AttributeClientId*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509AttributeClientId*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509AttributeClientId*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509AttributeClientId*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7494,7 +7586,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeClientId, lpVtbl : IX509AttributeClientIdVtbl* do
+  record IX509AttributeClientId, lpVtbl : IX509AttributeClientIdVtable* do
     GUID = LibC::GUID.new(0x728ab325_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeClientId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7514,8 +7606,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509AttributeClientId*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509AttributeClientId*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509AttributeClientId*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509AttributeClientId*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7548,14 +7640,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeRenewalCertificateVtbl,
+
+  record IX509AttributeRenewalCertificateVtable,
     query_interface : Proc(IX509AttributeRenewalCertificate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeRenewalCertificate*, UInt32),
     release : Proc(IX509AttributeRenewalCertificate*, UInt32),
     get_type_info_count : Proc(IX509AttributeRenewalCertificate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509AttributeRenewalCertificate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509AttributeRenewalCertificate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509AttributeRenewalCertificate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509AttributeRenewalCertificate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509AttributeRenewalCertificate*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509AttributeRenewalCertificate*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509AttributeRenewalCertificate*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7565,7 +7658,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeRenewalCertificate, lpVtbl : IX509AttributeRenewalCertificateVtbl* do
+  record IX509AttributeRenewalCertificate, lpVtbl : IX509AttributeRenewalCertificateVtable* do
     GUID = LibC::GUID.new(0x728ab326_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeRenewalCertificate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7585,8 +7678,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509AttributeRenewalCertificate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509AttributeRenewalCertificate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509AttributeRenewalCertificate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509AttributeRenewalCertificate*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7610,14 +7703,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeArchiveKeyVtbl,
+
+  record IX509AttributeArchiveKeyVtable,
     query_interface : Proc(IX509AttributeArchiveKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeArchiveKey*, UInt32),
     release : Proc(IX509AttributeArchiveKey*, UInt32),
     get_type_info_count : Proc(IX509AttributeArchiveKey*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509AttributeArchiveKey*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509AttributeArchiveKey*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509AttributeArchiveKey*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509AttributeArchiveKey*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509AttributeArchiveKey*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509AttributeArchiveKey*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509AttributeArchiveKey*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7629,7 +7723,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeArchiveKey, lpVtbl : IX509AttributeArchiveKeyVtbl* do
+  record IX509AttributeArchiveKey, lpVtbl : IX509AttributeArchiveKeyVtable* do
     GUID = LibC::GUID.new(0x728ab327_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeArchiveKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7649,8 +7743,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509AttributeArchiveKey*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509AttributeArchiveKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509AttributeArchiveKey*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509AttributeArchiveKey*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7680,14 +7774,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeArchiveKeyHashVtbl,
+
+  record IX509AttributeArchiveKeyHashVtable,
     query_interface : Proc(IX509AttributeArchiveKeyHash*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeArchiveKeyHash*, UInt32),
     release : Proc(IX509AttributeArchiveKeyHash*, UInt32),
     get_type_info_count : Proc(IX509AttributeArchiveKeyHash*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509AttributeArchiveKeyHash*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509AttributeArchiveKeyHash*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509AttributeArchiveKeyHash*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509AttributeArchiveKeyHash*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509AttributeArchiveKeyHash*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509AttributeArchiveKeyHash*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509AttributeArchiveKeyHash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7697,7 +7792,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeArchiveKeyHash, lpVtbl : IX509AttributeArchiveKeyHashVtbl* do
+  record IX509AttributeArchiveKeyHash, lpVtbl : IX509AttributeArchiveKeyHashVtable* do
     GUID = LibC::GUID.new(0x728ab328_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeArchiveKeyHash*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7717,8 +7812,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509AttributeArchiveKeyHash*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509AttributeArchiveKeyHash*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509AttributeArchiveKeyHash*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509AttributeArchiveKeyHash*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7742,14 +7837,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeOSVersionVtbl,
+
+  record IX509AttributeOSVersionVtable,
     query_interface : Proc(IX509AttributeOSVersion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeOSVersion*, UInt32),
     release : Proc(IX509AttributeOSVersion*, UInt32),
     get_type_info_count : Proc(IX509AttributeOSVersion*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509AttributeOSVersion*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509AttributeOSVersion*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509AttributeOSVersion*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509AttributeOSVersion*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509AttributeOSVersion*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509AttributeOSVersion*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509AttributeOSVersion*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7759,7 +7855,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeOSVersion, lpVtbl : IX509AttributeOSVersionVtbl* do
+  record IX509AttributeOSVersion, lpVtbl : IX509AttributeOSVersionVtable* do
     GUID = LibC::GUID.new(0x728ab32a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeOSVersion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7779,8 +7875,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509AttributeOSVersion*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509AttributeOSVersion*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509AttributeOSVersion*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509AttributeOSVersion*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7804,14 +7900,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeCspProviderVtbl,
+
+  record IX509AttributeCspProviderVtable,
     query_interface : Proc(IX509AttributeCspProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeCspProvider*, UInt32),
     release : Proc(IX509AttributeCspProvider*, UInt32),
     get_type_info_count : Proc(IX509AttributeCspProvider*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509AttributeCspProvider*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509AttributeCspProvider*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509AttributeCspProvider*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509AttributeCspProvider*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509AttributeCspProvider*, Void*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(IX509AttributeCspProvider*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509AttributeCspProvider*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7823,7 +7920,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeCspProvider, lpVtbl : IX509AttributeCspProviderVtbl* do
+  record IX509AttributeCspProvider, lpVtbl : IX509AttributeCspProviderVtable* do
     GUID = LibC::GUID.new(0x728ab32b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeCspProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7843,8 +7940,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509AttributeCspProvider*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509AttributeCspProvider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509AttributeCspProvider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509AttributeCspProvider*, pObjectId : Void*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pObjectId, encoding, strEncodedData)
@@ -7874,14 +7971,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICryptAttributeVtbl,
+
+  record ICryptAttributeVtable,
     query_interface : Proc(ICryptAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICryptAttribute*, UInt32),
     release : Proc(ICryptAttribute*, UInt32),
     get_type_info_count : Proc(ICryptAttribute*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICryptAttribute*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICryptAttribute*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICryptAttribute*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICryptAttribute*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize_from_object_id : Proc(ICryptAttribute*, Void*, Win32cr::Foundation::HRESULT),
     initialize_from_values : Proc(ICryptAttribute*, Void*, Win32cr::Foundation::HRESULT),
     get_ObjectId : Proc(ICryptAttribute*, Void**, Win32cr::Foundation::HRESULT),
@@ -7889,7 +7987,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICryptAttribute, lpVtbl : ICryptAttributeVtbl* do
+  record ICryptAttribute, lpVtbl : ICryptAttributeVtable* do
     GUID = LibC::GUID.new(0x728ab32c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICryptAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7909,8 +8007,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICryptAttribute*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICryptAttribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICryptAttribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize_from_object_id(this : ICryptAttribute*, pObjectId : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_object_id.call(this, pObjectId)
@@ -7928,14 +8026,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICryptAttributesVtbl,
+
+  record ICryptAttributesVtable,
     query_interface : Proc(ICryptAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICryptAttributes*, UInt32),
     release : Proc(ICryptAttributes*, UInt32),
     get_type_info_count : Proc(ICryptAttributes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICryptAttributes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICryptAttributes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICryptAttributes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICryptAttributes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ICryptAttributes*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICryptAttributes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICryptAttributes*, Void**, Win32cr::Foundation::HRESULT),
@@ -7947,7 +8046,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICryptAttributes, lpVtbl : ICryptAttributesVtbl* do
+  record ICryptAttributes, lpVtbl : ICryptAttributesVtable* do
     GUID = LibC::GUID.new(0x728ab32d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICryptAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7967,8 +8066,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICryptAttributes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICryptAttributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICryptAttributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ICryptAttributes*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -7998,25 +8097,26 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyVtbl,
+
+  record ICertPropertyVtable,
     query_interface : Proc(ICertProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertProperty*, UInt32),
     release : Proc(ICertProperty*, UInt32),
     get_type_info_count : Proc(ICertProperty*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertProperty*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertProperty*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertProperty*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertProperty*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertProperty*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertProperty*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertProperty*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertProperty*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertProperty*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertProperty*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertProperty*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertProperty*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+    remove_from_certificate : Proc(ICertProperty*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertProperty*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertProperty, lpVtbl : ICertPropertyVtbl* do
+  record ICertProperty, lpVtbl : ICertPropertyVtable* do
     GUID = LibC::GUID.new(0x728ab32e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8036,10 +8136,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertProperty*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertProperty*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertProperty*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertProperty*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertProperty*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8054,35 +8154,36 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertProperty*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertProperty*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertProperty*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertProperty*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertProperty*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
 
   end
 
   @[Extern]
-  record ICertPropertiesVtbl,
+
+  record ICertPropertiesVtable,
     query_interface : Proc(ICertProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertProperties*, UInt32),
     release : Proc(ICertProperties*, UInt32),
     get_type_info_count : Proc(ICertProperties*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertProperties*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertProperties*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertProperties*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertProperties*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ICertProperties*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICertProperties*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICertProperties*, Void**, Win32cr::Foundation::HRESULT),
     add : Proc(ICertProperties*, Void*, Win32cr::Foundation::HRESULT),
     remove : Proc(ICertProperties*, Int32, Win32cr::Foundation::HRESULT),
     clear : Proc(ICertProperties*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertProperties*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
+    initialize_from_certificate : Proc(ICertProperties*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertProperties, lpVtbl : ICertPropertiesVtbl* do
+  record ICertProperties, lpVtbl : ICertPropertiesVtable* do
     GUID = LibC::GUID.new(0x728ab32f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8102,8 +8203,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertProperties*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ICertProperties*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -8123,34 +8224,35 @@ module Win32cr::Security::Cryptography::Certificates
     def clear(this : ICertProperties*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clear.call(this)
     end
-    def initialize_from_certificate(this : ICertProperties*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertProperties*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
 
   end
 
   @[Extern]
-  record ICertPropertyFriendlyNameVtbl,
+
+  record ICertPropertyFriendlyNameVtable,
     query_interface : Proc(ICertPropertyFriendlyName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyFriendlyName*, UInt32),
     release : Proc(ICertPropertyFriendlyName*, UInt32),
     get_type_info_count : Proc(ICertPropertyFriendlyName*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyFriendlyName*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyFriendlyName*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyFriendlyName*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyFriendlyName*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyFriendlyName*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyFriendlyName*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyFriendlyName*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyFriendlyName*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyFriendlyName*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyFriendlyName*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyFriendlyName*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyFriendlyName*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyFriendlyName*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyFriendlyName*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyFriendlyName*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_FriendlyName : Proc(ICertPropertyFriendlyName*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyFriendlyName, lpVtbl : ICertPropertyFriendlyNameVtbl* do
+  record ICertPropertyFriendlyName, lpVtbl : ICertPropertyFriendlyNameVtable* do
     GUID = LibC::GUID.new(0x728ab330_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyFriendlyName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8170,10 +8272,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyFriendlyName*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyFriendlyName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyFriendlyName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyFriendlyName*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyFriendlyName*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyFriendlyName*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8188,10 +8290,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyFriendlyName*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyFriendlyName*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyFriendlyName*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyFriendlyName*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyFriendlyName*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyFriendlyName*, strFriendlyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8204,27 +8306,28 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyDescriptionVtbl,
+
+  record ICertPropertyDescriptionVtable,
     query_interface : Proc(ICertPropertyDescription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyDescription*, UInt32),
     release : Proc(ICertPropertyDescription*, UInt32),
     get_type_info_count : Proc(ICertPropertyDescription*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyDescription*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyDescription*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyDescription*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyDescription*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyDescription*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyDescription*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyDescription*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyDescription*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyDescription*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyDescription*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyDescription*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyDescription*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyDescription*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyDescription*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyDescription*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(ICertPropertyDescription*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyDescription, lpVtbl : ICertPropertyDescriptionVtbl* do
+  record ICertPropertyDescription, lpVtbl : ICertPropertyDescriptionVtable* do
     GUID = LibC::GUID.new(0x728ab331_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8244,10 +8347,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyDescription*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyDescription*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyDescription*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyDescription*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyDescription*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyDescription*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8262,10 +8365,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyDescription*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyDescription*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyDescription*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyDescription*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyDescription*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyDescription*, strDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8278,27 +8381,28 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyAutoEnrollVtbl,
+
+  record ICertPropertyAutoEnrollVtable,
     query_interface : Proc(ICertPropertyAutoEnroll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyAutoEnroll*, UInt32),
     release : Proc(ICertPropertyAutoEnroll*, UInt32),
     get_type_info_count : Proc(ICertPropertyAutoEnroll*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyAutoEnroll*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyAutoEnroll*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyAutoEnroll*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyAutoEnroll*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyAutoEnroll*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyAutoEnroll*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyAutoEnroll*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyAutoEnroll*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyAutoEnroll*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyAutoEnroll*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyAutoEnroll*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyAutoEnroll*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyAutoEnroll*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyAutoEnroll*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyAutoEnroll*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TemplateName : Proc(ICertPropertyAutoEnroll*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyAutoEnroll, lpVtbl : ICertPropertyAutoEnrollVtbl* do
+  record ICertPropertyAutoEnroll, lpVtbl : ICertPropertyAutoEnrollVtable* do
     GUID = LibC::GUID.new(0x728ab332_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyAutoEnroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8318,10 +8422,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyAutoEnroll*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyAutoEnroll*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyAutoEnroll*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyAutoEnroll*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyAutoEnroll*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyAutoEnroll*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8336,10 +8440,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyAutoEnroll*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyAutoEnroll*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyAutoEnroll*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyAutoEnroll*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyAutoEnroll*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyAutoEnroll*, strTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8352,28 +8456,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyRequestOriginatorVtbl,
+
+  record ICertPropertyRequestOriginatorVtable,
     query_interface : Proc(ICertPropertyRequestOriginator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyRequestOriginator*, UInt32),
     release : Proc(ICertPropertyRequestOriginator*, UInt32),
     get_type_info_count : Proc(ICertPropertyRequestOriginator*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyRequestOriginator*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyRequestOriginator*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyRequestOriginator*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyRequestOriginator*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyRequestOriginator*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyRequestOriginator*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyRequestOriginator*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyRequestOriginator*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyRequestOriginator*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyRequestOriginator*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyRequestOriginator*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyRequestOriginator*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyRequestOriginator*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyRequestOriginator*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyRequestOriginator*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_local_request_originator : Proc(ICertPropertyRequestOriginator*, Win32cr::Foundation::HRESULT),
     get_RequestOriginator : Proc(ICertPropertyRequestOriginator*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyRequestOriginator, lpVtbl : ICertPropertyRequestOriginatorVtbl* do
+  record ICertPropertyRequestOriginator, lpVtbl : ICertPropertyRequestOriginatorVtable* do
     GUID = LibC::GUID.new(0x728ab333_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyRequestOriginator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8393,10 +8498,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyRequestOriginator*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyRequestOriginator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyRequestOriginator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyRequestOriginator*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyRequestOriginator*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyRequestOriginator*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8411,10 +8516,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyRequestOriginator*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyRequestOriginator*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyRequestOriginator*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyRequestOriginator*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyRequestOriginator*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyRequestOriginator*, strRequestOriginator : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8430,27 +8535,28 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertySHA1HashVtbl,
+
+  record ICertPropertySHA1HashVtable,
     query_interface : Proc(ICertPropertySHA1Hash*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertySHA1Hash*, UInt32),
     release : Proc(ICertPropertySHA1Hash*, UInt32),
     get_type_info_count : Proc(ICertPropertySHA1Hash*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertySHA1Hash*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertySHA1Hash*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertySHA1Hash*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertySHA1Hash*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertySHA1Hash*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertySHA1Hash*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertySHA1Hash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertySHA1Hash*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertySHA1Hash*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertySHA1Hash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertySHA1Hash*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertySHA1Hash*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertySHA1Hash*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertySHA1Hash*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertySHA1Hash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SHA1Hash : Proc(ICertPropertySHA1Hash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertySHA1Hash, lpVtbl : ICertPropertySHA1HashVtbl* do
+  record ICertPropertySHA1Hash, lpVtbl : ICertPropertySHA1HashVtable* do
     GUID = LibC::GUID.new(0x728ab334_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertySHA1Hash*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8470,10 +8576,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertySHA1Hash*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertySHA1Hash*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertySHA1Hash*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertySHA1Hash*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertySHA1Hash*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertySHA1Hash*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8488,10 +8594,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertySHA1Hash*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertySHA1Hash*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertySHA1Hash*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertySHA1Hash*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertySHA1Hash*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertySHA1Hash*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strRenewalValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8504,27 +8610,28 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyKeyProvInfoVtbl,
+
+  record ICertPropertyKeyProvInfoVtable,
     query_interface : Proc(ICertPropertyKeyProvInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyKeyProvInfo*, UInt32),
     release : Proc(ICertPropertyKeyProvInfo*, UInt32),
     get_type_info_count : Proc(ICertPropertyKeyProvInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyKeyProvInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyKeyProvInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyKeyProvInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyKeyProvInfo*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyKeyProvInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyKeyProvInfo*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyKeyProvInfo*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyKeyProvInfo*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyKeyProvInfo*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyKeyProvInfo*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyKeyProvInfo*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyKeyProvInfo*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyKeyProvInfo*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyKeyProvInfo*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyKeyProvInfo*, Void*, Win32cr::Foundation::HRESULT),
     get_PrivateKey : Proc(ICertPropertyKeyProvInfo*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyKeyProvInfo, lpVtbl : ICertPropertyKeyProvInfoVtbl* do
+  record ICertPropertyKeyProvInfo, lpVtbl : ICertPropertyKeyProvInfoVtable* do
     GUID = LibC::GUID.new(0x728ab336_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyKeyProvInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8544,10 +8651,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyKeyProvInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyKeyProvInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyKeyProvInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyKeyProvInfo*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyKeyProvInfo*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyKeyProvInfo*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8562,10 +8669,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyKeyProvInfo*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyKeyProvInfo*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyKeyProvInfo*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyKeyProvInfo*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyKeyProvInfo*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyKeyProvInfo*, pValue : Void*) : Win32cr::Foundation::HRESULT
@@ -8578,27 +8685,28 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyArchivedVtbl,
+
+  record ICertPropertyArchivedVtable,
     query_interface : Proc(ICertPropertyArchived*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyArchived*, UInt32),
     release : Proc(ICertPropertyArchived*, UInt32),
     get_type_info_count : Proc(ICertPropertyArchived*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyArchived*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyArchived*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyArchived*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyArchived*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyArchived*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyArchived*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyArchived*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyArchived*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyArchived*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyArchived*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyArchived*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyArchived*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize__ : Proc(ICertPropertyArchived*, Int16, Win32cr::Foundation::HRESULT),
-    get_Archived : Proc(ICertPropertyArchived*, Int16*, Win32cr::Foundation::HRESULT)
+    remove_from_certificate : Proc(ICertPropertyArchived*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyArchived*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(ICertPropertyArchived*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Archived : Proc(ICertPropertyArchived*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyArchived, lpVtbl : ICertPropertyArchivedVtbl* do
+  record ICertPropertyArchived, lpVtbl : ICertPropertyArchivedVtable* do
     GUID = LibC::GUID.new(0x728ab337_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyArchived*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8618,10 +8726,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyArchived*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyArchived*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyArchived*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyArchived*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyArchived*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyArchived*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8636,45 +8744,46 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyArchived*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyArchived*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyArchived*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyArchived*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyArchived*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def initialize__(this : ICertPropertyArchived*, archived_value : Int16) : Win32cr::Foundation::HRESULT
+    def initialize__(this : ICertPropertyArchived*, archived_value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, archived_value)
     end
-    def get_Archived(this : ICertPropertyArchived*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Archived(this : ICertPropertyArchived*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Archived.call(this, pValue)
     end
 
   end
 
   @[Extern]
-  record ICertPropertyBackedUpVtbl,
+
+  record ICertPropertyBackedUpVtable,
     query_interface : Proc(ICertPropertyBackedUp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyBackedUp*, UInt32),
     release : Proc(ICertPropertyBackedUp*, UInt32),
     get_type_info_count : Proc(ICertPropertyBackedUp*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyBackedUp*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyBackedUp*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyBackedUp*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyBackedUp*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyBackedUp*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyBackedUp*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyBackedUp*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyBackedUp*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyBackedUp*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyBackedUp*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyBackedUp*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyBackedUp*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_current_time : Proc(ICertPropertyBackedUp*, Int16, Win32cr::Foundation::HRESULT),
-    initialize__ : Proc(ICertPropertyBackedUp*, Int16, Float64, Win32cr::Foundation::HRESULT),
-    get_BackedUpValue : Proc(ICertPropertyBackedUp*, Int16*, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyBackedUp*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyBackedUp*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    initialize_from_current_time : Proc(ICertPropertyBackedUp*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(ICertPropertyBackedUp*, Win32cr::Foundation::VARIANT_BOOL, Float64, Win32cr::Foundation::HRESULT),
+    get_BackedUpValue : Proc(ICertPropertyBackedUp*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_BackedUpTime : Proc(ICertPropertyBackedUp*, Float64*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyBackedUp, lpVtbl : ICertPropertyBackedUpVtbl* do
+  record ICertPropertyBackedUp, lpVtbl : ICertPropertyBackedUpVtable* do
     GUID = LibC::GUID.new(0x728ab338_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyBackedUp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8694,10 +8803,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyBackedUp*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyBackedUp*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyBackedUp*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyBackedUp*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyBackedUp*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyBackedUp*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8712,19 +8821,19 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyBackedUp*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyBackedUp*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyBackedUp*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyBackedUp*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyBackedUp*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def initialize_from_current_time(this : ICertPropertyBackedUp*, backed_up_value : Int16) : Win32cr::Foundation::HRESULT
+    def initialize_from_current_time(this : ICertPropertyBackedUp*, backed_up_value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_current_time.call(this, backed_up_value)
     end
-    def initialize__(this : ICertPropertyBackedUp*, backed_up_value : Int16, date : Float64) : Win32cr::Foundation::HRESULT
+    def initialize__(this : ICertPropertyBackedUp*, backed_up_value : Win32cr::Foundation::VARIANT_BOOL, date : Float64) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, backed_up_value, date)
     end
-    def get_BackedUpValue(this : ICertPropertyBackedUp*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BackedUpValue(this : ICertPropertyBackedUp*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BackedUpValue.call(this, pValue)
     end
     def get_BackedUpTime(this : ICertPropertyBackedUp*, pDate : Float64*) : Win32cr::Foundation::HRESULT
@@ -8734,21 +8843,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyEnrollmentVtbl,
+
+  record ICertPropertyEnrollmentVtable,
     query_interface : Proc(ICertPropertyEnrollment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyEnrollment*, UInt32),
     release : Proc(ICertPropertyEnrollment*, UInt32),
     get_type_info_count : Proc(ICertPropertyEnrollment*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyEnrollment*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyEnrollment*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyEnrollment*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyEnrollment*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyEnrollment*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyEnrollment*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyEnrollment*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyEnrollment*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyEnrollment*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyEnrollment*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyEnrollment*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyEnrollment*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyEnrollment*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyEnrollment*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyEnrollment*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_RequestId : Proc(ICertPropertyEnrollment*, Int32*, Win32cr::Foundation::HRESULT),
     get_CADnsName : Proc(ICertPropertyEnrollment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -8757,7 +8867,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyEnrollment, lpVtbl : ICertPropertyEnrollmentVtbl* do
+  record ICertPropertyEnrollment, lpVtbl : ICertPropertyEnrollmentVtable* do
     GUID = LibC::GUID.new(0x728ab339_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyEnrollment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8777,10 +8887,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyEnrollment*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyEnrollment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyEnrollment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyEnrollment*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyEnrollment*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyEnrollment*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8795,10 +8905,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyEnrollment*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyEnrollment*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyEnrollment*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyEnrollment*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyEnrollment*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyEnrollment*, request_id : Int32, strCADnsName : Win32cr::Foundation::BSTR, strCAName : Win32cr::Foundation::BSTR, strFriendlyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8820,28 +8930,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyRenewalVtbl,
+
+  record ICertPropertyRenewalVtable,
     query_interface : Proc(ICertPropertyRenewal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyRenewal*, UInt32),
     release : Proc(ICertPropertyRenewal*, UInt32),
     get_type_info_count : Proc(ICertPropertyRenewal*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyRenewal*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyRenewal*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyRenewal*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyRenewal*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyRenewal*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyRenewal*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyRenewal*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyRenewal*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyRenewal*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyRenewal*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyRenewal*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyRenewal*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyRenewal*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyRenewal*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyRenewal*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate_hash : Proc(ICertPropertyRenewal*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate_hash : Proc(ICertPropertyRenewal*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Renewal : Proc(ICertPropertyRenewal*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyRenewal, lpVtbl : ICertPropertyRenewalVtbl* do
+  record ICertPropertyRenewal, lpVtbl : ICertPropertyRenewalVtable* do
     GUID = LibC::GUID.new(0x728ab33a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyRenewal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8861,10 +8972,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyRenewal*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyRenewal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyRenewal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyRenewal*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyRenewal*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyRenewal*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8879,16 +8990,16 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyRenewal*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyRenewal*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyRenewal*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyRenewal*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyRenewal*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyRenewal*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strRenewalValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, encoding, strRenewalValue)
     end
-    def initialize_from_certificate_hash(this : ICertPropertyRenewal*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate_hash(this : ICertPropertyRenewal*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate_hash.call(this, machine_context, encoding, strCertificate)
     end
     def get_Renewal(this : ICertPropertyRenewal*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -8898,27 +9009,28 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyArchivedKeyHashVtbl,
+
+  record ICertPropertyArchivedKeyHashVtable,
     query_interface : Proc(ICertPropertyArchivedKeyHash*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyArchivedKeyHash*, UInt32),
     release : Proc(ICertPropertyArchivedKeyHash*, UInt32),
     get_type_info_count : Proc(ICertPropertyArchivedKeyHash*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyArchivedKeyHash*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyArchivedKeyHash*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyArchivedKeyHash*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyArchivedKeyHash*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyArchivedKeyHash*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyArchivedKeyHash*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyArchivedKeyHash*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ArchivedKeyHash : Proc(ICertPropertyArchivedKeyHash*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertPropertyArchivedKeyHash, lpVtbl : ICertPropertyArchivedKeyHashVtbl* do
+  record ICertPropertyArchivedKeyHash, lpVtbl : ICertPropertyArchivedKeyHashVtable* do
     GUID = LibC::GUID.new(0x728ab33b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyArchivedKeyHash*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8938,10 +9050,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyArchivedKeyHash*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyArchivedKeyHash*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyArchivedKeyHash*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyArchivedKeyHash*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyArchivedKeyHash*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyArchivedKeyHash*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8956,10 +9068,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyArchivedKeyHash*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyArchivedKeyHash*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyArchivedKeyHash*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyArchivedKeyHash*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyArchivedKeyHash*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyArchivedKeyHash*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strArchivedKeyHashValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8972,21 +9084,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyEnrollmentPolicyServerVtbl,
+
+  record ICertPropertyEnrollmentPolicyServerVtable,
     query_interface : Proc(ICertPropertyEnrollmentPolicyServer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyEnrollmentPolicyServer*, UInt32),
     release : Proc(ICertPropertyEnrollmentPolicyServer*, UInt32),
     get_type_info_count : Proc(ICertPropertyEnrollmentPolicyServer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertPropertyEnrollmentPolicyServer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertPropertyEnrollmentPolicyServer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertPropertyEnrollmentPolicyServer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(ICertPropertyEnrollmentPolicyServer*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertPropertyEnrollmentPolicyServer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_PropertyId : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID*, Win32cr::Foundation::HRESULT),
     put_PropertyId : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::CERTENROLL_PROPERTYID, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    remove_from_certificate : Proc(ICertPropertyEnrollmentPolicyServer*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    set_value_on_certificate : Proc(ICertPropertyEnrollmentPolicyServer*, Int16, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    remove_from_certificate : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    set_value_on_certificate : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::EnrollmentPolicyServerPropertyFlags, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, Win32cr::Security::Cryptography::Certificates::PolicyServerUrlFlags, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_policy_server_url : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_policy_server_id : Proc(ICertPropertyEnrollmentPolicyServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -8999,7 +9112,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyEnrollmentPolicyServer, lpVtbl : ICertPropertyEnrollmentPolicyServerVtbl* do
+  record ICertPropertyEnrollmentPolicyServer, lpVtbl : ICertPropertyEnrollmentPolicyServerVtable* do
     GUID = LibC::GUID.new(0x728ab34a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyEnrollmentPolicyServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9019,10 +9132,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertPropertyEnrollmentPolicyServer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertPropertyEnrollmentPolicyServer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertPropertyEnrollmentPolicyServer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize_from_certificate(this : ICertPropertyEnrollmentPolicyServer*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : ICertPropertyEnrollmentPolicyServer*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize_decode(this : ICertPropertyEnrollmentPolicyServer*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strEncodedData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -9037,10 +9150,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_RawData(this : ICertPropertyEnrollmentPolicyServer*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RawData.call(this, encoding, pValue)
     end
-    def remove_from_certificate(this : ICertPropertyEnrollmentPolicyServer*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def remove_from_certificate(this : ICertPropertyEnrollmentPolicyServer*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_from_certificate.call(this, machine_context, encoding, strCertificate)
     end
-    def set_value_on_certificate(this : ICertPropertyEnrollmentPolicyServer*, machine_context : Int16, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def set_value_on_certificate(this : ICertPropertyEnrollmentPolicyServer*, machine_context : Win32cr::Foundation::VARIANT_BOOL, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value_on_certificate.call(this, machine_context, encoding, strCertificate)
     end
     def initialize__(this : ICertPropertyEnrollmentPolicyServer*, property_flags : Win32cr::Security::Cryptography::Certificates::EnrollmentPolicyServerPropertyFlags, auth_flags : Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, enrollment_server_auth_flags : Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, url_flags : Win32cr::Security::Cryptography::Certificates::PolicyServerUrlFlags, strRequestId : Win32cr::Foundation::BSTR, strUrl : Win32cr::Foundation::BSTR, strId : Win32cr::Foundation::BSTR, strEnrollmentServerUrl : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -9074,31 +9187,32 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509SignatureInformationVtbl,
+
+  record IX509SignatureInformationVtable,
     query_interface : Proc(IX509SignatureInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509SignatureInformation*, UInt32),
     release : Proc(IX509SignatureInformation*, UInt32),
     get_type_info_count : Proc(IX509SignatureInformation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509SignatureInformation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509SignatureInformation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509SignatureInformation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509SignatureInformation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509SignatureInformation*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509SignatureInformation*, Void*, Win32cr::Foundation::HRESULT),
     get_PublicKeyAlgorithm : Proc(IX509SignatureInformation*, Void**, Win32cr::Foundation::HRESULT),
     put_PublicKeyAlgorithm : Proc(IX509SignatureInformation*, Void*, Win32cr::Foundation::HRESULT),
     get_Parameters : Proc(IX509SignatureInformation*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Parameters : Proc(IX509SignatureInformation*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509SignatureInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509SignatureInformation*, Int16, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithmSet : Proc(IX509SignatureInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509SignatureInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    put_NullSigned : Proc(IX509SignatureInformation*, Int16, Win32cr::Foundation::HRESULT),
-    get_signature_algorithm : Proc(IX509SignatureInformation*, Int16, Int16, Void**, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509SignatureInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509SignatureInformation*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithmSet : Proc(IX509SignatureInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509SignatureInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_NullSigned : Proc(IX509SignatureInformation*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_signature_algorithm : Proc(IX509SignatureInformation*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     set_default_values : Proc(IX509SignatureInformation*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509SignatureInformation, lpVtbl : IX509SignatureInformationVtbl* do
+  record IX509SignatureInformation, lpVtbl : IX509SignatureInformationVtable* do
     GUID = LibC::GUID.new(0x728ab33c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509SignatureInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9118,8 +9232,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509SignatureInformation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509SignatureInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509SignatureInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_HashAlgorithm(this : IX509SignatureInformation*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HashAlgorithm.call(this, ppValue)
@@ -9139,22 +9253,22 @@ module Win32cr::Security::Cryptography::Certificates
     def put_Parameters(this : IX509SignatureInformation*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Parameters.call(this, encoding, value)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509SignatureInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509SignatureInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509SignatureInformation*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509SignatureInformation*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
-    def get_AlternateSignatureAlgorithmSet(this : IX509SignatureInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithmSet(this : IX509SignatureInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithmSet.call(this, pValue)
     end
-    def get_NullSigned(this : IX509SignatureInformation*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509SignatureInformation*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
-    def put_NullSigned(this : IX509SignatureInformation*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_NullSigned(this : IX509SignatureInformation*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NullSigned.call(this, value)
     end
-    def get_signature_algorithm(this : IX509SignatureInformation*, pkcs7_signature : Int16, signature_key : Int16, ppValue : Void**) : Win32cr::Foundation::HRESULT
+    def get_signature_algorithm(this : IX509SignatureInformation*, pkcs7_signature : Win32cr::Foundation::VARIANT_BOOL, signature_key : Win32cr::Foundation::VARIANT_BOOL, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_signature_algorithm.call(this, pkcs7_signature, signature_key, ppValue)
     end
     def set_default_values(this : IX509SignatureInformation*) : Win32cr::Foundation::HRESULT
@@ -9164,19 +9278,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ISignerCertificateVtbl,
+
+  record ISignerCertificateVtable,
     query_interface : Proc(ISignerCertificate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISignerCertificate*, UInt32),
     release : Proc(ISignerCertificate*, UInt32),
     get_type_info_count : Proc(ISignerCertificate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISignerCertificate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISignerCertificate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISignerCertificate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize__ : Proc(ISignerCertificate*, Int16, Win32cr::Security::Cryptography::Certificates::X509PrivateKeyVerify, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISignerCertificate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(ISignerCertificate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::X509PrivateKeyVerify, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Certificate : Proc(ISignerCertificate*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_PrivateKey : Proc(ISignerCertificate*, Void**, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(ISignerCertificate*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(ISignerCertificate*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(ISignerCertificate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(ISignerCertificate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(ISignerCertificate*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(ISignerCertificate*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(ISignerCertificate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -9186,7 +9301,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ISignerCertificate, lpVtbl : ISignerCertificateVtbl* do
+  record ISignerCertificate, lpVtbl : ISignerCertificateVtable* do
     GUID = LibC::GUID.new(0x728ab33d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ISignerCertificate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9206,10 +9321,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ISignerCertificate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISignerCertificate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISignerCertificate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize__(this : ISignerCertificate*, machine_context : Int16, verify_type : Win32cr::Security::Cryptography::Certificates::X509PrivateKeyVerify, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def initialize__(this : ISignerCertificate*, machine_context : Win32cr::Foundation::VARIANT_BOOL, verify_type : Win32cr::Security::Cryptography::Certificates::X509PrivateKeyVerify, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strCertificate : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, machine_context, verify_type, encoding, strCertificate)
     end
     def get_Certificate(this : ISignerCertificate*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -9218,10 +9333,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_PrivateKey(this : ISignerCertificate*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateKey.call(this, ppValue)
     end
-    def get_Silent(this : ISignerCertificate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : ISignerCertificate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : ISignerCertificate*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : ISignerCertificate*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : ISignerCertificate*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -9246,14 +9361,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ISignerCertificatesVtbl,
+
+  record ISignerCertificatesVtable,
     query_interface : Proc(ISignerCertificates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISignerCertificates*, UInt32),
     release : Proc(ISignerCertificates*, UInt32),
     get_type_info_count : Proc(ISignerCertificates*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISignerCertificates*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISignerCertificates*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISignerCertificates*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISignerCertificates*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ISignerCertificates*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISignerCertificates*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISignerCertificates*, Void**, Win32cr::Foundation::HRESULT),
@@ -9264,7 +9380,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ISignerCertificates, lpVtbl : ISignerCertificatesVtbl* do
+  record ISignerCertificates, lpVtbl : ISignerCertificatesVtable* do
     GUID = LibC::GUID.new(0x728ab33e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ISignerCertificates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9284,8 +9400,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ISignerCertificates*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISignerCertificates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISignerCertificates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ISignerCertificates*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -9312,21 +9428,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509NameValuePairVtbl,
+
+  record IX509NameValuePairVtable,
     query_interface : Proc(IX509NameValuePair*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509NameValuePair*, UInt32),
     release : Proc(IX509NameValuePair*, UInt32),
     get_type_info_count : Proc(IX509NameValuePair*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509NameValuePair*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509NameValuePair*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509NameValuePair*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509NameValuePair*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509NameValuePair*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Value : Proc(IX509NameValuePair*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IX509NameValuePair*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509NameValuePair, lpVtbl : IX509NameValuePairVtbl* do
+  record IX509NameValuePair, lpVtbl : IX509NameValuePairVtable* do
     GUID = LibC::GUID.new(0x728ab33f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509NameValuePair*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9346,8 +9463,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509NameValuePair*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509NameValuePair*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509NameValuePair*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509NameValuePair*, strName : Win32cr::Foundation::BSTR, strValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, strName, strValue)
@@ -9362,14 +9479,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509NameValuePairsVtbl,
+
+  record IX509NameValuePairsVtable,
     query_interface : Proc(IX509NameValuePairs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509NameValuePairs*, UInt32),
     release : Proc(IX509NameValuePairs*, UInt32),
     get_type_info_count : Proc(IX509NameValuePairs*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509NameValuePairs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509NameValuePairs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509NameValuePairs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509NameValuePairs*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IX509NameValuePairs*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IX509NameValuePairs*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IX509NameValuePairs*, Void**, Win32cr::Foundation::HRESULT),
@@ -9379,7 +9497,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509NameValuePairs, lpVtbl : IX509NameValuePairsVtbl* do
+  record IX509NameValuePairs, lpVtbl : IX509NameValuePairsVtable* do
     GUID = LibC::GUID.new(0x728ab340_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509NameValuePairs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9399,8 +9517,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509NameValuePairs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509NameValuePairs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509NameValuePairs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IX509NameValuePairs*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -9424,19 +9542,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateTemplateVtbl,
+
+  record IX509CertificateTemplateVtable,
     query_interface : Proc(IX509CertificateTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateTemplate*, UInt32),
     release : Proc(IX509CertificateTemplate*, UInt32),
     get_type_info_count : Proc(IX509CertificateTemplate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateTemplate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateTemplate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateTemplate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Property : Proc(IX509CertificateTemplate*, Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IX509CertificateTemplate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Property : Proc(IX509CertificateTemplate*, Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509CertificateTemplate, lpVtbl : IX509CertificateTemplateVtbl* do
+  record IX509CertificateTemplate, lpVtbl : IX509CertificateTemplateVtable* do
     GUID = LibC::GUID.new(0x54244a13_u32, 0x555a_u16, 0x4e22_u16, StaticArray[0x89_u8, 0x6d_u8, 0x1b_u8, 0xe_u8, 0x52_u8, 0xf7_u8, 0x64_u8, 0x6_u8])
     def query_interface(this : IX509CertificateTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9456,24 +9575,25 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateTemplate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Property(this : IX509CertificateTemplate*, property : Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Property(this : IX509CertificateTemplate*, property : Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, pValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Property.call(this, property, pValue)
     end
 
   end
 
   @[Extern]
-  record IX509CertificateTemplatesVtbl,
+
+  record IX509CertificateTemplatesVtable,
     query_interface : Proc(IX509CertificateTemplates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateTemplates*, UInt32),
     release : Proc(IX509CertificateTemplates*, UInt32),
     get_type_info_count : Proc(IX509CertificateTemplates*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateTemplates*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateTemplates*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateTemplates*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateTemplates*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IX509CertificateTemplates*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IX509CertificateTemplates*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IX509CertificateTemplates*, Void**, Win32cr::Foundation::HRESULT),
@@ -9485,7 +9605,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateTemplates, lpVtbl : IX509CertificateTemplatesVtbl* do
+  record IX509CertificateTemplates, lpVtbl : IX509CertificateTemplatesVtable* do
     GUID = LibC::GUID.new(0x13b79003_u32, 0x2181_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateTemplates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9505,8 +9625,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateTemplates*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateTemplates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateTemplates*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IX509CertificateTemplates*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -9536,23 +9656,24 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateTemplateWritableVtbl,
+
+  record IX509CertificateTemplateWritableVtable,
     query_interface : Proc(IX509CertificateTemplateWritable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateTemplateWritable*, UInt32),
     release : Proc(IX509CertificateTemplateWritable*, UInt32),
     get_type_info_count : Proc(IX509CertificateTemplateWritable*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateTemplateWritable*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateTemplateWritable*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateTemplateWritable*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateTemplateWritable*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateTemplateWritable*, Void*, Win32cr::Foundation::HRESULT),
     commit : Proc(IX509CertificateTemplateWritable*, Win32cr::Security::Cryptography::Certificates::CommitTemplateFlags, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Property : Proc(IX509CertificateTemplateWritable*, Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Property : Proc(IX509CertificateTemplateWritable*, Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Property : Proc(IX509CertificateTemplateWritable*, Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Property : Proc(IX509CertificateTemplateWritable*, Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Template : Proc(IX509CertificateTemplateWritable*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509CertificateTemplateWritable, lpVtbl : IX509CertificateTemplateWritableVtbl* do
+  record IX509CertificateTemplateWritable, lpVtbl : IX509CertificateTemplateWritableVtable* do
     GUID = LibC::GUID.new(0xf49466a7_u32, 0x395a_u16, 0x4e9e_u16, StaticArray[0xb6_u8, 0xe7_u8, 0x32_u8, 0xb3_u8, 0x31_u8, 0x60_u8, 0xd_u8, 0xc0_u8])
     def query_interface(this : IX509CertificateTemplateWritable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9572,8 +9693,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateTemplateWritable*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateTemplateWritable*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateTemplateWritable*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateTemplateWritable*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pValue)
@@ -9581,10 +9702,10 @@ module Win32cr::Security::Cryptography::Certificates
     def commit(this : IX509CertificateTemplateWritable*, commitFlags : Win32cr::Security::Cryptography::Certificates::CommitTemplateFlags, strServerContext : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this, commitFlags, strServerContext)
     end
-    def get_Property(this : IX509CertificateTemplateWritable*, property : Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Property(this : IX509CertificateTemplateWritable*, property : Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, pValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Property.call(this, property, pValue)
     end
-    def put_Property(this : IX509CertificateTemplateWritable*, property : Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Property(this : IX509CertificateTemplateWritable*, property : Win32cr::Security::Cryptography::Certificates::EnrollmentTemplateProperty, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Property.call(this, property, value)
     end
     def get_Template(this : IX509CertificateTemplateWritable*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -9594,19 +9715,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificationAuthorityVtbl,
+
+  record ICertificationAuthorityVtable,
     query_interface : Proc(ICertificationAuthority*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificationAuthority*, UInt32),
     release : Proc(ICertificationAuthority*, UInt32),
     get_type_info_count : Proc(ICertificationAuthority*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertificationAuthority*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertificationAuthority*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertificationAuthority*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Property : Proc(ICertificationAuthority*, Win32cr::Security::Cryptography::Certificates::EnrollmentCAProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ICertificationAuthority*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Property : Proc(ICertificationAuthority*, Win32cr::Security::Cryptography::Certificates::EnrollmentCAProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertificationAuthority, lpVtbl : ICertificationAuthorityVtbl* do
+  record ICertificationAuthority, lpVtbl : ICertificationAuthorityVtable* do
     GUID = LibC::GUID.new(0x835d1f61_u32, 0x1e95_u16, 0x4bc8_u16, StaticArray[0xb4_u8, 0xd3_u8, 0x97_u8, 0x6c_u8, 0x42_u8, 0xb9_u8, 0x68_u8, 0xf7_u8])
     def query_interface(this : ICertificationAuthority*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9626,24 +9748,25 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertificationAuthority*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertificationAuthority*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertificationAuthority*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Property(this : ICertificationAuthority*, property : Win32cr::Security::Cryptography::Certificates::EnrollmentCAProperty, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Property(this : ICertificationAuthority*, property : Win32cr::Security::Cryptography::Certificates::EnrollmentCAProperty, pValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Property.call(this, property, pValue)
     end
 
   end
 
   @[Extern]
-  record ICertificationAuthoritiesVtbl,
+
+  record ICertificationAuthoritiesVtable,
     query_interface : Proc(ICertificationAuthorities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificationAuthorities*, UInt32),
     release : Proc(ICertificationAuthorities*, UInt32),
     get_type_info_count : Proc(ICertificationAuthorities*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertificationAuthorities*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertificationAuthorities*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertificationAuthorities*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertificationAuthorities*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(ICertificationAuthorities*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICertificationAuthorities*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICertificationAuthorities*, Void**, Win32cr::Foundation::HRESULT),
@@ -9655,7 +9778,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificationAuthorities, lpVtbl : ICertificationAuthoritiesVtbl* do
+  record ICertificationAuthorities, lpVtbl : ICertificationAuthoritiesVtable* do
     GUID = LibC::GUID.new(0x13b79005_u32, 0x2181_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertificationAuthorities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9675,8 +9798,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertificationAuthorities*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertificationAuthorities*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertificationAuthorities*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : ICertificationAuthorities*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -9706,15 +9829,16 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentPolicyServerVtbl,
+
+  record IX509EnrollmentPolicyServerVtable,
     query_interface : Proc(IX509EnrollmentPolicyServer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EnrollmentPolicyServer*, UInt32),
     release : Proc(IX509EnrollmentPolicyServer*, UInt32),
     get_type_info_count : Proc(IX509EnrollmentPolicyServer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509EnrollmentPolicyServer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509EnrollmentPolicyServer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509EnrollmentPolicyServer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    initialize__ : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, Int16, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509EnrollmentPolicyServer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     load_policy : Proc(IX509EnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::X509EnrollmentPolicyLoadOption, Win32cr::Foundation::HRESULT),
     get_templates : Proc(IX509EnrollmentPolicyServer*, Void**, Win32cr::Foundation::HRESULT),
     get_c_as_for_template : Proc(IX509EnrollmentPolicyServer*, Void*, Void**, Win32cr::Foundation::HRESULT),
@@ -9726,22 +9850,22 @@ module Win32cr::Security::Cryptography::Certificates
     get_policy_server_url : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_policy_server_id : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_friendly_name : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_is_default_cep : Proc(IX509EnrollmentPolicyServer*, Int16*, Win32cr::Foundation::HRESULT),
-    get_use_client_id : Proc(IX509EnrollmentPolicyServer*, Int16*, Win32cr::Foundation::HRESULT),
-    get_allow_un_trusted_ca : Proc(IX509EnrollmentPolicyServer*, Int16*, Win32cr::Foundation::HRESULT),
+    get_is_default_cep : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_use_client_id : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_allow_un_trusted_ca : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_cache_path : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_cache_dir : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_auth_flags : Proc(IX509EnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags*, Win32cr::Foundation::HRESULT),
     set_credential : Proc(IX509EnrollmentPolicyServer*, Int32, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    query_changes : Proc(IX509EnrollmentPolicyServer*, Int16*, Win32cr::Foundation::HRESULT),
-    initialize_import : Proc(IX509EnrollmentPolicyServer*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    export : Proc(IX509EnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::X509EnrollmentPolicyExportFlags, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    query_changes : Proc(IX509EnrollmentPolicyServer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    initialize_import : Proc(IX509EnrollmentPolicyServer*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    export : Proc(IX509EnrollmentPolicyServer*, Win32cr::Security::Cryptography::Certificates::X509EnrollmentPolicyExportFlags, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Cost : Proc(IX509EnrollmentPolicyServer*, UInt32*, Win32cr::Foundation::HRESULT),
     put_Cost : Proc(IX509EnrollmentPolicyServer*, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509EnrollmentPolicyServer, lpVtbl : IX509EnrollmentPolicyServerVtbl* do
+  record IX509EnrollmentPolicyServer, lpVtbl : IX509EnrollmentPolicyServerVtable* do
     GUID = LibC::GUID.new(0x13b79026_u32, 0x2181_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509EnrollmentPolicyServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9761,10 +9885,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509EnrollmentPolicyServer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509EnrollmentPolicyServer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509EnrollmentPolicyServer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def initialize__(this : IX509EnrollmentPolicyServer*, bstrPolicyServerUrl : Win32cr::Foundation::BSTR, bstrPolicyServerId : Win32cr::Foundation::BSTR, authFlags : Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, fIsUnTrusted : Int16, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
+    def initialize__(this : IX509EnrollmentPolicyServer*, bstrPolicyServerUrl : Win32cr::Foundation::BSTR, bstrPolicyServerId : Win32cr::Foundation::BSTR, authFlags : Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, fIsUnTrusted : Win32cr::Foundation::VARIANT_BOOL, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, bstrPolicyServerUrl, bstrPolicyServerId, authFlags, fIsUnTrusted, context)
     end
     def load_policy(this : IX509EnrollmentPolicyServer*, option : Win32cr::Security::Cryptography::Certificates::X509EnrollmentPolicyLoadOption) : Win32cr::Foundation::HRESULT
@@ -9800,13 +9924,13 @@ module Win32cr::Security::Cryptography::Certificates
     def get_friendly_name(this : IX509EnrollmentPolicyServer*, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_friendly_name.call(this, pValue)
     end
-    def get_is_default_cep(this : IX509EnrollmentPolicyServer*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_is_default_cep(this : IX509EnrollmentPolicyServer*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_is_default_cep.call(this, pValue)
     end
-    def get_use_client_id(this : IX509EnrollmentPolicyServer*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_use_client_id(this : IX509EnrollmentPolicyServer*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_use_client_id.call(this, pValue)
     end
-    def get_allow_un_trusted_ca(this : IX509EnrollmentPolicyServer*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_allow_un_trusted_ca(this : IX509EnrollmentPolicyServer*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_allow_un_trusted_ca.call(this, pValue)
     end
     def get_cache_path(this : IX509EnrollmentPolicyServer*, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -9821,13 +9945,13 @@ module Win32cr::Security::Cryptography::Certificates
     def set_credential(this : IX509EnrollmentPolicyServer*, hWndParent : Int32, flag : Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, strCredential : Win32cr::Foundation::BSTR, strPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_credential.call(this, hWndParent, flag, strCredential, strPassword)
     end
-    def query_changes(this : IX509EnrollmentPolicyServer*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def query_changes(this : IX509EnrollmentPolicyServer*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_changes.call(this, pValue)
     end
-    def initialize_import(this : IX509EnrollmentPolicyServer*, val : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def initialize_import(this : IX509EnrollmentPolicyServer*, val : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_import.call(this, val)
     end
-    def export(this : IX509EnrollmentPolicyServer*, exportFlags : Win32cr::Security::Cryptography::Certificates::X509EnrollmentPolicyExportFlags, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def export(this : IX509EnrollmentPolicyServer*, exportFlags : Win32cr::Security::Cryptography::Certificates::X509EnrollmentPolicyExportFlags, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.export.call(this, exportFlags, pVal)
     end
     def get_Cost(this : IX509EnrollmentPolicyServer*, pValue : UInt32*) : Win32cr::Foundation::HRESULT
@@ -9840,19 +9964,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PolicyServerUrlVtbl,
+
+  record IX509PolicyServerUrlVtable,
     query_interface : Proc(IX509PolicyServerUrl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PolicyServerUrl*, UInt32),
     release : Proc(IX509PolicyServerUrl*, UInt32),
     get_type_info_count : Proc(IX509PolicyServerUrl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509PolicyServerUrl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509PolicyServerUrl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509PolicyServerUrl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509PolicyServerUrl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509PolicyServerUrl*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     get_Url : Proc(IX509PolicyServerUrl*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Url : Proc(IX509PolicyServerUrl*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Default : Proc(IX509PolicyServerUrl*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Default : Proc(IX509PolicyServerUrl*, Int16, Win32cr::Foundation::HRESULT),
+    get_Default : Proc(IX509PolicyServerUrl*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Default : Proc(IX509PolicyServerUrl*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Flags : Proc(IX509PolicyServerUrl*, Win32cr::Security::Cryptography::Certificates::PolicyServerUrlFlags*, Win32cr::Foundation::HRESULT),
     put_Flags : Proc(IX509PolicyServerUrl*, Win32cr::Security::Cryptography::Certificates::PolicyServerUrlFlags, Win32cr::Foundation::HRESULT),
     get_AuthFlags : Proc(IX509PolicyServerUrl*, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags*, Win32cr::Foundation::HRESULT),
@@ -9866,7 +9991,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PolicyServerUrl, lpVtbl : IX509PolicyServerUrlVtbl* do
+  record IX509PolicyServerUrl, lpVtbl : IX509PolicyServerUrlVtable* do
     GUID = LibC::GUID.new(0x884e204a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PolicyServerUrl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9886,8 +10011,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509PolicyServerUrl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509PolicyServerUrl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509PolicyServerUrl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509PolicyServerUrl*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -9898,10 +10023,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_Url(this : IX509PolicyServerUrl*, pValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Url.call(this, pValue)
     end
-    def get_Default(this : IX509PolicyServerUrl*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Default(this : IX509PolicyServerUrl*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Default.call(this, pValue)
     end
-    def put_Default(this : IX509PolicyServerUrl*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Default(this : IX509PolicyServerUrl*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Default.call(this, value)
     end
     def get_Flags(this : IX509PolicyServerUrl*, pValue : Win32cr::Security::Cryptography::Certificates::PolicyServerUrlFlags*) : Win32cr::Foundation::HRESULT
@@ -9938,14 +10063,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PolicyServerListManagerVtbl,
+
+  record IX509PolicyServerListManagerVtable,
     query_interface : Proc(IX509PolicyServerListManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PolicyServerListManager*, UInt32),
     release : Proc(IX509PolicyServerListManager*, UInt32),
     get_type_info_count : Proc(IX509PolicyServerListManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509PolicyServerListManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509PolicyServerListManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509PolicyServerListManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509PolicyServerListManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IX509PolicyServerListManager*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IX509PolicyServerListManager*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IX509PolicyServerListManager*, Void**, Win32cr::Foundation::HRESULT),
@@ -9956,7 +10082,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PolicyServerListManager, lpVtbl : IX509PolicyServerListManagerVtbl* do
+  record IX509PolicyServerListManager, lpVtbl : IX509PolicyServerListManagerVtable* do
     GUID = LibC::GUID.new(0x884e204b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PolicyServerListManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9976,8 +10102,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509PolicyServerListManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509PolicyServerListManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509PolicyServerListManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IX509PolicyServerListManager*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -10004,28 +10130,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestVtbl,
+
+  record IX509CertificateRequestVtable,
     query_interface : Proc(IX509CertificateRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequest*, UInt32),
     release : Proc(IX509CertificateRequest*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequest*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequest*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequest*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequest*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequest*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequest*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequest*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequest*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequest*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequest*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequest*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequest*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequest*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequest*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequest*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequest*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequest*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequest*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequest*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequest*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequest*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequest*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequest*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequest*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -10034,13 +10161,13 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequest*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequest*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequest*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequest*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequest*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequest*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequest*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequest*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509CertificateRequest, lpVtbl : IX509CertificateRequestVtbl* do
+  record IX509CertificateRequest, lpVtbl : IX509CertificateRequestVtable* do
     GUID = LibC::GUID.new(0x728ab341_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10060,8 +10187,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequest*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequest*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -10081,10 +10208,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequest*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequest*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequest*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequest*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequest*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequest*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -10099,10 +10226,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequest*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequest*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequest*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequest*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequest*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequest*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10129,10 +10256,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequest*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequest*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequest*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequest*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequest*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequest*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10142,28 +10269,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs10Vtbl,
+
+  record IX509CertificateRequestPkcs10Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs10*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs10*, UInt32),
     release : Proc(IX509CertificateRequestPkcs10*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestPkcs10*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestPkcs10*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestPkcs10*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestPkcs10*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestPkcs10*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestPkcs10*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestPkcs10*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestPkcs10*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestPkcs10*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs10*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs10*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -10172,8 +10300,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestPkcs10*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestPkcs10*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestPkcs10*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_private_key : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -10181,18 +10309,18 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_certificate : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     check_signature : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes, Win32cr::Foundation::HRESULT),
-    is_smart_card : Proc(IX509CertificateRequestPkcs10*, Int16*, Win32cr::Foundation::HRESULT),
+    is_smart_card : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TemplateObjectId : Proc(IX509CertificateRequestPkcs10*, Void**, Win32cr::Foundation::HRESULT),
     get_PublicKey : Proc(IX509CertificateRequestPkcs10*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateKey : Proc(IX509CertificateRequestPkcs10*, Void**, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRequestPkcs10*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ReuseKey : Proc(IX509CertificateRequestPkcs10*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ReuseKey : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_OldCertificate : Proc(IX509CertificateRequestPkcs10*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IX509CertificateRequestPkcs10*, Void**, Win32cr::Foundation::HRESULT),
     put_Subject : Proc(IX509CertificateRequestPkcs10*, Void*, Win32cr::Foundation::HRESULT),
     get_CspStatuses : Proc(IX509CertificateRequestPkcs10*, Void**, Win32cr::Foundation::HRESULT),
-    get_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10*, Int16, Win32cr::Foundation::HRESULT),
+    get_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRequestPkcs10*, Void**, Win32cr::Foundation::HRESULT),
     get_KeyContainerNamePrefix : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_KeyContainerNamePrefix : Proc(IX509CertificateRequestPkcs10*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -10206,7 +10334,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs10, lpVtbl : IX509CertificateRequestPkcs10Vtbl* do
+  record IX509CertificateRequestPkcs10, lpVtbl : IX509CertificateRequestPkcs10Vtable* do
     GUID = LibC::GUID.new(0x728ab342_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs10*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10226,8 +10354,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestPkcs10*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestPkcs10*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestPkcs10*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestPkcs10*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -10247,10 +10375,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestPkcs10*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestPkcs10*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestPkcs10*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestPkcs10*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestPkcs10*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestPkcs10*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -10265,10 +10393,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestPkcs10*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestPkcs10*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestPkcs10*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestPkcs10*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestPkcs10*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestPkcs10*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10295,10 +10423,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestPkcs10*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestPkcs10*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10322,7 +10450,7 @@ module Win32cr::Security::Cryptography::Certificates
     def check_signature(this : IX509CertificateRequestPkcs10*, allowed_signature_types : Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_signature.call(this, allowed_signature_types)
     end
-    def is_smart_card(this : IX509CertificateRequestPkcs10*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def is_smart_card(this : IX509CertificateRequestPkcs10*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_smart_card.call(this, pValue)
     end
     def get_TemplateObjectId(this : IX509CertificateRequestPkcs10*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -10334,10 +10462,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_PrivateKey(this : IX509CertificateRequestPkcs10*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateKey.call(this, ppValue)
     end
-    def get_NullSigned(this : IX509CertificateRequestPkcs10*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRequestPkcs10*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
-    def get_ReuseKey(this : IX509CertificateRequestPkcs10*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReuseKey(this : IX509CertificateRequestPkcs10*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReuseKey.call(this, pValue)
     end
     def get_OldCertificate(this : IX509CertificateRequestPkcs10*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10352,10 +10480,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_CspStatuses(this : IX509CertificateRequestPkcs10*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CspStatuses.call(this, ppValue)
     end
-    def get_SmimeCapabilities(this : IX509CertificateRequestPkcs10*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SmimeCapabilities(this : IX509CertificateRequestPkcs10*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SmimeCapabilities.call(this, pValue)
     end
-    def put_SmimeCapabilities(this : IX509CertificateRequestPkcs10*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SmimeCapabilities(this : IX509CertificateRequestPkcs10*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SmimeCapabilities.call(this, value)
     end
     def get_SignatureInformation(this : IX509CertificateRequestPkcs10*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -10392,28 +10520,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V2Vtbl,
+
+  record IX509CertificateRequestPkcs10V2Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs10V2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs10V2*, UInt32),
     release : Proc(IX509CertificateRequestPkcs10V2*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestPkcs10V2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestPkcs10V2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestPkcs10V2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestPkcs10V2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestPkcs10V2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestPkcs10V2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestPkcs10V2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestPkcs10V2*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestPkcs10V2*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V2*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -10422,8 +10551,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestPkcs10V2*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestPkcs10V2*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestPkcs10V2*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V2*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_private_key : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -10431,18 +10560,18 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_certificate : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     check_signature : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes, Win32cr::Foundation::HRESULT),
-    is_smart_card : Proc(IX509CertificateRequestPkcs10V2*, Int16*, Win32cr::Foundation::HRESULT),
+    is_smart_card : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TemplateObjectId : Proc(IX509CertificateRequestPkcs10V2*, Void**, Win32cr::Foundation::HRESULT),
     get_PublicKey : Proc(IX509CertificateRequestPkcs10V2*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateKey : Proc(IX509CertificateRequestPkcs10V2*, Void**, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRequestPkcs10V2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ReuseKey : Proc(IX509CertificateRequestPkcs10V2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ReuseKey : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_OldCertificate : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IX509CertificateRequestPkcs10V2*, Void**, Win32cr::Foundation::HRESULT),
     put_Subject : Proc(IX509CertificateRequestPkcs10V2*, Void*, Win32cr::Foundation::HRESULT),
     get_CspStatuses : Proc(IX509CertificateRequestPkcs10V2*, Void**, Win32cr::Foundation::HRESULT),
-    get_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V2*, Int16, Win32cr::Foundation::HRESULT),
+    get_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRequestPkcs10V2*, Void**, Win32cr::Foundation::HRESULT),
     get_KeyContainerNamePrefix : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_KeyContainerNamePrefix : Proc(IX509CertificateRequestPkcs10V2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -10461,7 +10590,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V2, lpVtbl : IX509CertificateRequestPkcs10V2Vtbl* do
+  record IX509CertificateRequestPkcs10V2, lpVtbl : IX509CertificateRequestPkcs10V2Vtable* do
     GUID = LibC::GUID.new(0x728ab35b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs10V2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10481,8 +10610,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestPkcs10V2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestPkcs10V2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestPkcs10V2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestPkcs10V2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -10502,10 +10631,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestPkcs10V2*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestPkcs10V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestPkcs10V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestPkcs10V2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestPkcs10V2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestPkcs10V2*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -10520,10 +10649,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestPkcs10V2*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestPkcs10V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestPkcs10V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestPkcs10V2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestPkcs10V2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestPkcs10V2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10550,10 +10679,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestPkcs10V2*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestPkcs10V2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10577,7 +10706,7 @@ module Win32cr::Security::Cryptography::Certificates
     def check_signature(this : IX509CertificateRequestPkcs10V2*, allowed_signature_types : Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_signature.call(this, allowed_signature_types)
     end
-    def is_smart_card(this : IX509CertificateRequestPkcs10V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def is_smart_card(this : IX509CertificateRequestPkcs10V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_smart_card.call(this, pValue)
     end
     def get_TemplateObjectId(this : IX509CertificateRequestPkcs10V2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -10589,10 +10718,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_PrivateKey(this : IX509CertificateRequestPkcs10V2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateKey.call(this, ppValue)
     end
-    def get_NullSigned(this : IX509CertificateRequestPkcs10V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRequestPkcs10V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
-    def get_ReuseKey(this : IX509CertificateRequestPkcs10V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReuseKey(this : IX509CertificateRequestPkcs10V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReuseKey.call(this, pValue)
     end
     def get_OldCertificate(this : IX509CertificateRequestPkcs10V2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10607,10 +10736,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_CspStatuses(this : IX509CertificateRequestPkcs10V2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CspStatuses.call(this, ppValue)
     end
-    def get_SmimeCapabilities(this : IX509CertificateRequestPkcs10V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SmimeCapabilities(this : IX509CertificateRequestPkcs10V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SmimeCapabilities.call(this, pValue)
     end
-    def put_SmimeCapabilities(this : IX509CertificateRequestPkcs10V2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SmimeCapabilities(this : IX509CertificateRequestPkcs10V2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SmimeCapabilities.call(this, value)
     end
     def get_SignatureInformation(this : IX509CertificateRequestPkcs10V2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -10662,28 +10791,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V3Vtbl,
+
+  record IX509CertificateRequestPkcs10V3Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs10V3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs10V3*, UInt32),
     release : Proc(IX509CertificateRequestPkcs10V3*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestPkcs10V3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestPkcs10V3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestPkcs10V3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestPkcs10V3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestPkcs10V3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestPkcs10V3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestPkcs10V3*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestPkcs10V3*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestPkcs10V3*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V3*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -10692,8 +10822,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestPkcs10V3*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestPkcs10V3*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V3*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_private_key : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -10701,18 +10831,18 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_certificate : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     check_signature : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes, Win32cr::Foundation::HRESULT),
-    is_smart_card : Proc(IX509CertificateRequestPkcs10V3*, Int16*, Win32cr::Foundation::HRESULT),
+    is_smart_card : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TemplateObjectId : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
     get_PublicKey : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateKey : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRequestPkcs10V3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ReuseKey : Proc(IX509CertificateRequestPkcs10V3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ReuseKey : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_OldCertificate : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
     put_Subject : Proc(IX509CertificateRequestPkcs10V3*, Void*, Win32cr::Foundation::HRESULT),
     get_CspStatuses : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
-    get_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V3*, Int16, Win32cr::Foundation::HRESULT),
+    get_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
     get_KeyContainerNamePrefix : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_KeyContainerNamePrefix : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -10728,8 +10858,8 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_public_key_template : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Void*, Void*, Win32cr::Foundation::HRESULT),
     get_PolicyServer : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
     get_Template : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
-    get_AttestPrivateKey : Proc(IX509CertificateRequestPkcs10V3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AttestPrivateKey : Proc(IX509CertificateRequestPkcs10V3*, Int16, Win32cr::Foundation::HRESULT),
+    get_AttestPrivateKey : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AttestPrivateKey : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_AttestationEncryptionCertificate : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_AttestationEncryptionCertificate : Proc(IX509CertificateRequestPkcs10V3*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EncryptionAlgorithm : Proc(IX509CertificateRequestPkcs10V3*, Void**, Win32cr::Foundation::HRESULT),
@@ -10742,7 +10872,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V3, lpVtbl : IX509CertificateRequestPkcs10V3Vtbl* do
+  record IX509CertificateRequestPkcs10V3, lpVtbl : IX509CertificateRequestPkcs10V3Vtable* do
     GUID = LibC::GUID.new(0x54ea9942_u32, 0x3d66_u16, 0x4530_u16, StaticArray[0xb7_u8, 0x6e_u8, 0x7c_u8, 0x91_u8, 0x70_u8, 0xd3_u8, 0xec_u8, 0x52_u8])
     def query_interface(this : IX509CertificateRequestPkcs10V3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10762,8 +10892,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestPkcs10V3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestPkcs10V3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestPkcs10V3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestPkcs10V3*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -10783,10 +10913,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestPkcs10V3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestPkcs10V3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestPkcs10V3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestPkcs10V3*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -10801,10 +10931,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestPkcs10V3*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestPkcs10V3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestPkcs10V3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestPkcs10V3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestPkcs10V3*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10831,10 +10961,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestPkcs10V3*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestPkcs10V3*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10858,7 +10988,7 @@ module Win32cr::Security::Cryptography::Certificates
     def check_signature(this : IX509CertificateRequestPkcs10V3*, allowed_signature_types : Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_signature.call(this, allowed_signature_types)
     end
-    def is_smart_card(this : IX509CertificateRequestPkcs10V3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def is_smart_card(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_smart_card.call(this, pValue)
     end
     def get_TemplateObjectId(this : IX509CertificateRequestPkcs10V3*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -10870,10 +11000,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_PrivateKey(this : IX509CertificateRequestPkcs10V3*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateKey.call(this, ppValue)
     end
-    def get_NullSigned(this : IX509CertificateRequestPkcs10V3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
-    def get_ReuseKey(this : IX509CertificateRequestPkcs10V3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReuseKey(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReuseKey.call(this, pValue)
     end
     def get_OldCertificate(this : IX509CertificateRequestPkcs10V3*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10888,10 +11018,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_CspStatuses(this : IX509CertificateRequestPkcs10V3*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CspStatuses.call(this, ppValue)
     end
-    def get_SmimeCapabilities(this : IX509CertificateRequestPkcs10V3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SmimeCapabilities(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SmimeCapabilities.call(this, pValue)
     end
-    def put_SmimeCapabilities(this : IX509CertificateRequestPkcs10V3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SmimeCapabilities(this : IX509CertificateRequestPkcs10V3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SmimeCapabilities.call(this, value)
     end
     def get_SignatureInformation(this : IX509CertificateRequestPkcs10V3*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -10939,10 +11069,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_Template(this : IX509CertificateRequestPkcs10V3*, ppTemplate : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Template.call(this, ppTemplate)
     end
-    def get_AttestPrivateKey(this : IX509CertificateRequestPkcs10V3*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AttestPrivateKey(this : IX509CertificateRequestPkcs10V3*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AttestPrivateKey.call(this, pValue)
     end
-    def put_AttestPrivateKey(this : IX509CertificateRequestPkcs10V3*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AttestPrivateKey(this : IX509CertificateRequestPkcs10V3*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AttestPrivateKey.call(this, value)
     end
     def get_AttestationEncryptionCertificate(this : IX509CertificateRequestPkcs10V3*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -10976,28 +11106,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V4Vtbl,
+
+  record IX509CertificateRequestPkcs10V4Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs10V4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs10V4*, UInt32),
     release : Proc(IX509CertificateRequestPkcs10V4*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestPkcs10V4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestPkcs10V4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestPkcs10V4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestPkcs10V4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestPkcs10V4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestPkcs10V4*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestPkcs10V4*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestPkcs10V4*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V4*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -11006,8 +11137,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestPkcs10V4*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestPkcs10V4*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V4*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_private_key : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -11015,18 +11146,18 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_certificate : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     check_signature : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes, Win32cr::Foundation::HRESULT),
-    is_smart_card : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
+    is_smart_card : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TemplateObjectId : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
     get_PublicKey : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateKey : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ReuseKey : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ReuseKey : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_OldCertificate : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
     put_Subject : Proc(IX509CertificateRequestPkcs10V4*, Void*, Win32cr::Foundation::HRESULT),
     get_CspStatuses : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
-    get_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V4*, Int16, Win32cr::Foundation::HRESULT),
+    get_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SmimeCapabilities : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
     get_KeyContainerNamePrefix : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_KeyContainerNamePrefix : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -11042,8 +11173,8 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_public_key_template : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Void*, Void*, Win32cr::Foundation::HRESULT),
     get_PolicyServer : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
     get_Template : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
-    get_AttestPrivateKey : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AttestPrivateKey : Proc(IX509CertificateRequestPkcs10V4*, Int16, Win32cr::Foundation::HRESULT),
+    get_AttestPrivateKey : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AttestPrivateKey : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_AttestationEncryptionCertificate : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_AttestationEncryptionCertificate : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EncryptionAlgorithm : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
@@ -11055,12 +11186,12 @@ module Win32cr::Security::Cryptography::Certificates
     get_NameValuePairs : Proc(IX509CertificateRequestPkcs10V4*, Void**, Win32cr::Foundation::HRESULT),
     get_ClaimType : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::KeyAttestationClaimType*, Win32cr::Foundation::HRESULT),
     put_ClaimType : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Security::Cryptography::Certificates::KeyAttestationClaimType, Win32cr::Foundation::HRESULT),
-    get_AttestPrivateKeyPreferred : Proc(IX509CertificateRequestPkcs10V4*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AttestPrivateKeyPreferred : Proc(IX509CertificateRequestPkcs10V4*, Int16, Win32cr::Foundation::HRESULT)
+    get_AttestPrivateKeyPreferred : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AttestPrivateKeyPreferred : Proc(IX509CertificateRequestPkcs10V4*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V4, lpVtbl : IX509CertificateRequestPkcs10V4Vtbl* do
+  record IX509CertificateRequestPkcs10V4, lpVtbl : IX509CertificateRequestPkcs10V4Vtable* do
     GUID = LibC::GUID.new(0x728ab363_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs10V4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11080,8 +11211,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestPkcs10V4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestPkcs10V4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestPkcs10V4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestPkcs10V4*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -11101,10 +11232,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestPkcs10V4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestPkcs10V4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestPkcs10V4*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -11119,10 +11250,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestPkcs10V4*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestPkcs10V4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestPkcs10V4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestPkcs10V4*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11149,10 +11280,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestPkcs10V4*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs10V4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestPkcs10V4*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11176,7 +11307,7 @@ module Win32cr::Security::Cryptography::Certificates
     def check_signature(this : IX509CertificateRequestPkcs10V4*, allowed_signature_types : Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_signature.call(this, allowed_signature_types)
     end
-    def is_smart_card(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def is_smart_card(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_smart_card.call(this, pValue)
     end
     def get_TemplateObjectId(this : IX509CertificateRequestPkcs10V4*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -11188,10 +11319,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_PrivateKey(this : IX509CertificateRequestPkcs10V4*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateKey.call(this, ppValue)
     end
-    def get_NullSigned(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
-    def get_ReuseKey(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReuseKey(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReuseKey.call(this, pValue)
     end
     def get_OldCertificate(this : IX509CertificateRequestPkcs10V4*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11206,10 +11337,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_CspStatuses(this : IX509CertificateRequestPkcs10V4*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CspStatuses.call(this, ppValue)
     end
-    def get_SmimeCapabilities(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SmimeCapabilities(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SmimeCapabilities.call(this, pValue)
     end
-    def put_SmimeCapabilities(this : IX509CertificateRequestPkcs10V4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SmimeCapabilities(this : IX509CertificateRequestPkcs10V4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SmimeCapabilities.call(this, value)
     end
     def get_SignatureInformation(this : IX509CertificateRequestPkcs10V4*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -11257,10 +11388,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_Template(this : IX509CertificateRequestPkcs10V4*, ppTemplate : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Template.call(this, ppTemplate)
     end
-    def get_AttestPrivateKey(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AttestPrivateKey(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AttestPrivateKey.call(this, pValue)
     end
-    def put_AttestPrivateKey(this : IX509CertificateRequestPkcs10V4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AttestPrivateKey(this : IX509CertificateRequestPkcs10V4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AttestPrivateKey.call(this, value)
     end
     def get_AttestationEncryptionCertificate(this : IX509CertificateRequestPkcs10V4*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11296,38 +11427,39 @@ module Win32cr::Security::Cryptography::Certificates
     def put_ClaimType(this : IX509CertificateRequestPkcs10V4*, value : Win32cr::Security::Cryptography::Certificates::KeyAttestationClaimType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ClaimType.call(this, value)
     end
-    def get_AttestPrivateKeyPreferred(this : IX509CertificateRequestPkcs10V4*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AttestPrivateKeyPreferred(this : IX509CertificateRequestPkcs10V4*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AttestPrivateKeyPreferred.call(this, pValue)
     end
-    def put_AttestPrivateKeyPreferred(this : IX509CertificateRequestPkcs10V4*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AttestPrivateKeyPreferred(this : IX509CertificateRequestPkcs10V4*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AttestPrivateKeyPreferred.call(this, value)
     end
 
   end
 
   @[Extern]
-  record IX509CertificateRequestCertificateVtbl,
+
+  record IX509CertificateRequestCertificateVtable,
     query_interface : Proc(IX509CertificateRequestCertificate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestCertificate*, UInt32),
     release : Proc(IX509CertificateRequestCertificate*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestCertificate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestCertificate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestCertificate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestCertificate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestCertificate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestCertificate*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestCertificate*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestCertificate*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestCertificate*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestCertificate*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestCertificate*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -11336,8 +11468,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestCertificate*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestCertificate*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestCertificate*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCertificate*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCertificate*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_private_key : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -11345,18 +11477,18 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_certificate : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     check_signature : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes, Win32cr::Foundation::HRESULT),
-    is_smart_card : Proc(IX509CertificateRequestCertificate*, Int16*, Win32cr::Foundation::HRESULT),
+    is_smart_card : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TemplateObjectId : Proc(IX509CertificateRequestCertificate*, Void**, Win32cr::Foundation::HRESULT),
     get_PublicKey : Proc(IX509CertificateRequestCertificate*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateKey : Proc(IX509CertificateRequestCertificate*, Void**, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRequestCertificate*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ReuseKey : Proc(IX509CertificateRequestCertificate*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ReuseKey : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_OldCertificate : Proc(IX509CertificateRequestCertificate*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IX509CertificateRequestCertificate*, Void**, Win32cr::Foundation::HRESULT),
     put_Subject : Proc(IX509CertificateRequestCertificate*, Void*, Win32cr::Foundation::HRESULT),
     get_CspStatuses : Proc(IX509CertificateRequestCertificate*, Void**, Win32cr::Foundation::HRESULT),
-    get_SmimeCapabilities : Proc(IX509CertificateRequestCertificate*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SmimeCapabilities : Proc(IX509CertificateRequestCertificate*, Int16, Win32cr::Foundation::HRESULT),
+    get_SmimeCapabilities : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SmimeCapabilities : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRequestCertificate*, Void**, Win32cr::Foundation::HRESULT),
     get_KeyContainerNamePrefix : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_KeyContainerNamePrefix : Proc(IX509CertificateRequestCertificate*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -11381,7 +11513,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestCertificate, lpVtbl : IX509CertificateRequestCertificateVtbl* do
+  record IX509CertificateRequestCertificate, lpVtbl : IX509CertificateRequestCertificateVtable* do
     GUID = LibC::GUID.new(0x728ab343_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestCertificate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11401,8 +11533,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestCertificate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestCertificate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestCertificate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestCertificate*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -11422,10 +11554,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestCertificate*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestCertificate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestCertificate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestCertificate*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestCertificate*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestCertificate*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -11440,10 +11572,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestCertificate*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestCertificate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestCertificate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestCertificate*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestCertificate*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestCertificate*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11470,10 +11602,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestCertificate*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestCertificate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestCertificate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestCertificate*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestCertificate*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestCertificate*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11497,7 +11629,7 @@ module Win32cr::Security::Cryptography::Certificates
     def check_signature(this : IX509CertificateRequestCertificate*, allowed_signature_types : Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_signature.call(this, allowed_signature_types)
     end
-    def is_smart_card(this : IX509CertificateRequestCertificate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def is_smart_card(this : IX509CertificateRequestCertificate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_smart_card.call(this, pValue)
     end
     def get_TemplateObjectId(this : IX509CertificateRequestCertificate*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -11509,10 +11641,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_PrivateKey(this : IX509CertificateRequestCertificate*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateKey.call(this, ppValue)
     end
-    def get_NullSigned(this : IX509CertificateRequestCertificate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRequestCertificate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
-    def get_ReuseKey(this : IX509CertificateRequestCertificate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReuseKey(this : IX509CertificateRequestCertificate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReuseKey.call(this, pValue)
     end
     def get_OldCertificate(this : IX509CertificateRequestCertificate*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11527,10 +11659,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_CspStatuses(this : IX509CertificateRequestCertificate*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CspStatuses.call(this, ppValue)
     end
-    def get_SmimeCapabilities(this : IX509CertificateRequestCertificate*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SmimeCapabilities(this : IX509CertificateRequestCertificate*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SmimeCapabilities.call(this, pValue)
     end
-    def put_SmimeCapabilities(this : IX509CertificateRequestCertificate*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SmimeCapabilities(this : IX509CertificateRequestCertificate*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SmimeCapabilities.call(this, value)
     end
     def get_SignatureInformation(this : IX509CertificateRequestCertificate*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -11600,28 +11732,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestCertificate2Vtbl,
+
+  record IX509CertificateRequestCertificate2Vtable,
     query_interface : Proc(IX509CertificateRequestCertificate2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestCertificate2*, UInt32),
     release : Proc(IX509CertificateRequestCertificate2*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestCertificate2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestCertificate2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestCertificate2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestCertificate2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestCertificate2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestCertificate2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestCertificate2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestCertificate2*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestCertificate2*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestCertificate2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestCertificate2*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -11630,8 +11763,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestCertificate2*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestCertificate2*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestCertificate2*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCertificate2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCertificate2*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_private_key : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -11639,18 +11772,18 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_certificate : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     check_signature : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes, Win32cr::Foundation::HRESULT),
-    is_smart_card : Proc(IX509CertificateRequestCertificate2*, Int16*, Win32cr::Foundation::HRESULT),
+    is_smart_card : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TemplateObjectId : Proc(IX509CertificateRequestCertificate2*, Void**, Win32cr::Foundation::HRESULT),
     get_PublicKey : Proc(IX509CertificateRequestCertificate2*, Void**, Win32cr::Foundation::HRESULT),
     get_PrivateKey : Proc(IX509CertificateRequestCertificate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRequestCertificate2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ReuseKey : Proc(IX509CertificateRequestCertificate2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ReuseKey : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_OldCertificate : Proc(IX509CertificateRequestCertificate2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IX509CertificateRequestCertificate2*, Void**, Win32cr::Foundation::HRESULT),
     put_Subject : Proc(IX509CertificateRequestCertificate2*, Void*, Win32cr::Foundation::HRESULT),
     get_CspStatuses : Proc(IX509CertificateRequestCertificate2*, Void**, Win32cr::Foundation::HRESULT),
-    get_SmimeCapabilities : Proc(IX509CertificateRequestCertificate2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SmimeCapabilities : Proc(IX509CertificateRequestCertificate2*, Int16, Win32cr::Foundation::HRESULT),
+    get_SmimeCapabilities : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SmimeCapabilities : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRequestCertificate2*, Void**, Win32cr::Foundation::HRESULT),
     get_KeyContainerNamePrefix : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_KeyContainerNamePrefix : Proc(IX509CertificateRequestCertificate2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -11679,7 +11812,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestCertificate2, lpVtbl : IX509CertificateRequestCertificate2Vtbl* do
+  record IX509CertificateRequestCertificate2, lpVtbl : IX509CertificateRequestCertificate2Vtable* do
     GUID = LibC::GUID.new(0x728ab35a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestCertificate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11699,8 +11832,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestCertificate2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestCertificate2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestCertificate2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestCertificate2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -11720,10 +11853,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestCertificate2*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestCertificate2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestCertificate2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestCertificate2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestCertificate2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestCertificate2*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -11738,10 +11871,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestCertificate2*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestCertificate2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestCertificate2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestCertificate2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestCertificate2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestCertificate2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11768,10 +11901,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestCertificate2*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestCertificate2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestCertificate2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestCertificate2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestCertificate2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestCertificate2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11795,7 +11928,7 @@ module Win32cr::Security::Cryptography::Certificates
     def check_signature(this : IX509CertificateRequestCertificate2*, allowed_signature_types : Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_signature.call(this, allowed_signature_types)
     end
-    def is_smart_card(this : IX509CertificateRequestCertificate2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def is_smart_card(this : IX509CertificateRequestCertificate2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_smart_card.call(this, pValue)
     end
     def get_TemplateObjectId(this : IX509CertificateRequestCertificate2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -11807,10 +11940,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_PrivateKey(this : IX509CertificateRequestCertificate2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateKey.call(this, ppValue)
     end
-    def get_NullSigned(this : IX509CertificateRequestCertificate2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRequestCertificate2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
-    def get_ReuseKey(this : IX509CertificateRequestCertificate2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReuseKey(this : IX509CertificateRequestCertificate2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReuseKey.call(this, pValue)
     end
     def get_OldCertificate(this : IX509CertificateRequestCertificate2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -11825,10 +11958,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_CspStatuses(this : IX509CertificateRequestCertificate2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CspStatuses.call(this, ppValue)
     end
-    def get_SmimeCapabilities(this : IX509CertificateRequestCertificate2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SmimeCapabilities(this : IX509CertificateRequestCertificate2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SmimeCapabilities.call(this, pValue)
     end
-    def put_SmimeCapabilities(this : IX509CertificateRequestCertificate2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SmimeCapabilities(this : IX509CertificateRequestCertificate2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SmimeCapabilities.call(this, value)
     end
     def get_SignatureInformation(this : IX509CertificateRequestCertificate2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -11910,28 +12043,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs7Vtbl,
+
+  record IX509CertificateRequestPkcs7Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs7*, UInt32),
     release : Proc(IX509CertificateRequestPkcs7*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestPkcs7*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestPkcs7*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestPkcs7*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestPkcs7*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestPkcs7*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestPkcs7*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestPkcs7*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestPkcs7*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestPkcs7*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs7*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs7*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -11940,11 +12074,11 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestPkcs7*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestPkcs7*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestPkcs7*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs7*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs7*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Int16, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(IX509CertificateRequestPkcs7*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_from_inner_request : Proc(IX509CertificateRequestPkcs7*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     get_RequesterName : Proc(IX509CertificateRequestPkcs7*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -11954,7 +12088,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs7, lpVtbl : IX509CertificateRequestPkcs7Vtbl* do
+  record IX509CertificateRequestPkcs7, lpVtbl : IX509CertificateRequestPkcs7Vtable* do
     GUID = LibC::GUID.new(0x728ab344_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11974,8 +12108,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestPkcs7*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestPkcs7*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestPkcs7*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestPkcs7*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -11995,10 +12129,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestPkcs7*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestPkcs7*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestPkcs7*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestPkcs7*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestPkcs7*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestPkcs7*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -12013,10 +12147,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestPkcs7*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestPkcs7*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestPkcs7*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestPkcs7*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestPkcs7*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestPkcs7*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12043,10 +12177,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestPkcs7*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs7*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs7*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs7*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs7*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestPkcs7*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12055,7 +12189,7 @@ module Win32cr::Security::Cryptography::Certificates
     def initialize_from_template_name(this : IX509CertificateRequestPkcs7*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, strTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_template_name.call(this, context, strTemplateName)
     end
-    def initialize_from_certificate(this : IX509CertificateRequestPkcs7*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, renewal_request : Int16, strCertificate : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, inherit_options : Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : IX509CertificateRequestPkcs7*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, renewal_request : Win32cr::Foundation::VARIANT_BOOL, strCertificate : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, inherit_options : Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, context, renewal_request, strCertificate, encoding, inherit_options)
     end
     def initialize_from_inner_request(this : IX509CertificateRequestPkcs7*, pInnerRequest : Void*) : Win32cr::Foundation::HRESULT
@@ -12080,28 +12214,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs7V2Vtbl,
+
+  record IX509CertificateRequestPkcs7V2Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs7V2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs7V2*, UInt32),
     release : Proc(IX509CertificateRequestPkcs7V2*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestPkcs7V2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestPkcs7V2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestPkcs7V2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestPkcs7V2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestPkcs7V2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestPkcs7V2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestPkcs7V2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestPkcs7V2*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestPkcs7V2*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs7V2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs7V2*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -12110,11 +12245,11 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestPkcs7V2*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestPkcs7V2*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestPkcs7V2*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs7V2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs7V2*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Int16, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_from_inner_request : Proc(IX509CertificateRequestPkcs7V2*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     get_RequesterName : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -12124,11 +12259,11 @@ module Win32cr::Security::Cryptography::Certificates
     initialize_from_template : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Void*, Void*, Win32cr::Foundation::HRESULT),
     get_PolicyServer : Proc(IX509CertificateRequestPkcs7V2*, Void**, Win32cr::Foundation::HRESULT),
     get_Template : Proc(IX509CertificateRequestPkcs7V2*, Void**, Win32cr::Foundation::HRESULT),
-    check_certificate_signature : Proc(IX509CertificateRequestPkcs7V2*, Int16, Win32cr::Foundation::HRESULT)
+    check_certificate_signature : Proc(IX509CertificateRequestPkcs7V2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs7V2, lpVtbl : IX509CertificateRequestPkcs7V2Vtbl* do
+  record IX509CertificateRequestPkcs7V2, lpVtbl : IX509CertificateRequestPkcs7V2Vtable* do
     GUID = LibC::GUID.new(0x728ab35c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs7V2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12148,8 +12283,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestPkcs7V2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestPkcs7V2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestPkcs7V2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestPkcs7V2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -12169,10 +12304,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestPkcs7V2*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestPkcs7V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestPkcs7V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestPkcs7V2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestPkcs7V2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestPkcs7V2*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -12187,10 +12322,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestPkcs7V2*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestPkcs7V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestPkcs7V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestPkcs7V2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestPkcs7V2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestPkcs7V2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12217,10 +12352,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestPkcs7V2*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs7V2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs7V2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs7V2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestPkcs7V2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestPkcs7V2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12229,7 +12364,7 @@ module Win32cr::Security::Cryptography::Certificates
     def initialize_from_template_name(this : IX509CertificateRequestPkcs7V2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, strTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_template_name.call(this, context, strTemplateName)
     end
-    def initialize_from_certificate(this : IX509CertificateRequestPkcs7V2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, renewal_request : Int16, strCertificate : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, inherit_options : Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : IX509CertificateRequestPkcs7V2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, renewal_request : Win32cr::Foundation::VARIANT_BOOL, strCertificate : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, inherit_options : Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, context, renewal_request, strCertificate, encoding, inherit_options)
     end
     def initialize_from_inner_request(this : IX509CertificateRequestPkcs7V2*, pInnerRequest : Void*) : Win32cr::Foundation::HRESULT
@@ -12259,35 +12394,36 @@ module Win32cr::Security::Cryptography::Certificates
     def get_Template(this : IX509CertificateRequestPkcs7V2*, ppTemplate : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Template.call(this, ppTemplate)
     end
-    def check_certificate_signature(this : IX509CertificateRequestPkcs7V2*, validate_certificate_chain : Int16) : Win32cr::Foundation::HRESULT
+    def check_certificate_signature(this : IX509CertificateRequestPkcs7V2*, validate_certificate_chain : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_certificate_signature.call(this, validate_certificate_chain)
     end
 
   end
 
   @[Extern]
-  record IX509CertificateRequestCmcVtbl,
+
+  record IX509CertificateRequestCmcVtable,
     query_interface : Proc(IX509CertificateRequestCmc*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestCmc*, UInt32),
     release : Proc(IX509CertificateRequestCmc*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestCmc*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestCmc*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestCmc*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestCmc*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestCmc*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestCmc*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestCmc*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestCmc*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestCmc*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestCmc*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestCmc*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -12296,11 +12432,11 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestCmc*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestCmc*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestCmc*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCmc*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCmc*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Int16, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_from_inner_request : Proc(IX509CertificateRequestCmc*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     get_RequesterName : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -12309,7 +12445,7 @@ module Win32cr::Security::Cryptography::Certificates
     put_SignerCertificate : Proc(IX509CertificateRequestCmc*, Void*, Win32cr::Foundation::HRESULT),
     initialize_from_inner_request_template_name : Proc(IX509CertificateRequestCmc*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TemplateObjectId : Proc(IX509CertificateRequestCmc*, Void**, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRequestCmc*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CryptAttributes : Proc(IX509CertificateRequestCmc*, Void**, Win32cr::Foundation::HRESULT),
     get_NameValuePairs : Proc(IX509CertificateRequestCmc*, Void**, Win32cr::Foundation::HRESULT),
     get_X509Extensions : Proc(IX509CertificateRequestCmc*, Void**, Win32cr::Foundation::HRESULT),
@@ -12320,8 +12456,8 @@ module Win32cr::Security::Cryptography::Certificates
     get_SenderNonce : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SenderNonce : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRequestCmc*, Void**, Win32cr::Foundation::HRESULT),
-    get_ArchivePrivateKey : Proc(IX509CertificateRequestCmc*, Int16*, Win32cr::Foundation::HRESULT),
-    put_ArchivePrivateKey : Proc(IX509CertificateRequestCmc*, Int16, Win32cr::Foundation::HRESULT),
+    get_ArchivePrivateKey : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_ArchivePrivateKey : Proc(IX509CertificateRequestCmc*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_KeyArchivalCertificate : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_KeyArchivalCertificate : Proc(IX509CertificateRequestCmc*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EncryptionAlgorithm : Proc(IX509CertificateRequestCmc*, Void**, Win32cr::Foundation::HRESULT),
@@ -12333,7 +12469,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestCmc, lpVtbl : IX509CertificateRequestCmcVtbl* do
+  record IX509CertificateRequestCmc, lpVtbl : IX509CertificateRequestCmcVtable* do
     GUID = LibC::GUID.new(0x728ab345_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestCmc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12353,8 +12489,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestCmc*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestCmc*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestCmc*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestCmc*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -12374,10 +12510,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestCmc*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestCmc*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestCmc*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestCmc*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestCmc*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestCmc*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -12392,10 +12528,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestCmc*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestCmc*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestCmc*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestCmc*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestCmc*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestCmc*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12422,10 +12558,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestCmc*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestCmc*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestCmc*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestCmc*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestCmc*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestCmc*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12434,7 +12570,7 @@ module Win32cr::Security::Cryptography::Certificates
     def initialize_from_template_name(this : IX509CertificateRequestCmc*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, strTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_template_name.call(this, context, strTemplateName)
     end
-    def initialize_from_certificate(this : IX509CertificateRequestCmc*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, renewal_request : Int16, strCertificate : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, inherit_options : Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : IX509CertificateRequestCmc*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, renewal_request : Win32cr::Foundation::VARIANT_BOOL, strCertificate : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, inherit_options : Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, context, renewal_request, strCertificate, encoding, inherit_options)
     end
     def initialize_from_inner_request(this : IX509CertificateRequestCmc*, pInnerRequest : Void*) : Win32cr::Foundation::HRESULT
@@ -12461,7 +12597,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_TemplateObjectId(this : IX509CertificateRequestCmc*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TemplateObjectId.call(this, ppValue)
     end
-    def get_NullSigned(this : IX509CertificateRequestCmc*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRequestCmc*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
     def get_CryptAttributes(this : IX509CertificateRequestCmc*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -12494,10 +12630,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_SignatureInformation(this : IX509CertificateRequestCmc*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SignatureInformation.call(this, ppValue)
     end
-    def get_ArchivePrivateKey(this : IX509CertificateRequestCmc*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ArchivePrivateKey(this : IX509CertificateRequestCmc*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ArchivePrivateKey.call(this, pValue)
     end
-    def put_ArchivePrivateKey(this : IX509CertificateRequestCmc*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_ArchivePrivateKey(this : IX509CertificateRequestCmc*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ArchivePrivateKey.call(this, value)
     end
     def get_KeyArchivalCertificate(this : IX509CertificateRequestCmc*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12528,28 +12664,29 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestCmc2Vtbl,
+
+  record IX509CertificateRequestCmc2Vtable,
     query_interface : Proc(IX509CertificateRequestCmc2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestCmc2*, UInt32),
     release : Proc(IX509CertificateRequestCmc2*, UInt32),
     get_type_info_count : Proc(IX509CertificateRequestCmc2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRequestCmc2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRequestCmc2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRequestCmc2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRequestCmc2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::HRESULT),
     reset_for_encode : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::HRESULT),
     get_inner_request : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::InnerRequestLevel, Void**, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::X509RequestType*, Win32cr::Foundation::HRESULT),
     get_EnrollmentContext : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509CertificateRequestCmc2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509CertificateRequestCmc2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509CertificateRequestCmc2*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509CertificateRequestCmc2*, Int32, Win32cr::Foundation::HRESULT),
     get_UIContextMessage : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_UIContextMessage : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SuppressDefaults : Proc(IX509CertificateRequestCmc2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SuppressDefaults : Proc(IX509CertificateRequestCmc2*, Int16, Win32cr::Foundation::HRESULT),
+    get_SuppressDefaults : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SuppressDefaults : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RenewalCertificate : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RenewalCertificate : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::RequestClientInfoClientId*, Win32cr::Foundation::HRESULT),
@@ -12558,11 +12695,11 @@ module Win32cr::Security::Cryptography::Certificates
     put_CspInformations : Proc(IX509CertificateRequestCmc2*, Void*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRequestCmc2*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCmc2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCmc2*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    initialize_from_certificate : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Int16, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
+    initialize_from_certificate : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions, Win32cr::Foundation::HRESULT),
     initialize_from_inner_request : Proc(IX509CertificateRequestCmc2*, Void*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     get_RequesterName : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -12571,7 +12708,7 @@ module Win32cr::Security::Cryptography::Certificates
     put_SignerCertificate : Proc(IX509CertificateRequestCmc2*, Void*, Win32cr::Foundation::HRESULT),
     initialize_from_inner_request_template_name : Proc(IX509CertificateRequestCmc2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TemplateObjectId : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRequestCmc2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_CryptAttributes : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
     get_NameValuePairs : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
     get_X509Extensions : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
@@ -12582,8 +12719,8 @@ module Win32cr::Security::Cryptography::Certificates
     get_SenderNonce : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SenderNonce : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
-    get_ArchivePrivateKey : Proc(IX509CertificateRequestCmc2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_ArchivePrivateKey : Proc(IX509CertificateRequestCmc2*, Int16, Win32cr::Foundation::HRESULT),
+    get_ArchivePrivateKey : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_ArchivePrivateKey : Proc(IX509CertificateRequestCmc2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_KeyArchivalCertificate : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_KeyArchivalCertificate : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EncryptionAlgorithm : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
@@ -12597,11 +12734,11 @@ module Win32cr::Security::Cryptography::Certificates
     get_PolicyServer : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
     get_Template : Proc(IX509CertificateRequestCmc2*, Void**, Win32cr::Foundation::HRESULT),
     check_signature : Proc(IX509CertificateRequestCmc2*, Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes, Win32cr::Foundation::HRESULT),
-    check_certificate_signature : Proc(IX509CertificateRequestCmc2*, Void*, Int16, Win32cr::Foundation::HRESULT)
+    check_certificate_signature : Proc(IX509CertificateRequestCmc2*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509CertificateRequestCmc2, lpVtbl : IX509CertificateRequestCmc2Vtbl* do
+  record IX509CertificateRequestCmc2, lpVtbl : IX509CertificateRequestCmc2Vtable* do
     GUID = LibC::GUID.new(0x728ab35d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestCmc2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12621,8 +12758,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRequestCmc2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRequestCmc2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRequestCmc2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRequestCmc2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -12642,10 +12779,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnrollmentContext(this : IX509CertificateRequestCmc2*, pValue : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnrollmentContext.call(this, pValue)
     end
-    def get_Silent(this : IX509CertificateRequestCmc2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509CertificateRequestCmc2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509CertificateRequestCmc2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509CertificateRequestCmc2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509CertificateRequestCmc2*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -12660,10 +12797,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_UIContextMessage(this : IX509CertificateRequestCmc2*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UIContextMessage.call(this, value)
     end
-    def get_SuppressDefaults(this : IX509CertificateRequestCmc2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SuppressDefaults(this : IX509CertificateRequestCmc2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SuppressDefaults.call(this, pValue)
     end
-    def put_SuppressDefaults(this : IX509CertificateRequestCmc2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_SuppressDefaults(this : IX509CertificateRequestCmc2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SuppressDefaults.call(this, value)
     end
     def get_RenewalCertificate(this : IX509CertificateRequestCmc2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12690,10 +12827,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRequestCmc2*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestCmc2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRequestCmc2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestCmc2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRequestCmc2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_RawData(this : IX509CertificateRequestCmc2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12702,7 +12839,7 @@ module Win32cr::Security::Cryptography::Certificates
     def initialize_from_template_name(this : IX509CertificateRequestCmc2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, strTemplateName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_template_name.call(this, context, strTemplateName)
     end
-    def initialize_from_certificate(this : IX509CertificateRequestCmc2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, renewal_request : Int16, strCertificate : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, inherit_options : Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions) : Win32cr::Foundation::HRESULT
+    def initialize_from_certificate(this : IX509CertificateRequestCmc2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, renewal_request : Win32cr::Foundation::VARIANT_BOOL, strCertificate : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, inherit_options : Win32cr::Security::Cryptography::Certificates::X509RequestInheritOptions) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_from_certificate.call(this, context, renewal_request, strCertificate, encoding, inherit_options)
     end
     def initialize_from_inner_request(this : IX509CertificateRequestCmc2*, pInnerRequest : Void*) : Win32cr::Foundation::HRESULT
@@ -12729,7 +12866,7 @@ module Win32cr::Security::Cryptography::Certificates
     def get_TemplateObjectId(this : IX509CertificateRequestCmc2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TemplateObjectId.call(this, ppValue)
     end
-    def get_NullSigned(this : IX509CertificateRequestCmc2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRequestCmc2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
     def get_CryptAttributes(this : IX509CertificateRequestCmc2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -12762,10 +12899,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_SignatureInformation(this : IX509CertificateRequestCmc2*, ppValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SignatureInformation.call(this, ppValue)
     end
-    def get_ArchivePrivateKey(this : IX509CertificateRequestCmc2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ArchivePrivateKey(this : IX509CertificateRequestCmc2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ArchivePrivateKey.call(this, pValue)
     end
-    def put_ArchivePrivateKey(this : IX509CertificateRequestCmc2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_ArchivePrivateKey(this : IX509CertificateRequestCmc2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ArchivePrivateKey.call(this, value)
     end
     def get_KeyArchivalCertificate(this : IX509CertificateRequestCmc2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -12807,21 +12944,22 @@ module Win32cr::Security::Cryptography::Certificates
     def check_signature(this : IX509CertificateRequestCmc2*, allowed_signature_types : Win32cr::Security::Cryptography::Certificates::Pkcs10AllowedSignatureTypes) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_signature.call(this, allowed_signature_types)
     end
-    def check_certificate_signature(this : IX509CertificateRequestCmc2*, pSignerCertificate : Void*, validate_certificate_chain : Int16) : Win32cr::Foundation::HRESULT
+    def check_certificate_signature(this : IX509CertificateRequestCmc2*, pSignerCertificate : Void*, validate_certificate_chain : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.check_certificate_signature.call(this, pSignerCertificate, validate_certificate_chain)
     end
 
   end
 
   @[Extern]
-  record IX509EnrollmentVtbl,
+
+  record IX509EnrollmentVtable,
     query_interface : Proc(IX509Enrollment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Enrollment*, UInt32),
     release : Proc(IX509Enrollment*, UInt32),
     get_type_info_count : Proc(IX509Enrollment*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509Enrollment*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509Enrollment*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509Enrollment*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509Enrollment*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509Enrollment*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509Enrollment*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_request : Proc(IX509Enrollment*, Void*, Win32cr::Foundation::HRESULT),
@@ -12830,8 +12968,8 @@ module Win32cr::Security::Cryptography::Certificates
     install_response : Proc(IX509Enrollment*, Win32cr::Security::Cryptography::Certificates::InstallResponseRestrictionFlags, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     create_pfx : Proc(IX509Enrollment*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::PFXExportOptions, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Request : Proc(IX509Enrollment*, Void**, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509Enrollment*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509Enrollment*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509Enrollment*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509Enrollment*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509Enrollment*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509Enrollment*, Int32, Win32cr::Foundation::HRESULT),
     get_NameValuePairs : Proc(IX509Enrollment*, Void**, Win32cr::Foundation::HRESULT),
@@ -12848,7 +12986,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Enrollment, lpVtbl : IX509EnrollmentVtbl* do
+  record IX509Enrollment, lpVtbl : IX509EnrollmentVtable* do
     GUID = LibC::GUID.new(0x728ab346_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Enrollment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12868,8 +13006,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509Enrollment*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509Enrollment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509Enrollment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509Enrollment*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -12895,10 +13033,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_Request(this : IX509Enrollment*, pValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Request.call(this, pValue)
     end
-    def get_Silent(this : IX509Enrollment*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509Enrollment*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509Enrollment*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509Enrollment*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509Enrollment*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -12944,14 +13082,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509Enrollment2Vtbl,
+
+  record IX509Enrollment2Vtable,
     query_interface : Proc(IX509Enrollment2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Enrollment2*, UInt32),
     release : Proc(IX509Enrollment2*, UInt32),
     get_type_info_count : Proc(IX509Enrollment2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509Enrollment2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509Enrollment2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509Enrollment2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509Enrollment2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509Enrollment2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     initialize_from_template_name : Proc(IX509Enrollment2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_from_request : Proc(IX509Enrollment2*, Void*, Win32cr::Foundation::HRESULT),
@@ -12960,8 +13099,8 @@ module Win32cr::Security::Cryptography::Certificates
     install_response : Proc(IX509Enrollment2*, Win32cr::Security::Cryptography::Certificates::InstallResponseRestrictionFlags, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     create_pfx : Proc(IX509Enrollment2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::PFXExportOptions, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Request : Proc(IX509Enrollment2*, Void**, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509Enrollment2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509Enrollment2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509Enrollment2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509Enrollment2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ParentWindow : Proc(IX509Enrollment2*, Int32*, Win32cr::Foundation::HRESULT),
     put_ParentWindow : Proc(IX509Enrollment2*, Int32, Win32cr::Foundation::HRESULT),
     get_NameValuePairs : Proc(IX509Enrollment2*, Void**, Win32cr::Foundation::HRESULT),
@@ -12983,7 +13122,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Enrollment2, lpVtbl : IX509Enrollment2Vtbl* do
+  record IX509Enrollment2, lpVtbl : IX509Enrollment2Vtable* do
     GUID = LibC::GUID.new(0x728ab350_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Enrollment2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13003,8 +13142,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509Enrollment2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509Enrollment2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509Enrollment2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509Enrollment2*, context : Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, context)
@@ -13030,10 +13169,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_Request(this : IX509Enrollment2*, pValue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Request.call(this, pValue)
     end
-    def get_Silent(this : IX509Enrollment2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509Enrollment2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509Enrollment2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509Enrollment2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def get_ParentWindow(this : IX509Enrollment2*, pValue : Int32*) : Win32cr::Foundation::HRESULT
@@ -13094,14 +13233,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentHelperVtbl,
+
+  record IX509EnrollmentHelperVtable,
     query_interface : Proc(IX509EnrollmentHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EnrollmentHelper*, UInt32),
     release : Proc(IX509EnrollmentHelper*, UInt32),
     get_type_info_count : Proc(IX509EnrollmentHelper*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509EnrollmentHelper*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509EnrollmentHelper*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509EnrollmentHelper*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509EnrollmentHelper*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     add_policy_server : Proc(IX509EnrollmentHelper*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::PolicyServerUrlFlags, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     add_enrollment_server : Proc(IX509EnrollmentHelper*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     enroll : Proc(IX509EnrollmentHelper*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::WebEnrollmentFlags, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -13109,7 +13249,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509EnrollmentHelper, lpVtbl : IX509EnrollmentHelperVtbl* do
+  record IX509EnrollmentHelper, lpVtbl : IX509EnrollmentHelperVtable* do
     GUID = LibC::GUID.new(0x728ab351_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509EnrollmentHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13129,8 +13269,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509EnrollmentHelper*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509EnrollmentHelper*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509EnrollmentHelper*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def add_policy_server(this : IX509EnrollmentHelper*, strEnrollmentPolicyServerURI : Win32cr::Foundation::BSTR, strEnrollmentPolicyID : Win32cr::Foundation::BSTR, enrollment_policy_server_flags : Win32cr::Security::Cryptography::Certificates::PolicyServerUrlFlags, authFlags : Win32cr::Security::Cryptography::Certificates::X509EnrollmentAuthFlags, strCredential : Win32cr::Foundation::BSTR, strPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_server.call(this, strEnrollmentPolicyServerURI, strEnrollmentPolicyID, enrollment_policy_server_flags, authFlags, strCredential, strPassword)
@@ -13148,19 +13288,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentWebClassFactoryVtbl,
+
+  record IX509EnrollmentWebClassFactoryVtable,
     query_interface : Proc(IX509EnrollmentWebClassFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EnrollmentWebClassFactory*, UInt32),
     release : Proc(IX509EnrollmentWebClassFactory*, UInt32),
     get_type_info_count : Proc(IX509EnrollmentWebClassFactory*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509EnrollmentWebClassFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509EnrollmentWebClassFactory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509EnrollmentWebClassFactory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509EnrollmentWebClassFactory*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_object : Proc(IX509EnrollmentWebClassFactory*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509EnrollmentWebClassFactory, lpVtbl : IX509EnrollmentWebClassFactoryVtbl* do
+  record IX509EnrollmentWebClassFactory, lpVtbl : IX509EnrollmentWebClassFactoryVtable* do
     GUID = LibC::GUID.new(0x728ab349_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509EnrollmentWebClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13180,8 +13321,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509EnrollmentWebClassFactory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509EnrollmentWebClassFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509EnrollmentWebClassFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_object(this : IX509EnrollmentWebClassFactory*, strProgID : Win32cr::Foundation::BSTR, ppIUnknown : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_object.call(this, strProgID, ppIUnknown)
@@ -13190,19 +13331,20 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509MachineEnrollmentFactoryVtbl,
+
+  record IX509MachineEnrollmentFactoryVtable,
     query_interface : Proc(IX509MachineEnrollmentFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509MachineEnrollmentFactory*, UInt32),
     release : Proc(IX509MachineEnrollmentFactory*, UInt32),
     get_type_info_count : Proc(IX509MachineEnrollmentFactory*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509MachineEnrollmentFactory*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509MachineEnrollmentFactory*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509MachineEnrollmentFactory*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509MachineEnrollmentFactory*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     create_object : Proc(IX509MachineEnrollmentFactory*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509MachineEnrollmentFactory, lpVtbl : IX509MachineEnrollmentFactoryVtbl* do
+  record IX509MachineEnrollmentFactory, lpVtbl : IX509MachineEnrollmentFactoryVtable* do
     GUID = LibC::GUID.new(0x728ab352_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509MachineEnrollmentFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13222,8 +13364,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509MachineEnrollmentFactory*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509MachineEnrollmentFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509MachineEnrollmentFactory*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def create_object(this : IX509MachineEnrollmentFactory*, strProgID : Win32cr::Foundation::BSTR, ppIHelper : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_object.call(this, strProgID, ppIHelper)
@@ -13232,14 +13374,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRevocationListEntryVtbl,
+
+  record IX509CertificateRevocationListEntryVtable,
     query_interface : Proc(IX509CertificateRevocationListEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRevocationListEntry*, UInt32),
     release : Proc(IX509CertificateRevocationListEntry*, UInt32),
     get_type_info_count : Proc(IX509CertificateRevocationListEntry*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRevocationListEntry*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRevocationListEntry*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRevocationListEntry*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRevocationListEntry*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRevocationListEntry*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Float64, Win32cr::Foundation::HRESULT),
     get_SerialNumber : Proc(IX509CertificateRevocationListEntry*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RevocationDate : Proc(IX509CertificateRevocationListEntry*, Float64*, Win32cr::Foundation::HRESULT),
@@ -13250,7 +13393,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRevocationListEntry, lpVtbl : IX509CertificateRevocationListEntryVtbl* do
+  record IX509CertificateRevocationListEntry, lpVtbl : IX509CertificateRevocationListEntryVtable* do
     GUID = LibC::GUID.new(0x728ab35e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRevocationListEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13270,8 +13413,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRevocationListEntry*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRevocationListEntry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRevocationListEntry*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRevocationListEntry*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, serial_number : Win32cr::Foundation::BSTR, revocation_date : Float64) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, encoding, serial_number, revocation_date)
@@ -13298,14 +13441,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRevocationListEntriesVtbl,
+
+  record IX509CertificateRevocationListEntriesVtable,
     query_interface : Proc(IX509CertificateRevocationListEntries*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRevocationListEntries*, UInt32),
     release : Proc(IX509CertificateRevocationListEntries*, UInt32),
     get_type_info_count : Proc(IX509CertificateRevocationListEntries*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRevocationListEntries*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRevocationListEntries*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRevocationListEntries*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRevocationListEntries*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ItemByIndex : Proc(IX509CertificateRevocationListEntries*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IX509CertificateRevocationListEntries*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IX509CertificateRevocationListEntries*, Void**, Win32cr::Foundation::HRESULT),
@@ -13317,7 +13461,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRevocationListEntries, lpVtbl : IX509CertificateRevocationListEntriesVtbl* do
+  record IX509CertificateRevocationListEntries, lpVtbl : IX509CertificateRevocationListEntriesVtable* do
     GUID = LibC::GUID.new(0x728ab35f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRevocationListEntries*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13337,8 +13481,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRevocationListEntries*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRevocationListEntries*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRevocationListEntries*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ItemByIndex(this : IX509CertificateRevocationListEntries*, index : Int32, pVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ItemByIndex.call(this, index, pVal)
@@ -13368,14 +13512,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRevocationListVtbl,
+
+  record IX509CertificateRevocationListVtable,
     query_interface : Proc(IX509CertificateRevocationList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRevocationList*, UInt32),
     release : Proc(IX509CertificateRevocationList*, UInt32),
     get_type_info_count : Proc(IX509CertificateRevocationList*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509CertificateRevocationList*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509CertificateRevocationList*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509CertificateRevocationList*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509CertificateRevocationList*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509CertificateRevocationList*, Win32cr::Foundation::HRESULT),
     initialize_decode : Proc(IX509CertificateRevocationList*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     encode : Proc(IX509CertificateRevocationList*, Win32cr::Foundation::HRESULT),
@@ -13397,12 +13542,12 @@ module Win32cr::Security::Cryptography::Certificates
     put_CRLNumber : Proc(IX509CertificateRevocationList*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_CAVersion : Proc(IX509CertificateRevocationList*, Int32*, Win32cr::Foundation::HRESULT),
     put_CAVersion : Proc(IX509CertificateRevocationList*, Int32, Win32cr::Foundation::HRESULT),
-    get_BaseCRL : Proc(IX509CertificateRevocationList*, Int16*, Win32cr::Foundation::HRESULT),
-    get_NullSigned : Proc(IX509CertificateRevocationList*, Int16*, Win32cr::Foundation::HRESULT),
+    get_BaseCRL : Proc(IX509CertificateRevocationList*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_NullSigned : Proc(IX509CertificateRevocationList*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(IX509CertificateRevocationList*, Void**, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(IX509CertificateRevocationList*, Void*, Win32cr::Foundation::HRESULT),
-    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRevocationList*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRevocationList*, Int16, Win32cr::Foundation::HRESULT),
+    get_AlternateSignatureAlgorithm : Proc(IX509CertificateRevocationList*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AlternateSignatureAlgorithm : Proc(IX509CertificateRevocationList*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SignatureInformation : Proc(IX509CertificateRevocationList*, Void**, Win32cr::Foundation::HRESULT),
     get_RawData : Proc(IX509CertificateRevocationList*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RawDataToBeSigned : Proc(IX509CertificateRevocationList*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -13410,7 +13555,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRevocationList, lpVtbl : IX509CertificateRevocationListVtbl* do
+  record IX509CertificateRevocationList, lpVtbl : IX509CertificateRevocationListVtable* do
     GUID = LibC::GUID.new(0x728ab360_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRevocationList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13430,8 +13575,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509CertificateRevocationList*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509CertificateRevocationList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509CertificateRevocationList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509CertificateRevocationList*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this)
@@ -13496,10 +13641,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_CAVersion(this : IX509CertificateRevocationList*, pValue : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CAVersion.call(this, pValue)
     end
-    def get_BaseCRL(this : IX509CertificateRevocationList*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BaseCRL(this : IX509CertificateRevocationList*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BaseCRL.call(this, pValue)
     end
-    def get_NullSigned(this : IX509CertificateRevocationList*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_NullSigned(this : IX509CertificateRevocationList*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NullSigned.call(this, pValue)
     end
     def get_HashAlgorithm(this : IX509CertificateRevocationList*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -13508,10 +13653,10 @@ module Win32cr::Security::Cryptography::Certificates
     def put_HashAlgorithm(this : IX509CertificateRevocationList*, pValue : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, pValue)
     end
-    def get_AlternateSignatureAlgorithm(this : IX509CertificateRevocationList*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AlternateSignatureAlgorithm(this : IX509CertificateRevocationList*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AlternateSignatureAlgorithm.call(this, pValue)
     end
-    def put_AlternateSignatureAlgorithm(this : IX509CertificateRevocationList*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_AlternateSignatureAlgorithm(this : IX509CertificateRevocationList*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AlternateSignatureAlgorithm.call(this, value)
     end
     def get_SignatureInformation(this : IX509CertificateRevocationList*, ppValue : Void**) : Win32cr::Foundation::HRESULT
@@ -13530,21 +13675,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificateAttestationChallengeVtbl,
+
+  record ICertificateAttestationChallengeVtable,
     query_interface : Proc(ICertificateAttestationChallenge*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificateAttestationChallenge*, UInt32),
     release : Proc(ICertificateAttestationChallenge*, UInt32),
     get_type_info_count : Proc(ICertificateAttestationChallenge*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertificateAttestationChallenge*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertificateAttestationChallenge*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertificateAttestationChallenge*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertificateAttestationChallenge*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertificateAttestationChallenge*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     decrypt_challenge : Proc(ICertificateAttestationChallenge*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RequestID : Proc(ICertificateAttestationChallenge*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertificateAttestationChallenge, lpVtbl : ICertificateAttestationChallengeVtbl* do
+  record ICertificateAttestationChallenge, lpVtbl : ICertificateAttestationChallengeVtable* do
     GUID = LibC::GUID.new(0x6f175a7c_u32, 0x4a3a_u16, 0x40ae_u16, StaticArray[0x9d_u8, 0xba_u8, 0x59_u8, 0x2f_u8, 0xd6_u8, 0xbb_u8, 0xf9_u8, 0xb8_u8])
     def query_interface(this : ICertificateAttestationChallenge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13564,8 +13710,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertificateAttestationChallenge*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertificateAttestationChallenge*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertificateAttestationChallenge*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ICertificateAttestationChallenge*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strPendingFullCmcResponseWithChallenge : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, encoding, strPendingFullCmcResponseWithChallenge)
@@ -13580,14 +13726,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificateAttestationChallenge2Vtbl,
+
+  record ICertificateAttestationChallenge2Vtable,
     query_interface : Proc(ICertificateAttestationChallenge2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificateAttestationChallenge2*, UInt32),
     release : Proc(ICertificateAttestationChallenge2*, UInt32),
     get_type_info_count : Proc(ICertificateAttestationChallenge2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertificateAttestationChallenge2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertificateAttestationChallenge2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertificateAttestationChallenge2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertificateAttestationChallenge2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertificateAttestationChallenge2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     decrypt_challenge : Proc(ICertificateAttestationChallenge2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_RequestID : Proc(ICertificateAttestationChallenge2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -13596,7 +13743,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificateAttestationChallenge2, lpVtbl : ICertificateAttestationChallenge2Vtbl* do
+  record ICertificateAttestationChallenge2, lpVtbl : ICertificateAttestationChallenge2Vtable* do
     GUID = LibC::GUID.new(0x4631334d_u32, 0xe266_u16, 0x47d6_u16, StaticArray[0xbd_u8, 0x79_u8, 0xbe_u8, 0x53_u8, 0xcb_u8, 0x2e_u8, 0x27_u8, 0x53_u8])
     def query_interface(this : ICertificateAttestationChallenge2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13616,8 +13763,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertificateAttestationChallenge2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertificateAttestationChallenge2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertificateAttestationChallenge2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ICertificateAttestationChallenge2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strPendingFullCmcResponseWithChallenge : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, encoding, strPendingFullCmcResponseWithChallenge)
@@ -13638,14 +13785,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509SCEPEnrollmentVtbl,
+
+  record IX509SCEPEnrollmentVtable,
     query_interface : Proc(IX509SCEPEnrollment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509SCEPEnrollment*, UInt32),
     release : Proc(IX509SCEPEnrollment*, UInt32),
     get_type_info_count : Proc(IX509SCEPEnrollment*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509SCEPEnrollment*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509SCEPEnrollment*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509SCEPEnrollment*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509SCEPEnrollment*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509SCEPEnrollment*, Void*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     initialize_for_pending : Proc(IX509SCEPEnrollment*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     create_request_message : Proc(IX509SCEPEnrollment*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -13665,13 +13813,13 @@ module Win32cr::Security::Cryptography::Certificates
     put_CertificateFriendlyName : Proc(IX509SCEPEnrollment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IX509SCEPEnrollment*, Void**, Win32cr::Foundation::HRESULT),
     get_Certificate : Proc(IX509SCEPEnrollment*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509SCEPEnrollment*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509SCEPEnrollment*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509SCEPEnrollment*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509SCEPEnrollment*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     delete_request : Proc(IX509SCEPEnrollment*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IX509SCEPEnrollment, lpVtbl : IX509SCEPEnrollmentVtbl* do
+  record IX509SCEPEnrollment, lpVtbl : IX509SCEPEnrollmentVtable* do
     GUID = LibC::GUID.new(0x728ab361_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509SCEPEnrollment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13691,8 +13839,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509SCEPEnrollment*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509SCEPEnrollment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509SCEPEnrollment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509SCEPEnrollment*, pRequest : Void*, strThumbprint : Win32cr::Foundation::BSTR, thumprint_encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strServerCertificates : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pRequest, strThumbprint, thumprint_encoding, strServerCertificates, encoding)
@@ -13751,10 +13899,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_Certificate(this : IX509SCEPEnrollment*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Certificate.call(this, encoding, pValue)
     end
-    def get_Silent(this : IX509SCEPEnrollment*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509SCEPEnrollment*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509SCEPEnrollment*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509SCEPEnrollment*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def delete_request(this : IX509SCEPEnrollment*) : Win32cr::Foundation::HRESULT
@@ -13764,14 +13912,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509SCEPEnrollment2Vtbl,
+
+  record IX509SCEPEnrollment2Vtable,
     query_interface : Proc(IX509SCEPEnrollment2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509SCEPEnrollment2*, UInt32),
     release : Proc(IX509SCEPEnrollment2*, UInt32),
     get_type_info_count : Proc(IX509SCEPEnrollment2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509SCEPEnrollment2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509SCEPEnrollment2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509SCEPEnrollment2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509SCEPEnrollment2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509SCEPEnrollment2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::HRESULT),
     initialize_for_pending : Proc(IX509SCEPEnrollment2*, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::HRESULT),
     create_request_message : Proc(IX509SCEPEnrollment2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -13791,8 +13940,8 @@ module Win32cr::Security::Cryptography::Certificates
     put_CertificateFriendlyName : Proc(IX509SCEPEnrollment2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IX509SCEPEnrollment2*, Void**, Win32cr::Foundation::HRESULT),
     get_Certificate : Proc(IX509SCEPEnrollment2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Silent : Proc(IX509SCEPEnrollment2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Silent : Proc(IX509SCEPEnrollment2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Silent : Proc(IX509SCEPEnrollment2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Silent : Proc(IX509SCEPEnrollment2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     delete_request : Proc(IX509SCEPEnrollment2*, Win32cr::Foundation::HRESULT),
     create_challenge_answer_message : Proc(IX509SCEPEnrollment2*, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     process_response_message2 : Proc(IX509SCEPEnrollment2*, Win32cr::Security::Cryptography::Certificates::X509SCEPProcessMessageFlags, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::EncodingType, Win32cr::Security::Cryptography::Certificates::X509SCEPDisposition*, Win32cr::Foundation::HRESULT),
@@ -13803,7 +13952,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509SCEPEnrollment2, lpVtbl : IX509SCEPEnrollment2Vtbl* do
+  record IX509SCEPEnrollment2, lpVtbl : IX509SCEPEnrollment2Vtable* do
     GUID = LibC::GUID.new(0x728ab364_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509SCEPEnrollment2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13823,8 +13972,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509SCEPEnrollment2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509SCEPEnrollment2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509SCEPEnrollment2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509SCEPEnrollment2*, pRequest : Void*, strThumbprint : Win32cr::Foundation::BSTR, thumprint_encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, strServerCertificates : Win32cr::Foundation::BSTR, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, pRequest, strThumbprint, thumprint_encoding, strServerCertificates, encoding)
@@ -13883,10 +14032,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_Certificate(this : IX509SCEPEnrollment2*, encoding : Win32cr::Security::Cryptography::Certificates::EncodingType, pValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Certificate.call(this, encoding, pValue)
     end
-    def get_Silent(this : IX509SCEPEnrollment2*, pValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Silent(this : IX509SCEPEnrollment2*, pValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Silent.call(this, pValue)
     end
-    def put_Silent(this : IX509SCEPEnrollment2*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Silent(this : IX509SCEPEnrollment2*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Silent.call(this, value)
     end
     def delete_request(this : IX509SCEPEnrollment2*) : Win32cr::Foundation::HRESULT
@@ -13914,14 +14063,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509SCEPEnrollmentHelperVtbl,
+
+  record IX509SCEPEnrollmentHelperVtable,
     query_interface : Proc(IX509SCEPEnrollmentHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509SCEPEnrollmentHelper*, UInt32),
     release : Proc(IX509SCEPEnrollmentHelper*, UInt32),
     get_type_info_count : Proc(IX509SCEPEnrollmentHelper*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IX509SCEPEnrollmentHelper*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IX509SCEPEnrollmentHelper*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IX509SCEPEnrollmentHelper*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IX509SCEPEnrollmentHelper*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(IX509SCEPEnrollmentHelper*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     initialize_for_pending : Proc(IX509SCEPEnrollmentHelper*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::X509CertificateEnrollmentContext, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     enroll : Proc(IX509SCEPEnrollmentHelper*, Win32cr::Security::Cryptography::Certificates::X509SCEPProcessMessageFlags, Win32cr::Security::Cryptography::Certificates::X509SCEPDisposition*, Win32cr::Foundation::HRESULT),
@@ -13931,7 +14081,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509SCEPEnrollmentHelper, lpVtbl : IX509SCEPEnrollmentHelperVtbl* do
+  record IX509SCEPEnrollmentHelper, lpVtbl : IX509SCEPEnrollmentHelperVtable* do
     GUID = LibC::GUID.new(0x728ab365_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509SCEPEnrollmentHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13951,8 +14101,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : IX509SCEPEnrollmentHelper*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IX509SCEPEnrollmentHelper*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IX509SCEPEnrollmentHelper*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : IX509SCEPEnrollmentHelper*, strServerUrl : Win32cr::Foundation::BSTR, strRequestHeaders : Win32cr::Foundation::BSTR, pRequest : Void*, strCACertificateThumbprint : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, strServerUrl, strRequestHeaders, pRequest, strCACertificateThumbprint)
@@ -13976,14 +14126,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeStringArrayVtbl,
+
+  record ICertEncodeStringArrayVtable,
     query_interface : Proc(ICertEncodeStringArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeStringArray*, UInt32),
     release : Proc(ICertEncodeStringArray*, UInt32),
     get_type_info_count : Proc(ICertEncodeStringArray*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeStringArray*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeStringArray*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeStringArray*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeStringArray*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeStringArray*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_string_type : Proc(ICertEncodeStringArray*, Int32*, Win32cr::Foundation::HRESULT),
     get_count : Proc(ICertEncodeStringArray*, Int32*, Win32cr::Foundation::HRESULT),
@@ -13994,7 +14145,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeStringArray, lpVtbl : ICertEncodeStringArrayVtbl* do
+  record ICertEncodeStringArray, lpVtbl : ICertEncodeStringArrayVtable* do
     GUID = LibC::GUID.new(0x12a88820_u32, 0x7494_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertEncodeStringArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14014,8 +14165,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeStringArray*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeStringArray*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeStringArray*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeStringArray*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14042,14 +14193,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeStringArray2Vtbl,
+
+  record ICertEncodeStringArray2Vtable,
     query_interface : Proc(ICertEncodeStringArray2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeStringArray2*, UInt32),
     release : Proc(ICertEncodeStringArray2*, UInt32),
     get_type_info_count : Proc(ICertEncodeStringArray2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeStringArray2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeStringArray2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeStringArray2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeStringArray2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeStringArray2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_string_type : Proc(ICertEncodeStringArray2*, Int32*, Win32cr::Foundation::HRESULT),
     get_count : Proc(ICertEncodeStringArray2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -14062,7 +14214,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeStringArray2, lpVtbl : ICertEncodeStringArray2Vtbl* do
+  record ICertEncodeStringArray2, lpVtbl : ICertEncodeStringArray2Vtable* do
     GUID = LibC::GUID.new(0x9c680d93_u32, 0x9b7d_u16, 0x4e95_u16, StaticArray[0x90_u8, 0x18_u8, 0x4f_u8, 0xfe_u8, 0x10_u8, 0xba_u8, 0x5a_u8, 0xda_u8])
     def query_interface(this : ICertEncodeStringArray2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14082,8 +14234,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeStringArray2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeStringArray2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeStringArray2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeStringArray2*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14116,14 +14268,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeLongArrayVtbl,
+
+  record ICertEncodeLongArrayVtable,
     query_interface : Proc(ICertEncodeLongArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeLongArray*, UInt32),
     release : Proc(ICertEncodeLongArray*, UInt32),
     get_type_info_count : Proc(ICertEncodeLongArray*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeLongArray*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeLongArray*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeLongArray*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeLongArray*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeLongArray*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_count : Proc(ICertEncodeLongArray*, Int32*, Win32cr::Foundation::HRESULT),
     get_value : Proc(ICertEncodeLongArray*, Int32, Int32*, Win32cr::Foundation::HRESULT),
@@ -14133,7 +14286,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeLongArray, lpVtbl : ICertEncodeLongArrayVtbl* do
+  record ICertEncodeLongArray, lpVtbl : ICertEncodeLongArrayVtable* do
     GUID = LibC::GUID.new(0x15e2f230_u32, 0xa0a2_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x21_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertEncodeLongArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14153,8 +14306,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeLongArray*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeLongArray*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeLongArray*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeLongArray*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14178,14 +14331,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeLongArray2Vtbl,
+
+  record ICertEncodeLongArray2Vtable,
     query_interface : Proc(ICertEncodeLongArray2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeLongArray2*, UInt32),
     release : Proc(ICertEncodeLongArray2*, UInt32),
     get_type_info_count : Proc(ICertEncodeLongArray2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeLongArray2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeLongArray2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeLongArray2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeLongArray2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeLongArray2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_count : Proc(ICertEncodeLongArray2*, Int32*, Win32cr::Foundation::HRESULT),
     get_value : Proc(ICertEncodeLongArray2*, Int32, Int32*, Win32cr::Foundation::HRESULT),
@@ -14197,7 +14351,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeLongArray2, lpVtbl : ICertEncodeLongArray2Vtbl* do
+  record ICertEncodeLongArray2, lpVtbl : ICertEncodeLongArray2Vtable* do
     GUID = LibC::GUID.new(0x4efde84a_u32, 0xbd9b_u16, 0x4fc2_u16, StaticArray[0xa1_u8, 0x8_u8, 0xc3_u8, 0x47_u8, 0xd4_u8, 0x78_u8, 0x84_u8, 0xf_u8])
     def query_interface(this : ICertEncodeLongArray2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14217,8 +14371,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeLongArray2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeLongArray2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeLongArray2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeLongArray2*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14248,14 +14402,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeDateArrayVtbl,
+
+  record ICertEncodeDateArrayVtable,
     query_interface : Proc(ICertEncodeDateArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeDateArray*, UInt32),
     release : Proc(ICertEncodeDateArray*, UInt32),
     get_type_info_count : Proc(ICertEncodeDateArray*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeDateArray*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeDateArray*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeDateArray*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeDateArray*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeDateArray*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_count : Proc(ICertEncodeDateArray*, Int32*, Win32cr::Foundation::HRESULT),
     get_value : Proc(ICertEncodeDateArray*, Int32, Float64*, Win32cr::Foundation::HRESULT),
@@ -14265,7 +14420,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeDateArray, lpVtbl : ICertEncodeDateArrayVtbl* do
+  record ICertEncodeDateArray, lpVtbl : ICertEncodeDateArrayVtable* do
     GUID = LibC::GUID.new(0x2f9469a0_u32, 0xa470_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x21_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertEncodeDateArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14285,8 +14440,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeDateArray*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeDateArray*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeDateArray*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeDateArray*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14310,14 +14465,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeDateArray2Vtbl,
+
+  record ICertEncodeDateArray2Vtable,
     query_interface : Proc(ICertEncodeDateArray2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeDateArray2*, UInt32),
     release : Proc(ICertEncodeDateArray2*, UInt32),
     get_type_info_count : Proc(ICertEncodeDateArray2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeDateArray2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeDateArray2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeDateArray2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeDateArray2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeDateArray2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_count : Proc(ICertEncodeDateArray2*, Int32*, Win32cr::Foundation::HRESULT),
     get_value : Proc(ICertEncodeDateArray2*, Int32, Float64*, Win32cr::Foundation::HRESULT),
@@ -14329,7 +14485,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeDateArray2, lpVtbl : ICertEncodeDateArray2Vtbl* do
+  record ICertEncodeDateArray2, lpVtbl : ICertEncodeDateArray2Vtable* do
     GUID = LibC::GUID.new(0x99a4edb5_u32, 0x2b8e_u16, 0x448d_u16, StaticArray[0xbf_u8, 0x95_u8, 0xbb_u8, 0xa8_u8, 0xd7_u8, 0x78_u8, 0x9d_u8, 0xc8_u8])
     def query_interface(this : ICertEncodeDateArray2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14349,8 +14505,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeDateArray2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeDateArray2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeDateArray2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeDateArray2*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14380,14 +14536,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeCRLDistInfoVtbl,
+
+  record ICertEncodeCRLDistInfoVtable,
     query_interface : Proc(ICertEncodeCRLDistInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeCRLDistInfo*, UInt32),
     release : Proc(ICertEncodeCRLDistInfo*, UInt32),
     get_type_info_count : Proc(ICertEncodeCRLDistInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeCRLDistInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeCRLDistInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeCRLDistInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeCRLDistInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeCRLDistInfo*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_dist_point_count : Proc(ICertEncodeCRLDistInfo*, Int32*, Win32cr::Foundation::HRESULT),
     get_name_count : Proc(ICertEncodeCRLDistInfo*, Int32, Int32*, Win32cr::Foundation::HRESULT),
@@ -14400,7 +14557,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeCRLDistInfo, lpVtbl : ICertEncodeCRLDistInfoVtbl* do
+  record ICertEncodeCRLDistInfo, lpVtbl : ICertEncodeCRLDistInfoVtable* do
     GUID = LibC::GUID.new(0x1958640_u32, 0xbbff_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x25_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertEncodeCRLDistInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14420,8 +14577,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeCRLDistInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeCRLDistInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeCRLDistInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeCRLDistInfo*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14454,14 +14611,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeCRLDistInfo2Vtbl,
+
+  record ICertEncodeCRLDistInfo2Vtable,
     query_interface : Proc(ICertEncodeCRLDistInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeCRLDistInfo2*, UInt32),
     release : Proc(ICertEncodeCRLDistInfo2*, UInt32),
     get_type_info_count : Proc(ICertEncodeCRLDistInfo2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeCRLDistInfo2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeCRLDistInfo2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeCRLDistInfo2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeCRLDistInfo2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeCRLDistInfo2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_dist_point_count : Proc(ICertEncodeCRLDistInfo2*, Int32*, Win32cr::Foundation::HRESULT),
     get_name_count : Proc(ICertEncodeCRLDistInfo2*, Int32, Int32*, Win32cr::Foundation::HRESULT),
@@ -14476,7 +14634,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeCRLDistInfo2, lpVtbl : ICertEncodeCRLDistInfo2Vtbl* do
+  record ICertEncodeCRLDistInfo2, lpVtbl : ICertEncodeCRLDistInfo2Vtable* do
     GUID = LibC::GUID.new(0xb4275d4b_u32, 0x3e30_u16, 0x446f_u16, StaticArray[0xad_u8, 0x36_u8, 0x9_u8, 0xd0_u8, 0x31_u8, 0x20_u8, 0xb0_u8, 0x78_u8])
     def query_interface(this : ICertEncodeCRLDistInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14496,8 +14654,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeCRLDistInfo2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeCRLDistInfo2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeCRLDistInfo2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeCRLDistInfo2*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14536,14 +14694,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeAltNameVtbl,
+
+  record ICertEncodeAltNameVtable,
     query_interface : Proc(ICertEncodeAltName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeAltName*, UInt32),
     release : Proc(ICertEncodeAltName*, UInt32),
     get_type_info_count : Proc(ICertEncodeAltName*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeAltName*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeAltName*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeAltName*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeAltName*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeAltName*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_name_count : Proc(ICertEncodeAltName*, Int32*, Win32cr::Foundation::HRESULT),
     get_name_choice : Proc(ICertEncodeAltName*, Int32, Int32*, Win32cr::Foundation::HRESULT),
@@ -14554,7 +14713,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeAltName, lpVtbl : ICertEncodeAltNameVtbl* do
+  record ICertEncodeAltName, lpVtbl : ICertEncodeAltNameVtable* do
     GUID = LibC::GUID.new(0x1c9a8c70_u32, 0x1271_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : ICertEncodeAltName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14574,8 +14733,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeAltName*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeAltName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeAltName*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeAltName*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14602,14 +14761,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeAltName2Vtbl,
+
+  record ICertEncodeAltName2Vtable,
     query_interface : Proc(ICertEncodeAltName2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeAltName2*, UInt32),
     release : Proc(ICertEncodeAltName2*, UInt32),
     get_type_info_count : Proc(ICertEncodeAltName2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeAltName2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeAltName2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeAltName2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeAltName2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeAltName2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_name_count : Proc(ICertEncodeAltName2*, Int32*, Win32cr::Foundation::HRESULT),
     get_name_choice : Proc(ICertEncodeAltName2*, Int32, Int32*, Win32cr::Foundation::HRESULT),
@@ -14624,7 +14784,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeAltName2, lpVtbl : ICertEncodeAltName2Vtbl* do
+  record ICertEncodeAltName2, lpVtbl : ICertEncodeAltName2Vtable* do
     GUID = LibC::GUID.new(0xf67fe177_u32, 0x5ef1_u16, 0x4535_u16, StaticArray[0xb4_u8, 0xce_u8, 0x29_u8, 0xdf_u8, 0x15_u8, 0xe2_u8, 0xe0_u8, 0xc3_u8])
     def query_interface(this : ICertEncodeAltName2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14644,8 +14804,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeAltName2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeAltName2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeAltName2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeAltName2*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14684,14 +14844,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeBitStringVtbl,
+
+  record ICertEncodeBitStringVtable,
     query_interface : Proc(ICertEncodeBitString*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeBitString*, UInt32),
     release : Proc(ICertEncodeBitString*, UInt32),
     get_type_info_count : Proc(ICertEncodeBitString*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeBitString*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeBitString*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeBitString*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeBitString*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeBitString*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_bit_count : Proc(ICertEncodeBitString*, Int32*, Win32cr::Foundation::HRESULT),
     get_bit_string : Proc(ICertEncodeBitString*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -14699,7 +14860,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeBitString, lpVtbl : ICertEncodeBitStringVtbl* do
+  record ICertEncodeBitString, lpVtbl : ICertEncodeBitStringVtable* do
     GUID = LibC::GUID.new(0x6db525be_u32, 0x1278_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : ICertEncodeBitString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14719,8 +14880,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeBitString*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeBitString*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeBitString*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeBitString*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14738,14 +14899,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeBitString2Vtbl,
+
+  record ICertEncodeBitString2Vtable,
     query_interface : Proc(ICertEncodeBitString2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeBitString2*, UInt32),
     release : Proc(ICertEncodeBitString2*, UInt32),
     get_type_info_count : Proc(ICertEncodeBitString2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertEncodeBitString2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertEncodeBitString2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertEncodeBitString2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertEncodeBitString2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     decode : Proc(ICertEncodeBitString2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_bit_count : Proc(ICertEncodeBitString2*, Int32*, Win32cr::Foundation::HRESULT),
     get_bit_string : Proc(ICertEncodeBitString2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -14756,7 +14918,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeBitString2, lpVtbl : ICertEncodeBitString2Vtbl* do
+  record ICertEncodeBitString2, lpVtbl : ICertEncodeBitString2Vtable* do
     GUID = LibC::GUID.new(0xe070d6e7_u32, 0x23ef_u16, 0x4dd2_u16, StaticArray[0x82_u8, 0x42_u8, 0xeb_u8, 0xd9_u8, 0xc9_u8, 0x28_u8, 0xcb_u8, 0x30_u8])
     def query_interface(this : ICertEncodeBitString2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14776,8 +14938,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertEncodeBitString2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertEncodeBitString2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertEncodeBitString2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def decode(this : ICertEncodeBitString2*, strBinary : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.decode.call(this, strBinary)
@@ -14804,21 +14966,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertExitVtbl,
+
+  record ICertExitVtable,
     query_interface : Proc(ICertExit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertExit*, UInt32),
     release : Proc(ICertExit*, UInt32),
     get_type_info_count : Proc(ICertExit*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertExit*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertExit*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertExit*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertExit*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertExit*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_EXIT_EVENT_MASK*, Win32cr::Foundation::HRESULT),
     notify : Proc(ICertExit*, Int32, Int32, Win32cr::Foundation::HRESULT),
     get_description : Proc(ICertExit*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertExit, lpVtbl : ICertExitVtbl* do
+  record ICertExit, lpVtbl : ICertExitVtable* do
     GUID = LibC::GUID.new(0xe19ae1a0_u32, 0x7364_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertExit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14838,8 +15001,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertExit*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertExit*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertExit*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ICertExit*, strConfig : Win32cr::Foundation::BSTR, pEventMask : Win32cr::Security::Cryptography::Certificates::CERT_EXIT_EVENT_MASK*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, strConfig, pEventMask)
@@ -14854,14 +15017,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertExit2Vtbl,
+
+  record ICertExit2Vtable,
     query_interface : Proc(ICertExit2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertExit2*, UInt32),
     release : Proc(ICertExit2*, UInt32),
     get_type_info_count : Proc(ICertExit2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertExit2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertExit2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertExit2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertExit2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     initialize__ : Proc(ICertExit2*, Win32cr::Foundation::BSTR, Win32cr::Security::Cryptography::Certificates::CERT_EXIT_EVENT_MASK*, Win32cr::Foundation::HRESULT),
     notify : Proc(ICertExit2*, Int32, Int32, Win32cr::Foundation::HRESULT),
     get_description : Proc(ICertExit2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -14869,7 +15033,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertExit2, lpVtbl : ICertExit2Vtbl* do
+  record ICertExit2, lpVtbl : ICertExit2Vtable* do
     GUID = LibC::GUID.new(0xabf484b_u32, 0xd049_u16, 0x464d_u16, StaticArray[0xa7_u8, 0xed_u8, 0x55_u8, 0x2e_u8, 0x75_u8, 0x29_u8, 0xb0_u8, 0xff_u8])
     def query_interface(this : ICertExit2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14889,8 +15053,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICertExit2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertExit2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertExit2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def initialize__(this : ICertExit2*, strConfig : Win32cr::Foundation::BSTR, pEventMask : Win32cr::Security::Cryptography::Certificates::CERT_EXIT_EVENT_MASK*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, strConfig, pEventMask)
@@ -14908,14 +15072,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICEnrollVtbl,
+
+  record ICEnrollVtable,
     query_interface : Proc(ICEnroll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICEnroll*, UInt32),
     release : Proc(ICEnroll*, UInt32),
     get_type_info_count : Proc(ICEnroll*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICEnroll*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICEnroll*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICEnroll*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICEnroll*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     createFilePKCS10 : Proc(ICEnroll*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     acceptFilePKCS7 : Proc(ICEnroll*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     createPKCS10 : Proc(ICEnroll*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -14975,7 +15140,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICEnroll, lpVtbl : ICEnrollVtbl* do
+  record ICEnroll, lpVtbl : ICEnrollVtable* do
     GUID = LibC::GUID.new(0x43f8f288_u32, 0x7a20_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0x6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xe1_u8])
     def query_interface(this : ICEnroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14995,8 +15160,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICEnroll*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICEnroll*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICEnroll*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def createFilePKCS10(this : ICEnroll*, dn_name : Win32cr::Foundation::BSTR, usage : Win32cr::Foundation::BSTR, wszPKCS10FileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createFilePKCS10.call(this, dn_name, usage, wszPKCS10FileName)
@@ -15170,14 +15335,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICEnroll2Vtbl,
+
+  record ICEnroll2Vtable,
     query_interface : Proc(ICEnroll2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICEnroll2*, UInt32),
     release : Proc(ICEnroll2*, UInt32),
     get_type_info_count : Proc(ICEnroll2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICEnroll2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICEnroll2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICEnroll2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICEnroll2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     createFilePKCS10 : Proc(ICEnroll2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     acceptFilePKCS7 : Proc(ICEnroll2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     createPKCS10 : Proc(ICEnroll2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -15243,7 +15409,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICEnroll2, lpVtbl : ICEnroll2Vtbl* do
+  record ICEnroll2, lpVtbl : ICEnroll2Vtable* do
     GUID = LibC::GUID.new(0x704ca730_u32, 0xc90b_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xec_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xe1_u8])
     def query_interface(this : ICEnroll2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15263,8 +15429,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICEnroll2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICEnroll2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICEnroll2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def createFilePKCS10(this : ICEnroll2*, dn_name : Win32cr::Foundation::BSTR, usage : Win32cr::Foundation::BSTR, wszPKCS10FileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createFilePKCS10.call(this, dn_name, usage, wszPKCS10FileName)
@@ -15456,14 +15622,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICEnroll3Vtbl,
+
+  record ICEnroll3Vtable,
     query_interface : Proc(ICEnroll3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICEnroll3*, UInt32),
     release : Proc(ICEnroll3*, UInt32),
     get_type_info_count : Proc(ICEnroll3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICEnroll3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICEnroll3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICEnroll3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICEnroll3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     createFilePKCS10 : Proc(ICEnroll3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     acceptFilePKCS7 : Proc(ICEnroll3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     createPKCS10 : Proc(ICEnroll3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -15543,7 +15710,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICEnroll3, lpVtbl : ICEnroll3Vtbl* do
+  record ICEnroll3, lpVtbl : ICEnroll3Vtable* do
     GUID = LibC::GUID.new(0xc28c2d95_u32, 0xb7de_u16, 0x11d2_u16, StaticArray[0xa4_u8, 0x21_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfe_u8, 0x8e_u8])
     def query_interface(this : ICEnroll3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15563,8 +15730,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICEnroll3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICEnroll3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICEnroll3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def createFilePKCS10(this : ICEnroll3*, dn_name : Win32cr::Foundation::BSTR, usage : Win32cr::Foundation::BSTR, wszPKCS10FileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createFilePKCS10.call(this, dn_name, usage, wszPKCS10FileName)
@@ -15798,14 +15965,15 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICEnroll4Vtbl,
+
+  record ICEnroll4Vtable,
     query_interface : Proc(ICEnroll4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICEnroll4*, UInt32),
     release : Proc(ICEnroll4*, UInt32),
     get_type_info_count : Proc(ICEnroll4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICEnroll4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICEnroll4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICEnroll4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICEnroll4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     createFilePKCS10 : Proc(ICEnroll4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     acceptFilePKCS7 : Proc(ICEnroll4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     createPKCS10 : Proc(ICEnroll4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -15902,7 +16070,7 @@ module Win32cr::Security::Cryptography::Certificates
     createPFX : Proc(ICEnroll4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     createFilePFX : Proc(ICEnroll4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     setPendingRequestInfo : Proc(ICEnroll4*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    enumPendingRequest : Proc(ICEnroll4*, Int32, Win32cr::Security::Cryptography::Certificates::PENDING_REQUEST_DESIRED_PROPERTY, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    enumPendingRequest : Proc(ICEnroll4*, Int32, Win32cr::Security::Cryptography::Certificates::PENDING_REQUEST_DESIRED_PROPERTY, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     removePendingRequest : Proc(ICEnroll4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_key_len_ex : Proc(ICEnroll4*, Win32cr::Security::Cryptography::Certificates::XEKL_KEYSIZE, Win32cr::Security::Cryptography::Certificates::XEKL_KEYSPEC, Int32*, Win32cr::Foundation::HRESULT),
     install_pkcs7_ex : Proc(ICEnroll4*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::HRESULT),
@@ -15918,7 +16086,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICEnroll4, lpVtbl : ICEnroll4Vtbl* do
+  record ICEnroll4, lpVtbl : ICEnroll4Vtable* do
     GUID = LibC::GUID.new(0xc1f1188a_u32, 0x2eb5_u16, 0x4a80_u16, StaticArray[0x84_u8, 0x1b_u8, 0x7e_u8, 0x72_u8, 0x9a_u8, 0x35_u8, 0x6d_u8, 0x90_u8])
     def query_interface(this : ICEnroll4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15938,8 +16106,8 @@ module Win32cr::Security::Cryptography::Certificates
     def get_i_ds_of_names(this : ICEnroll4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICEnroll4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICEnroll4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def createFilePKCS10(this : ICEnroll4*, dn_name : Win32cr::Foundation::BSTR, usage : Win32cr::Foundation::BSTR, wszPKCS10FileName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createFilePKCS10.call(this, dn_name, usage, wszPKCS10FileName)
@@ -16229,7 +16397,7 @@ module Win32cr::Security::Cryptography::Certificates
     def setPendingRequestInfo(this : ICEnroll4*, lRequestID : Int32, strCADNS : Win32cr::Foundation::BSTR, strCAName : Win32cr::Foundation::BSTR, strFriendlyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setPendingRequestInfo.call(this, lRequestID, strCADNS, strCAName, strFriendlyName)
     end
-    def enumPendingRequest(this : ICEnroll4*, lIndex : Int32, lDesiredProperty : Win32cr::Security::Cryptography::Certificates::PENDING_REQUEST_DESIRED_PROPERTY, pvarProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def enumPendingRequest(this : ICEnroll4*, lIndex : Int32, lDesiredProperty : Win32cr::Security::Cryptography::Certificates::PENDING_REQUEST_DESIRED_PROPERTY, pvarProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumPendingRequest.call(this, lIndex, lDesiredProperty, pvarProperty)
     end
     def removePendingRequest(this : ICEnroll4*, strThumbprint : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -16272,21 +16440,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnrollVtbl,
+
+  record IEnrollVtable,
     query_interface : Proc(IEnroll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnroll*, UInt32),
     release : Proc(IEnroll*, UInt32),
     createFilePKCS10WStr : Proc(IEnroll*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     acceptFilePKCS7WStr : Proc(IEnroll*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    createPKCS10WStr : Proc(IEnroll*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    acceptPKCS7Blob : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    getCertContextFromPKCS7 : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*),
+    createPKCS10WStr : Proc(IEnroll*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    acceptPKCS7Blob : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    getCertContextFromPKCS7 : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*),
     getMyStore : Proc(IEnroll*, Win32cr::Security::Cryptography::HCERTSTORE),
     getCAStore : Proc(IEnroll*, Win32cr::Security::Cryptography::HCERTSTORE),
     getROOTHStore : Proc(IEnroll*, Win32cr::Security::Cryptography::HCERTSTORE),
     enumProvidersWStr : Proc(IEnroll*, Int32, Int32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
     enumContainersWStr : Proc(IEnroll*, Int32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
-    freeRequestInfoBlob : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, Win32cr::Foundation::HRESULT),
+    freeRequestInfoBlob : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, Win32cr::Foundation::HRESULT),
     get_MyStoreNameWStr : Proc(IEnroll*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
     put_MyStoreNameWStr : Proc(IEnroll*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     get_MyStoreTypeWStr : Proc(IEnroll*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
@@ -16345,11 +16514,11 @@ module Win32cr::Security::Cryptography::Certificates
     add_name_value_pair_to_signature_w_str : Proc(IEnroll*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     add_extensions_to_request : Proc(IEnroll*, Win32cr::Security::Cryptography::CERT_EXTENSIONS*, Win32cr::Foundation::HRESULT),
     add_authenticated_attributes_to_pkcs7_request : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, Win32cr::Foundation::HRESULT),
-    create_pkcs7_request_from_request : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT)
+    create_pkcs7_request_from_request : Proc(IEnroll*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IEnroll, lpVtbl : IEnrollVtbl* do
+  record IEnroll, lpVtbl : IEnrollVtable* do
     GUID = LibC::GUID.new(0xacaa7838_u32, 0x4585_u16, 0x11d1_u16, StaticArray[0xab_u8, 0x57_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xe1_u8])
     def query_interface(this : IEnroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16366,13 +16535,13 @@ module Win32cr::Security::Cryptography::Certificates
     def acceptFilePKCS7WStr(this : IEnroll*, wszPKCS7FileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.acceptFilePKCS7WStr.call(this, wszPKCS7FileName)
     end
-    def createPKCS10WStr(this : IEnroll*, dn_name : Win32cr::Foundation::PWSTR, usage : Win32cr::Foundation::PWSTR, pPkcs10Blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def createPKCS10WStr(this : IEnroll*, dn_name : Win32cr::Foundation::PWSTR, usage : Win32cr::Foundation::PWSTR, pPkcs10Blob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createPKCS10WStr.call(this, dn_name, usage, pPkcs10Blob)
     end
-    def acceptPKCS7Blob(this : IEnroll*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def acceptPKCS7Blob(this : IEnroll*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.acceptPKCS7Blob.call(this, pBlobPKCS7)
     end
-    def getCertContextFromPKCS7(this : IEnroll*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    def getCertContextFromPKCS7(this : IEnroll*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
       @lpVtbl.try &.value.getCertContextFromPKCS7.call(this, pBlobPKCS7)
     end
     def getMyStore(this : IEnroll*) : Win32cr::Security::Cryptography::HCERTSTORE
@@ -16390,7 +16559,7 @@ module Win32cr::Security::Cryptography::Certificates
     def enumContainersWStr(this : IEnroll*, dwIndex : Int32, pbstr : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumContainersWStr.call(this, dwIndex, pbstr)
     end
-    def freeRequestInfoBlob(this : IEnroll*, pkcs7OrPkcs10 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB) : Win32cr::Foundation::HRESULT
+    def freeRequestInfoBlob(this : IEnroll*, pkcs7OrPkcs10 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.freeRequestInfoBlob.call(this, pkcs7OrPkcs10)
     end
     def get_MyStoreNameWStr(this : IEnroll*, szwName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
@@ -16567,28 +16736,29 @@ module Win32cr::Security::Cryptography::Certificates
     def add_authenticated_attributes_to_pkcs7_request(this : IEnroll*, pAttributes : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_authenticated_attributes_to_pkcs7_request.call(this, pAttributes)
     end
-    def create_pkcs7_request_from_request(this : IEnroll*, pRequest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pSigningCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPkcs7Blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def create_pkcs7_request_from_request(this : IEnroll*, pRequest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pSigningCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPkcs7Blob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_pkcs7_request_from_request.call(this, pRequest, pSigningCertContext, pPkcs7Blob)
     end
 
   end
 
   @[Extern]
-  record IEnroll2Vtbl,
+
+  record IEnroll2Vtable,
     query_interface : Proc(IEnroll2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnroll2*, UInt32),
     release : Proc(IEnroll2*, UInt32),
     createFilePKCS10WStr : Proc(IEnroll2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     acceptFilePKCS7WStr : Proc(IEnroll2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    createPKCS10WStr : Proc(IEnroll2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    acceptPKCS7Blob : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    getCertContextFromPKCS7 : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*),
+    createPKCS10WStr : Proc(IEnroll2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    acceptPKCS7Blob : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    getCertContextFromPKCS7 : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*),
     getMyStore : Proc(IEnroll2*, Win32cr::Security::Cryptography::HCERTSTORE),
     getCAStore : Proc(IEnroll2*, Win32cr::Security::Cryptography::HCERTSTORE),
     getROOTHStore : Proc(IEnroll2*, Win32cr::Security::Cryptography::HCERTSTORE),
     enumProvidersWStr : Proc(IEnroll2*, Int32, Int32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
     enumContainersWStr : Proc(IEnroll2*, Int32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
-    freeRequestInfoBlob : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, Win32cr::Foundation::HRESULT),
+    freeRequestInfoBlob : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, Win32cr::Foundation::HRESULT),
     get_MyStoreNameWStr : Proc(IEnroll2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
     put_MyStoreNameWStr : Proc(IEnroll2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     get_MyStoreTypeWStr : Proc(IEnroll2*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
@@ -16647,8 +16817,8 @@ module Win32cr::Security::Cryptography::Certificates
     add_name_value_pair_to_signature_w_str : Proc(IEnroll2*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     add_extensions_to_request : Proc(IEnroll2*, Win32cr::Security::Cryptography::CERT_EXTENSIONS*, Win32cr::Foundation::HRESULT),
     add_authenticated_attributes_to_pkcs7_request : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, Win32cr::Foundation::HRESULT),
-    create_pkcs7_request_from_request : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    install_pkcs7_blob : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
+    create_pkcs7_request_from_request : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    install_pkcs7_blob : Proc(IEnroll2*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
     reset : Proc(IEnroll2*, Win32cr::Foundation::HRESULT),
     get_supported_key_spec : Proc(IEnroll2*, Int32*, Win32cr::Foundation::HRESULT),
     get_key_len : Proc(IEnroll2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Int32*, Win32cr::Foundation::HRESULT),
@@ -16669,7 +16839,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnroll2, lpVtbl : IEnroll2Vtbl* do
+  record IEnroll2, lpVtbl : IEnroll2Vtable* do
     GUID = LibC::GUID.new(0xc080e199_u32, 0xb7df_u16, 0x11d2_u16, StaticArray[0xa4_u8, 0x21_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfe_u8, 0x8e_u8])
     def query_interface(this : IEnroll2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16686,13 +16856,13 @@ module Win32cr::Security::Cryptography::Certificates
     def acceptFilePKCS7WStr(this : IEnroll2*, wszPKCS7FileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.acceptFilePKCS7WStr.call(this, wszPKCS7FileName)
     end
-    def createPKCS10WStr(this : IEnroll2*, dn_name : Win32cr::Foundation::PWSTR, usage : Win32cr::Foundation::PWSTR, pPkcs10Blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def createPKCS10WStr(this : IEnroll2*, dn_name : Win32cr::Foundation::PWSTR, usage : Win32cr::Foundation::PWSTR, pPkcs10Blob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createPKCS10WStr.call(this, dn_name, usage, pPkcs10Blob)
     end
-    def acceptPKCS7Blob(this : IEnroll2*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def acceptPKCS7Blob(this : IEnroll2*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.acceptPKCS7Blob.call(this, pBlobPKCS7)
     end
-    def getCertContextFromPKCS7(this : IEnroll2*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    def getCertContextFromPKCS7(this : IEnroll2*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
       @lpVtbl.try &.value.getCertContextFromPKCS7.call(this, pBlobPKCS7)
     end
     def getMyStore(this : IEnroll2*) : Win32cr::Security::Cryptography::HCERTSTORE
@@ -16710,7 +16880,7 @@ module Win32cr::Security::Cryptography::Certificates
     def enumContainersWStr(this : IEnroll2*, dwIndex : Int32, pbstr : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumContainersWStr.call(this, dwIndex, pbstr)
     end
-    def freeRequestInfoBlob(this : IEnroll2*, pkcs7OrPkcs10 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB) : Win32cr::Foundation::HRESULT
+    def freeRequestInfoBlob(this : IEnroll2*, pkcs7OrPkcs10 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.freeRequestInfoBlob.call(this, pkcs7OrPkcs10)
     end
     def get_MyStoreNameWStr(this : IEnroll2*, szwName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
@@ -16887,10 +17057,10 @@ module Win32cr::Security::Cryptography::Certificates
     def add_authenticated_attributes_to_pkcs7_request(this : IEnroll2*, pAttributes : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_authenticated_attributes_to_pkcs7_request.call(this, pAttributes)
     end
-    def create_pkcs7_request_from_request(this : IEnroll2*, pRequest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pSigningCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPkcs7Blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def create_pkcs7_request_from_request(this : IEnroll2*, pRequest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pSigningCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPkcs7Blob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_pkcs7_request_from_request.call(this, pRequest, pSigningCertContext, pPkcs7Blob)
     end
-    def install_pkcs7_blob(this : IEnroll2*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def install_pkcs7_blob(this : IEnroll2*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install_pkcs7_blob.call(this, pBlobPKCS7)
     end
     def reset(this : IEnroll2*) : Win32cr::Foundation::HRESULT
@@ -16948,21 +17118,22 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnroll4Vtbl,
+
+  record IEnroll4Vtable,
     query_interface : Proc(IEnroll4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnroll4*, UInt32),
     release : Proc(IEnroll4*, UInt32),
     createFilePKCS10WStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     acceptFilePKCS7WStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    createPKCS10WStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    acceptPKCS7Blob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    getCertContextFromPKCS7 : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*),
+    createPKCS10WStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    acceptPKCS7Blob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    getCertContextFromPKCS7 : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*),
     getMyStore : Proc(IEnroll4*, Win32cr::Security::Cryptography::HCERTSTORE),
     getCAStore : Proc(IEnroll4*, Win32cr::Security::Cryptography::HCERTSTORE),
     getROOTHStore : Proc(IEnroll4*, Win32cr::Security::Cryptography::HCERTSTORE),
     enumProvidersWStr : Proc(IEnroll4*, Int32, Int32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
     enumContainersWStr : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
-    freeRequestInfoBlob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, Win32cr::Foundation::HRESULT),
+    freeRequestInfoBlob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, Win32cr::Foundation::HRESULT),
     get_MyStoreNameWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
     put_MyStoreNameWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     get_MyStoreTypeWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
@@ -17021,8 +17192,8 @@ module Win32cr::Security::Cryptography::Certificates
     add_name_value_pair_to_signature_w_str : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     add_extensions_to_request : Proc(IEnroll4*, Win32cr::Security::Cryptography::CERT_EXTENSIONS*, Win32cr::Foundation::HRESULT),
     add_authenticated_attributes_to_pkcs7_request : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, Win32cr::Foundation::HRESULT),
-    create_pkcs7_request_from_request : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    install_pkcs7_blob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
+    create_pkcs7_request_from_request : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    install_pkcs7_blob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
     reset : Proc(IEnroll4*, Win32cr::Foundation::HRESULT),
     get_supported_key_spec : Proc(IEnroll4*, Int32*, Win32cr::Foundation::HRESULT),
     get_key_len : Proc(IEnroll4*, Win32cr::Foundation::BOOL, Win32cr::Foundation::BOOL, Int32*, Win32cr::Foundation::HRESULT),
@@ -17040,33 +17211,33 @@ module Win32cr::Security::Cryptography::Certificates
     get_LimitExchangeKeyToEncipherment : Proc(IEnroll4*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_EnableSMIMECapabilities : Proc(IEnroll4*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_EnableSMIMECapabilities : Proc(IEnroll4*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    put_ThumbPrintWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, Win32cr::Foundation::HRESULT),
-    get_ThumbPrintWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
+    put_ThumbPrintWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, Win32cr::Foundation::HRESULT),
+    get_ThumbPrintWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
     set_private_key_archive_certificate : Proc(IEnroll4*, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Foundation::HRESULT),
     get_private_key_archive_certificate : Proc(IEnroll4*, Win32cr::Security::Cryptography::CERT_CONTEXT*),
-    binaryBlobToString : Proc(IEnroll4*, Int32, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
-    stringToBinaryBlob : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Int32*, Int32*, Win32cr::Foundation::HRESULT),
-    addExtensionToRequestWStr : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
-    addAttributeToRequestWStr : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
+    binaryBlobToString : Proc(IEnroll4*, Int32, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::HRESULT),
+    stringToBinaryBlob : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Int32*, Int32*, Win32cr::Foundation::HRESULT),
+    addExtensionToRequestWStr : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
+    addAttributeToRequestWStr : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
     addNameValuePairToRequestWStr : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     resetExtensions : Proc(IEnroll4*, Win32cr::Foundation::HRESULT),
     resetAttributes : Proc(IEnroll4*, Win32cr::Foundation::HRESULT),
-    createRequestWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::Certificates::CERT_CREATE_REQUEST_FLAGS, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
+    createRequestWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::Certificates::CERT_CREATE_REQUEST_FLAGS, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
     createFileRequestWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::Certificates::CERT_CREATE_REQUEST_FLAGS, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    acceptResponseBlob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
+    acceptResponseBlob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
     acceptFileResponseWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    getCertContextFromResponseBlob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::HRESULT),
+    getCertContextFromResponseBlob : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::HRESULT),
     getCertContextFromFileResponseWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Foundation::HRESULT),
-    createPFXWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
+    createPFXWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
     createFilePFXWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     setPendingRequestInfoWStr : Proc(IEnroll4*, Int32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     enumPendingRequestWStr : Proc(IEnroll4*, Int32, Win32cr::Security::Cryptography::Certificates::PENDING_REQUEST_DESIRED_PROPERTY, Void*, Win32cr::Foundation::HRESULT),
-    removePendingRequestWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, Win32cr::Foundation::HRESULT),
+    removePendingRequestWStr : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, Win32cr::Foundation::HRESULT),
     get_key_len_ex : Proc(IEnroll4*, Win32cr::Security::Cryptography::Certificates::XEKL_KEYSIZE, Win32cr::Security::Cryptography::Certificates::XEKL_KEYSPEC, Int32*, Win32cr::Foundation::HRESULT),
-    install_pkcs7_blob_ex : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Int32*, Win32cr::Foundation::HRESULT),
+    install_pkcs7_blob_ex : Proc(IEnroll4*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Int32*, Win32cr::Foundation::HRESULT),
     add_cert_type_to_request_w_str_ex : Proc(IEnroll4*, Win32cr::Security::Cryptography::Certificates::ADDED_CERT_TYPE, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::BOOL, Int32, Win32cr::Foundation::HRESULT),
     getProviderTypeWStr : Proc(IEnroll4*, Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::HRESULT),
-    addBlobPropertyToCertificateWStr : Proc(IEnroll4*, Int32, Int32, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Win32cr::Foundation::HRESULT),
+    addBlobPropertyToCertificateWStr : Proc(IEnroll4*, Int32, Int32, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT),
     set_signer_certificate : Proc(IEnroll4*, Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Foundation::HRESULT),
     put_ClientId : Proc(IEnroll4*, Int32, Win32cr::Foundation::HRESULT),
     get_ClientId : Proc(IEnroll4*, Int32*, Win32cr::Foundation::HRESULT),
@@ -17075,7 +17246,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnroll4, lpVtbl : IEnroll4Vtbl* do
+  record IEnroll4, lpVtbl : IEnroll4Vtable* do
     GUID = LibC::GUID.new(0xf8053fe5_u32, 0x78f4_u16, 0x448f_u16, StaticArray[0xa0_u8, 0xdb_u8, 0x41_u8, 0xd6_u8, 0x1b_u8, 0x73_u8, 0x44_u8, 0x6b_u8])
     def query_interface(this : IEnroll4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17092,13 +17263,13 @@ module Win32cr::Security::Cryptography::Certificates
     def acceptFilePKCS7WStr(this : IEnroll4*, wszPKCS7FileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.acceptFilePKCS7WStr.call(this, wszPKCS7FileName)
     end
-    def createPKCS10WStr(this : IEnroll4*, dn_name : Win32cr::Foundation::PWSTR, usage : Win32cr::Foundation::PWSTR, pPkcs10Blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def createPKCS10WStr(this : IEnroll4*, dn_name : Win32cr::Foundation::PWSTR, usage : Win32cr::Foundation::PWSTR, pPkcs10Blob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createPKCS10WStr.call(this, dn_name, usage, pPkcs10Blob)
     end
-    def acceptPKCS7Blob(this : IEnroll4*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def acceptPKCS7Blob(this : IEnroll4*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.acceptPKCS7Blob.call(this, pBlobPKCS7)
     end
-    def getCertContextFromPKCS7(this : IEnroll4*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    def getCertContextFromPKCS7(this : IEnroll4*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
       @lpVtbl.try &.value.getCertContextFromPKCS7.call(this, pBlobPKCS7)
     end
     def getMyStore(this : IEnroll4*) : Win32cr::Security::Cryptography::HCERTSTORE
@@ -17116,7 +17287,7 @@ module Win32cr::Security::Cryptography::Certificates
     def enumContainersWStr(this : IEnroll4*, dwIndex : Int32, pbstr : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumContainersWStr.call(this, dwIndex, pbstr)
     end
-    def freeRequestInfoBlob(this : IEnroll4*, pkcs7OrPkcs10 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB) : Win32cr::Foundation::HRESULT
+    def freeRequestInfoBlob(this : IEnroll4*, pkcs7OrPkcs10 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.freeRequestInfoBlob.call(this, pkcs7OrPkcs10)
     end
     def get_MyStoreNameWStr(this : IEnroll4*, szwName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
@@ -17293,10 +17464,10 @@ module Win32cr::Security::Cryptography::Certificates
     def add_authenticated_attributes_to_pkcs7_request(this : IEnroll4*, pAttributes : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_authenticated_attributes_to_pkcs7_request.call(this, pAttributes)
     end
-    def create_pkcs7_request_from_request(this : IEnroll4*, pRequest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pSigningCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPkcs7Blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def create_pkcs7_request_from_request(this : IEnroll4*, pRequest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pSigningCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPkcs7Blob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_pkcs7_request_from_request.call(this, pRequest, pSigningCertContext, pPkcs7Blob)
     end
-    def install_pkcs7_blob(this : IEnroll4*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def install_pkcs7_blob(this : IEnroll4*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install_pkcs7_blob.call(this, pBlobPKCS7)
     end
     def reset(this : IEnroll4*) : Win32cr::Foundation::HRESULT
@@ -17350,10 +17521,10 @@ module Win32cr::Security::Cryptography::Certificates
     def get_EnableSMIMECapabilities(this : IEnroll4*, fEnableSMIMECapabilities : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EnableSMIMECapabilities.call(this, fEnableSMIMECapabilities)
     end
-    def put_ThumbPrintWStr(this : IEnroll4*, thumbPrintBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB) : Win32cr::Foundation::HRESULT
+    def put_ThumbPrintWStr(this : IEnroll4*, thumbPrintBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ThumbPrintWStr.call(this, thumbPrintBlob)
     end
-    def get_ThumbPrintWStr(this : IEnroll4*, thumbPrintBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def get_ThumbPrintWStr(this : IEnroll4*, thumbPrintBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ThumbPrintWStr.call(this, thumbPrintBlob)
     end
     def set_private_key_archive_certificate(this : IEnroll4*, pPrivateKeyArchiveCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::HRESULT
@@ -17362,16 +17533,16 @@ module Win32cr::Security::Cryptography::Certificates
     def get_private_key_archive_certificate(this : IEnroll4*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
       @lpVtbl.try &.value.get_private_key_archive_certificate.call(this)
     end
-    def binaryBlobToString(this : IEnroll4*, flags : Int32, pblobBinary : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, ppwszString : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    def binaryBlobToString(this : IEnroll4*, flags : Int32, pblobBinary : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, ppwszString : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.binaryBlobToString.call(this, flags, pblobBinary, ppwszString)
     end
-    def stringToBinaryBlob(this : IEnroll4*, flags : Int32, pwszString : Win32cr::Foundation::PWSTR, pblobBinary : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pdwSkip : Int32*, pdwFlags : Int32*) : Win32cr::Foundation::HRESULT
+    def stringToBinaryBlob(this : IEnroll4*, flags : Int32, pwszString : Win32cr::Foundation::PWSTR, pblobBinary : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pdwSkip : Int32*, pdwFlags : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.stringToBinaryBlob.call(this, flags, pwszString, pblobBinary, pdwSkip, pdwFlags)
     end
-    def addExtensionToRequestWStr(this : IEnroll4*, flags : Int32, pwszName : Win32cr::Foundation::PWSTR, pblobValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def addExtensionToRequestWStr(this : IEnroll4*, flags : Int32, pwszName : Win32cr::Foundation::PWSTR, pblobValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.addExtensionToRequestWStr.call(this, flags, pwszName, pblobValue)
     end
-    def addAttributeToRequestWStr(this : IEnroll4*, flags : Int32, pwszName : Win32cr::Foundation::PWSTR, pblobValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def addAttributeToRequestWStr(this : IEnroll4*, flags : Int32, pwszName : Win32cr::Foundation::PWSTR, pblobValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.addAttributeToRequestWStr.call(this, flags, pwszName, pblobValue)
     end
     def addNameValuePairToRequestWStr(this : IEnroll4*, flags : Int32, pwszName : Win32cr::Foundation::PWSTR, pwszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -17383,25 +17554,25 @@ module Win32cr::Security::Cryptography::Certificates
     def resetAttributes(this : IEnroll4*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.resetAttributes.call(this)
     end
-    def createRequestWStr(this : IEnroll4*, flags : Win32cr::Security::Cryptography::Certificates::CERT_CREATE_REQUEST_FLAGS, pwszDNName : Win32cr::Foundation::PWSTR, pwszUsage : Win32cr::Foundation::PWSTR, pblobRequest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def createRequestWStr(this : IEnroll4*, flags : Win32cr::Security::Cryptography::Certificates::CERT_CREATE_REQUEST_FLAGS, pwszDNName : Win32cr::Foundation::PWSTR, pwszUsage : Win32cr::Foundation::PWSTR, pblobRequest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createRequestWStr.call(this, flags, pwszDNName, pwszUsage, pblobRequest)
     end
     def createFileRequestWStr(this : IEnroll4*, flags : Win32cr::Security::Cryptography::Certificates::CERT_CREATE_REQUEST_FLAGS, pwszDNName : Win32cr::Foundation::PWSTR, pwszUsage : Win32cr::Foundation::PWSTR, pwszRequestFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createFileRequestWStr.call(this, flags, pwszDNName, pwszUsage, pwszRequestFileName)
     end
-    def acceptResponseBlob(this : IEnroll4*, pblobResponse : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def acceptResponseBlob(this : IEnroll4*, pblobResponse : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.acceptResponseBlob.call(this, pblobResponse)
     end
     def acceptFileResponseWStr(this : IEnroll4*, pwszResponseFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.acceptFileResponseWStr.call(this, pwszResponseFileName)
     end
-    def getCertContextFromResponseBlob(this : IEnroll4*, pblobResponse : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, ppCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::HRESULT
+    def getCertContextFromResponseBlob(this : IEnroll4*, pblobResponse : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, ppCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getCertContextFromResponseBlob.call(this, pblobResponse, ppCertContext)
     end
     def getCertContextFromFileResponseWStr(this : IEnroll4*, pwszResponseFileName : Win32cr::Foundation::PWSTR, ppCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getCertContextFromFileResponseWStr.call(this, pwszResponseFileName, ppCertContext)
     end
-    def createPFXWStr(this : IEnroll4*, pwszPassword : Win32cr::Foundation::PWSTR, pblobPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def createPFXWStr(this : IEnroll4*, pwszPassword : Win32cr::Foundation::PWSTR, pblobPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createPFXWStr.call(this, pwszPassword, pblobPFX)
     end
     def createFilePFXWStr(this : IEnroll4*, pwszPassword : Win32cr::Foundation::PWSTR, pwszPFXFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -17413,13 +17584,13 @@ module Win32cr::Security::Cryptography::Certificates
     def enumPendingRequestWStr(this : IEnroll4*, lIndex : Int32, lDesiredProperty : Win32cr::Security::Cryptography::Certificates::PENDING_REQUEST_DESIRED_PROPERTY, ppProperty : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enumPendingRequestWStr.call(this, lIndex, lDesiredProperty, ppProperty)
     end
-    def removePendingRequestWStr(this : IEnroll4*, thumbPrintBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB) : Win32cr::Foundation::HRESULT
+    def removePendingRequestWStr(this : IEnroll4*, thumbPrintBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.removePendingRequestWStr.call(this, thumbPrintBlob)
     end
     def get_key_len_ex(this : IEnroll4*, lSizeSpec : Win32cr::Security::Cryptography::Certificates::XEKL_KEYSIZE, lKeySpec : Win32cr::Security::Cryptography::Certificates::XEKL_KEYSPEC, pdwKeySize : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_key_len_ex.call(this, lSizeSpec, lKeySpec, pdwKeySize)
     end
-    def install_pkcs7_blob_ex(this : IEnroll4*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, plCertInstalled : Int32*) : Win32cr::Foundation::HRESULT
+    def install_pkcs7_blob_ex(this : IEnroll4*, pBlobPKCS7 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, plCertInstalled : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install_pkcs7_blob_ex.call(this, pBlobPKCS7, plCertInstalled)
     end
     def add_cert_type_to_request_w_str_ex(this : IEnroll4*, lType : Win32cr::Security::Cryptography::Certificates::ADDED_CERT_TYPE, pwszOIDOrName : Win32cr::Foundation::PWSTR, lMajorVersion : Int32, fMinorVersion : Win32cr::Foundation::BOOL, lMinorVersion : Int32) : Win32cr::Foundation::HRESULT
@@ -17428,7 +17599,7 @@ module Win32cr::Security::Cryptography::Certificates
     def getProviderTypeWStr(this : IEnroll4*, pwszProvName : Win32cr::Foundation::PWSTR, plProvType : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProviderTypeWStr.call(this, pwszProvName, plProvType)
     end
-    def addBlobPropertyToCertificateWStr(this : IEnroll4*, lPropertyId : Int32, lReserved : Int32, pBlobProperty : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::HRESULT
+    def addBlobPropertyToCertificateWStr(this : IEnroll4*, lPropertyId : Int32, lReserved : Int32, pBlobProperty : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.addBlobPropertyToCertificateWStr.call(this, lPropertyId, lReserved, pBlobProperty)
     end
     def set_signer_certificate(this : IEnroll4*, pSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::HRESULT
@@ -17450,7 +17621,8 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequestDVtbl,
+
+  record ICertRequestDVtable,
     query_interface : Proc(ICertRequestD*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequestD*, UInt32),
     release : Proc(ICertRequestD*, UInt32),
@@ -17460,7 +17632,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertRequestD, lpVtbl : ICertRequestDVtbl* do
+  record ICertRequestD, lpVtbl : ICertRequestDVtable* do
     GUID = LibC::GUID.new(0xd99e6e70_u32, 0xfc88_u16, 0x11d0_u16, StaticArray[0xb4_u8, 0x98_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0x12_u8, 0xf3_u8])
     def query_interface(this : ICertRequestD*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17484,7 +17656,8 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequestD2Vtbl,
+
+  record ICertRequestD2Vtable,
     query_interface : Proc(ICertRequestD2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequestD2*, UInt32),
     release : Proc(ICertRequestD2*, UInt32),
@@ -17498,7 +17671,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertRequestD2, lpVtbl : ICertRequestD2Vtbl* do
+  record ICertRequestD2, lpVtbl : ICertRequestD2Vtable* do
     GUID = LibC::GUID.new(0x5422fd3a_u32, 0xd4b8_u16, 0x4cef_u16, StaticArray[0xa1_u8, 0x2e_u8, 0xe8_u8, 0x7d_u8, 0x4c_u8, 0xa2_u8, 0x2e_u8, 0x90_u8])
     def query_interface(this : ICertRequestD2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17534,111 +17707,164 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   def certSrvIsServerOnlineW(pwszServerName : Win32cr::Foundation::PWSTR, pfServerOnline : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvIsServerOnlineW(pwszServerName, pfServerOnline)
+    {% end %}
   end
 
   def certSrvBackupGetDynamicFileListW(hbc : Void*, ppwszzFileList : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupGetDynamicFileListW(hbc, ppwszzFileList, pcbSize)
+    {% end %}
   end
 
   def certSrvBackupPrepareW(pwszServerName : Win32cr::Foundation::PWSTR, grbitJet : UInt32, dwBackupFlags : Win32cr::Security::Cryptography::Certificates::CSBACKUP_TYPE, phbc : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupPrepareW(pwszServerName, grbitJet, dwBackupFlags, phbc)
+    {% end %}
   end
 
   def certSrvBackupGetDatabaseNamesW(hbc : Void*, ppwszzAttachmentInformation : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupGetDatabaseNamesW(hbc, ppwszzAttachmentInformation, pcbSize)
+    {% end %}
   end
 
-  def certSrvBackupOpenFileW(hbc : Void*, pwszAttachmentName : Win32cr::Foundation::PWSTR, cbReadHintSize : UInt32, pliFileSize : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+  def certSrvBackupOpenFileW(hbc : Void*, pwszAttachmentName : Win32cr::Foundation::PWSTR, cbReadHintSize : UInt32, pliFileSize : Int64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupOpenFileW(hbc, pwszAttachmentName, cbReadHintSize, pliFileSize)
+    {% end %}
   end
 
   def certSrvBackupRead(hbc : Void*, pvBuffer : Void*, cbBuffer : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupRead(hbc, pvBuffer, cbBuffer, pcbRead)
+    {% end %}
   end
 
   def certSrvBackupClose(hbc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupClose(hbc)
+    {% end %}
   end
 
   def certSrvBackupGetBackupLogsW(hbc : Void*, ppwszzBackupLogFiles : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupGetBackupLogsW(hbc, ppwszzBackupLogFiles, pcbSize)
+    {% end %}
   end
 
   def certSrvBackupTruncateLogs(hbc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupTruncateLogs(hbc)
+    {% end %}
   end
 
   def certSrvBackupEnd(hbc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupEnd(hbc)
+    {% end %}
   end
 
   def certSrvBackupFree(pv : Void*) : Void
+    {% if !flag?(:docs) %}
     C.CertSrvBackupFree(pv)
+    {% end %}
   end
 
   def certSrvRestoreGetDatabaseLocationsW(hbc : Void*, ppwszzDatabaseLocationList : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreGetDatabaseLocationsW(hbc, ppwszzDatabaseLocationList, pcbSize)
+    {% end %}
   end
 
   def certSrvRestorePrepareW(pwszServerName : Win32cr::Foundation::PWSTR, dwRestoreFlags : UInt32, phbc : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestorePrepareW(pwszServerName, dwRestoreFlags, phbc)
+    {% end %}
   end
 
   def certSrvRestoreRegisterW(hbc : Void*, pwszCheckPointFilePath : Win32cr::Foundation::PWSTR, pwszLogPath : Win32cr::Foundation::PWSTR, rgrstmap : Win32cr::Security::Cryptography::Certificates::CSEDB_RSTMAPW*, crstmap : Int32, pwszBackupLogPath : Win32cr::Foundation::PWSTR, genLow : UInt32, genHigh : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreRegisterW(hbc, pwszCheckPointFilePath, pwszLogPath, rgrstmap, crstmap, pwszBackupLogPath, genLow, genHigh)
+    {% end %}
   end
 
   def certSrvRestoreRegisterThroughFile(hbc : Void*, pwszCheckPointFilePath : Win32cr::Foundation::PWSTR, pwszLogPath : Win32cr::Foundation::PWSTR, rgrstmap : Win32cr::Security::Cryptography::Certificates::CSEDB_RSTMAPW*, crstmap : Int32, pwszBackupLogPath : Win32cr::Foundation::PWSTR, genLow : UInt32, genHigh : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreRegisterThroughFile(hbc, pwszCheckPointFilePath, pwszLogPath, rgrstmap, crstmap, pwszBackupLogPath, genLow, genHigh)
+    {% end %}
   end
 
   def certSrvRestoreRegisterComplete(hbc : Void*, hrRestoreState : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreRegisterComplete(hbc, hrRestoreState)
+    {% end %}
   end
 
   def certSrvRestoreEnd(hbc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreEnd(hbc)
+    {% end %}
   end
 
   def certSrvServerControlW(pwszServerName : Win32cr::Foundation::PWSTR, dwControlFlags : UInt32, pcbOut : UInt32*, ppbOut : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvServerControlW(pwszServerName, dwControlFlags, pcbOut, ppbOut)
+    {% end %}
   end
 
   def pstGetTrustAnchors(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, ppTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetTrustAnchors(pTargetName, cCriteria, rgpCriteria, ppTrustedIssuers)
+    {% end %}
   end
 
   def pstGetTrustAnchorsEx(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, ppTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetTrustAnchorsEx(pTargetName, cCriteria, rgpCriteria, pCertContext, ppTrustedIssuers)
+    {% end %}
   end
 
   def pstGetCertificateChain(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx*, ppCertChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetCertificateChain(pCert, pTrustedIssuers, ppCertChainContext)
+    {% end %}
   end
 
   def pstGetCertificates(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, bIsClient : Win32cr::Foundation::BOOL, pdwCertChainContextCount : UInt32*, ppCertChainContexts : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT***) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetCertificates(pTargetName, cCriteria, rgpCriteria, bIsClient, pdwCertChainContextCount, ppCertChainContexts)
+    {% end %}
   end
 
   def pstAcquirePrivateKey(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstAcquirePrivateKey(pCert)
+    {% end %}
   end
 
   def pstValidate(pTargetName : Win32cr::Foundation::UNICODE_STRING*, bIsClient : Win32cr::Foundation::BOOL, pRequestedIssuancePolicy : Win32cr::Security::Cryptography::CERT_USAGE_MATCH*, phAdditionalCertStore : Win32cr::Security::Cryptography::HCERTSTORE*, pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pProvGUID : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstValidate(pTargetName, bIsClient, pRequestedIssuancePolicy, phAdditionalCertStore, pCert, pProvGUID)
+    {% end %}
   end
 
   def pstMapCertificate(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTokenInformationType : Win32cr::Security::Authentication::Identity::LSA_TOKEN_INFORMATION_TYPE*, ppTokenInformation : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstMapCertificate(pCert, pTokenInformationType, ppTokenInformation)
+    {% end %}
   end
 
   def pstGetUserNameForCertificate(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, user_name : Win32cr::Foundation::UNICODE_STRING*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetUserNameForCertificate(pCertContext, user_name)
+    {% end %}
   end
 
   @[Link("certadm")]
   @[Link("certpoleng")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CertSrvIsServerOnlineW(pwszServerName : Win32cr::Foundation::PWSTR, pfServerOnline : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -17653,7 +17879,7 @@ module Win32cr::Security::Cryptography::Certificates
     fun CertSrvBackupGetDatabaseNamesW(hbc : Void*, ppwszzAttachmentInformation : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CertSrvBackupOpenFileW(hbc : Void*, pwszAttachmentName : Win32cr::Foundation::PWSTR, cbReadHintSize : UInt32, pliFileSize : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    fun CertSrvBackupOpenFileW(hbc : Void*, pwszAttachmentName : Win32cr::Foundation::PWSTR, cbReadHintSize : UInt32, pliFileSize : Int64*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun CertSrvBackupRead(hbc : Void*, pvBuffer : Void*, cbBuffer : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
@@ -17719,4 +17945,5 @@ module Win32cr::Security::Cryptography::Certificates
     fun PstGetUserNameForCertificate(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, user_name : Win32cr::Foundation::UNICODE_STRING*) : Win32cr::Foundation::NTSTATUS
 
   end
+  {% end %}
 end

@@ -4,6 +4,8 @@ module Win32cr::System::IO
   extend self
   alias LPOVERLAPPED_COMPLETION_ROUTINE = Proc(UInt32, UInt32, Win32cr::System::IO::OVERLAPPED*, Void)
 
+  alias PIO_APC_ROUTINE = Proc(Void*, Win32cr::System::IO::IO_STATUS_BLOCK*, UInt32, Void)
+
 
 
   @[Extern]
@@ -46,12 +48,32 @@ module Win32cr::System::IO
     end
   end
 
+  @[Extern]
+  struct IO_STATUS_BLOCK
+    property anonymous : Anonymous_e__Union_
+    property information : LibC::UIntPtrT
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property status : Win32cr::Foundation::NTSTATUS
+    property pointer : Void*
+    def initialize(@status : Win32cr::Foundation::NTSTATUS, @pointer : Void*)
+    end
+    end
+
+    def initialize(@anonymous : Anonymous_e__Union_, @information : LibC::UIntPtrT)
+    end
+  end
+
   #def createIoCompletionPort(file_handle : Win32cr::Foundation::HANDLE, existing_completion_port : Win32cr::Foundation::HANDLE, completion_key : LibC::UIntPtrT, number_of_concurrent_threads : UInt32) : Win32cr::Foundation::HANDLE
     #C.CreateIoCompletionPort(file_handle, existing_completion_port, completion_key, number_of_concurrent_threads)
   #end
 
   def getQueuedCompletionStatus(completion_port : Win32cr::Foundation::HANDLE, lpNumberOfBytesTransferred : UInt32*, lpCompletionKey : LibC::UIntPtrT*, lpOverlapped : Win32cr::System::IO::OVERLAPPED**, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetQueuedCompletionStatus(completion_port, lpNumberOfBytesTransferred, lpCompletionKey, lpOverlapped, dwMilliseconds)
+    {% end %}
   end
 
   #def getQueuedCompletionStatusEx(completion_port : Win32cr::Foundation::HANDLE, lpCompletionPortEntries : Win32cr::System::IO::OVERLAPPED_ENTRY*, ulCount : UInt32, ulNumEntriesRemoved : UInt32*, dwMilliseconds : UInt32, fAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -79,18 +101,25 @@ module Win32cr::System::IO
   #end
 
   def getOverlappedResultEx(hFile : Win32cr::Foundation::HANDLE, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, lpNumberOfBytesTransferred : UInt32*, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOverlappedResultEx(hFile, lpOverlapped, lpNumberOfBytesTransferred, dwMilliseconds, bAlertable)
+    {% end %}
   end
 
   def cancelSynchronousIo(hThread : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CancelSynchronousIo(hThread)
+    {% end %}
   end
 
   def bindIoCompletionCallback(file_handle : Win32cr::Foundation::HANDLE, function : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BindIoCompletionCallback(file_handle, function, flags)
+    {% end %}
   end
 
   @[Link("kernel32")]
+  {% if !flag?(:docs) %}
   lib C
     # Commented out due to being part of LibC
     # :nodoc:
@@ -133,4 +162,5 @@ module Win32cr::System::IO
     fun BindIoCompletionCallback(file_handle : Win32cr::Foundation::HANDLE, function : Win32cr::System::IO::LPOVERLAPPED_COMPLETION_ROUTINE, flags : UInt32) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

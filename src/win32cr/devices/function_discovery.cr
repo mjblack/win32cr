@@ -1,7 +1,7 @@
-require "./../system/com.cr"
 require "./../foundation.cr"
-require "./../system/com/structured_storage.cr"
+require "./../system/com.cr"
 require "./../ui/shell/properties_system.cr"
+require "./../system/com/structured_storage.cr"
 
 module Win32cr::Devices::FunctionDiscovery
   extend self
@@ -12,76 +12,76 @@ module Win32cr::Devices::FunctionDiscovery
   FD_EVENTID_SEARCHSTART = 1002_u32
   FD_EVENTID_IPADDRESSCHANGE = 1003_u32
   FD_EVENTID_QUERYREFRESH = 1004_u32
-  SID_PnpProvider = "8101368e-cabb-4426-acff-96c410812000"
-  SID_UPnPActivator = "0d0d66eb-cf74-4164-b52f-08344672dd46"
-  SID_EnumInterface = "40eab0b9-4d7f-4b53-a334-1581dd9041f4"
-  SID_PNPXPropertyStore = "a86530b1-542f-439f-b71c-b0756b13677a"
-  SID_PNPXAssociation = "cee8ccc9-4f6b-4469-a235-5a22869eef03"
-  SID_PNPXServiceCollection = "439e80ee-a217-4712-9fa6-deabd9c2a727"
-  SID_FDPairingHandler = "383b69fa-5486-49da-91f5-d63c24c8e9d0"
-  SID_EnumDeviceFunction = "13e0e9e2-c3fa-4e3c-906e-64502fa4dc95"
-  SID_UnpairProvider = "89a502fc-857b-4698-a0b7-027192002f9e"
-  SID_DeviceDisplayStatusManager = "f59aa553-8309-46ca-9736-1ac3c62d6031"
-  SID_FunctionDiscoveryProviderRefresh = "2b4cbdc9-31c4-40d4-a62d-772aa174ed52"
-  SID_UninstallDeviceFunction = "c920566e-5671-4496-8025-bf0b89bd44cd"
-  PKEY_FunctionInstance = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8c0c253_u32, 0xa154_u16, 0x4746_u16, StaticArray[0x90_u8, 0x5_u8, 0x82_u8, 0xde_u8, 0x53_u8, 0x17_u8, 0x14_u8, 0x8b_u8]), 1_u32)
-  FMTID_FD = "904b03a2-471d-423c-a584-f3483238a146"
+  SID_PnpProvider = LibC::GUID.new(0x8101368e_u32, 0xcabb_u16, 0x4426_u16, StaticArray[0xac_u8, 0xff_u8, 0x96_u8, 0xc4_u8, 0x10_u8, 0x81_u8, 0x20_u8, 0x0_u8])
+  SID_UPnPActivator = LibC::GUID.new(0xd0d66eb_u32, 0xcf74_u16, 0x4164_u16, StaticArray[0xb5_u8, 0x2f_u8, 0x8_u8, 0x34_u8, 0x46_u8, 0x72_u8, 0xdd_u8, 0x46_u8])
+  SID_EnumInterface = LibC::GUID.new(0x40eab0b9_u32, 0x4d7f_u16, 0x4b53_u16, StaticArray[0xa3_u8, 0x34_u8, 0x15_u8, 0x81_u8, 0xdd_u8, 0x90_u8, 0x41_u8, 0xf4_u8])
+  SID_PNPXPropertyStore = LibC::GUID.new(0xa86530b1_u32, 0x542f_u16, 0x439f_u16, StaticArray[0xb7_u8, 0x1c_u8, 0xb0_u8, 0x75_u8, 0x6b_u8, 0x13_u8, 0x67_u8, 0x7a_u8])
+  SID_PNPXAssociation = LibC::GUID.new(0xcee8ccc9_u32, 0x4f6b_u16, 0x4469_u16, StaticArray[0xa2_u8, 0x35_u8, 0x5a_u8, 0x22_u8, 0x86_u8, 0x9e_u8, 0xef_u8, 0x3_u8])
+  SID_PNPXServiceCollection = LibC::GUID.new(0x439e80ee_u32, 0xa217_u16, 0x4712_u16, StaticArray[0x9f_u8, 0xa6_u8, 0xde_u8, 0xab_u8, 0xd9_u8, 0xc2_u8, 0xa7_u8, 0x27_u8])
+  SID_FDPairingHandler = LibC::GUID.new(0x383b69fa_u32, 0x5486_u16, 0x49da_u16, StaticArray[0x91_u8, 0xf5_u8, 0xd6_u8, 0x3c_u8, 0x24_u8, 0xc8_u8, 0xe9_u8, 0xd0_u8])
+  SID_EnumDeviceFunction = LibC::GUID.new(0x13e0e9e2_u32, 0xc3fa_u16, 0x4e3c_u16, StaticArray[0x90_u8, 0x6e_u8, 0x64_u8, 0x50_u8, 0x2f_u8, 0xa4_u8, 0xdc_u8, 0x95_u8])
+  SID_UnpairProvider = LibC::GUID.new(0x89a502fc_u32, 0x857b_u16, 0x4698_u16, StaticArray[0xa0_u8, 0xb7_u8, 0x2_u8, 0x71_u8, 0x92_u8, 0x0_u8, 0x2f_u8, 0x9e_u8])
+  SID_DeviceDisplayStatusManager = LibC::GUID.new(0xf59aa553_u32, 0x8309_u16, 0x46ca_u16, StaticArray[0x97_u8, 0x36_u8, 0x1a_u8, 0xc3_u8, 0xc6_u8, 0x2d_u8, 0x60_u8, 0x31_u8])
+  SID_FunctionDiscoveryProviderRefresh = LibC::GUID.new(0x2b4cbdc9_u32, 0x31c4_u16, 0x40d4_u16, StaticArray[0xa6_u8, 0x2d_u8, 0x77_u8, 0x2a_u8, 0xa1_u8, 0x74_u8, 0xed_u8, 0x52_u8])
+  SID_UninstallDeviceFunction = LibC::GUID.new(0xc920566e_u32, 0x5671_u16, 0x4496_u16, StaticArray[0x80_u8, 0x25_u8, 0xbf_u8, 0xb_u8, 0x89_u8, 0xbd_u8, 0x44_u8, 0xcd_u8])
+  PKEY_FunctionInstance = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x8c0c253_u32, 0xa154_u16, 0x4746_u16, StaticArray[0x90_u8, 0x5_u8, 0x82_u8, 0xde_u8, 0x53_u8, 0x17_u8, 0x14_u8, 0x8b_u8]), 1_u32)
+  FMTID_FD = LibC::GUID.new(0x904b03a2_u32, 0x471d_u16, 0x423c_u16, StaticArray[0xa5_u8, 0x84_u8, 0xf3_u8, 0x48_u8, 0x32_u8, 0x38_u8, 0xa1_u8, 0x46_u8])
   FD_Visibility_Default = 0_u32
   FD_Visibility_Hidden = 1_u32
-  FMTID_Device = "78c34fc8-104a-4aca-9ea4-524d52996e57"
-  FMTID_DeviceInterface = "53808008-07bb-4661-bc3c-b5953e708560"
-  PKEY_DeviceDisplay_Address = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 51_u32)
-  PKEY_DeviceDisplay_DiscoveryMethod = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 52_u32)
-  PKEY_DeviceDisplay_IsEncrypted = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 53_u32)
-  PKEY_DeviceDisplay_IsAuthenticated = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 54_u32)
-  PKEY_DeviceDisplay_IsConnected = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 55_u32)
-  PKEY_DeviceDisplay_IsPaired = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 56_u32)
-  PKEY_DeviceDisplay_Icon = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 57_u32)
-  PKEY_DeviceDisplay_Version = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 65_u32)
-  PKEY_DeviceDisplay_Last_Seen = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 66_u32)
-  PKEY_DeviceDisplay_Last_Connected = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 67_u32)
-  PKEY_DeviceDisplay_IsShowInDisconnectedState = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 68_u32)
-  PKEY_DeviceDisplay_IsLocalMachine = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 70_u32)
-  PKEY_DeviceDisplay_MetadataPath = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 71_u32)
-  PKEY_DeviceDisplay_IsMetadataSearchInProgress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 72_u32)
-  PKEY_DeviceDisplay_MetadataChecksum = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 73_u32)
-  PKEY_DeviceDisplay_IsNotInterestingForDisplay = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 74_u32)
-  PKEY_DeviceDisplay_LaunchDeviceStageOnDeviceConnect = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 76_u32)
-  PKEY_DeviceDisplay_LaunchDeviceStageFromExplorer = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 77_u32)
-  PKEY_DeviceDisplay_BaselineExperienceId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 78_u32)
-  PKEY_DeviceDisplay_IsDeviceUniquelyIdentifiable = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 79_u32)
-  PKEY_DeviceDisplay_AssociationArray = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 80_u32)
-  PKEY_DeviceDisplay_DeviceDescription1 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 81_u32)
-  PKEY_DeviceDisplay_DeviceDescription2 = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 82_u32)
-  PKEY_DeviceDisplay_IsNotWorkingProperly = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 83_u32)
-  PKEY_DeviceDisplay_IsSharedDevice = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 84_u32)
-  PKEY_DeviceDisplay_IsNetworkDevice = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 85_u32)
-  PKEY_DeviceDisplay_IsDefaultDevice = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 86_u32)
-  PKEY_DeviceDisplay_MetadataCabinet = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 87_u32)
-  PKEY_DeviceDisplay_RequiresPairingElevation = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 88_u32)
-  PKEY_DeviceDisplay_ExperienceId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 89_u32)
-  PKEY_DeviceDisplay_Category = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 90_u32)
-  PKEY_DeviceDisplay_Category_Desc_Singular = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 91_u32)
-  PKEY_DeviceDisplay_Category_Desc_Plural = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 92_u32)
-  PKEY_DeviceDisplay_Category_Icon = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 93_u32)
-  PKEY_DeviceDisplay_CategoryGroup_Desc = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 94_u32)
-  PKEY_DeviceDisplay_CategoryGroup_Icon = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 95_u32)
-  PKEY_DeviceDisplay_PrimaryCategory = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 97_u32)
-  PKEY_DeviceDisplay_UnpairUninstall = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 98_u32)
-  PKEY_DeviceDisplay_RequiresUninstallElevation = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 99_u32)
-  PKEY_DeviceDisplay_DeviceFunctionSubRank = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 100_u32)
-  PKEY_DeviceDisplay_AlwaysShowDeviceAsConnected = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 101_u32)
-  PKEY_DeviceDisplay_FriendlyName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12288_u32)
-  PKEY_DeviceDisplay_Manufacturer = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8192_u32)
-  PKEY_DeviceDisplay_ModelName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8194_u32)
-  PKEY_DeviceDisplay_ModelNumber = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8195_u32)
-  PKEY_DeviceDisplay_InstallInProgress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x83da6326_u32, 0x97a6_u16, 0x4088_u16, StaticArray[0x94_u8, 0x53_u8, 0xa1_u8, 0x92_u8, 0x3f_u8, 0x57_u8, 0x3b_u8, 0x29_u8]), 9_u32)
-  FMTID_Pairing = "8807cae6-7db6-4f10-8ee4-435eaa1392bc"
-  PKEY_Pairing_ListItemText = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 1_u32)
-  PKEY_Pairing_ListItemDescription = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 2_u32)
-  PKEY_Pairing_ListItemIcon = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 3_u32)
-  PKEY_Pairing_ListItemDefault = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 4_u32)
-  PKEY_Pairing_IsWifiOnlyDevice = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 16_u32)
+  FMTID_Device = LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8])
+  FMTID_DeviceInterface = LibC::GUID.new(0x53808008_u32, 0x7bb_u16, 0x4661_u16, StaticArray[0xbc_u8, 0x3c_u8, 0xb5_u8, 0x95_u8, 0x3e_u8, 0x70_u8, 0x85_u8, 0x60_u8])
+  PKEY_DeviceDisplay_Address = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 51_u32)
+  PKEY_DeviceDisplay_DiscoveryMethod = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 52_u32)
+  PKEY_DeviceDisplay_IsEncrypted = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 53_u32)
+  PKEY_DeviceDisplay_IsAuthenticated = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 54_u32)
+  PKEY_DeviceDisplay_IsConnected = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 55_u32)
+  PKEY_DeviceDisplay_IsPaired = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 56_u32)
+  PKEY_DeviceDisplay_Icon = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 57_u32)
+  PKEY_DeviceDisplay_Version = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 65_u32)
+  PKEY_DeviceDisplay_Last_Seen = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 66_u32)
+  PKEY_DeviceDisplay_Last_Connected = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 67_u32)
+  PKEY_DeviceDisplay_IsShowInDisconnectedState = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 68_u32)
+  PKEY_DeviceDisplay_IsLocalMachine = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 70_u32)
+  PKEY_DeviceDisplay_MetadataPath = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 71_u32)
+  PKEY_DeviceDisplay_IsMetadataSearchInProgress = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 72_u32)
+  PKEY_DeviceDisplay_MetadataChecksum = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 73_u32)
+  PKEY_DeviceDisplay_IsNotInterestingForDisplay = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 74_u32)
+  PKEY_DeviceDisplay_LaunchDeviceStageOnDeviceConnect = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 76_u32)
+  PKEY_DeviceDisplay_LaunchDeviceStageFromExplorer = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 77_u32)
+  PKEY_DeviceDisplay_BaselineExperienceId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 78_u32)
+  PKEY_DeviceDisplay_IsDeviceUniquelyIdentifiable = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 79_u32)
+  PKEY_DeviceDisplay_AssociationArray = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 80_u32)
+  PKEY_DeviceDisplay_DeviceDescription1 = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 81_u32)
+  PKEY_DeviceDisplay_DeviceDescription2 = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 82_u32)
+  PKEY_DeviceDisplay_IsNotWorkingProperly = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 83_u32)
+  PKEY_DeviceDisplay_IsSharedDevice = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 84_u32)
+  PKEY_DeviceDisplay_IsNetworkDevice = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 85_u32)
+  PKEY_DeviceDisplay_IsDefaultDevice = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 86_u32)
+  PKEY_DeviceDisplay_MetadataCabinet = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 87_u32)
+  PKEY_DeviceDisplay_RequiresPairingElevation = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 88_u32)
+  PKEY_DeviceDisplay_ExperienceId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 89_u32)
+  PKEY_DeviceDisplay_Category = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 90_u32)
+  PKEY_DeviceDisplay_Category_Desc_Singular = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 91_u32)
+  PKEY_DeviceDisplay_Category_Desc_Plural = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 92_u32)
+  PKEY_DeviceDisplay_Category_Icon = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 93_u32)
+  PKEY_DeviceDisplay_CategoryGroup_Desc = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 94_u32)
+  PKEY_DeviceDisplay_CategoryGroup_Icon = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 95_u32)
+  PKEY_DeviceDisplay_PrimaryCategory = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 97_u32)
+  PKEY_DeviceDisplay_UnpairUninstall = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 98_u32)
+  PKEY_DeviceDisplay_RequiresUninstallElevation = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 99_u32)
+  PKEY_DeviceDisplay_DeviceFunctionSubRank = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 100_u32)
+  PKEY_DeviceDisplay_AlwaysShowDeviceAsConnected = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 101_u32)
+  PKEY_DeviceDisplay_FriendlyName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12288_u32)
+  PKEY_DeviceDisplay_Manufacturer = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8192_u32)
+  PKEY_DeviceDisplay_ModelName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8194_u32)
+  PKEY_DeviceDisplay_ModelNumber = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8195_u32)
+  PKEY_DeviceDisplay_InstallInProgress = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x83da6326_u32, 0x97a6_u16, 0x4088_u16, StaticArray[0x94_u8, 0x53_u8, 0xa1_u8, 0x92_u8, 0x3f_u8, 0x57_u8, 0x3b_u8, 0x29_u8]), 9_u32)
+  FMTID_Pairing = LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8])
+  PKEY_Pairing_ListItemText = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 1_u32)
+  PKEY_Pairing_ListItemDescription = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 2_u32)
+  PKEY_Pairing_ListItemIcon = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 3_u32)
+  PKEY_Pairing_ListItemDefault = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 4_u32)
+  PKEY_Pairing_IsWifiOnlyDevice = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x8807cae6_u32, 0x7db6_u16, 0x4f10_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x43_u8, 0x5e_u8, 0xaa_u8, 0x13_u8, 0x92_u8, 0xbc_u8]), 16_u32)
   DEVICEDISPLAY_DISCOVERYMETHOD_BLUETOOTH = "Bluetooth"
   DEVICEDISPLAY_DISCOVERYMETHOD_BLUETOOTH_LE = "Bluetooth Low Energy"
   DEVICEDISPLAY_DISCOVERYMETHOD_NETBIOS = "NetBIOS"
@@ -92,27 +92,27 @@ module Win32cr::Devices::FunctionDiscovery
   DEVICEDISPLAY_DISCOVERYMETHOD_WUSB = "WUSB"
   DEVICEDISPLAY_DISCOVERYMETHOD_WFD = "WiFiDirect"
   DEVICEDISPLAY_DISCOVERYMETHOD_ASP_INFRA = "AspInfra"
-  PKEY_Device_BIOSVersion = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xeaee7f1d_u32, 0x6a33_u16, 0x44d1_u16, StaticArray[0x94_u8, 0x41_u8, 0x5f_u8, 0x46_u8, 0xde_u8, 0xf2_u8, 0x31_u8, 0x98_u8]), 9_u32)
-  FMTID_WSD = "92506491-ff95-4724-a05a-5b81885a7c92"
-  FMTID_PNPX = "656a3bb3-ecc0-43fd-8477-4ae0404a96cd"
-  PKEY_PNPX_GlobalIdentity = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4096_u32)
-  PKEY_PNPX_Types = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4097_u32)
-  PKEY_PNPX_Scopes = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4098_u32)
-  PKEY_PNPX_XAddrs = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4099_u32)
-  PKEY_PNPX_MetadataVersion = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4100_u32)
-  PKEY_PNPX_ID = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4101_u32)
-  PKEY_PNPX_RemoteAddress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4102_u32)
-  PKEY_PNPX_RootProxy = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4103_u32)
-  PKEY_PNPX_ManufacturerUrl = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8193_u32)
-  PKEY_PNPX_ModelUrl = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8196_u32)
-  PKEY_PNPX_Upc = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8197_u32)
-  PKEY_PNPX_PresentationUrl = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8198_u32)
-  PKEY_PNPX_FirmwareVersion = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12289_u32)
-  PKEY_PNPX_SerialNumber = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12290_u32)
-  PKEY_PNPX_DeviceCategory = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12292_u32)
-  PKEY_PNPX_SecureChannel = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28673_u32)
-  PKEY_PNPX_CompactSignature = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28674_u32)
-  PKEY_PNPX_DeviceCertHash = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28675_u32)
+  PKEY_Device_BIOSVersion = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xeaee7f1d_u32, 0x6a33_u16, 0x44d1_u16, StaticArray[0x94_u8, 0x41_u8, 0x5f_u8, 0x46_u8, 0xde_u8, 0xf2_u8, 0x31_u8, 0x98_u8]), 9_u32)
+  FMTID_WSD = LibC::GUID.new(0x92506491_u32, 0xff95_u16, 0x4724_u16, StaticArray[0xa0_u8, 0x5a_u8, 0x5b_u8, 0x81_u8, 0x88_u8, 0x5a_u8, 0x7c_u8, 0x92_u8])
+  FMTID_PNPX = LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8])
+  PKEY_PNPX_GlobalIdentity = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4096_u32)
+  PKEY_PNPX_Types = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4097_u32)
+  PKEY_PNPX_Scopes = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4098_u32)
+  PKEY_PNPX_XAddrs = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4099_u32)
+  PKEY_PNPX_MetadataVersion = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4100_u32)
+  PKEY_PNPX_ID = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4101_u32)
+  PKEY_PNPX_RemoteAddress = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4102_u32)
+  PKEY_PNPX_RootProxy = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 4103_u32)
+  PKEY_PNPX_ManufacturerUrl = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8193_u32)
+  PKEY_PNPX_ModelUrl = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8196_u32)
+  PKEY_PNPX_Upc = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8197_u32)
+  PKEY_PNPX_PresentationUrl = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 8198_u32)
+  PKEY_PNPX_FirmwareVersion = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12289_u32)
+  PKEY_PNPX_SerialNumber = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12290_u32)
+  PKEY_PNPX_DeviceCategory = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12292_u32)
+  PKEY_PNPX_SecureChannel = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28673_u32)
+  PKEY_PNPX_CompactSignature = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28674_u32)
+  PKEY_PNPX_DeviceCertHash = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28675_u32)
   PNPX_DEVICECATEGORY_COMPUTER = "Computers"
   PNPX_DEVICECATEGORY_INPUTDEVICE = "Input"
   PNPX_DEVICECATEGORY_PRINTER = "Printers"
@@ -129,178 +129,178 @@ module Win32cr::Devices::FunctionDiscovery
   PNPX_DEVICECATEGORY_HOME_AUTOMATION_SYSTEM = "HomeAutomation"
   PNPX_DEVICECATEGORY_HOME_SECURITY_SYSTEM = "HomeSecurity"
   PNPX_DEVICECATEGORY_OTHER = "Other"
-  PKEY_PNPX_DeviceCategory_Desc = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12293_u32)
-  PKEY_PNPX_Category_Desc_NonPlural = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12304_u32)
-  PKEY_PNPX_PhysicalAddress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12294_u32)
-  PKEY_PNPX_NetworkInterfaceLuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12295_u32)
-  PKEY_PNPX_NetworkInterfaceGuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12296_u32)
-  PKEY_PNPX_IpAddress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12297_u32)
-  PKEY_PNPX_ServiceAddress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16384_u32)
-  PKEY_PNPX_ServiceId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16385_u32)
-  PKEY_PNPX_ServiceTypes = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16386_u32)
-  PKEY_PNPX_ServiceControlUrl = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16388_u32)
-  PKEY_PNPX_ServiceDescUrl = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16389_u32)
-  PKEY_PNPX_ServiceEventSubUrl = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16390_u32)
-  PKEY_PNPX_DomainName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 20480_u32)
-  PKEY_PNPX_ShareName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 20482_u32)
-  PKEY_SSDP_AltLocationInfo = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 24576_u32)
-  PKEY_SSDP_DevLifeTime = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 24577_u32)
-  PKEY_SSDP_NetworkInterface = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 24578_u32)
-  FMTID_PNPXDynamicProperty = "4fc5077e-b686-44be-93e3-86cafe368ccd"
-  PKEY_PNPX_Installable = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8]), 1_u32)
-  PKEY_PNPX_Associated = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8]), 2_u32)
-  PKEY_PNPX_CompatibleTypes = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8]), 3_u32)
-  PKEY_PNPX_InstallState = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8]), 4_u32)
+  PKEY_PNPX_DeviceCategory_Desc = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12293_u32)
+  PKEY_PNPX_Category_Desc_NonPlural = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12304_u32)
+  PKEY_PNPX_PhysicalAddress = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12294_u32)
+  PKEY_PNPX_NetworkInterfaceLuid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12295_u32)
+  PKEY_PNPX_NetworkInterfaceGuid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12296_u32)
+  PKEY_PNPX_IpAddress = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 12297_u32)
+  PKEY_PNPX_ServiceAddress = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16384_u32)
+  PKEY_PNPX_ServiceId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16385_u32)
+  PKEY_PNPX_ServiceTypes = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16386_u32)
+  PKEY_PNPX_ServiceControlUrl = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16388_u32)
+  PKEY_PNPX_ServiceDescUrl = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16389_u32)
+  PKEY_PNPX_ServiceEventSubUrl = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 16390_u32)
+  PKEY_PNPX_DomainName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 20480_u32)
+  PKEY_PNPX_ShareName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 20482_u32)
+  PKEY_SSDP_AltLocationInfo = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 24576_u32)
+  PKEY_SSDP_DevLifeTime = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 24577_u32)
+  PKEY_SSDP_NetworkInterface = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 24578_u32)
+  FMTID_PNPXDynamicProperty = LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8])
+  PKEY_PNPX_Installable = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8]), 1_u32)
+  PKEY_PNPX_Associated = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8]), 2_u32)
+  PKEY_PNPX_CompatibleTypes = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8]), 3_u32)
+  PKEY_PNPX_InstallState = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4fc5077e_u32, 0xb686_u16, 0x44be_u16, StaticArray[0x93_u8, 0xe3_u8, 0x86_u8, 0xca_u8, 0xfe_u8, 0x36_u8, 0x8c_u8, 0xcd_u8]), 4_u32)
   PNPX_INSTALLSTATE_NOTINSTALLED = 0_u32
   PNPX_INSTALLSTATE_INSTALLED = 1_u32
   PNPX_INSTALLSTATE_INSTALLING = 2_u32
   PNPX_INSTALLSTATE_FAILED = 3_u32
-  PKEY_PNPX_Removable = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28672_u32)
-  PKEY_PNPX_IPBusEnumerated = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28688_u32)
-  PKEY_WNET_Scope = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 1_u32)
-  PKEY_WNET_Type = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 2_u32)
-  PKEY_WNET_DisplayType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 3_u32)
-  PKEY_WNET_Usage = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 4_u32)
-  PKEY_WNET_LocalName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 5_u32)
-  PKEY_WNET_RemoteName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 6_u32)
-  PKEY_WNET_Comment = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 7_u32)
-  PKEY_WNET_Provider = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 8_u32)
-  PKEY_WCN_Version = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b80_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 1_u32)
-  PKEY_WCN_RequestType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b81_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 2_u32)
-  PKEY_WCN_AuthType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b82_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 3_u32)
-  PKEY_WCN_EncryptType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b83_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 4_u32)
-  PKEY_WCN_ConnType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b84_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 5_u32)
-  PKEY_WCN_ConfigMethods = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b85_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 6_u32)
-  PKEY_WCN_RfBand = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b87_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 8_u32)
-  PKEY_WCN_AssocState = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b88_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 9_u32)
-  PKEY_WCN_ConfigError = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b89_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 10_u32)
-  PKEY_WCN_ConfigState = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b89_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 11_u32)
-  PKEY_WCN_DevicePasswordId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b89_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 12_u32)
-  PKEY_WCN_OSVersion = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b89_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 13_u32)
-  PKEY_WCN_VendorExtension = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b8a_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 14_u32)
-  PKEY_WCN_RegistrarType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 15_u32)
-  PKEY_Hardware_Devinst = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4097_u32)
-  PKEY_Hardware_DisplayAttribute = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 5_u32)
-  PKEY_Hardware_DriverDate = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 11_u32)
-  PKEY_Hardware_DriverProvider = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 10_u32)
-  PKEY_Hardware_DriverVersion = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 9_u32)
-  PKEY_Hardware_Function = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4099_u32)
-  PKEY_Hardware_Icon = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 3_u32)
-  PKEY_Hardware_Image = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4098_u32)
-  PKEY_Hardware_Manufacturer = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 6_u32)
-  PKEY_Hardware_Model = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 7_u32)
-  PKEY_Hardware_Name = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 2_u32)
-  PKEY_Hardware_SerialNumber = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 8_u32)
-  PKEY_Hardware_ShellAttributes = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4100_u32)
-  PKEY_Hardware_Status = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4096_u32)
-  PKEY_NAME = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xb725f130_u32, 0x47ef_u16, 0x101a_u16, StaticArray[0xa5_u8, 0xf1_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0xeb_u8, 0xac_u8]), 10_u32)
-  PKEY_Device_DeviceDesc = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 2_u32)
-  PKEY_Device_HardwareIds = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 3_u32)
-  PKEY_Device_CompatibleIds = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 4_u32)
-  PKEY_Device_Service = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 6_u32)
-  PKEY_Device_Class = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 9_u32)
-  PKEY_Device_ClassGuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 10_u32)
-  PKEY_Device_Driver = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 11_u32)
-  PKEY_Device_ConfigFlags = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 12_u32)
-  PKEY_Device_Manufacturer = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 13_u32)
-  PKEY_Device_FriendlyName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 14_u32)
-  PKEY_Device_LocationInfo = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 15_u32)
-  PKEY_Device_PDOName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 16_u32)
-  PKEY_Device_Capabilities = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 17_u32)
-  PKEY_Device_UINumber = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 18_u32)
-  PKEY_Device_UpperFilters = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 19_u32)
-  PKEY_Device_LowerFilters = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 20_u32)
-  PKEY_Device_BusTypeGuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 21_u32)
-  PKEY_Device_LegacyBusType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 22_u32)
-  PKEY_Device_BusNumber = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 23_u32)
-  PKEY_Device_EnumeratorName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 24_u32)
-  PKEY_Device_Security = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 25_u32)
-  PKEY_Device_SecuritySDS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 26_u32)
-  PKEY_Device_DevType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 27_u32)
-  PKEY_Device_Exclusive = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 28_u32)
-  PKEY_Device_Characteristics = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 29_u32)
-  PKEY_Device_Address = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 30_u32)
-  PKEY_Device_UINumberDescFormat = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 31_u32)
-  PKEY_Device_PowerData = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 32_u32)
-  PKEY_Device_RemovalPolicy = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 33_u32)
-  PKEY_Device_RemovalPolicyDefault = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 34_u32)
-  PKEY_Device_RemovalPolicyOverride = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 35_u32)
-  PKEY_Device_InstallState = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 36_u32)
-  PKEY_Device_LocationPaths = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 37_u32)
-  PKEY_Device_BaseContainerId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 38_u32)
-  PKEY_Device_DevNodeStatus = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 2_u32)
-  PKEY_Device_ProblemCode = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 3_u32)
-  PKEY_Device_EjectionRelations = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 4_u32)
-  PKEY_Device_RemovalRelations = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 5_u32)
-  PKEY_Device_PowerRelations = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 6_u32)
-  PKEY_Device_BusRelations = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 7_u32)
-  PKEY_Device_Parent = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 8_u32)
-  PKEY_Device_Children = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 9_u32)
-  PKEY_Device_Siblings = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 10_u32)
-  PKEY_Device_TransportRelations = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 11_u32)
-  PKEY_Device_Reported = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x80497100_u32, 0x8c73_u16, 0x48b9_u16, StaticArray[0xaa_u8, 0xd9_u8, 0xce_u8, 0x38_u8, 0x7e_u8, 0x19_u8, 0xc5_u8, 0x6e_u8]), 2_u32)
-  PKEY_Device_Legacy = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x80497100_u32, 0x8c73_u16, 0x48b9_u16, StaticArray[0xaa_u8, 0xd9_u8, 0xce_u8, 0x38_u8, 0x7e_u8, 0x19_u8, 0xc5_u8, 0x6e_u8]), 3_u32)
-  PKEY_Device_InstanceId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 256_u32)
-  PKEY_Device_ContainerId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x8c7ed206_u32, 0x3f8a_u16, 0x4827_u16, StaticArray[0xb3_u8, 0xab_u8, 0xae_u8, 0x9e_u8, 0x1f_u8, 0xae_u8, 0xfc_u8, 0x6c_u8]), 2_u32)
-  PKEY_Device_ModelId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 2_u32)
-  PKEY_Device_FriendlyNameAttributes = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 3_u32)
-  PKEY_Device_ManufacturerAttributes = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 4_u32)
-  PKEY_Device_PresenceNotForDevice = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 5_u32)
-  PKEY_Device_SignalStrength = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 6_u32)
-  PKEY_Device_IsAssociateableByUserAction = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 7_u32)
-  PKEY_Numa_Proximity_Domain = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x540b947e_u32, 0x8b40_u16, 0x45bc_u16, StaticArray[0xa8_u8, 0xa2_u8, 0x6a_u8, 0xb_u8, 0x89_u8, 0x4c_u8, 0xbd_u8, 0xa2_u8]), 1_u32)
-  PKEY_Device_DHP_Rebalance_Policy = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x540b947e_u32, 0x8b40_u16, 0x45bc_u16, StaticArray[0xa8_u8, 0xa2_u8, 0x6a_u8, 0xb_u8, 0x89_u8, 0x4c_u8, 0xbd_u8, 0xa2_u8]), 2_u32)
-  PKEY_Device_Numa_Node = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x540b947e_u32, 0x8b40_u16, 0x45bc_u16, StaticArray[0xa8_u8, 0xa2_u8, 0x6a_u8, 0xb_u8, 0x89_u8, 0x4c_u8, 0xbd_u8, 0xa2_u8]), 3_u32)
-  PKEY_Device_BusReportedDeviceDesc = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x540b947e_u32, 0x8b40_u16, 0x45bc_u16, StaticArray[0xa8_u8, 0xa2_u8, 0x6a_u8, 0xb_u8, 0x89_u8, 0x4c_u8, 0xbd_u8, 0xa2_u8]), 4_u32)
-  PKEY_Device_InstallInProgress = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x83da6326_u32, 0x97a6_u16, 0x4088_u16, StaticArray[0x94_u8, 0x53_u8, 0xa1_u8, 0x92_u8, 0x3f_u8, 0x57_u8, 0x3b_u8, 0x29_u8]), 9_u32)
-  PKEY_Device_DriverDate = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 2_u32)
-  PKEY_Device_DriverVersion = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 3_u32)
-  PKEY_Device_DriverDesc = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 4_u32)
-  PKEY_Device_DriverInfPath = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 5_u32)
-  PKEY_Device_DriverInfSection = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 6_u32)
-  PKEY_Device_DriverInfSectionExt = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 7_u32)
-  PKEY_Device_MatchingDeviceId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 8_u32)
-  PKEY_Device_DriverProvider = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 9_u32)
-  PKEY_Device_DriverPropPageProvider = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 10_u32)
-  PKEY_Device_DriverCoInstallers = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 11_u32)
-  PKEY_Device_ResourcePickerTags = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 12_u32)
-  PKEY_Device_ResourcePickerExceptions = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 13_u32)
-  PKEY_Device_DriverRank = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 14_u32)
-  PKEY_Device_DriverLogoLevel = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 15_u32)
-  PKEY_Device_NoConnectSound = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 17_u32)
-  PKEY_Device_GenericDriverInstalled = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 18_u32)
-  PKEY_Device_AdditionalSoftwareRequested = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 19_u32)
-  PKEY_Device_SafeRemovalRequired = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xafd97640_u32, 0x86a3_u16, 0x4210_u16, StaticArray[0xb6_u8, 0x7c_u8, 0x28_u8, 0x9c_u8, 0x41_u8, 0xaa_u8, 0xbe_u8, 0x55_u8]), 2_u32)
-  PKEY_Device_SafeRemovalRequiredOverride = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xafd97640_u32, 0x86a3_u16, 0x4210_u16, StaticArray[0xb6_u8, 0x7c_u8, 0x28_u8, 0x9c_u8, 0x41_u8, 0xaa_u8, 0xbe_u8, 0x55_u8]), 3_u32)
-  PKEY_DrvPkg_Model = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 2_u32)
-  PKEY_DrvPkg_VendorWebSite = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 3_u32)
-  PKEY_DrvPkg_DetailedDescription = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 4_u32)
-  PKEY_DrvPkg_DocumentationLink = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 5_u32)
-  PKEY_DrvPkg_Icon = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 6_u32)
-  PKEY_DrvPkg_BrandingIcon = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 7_u32)
-  PKEY_DeviceClass_UpperFilters = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 19_u32)
-  PKEY_DeviceClass_LowerFilters = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 20_u32)
-  PKEY_DeviceClass_Security = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 25_u32)
-  PKEY_DeviceClass_SecuritySDS = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 26_u32)
-  PKEY_DeviceClass_DevType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 27_u32)
-  PKEY_DeviceClass_Exclusive = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 28_u32)
-  PKEY_DeviceClass_Characteristics = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 29_u32)
-  PKEY_DeviceClass_Name = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 2_u32)
-  PKEY_DeviceClass_ClassName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 3_u32)
-  PKEY_DeviceClass_Icon = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 4_u32)
-  PKEY_DeviceClass_ClassInstaller = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 5_u32)
-  PKEY_DeviceClass_PropPageProvider = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 6_u32)
-  PKEY_DeviceClass_NoInstallClass = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 7_u32)
-  PKEY_DeviceClass_NoDisplayClass = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 8_u32)
-  PKEY_DeviceClass_SilentInstall = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 9_u32)
-  PKEY_DeviceClass_NoUseClass = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 10_u32)
-  PKEY_DeviceClass_DefaultService = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 11_u32)
-  PKEY_DeviceClass_IconPath = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 12_u32)
-  PKEY_DeviceClass_ClassCoInstallers = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x713d1703_u32, 0xa2e2_u16, 0x49f5_u16, StaticArray[0x92_u8, 0x14_u8, 0x56_u8, 0x47_u8, 0x2e_u8, 0xf3_u8, 0xda_u8, 0x5c_u8]), 2_u32)
-  PKEY_DeviceInterface_FriendlyName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x26e516e_u32, 0xb814_u16, 0x414b_u16, StaticArray[0x83_u8, 0xcd_u8, 0x85_u8, 0x6d_u8, 0x6f_u8, 0xef_u8, 0x48_u8, 0x22_u8]), 2_u32)
-  PKEY_DeviceInterface_Enabled = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x26e516e_u32, 0xb814_u16, 0x414b_u16, StaticArray[0x83_u8, 0xcd_u8, 0x85_u8, 0x6d_u8, 0x6f_u8, 0xef_u8, 0x48_u8, 0x22_u8]), 3_u32)
-  PKEY_DeviceInterface_ClassGuid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x26e516e_u32, 0xb814_u16, 0x414b_u16, StaticArray[0x83_u8, 0xcd_u8, 0x85_u8, 0x6d_u8, 0x6f_u8, 0xef_u8, 0x48_u8, 0x22_u8]), 4_u32)
-  PKEY_DeviceInterfaceClass_DefaultInterface = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x14c83a99_u32, 0xb3f_u16, 0x44b7_u16, StaticArray[0xbe_u8, 0x4c_u8, 0xa1_u8, 0x78_u8, 0xd3_u8, 0x99_u8, 0x5_u8, 0x64_u8]), 2_u32)
+  PKEY_PNPX_Removable = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28672_u32)
+  PKEY_PNPX_IPBusEnumerated = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x656a3bb3_u32, 0xecc0_u16, 0x43fd_u16, StaticArray[0x84_u8, 0x77_u8, 0x4a_u8, 0xe0_u8, 0x40_u8, 0x4a_u8, 0x96_u8, 0xcd_u8]), 28688_u32)
+  PKEY_WNET_Scope = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 1_u32)
+  PKEY_WNET_Type = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 2_u32)
+  PKEY_WNET_DisplayType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 3_u32)
+  PKEY_WNET_Usage = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 4_u32)
+  PKEY_WNET_LocalName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 5_u32)
+  PKEY_WNET_RemoteName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 6_u32)
+  PKEY_WNET_Comment = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 7_u32)
+  PKEY_WNET_Provider = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xdebda43a_u32, 0x37b3_u16, 0x4383_u16, StaticArray[0x91_u8, 0xe7_u8, 0x44_u8, 0x98_u8, 0xda_u8, 0x29_u8, 0x95_u8, 0xab_u8]), 8_u32)
+  PKEY_WCN_Version = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b80_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 1_u32)
+  PKEY_WCN_RequestType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b81_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 2_u32)
+  PKEY_WCN_AuthType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b82_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 3_u32)
+  PKEY_WCN_EncryptType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b83_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 4_u32)
+  PKEY_WCN_ConnType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b84_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 5_u32)
+  PKEY_WCN_ConfigMethods = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b85_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 6_u32)
+  PKEY_WCN_RfBand = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b87_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 8_u32)
+  PKEY_WCN_AssocState = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b88_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 9_u32)
+  PKEY_WCN_ConfigError = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b89_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 10_u32)
+  PKEY_WCN_ConfigState = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b89_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 11_u32)
+  PKEY_WCN_DevicePasswordId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b89_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 12_u32)
+  PKEY_WCN_OSVersion = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b89_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 13_u32)
+  PKEY_WCN_VendorExtension = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b8a_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 14_u32)
+  PKEY_WCN_RegistrarType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x88190b8b_u32, 0x4684_u16, 0x11da_u16, StaticArray[0xa2_u8, 0x6a_u8, 0x0_u8, 0x2_u8, 0xb3_u8, 0x98_u8, 0x8e_u8, 0x81_u8]), 15_u32)
+  PKEY_Hardware_Devinst = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4097_u32)
+  PKEY_Hardware_DisplayAttribute = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 5_u32)
+  PKEY_Hardware_DriverDate = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 11_u32)
+  PKEY_Hardware_DriverProvider = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 10_u32)
+  PKEY_Hardware_DriverVersion = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 9_u32)
+  PKEY_Hardware_Function = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4099_u32)
+  PKEY_Hardware_Icon = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 3_u32)
+  PKEY_Hardware_Image = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4098_u32)
+  PKEY_Hardware_Manufacturer = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 6_u32)
+  PKEY_Hardware_Model = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 7_u32)
+  PKEY_Hardware_Name = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 2_u32)
+  PKEY_Hardware_SerialNumber = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 8_u32)
+  PKEY_Hardware_ShellAttributes = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4100_u32)
+  PKEY_Hardware_Status = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x5eaf3ef2_u32, 0xe0ca_u16, 0x4598_u16, StaticArray[0xbf_u8, 0x6_u8, 0x71_u8, 0xed_u8, 0x1d_u8, 0x9d_u8, 0xd9_u8, 0x53_u8]), 4096_u32)
+  PKEY_NAME = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xb725f130_u32, 0x47ef_u16, 0x101a_u16, StaticArray[0xa5_u8, 0xf1_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0xeb_u8, 0xac_u8]), 10_u32)
+  PKEY_Device_DeviceDesc = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 2_u32)
+  PKEY_Device_HardwareIds = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 3_u32)
+  PKEY_Device_CompatibleIds = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 4_u32)
+  PKEY_Device_Service = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 6_u32)
+  PKEY_Device_Class = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 9_u32)
+  PKEY_Device_ClassGuid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 10_u32)
+  PKEY_Device_Driver = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 11_u32)
+  PKEY_Device_ConfigFlags = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 12_u32)
+  PKEY_Device_Manufacturer = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 13_u32)
+  PKEY_Device_FriendlyName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 14_u32)
+  PKEY_Device_LocationInfo = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 15_u32)
+  PKEY_Device_PDOName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 16_u32)
+  PKEY_Device_Capabilities = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 17_u32)
+  PKEY_Device_UINumber = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 18_u32)
+  PKEY_Device_UpperFilters = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 19_u32)
+  PKEY_Device_LowerFilters = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 20_u32)
+  PKEY_Device_BusTypeGuid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 21_u32)
+  PKEY_Device_LegacyBusType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 22_u32)
+  PKEY_Device_BusNumber = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 23_u32)
+  PKEY_Device_EnumeratorName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 24_u32)
+  PKEY_Device_Security = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 25_u32)
+  PKEY_Device_SecuritySDS = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 26_u32)
+  PKEY_Device_DevType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 27_u32)
+  PKEY_Device_Exclusive = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 28_u32)
+  PKEY_Device_Characteristics = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 29_u32)
+  PKEY_Device_Address = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 30_u32)
+  PKEY_Device_UINumberDescFormat = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 31_u32)
+  PKEY_Device_PowerData = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 32_u32)
+  PKEY_Device_RemovalPolicy = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 33_u32)
+  PKEY_Device_RemovalPolicyDefault = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 34_u32)
+  PKEY_Device_RemovalPolicyOverride = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 35_u32)
+  PKEY_Device_InstallState = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 36_u32)
+  PKEY_Device_LocationPaths = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 37_u32)
+  PKEY_Device_BaseContainerId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa45c254e_u32, 0xdf1c_u16, 0x4efd_u16, StaticArray[0x80_u8, 0x20_u8, 0x67_u8, 0xd1_u8, 0x46_u8, 0xa8_u8, 0x50_u8, 0xe0_u8]), 38_u32)
+  PKEY_Device_DevNodeStatus = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 2_u32)
+  PKEY_Device_ProblemCode = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 3_u32)
+  PKEY_Device_EjectionRelations = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 4_u32)
+  PKEY_Device_RemovalRelations = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 5_u32)
+  PKEY_Device_PowerRelations = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 6_u32)
+  PKEY_Device_BusRelations = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 7_u32)
+  PKEY_Device_Parent = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 8_u32)
+  PKEY_Device_Children = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 9_u32)
+  PKEY_Device_Siblings = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 10_u32)
+  PKEY_Device_TransportRelations = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4340a6c5_u32, 0x93fa_u16, 0x4706_u16, StaticArray[0x97_u8, 0x2c_u8, 0x7b_u8, 0x64_u8, 0x80_u8, 0x8_u8, 0xa5_u8, 0xa7_u8]), 11_u32)
+  PKEY_Device_Reported = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x80497100_u32, 0x8c73_u16, 0x48b9_u16, StaticArray[0xaa_u8, 0xd9_u8, 0xce_u8, 0x38_u8, 0x7e_u8, 0x19_u8, 0xc5_u8, 0x6e_u8]), 2_u32)
+  PKEY_Device_Legacy = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x80497100_u32, 0x8c73_u16, 0x48b9_u16, StaticArray[0xaa_u8, 0xd9_u8, 0xce_u8, 0x38_u8, 0x7e_u8, 0x19_u8, 0xc5_u8, 0x6e_u8]), 3_u32)
+  PKEY_Device_InstanceId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x78c34fc8_u32, 0x104a_u16, 0x4aca_u16, StaticArray[0x9e_u8, 0xa4_u8, 0x52_u8, 0x4d_u8, 0x52_u8, 0x99_u8, 0x6e_u8, 0x57_u8]), 256_u32)
+  PKEY_Device_ContainerId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x8c7ed206_u32, 0x3f8a_u16, 0x4827_u16, StaticArray[0xb3_u8, 0xab_u8, 0xae_u8, 0x9e_u8, 0x1f_u8, 0xae_u8, 0xfc_u8, 0x6c_u8]), 2_u32)
+  PKEY_Device_ModelId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 2_u32)
+  PKEY_Device_FriendlyNameAttributes = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 3_u32)
+  PKEY_Device_ManufacturerAttributes = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 4_u32)
+  PKEY_Device_PresenceNotForDevice = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 5_u32)
+  PKEY_Device_SignalStrength = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 6_u32)
+  PKEY_Device_IsAssociateableByUserAction = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x80d81ea6_u32, 0x7473_u16, 0x4b0c_u16, StaticArray[0x82_u8, 0x16_u8, 0xef_u8, 0xc1_u8, 0x1a_u8, 0x2c_u8, 0x4c_u8, 0x8b_u8]), 7_u32)
+  PKEY_Numa_Proximity_Domain = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x540b947e_u32, 0x8b40_u16, 0x45bc_u16, StaticArray[0xa8_u8, 0xa2_u8, 0x6a_u8, 0xb_u8, 0x89_u8, 0x4c_u8, 0xbd_u8, 0xa2_u8]), 1_u32)
+  PKEY_Device_DHP_Rebalance_Policy = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x540b947e_u32, 0x8b40_u16, 0x45bc_u16, StaticArray[0xa8_u8, 0xa2_u8, 0x6a_u8, 0xb_u8, 0x89_u8, 0x4c_u8, 0xbd_u8, 0xa2_u8]), 2_u32)
+  PKEY_Device_Numa_Node = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x540b947e_u32, 0x8b40_u16, 0x45bc_u16, StaticArray[0xa8_u8, 0xa2_u8, 0x6a_u8, 0xb_u8, 0x89_u8, 0x4c_u8, 0xbd_u8, 0xa2_u8]), 3_u32)
+  PKEY_Device_BusReportedDeviceDesc = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x540b947e_u32, 0x8b40_u16, 0x45bc_u16, StaticArray[0xa8_u8, 0xa2_u8, 0x6a_u8, 0xb_u8, 0x89_u8, 0x4c_u8, 0xbd_u8, 0xa2_u8]), 4_u32)
+  PKEY_Device_InstallInProgress = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x83da6326_u32, 0x97a6_u16, 0x4088_u16, StaticArray[0x94_u8, 0x53_u8, 0xa1_u8, 0x92_u8, 0x3f_u8, 0x57_u8, 0x3b_u8, 0x29_u8]), 9_u32)
+  PKEY_Device_DriverDate = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 2_u32)
+  PKEY_Device_DriverVersion = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 3_u32)
+  PKEY_Device_DriverDesc = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 4_u32)
+  PKEY_Device_DriverInfPath = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 5_u32)
+  PKEY_Device_DriverInfSection = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 6_u32)
+  PKEY_Device_DriverInfSectionExt = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 7_u32)
+  PKEY_Device_MatchingDeviceId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 8_u32)
+  PKEY_Device_DriverProvider = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 9_u32)
+  PKEY_Device_DriverPropPageProvider = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 10_u32)
+  PKEY_Device_DriverCoInstallers = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 11_u32)
+  PKEY_Device_ResourcePickerTags = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 12_u32)
+  PKEY_Device_ResourcePickerExceptions = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 13_u32)
+  PKEY_Device_DriverRank = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 14_u32)
+  PKEY_Device_DriverLogoLevel = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 15_u32)
+  PKEY_Device_NoConnectSound = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 17_u32)
+  PKEY_Device_GenericDriverInstalled = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 18_u32)
+  PKEY_Device_AdditionalSoftwareRequested = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xa8b865dd_u32, 0x2e3d_u16, 0x4094_u16, StaticArray[0xad_u8, 0x97_u8, 0xe5_u8, 0x93_u8, 0xa7_u8, 0xc_u8, 0x75_u8, 0xd6_u8]), 19_u32)
+  PKEY_Device_SafeRemovalRequired = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xafd97640_u32, 0x86a3_u16, 0x4210_u16, StaticArray[0xb6_u8, 0x7c_u8, 0x28_u8, 0x9c_u8, 0x41_u8, 0xaa_u8, 0xbe_u8, 0x55_u8]), 2_u32)
+  PKEY_Device_SafeRemovalRequiredOverride = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xafd97640_u32, 0x86a3_u16, 0x4210_u16, StaticArray[0xb6_u8, 0x7c_u8, 0x28_u8, 0x9c_u8, 0x41_u8, 0xaa_u8, 0xbe_u8, 0x55_u8]), 3_u32)
+  PKEY_DrvPkg_Model = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 2_u32)
+  PKEY_DrvPkg_VendorWebSite = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 3_u32)
+  PKEY_DrvPkg_DetailedDescription = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 4_u32)
+  PKEY_DrvPkg_DocumentationLink = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 5_u32)
+  PKEY_DrvPkg_Icon = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 6_u32)
+  PKEY_DrvPkg_BrandingIcon = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xcf73bb51_u32, 0x3abf_u16, 0x44a2_u16, StaticArray[0x85_u8, 0xe0_u8, 0x9a_u8, 0x3d_u8, 0xc7_u8, 0xa1_u8, 0x21_u8, 0x32_u8]), 7_u32)
+  PKEY_DeviceClass_UpperFilters = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 19_u32)
+  PKEY_DeviceClass_LowerFilters = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 20_u32)
+  PKEY_DeviceClass_Security = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 25_u32)
+  PKEY_DeviceClass_SecuritySDS = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 26_u32)
+  PKEY_DeviceClass_DevType = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 27_u32)
+  PKEY_DeviceClass_Exclusive = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 28_u32)
+  PKEY_DeviceClass_Characteristics = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4321918b_u32, 0xf69e_u16, 0x470d_u16, StaticArray[0xa5_u8, 0xde_u8, 0x4d_u8, 0x88_u8, 0xc7_u8, 0x5a_u8, 0xd2_u8, 0x4b_u8]), 29_u32)
+  PKEY_DeviceClass_Name = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 2_u32)
+  PKEY_DeviceClass_ClassName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 3_u32)
+  PKEY_DeviceClass_Icon = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 4_u32)
+  PKEY_DeviceClass_ClassInstaller = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 5_u32)
+  PKEY_DeviceClass_PropPageProvider = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 6_u32)
+  PKEY_DeviceClass_NoInstallClass = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 7_u32)
+  PKEY_DeviceClass_NoDisplayClass = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 8_u32)
+  PKEY_DeviceClass_SilentInstall = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 9_u32)
+  PKEY_DeviceClass_NoUseClass = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 10_u32)
+  PKEY_DeviceClass_DefaultService = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 11_u32)
+  PKEY_DeviceClass_IconPath = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x259abffc_u32, 0x50a7_u16, 0x47ce_u16, StaticArray[0xaf_u8, 0x8_u8, 0x68_u8, 0xc9_u8, 0xa7_u8, 0xd7_u8, 0x33_u8, 0x66_u8]), 12_u32)
+  PKEY_DeviceClass_ClassCoInstallers = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x713d1703_u32, 0xa2e2_u16, 0x49f5_u16, StaticArray[0x92_u8, 0x14_u8, 0x56_u8, 0x47_u8, 0x2e_u8, 0xf3_u8, 0xda_u8, 0x5c_u8]), 2_u32)
+  PKEY_DeviceInterface_FriendlyName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x26e516e_u32, 0xb814_u16, 0x414b_u16, StaticArray[0x83_u8, 0xcd_u8, 0x85_u8, 0x6d_u8, 0x6f_u8, 0xef_u8, 0x48_u8, 0x22_u8]), 2_u32)
+  PKEY_DeviceInterface_Enabled = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x26e516e_u32, 0xb814_u16, 0x414b_u16, StaticArray[0x83_u8, 0xcd_u8, 0x85_u8, 0x6d_u8, 0x6f_u8, 0xef_u8, 0x48_u8, 0x22_u8]), 3_u32)
+  PKEY_DeviceInterface_ClassGuid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x26e516e_u32, 0xb814_u16, 0x414b_u16, StaticArray[0x83_u8, 0xcd_u8, 0x85_u8, 0x6d_u8, 0x6f_u8, 0xef_u8, 0x48_u8, 0x22_u8]), 4_u32)
+  PKEY_DeviceInterfaceClass_DefaultInterface = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x14c83a99_u32, 0xb3f_u16, 0x44b7_u16, StaticArray[0xbe_u8, 0x4c_u8, 0xa1_u8, 0x78_u8, 0xd3_u8, 0x99_u8, 0x5_u8, 0x64_u8]), 2_u32)
   FD_LONGHORN = 1_u32
   FD_SUBKEY = "SOFTWARE\\Microsoft\\Function Discovery\\"
   FCTN_CATEGORY_PNP = "Provider\\Microsoft.Base.PnP"
@@ -429,7 +429,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryNotificationVtbl,
+
+  record IFunctionDiscoveryNotificationVtable,
     query_interface : Proc(IFunctionDiscoveryNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryNotification*, UInt32),
     release : Proc(IFunctionDiscoveryNotification*, UInt32),
@@ -439,7 +440,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryNotification, lpVtbl : IFunctionDiscoveryNotificationVtbl* do
+  record IFunctionDiscoveryNotification, lpVtbl : IFunctionDiscoveryNotificationVtable* do
     GUID = LibC::GUID.new(0x5f6c1ba8_u32, 0x5330_u16, 0x422e_u16, StaticArray[0xa3_u8, 0x68_u8, 0x57_u8, 0x2b_u8, 0x24_u8, 0x4d_u8, 0x3f_u8, 0x87_u8])
     def query_interface(this : IFunctionDiscoveryNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -463,7 +464,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryVtbl,
+
+  record IFunctionDiscoveryVtable,
     query_interface : Proc(IFunctionDiscovery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscovery*, UInt32),
     release : Proc(IFunctionDiscovery*, UInt32),
@@ -476,7 +478,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscovery, lpVtbl : IFunctionDiscoveryVtbl* do
+  record IFunctionDiscovery, lpVtbl : IFunctionDiscoveryVtable* do
     GUID = LibC::GUID.new(0x4df99b70_u32, 0xe148_u16, 0x4432_u16, StaticArray[0xb0_u8, 0x4_u8, 0x4c_u8, 0x9e_u8, 0xeb_u8, 0x53_u8, 0x5a_u8, 0x5e_u8])
     def query_interface(this : IFunctionDiscovery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -509,19 +511,20 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionInstanceVtbl,
+
+  record IFunctionInstanceVtable,
     query_interface : Proc(IFunctionInstance*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionInstance*, UInt32),
     release : Proc(IFunctionInstance*, UInt32),
     query_service : Proc(IFunctionInstance*, LibC::GUID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(IFunctionInstance*, UInt16**, Win32cr::Foundation::HRESULT),
     get_provider_instance_id : Proc(IFunctionInstance*, UInt16**, Win32cr::Foundation::HRESULT),
-    open_property_store : Proc(IFunctionInstance*, Win32cr::System::Com::StructuredStorage::STGM, Void**, Win32cr::Foundation::HRESULT),
+    open_property_store : Proc(IFunctionInstance*, Win32cr::System::Com::STGM, Void**, Win32cr::Foundation::HRESULT),
     get_category : Proc(IFunctionInstance*, UInt16**, UInt16**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFunctionInstance, lpVtbl : IFunctionInstanceVtbl* do
+  record IFunctionInstance, lpVtbl : IFunctionInstanceVtable* do
     GUID = LibC::GUID.new(0x33591c10_u32, 0xbed_u16, 0x4f02_u16, StaticArray[0xb0_u8, 0xab_u8, 0x15_u8, 0x30_u8, 0xd5_u8, 0x53_u8, 0x3e_u8, 0xe9_u8])
     def query_interface(this : IFunctionInstance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -541,7 +544,7 @@ module Win32cr::Devices::FunctionDiscovery
     def get_provider_instance_id(this : IFunctionInstance*, ppszCoMemProviderInstanceIdentity : UInt16**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_provider_instance_id.call(this, ppszCoMemProviderInstanceIdentity)
     end
-    def open_property_store(this : IFunctionInstance*, dwStgAccess : Win32cr::System::Com::StructuredStorage::STGM, ppIPropertyStore : Void**) : Win32cr::Foundation::HRESULT
+    def open_property_store(this : IFunctionInstance*, dwStgAccess : Win32cr::System::Com::STGM, ppIPropertyStore : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_property_store.call(this, dwStgAccess, ppIPropertyStore)
     end
     def get_category(this : IFunctionInstance*, ppszCoMemCategory : UInt16**, ppszCoMemSubCategory : UInt16**) : Win32cr::Foundation::HRESULT
@@ -551,7 +554,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionInstanceCollectionVtbl,
+
+  record IFunctionInstanceCollectionVtable,
     query_interface : Proc(IFunctionInstanceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionInstanceCollection*, UInt32),
     release : Proc(IFunctionInstanceCollection*, UInt32),
@@ -565,7 +569,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionInstanceCollection, lpVtbl : IFunctionInstanceCollectionVtbl* do
+  record IFunctionInstanceCollection, lpVtbl : IFunctionInstanceCollectionVtable* do
     GUID = LibC::GUID.new(0xf0a3d895_u32, 0x855c_u16, 0x42a2_u16, StaticArray[0x94_u8, 0x8d_u8, 0x2f_u8, 0x97_u8, 0xd4_u8, 0x50_u8, 0xec_u8, 0xb1_u8])
     def query_interface(this : IFunctionInstanceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -601,7 +605,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IPropertyStoreCollectionVtbl,
+
+  record IPropertyStoreCollectionVtable,
     query_interface : Proc(IPropertyStoreCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPropertyStoreCollection*, UInt32),
     release : Proc(IPropertyStoreCollection*, UInt32),
@@ -615,7 +620,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IPropertyStoreCollection, lpVtbl : IPropertyStoreCollectionVtbl* do
+  record IPropertyStoreCollection, lpVtbl : IPropertyStoreCollectionVtable* do
     GUID = LibC::GUID.new(0xd14d9c30_u32, 0x12d2_u16, 0x42d8_u16, StaticArray[0xbc_u8, 0xe4_u8, 0xc6_u8, 0xc_u8, 0x2b_u8, 0xb2_u8, 0x26_u8, 0xfa_u8])
     def query_interface(this : IPropertyStoreCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -651,7 +656,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionInstanceQueryVtbl,
+
+  record IFunctionInstanceQueryVtable,
     query_interface : Proc(IFunctionInstanceQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionInstanceQuery*, UInt32),
     release : Proc(IFunctionInstanceQuery*, UInt32),
@@ -659,7 +665,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionInstanceQuery, lpVtbl : IFunctionInstanceQueryVtbl* do
+  record IFunctionInstanceQuery, lpVtbl : IFunctionInstanceQueryVtable* do
     GUID = LibC::GUID.new(0x6242bc6b_u32, 0x90ec_u16, 0x4b37_u16, StaticArray[0xbb_u8, 0x46_u8, 0xe2_u8, 0x29_u8, 0xfd_u8, 0x84_u8, 0xed_u8, 0x95_u8])
     def query_interface(this : IFunctionInstanceQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -677,17 +683,18 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionInstanceCollectionQueryVtbl,
+
+  record IFunctionInstanceCollectionQueryVtable,
     query_interface : Proc(IFunctionInstanceCollectionQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionInstanceCollectionQuery*, UInt32),
     release : Proc(IFunctionInstanceCollectionQuery*, UInt32),
     add_query_constraint : Proc(IFunctionInstanceCollectionQuery*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    add_property_constraint : Proc(IFunctionInstanceCollectionQuery*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Devices::FunctionDiscovery::PropertyConstraint, Win32cr::Foundation::HRESULT),
+    add_property_constraint : Proc(IFunctionInstanceCollectionQuery*, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Devices::FunctionDiscovery::PropertyConstraint, Win32cr::Foundation::HRESULT),
     execute : Proc(IFunctionInstanceCollectionQuery*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFunctionInstanceCollectionQuery, lpVtbl : IFunctionInstanceCollectionQueryVtbl* do
+  record IFunctionInstanceCollectionQuery, lpVtbl : IFunctionInstanceCollectionQueryVtable* do
     GUID = LibC::GUID.new(0x57cc6fd2_u32, 0xc09a_u16, 0x4289_u16, StaticArray[0xbb_u8, 0x72_u8, 0x25_u8, 0xf0_u8, 0x41_u8, 0x42_u8, 0x5_u8, 0x8e_u8])
     def query_interface(this : IFunctionInstanceCollectionQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -701,7 +708,7 @@ module Win32cr::Devices::FunctionDiscovery
     def add_query_constraint(this : IFunctionInstanceCollectionQuery*, pszConstraintName : Win32cr::Foundation::PWSTR, pszConstraintValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_query_constraint.call(this, pszConstraintName, pszConstraintValue)
     end
-    def add_property_constraint(this : IFunctionInstanceCollectionQuery*, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pv : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, enumPropertyConstraint : Win32cr::Devices::FunctionDiscovery::PropertyConstraint) : Win32cr::Foundation::HRESULT
+    def add_property_constraint(this : IFunctionInstanceCollectionQuery*, key : Win32cr::Foundation::PROPERTYKEY*, pv : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, enumPropertyConstraint : Win32cr::Devices::FunctionDiscovery::PropertyConstraint) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_constraint.call(this, key, pv, enumPropertyConstraint)
     end
     def execute(this : IFunctionInstanceCollectionQuery*, ppIFunctionInstanceCollection : Void**) : Win32cr::Foundation::HRESULT
@@ -711,7 +718,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryProviderVtbl,
+
+  record IFunctionDiscoveryProviderVtable,
     query_interface : Proc(IFunctionDiscoveryProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryProvider*, UInt32),
     release : Proc(IFunctionDiscoveryProvider*, UInt32),
@@ -726,7 +734,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryProvider, lpVtbl : IFunctionDiscoveryProviderVtbl* do
+  record IFunctionDiscoveryProvider, lpVtbl : IFunctionDiscoveryProviderVtable* do
     GUID = LibC::GUID.new(0xdcde394f_u32, 0x1478_u16, 0x4813_u16, StaticArray[0xa4_u8, 0x2_u8, 0xf6_u8, 0xfb_u8, 0x10_u8, 0x65_u8, 0x72_u8, 0x22_u8])
     def query_interface(this : IFunctionDiscoveryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -765,18 +773,19 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IProviderPropertiesVtbl,
+
+  record IProviderPropertiesVtable,
     query_interface : Proc(IProviderProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderProperties*, UInt32),
     release : Proc(IProviderProperties*, UInt32),
     get_count : Proc(IProviderProperties*, Void*, LibC::IntPtrT, UInt32*, Win32cr::Foundation::HRESULT),
-    get_at : Proc(IProviderProperties*, Void*, LibC::IntPtrT, UInt32, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::Foundation::HRESULT),
-    get_value : Proc(IProviderProperties*, Void*, LibC::IntPtrT, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
-    set_value : Proc(IProviderProperties*, Void*, LibC::IntPtrT, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT)
+    get_at : Proc(IProviderProperties*, Void*, LibC::IntPtrT, UInt32, Win32cr::Foundation::PROPERTYKEY*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(IProviderProperties*, Void*, LibC::IntPtrT, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT),
+    set_value : Proc(IProviderProperties*, Void*, LibC::IntPtrT, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IProviderProperties, lpVtbl : IProviderPropertiesVtbl* do
+  record IProviderProperties, lpVtbl : IProviderPropertiesVtable* do
     GUID = LibC::GUID.new(0xcf986ea6_u32, 0x3b5f_u16, 0x4c5f_u16, StaticArray[0xb8_u8, 0x8a_u8, 0x2f_u8, 0x8b_u8, 0x20_u8, 0xce_u8, 0xef_u8, 0x17_u8])
     def query_interface(this : IProviderProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -790,20 +799,21 @@ module Win32cr::Devices::FunctionDiscovery
     def get_count(this : IProviderProperties*, pIFunctionInstance : Void*, iProviderInstanceContext : LibC::IntPtrT, pdwCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_count.call(this, pIFunctionInstance, iProviderInstanceContext, pdwCount)
     end
-    def get_at(this : IProviderProperties*, pIFunctionInstance : Void*, iProviderInstanceContext : LibC::IntPtrT, dwIndex : UInt32, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
+    def get_at(this : IProviderProperties*, pIFunctionInstance : Void*, iProviderInstanceContext : LibC::IntPtrT, dwIndex : UInt32, pKey : Win32cr::Foundation::PROPERTYKEY*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_at.call(this, pIFunctionInstance, iProviderInstanceContext, dwIndex, pKey)
     end
-    def get_value(this : IProviderProperties*, pIFunctionInstance : Void*, iProviderInstanceContext : LibC::IntPtrT, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, ppropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    def get_value(this : IProviderProperties*, pIFunctionInstance : Void*, iProviderInstanceContext : LibC::IntPtrT, key : Win32cr::Foundation::PROPERTYKEY*, ppropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, pIFunctionInstance, iProviderInstanceContext, key, ppropVar)
     end
-    def set_value(this : IProviderProperties*, pIFunctionInstance : Void*, iProviderInstanceContext : LibC::IntPtrT, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, ppropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    def set_value(this : IProviderProperties*, pIFunctionInstance : Void*, iProviderInstanceContext : LibC::IntPtrT, key : Win32cr::Foundation::PROPERTYKEY*, ppropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value.call(this, pIFunctionInstance, iProviderInstanceContext, key, ppropVar)
     end
 
   end
 
   @[Extern]
-  record IProviderPublishingVtbl,
+
+  record IProviderPublishingVtable,
     query_interface : Proc(IProviderPublishing*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderPublishing*, UInt32),
     release : Proc(IProviderPublishing*, UInt32),
@@ -812,7 +822,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IProviderPublishing, lpVtbl : IProviderPublishingVtbl* do
+  record IProviderPublishing, lpVtbl : IProviderPublishingVtable* do
     GUID = LibC::GUID.new(0xcd1b9a04_u32, 0x206c_u16, 0x4a05_u16, StaticArray[0xa0_u8, 0xc8_u8, 0x16_u8, 0x35_u8, 0xa2_u8, 0x1a_u8, 0x2b_u8, 0x7c_u8])
     def query_interface(this : IProviderPublishing*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -833,7 +843,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryProviderFactoryVtbl,
+
+  record IFunctionDiscoveryProviderFactoryVtable,
     query_interface : Proc(IFunctionDiscoveryProviderFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryProviderFactory*, UInt32),
     release : Proc(IFunctionDiscoveryProviderFactory*, UInt32),
@@ -843,7 +854,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryProviderFactory, lpVtbl : IFunctionDiscoveryProviderFactoryVtbl* do
+  record IFunctionDiscoveryProviderFactory, lpVtbl : IFunctionDiscoveryProviderFactoryVtable* do
     GUID = LibC::GUID.new(0x86443ff0_u32, 0x1ad5_u16, 0x4e68_u16, StaticArray[0xa4_u8, 0x5a_u8, 0x40_u8, 0xc2_u8, 0xc3_u8, 0x29_u8, 0xde_u8, 0x3b_u8])
     def query_interface(this : IFunctionDiscoveryProviderFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -867,7 +878,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryProviderQueryVtbl,
+
+  record IFunctionDiscoveryProviderQueryVtable,
     query_interface : Proc(IFunctionDiscoveryProviderQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryProviderQuery*, UInt32),
     release : Proc(IFunctionDiscoveryProviderQuery*, UInt32),
@@ -878,7 +890,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryProviderQuery, lpVtbl : IFunctionDiscoveryProviderQueryVtbl* do
+  record IFunctionDiscoveryProviderQuery, lpVtbl : IFunctionDiscoveryProviderQueryVtable* do
     GUID = LibC::GUID.new(0x6876ea98_u32, 0xbaec_u16, 0x46db_u16, StaticArray[0xbc_u8, 0x20_u8, 0x75_u8, 0xa7_u8, 0x6e_u8, 0x26_u8, 0x7a_u8, 0x3a_u8])
     def query_interface(this : IFunctionDiscoveryProviderQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -905,7 +917,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IProviderQueryConstraintCollectionVtbl,
+
+  record IProviderQueryConstraintCollectionVtable,
     query_interface : Proc(IProviderQueryConstraintCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderQueryConstraintCollection*, UInt32),
     release : Proc(IProviderQueryConstraintCollection*, UInt32),
@@ -918,7 +931,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IProviderQueryConstraintCollection, lpVtbl : IProviderQueryConstraintCollectionVtbl* do
+  record IProviderQueryConstraintCollection, lpVtbl : IProviderQueryConstraintCollectionVtable* do
     GUID = LibC::GUID.new(0x9c243e11_u32, 0x3261_u16, 0x4bcd_u16, StaticArray[0xb9_u8, 0x22_u8, 0x84_u8, 0xa8_u8, 0x73_u8, 0xd4_u8, 0x60_u8, 0xae_u8])
     def query_interface(this : IProviderQueryConstraintCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -951,20 +964,21 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IProviderPropertyConstraintCollectionVtbl,
+
+  record IProviderPropertyConstraintCollectionVtable,
     query_interface : Proc(IProviderPropertyConstraintCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderPropertyConstraintCollection*, UInt32),
     release : Proc(IProviderPropertyConstraintCollection*, UInt32),
     get_count : Proc(IProviderPropertyConstraintCollection*, UInt32*, Win32cr::Foundation::HRESULT),
-    get : Proc(IProviderPropertyConstraintCollection*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, UInt32*, Win32cr::Foundation::HRESULT),
-    item : Proc(IProviderPropertyConstraintCollection*, UInt32, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, UInt32*, Win32cr::Foundation::HRESULT),
-    next__ : Proc(IProviderPropertyConstraintCollection*, Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, UInt32*, Win32cr::Foundation::HRESULT),
+    get : Proc(IProviderPropertyConstraintCollection*, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, UInt32*, Win32cr::Foundation::HRESULT),
+    item : Proc(IProviderPropertyConstraintCollection*, UInt32, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, UInt32*, Win32cr::Foundation::HRESULT),
+    next__ : Proc(IProviderPropertyConstraintCollection*, Win32cr::Foundation::PROPERTYKEY*, Win32cr::System::Com::StructuredStorage::PROPVARIANT*, UInt32*, Win32cr::Foundation::HRESULT),
     skip : Proc(IProviderPropertyConstraintCollection*, Win32cr::Foundation::HRESULT),
     reset : Proc(IProviderPropertyConstraintCollection*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IProviderPropertyConstraintCollection, lpVtbl : IProviderPropertyConstraintCollectionVtbl* do
+  record IProviderPropertyConstraintCollection, lpVtbl : IProviderPropertyConstraintCollectionVtable* do
     GUID = LibC::GUID.new(0xf4fae42f_u32, 0x5778_u16, 0x4a13_u16, StaticArray[0x85_u8, 0x40_u8, 0xb5_u8, 0xfd_u8, 0x8c_u8, 0x13_u8, 0x98_u8, 0xdd_u8])
     def query_interface(this : IProviderPropertyConstraintCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -978,13 +992,13 @@ module Win32cr::Devices::FunctionDiscovery
     def get_count(this : IProviderPropertyConstraintCollection*, pdwCount : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_count.call(this, pdwCount)
     end
-    def get(this : IProviderPropertyConstraintCollection*, key : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdwPropertyConstraint : UInt32*) : Win32cr::Foundation::HRESULT
+    def get(this : IProviderPropertyConstraintCollection*, key : Win32cr::Foundation::PROPERTYKEY*, pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdwPropertyConstraint : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get.call(this, key, pPropVar, pdwPropertyConstraint)
     end
-    def item(this : IProviderPropertyConstraintCollection*, dwIndex : UInt32, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdwPropertyConstraint : UInt32*) : Win32cr::Foundation::HRESULT
+    def item(this : IProviderPropertyConstraintCollection*, dwIndex : UInt32, pKey : Win32cr::Foundation::PROPERTYKEY*, pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdwPropertyConstraint : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, dwIndex, pKey, pPropVar, pdwPropertyConstraint)
     end
-    def next__(this : IProviderPropertyConstraintCollection*, pKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY*, pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdwPropertyConstraint : UInt32*) : Win32cr::Foundation::HRESULT
+    def next__(this : IProviderPropertyConstraintCollection*, pKey : Win32cr::Foundation::PROPERTYKEY*, pPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pdwPropertyConstraint : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.next__.call(this, pKey, pPropVar, pdwPropertyConstraint)
     end
     def skip(this : IProviderPropertyConstraintCollection*) : Win32cr::Foundation::HRESULT
@@ -997,7 +1011,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryServiceProviderVtbl,
+
+  record IFunctionDiscoveryServiceProviderVtable,
     query_interface : Proc(IFunctionDiscoveryServiceProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryServiceProvider*, UInt32),
     release : Proc(IFunctionDiscoveryServiceProvider*, UInt32),
@@ -1005,7 +1020,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryServiceProvider, lpVtbl : IFunctionDiscoveryServiceProviderVtbl* do
+  record IFunctionDiscoveryServiceProvider, lpVtbl : IFunctionDiscoveryServiceProviderVtable* do
     GUID = LibC::GUID.new(0x4c81ed02_u32, 0x1b04_u16, 0x43f2_u16, StaticArray[0xa4_u8, 0x51_u8, 0x69_u8, 0x96_u8, 0x6c_u8, 0xbc_u8, 0xd1_u8, 0xc2_u8])
     def query_interface(this : IFunctionDiscoveryServiceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1023,7 +1038,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IPNPXAssociationVtbl,
+
+  record IPNPXAssociationVtable,
     query_interface : Proc(IPNPXAssociation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPNPXAssociation*, UInt32),
     release : Proc(IPNPXAssociation*, UInt32),
@@ -1033,7 +1049,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IPNPXAssociation, lpVtbl : IPNPXAssociationVtbl* do
+  record IPNPXAssociation, lpVtbl : IPNPXAssociationVtable* do
     GUID = LibC::GUID.new(0xbd7e521_u32, 0x4da6_u16, 0x42d5_u16, StaticArray[0x81_u8, 0xba_u8, 0x19_u8, 0x81_u8, 0xb6_u8, 0xb9_u8, 0x40_u8, 0x75_u8])
     def query_interface(this : IPNPXAssociation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1057,7 +1073,8 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IPNPXDeviceAssociationVtbl,
+
+  record IPNPXDeviceAssociationVtable,
     query_interface : Proc(IPNPXDeviceAssociation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPNPXDeviceAssociation*, UInt32),
     release : Proc(IPNPXDeviceAssociation*, UInt32),
@@ -1067,7 +1084,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IPNPXDeviceAssociation, lpVtbl : IPNPXDeviceAssociationVtbl* do
+  record IPNPXDeviceAssociation, lpVtbl : IPNPXDeviceAssociationVtable* do
     GUID = LibC::GUID.new(0xeed366d0_u32, 0x35b8_u16, 0x4fc5_u16, StaticArray[0x8d_u8, 0x20_u8, 0x7e_u8, 0x5b_u8, 0xd3_u8, 0x1f_u8, 0x6d_u8, 0xed_u8])
     def query_interface(this : IPNPXDeviceAssociation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

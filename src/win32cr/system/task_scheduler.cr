@@ -1,6 +1,7 @@
 require "./com.cr"
 require "./../foundation.cr"
 require "./../ui/controls.cr"
+require "./variant.cr"
 
 module Win32cr::System::TaskScheduler
   extend self
@@ -45,8 +46,8 @@ module Win32cr::System::TaskScheduler
   TASK_TRIGGER_FLAG_KILL_AT_DURATION_END = 2_u32
   TASK_TRIGGER_FLAG_DISABLED = 4_u32
   TASK_MAX_RUN_TIMES = 1440_u32
-  CLSID_CTask = "148bd520-a2ab-11ce-b11f-00aa00530503"
-  CLSID_CTaskScheduler = "148bd52a-a2ab-11ce-b11f-00aa00530503"
+  CLSID_CTask = LibC::GUID.new(0x148bd520_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
+  CLSID_CTaskScheduler = LibC::GUID.new(0x148bd52a_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
 
   CLSID_TaskScheduler = LibC::GUID.new(0xf87369f_u32, 0xa4e5_u16, 0x4cfc_u16, StaticArray[0xbd_u8, 0x3e_u8, 0x73_u8, 0xe6_u8, 0x15_u8, 0x45_u8, 0x72_u8, 0xdd_u8])
 
@@ -223,7 +224,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskTriggerVtbl,
+
+  record ITaskTriggerVtable,
     query_interface : Proc(ITaskTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskTrigger*, UInt32),
     release : Proc(ITaskTrigger*, UInt32),
@@ -233,7 +235,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskTrigger, lpVtbl : ITaskTriggerVtbl* do
+  record ITaskTrigger, lpVtbl : ITaskTriggerVtable* do
     GUID = LibC::GUID.new(0x148bd52b_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
     def query_interface(this : ITaskTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -257,7 +259,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IScheduledWorkItemVtbl,
+
+  record IScheduledWorkItemVtable,
     query_interface : Proc(IScheduledWorkItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScheduledWorkItem*, UInt32),
     release : Proc(IScheduledWorkItem*, UInt32),
@@ -293,7 +296,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IScheduledWorkItem, lpVtbl : IScheduledWorkItemVtbl* do
+  record IScheduledWorkItem, lpVtbl : IScheduledWorkItemVtable* do
     GUID = LibC::GUID.new(0xa6b952f0_u32, 0xa4b1_u16, 0x11d0_u16, StaticArray[0x99_u8, 0x7d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0x87_u8, 0xec_u8])
     def query_interface(this : IScheduledWorkItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -395,7 +398,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskVtbl,
+
+  record ITaskVtable,
     query_interface : Proc(ITask*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITask*, UInt32),
     release : Proc(ITask*, UInt32),
@@ -443,7 +447,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITask, lpVtbl : ITaskVtbl* do
+  record ITask, lpVtbl : ITaskVtable* do
     GUID = LibC::GUID.new(0x148bd524_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
     def query_interface(this : ITask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -581,7 +585,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IEnumWorkItemsVtbl,
+
+  record IEnumWorkItemsVtable,
     query_interface : Proc(IEnumWorkItems*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumWorkItems*, UInt32),
     release : Proc(IEnumWorkItems*, UInt32),
@@ -592,7 +597,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IEnumWorkItems, lpVtbl : IEnumWorkItemsVtbl* do
+  record IEnumWorkItems, lpVtbl : IEnumWorkItemsVtable* do
     GUID = LibC::GUID.new(0x148bd528_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
     def query_interface(this : IEnumWorkItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -619,7 +624,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskSchedulerVtbl,
+
+  record ITaskSchedulerVtable,
     query_interface : Proc(ITaskScheduler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskScheduler*, UInt32),
     release : Proc(ITaskScheduler*, UInt32),
@@ -634,7 +640,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskScheduler, lpVtbl : ITaskSchedulerVtbl* do
+  record ITaskScheduler, lpVtbl : ITaskSchedulerVtable* do
     GUID = LibC::GUID.new(0x148bd527_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
     def query_interface(this : ITaskScheduler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -673,7 +679,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IProvideTaskPageVtbl,
+
+  record IProvideTaskPageVtable,
     query_interface : Proc(IProvideTaskPage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvideTaskPage*, UInt32),
     release : Proc(IProvideTaskPage*, UInt32),
@@ -681,7 +688,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IProvideTaskPage, lpVtbl : IProvideTaskPageVtbl* do
+  record IProvideTaskPage, lpVtbl : IProvideTaskPageVtable* do
     GUID = LibC::GUID.new(0x4086658a_u32, 0xcbbb_u16, 0x11cf_u16, StaticArray[0xb6_u8, 0x4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x65_u8])
     def query_interface(this : IProvideTaskPage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -699,21 +706,22 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskFolderCollectionVtbl,
+
+  record ITaskFolderCollectionVtable,
     query_interface : Proc(ITaskFolderCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskFolderCollection*, UInt32),
     release : Proc(ITaskFolderCollection*, UInt32),
     get_type_info_count : Proc(ITaskFolderCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskFolderCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskFolderCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskFolderCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITaskFolderCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ITaskFolderCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ITaskFolderCollection*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ITaskFolderCollection*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ITaskFolderCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITaskFolderCollection, lpVtbl : ITaskFolderCollectionVtbl* do
+  record ITaskFolderCollection, lpVtbl : ITaskFolderCollectionVtable* do
     GUID = LibC::GUID.new(0x79184a66_u32, 0x8664_u16, 0x423f_u16, StaticArray[0x97_u8, 0xf1_u8, 0x63_u8, 0x73_u8, 0x56_u8, 0xa5_u8, 0xd8_u8, 0x12_u8])
     def query_interface(this : ITaskFolderCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -733,13 +741,13 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskFolderCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskFolderCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskFolderCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ITaskFolderCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pCount)
     end
-    def get_Item(this : ITaskFolderCollection*, index : Win32cr::System::Com::VARIANT, ppFolder : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ITaskFolderCollection*, index : Win32cr::System::Variant::VARIANT, ppFolder : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, ppFolder)
     end
     def get__NewEnum(this : ITaskFolderCollection*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -749,19 +757,20 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskServiceVtbl,
+
+  record ITaskServiceVtable,
     query_interface : Proc(ITaskService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskService*, UInt32),
     release : Proc(ITaskService*, UInt32),
     get_type_info_count : Proc(ITaskService*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskService*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskService*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskService*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITaskService*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_folder : Proc(ITaskService*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_running_tasks : Proc(ITaskService*, Int32, Void**, Win32cr::Foundation::HRESULT),
     new_task : Proc(ITaskService*, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    connect : Proc(ITaskService*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_Connected : Proc(ITaskService*, Int16*, Win32cr::Foundation::HRESULT),
+    connect : Proc(ITaskService*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Connected : Proc(ITaskService*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TargetServer : Proc(ITaskService*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ConnectedUser : Proc(ITaskService*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ConnectedDomain : Proc(ITaskService*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -769,7 +778,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskService, lpVtbl : ITaskServiceVtbl* do
+  record ITaskService, lpVtbl : ITaskServiceVtable* do
     GUID = LibC::GUID.new(0x2faba4c7_u32, 0x4da9_u16, 0x4013_u16, StaticArray[0x96_u8, 0x97_u8, 0x20_u8, 0xcc_u8, 0x3f_u8, 0xd4_u8, 0xf_u8, 0x85_u8])
     def query_interface(this : ITaskService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -789,8 +798,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskService*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskService*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskService*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_folder(this : ITaskService*, path : Win32cr::Foundation::BSTR, ppFolder : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_folder.call(this, path, ppFolder)
@@ -801,10 +810,10 @@ module Win32cr::System::TaskScheduler
     def new_task(this : ITaskService*, flags : UInt32, ppDefinition : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.new_task.call(this, flags, ppDefinition)
     end
-    def connect(this : ITaskService*, serverName : Win32cr::System::Com::VARIANT, user : Win32cr::System::Com::VARIANT, domain : Win32cr::System::Com::VARIANT, password : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def connect(this : ITaskService*, serverName : Win32cr::System::Variant::VARIANT, user : Win32cr::System::Variant::VARIANT, domain : Win32cr::System::Variant::VARIANT, password : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connect.call(this, serverName, user, domain, password)
     end
-    def get_Connected(this : ITaskService*, pConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Connected(this : ITaskService*, pConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Connected.call(this, pConnected)
     end
     def get_TargetServer(this : ITaskService*, pServer : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -823,7 +832,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskHandlerVtbl,
+
+  record ITaskHandlerVtable,
     query_interface : Proc(ITaskHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskHandler*, UInt32),
     release : Proc(ITaskHandler*, UInt32),
@@ -834,7 +844,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskHandler, lpVtbl : ITaskHandlerVtbl* do
+  record ITaskHandler, lpVtbl : ITaskHandlerVtable* do
     GUID = LibC::GUID.new(0x839d7762_u32, 0x5121_u16, 0x4009_u16, StaticArray[0x92_u8, 0x34_u8, 0x4f_u8, 0xd_u8, 0x19_u8, 0x39_u8, 0x4f_u8, 0x4_u8])
     def query_interface(this : ITaskHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -861,7 +871,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskHandlerStatusVtbl,
+
+  record ITaskHandlerStatusVtable,
     query_interface : Proc(ITaskHandlerStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskHandlerStatus*, UInt32),
     release : Proc(ITaskHandlerStatus*, UInt32),
@@ -870,7 +881,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskHandlerStatus, lpVtbl : ITaskHandlerStatusVtbl* do
+  record ITaskHandlerStatus, lpVtbl : ITaskHandlerStatusVtable* do
     GUID = LibC::GUID.new(0xeaec7a8f_u32, 0x27a0_u16, 0x4ddc_u16, StaticArray[0x86_u8, 0x75_u8, 0x14_u8, 0x72_u8, 0x6a_u8, 0x1_u8, 0xa3_u8, 0x8a_u8])
     def query_interface(this : ITaskHandlerStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -891,7 +902,8 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskVariablesVtbl,
+
+  record ITaskVariablesVtable,
     query_interface : Proc(ITaskVariables*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskVariables*, UInt32),
     release : Proc(ITaskVariables*, UInt32),
@@ -901,7 +913,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskVariables, lpVtbl : ITaskVariablesVtbl* do
+  record ITaskVariables, lpVtbl : ITaskVariablesVtable* do
     GUID = LibC::GUID.new(0x3e4c9351_u32, 0xd966_u16, 0x4b8b_u16, StaticArray[0xbb_u8, 0x87_u8, 0xce_u8, 0xba_u8, 0x68_u8, 0xbb_u8, 0x1_u8, 0x7_u8])
     def query_interface(this : ITaskVariables*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -925,14 +937,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskNamedValuePairVtbl,
+
+  record ITaskNamedValuePairVtable,
     query_interface : Proc(ITaskNamedValuePair*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskNamedValuePair*, UInt32),
     release : Proc(ITaskNamedValuePair*, UInt32),
     get_type_info_count : Proc(ITaskNamedValuePair*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskNamedValuePair*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskNamedValuePair*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskNamedValuePair*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITaskNamedValuePair*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITaskNamedValuePair*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(ITaskNamedValuePair*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Value : Proc(ITaskNamedValuePair*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -940,7 +953,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskNamedValuePair, lpVtbl : ITaskNamedValuePairVtbl* do
+  record ITaskNamedValuePair, lpVtbl : ITaskNamedValuePairVtable* do
     GUID = LibC::GUID.new(0x39038068_u32, 0x2b46_u16, 0x4afd_u16, StaticArray[0x86_u8, 0x62_u8, 0x7b_u8, 0xb6_u8, 0xf8_u8, 0x68_u8, 0xd2_u8, 0x21_u8])
     def query_interface(this : ITaskNamedValuePair*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -960,8 +973,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskNamedValuePair*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskNamedValuePair*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskNamedValuePair*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ITaskNamedValuePair*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pName)
@@ -979,14 +992,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskNamedValueCollectionVtbl,
+
+  record ITaskNamedValueCollectionVtable,
     query_interface : Proc(ITaskNamedValueCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskNamedValueCollection*, UInt32),
     release : Proc(ITaskNamedValueCollection*, UInt32),
     get_type_info_count : Proc(ITaskNamedValueCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskNamedValueCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskNamedValueCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskNamedValueCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITaskNamedValueCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ITaskNamedValueCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(ITaskNamedValueCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ITaskNamedValueCollection*, Void**, Win32cr::Foundation::HRESULT),
@@ -996,7 +1010,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskNamedValueCollection, lpVtbl : ITaskNamedValueCollectionVtbl* do
+  record ITaskNamedValueCollection, lpVtbl : ITaskNamedValueCollectionVtable* do
     GUID = LibC::GUID.new(0xb4ef826b_u32, 0x63c3_u16, 0x46e4_u16, StaticArray[0xa5_u8, 0x4_u8, 0xef_u8, 0x69_u8, 0xe4_u8, 0xf7_u8, 0xea_u8, 0x4d_u8])
     def query_interface(this : ITaskNamedValueCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1016,8 +1030,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskNamedValueCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskNamedValueCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskNamedValueCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ITaskNamedValueCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pCount)
@@ -1041,14 +1055,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRunningTaskVtbl,
+
+  record IRunningTaskVtable,
     query_interface : Proc(IRunningTask*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRunningTask*, UInt32),
     release : Proc(IRunningTask*, UInt32),
     get_type_info_count : Proc(IRunningTask*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRunningTask*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRunningTask*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRunningTask*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRunningTask*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IRunningTask*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_InstanceGuid : Proc(IRunningTask*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IRunningTask*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1060,7 +1075,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRunningTask, lpVtbl : IRunningTaskVtbl* do
+  record IRunningTask, lpVtbl : IRunningTaskVtable* do
     GUID = LibC::GUID.new(0x653758fb_u32, 0x7b9a_u16, 0x4f1e_u16, StaticArray[0xa4_u8, 0x71_u8, 0xbe_u8, 0xeb_u8, 0x8e_u8, 0x9b_u8, 0x83_u8, 0x4e_u8])
     def query_interface(this : IRunningTask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1080,8 +1095,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IRunningTask*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRunningTask*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRunningTask*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IRunningTask*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pName)
@@ -1111,21 +1126,22 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRunningTaskCollectionVtbl,
+
+  record IRunningTaskCollectionVtable,
     query_interface : Proc(IRunningTaskCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRunningTaskCollection*, UInt32),
     release : Proc(IRunningTaskCollection*, UInt32),
     get_type_info_count : Proc(IRunningTaskCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRunningTaskCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRunningTaskCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRunningTaskCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRunningTaskCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IRunningTaskCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IRunningTaskCollection*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IRunningTaskCollection*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IRunningTaskCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRunningTaskCollection, lpVtbl : IRunningTaskCollectionVtbl* do
+  record IRunningTaskCollection, lpVtbl : IRunningTaskCollectionVtable* do
     GUID = LibC::GUID.new(0x6a67614b_u32, 0x6828_u16, 0x4fec_u16, StaticArray[0xaa_u8, 0x54_u8, 0x6d_u8, 0x52_u8, 0xe8_u8, 0xf1_u8, 0xf2_u8, 0xdb_u8])
     def query_interface(this : IRunningTaskCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1145,13 +1161,13 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IRunningTaskCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRunningTaskCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRunningTaskCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IRunningTaskCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pCount)
     end
-    def get_Item(this : IRunningTaskCollection*, index : Win32cr::System::Com::VARIANT, ppRunningTask : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IRunningTaskCollection*, index : Win32cr::System::Variant::VARIANT, ppRunningTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, ppRunningTask)
     end
     def get__NewEnum(this : IRunningTaskCollection*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -1161,21 +1177,22 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRegisteredTaskVtbl,
+
+  record IRegisteredTaskVtable,
     query_interface : Proc(IRegisteredTask*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegisteredTask*, UInt32),
     release : Proc(IRegisteredTask*, UInt32),
     get_type_info_count : Proc(IRegisteredTask*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRegisteredTask*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRegisteredTask*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRegisteredTask*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRegisteredTask*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IRegisteredTask*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Path : Proc(IRegisteredTask*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_State : Proc(IRegisteredTask*, Win32cr::System::TaskScheduler::TASK_STATE*, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IRegisteredTask*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IRegisteredTask*, Int16, Win32cr::Foundation::HRESULT),
-    run : Proc(IRegisteredTask*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    run_ex : Proc(IRegisteredTask*, Win32cr::System::Com::VARIANT, Int32, Int32, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IRegisteredTask*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IRegisteredTask*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    run : Proc(IRegisteredTask*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    run_ex : Proc(IRegisteredTask*, Win32cr::System::Variant::VARIANT, Int32, Int32, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_instances : Proc(IRegisteredTask*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_LastRunTime : Proc(IRegisteredTask*, Float64*, Win32cr::Foundation::HRESULT),
     get_LastTaskResult : Proc(IRegisteredTask*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1190,7 +1207,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRegisteredTask, lpVtbl : IRegisteredTaskVtbl* do
+  record IRegisteredTask, lpVtbl : IRegisteredTaskVtable* do
     GUID = LibC::GUID.new(0x9c86f320_u32, 0xdee3_u16, 0x4dd1_u16, StaticArray[0xb9_u8, 0x72_u8, 0xa3_u8, 0x3_u8, 0xf2_u8, 0x6b_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : IRegisteredTask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1210,8 +1227,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IRegisteredTask*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRegisteredTask*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRegisteredTask*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IRegisteredTask*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pName)
@@ -1222,16 +1239,16 @@ module Win32cr::System::TaskScheduler
     def get_State(this : IRegisteredTask*, pState : Win32cr::System::TaskScheduler::TASK_STATE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_State.call(this, pState)
     end
-    def get_Enabled(this : IRegisteredTask*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IRegisteredTask*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IRegisteredTask*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IRegisteredTask*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
-    def run(this : IRegisteredTask*, params : Win32cr::System::Com::VARIANT, ppRunningTask : Void**) : Win32cr::Foundation::HRESULT
+    def run(this : IRegisteredTask*, params : Win32cr::System::Variant::VARIANT, ppRunningTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run.call(this, params, ppRunningTask)
     end
-    def run_ex(this : IRegisteredTask*, params : Win32cr::System::Com::VARIANT, flags : Int32, sessionID : Int32, user : Win32cr::Foundation::BSTR, ppRunningTask : Void**) : Win32cr::Foundation::HRESULT
+    def run_ex(this : IRegisteredTask*, params : Win32cr::System::Variant::VARIANT, flags : Int32, sessionID : Int32, user : Win32cr::Foundation::BSTR, ppRunningTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.run_ex.call(this, params, flags, sessionID, user, ppRunningTask)
     end
     def get_instances(this : IRegisteredTask*, flags : Int32, ppRunningTasks : Void**) : Win32cr::Foundation::HRESULT
@@ -1271,14 +1288,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITriggerVtbl,
+
+  record ITriggerVtable,
     query_interface : Proc(ITrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITrigger*, UInt32),
     release : Proc(ITrigger*, UInt32),
     get_type_info_count : Proc(ITrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(ITrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(ITrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(ITrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1290,12 +1308,12 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(ITrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(ITrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(ITrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(ITrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(ITrigger*, Int16, Win32cr::Foundation::HRESULT)
+    get_Enabled : Proc(ITrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(ITrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITrigger, lpVtbl : ITriggerVtbl* do
+  record ITrigger, lpVtbl : ITriggerVtable* do
     GUID = LibC::GUID.new(0x9941815_u32, 0xea89_u16, 0x4b5b_u16, StaticArray[0x89_u8, 0xe0_u8, 0x2a_u8, 0x77_u8, 0x38_u8, 0x1_u8, 0xfa_u8, 0xc3_u8])
     def query_interface(this : ITrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1315,8 +1333,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : ITrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1351,24 +1369,25 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : ITrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : ITrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : ITrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : ITrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : ITrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
 
   end
 
   @[Extern]
-  record IIdleTriggerVtbl,
+
+  record IIdleTriggerVtable,
     query_interface : Proc(IIdleTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIdleTrigger*, UInt32),
     release : Proc(IIdleTrigger*, UInt32),
     get_type_info_count : Proc(IIdleTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IIdleTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IIdleTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IIdleTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IIdleTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IIdleTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IIdleTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IIdleTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1380,12 +1399,12 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(IIdleTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(IIdleTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(IIdleTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IIdleTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IIdleTrigger*, Int16, Win32cr::Foundation::HRESULT)
+    get_Enabled : Proc(IIdleTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IIdleTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IIdleTrigger, lpVtbl : IIdleTriggerVtbl* do
+  record IIdleTrigger, lpVtbl : IIdleTriggerVtable* do
     GUID = LibC::GUID.new(0xd537d2b0_u32, 0x9fb3_u16, 0x4d34_u16, StaticArray[0x97_u8, 0x39_u8, 0x1f_u8, 0xf5_u8, 0xce_u8, 0x7b_u8, 0x1e_u8, 0xf3_u8])
     def query_interface(this : IIdleTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1405,8 +1424,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IIdleTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IIdleTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IIdleTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IIdleTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1441,24 +1460,25 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : IIdleTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : IIdleTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IIdleTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IIdleTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IIdleTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
 
   end
 
   @[Extern]
-  record ILogonTriggerVtbl,
+
+  record ILogonTriggerVtable,
     query_interface : Proc(ILogonTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILogonTrigger*, UInt32),
     release : Proc(ILogonTrigger*, UInt32),
     get_type_info_count : Proc(ILogonTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ILogonTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ILogonTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ILogonTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ILogonTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(ILogonTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(ILogonTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(ILogonTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1470,8 +1490,8 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(ILogonTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(ILogonTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(ILogonTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(ILogonTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(ILogonTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(ILogonTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(ILogonTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Delay : Proc(ILogonTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Delay : Proc(ILogonTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_UserId : Proc(ILogonTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1479,7 +1499,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ILogonTrigger, lpVtbl : ILogonTriggerVtbl* do
+  record ILogonTrigger, lpVtbl : ILogonTriggerVtable* do
     GUID = LibC::GUID.new(0x72dade38_u32, 0xfae4_u16, 0x4b3e_u16, StaticArray[0xba_u8, 0xf4_u8, 0x5d_u8, 0x0_u8, 0x9a_u8, 0xf0_u8, 0x2b_u8, 0x1c_u8])
     def query_interface(this : ILogonTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1499,8 +1519,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ILogonTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ILogonTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ILogonTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : ILogonTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1535,10 +1555,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : ILogonTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : ILogonTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : ILogonTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : ILogonTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : ILogonTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_Delay(this : ILogonTrigger*, pDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1557,14 +1577,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ISessionStateChangeTriggerVtbl,
+
+  record ISessionStateChangeTriggerVtable,
     query_interface : Proc(ISessionStateChangeTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISessionStateChangeTrigger*, UInt32),
     release : Proc(ISessionStateChangeTrigger*, UInt32),
     get_type_info_count : Proc(ISessionStateChangeTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISessionStateChangeTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISessionStateChangeTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISessionStateChangeTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISessionStateChangeTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(ISessionStateChangeTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1576,8 +1597,8 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(ISessionStateChangeTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(ISessionStateChangeTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Delay : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Delay : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_UserId : Proc(ISessionStateChangeTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1587,7 +1608,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ISessionStateChangeTrigger, lpVtbl : ISessionStateChangeTriggerVtbl* do
+  record ISessionStateChangeTrigger, lpVtbl : ISessionStateChangeTriggerVtable* do
     GUID = LibC::GUID.new(0x754da71b_u32, 0x4385_u16, 0x4475_u16, StaticArray[0x9d_u8, 0xd9_u8, 0x59_u8, 0x82_u8, 0x94_u8, 0xfa_u8, 0x36_u8, 0x41_u8])
     def query_interface(this : ISessionStateChangeTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1607,8 +1628,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ISessionStateChangeTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISessionStateChangeTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISessionStateChangeTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : ISessionStateChangeTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1643,10 +1664,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : ISessionStateChangeTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : ISessionStateChangeTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : ISessionStateChangeTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : ISessionStateChangeTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : ISessionStateChangeTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_Delay(this : ISessionStateChangeTrigger*, pDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1671,14 +1692,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IEventTriggerVtbl,
+
+  record IEventTriggerVtable,
     query_interface : Proc(IEventTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventTrigger*, UInt32),
     release : Proc(IEventTrigger*, UInt32),
     get_type_info_count : Proc(IEventTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IEventTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IEventTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IEventTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IEventTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IEventTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IEventTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IEventTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1690,8 +1712,8 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(IEventTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(IEventTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(IEventTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IEventTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IEventTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IEventTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IEventTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Subscription : Proc(IEventTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Subscription : Proc(IEventTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Delay : Proc(IEventTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1701,7 +1723,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IEventTrigger, lpVtbl : IEventTriggerVtbl* do
+  record IEventTrigger, lpVtbl : IEventTriggerVtable* do
     GUID = LibC::GUID.new(0xd45b0167_u32, 0x9653_u16, 0x4eef_u16, StaticArray[0xb9_u8, 0x4f_u8, 0x7_u8, 0x32_u8, 0xca_u8, 0x7a_u8, 0xf2_u8, 0x51_u8])
     def query_interface(this : IEventTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1721,8 +1743,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IEventTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IEventTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IEventTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IEventTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1757,10 +1779,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : IEventTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : IEventTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IEventTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IEventTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IEventTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_Subscription(this : IEventTrigger*, pQuery : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1785,14 +1807,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITimeTriggerVtbl,
+
+  record ITimeTriggerVtable,
     query_interface : Proc(ITimeTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITimeTrigger*, UInt32),
     release : Proc(ITimeTrigger*, UInt32),
     get_type_info_count : Proc(ITimeTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITimeTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITimeTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITimeTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITimeTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(ITimeTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(ITimeTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(ITimeTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1804,14 +1827,14 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(ITimeTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(ITimeTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(ITimeTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(ITimeTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(ITimeTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(ITimeTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(ITimeTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RandomDelay : Proc(ITimeTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RandomDelay : Proc(ITimeTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITimeTrigger, lpVtbl : ITimeTriggerVtbl* do
+  record ITimeTrigger, lpVtbl : ITimeTriggerVtable* do
     GUID = LibC::GUID.new(0xb45747e0_u32, 0xeba7_u16, 0x4276_u16, StaticArray[0x9f_u8, 0x29_u8, 0x85_u8, 0xc5_u8, 0xbb_u8, 0x30_u8, 0x0_u8, 0x6_u8])
     def query_interface(this : ITimeTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1831,8 +1854,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITimeTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITimeTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITimeTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : ITimeTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1867,10 +1890,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : ITimeTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : ITimeTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : ITimeTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : ITimeTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : ITimeTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_RandomDelay(this : ITimeTrigger*, pRandomDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1883,14 +1906,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IDailyTriggerVtbl,
+
+  record IDailyTriggerVtable,
     query_interface : Proc(IDailyTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDailyTrigger*, UInt32),
     release : Proc(IDailyTrigger*, UInt32),
     get_type_info_count : Proc(IDailyTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IDailyTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IDailyTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IDailyTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IDailyTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IDailyTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IDailyTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IDailyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1902,8 +1926,8 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(IDailyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(IDailyTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(IDailyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IDailyTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IDailyTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IDailyTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IDailyTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DaysInterval : Proc(IDailyTrigger*, Int16*, Win32cr::Foundation::HRESULT),
     put_DaysInterval : Proc(IDailyTrigger*, Int16, Win32cr::Foundation::HRESULT),
     get_RandomDelay : Proc(IDailyTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1911,7 +1935,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IDailyTrigger, lpVtbl : IDailyTriggerVtbl* do
+  record IDailyTrigger, lpVtbl : IDailyTriggerVtable* do
     GUID = LibC::GUID.new(0x126c5cd8_u32, 0xb288_u16, 0x41d5_u16, StaticArray[0x8d_u8, 0xbf_u8, 0xe4_u8, 0x91_u8, 0x44_u8, 0x6a_u8, 0xdc_u8, 0x5c_u8])
     def query_interface(this : IDailyTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1931,8 +1955,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IDailyTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IDailyTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IDailyTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IDailyTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -1967,10 +1991,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : IDailyTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : IDailyTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IDailyTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IDailyTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IDailyTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_DaysInterval(this : IDailyTrigger*, pDays : Int16*) : Win32cr::Foundation::HRESULT
@@ -1989,14 +2013,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IWeeklyTriggerVtbl,
+
+  record IWeeklyTriggerVtable,
     query_interface : Proc(IWeeklyTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWeeklyTrigger*, UInt32),
     release : Proc(IWeeklyTrigger*, UInt32),
     get_type_info_count : Proc(IWeeklyTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IWeeklyTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IWeeklyTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IWeeklyTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IWeeklyTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IWeeklyTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IWeeklyTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IWeeklyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2008,8 +2033,8 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(IWeeklyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(IWeeklyTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(IWeeklyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IWeeklyTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IWeeklyTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IWeeklyTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IWeeklyTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DaysOfWeek : Proc(IWeeklyTrigger*, Int16*, Win32cr::Foundation::HRESULT),
     put_DaysOfWeek : Proc(IWeeklyTrigger*, Int16, Win32cr::Foundation::HRESULT),
     get_WeeksInterval : Proc(IWeeklyTrigger*, Int16*, Win32cr::Foundation::HRESULT),
@@ -2019,7 +2044,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IWeeklyTrigger, lpVtbl : IWeeklyTriggerVtbl* do
+  record IWeeklyTrigger, lpVtbl : IWeeklyTriggerVtable* do
     GUID = LibC::GUID.new(0x5038fc98_u32, 0x82ff_u16, 0x436d_u16, StaticArray[0x87_u8, 0x28_u8, 0xa5_u8, 0x12_u8, 0xa5_u8, 0x7c_u8, 0x9d_u8, 0xc1_u8])
     def query_interface(this : IWeeklyTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2039,8 +2064,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IWeeklyTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IWeeklyTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IWeeklyTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IWeeklyTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -2075,10 +2100,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : IWeeklyTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : IWeeklyTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IWeeklyTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IWeeklyTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IWeeklyTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_DaysOfWeek(this : IWeeklyTrigger*, pDays : Int16*) : Win32cr::Foundation::HRESULT
@@ -2103,14 +2128,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IMonthlyTriggerVtbl,
+
+  record IMonthlyTriggerVtable,
     query_interface : Proc(IMonthlyTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMonthlyTrigger*, UInt32),
     release : Proc(IMonthlyTrigger*, UInt32),
     get_type_info_count : Proc(IMonthlyTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMonthlyTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMonthlyTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMonthlyTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMonthlyTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IMonthlyTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IMonthlyTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IMonthlyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2122,20 +2148,20 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(IMonthlyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(IMonthlyTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(IMonthlyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IMonthlyTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IMonthlyTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IMonthlyTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IMonthlyTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DaysOfMonth : Proc(IMonthlyTrigger*, Int32*, Win32cr::Foundation::HRESULT),
     put_DaysOfMonth : Proc(IMonthlyTrigger*, Int32, Win32cr::Foundation::HRESULT),
     get_MonthsOfYear : Proc(IMonthlyTrigger*, Int16*, Win32cr::Foundation::HRESULT),
     put_MonthsOfYear : Proc(IMonthlyTrigger*, Int16, Win32cr::Foundation::HRESULT),
-    get_RunOnLastDayOfMonth : Proc(IMonthlyTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_RunOnLastDayOfMonth : Proc(IMonthlyTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_RunOnLastDayOfMonth : Proc(IMonthlyTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_RunOnLastDayOfMonth : Proc(IMonthlyTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RandomDelay : Proc(IMonthlyTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RandomDelay : Proc(IMonthlyTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMonthlyTrigger, lpVtbl : IMonthlyTriggerVtbl* do
+  record IMonthlyTrigger, lpVtbl : IMonthlyTriggerVtable* do
     GUID = LibC::GUID.new(0x97c45ef1_u32, 0x6b02_u16, 0x4a1a_u16, StaticArray[0x9c_u8, 0xe_u8, 0x1e_u8, 0xbf_u8, 0xba_u8, 0x15_u8, 0x0_u8, 0xac_u8])
     def query_interface(this : IMonthlyTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2155,8 +2181,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IMonthlyTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMonthlyTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMonthlyTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IMonthlyTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -2191,10 +2217,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : IMonthlyTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : IMonthlyTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IMonthlyTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IMonthlyTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IMonthlyTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_DaysOfMonth(this : IMonthlyTrigger*, pDays : Int32*) : Win32cr::Foundation::HRESULT
@@ -2209,10 +2235,10 @@ module Win32cr::System::TaskScheduler
     def put_MonthsOfYear(this : IMonthlyTrigger*, months : Int16) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MonthsOfYear.call(this, months)
     end
-    def get_RunOnLastDayOfMonth(this : IMonthlyTrigger*, pLastDay : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RunOnLastDayOfMonth(this : IMonthlyTrigger*, pLastDay : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RunOnLastDayOfMonth.call(this, pLastDay)
     end
-    def put_RunOnLastDayOfMonth(this : IMonthlyTrigger*, lastDay : Int16) : Win32cr::Foundation::HRESULT
+    def put_RunOnLastDayOfMonth(this : IMonthlyTrigger*, lastDay : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RunOnLastDayOfMonth.call(this, lastDay)
     end
     def get_RandomDelay(this : IMonthlyTrigger*, pRandomDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2225,14 +2251,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IMonthlyDOWTriggerVtbl,
+
+  record IMonthlyDOWTriggerVtable,
     query_interface : Proc(IMonthlyDOWTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMonthlyDOWTrigger*, UInt32),
     release : Proc(IMonthlyDOWTrigger*, UInt32),
     get_type_info_count : Proc(IMonthlyDOWTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMonthlyDOWTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMonthlyDOWTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMonthlyDOWTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMonthlyDOWTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IMonthlyDOWTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2244,22 +2271,22 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IMonthlyDOWTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IMonthlyDOWTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DaysOfWeek : Proc(IMonthlyDOWTrigger*, Int16*, Win32cr::Foundation::HRESULT),
     put_DaysOfWeek : Proc(IMonthlyDOWTrigger*, Int16, Win32cr::Foundation::HRESULT),
     get_WeeksOfMonth : Proc(IMonthlyDOWTrigger*, Int16*, Win32cr::Foundation::HRESULT),
     put_WeeksOfMonth : Proc(IMonthlyDOWTrigger*, Int16, Win32cr::Foundation::HRESULT),
     get_MonthsOfYear : Proc(IMonthlyDOWTrigger*, Int16*, Win32cr::Foundation::HRESULT),
     put_MonthsOfYear : Proc(IMonthlyDOWTrigger*, Int16, Win32cr::Foundation::HRESULT),
-    get_RunOnLastWeekOfMonth : Proc(IMonthlyDOWTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_RunOnLastWeekOfMonth : Proc(IMonthlyDOWTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_RunOnLastWeekOfMonth : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_RunOnLastWeekOfMonth : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RandomDelay : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RandomDelay : Proc(IMonthlyDOWTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMonthlyDOWTrigger, lpVtbl : IMonthlyDOWTriggerVtbl* do
+  record IMonthlyDOWTrigger, lpVtbl : IMonthlyDOWTriggerVtable* do
     GUID = LibC::GUID.new(0x77d025a3_u32, 0x90fa_u16, 0x43aa_u16, StaticArray[0xb5_u8, 0x2e_u8, 0xcd_u8, 0xa5_u8, 0x49_u8, 0x9b_u8, 0x94_u8, 0x6a_u8])
     def query_interface(this : IMonthlyDOWTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2279,8 +2306,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IMonthlyDOWTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMonthlyDOWTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMonthlyDOWTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IMonthlyDOWTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -2315,10 +2342,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : IMonthlyDOWTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : IMonthlyDOWTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IMonthlyDOWTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IMonthlyDOWTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IMonthlyDOWTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_DaysOfWeek(this : IMonthlyDOWTrigger*, pDays : Int16*) : Win32cr::Foundation::HRESULT
@@ -2339,10 +2366,10 @@ module Win32cr::System::TaskScheduler
     def put_MonthsOfYear(this : IMonthlyDOWTrigger*, months : Int16) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MonthsOfYear.call(this, months)
     end
-    def get_RunOnLastWeekOfMonth(this : IMonthlyDOWTrigger*, pLastWeek : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RunOnLastWeekOfMonth(this : IMonthlyDOWTrigger*, pLastWeek : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RunOnLastWeekOfMonth.call(this, pLastWeek)
     end
-    def put_RunOnLastWeekOfMonth(this : IMonthlyDOWTrigger*, lastWeek : Int16) : Win32cr::Foundation::HRESULT
+    def put_RunOnLastWeekOfMonth(this : IMonthlyDOWTrigger*, lastWeek : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RunOnLastWeekOfMonth.call(this, lastWeek)
     end
     def get_RandomDelay(this : IMonthlyDOWTrigger*, pRandomDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2355,14 +2382,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IBootTriggerVtbl,
+
+  record IBootTriggerVtable,
     query_interface : Proc(IBootTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBootTrigger*, UInt32),
     release : Proc(IBootTrigger*, UInt32),
     get_type_info_count : Proc(IBootTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IBootTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IBootTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IBootTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IBootTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IBootTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IBootTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IBootTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2374,14 +2402,14 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(IBootTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(IBootTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(IBootTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IBootTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IBootTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IBootTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IBootTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Delay : Proc(IBootTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Delay : Proc(IBootTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IBootTrigger, lpVtbl : IBootTriggerVtbl* do
+  record IBootTrigger, lpVtbl : IBootTriggerVtable* do
     GUID = LibC::GUID.new(0x2a9c35da_u32, 0xd357_u16, 0x41f4_u16, StaticArray[0xbb_u8, 0xc1_u8, 0x20_u8, 0x7a_u8, 0xc1_u8, 0xb1_u8, 0xf3_u8, 0xcb_u8])
     def query_interface(this : IBootTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2401,8 +2429,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IBootTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IBootTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IBootTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IBootTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -2437,10 +2465,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : IBootTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : IBootTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IBootTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IBootTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IBootTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_Delay(this : IBootTrigger*, pDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2453,14 +2481,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRegistrationTriggerVtbl,
+
+  record IRegistrationTriggerVtable,
     query_interface : Proc(IRegistrationTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegistrationTrigger*, UInt32),
     release : Proc(IRegistrationTrigger*, UInt32),
     get_type_info_count : Proc(IRegistrationTrigger*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRegistrationTrigger*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRegistrationTrigger*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRegistrationTrigger*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRegistrationTrigger*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IRegistrationTrigger*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IRegistrationTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IRegistrationTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -2472,14 +2501,14 @@ module Win32cr::System::TaskScheduler
     put_StartBoundary : Proc(IRegistrationTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_EndBoundary : Proc(IRegistrationTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_EndBoundary : Proc(IRegistrationTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IRegistrationTrigger*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IRegistrationTrigger*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(IRegistrationTrigger*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IRegistrationTrigger*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Delay : Proc(IRegistrationTrigger*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Delay : Proc(IRegistrationTrigger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRegistrationTrigger, lpVtbl : IRegistrationTriggerVtbl* do
+  record IRegistrationTrigger, lpVtbl : IRegistrationTriggerVtable* do
     GUID = LibC::GUID.new(0x4c8fec3a_u32, 0xc218_u16, 0x4e0c_u16, StaticArray[0xb2_u8, 0x3d_u8, 0x62_u8, 0x90_u8, 0x24_u8, 0xdb_u8, 0x91_u8, 0xa2_u8])
     def query_interface(this : IRegistrationTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2499,8 +2528,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IRegistrationTrigger*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRegistrationTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRegistrationTrigger*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Type(this : IRegistrationTrigger*, pType : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Type.call(this, pType)
@@ -2535,10 +2564,10 @@ module Win32cr::System::TaskScheduler
     def put_EndBoundary(this : IRegistrationTrigger*, end__ : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EndBoundary.call(this, end__)
     end
-    def get_Enabled(this : IRegistrationTrigger*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IRegistrationTrigger*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : IRegistrationTrigger*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IRegistrationTrigger*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_Delay(this : IRegistrationTrigger*, pDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2551,21 +2580,22 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IActionVtbl,
+
+  record IActionVtable,
     query_interface : Proc(IAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAction*, UInt32),
     release : Proc(IAction*, UInt32),
     get_type_info_count : Proc(IAction*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAction*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IAction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IAction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IAction*, Win32cr::System::TaskScheduler::TASK_ACTION_TYPE*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAction, lpVtbl : IActionVtbl* do
+  record IAction, lpVtbl : IActionVtable* do
     GUID = LibC::GUID.new(0xbae54997_u32, 0x48b1_u16, 0x4cbe_u16, StaticArray[0x99_u8, 0x65_u8, 0xd6_u8, 0xbe_u8, 0x26_u8, 0x3e_u8, 0xbe_u8, 0xa4_u8])
     def query_interface(this : IAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2585,8 +2615,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IAction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IAction*, pId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pId)
@@ -2601,14 +2631,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IExecActionVtbl,
+
+  record IExecActionVtable,
     query_interface : Proc(IExecAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IExecAction*, UInt32),
     release : Proc(IExecAction*, UInt32),
     get_type_info_count : Proc(IExecAction*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IExecAction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IExecAction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IExecAction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IExecAction*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IExecAction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IExecAction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IExecAction*, Win32cr::System::TaskScheduler::TASK_ACTION_TYPE*, Win32cr::Foundation::HRESULT),
@@ -2621,7 +2652,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IExecAction, lpVtbl : IExecActionVtbl* do
+  record IExecAction, lpVtbl : IExecActionVtable* do
     GUID = LibC::GUID.new(0x4c3d624d_u32, 0xfd6b_u16, 0x49a3_u16, StaticArray[0xb9_u8, 0xb7_u8, 0x9_u8, 0xcb_u8, 0x3c_u8, 0xd3_u8, 0xf0_u8, 0x47_u8])
     def query_interface(this : IExecAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2641,8 +2672,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IExecAction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IExecAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IExecAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IExecAction*, pId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pId)
@@ -2675,14 +2706,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IExecAction2Vtbl,
+
+  record IExecAction2Vtable,
     query_interface : Proc(IExecAction2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IExecAction2*, UInt32),
     release : Proc(IExecAction2*, UInt32),
     get_type_info_count : Proc(IExecAction2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IExecAction2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IExecAction2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IExecAction2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IExecAction2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IExecAction2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IExecAction2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IExecAction2*, Win32cr::System::TaskScheduler::TASK_ACTION_TYPE*, Win32cr::Foundation::HRESULT),
@@ -2692,12 +2724,12 @@ module Win32cr::System::TaskScheduler
     put_Arguments : Proc(IExecAction2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_WorkingDirectory : Proc(IExecAction2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_WorkingDirectory : Proc(IExecAction2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_HideAppWindow : Proc(IExecAction2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_HideAppWindow : Proc(IExecAction2*, Int16, Win32cr::Foundation::HRESULT)
+    get_HideAppWindow : Proc(IExecAction2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_HideAppWindow : Proc(IExecAction2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IExecAction2, lpVtbl : IExecAction2Vtbl* do
+  record IExecAction2, lpVtbl : IExecAction2Vtable* do
     GUID = LibC::GUID.new(0xf2a82542_u32, 0xbda5_u16, 0x4e6b_u16, StaticArray[0x91_u8, 0x43_u8, 0xe2_u8, 0xbf_u8, 0x4f_u8, 0x89_u8, 0x87_u8, 0xb6_u8])
     def query_interface(this : IExecAction2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2717,8 +2749,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IExecAction2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IExecAction2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IExecAction2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IExecAction2*, pId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pId)
@@ -2747,24 +2779,25 @@ module Win32cr::System::TaskScheduler
     def put_WorkingDirectory(this : IExecAction2*, workingDirectory : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_WorkingDirectory.call(this, workingDirectory)
     end
-    def get_HideAppWindow(this : IExecAction2*, pHideAppWindow : Int16*) : Win32cr::Foundation::HRESULT
+    def get_HideAppWindow(this : IExecAction2*, pHideAppWindow : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HideAppWindow.call(this, pHideAppWindow)
     end
-    def put_HideAppWindow(this : IExecAction2*, hideAppWindow : Int16) : Win32cr::Foundation::HRESULT
+    def put_HideAppWindow(this : IExecAction2*, hideAppWindow : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HideAppWindow.call(this, hideAppWindow)
     end
 
   end
 
   @[Extern]
-  record IShowMessageActionVtbl,
+
+  record IShowMessageActionVtable,
     query_interface : Proc(IShowMessageAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IShowMessageAction*, UInt32),
     release : Proc(IShowMessageAction*, UInt32),
     get_type_info_count : Proc(IShowMessageAction*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IShowMessageAction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IShowMessageAction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IShowMessageAction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IShowMessageAction*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IShowMessageAction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IShowMessageAction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IShowMessageAction*, Win32cr::System::TaskScheduler::TASK_ACTION_TYPE*, Win32cr::Foundation::HRESULT),
@@ -2775,7 +2808,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IShowMessageAction, lpVtbl : IShowMessageActionVtbl* do
+  record IShowMessageAction, lpVtbl : IShowMessageActionVtable* do
     GUID = LibC::GUID.new(0x505e9e68_u32, 0xaf89_u16, 0x46b8_u16, StaticArray[0xa3_u8, 0xf_u8, 0x56_u8, 0x16_u8, 0x2a_u8, 0x83_u8, 0xd5_u8, 0x37_u8])
     def query_interface(this : IShowMessageAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2795,8 +2828,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IShowMessageAction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IShowMessageAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IShowMessageAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IShowMessageAction*, pId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pId)
@@ -2823,14 +2856,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IComHandlerActionVtbl,
+
+  record IComHandlerActionVtable,
     query_interface : Proc(IComHandlerAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComHandlerAction*, UInt32),
     release : Proc(IComHandlerAction*, UInt32),
     get_type_info_count : Proc(IComHandlerAction*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IComHandlerAction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IComHandlerAction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IComHandlerAction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IComHandlerAction*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IComHandlerAction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IComHandlerAction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IComHandlerAction*, Win32cr::System::TaskScheduler::TASK_ACTION_TYPE*, Win32cr::Foundation::HRESULT),
@@ -2841,7 +2875,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IComHandlerAction, lpVtbl : IComHandlerActionVtbl* do
+  record IComHandlerAction, lpVtbl : IComHandlerActionVtable* do
     GUID = LibC::GUID.new(0x6d2fd252_u32, 0x75c5_u16, 0x4f66_u16, StaticArray[0x90_u8, 0xba_u8, 0x2a_u8, 0x7d_u8, 0x8c_u8, 0xc3_u8, 0x3_u8, 0x9f_u8])
     def query_interface(this : IComHandlerAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2861,8 +2895,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IComHandlerAction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IComHandlerAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IComHandlerAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IComHandlerAction*, pId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pId)
@@ -2889,14 +2923,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IEmailActionVtbl,
+
+  record IEmailActionVtable,
     query_interface : Proc(IEmailAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEmailAction*, UInt32),
     release : Proc(IEmailAction*, UInt32),
     get_type_info_count : Proc(IEmailAction*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IEmailAction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IEmailAction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IEmailAction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IEmailAction*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IEmailAction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IEmailAction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IEmailAction*, Win32cr::System::TaskScheduler::TASK_ACTION_TYPE*, Win32cr::Foundation::HRESULT),
@@ -2923,7 +2958,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IEmailAction, lpVtbl : IEmailActionVtbl* do
+  record IEmailAction, lpVtbl : IEmailActionVtable* do
     GUID = LibC::GUID.new(0x10f62c64_u32, 0x7e16_u16, 0x4314_u16, StaticArray[0xa0_u8, 0xc2_u8, 0xc_u8, 0x36_u8, 0x83_u8, 0xf9_u8, 0x9d_u8, 0x40_u8])
     def query_interface(this : IEmailAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2943,8 +2978,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IEmailAction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IEmailAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IEmailAction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IEmailAction*, pId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pId)
@@ -3019,24 +3054,25 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITriggerCollectionVtbl,
+
+  record ITriggerCollectionVtable,
     query_interface : Proc(ITriggerCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITriggerCollection*, UInt32),
     release : Proc(ITriggerCollection*, UInt32),
     get_type_info_count : Proc(ITriggerCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITriggerCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITriggerCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITriggerCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITriggerCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ITriggerCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(ITriggerCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ITriggerCollection*, Void**, Win32cr::Foundation::HRESULT),
     create : Proc(ITriggerCollection*, Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2, Void**, Win32cr::Foundation::HRESULT),
-    remove : Proc(ITriggerCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    remove : Proc(ITriggerCollection*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     clear : Proc(ITriggerCollection*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITriggerCollection, lpVtbl : ITriggerCollectionVtbl* do
+  record ITriggerCollection, lpVtbl : ITriggerCollectionVtable* do
     GUID = LibC::GUID.new(0x85df5081_u32, 0x1b24_u16, 0x4f32_u16, StaticArray[0x87_u8, 0x8a_u8, 0xd9_u8, 0xd1_u8, 0x4d_u8, 0xf4_u8, 0xcb_u8, 0x77_u8])
     def query_interface(this : ITriggerCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3056,8 +3092,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITriggerCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITriggerCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITriggerCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ITriggerCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pCount)
@@ -3071,7 +3107,7 @@ module Win32cr::System::TaskScheduler
     def create(this : ITriggerCollection*, type__ : Win32cr::System::TaskScheduler::TASK_TRIGGER_TYPE2, ppTrigger : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create.call(this, type__, ppTrigger)
     end
-    def remove(this : ITriggerCollection*, index : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove(this : ITriggerCollection*, index : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, index)
     end
     def clear(this : ITriggerCollection*) : Win32cr::Foundation::HRESULT
@@ -3081,28 +3117,29 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IActionCollectionVtbl,
+
+  record IActionCollectionVtable,
     query_interface : Proc(IActionCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActionCollection*, UInt32),
     release : Proc(IActionCollection*, UInt32),
     get_type_info_count : Proc(IActionCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IActionCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IActionCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IActionCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IActionCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IActionCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IActionCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IActionCollection*, Void**, Win32cr::Foundation::HRESULT),
     get_XmlText : Proc(IActionCollection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_XmlText : Proc(IActionCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     create : Proc(IActionCollection*, Win32cr::System::TaskScheduler::TASK_ACTION_TYPE, Void**, Win32cr::Foundation::HRESULT),
-    remove : Proc(IActionCollection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    remove : Proc(IActionCollection*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     clear : Proc(IActionCollection*, Win32cr::Foundation::HRESULT),
     get_Context : Proc(IActionCollection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Context : Proc(IActionCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IActionCollection, lpVtbl : IActionCollectionVtbl* do
+  record IActionCollection, lpVtbl : IActionCollectionVtable* do
     GUID = LibC::GUID.new(0x2820e19_u32, 0x7b98_u16, 0x4ed2_u16, StaticArray[0xb2_u8, 0xe8_u8, 0xfd_u8, 0xcc_u8, 0xce_u8, 0xff_u8, 0x61_u8, 0x9b_u8])
     def query_interface(this : IActionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3122,8 +3159,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IActionCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IActionCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IActionCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IActionCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pCount)
@@ -3143,7 +3180,7 @@ module Win32cr::System::TaskScheduler
     def create(this : IActionCollection*, type__ : Win32cr::System::TaskScheduler::TASK_ACTION_TYPE, ppAction : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create.call(this, type__, ppAction)
     end
-    def remove(this : IActionCollection*, index : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove(this : IActionCollection*, index : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, index)
     end
     def clear(this : IActionCollection*) : Win32cr::Foundation::HRESULT
@@ -3159,14 +3196,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IPrincipalVtbl,
+
+  record IPrincipalVtable,
     query_interface : Proc(IPrincipal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrincipal*, UInt32),
     release : Proc(IPrincipal*, UInt32),
     get_type_info_count : Proc(IPrincipal*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IPrincipal*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IPrincipal*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IPrincipal*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IPrincipal*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IPrincipal*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Id : Proc(IPrincipal*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_DisplayName : Proc(IPrincipal*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3182,7 +3220,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IPrincipal, lpVtbl : IPrincipalVtbl* do
+  record IPrincipal, lpVtbl : IPrincipalVtable* do
     GUID = LibC::GUID.new(0xd98d51e5_u32, 0xc9b4_u16, 0x496a_u16, StaticArray[0xa9_u8, 0xc1_u8, 0x18_u8, 0x98_u8, 0x2_u8, 0x61_u8, 0xcf_u8, 0xf_u8])
     def query_interface(this : IPrincipal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3202,8 +3240,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IPrincipal*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IPrincipal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IPrincipal*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IPrincipal*, pId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pId)
@@ -3245,14 +3283,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IPrincipal2Vtbl,
+
+  record IPrincipal2Vtable,
     query_interface : Proc(IPrincipal2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrincipal2*, UInt32),
     release : Proc(IPrincipal2*, UInt32),
     get_type_info_count : Proc(IPrincipal2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IPrincipal2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IPrincipal2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IPrincipal2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IPrincipal2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ProcessTokenSidType : Proc(IPrincipal2*, Win32cr::System::TaskScheduler::TASK_PROCESSTOKENSID_TYPE*, Win32cr::Foundation::HRESULT),
     put_ProcessTokenSidType : Proc(IPrincipal2*, Win32cr::System::TaskScheduler::TASK_PROCESSTOKENSID_TYPE, Win32cr::Foundation::HRESULT),
     get_RequiredPrivilegeCount : Proc(IPrincipal2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3261,7 +3300,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IPrincipal2, lpVtbl : IPrincipal2Vtbl* do
+  record IPrincipal2, lpVtbl : IPrincipal2Vtable* do
     GUID = LibC::GUID.new(0x248919ae_u32, 0xe345_u16, 0x4a6d_u16, StaticArray[0x8a_u8, 0xeb_u8, 0xe0_u8, 0xd3_u8, 0x16_u8, 0x5c_u8, 0x90_u8, 0x4e_u8])
     def query_interface(this : IPrincipal2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3281,8 +3320,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IPrincipal2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IPrincipal2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IPrincipal2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ProcessTokenSidType(this : IPrincipal2*, pProcessTokenSidType : Win32cr::System::TaskScheduler::TASK_PROCESSTOKENSID_TYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ProcessTokenSidType.call(this, pProcessTokenSidType)
@@ -3303,14 +3342,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRegistrationInfoVtbl,
+
+  record IRegistrationInfoVtable,
     query_interface : Proc(IRegistrationInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegistrationInfo*, UInt32),
     release : Proc(IRegistrationInfo*, UInt32),
     get_type_info_count : Proc(IRegistrationInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRegistrationInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRegistrationInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRegistrationInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRegistrationInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IRegistrationInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IRegistrationInfo*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Author : Proc(IRegistrationInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3325,14 +3365,14 @@ module Win32cr::System::TaskScheduler
     put_XmlText : Proc(IRegistrationInfo*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_URI : Proc(IRegistrationInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_URI : Proc(IRegistrationInfo*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SecurityDescriptor : Proc(IRegistrationInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SecurityDescriptor : Proc(IRegistrationInfo*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SecurityDescriptor : Proc(IRegistrationInfo*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SecurityDescriptor : Proc(IRegistrationInfo*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Source : Proc(IRegistrationInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Source : Proc(IRegistrationInfo*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRegistrationInfo, lpVtbl : IRegistrationInfoVtbl* do
+  record IRegistrationInfo, lpVtbl : IRegistrationInfoVtable* do
     GUID = LibC::GUID.new(0x416d8b73_u32, 0xcb41_u16, 0x4ea1_u16, StaticArray[0x80_u8, 0x5c_u8, 0x9b_u8, 0xe9_u8, 0xa5_u8, 0xac_u8, 0x4a_u8, 0x74_u8])
     def query_interface(this : IRegistrationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3352,8 +3392,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IRegistrationInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRegistrationInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRegistrationInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Description(this : IRegistrationInfo*, pDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, pDescription)
@@ -3397,10 +3437,10 @@ module Win32cr::System::TaskScheduler
     def put_URI(this : IRegistrationInfo*, uri : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_URI.call(this, uri)
     end
-    def get_SecurityDescriptor(this : IRegistrationInfo*, pSddl : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SecurityDescriptor(this : IRegistrationInfo*, pSddl : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SecurityDescriptor.call(this, pSddl)
     end
-    def put_SecurityDescriptor(this : IRegistrationInfo*, sddl : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SecurityDescriptor(this : IRegistrationInfo*, sddl : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SecurityDescriptor.call(this, sddl)
     end
     def get_Source(this : IRegistrationInfo*, pSource : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3413,14 +3453,15 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskDefinitionVtbl,
+
+  record ITaskDefinitionVtable,
     query_interface : Proc(ITaskDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskDefinition*, UInt32),
     release : Proc(ITaskDefinition*, UInt32),
     get_type_info_count : Proc(ITaskDefinition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskDefinition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskDefinition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskDefinition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITaskDefinition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_RegistrationInfo : Proc(ITaskDefinition*, Void**, Win32cr::Foundation::HRESULT),
     put_RegistrationInfo : Proc(ITaskDefinition*, Void*, Win32cr::Foundation::HRESULT),
     get_Triggers : Proc(ITaskDefinition*, Void**, Win32cr::Foundation::HRESULT),
@@ -3438,7 +3479,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskDefinition, lpVtbl : ITaskDefinitionVtbl* do
+  record ITaskDefinition, lpVtbl : ITaskDefinitionVtable* do
     GUID = LibC::GUID.new(0xf5bc8fc5_u32, 0x536d_u16, 0x4f77_u16, StaticArray[0xb8_u8, 0x52_u8, 0xfb_u8, 0xc1_u8, 0x35_u8, 0x6f_u8, 0xde_u8, 0xb6_u8])
     def query_interface(this : ITaskDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3458,8 +3499,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskDefinition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_RegistrationInfo(this : ITaskDefinition*, ppRegistrationInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RegistrationInfo.call(this, ppRegistrationInfo)
@@ -3507,58 +3548,59 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskSettingsVtbl,
+
+  record ITaskSettingsVtable,
     query_interface : Proc(ITaskSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskSettings*, UInt32),
     release : Proc(ITaskSettings*, UInt32),
     get_type_info_count : Proc(ITaskSettings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskSettings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskSettings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskSettings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_AllowDemandStart : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowDemandStart : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITaskSettings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_AllowDemandStart : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowDemandStart : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RestartInterval : Proc(ITaskSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RestartInterval : Proc(ITaskSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_RestartCount : Proc(ITaskSettings*, Int32*, Win32cr::Foundation::HRESULT),
     put_RestartCount : Proc(ITaskSettings*, Int32, Win32cr::Foundation::HRESULT),
     get_MultipleInstances : Proc(ITaskSettings*, Win32cr::System::TaskScheduler::TASK_INSTANCES_POLICY*, Win32cr::Foundation::HRESULT),
     put_MultipleInstances : Proc(ITaskSettings*, Win32cr::System::TaskScheduler::TASK_INSTANCES_POLICY, Win32cr::Foundation::HRESULT),
-    get_StopIfGoingOnBatteries : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_StopIfGoingOnBatteries : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
-    get_DisallowStartIfOnBatteries : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DisallowStartIfOnBatteries : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
-    get_AllowHardTerminate : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowHardTerminate : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
-    get_StartWhenAvailable : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_StartWhenAvailable : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
+    get_StopIfGoingOnBatteries : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_StopIfGoingOnBatteries : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_DisallowStartIfOnBatteries : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DisallowStartIfOnBatteries : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AllowHardTerminate : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowHardTerminate : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_StartWhenAvailable : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_StartWhenAvailable : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_XmlText : Proc(ITaskSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_XmlText : Proc(ITaskSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_RunOnlyIfNetworkAvailable : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_RunOnlyIfNetworkAvailable : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
+    get_RunOnlyIfNetworkAvailable : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_RunOnlyIfNetworkAvailable : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ExecutionTimeLimit : Proc(ITaskSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ExecutionTimeLimit : Proc(ITaskSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DeleteExpiredTaskAfter : Proc(ITaskSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_DeleteExpiredTaskAfter : Proc(ITaskSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Priority : Proc(ITaskSettings*, Int32*, Win32cr::Foundation::HRESULT),
     put_Priority : Proc(ITaskSettings*, Int32, Win32cr::Foundation::HRESULT),
     get_Compatibility : Proc(ITaskSettings*, Win32cr::System::TaskScheduler::TASK_COMPATIBILITY*, Win32cr::Foundation::HRESULT),
     put_Compatibility : Proc(ITaskSettings*, Win32cr::System::TaskScheduler::TASK_COMPATIBILITY, Win32cr::Foundation::HRESULT),
-    get_Hidden : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Hidden : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
+    get_Hidden : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Hidden : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_IdleSettings : Proc(ITaskSettings*, Void**, Win32cr::Foundation::HRESULT),
     put_IdleSettings : Proc(ITaskSettings*, Void*, Win32cr::Foundation::HRESULT),
-    get_RunOnlyIfIdle : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_RunOnlyIfIdle : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
-    get_WakeToRun : Proc(ITaskSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_WakeToRun : Proc(ITaskSettings*, Int16, Win32cr::Foundation::HRESULT),
+    get_RunOnlyIfIdle : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_RunOnlyIfIdle : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_WakeToRun : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_WakeToRun : Proc(ITaskSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_NetworkSettings : Proc(ITaskSettings*, Void**, Win32cr::Foundation::HRESULT),
     put_NetworkSettings : Proc(ITaskSettings*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITaskSettings, lpVtbl : ITaskSettingsVtbl* do
+  record ITaskSettings, lpVtbl : ITaskSettingsVtable* do
     GUID = LibC::GUID.new(0x8fd4711d_u32, 0x2d02_u16, 0x4c8c_u16, StaticArray[0x87_u8, 0xe3_u8, 0xef_u8, 0xf6_u8, 0x99_u8, 0xde_u8, 0x12_u8, 0x7e_u8])
     def query_interface(this : ITaskSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3578,13 +3620,13 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskSettings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_AllowDemandStart(this : ITaskSettings*, pAllowDemandStart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowDemandStart(this : ITaskSettings*, pAllowDemandStart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowDemandStart.call(this, pAllowDemandStart)
     end
-    def put_AllowDemandStart(this : ITaskSettings*, allowDemandStart : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowDemandStart(this : ITaskSettings*, allowDemandStart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowDemandStart.call(this, allowDemandStart)
     end
     def get_RestartInterval(this : ITaskSettings*, pRestartInterval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3605,28 +3647,28 @@ module Win32cr::System::TaskScheduler
     def put_MultipleInstances(this : ITaskSettings*, policy : Win32cr::System::TaskScheduler::TASK_INSTANCES_POLICY) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MultipleInstances.call(this, policy)
     end
-    def get_StopIfGoingOnBatteries(this : ITaskSettings*, pStopIfOnBatteries : Int16*) : Win32cr::Foundation::HRESULT
+    def get_StopIfGoingOnBatteries(this : ITaskSettings*, pStopIfOnBatteries : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StopIfGoingOnBatteries.call(this, pStopIfOnBatteries)
     end
-    def put_StopIfGoingOnBatteries(this : ITaskSettings*, stopIfOnBatteries : Int16) : Win32cr::Foundation::HRESULT
+    def put_StopIfGoingOnBatteries(this : ITaskSettings*, stopIfOnBatteries : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_StopIfGoingOnBatteries.call(this, stopIfOnBatteries)
     end
-    def get_DisallowStartIfOnBatteries(this : ITaskSettings*, pDisallowStart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DisallowStartIfOnBatteries(this : ITaskSettings*, pDisallowStart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisallowStartIfOnBatteries.call(this, pDisallowStart)
     end
-    def put_DisallowStartIfOnBatteries(this : ITaskSettings*, disallowStart : Int16) : Win32cr::Foundation::HRESULT
+    def put_DisallowStartIfOnBatteries(this : ITaskSettings*, disallowStart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DisallowStartIfOnBatteries.call(this, disallowStart)
     end
-    def get_AllowHardTerminate(this : ITaskSettings*, pAllowHardTerminate : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowHardTerminate(this : ITaskSettings*, pAllowHardTerminate : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowHardTerminate.call(this, pAllowHardTerminate)
     end
-    def put_AllowHardTerminate(this : ITaskSettings*, allowHardTerminate : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowHardTerminate(this : ITaskSettings*, allowHardTerminate : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowHardTerminate.call(this, allowHardTerminate)
     end
-    def get_StartWhenAvailable(this : ITaskSettings*, pStartWhenAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_StartWhenAvailable(this : ITaskSettings*, pStartWhenAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StartWhenAvailable.call(this, pStartWhenAvailable)
     end
-    def put_StartWhenAvailable(this : ITaskSettings*, startWhenAvailable : Int16) : Win32cr::Foundation::HRESULT
+    def put_StartWhenAvailable(this : ITaskSettings*, startWhenAvailable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_StartWhenAvailable.call(this, startWhenAvailable)
     end
     def get_XmlText(this : ITaskSettings*, pText : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3635,10 +3677,10 @@ module Win32cr::System::TaskScheduler
     def put_XmlText(this : ITaskSettings*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_XmlText.call(this, text)
     end
-    def get_RunOnlyIfNetworkAvailable(this : ITaskSettings*, pRunOnlyIfNetworkAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RunOnlyIfNetworkAvailable(this : ITaskSettings*, pRunOnlyIfNetworkAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RunOnlyIfNetworkAvailable.call(this, pRunOnlyIfNetworkAvailable)
     end
-    def put_RunOnlyIfNetworkAvailable(this : ITaskSettings*, runOnlyIfNetworkAvailable : Int16) : Win32cr::Foundation::HRESULT
+    def put_RunOnlyIfNetworkAvailable(this : ITaskSettings*, runOnlyIfNetworkAvailable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RunOnlyIfNetworkAvailable.call(this, runOnlyIfNetworkAvailable)
     end
     def get_ExecutionTimeLimit(this : ITaskSettings*, pExecutionTimeLimit : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3647,10 +3689,10 @@ module Win32cr::System::TaskScheduler
     def put_ExecutionTimeLimit(this : ITaskSettings*, executionTimeLimit : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ExecutionTimeLimit.call(this, executionTimeLimit)
     end
-    def get_Enabled(this : ITaskSettings*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : ITaskSettings*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : ITaskSettings*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : ITaskSettings*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_DeleteExpiredTaskAfter(this : ITaskSettings*, pExpirationDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3671,10 +3713,10 @@ module Win32cr::System::TaskScheduler
     def put_Compatibility(this : ITaskSettings*, compatLevel : Win32cr::System::TaskScheduler::TASK_COMPATIBILITY) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Compatibility.call(this, compatLevel)
     end
-    def get_Hidden(this : ITaskSettings*, pHidden : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Hidden(this : ITaskSettings*, pHidden : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Hidden.call(this, pHidden)
     end
-    def put_Hidden(this : ITaskSettings*, hidden : Int16) : Win32cr::Foundation::HRESULT
+    def put_Hidden(this : ITaskSettings*, hidden : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Hidden.call(this, hidden)
     end
     def get_IdleSettings(this : ITaskSettings*, ppIdleSettings : Void**) : Win32cr::Foundation::HRESULT
@@ -3683,16 +3725,16 @@ module Win32cr::System::TaskScheduler
     def put_IdleSettings(this : ITaskSettings*, pIdleSettings : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IdleSettings.call(this, pIdleSettings)
     end
-    def get_RunOnlyIfIdle(this : ITaskSettings*, pRunOnlyIfIdle : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RunOnlyIfIdle(this : ITaskSettings*, pRunOnlyIfIdle : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RunOnlyIfIdle.call(this, pRunOnlyIfIdle)
     end
-    def put_RunOnlyIfIdle(this : ITaskSettings*, runOnlyIfIdle : Int16) : Win32cr::Foundation::HRESULT
+    def put_RunOnlyIfIdle(this : ITaskSettings*, runOnlyIfIdle : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RunOnlyIfIdle.call(this, runOnlyIfIdle)
     end
-    def get_WakeToRun(this : ITaskSettings*, pWake : Int16*) : Win32cr::Foundation::HRESULT
+    def get_WakeToRun(this : ITaskSettings*, pWake : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WakeToRun.call(this, pWake)
     end
-    def put_WakeToRun(this : ITaskSettings*, wake : Int16) : Win32cr::Foundation::HRESULT
+    def put_WakeToRun(this : ITaskSettings*, wake : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_WakeToRun.call(this, wake)
     end
     def get_NetworkSettings(this : ITaskSettings*, ppNetworkSettings : Void**) : Win32cr::Foundation::HRESULT
@@ -3705,22 +3747,23 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskSettings2Vtbl,
+
+  record ITaskSettings2Vtable,
     query_interface : Proc(ITaskSettings2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskSettings2*, UInt32),
     release : Proc(ITaskSettings2*, UInt32),
     get_type_info_count : Proc(ITaskSettings2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskSettings2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskSettings2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskSettings2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_DisallowStartOnRemoteAppSession : Proc(ITaskSettings2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DisallowStartOnRemoteAppSession : Proc(ITaskSettings2*, Int16, Win32cr::Foundation::HRESULT),
-    get_UseUnifiedSchedulingEngine : Proc(ITaskSettings2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseUnifiedSchedulingEngine : Proc(ITaskSettings2*, Int16, Win32cr::Foundation::HRESULT)
+    invoke : Proc(ITaskSettings2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_DisallowStartOnRemoteAppSession : Proc(ITaskSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DisallowStartOnRemoteAppSession : Proc(ITaskSettings2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_UseUnifiedSchedulingEngine : Proc(ITaskSettings2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseUnifiedSchedulingEngine : Proc(ITaskSettings2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITaskSettings2, lpVtbl : ITaskSettings2Vtbl* do
+  record ITaskSettings2, lpVtbl : ITaskSettings2Vtable* do
     GUID = LibC::GUID.new(0x2c05c3f0_u32, 0x6eed_u16, 0x4c05_u16, StaticArray[0xa1_u8, 0x5f_u8, 0xed_u8, 0x7d_u8, 0x7a_u8, 0x98_u8, 0xa3_u8, 0x69_u8])
     def query_interface(this : ITaskSettings2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3740,86 +3783,87 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskSettings2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskSettings2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskSettings2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_DisallowStartOnRemoteAppSession(this : ITaskSettings2*, pDisallowStart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DisallowStartOnRemoteAppSession(this : ITaskSettings2*, pDisallowStart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisallowStartOnRemoteAppSession.call(this, pDisallowStart)
     end
-    def put_DisallowStartOnRemoteAppSession(this : ITaskSettings2*, disallowStart : Int16) : Win32cr::Foundation::HRESULT
+    def put_DisallowStartOnRemoteAppSession(this : ITaskSettings2*, disallowStart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DisallowStartOnRemoteAppSession.call(this, disallowStart)
     end
-    def get_UseUnifiedSchedulingEngine(this : ITaskSettings2*, pUseUnifiedEngine : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseUnifiedSchedulingEngine(this : ITaskSettings2*, pUseUnifiedEngine : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseUnifiedSchedulingEngine.call(this, pUseUnifiedEngine)
     end
-    def put_UseUnifiedSchedulingEngine(this : ITaskSettings2*, useUnifiedEngine : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseUnifiedSchedulingEngine(this : ITaskSettings2*, useUnifiedEngine : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseUnifiedSchedulingEngine.call(this, useUnifiedEngine)
     end
 
   end
 
   @[Extern]
-  record ITaskSettings3Vtbl,
+
+  record ITaskSettings3Vtable,
     query_interface : Proc(ITaskSettings3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskSettings3*, UInt32),
     release : Proc(ITaskSettings3*, UInt32),
     get_type_info_count : Proc(ITaskSettings3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskSettings3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskSettings3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskSettings3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_AllowDemandStart : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowDemandStart : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITaskSettings3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_AllowDemandStart : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowDemandStart : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_RestartInterval : Proc(ITaskSettings3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RestartInterval : Proc(ITaskSettings3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_RestartCount : Proc(ITaskSettings3*, Int32*, Win32cr::Foundation::HRESULT),
     put_RestartCount : Proc(ITaskSettings3*, Int32, Win32cr::Foundation::HRESULT),
     get_MultipleInstances : Proc(ITaskSettings3*, Win32cr::System::TaskScheduler::TASK_INSTANCES_POLICY*, Win32cr::Foundation::HRESULT),
     put_MultipleInstances : Proc(ITaskSettings3*, Win32cr::System::TaskScheduler::TASK_INSTANCES_POLICY, Win32cr::Foundation::HRESULT),
-    get_StopIfGoingOnBatteries : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_StopIfGoingOnBatteries : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
-    get_DisallowStartIfOnBatteries : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DisallowStartIfOnBatteries : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
-    get_AllowHardTerminate : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowHardTerminate : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
-    get_StartWhenAvailable : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_StartWhenAvailable : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
+    get_StopIfGoingOnBatteries : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_StopIfGoingOnBatteries : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_DisallowStartIfOnBatteries : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DisallowStartIfOnBatteries : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AllowHardTerminate : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowHardTerminate : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_StartWhenAvailable : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_StartWhenAvailable : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_XmlText : Proc(ITaskSettings3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_XmlText : Proc(ITaskSettings3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_RunOnlyIfNetworkAvailable : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_RunOnlyIfNetworkAvailable : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
+    get_RunOnlyIfNetworkAvailable : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_RunOnlyIfNetworkAvailable : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ExecutionTimeLimit : Proc(ITaskSettings3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ExecutionTimeLimit : Proc(ITaskSettings3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
+    get_Enabled : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DeleteExpiredTaskAfter : Proc(ITaskSettings3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_DeleteExpiredTaskAfter : Proc(ITaskSettings3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Priority : Proc(ITaskSettings3*, Int32*, Win32cr::Foundation::HRESULT),
     put_Priority : Proc(ITaskSettings3*, Int32, Win32cr::Foundation::HRESULT),
     get_Compatibility : Proc(ITaskSettings3*, Win32cr::System::TaskScheduler::TASK_COMPATIBILITY*, Win32cr::Foundation::HRESULT),
     put_Compatibility : Proc(ITaskSettings3*, Win32cr::System::TaskScheduler::TASK_COMPATIBILITY, Win32cr::Foundation::HRESULT),
-    get_Hidden : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Hidden : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
+    get_Hidden : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Hidden : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_IdleSettings : Proc(ITaskSettings3*, Void**, Win32cr::Foundation::HRESULT),
     put_IdleSettings : Proc(ITaskSettings3*, Void*, Win32cr::Foundation::HRESULT),
-    get_RunOnlyIfIdle : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_RunOnlyIfIdle : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
-    get_WakeToRun : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_WakeToRun : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
+    get_RunOnlyIfIdle : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_RunOnlyIfIdle : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_WakeToRun : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_WakeToRun : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_NetworkSettings : Proc(ITaskSettings3*, Void**, Win32cr::Foundation::HRESULT),
     put_NetworkSettings : Proc(ITaskSettings3*, Void*, Win32cr::Foundation::HRESULT),
-    get_DisallowStartOnRemoteAppSession : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_DisallowStartOnRemoteAppSession : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
-    get_UseUnifiedSchedulingEngine : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseUnifiedSchedulingEngine : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT),
+    get_DisallowStartOnRemoteAppSession : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_DisallowStartOnRemoteAppSession : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_UseUnifiedSchedulingEngine : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseUnifiedSchedulingEngine : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_MaintenanceSettings : Proc(ITaskSettings3*, Void**, Win32cr::Foundation::HRESULT),
     put_MaintenanceSettings : Proc(ITaskSettings3*, Void*, Win32cr::Foundation::HRESULT),
     create_maintenance_settings : Proc(ITaskSettings3*, Void**, Win32cr::Foundation::HRESULT),
-    get_Volatile : Proc(ITaskSettings3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Volatile : Proc(ITaskSettings3*, Int16, Win32cr::Foundation::HRESULT)
+    get_Volatile : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Volatile : Proc(ITaskSettings3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITaskSettings3, lpVtbl : ITaskSettings3Vtbl* do
+  record ITaskSettings3, lpVtbl : ITaskSettings3Vtable* do
     GUID = LibC::GUID.new(0xad9d0d7_u32, 0xc7f_u16, 0x4ebb_u16, StaticArray[0x9a_u8, 0x5f_u8, 0xd1_u8, 0xc6_u8, 0x48_u8, 0xdc_u8, 0xa5_u8, 0x28_u8])
     def query_interface(this : ITaskSettings3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3839,13 +3883,13 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskSettings3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskSettings3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskSettings3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_AllowDemandStart(this : ITaskSettings3*, pAllowDemandStart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowDemandStart(this : ITaskSettings3*, pAllowDemandStart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowDemandStart.call(this, pAllowDemandStart)
     end
-    def put_AllowDemandStart(this : ITaskSettings3*, allowDemandStart : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowDemandStart(this : ITaskSettings3*, allowDemandStart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowDemandStart.call(this, allowDemandStart)
     end
     def get_RestartInterval(this : ITaskSettings3*, pRestartInterval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3866,28 +3910,28 @@ module Win32cr::System::TaskScheduler
     def put_MultipleInstances(this : ITaskSettings3*, policy : Win32cr::System::TaskScheduler::TASK_INSTANCES_POLICY) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_MultipleInstances.call(this, policy)
     end
-    def get_StopIfGoingOnBatteries(this : ITaskSettings3*, pStopIfOnBatteries : Int16*) : Win32cr::Foundation::HRESULT
+    def get_StopIfGoingOnBatteries(this : ITaskSettings3*, pStopIfOnBatteries : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StopIfGoingOnBatteries.call(this, pStopIfOnBatteries)
     end
-    def put_StopIfGoingOnBatteries(this : ITaskSettings3*, stopIfOnBatteries : Int16) : Win32cr::Foundation::HRESULT
+    def put_StopIfGoingOnBatteries(this : ITaskSettings3*, stopIfOnBatteries : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_StopIfGoingOnBatteries.call(this, stopIfOnBatteries)
     end
-    def get_DisallowStartIfOnBatteries(this : ITaskSettings3*, pDisallowStart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DisallowStartIfOnBatteries(this : ITaskSettings3*, pDisallowStart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisallowStartIfOnBatteries.call(this, pDisallowStart)
     end
-    def put_DisallowStartIfOnBatteries(this : ITaskSettings3*, disallowStart : Int16) : Win32cr::Foundation::HRESULT
+    def put_DisallowStartIfOnBatteries(this : ITaskSettings3*, disallowStart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DisallowStartIfOnBatteries.call(this, disallowStart)
     end
-    def get_AllowHardTerminate(this : ITaskSettings3*, pAllowHardTerminate : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowHardTerminate(this : ITaskSettings3*, pAllowHardTerminate : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowHardTerminate.call(this, pAllowHardTerminate)
     end
-    def put_AllowHardTerminate(this : ITaskSettings3*, allowHardTerminate : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowHardTerminate(this : ITaskSettings3*, allowHardTerminate : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowHardTerminate.call(this, allowHardTerminate)
     end
-    def get_StartWhenAvailable(this : ITaskSettings3*, pStartWhenAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_StartWhenAvailable(this : ITaskSettings3*, pStartWhenAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StartWhenAvailable.call(this, pStartWhenAvailable)
     end
-    def put_StartWhenAvailable(this : ITaskSettings3*, startWhenAvailable : Int16) : Win32cr::Foundation::HRESULT
+    def put_StartWhenAvailable(this : ITaskSettings3*, startWhenAvailable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_StartWhenAvailable.call(this, startWhenAvailable)
     end
     def get_XmlText(this : ITaskSettings3*, pText : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3896,10 +3940,10 @@ module Win32cr::System::TaskScheduler
     def put_XmlText(this : ITaskSettings3*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_XmlText.call(this, text)
     end
-    def get_RunOnlyIfNetworkAvailable(this : ITaskSettings3*, pRunOnlyIfNetworkAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RunOnlyIfNetworkAvailable(this : ITaskSettings3*, pRunOnlyIfNetworkAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RunOnlyIfNetworkAvailable.call(this, pRunOnlyIfNetworkAvailable)
     end
-    def put_RunOnlyIfNetworkAvailable(this : ITaskSettings3*, runOnlyIfNetworkAvailable : Int16) : Win32cr::Foundation::HRESULT
+    def put_RunOnlyIfNetworkAvailable(this : ITaskSettings3*, runOnlyIfNetworkAvailable : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RunOnlyIfNetworkAvailable.call(this, runOnlyIfNetworkAvailable)
     end
     def get_ExecutionTimeLimit(this : ITaskSettings3*, pExecutionTimeLimit : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3908,10 +3952,10 @@ module Win32cr::System::TaskScheduler
     def put_ExecutionTimeLimit(this : ITaskSettings3*, executionTimeLimit : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ExecutionTimeLimit.call(this, executionTimeLimit)
     end
-    def get_Enabled(this : ITaskSettings3*, pEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : ITaskSettings3*, pEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pEnabled)
     end
-    def put_Enabled(this : ITaskSettings3*, enabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : ITaskSettings3*, enabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, enabled)
     end
     def get_DeleteExpiredTaskAfter(this : ITaskSettings3*, pExpirationDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3932,10 +3976,10 @@ module Win32cr::System::TaskScheduler
     def put_Compatibility(this : ITaskSettings3*, compatLevel : Win32cr::System::TaskScheduler::TASK_COMPATIBILITY) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Compatibility.call(this, compatLevel)
     end
-    def get_Hidden(this : ITaskSettings3*, pHidden : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Hidden(this : ITaskSettings3*, pHidden : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Hidden.call(this, pHidden)
     end
-    def put_Hidden(this : ITaskSettings3*, hidden : Int16) : Win32cr::Foundation::HRESULT
+    def put_Hidden(this : ITaskSettings3*, hidden : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Hidden.call(this, hidden)
     end
     def get_IdleSettings(this : ITaskSettings3*, ppIdleSettings : Void**) : Win32cr::Foundation::HRESULT
@@ -3944,16 +3988,16 @@ module Win32cr::System::TaskScheduler
     def put_IdleSettings(this : ITaskSettings3*, pIdleSettings : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IdleSettings.call(this, pIdleSettings)
     end
-    def get_RunOnlyIfIdle(this : ITaskSettings3*, pRunOnlyIfIdle : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RunOnlyIfIdle(this : ITaskSettings3*, pRunOnlyIfIdle : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RunOnlyIfIdle.call(this, pRunOnlyIfIdle)
     end
-    def put_RunOnlyIfIdle(this : ITaskSettings3*, runOnlyIfIdle : Int16) : Win32cr::Foundation::HRESULT
+    def put_RunOnlyIfIdle(this : ITaskSettings3*, runOnlyIfIdle : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RunOnlyIfIdle.call(this, runOnlyIfIdle)
     end
-    def get_WakeToRun(this : ITaskSettings3*, pWake : Int16*) : Win32cr::Foundation::HRESULT
+    def get_WakeToRun(this : ITaskSettings3*, pWake : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WakeToRun.call(this, pWake)
     end
-    def put_WakeToRun(this : ITaskSettings3*, wake : Int16) : Win32cr::Foundation::HRESULT
+    def put_WakeToRun(this : ITaskSettings3*, wake : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_WakeToRun.call(this, wake)
     end
     def get_NetworkSettings(this : ITaskSettings3*, ppNetworkSettings : Void**) : Win32cr::Foundation::HRESULT
@@ -3962,16 +4006,16 @@ module Win32cr::System::TaskScheduler
     def put_NetworkSettings(this : ITaskSettings3*, pNetworkSettings : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_NetworkSettings.call(this, pNetworkSettings)
     end
-    def get_DisallowStartOnRemoteAppSession(this : ITaskSettings3*, pDisallowStart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_DisallowStartOnRemoteAppSession(this : ITaskSettings3*, pDisallowStart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DisallowStartOnRemoteAppSession.call(this, pDisallowStart)
     end
-    def put_DisallowStartOnRemoteAppSession(this : ITaskSettings3*, disallowStart : Int16) : Win32cr::Foundation::HRESULT
+    def put_DisallowStartOnRemoteAppSession(this : ITaskSettings3*, disallowStart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DisallowStartOnRemoteAppSession.call(this, disallowStart)
     end
-    def get_UseUnifiedSchedulingEngine(this : ITaskSettings3*, pUseUnifiedEngine : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseUnifiedSchedulingEngine(this : ITaskSettings3*, pUseUnifiedEngine : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseUnifiedSchedulingEngine.call(this, pUseUnifiedEngine)
     end
-    def put_UseUnifiedSchedulingEngine(this : ITaskSettings3*, useUnifiedEngine : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseUnifiedSchedulingEngine(this : ITaskSettings3*, useUnifiedEngine : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseUnifiedSchedulingEngine.call(this, useUnifiedEngine)
     end
     def get_MaintenanceSettings(this : ITaskSettings3*, ppMaintenanceSettings : Void**) : Win32cr::Foundation::HRESULT
@@ -3983,34 +4027,35 @@ module Win32cr::System::TaskScheduler
     def create_maintenance_settings(this : ITaskSettings3*, ppMaintenanceSettings : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_maintenance_settings.call(this, ppMaintenanceSettings)
     end
-    def get_Volatile(this : ITaskSettings3*, pVolatile : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Volatile(this : ITaskSettings3*, pVolatile : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Volatile.call(this, pVolatile)
     end
-    def put_Volatile(this : ITaskSettings3*, volatile : Int16) : Win32cr::Foundation::HRESULT
+    def put_Volatile(this : ITaskSettings3*, volatile : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Volatile.call(this, volatile)
     end
 
   end
 
   @[Extern]
-  record IMaintenanceSettingsVtbl,
+
+  record IMaintenanceSettingsVtable,
     query_interface : Proc(IMaintenanceSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMaintenanceSettings*, UInt32),
     release : Proc(IMaintenanceSettings*, UInt32),
     get_type_info_count : Proc(IMaintenanceSettings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMaintenanceSettings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMaintenanceSettings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMaintenanceSettings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMaintenanceSettings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_Period : Proc(IMaintenanceSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Period : Proc(IMaintenanceSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Deadline : Proc(IMaintenanceSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Deadline : Proc(IMaintenanceSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    put_Exclusive : Proc(IMaintenanceSettings*, Int16, Win32cr::Foundation::HRESULT),
-    get_Exclusive : Proc(IMaintenanceSettings*, Int16*, Win32cr::Foundation::HRESULT)
+    put_Exclusive : Proc(IMaintenanceSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Exclusive : Proc(IMaintenanceSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMaintenanceSettings, lpVtbl : IMaintenanceSettingsVtbl* do
+  record IMaintenanceSettings, lpVtbl : IMaintenanceSettingsVtable* do
     GUID = LibC::GUID.new(0xa6024fa8_u32, 0x9652_u16, 0x4adb_u16, StaticArray[0xa6_u8, 0xbf_u8, 0x5c_u8, 0xfc_u8, 0xd8_u8, 0x77_u8, 0xa7_u8, 0xba_u8])
     def query_interface(this : IMaintenanceSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4030,8 +4075,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IMaintenanceSettings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMaintenanceSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMaintenanceSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_Period(this : IMaintenanceSettings*, value : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Period.call(this, value)
@@ -4045,31 +4090,32 @@ module Win32cr::System::TaskScheduler
     def get_Deadline(this : IMaintenanceSettings*, target : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Deadline.call(this, target)
     end
-    def put_Exclusive(this : IMaintenanceSettings*, value : Int16) : Win32cr::Foundation::HRESULT
+    def put_Exclusive(this : IMaintenanceSettings*, value : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Exclusive.call(this, value)
     end
-    def get_Exclusive(this : IMaintenanceSettings*, target : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Exclusive(this : IMaintenanceSettings*, target : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Exclusive.call(this, target)
     end
 
   end
 
   @[Extern]
-  record IRegisteredTaskCollectionVtbl,
+
+  record IRegisteredTaskCollectionVtable,
     query_interface : Proc(IRegisteredTaskCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegisteredTaskCollection*, UInt32),
     release : Proc(IRegisteredTaskCollection*, UInt32),
     get_type_info_count : Proc(IRegisteredTaskCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRegisteredTaskCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRegisteredTaskCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRegisteredTaskCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRegisteredTaskCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IRegisteredTaskCollection*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IRegisteredTaskCollection*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IRegisteredTaskCollection*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IRegisteredTaskCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRegisteredTaskCollection, lpVtbl : IRegisteredTaskCollectionVtbl* do
+  record IRegisteredTaskCollection, lpVtbl : IRegisteredTaskCollectionVtable* do
     GUID = LibC::GUID.new(0x86627eb4_u32, 0x42a7_u16, 0x41e4_u16, StaticArray[0xa4_u8, 0xd9_u8, 0xac_u8, 0x33_u8, 0xa7_u8, 0x2f_u8, 0x2d_u8, 0x52_u8])
     def query_interface(this : IRegisteredTaskCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4089,13 +4135,13 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IRegisteredTaskCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRegisteredTaskCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRegisteredTaskCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : IRegisteredTaskCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pCount)
     end
-    def get_Item(this : IRegisteredTaskCollection*, index : Win32cr::System::Com::VARIANT, ppRegisteredTask : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IRegisteredTaskCollection*, index : Win32cr::System::Variant::VARIANT, ppRegisteredTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, ppRegisteredTask)
     end
     def get__NewEnum(this : IRegisteredTaskCollection*, ppEnum : Void**) : Win32cr::Foundation::HRESULT
@@ -4105,31 +4151,32 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskFolderVtbl,
+
+  record ITaskFolderVtable,
     query_interface : Proc(ITaskFolder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskFolder*, UInt32),
     release : Proc(ITaskFolder*, UInt32),
     get_type_info_count : Proc(ITaskFolder*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITaskFolder*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITaskFolder*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITaskFolder*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITaskFolder*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(ITaskFolder*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Path : Proc(ITaskFolder*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_folder : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_folders : Proc(ITaskFolder*, Int32, Void**, Win32cr::Foundation::HRESULT),
-    create_folder : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_folder : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     delete_folder : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     get_task : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_tasks : Proc(ITaskFolder*, Int32, Void**, Win32cr::Foundation::HRESULT),
     delete_task : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
-    register_task : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::TaskScheduler::TASK_LOGON_TYPE, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    register_task_definition : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Void*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::TaskScheduler::TASK_LOGON_TYPE, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    register_task : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::TaskScheduler::TASK_LOGON_TYPE, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    register_task_definition : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Void*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::TaskScheduler::TASK_LOGON_TYPE, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_security_descriptor : Proc(ITaskFolder*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_security_descriptor : Proc(ITaskFolder*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITaskFolder, lpVtbl : ITaskFolderVtbl* do
+  record ITaskFolder, lpVtbl : ITaskFolderVtable* do
     GUID = LibC::GUID.new(0x8cfac062_u32, 0xa080_u16, 0x4c15_u16, StaticArray[0x9a_u8, 0x88_u8, 0xaa_u8, 0x7c_u8, 0x2a_u8, 0xf8_u8, 0xd_u8, 0xfc_u8])
     def query_interface(this : ITaskFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4149,8 +4196,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : ITaskFolder*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITaskFolder*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITaskFolder*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : ITaskFolder*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pName)
@@ -4164,7 +4211,7 @@ module Win32cr::System::TaskScheduler
     def get_folders(this : ITaskFolder*, flags : Int32, ppFolders : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_folders.call(this, flags, ppFolders)
     end
-    def create_folder(this : ITaskFolder*, subFolderName : Win32cr::Foundation::BSTR, sddl : Win32cr::System::Com::VARIANT, ppFolder : Void**) : Win32cr::Foundation::HRESULT
+    def create_folder(this : ITaskFolder*, subFolderName : Win32cr::Foundation::BSTR, sddl : Win32cr::System::Variant::VARIANT, ppFolder : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_folder.call(this, subFolderName, sddl, ppFolder)
     end
     def delete_folder(this : ITaskFolder*, subFolderName : Win32cr::Foundation::BSTR, flags : Int32) : Win32cr::Foundation::HRESULT
@@ -4179,10 +4226,10 @@ module Win32cr::System::TaskScheduler
     def delete_task(this : ITaskFolder*, name : Win32cr::Foundation::BSTR, flags : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, name, flags)
     end
-    def register_task(this : ITaskFolder*, path : Win32cr::Foundation::BSTR, xmlText : Win32cr::Foundation::BSTR, flags : Int32, userId : Win32cr::System::Com::VARIANT, password : Win32cr::System::Com::VARIANT, logonType : Win32cr::System::TaskScheduler::TASK_LOGON_TYPE, sddl : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def register_task(this : ITaskFolder*, path : Win32cr::Foundation::BSTR, xmlText : Win32cr::Foundation::BSTR, flags : Int32, userId : Win32cr::System::Variant::VARIANT, password : Win32cr::System::Variant::VARIANT, logonType : Win32cr::System::TaskScheduler::TASK_LOGON_TYPE, sddl : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_task.call(this, path, xmlText, flags, userId, password, logonType, sddl, ppTask)
     end
-    def register_task_definition(this : ITaskFolder*, path : Win32cr::Foundation::BSTR, pDefinition : Void*, flags : Int32, userId : Win32cr::System::Com::VARIANT, password : Win32cr::System::Com::VARIANT, logonType : Win32cr::System::TaskScheduler::TASK_LOGON_TYPE, sddl : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def register_task_definition(this : ITaskFolder*, path : Win32cr::Foundation::BSTR, pDefinition : Void*, flags : Int32, userId : Win32cr::System::Variant::VARIANT, password : Win32cr::System::Variant::VARIANT, logonType : Win32cr::System::TaskScheduler::TASK_LOGON_TYPE, sddl : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_task_definition.call(this, path, pDefinition, flags, userId, password, logonType, sddl, ppTask)
     end
     def get_security_descriptor(this : ITaskFolder*, securityInformation : Int32, pSddl : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4195,26 +4242,27 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IIdleSettingsVtbl,
+
+  record IIdleSettingsVtable,
     query_interface : Proc(IIdleSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIdleSettings*, UInt32),
     release : Proc(IIdleSettings*, UInt32),
     get_type_info_count : Proc(IIdleSettings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IIdleSettings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IIdleSettings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IIdleSettings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IIdleSettings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_IdleDuration : Proc(IIdleSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_IdleDuration : Proc(IIdleSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_WaitTimeout : Proc(IIdleSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_WaitTimeout : Proc(IIdleSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_StopOnIdleEnd : Proc(IIdleSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_StopOnIdleEnd : Proc(IIdleSettings*, Int16, Win32cr::Foundation::HRESULT),
-    get_RestartOnIdle : Proc(IIdleSettings*, Int16*, Win32cr::Foundation::HRESULT),
-    put_RestartOnIdle : Proc(IIdleSettings*, Int16, Win32cr::Foundation::HRESULT)
+    get_StopOnIdleEnd : Proc(IIdleSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_StopOnIdleEnd : Proc(IIdleSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_RestartOnIdle : Proc(IIdleSettings*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_RestartOnIdle : Proc(IIdleSettings*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IIdleSettings, lpVtbl : IIdleSettingsVtbl* do
+  record IIdleSettings, lpVtbl : IIdleSettingsVtable* do
     GUID = LibC::GUID.new(0x84594461_u32, 0x53_u16, 0x4342_u16, StaticArray[0xa8_u8, 0xfd_u8, 0x8_u8, 0x8f_u8, 0xab_u8, 0xf1_u8, 0x1f_u8, 0x32_u8])
     def query_interface(this : IIdleSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4234,8 +4282,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IIdleSettings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IIdleSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IIdleSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_IdleDuration(this : IIdleSettings*, pDelay : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IdleDuration.call(this, pDelay)
@@ -4249,30 +4297,31 @@ module Win32cr::System::TaskScheduler
     def put_WaitTimeout(this : IIdleSettings*, timeout : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_WaitTimeout.call(this, timeout)
     end
-    def get_StopOnIdleEnd(this : IIdleSettings*, pStop : Int16*) : Win32cr::Foundation::HRESULT
+    def get_StopOnIdleEnd(this : IIdleSettings*, pStop : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StopOnIdleEnd.call(this, pStop)
     end
-    def put_StopOnIdleEnd(this : IIdleSettings*, stop : Int16) : Win32cr::Foundation::HRESULT
+    def put_StopOnIdleEnd(this : IIdleSettings*, stop : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_StopOnIdleEnd.call(this, stop)
     end
-    def get_RestartOnIdle(this : IIdleSettings*, pRestart : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RestartOnIdle(this : IIdleSettings*, pRestart : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RestartOnIdle.call(this, pRestart)
     end
-    def put_RestartOnIdle(this : IIdleSettings*, restart : Int16) : Win32cr::Foundation::HRESULT
+    def put_RestartOnIdle(this : IIdleSettings*, restart : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RestartOnIdle.call(this, restart)
     end
 
   end
 
   @[Extern]
-  record INetworkSettingsVtbl,
+
+  record INetworkSettingsVtable,
     query_interface : Proc(INetworkSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkSettings*, UInt32),
     release : Proc(INetworkSettings*, UInt32),
     get_type_info_count : Proc(INetworkSettings*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(INetworkSettings*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(INetworkSettings*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(INetworkSettings*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(INetworkSettings*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(INetworkSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(INetworkSettings*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Id : Proc(INetworkSettings*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4280,7 +4329,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record INetworkSettings, lpVtbl : INetworkSettingsVtbl* do
+  record INetworkSettings, lpVtbl : INetworkSettingsVtable* do
     GUID = LibC::GUID.new(0x9f7dea84_u32, 0xc30b_u16, 0x4245_u16, StaticArray[0x80_u8, 0xb6_u8, 0x0_u8, 0xe9_u8, 0xf6_u8, 0x46_u8, 0xf1_u8, 0xb4_u8])
     def query_interface(this : INetworkSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4300,8 +4349,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : INetworkSettings*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : INetworkSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : INetworkSettings*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : INetworkSettings*, pName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pName)
@@ -4319,24 +4368,25 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRepetitionPatternVtbl,
+
+  record IRepetitionPatternVtable,
     query_interface : Proc(IRepetitionPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRepetitionPattern*, UInt32),
     release : Proc(IRepetitionPattern*, UInt32),
     get_type_info_count : Proc(IRepetitionPattern*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRepetitionPattern*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRepetitionPattern*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRepetitionPattern*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRepetitionPattern*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Interval : Proc(IRepetitionPattern*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Interval : Proc(IRepetitionPattern*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Duration : Proc(IRepetitionPattern*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Duration : Proc(IRepetitionPattern*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_StopAtDurationEnd : Proc(IRepetitionPattern*, Int16*, Win32cr::Foundation::HRESULT),
-    put_StopAtDurationEnd : Proc(IRepetitionPattern*, Int16, Win32cr::Foundation::HRESULT)
+    get_StopAtDurationEnd : Proc(IRepetitionPattern*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_StopAtDurationEnd : Proc(IRepetitionPattern*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRepetitionPattern, lpVtbl : IRepetitionPatternVtbl* do
+  record IRepetitionPattern, lpVtbl : IRepetitionPatternVtable* do
     GUID = LibC::GUID.new(0x7fb9acf1_u32, 0x26be_u16, 0x400e_u16, StaticArray[0x85_u8, 0xb5_u8, 0x29_u8, 0x4b_u8, 0x9c_u8, 0x75_u8, 0xdf_u8, 0xd6_u8])
     def query_interface(this : IRepetitionPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4356,8 +4406,8 @@ module Win32cr::System::TaskScheduler
     def get_i_ds_of_names(this : IRepetitionPattern*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRepetitionPattern*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRepetitionPattern*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Interval(this : IRepetitionPattern*, pInterval : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Interval.call(this, pInterval)
@@ -4371,10 +4421,10 @@ module Win32cr::System::TaskScheduler
     def put_Duration(this : IRepetitionPattern*, duration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Duration.call(this, duration)
     end
-    def get_StopAtDurationEnd(this : IRepetitionPattern*, pStop : Int16*) : Win32cr::Foundation::HRESULT
+    def get_StopAtDurationEnd(this : IRepetitionPattern*, pStop : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_StopAtDurationEnd.call(this, pStop)
     end
-    def put_StopAtDurationEnd(this : IRepetitionPattern*, stop : Int16) : Win32cr::Foundation::HRESULT
+    def put_StopAtDurationEnd(this : IRepetitionPattern*, stop : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_StopAtDurationEnd.call(this, stop)
     end
 

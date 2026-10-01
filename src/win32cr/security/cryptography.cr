@@ -2,32 +2,35 @@ require "./../foundation.cr"
 require "./../system/registry.cr"
 require "./../security.cr"
 require "./../system/com.cr"
+require "./../system/variant.cr"
 
 module Win32cr::Security::Cryptography
   extend self
   alias HCRYPTASYNC = LibC::IntPtrT
-  alias HCERTCHAINENGINE = LibC::IntPtrT
-  alias BCRYPT_ALG_HANDLE = LibC::IntPtrT
-  alias BCRYPT_KEY_HANDLE = LibC::IntPtrT
-  alias BCRYPT_HASH_HANDLE = LibC::IntPtrT
-  alias BCRYPT_SECRET_HANDLE = LibC::IntPtrT
-  alias BCRYPT_HANDLE = LibC::IntPtrT
-  alias NCRYPT_HANDLE = LibC::UIntPtrT
+  alias HCERTCHAINENGINE = Void*
+  alias BCRYPT_ALG_HANDLE = Void*
+  alias BCRYPT_KEY_HANDLE = Void*
+  alias BCRYPT_HASH_HANDLE = Void*
+  alias BCRYPT_SECRET_HANDLE = Void*
   alias NCRYPT_PROV_HANDLE = LibC::UIntPtrT
   alias NCRYPT_KEY_HANDLE = LibC::UIntPtrT
+  alias BCRYPT_HANDLE = Void*
+  alias NCRYPT_HANDLE = LibC::UIntPtrT
   alias NCRYPT_HASH_HANDLE = LibC::UIntPtrT
   alias NCRYPT_SECRET_HANDLE = LibC::UIntPtrT
   alias HCRYPTPROV_LEGACY = LibC::UIntPtrT
   alias HCRYPTPROV_OR_NCRYPT_KEY_HANDLE = LibC::UIntPtrT
   alias HCERTSTORE = Void*
   alias HCERTSTOREPROV = Void*
+  alias SslGetCipherSuitePRFHashAlgorithmFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, UInt32, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
+
   alias PFN_NCRYPT_ALLOC = Proc(LibC::UIntPtrT, Void*)
 
   alias PFN_NCRYPT_FREE = Proc(Void*, Void)
 
-  alias PCRYPT_DECRYPT_PRIVATE_KEY_FUNC = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, UInt8*, UInt32*, Void*, Win32cr::Foundation::BOOL)
+  alias PCRYPT_DECRYPT_PRIVATE_KEY_FUNC = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, UInt8*, UInt32*, Void*, Win32cr::Foundation::BOOL)
 
-  alias PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, UInt8*, UInt32*, Void*, Win32cr::Foundation::BOOL)
+  alias PCRYPT_ENCRYPT_PRIVATE_KEY_FUNC = Proc(Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, UInt8*, UInt32*, Void*, Win32cr::Foundation::BOOL)
 
   alias PCRYPT_RESOLVE_HCRYPTPROV_FUNC = Proc(Win32cr::Security::Cryptography::CRYPT_PRIVATE_KEY_INFO*, LibC::UIntPtrT*, Void*, Win32cr::Foundation::BOOL)
 
@@ -127,23 +130,23 @@ module Win32cr::Security::Cryptography
 
   alias PFN_CERT_ENUM_PHYSICAL_STORE = Proc(Void*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CERT_PHYSICAL_STORE_INFO*, Void*, Void*, Win32cr::Foundation::BOOL)
 
-  alias PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC = Proc(UInt32, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void**, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::BOOL)
+  alias PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC = Proc(Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void**, Win32cr::Foundation::PWSTR*, Win32cr::Foundation::BOOL)
 
-  alias PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC = Proc(Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt32, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32*, Win32cr::Foundation::BOOL)
+  alias PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC = Proc(Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC = Proc(UInt32, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32, Win32cr::Foundation::BOOL)
+  alias PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC = Proc(Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC = Proc(Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt32, Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32*, Win32cr::Foundation::BOOL)
+  alias PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC = Proc(Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, UInt32, Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32*, Win32cr::Foundation::BOOL)
+  alias PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC = Proc(UInt32, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32, Void*, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, Win32cr::Foundation::BOOL)
+  alias PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC = Proc(Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, UInt32, Void*, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, Win32cr::Foundation::BOOL)
 
   alias PFN_IMPORT_PRIV_KEY_FUNC = Proc(LibC::UIntPtrT, Win32cr::Security::Cryptography::CRYPT_PRIVATE_KEY_INFO*, UInt32, Void*, Win32cr::Foundation::BOOL)
 
   alias PFN_EXPORT_PRIV_KEY_FUNC = Proc(LibC::UIntPtrT, UInt32, Win32cr::Foundation::PSTR, UInt32, Void*, Win32cr::Security::Cryptography::CRYPT_PRIVATE_KEY_INFO*, UInt32*, Win32cr::Foundation::BOOL)
 
-  alias PFN_CRYPT_GET_SIGNER_CERTIFICATE = Proc(Void*, UInt32, Win32cr::Security::Cryptography::CERT_INFO*, Win32cr::Security::Cryptography::HCERTSTORE, Win32cr::Security::Cryptography::CERT_CONTEXT*)
+  alias PFN_CRYPT_GET_SIGNER_CERTIFICATE = Proc(Void*, Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, Win32cr::Security::Cryptography::CERT_INFO*, Win32cr::Security::Cryptography::HCERTSTORE, Win32cr::Security::Cryptography::CERT_CONTEXT*)
 
   alias PFN_CRYPT_ASYNC_PARAM_FREE_FUNC = Proc(Win32cr::Foundation::PSTR, Void*, Void)
 
@@ -155,15 +158,15 @@ module Win32cr::Security::Cryptography
 
   alias PFN_CANCEL_ASYNC_RETRIEVAL_FUNC = Proc(Win32cr::Security::Cryptography::HCRYPTASYNC, Win32cr::Foundation::BOOL)
 
-  alias PFN_CRYPT_ENUM_KEYID_PROP = Proc(Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, UInt32, Void*, Void*, UInt32, UInt32*, Void**, UInt32*, Win32cr::Foundation::BOOL)
+  alias PFN_CRYPT_ENUM_KEYID_PROP = Proc(Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, UInt32, Void*, Void*, UInt32, UInt32*, Void**, UInt32*, Win32cr::Foundation::BOOL)
 
   alias PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK = Proc(Win32cr::Security::Cryptography::CERT_CONTEXT*, Void*, Win32cr::Foundation::BOOL)
 
   alias PFN_CERT_SERVER_OCSP_RESPONSE_UPDATE_CALLBACK = Proc(Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_CONTEXT*, Win32cr::Security::Cryptography::CRL_CONTEXT*, Win32cr::Security::Cryptography::CRL_CONTEXT*, Void*, UInt32, Void)
 
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH = Proc(Void*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**, UInt32, Win32cr::Foundation::BOOL)
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH = Proc(Void*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB**, UInt32, Win32cr::Foundation::BOOL)
 
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET = Proc(Void*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, UInt32, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, UInt8**, UInt32*, Win32cr::Foundation::PWSTR*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**, Win32cr::Foundation::BOOL)
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_GET = Proc(Void*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, UInt32, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, UInt8**, UInt32*, Win32cr::Foundation::PWSTR*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB**, Win32cr::Foundation::BOOL)
 
   alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE = Proc(Win32cr::Security::Cryptography::CRYPT_OBJECT_LOCATOR_RELEASE_REASON, Void*, Void)
 
@@ -171,7 +174,7 @@ module Win32cr::Security::Cryptography
 
   alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE = Proc(Void*, UInt8*, Void)
 
-  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER = Proc(Void*, Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, Void)
+  alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FREE_IDENTIFIER = Proc(Void*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Void)
 
   alias PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_INITIALIZE = Proc(Win32cr::Security::Cryptography::PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_FLUSH, Void*, UInt32*, Win32cr::Security::Cryptography::CRYPT_OBJECT_LOCATOR_PROVIDER_TABLE**, Void**, Win32cr::Foundation::BOOL)
 
@@ -180,6 +183,14 @@ module Win32cr::Security::Cryptography
   alias PFNCryptStreamOutputCallback = Proc(Void*, UInt8*, LibC::UIntPtrT, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
 
   alias PFNCryptStreamOutputCallbackEx = Proc(Void*, UInt8*, LibC::UIntPtrT, Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT)
+
+  alias PFN_AUTHENTICODE_DIGEST_SIGN = Proc(Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::ALG_ID, UInt8*, UInt32, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT)
+
+  alias PFN_AUTHENTICODE_DIGEST_SIGN_EX = Proc(Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::ALG_ID, UInt8*, UInt32, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Security::Cryptography::HCERTSTORE, Win32cr::Foundation::HRESULT)
+
+  alias PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE = Proc(Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::ALG_ID, UInt8*, UInt32, Win32cr::Foundation::HANDLE, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::CERT_CONTEXT**, Win32cr::Security::Cryptography::HCERTSTORE, Win32cr::Foundation::HRESULT)
+
+  alias PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE = Proc(Win32cr::Security::Cryptography::CERT_CONTEXT*, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Security::Cryptography::ALG_ID, UInt8*, UInt32, Win32cr::Foundation::HANDLE, Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, Win32cr::Foundation::HRESULT)
 
   alias PFN_CRYPT_XML_WRITE_CALLBACK = Proc(Void*, UInt8*, UInt32, Win32cr::Foundation::HRESULT)
 
@@ -213,6 +224,346 @@ module Win32cr::Security::Cryptography
 
   alias CryptXmlDllCreateKey = Proc(Win32cr::Security::Cryptography::CRYPT_XML_BLOB*, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, Win32cr::Foundation::HRESULT)
 
+  alias BCryptOpenAlgorithmProviderFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptGetPropertyFn = Proc(Win32cr::Security::Cryptography::BCRYPT_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptSetPropertyFn = Proc(Win32cr::Security::Cryptography::BCRYPT_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptCloseAlgorithmProviderFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptFreeBufferFn = Proc(Void*, Void)
+
+  alias BCryptGenerateSymmetricKeyFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, UInt8*, UInt32, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptGenerateKeyPairFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptEncryptFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, UInt8*, UInt32, Void*, UInt8*, UInt32, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDecryptFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, UInt8*, UInt32, Void*, UInt8*, UInt32, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptExportKeyFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptImportKeyFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, UInt8*, UInt32, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptImportKeyPairFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDuplicateKeyFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptFinalizeKeyPairFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDestroyKeyFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDestroySecretFn = Proc(Win32cr::Security::Cryptography::BCRYPT_SECRET_HANDLE, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptSignHashFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Void*, UInt8*, UInt32, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptVerifySignatureFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Void*, UInt8*, UInt32, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptSecretAgreementFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::BCRYPT_SECRET_HANDLE*, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDeriveKeyFn = Proc(Win32cr::Security::Cryptography::BCRYPT_SECRET_HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptKeyDerivationFn = Proc(Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptCreateHashFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE*, UInt8*, UInt32, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptHashDataFn = Proc(Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptFinishHashFn = Proc(Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptCreateMultiHashFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE*, UInt32, UInt8*, UInt32, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptProcessMultiOperationsFn = Proc(Win32cr::Security::Cryptography::BCRYPT_HANDLE, Win32cr::Security::Cryptography::BCRYPT_MULTI_OPERATION_TYPE, Void*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDuplicateHashFn = Proc(Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE*, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDestroyHashFn = Proc(Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptGenRandomFn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDeriveKeyCapiFn = Proc(Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias BCryptDeriveKeyPBKDF2Fn = Proc(Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, UInt8*, UInt32, UInt8*, UInt32, UInt64, UInt8*, UInt32, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias GetCipherInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_CIPHER_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias GetHashInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_HASH_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias GetAsymmetricEncryptionInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_ASYMMETRIC_ENCRYPTION_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias GetSecretAgreementInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_SECRET_AGREEMENT_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias GetSignatureInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_SIGNATURE_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias GetRngInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_RNG_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias GetKeyDerivationInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCRYPT_KEY_DERIVATION_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias NCryptOpenStorageProviderFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptEnumAlgorithmsFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, UInt32, UInt32*, Win32cr::Security::Cryptography::NCryptAlgorithmName**, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptIsAlgSupportedFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptEnumKeysFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::NCryptKeyName**, Void**, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptEnumStorageProvidersFn = Proc(UInt32*, Win32cr::Security::Cryptography::NCryptProviderName**, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptFreeBufferFn = Proc(Void*, Win32cr::Foundation::HRESULT)
+
+  alias NCryptOpenKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptCreatePersistedKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptGetProviderPropertyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptGetKeyPropertyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptSetProviderPropertyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptSetKeyPropertyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptFinalizeKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptEncryptFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt8*, UInt32, Void*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptDecryptFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt8*, UInt32, Void*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptImportKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCryptBufferDesc*, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptExportKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptSignHashFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Void*, UInt8*, UInt32, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptVerifySignatureFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Void*, UInt8*, UInt32, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptDeleteKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptFreeProviderFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Foundation::HRESULT)
+
+  alias NCryptFreeKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::HRESULT)
+
+  alias NCryptFreeSecretFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_SECRET_HANDLE, Win32cr::Foundation::HRESULT)
+
+  alias NCryptPromptUserFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptNotifyChangeKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Foundation::HANDLE*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptSecretAgreementFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_SECRET_HANDLE*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptDeriveKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_SECRET_HANDLE, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptKeyDerivationFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptCreateClaimFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt32, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias NCryptVerifyClaimFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt32, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias GetKeyStorageInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::NCRYPT_KEY_STORAGE_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias SslComputeClientAuthHashFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslComputeEapKeyBlockFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt8*, UInt32, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslComputeFinishedHashFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslCreateEphemeralKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, UInt32, UInt32, UInt32, UInt32, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslCreateHandshakeHashFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, UInt32, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslDecryptPacketFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt8*, UInt32, UInt8*, UInt32, UInt32*, UInt64, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslEncryptPacketFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt8*, UInt32, UInt8*, UInt32, UInt32*, UInt64, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslEnumCipherSuitesFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE**, Void**, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslEnumCipherSuitesExFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE_EX**, Void**, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslEnumEccCurvesFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, UInt32*, Win32cr::Security::Cryptography::NCRYPT_SSL_ECC_CURVE**, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExportKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslFreeBufferFn = Proc(Void*, Win32cr::Foundation::HRESULT)
+
+  alias SslFreeObjectFn = Proc(Win32cr::Security::Cryptography::NCRYPT_HANDLE, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslGenerateMasterKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, UInt32, UInt32, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslGenerateSessionKeysFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslGetKeyPropertyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslGetProviderPropertyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Foundation::PWSTR, UInt8**, UInt32*, Void**, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslHashHandshakeFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslImportKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslImportMasterKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, UInt32, UInt32, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslLookupCipherSuiteInfoFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, UInt32, UInt32, UInt32, Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslOpenPrivateKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::CERT_CONTEXT*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslOpenProviderFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslSignHashFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt8*, UInt32, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslVerifySignatureFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt8*, UInt32, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslLookupCipherLengthsFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, UInt32, UInt32, UInt32, Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_LENGTHS*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslCreateClientAuthHashFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, UInt32, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslComputeSessionHashFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, UInt32, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslGeneratePreMasterKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, UInt32, UInt32, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt8*, UInt32, UInt32*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExportKeyingMaterialFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Foundation::PSTR, UInt8*, UInt32, UInt8*, UInt16, UInt8*, UInt32, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExtractEarlyKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, UInt32, UInt32, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExtractHandshakeKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExtractMasterKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExpandTrafficKeysFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExpandWriteKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExpandExporterMasterKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExpandResumptionMasterKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslDuplicateTranscriptHashFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExpandBinderKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias SslExpandPreSharedKeyFn = Proc(Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, UInt8*, UInt32, Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, Win32cr::Security::Cryptography::BCryptBufferDesc*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias GetSChannelInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::NCRYPT_SSL_FUNCTION_TABLE**, UInt32, Win32cr::Foundation::NTSTATUS)
+
+  alias SslInitializeInterfaceFn = Proc(Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::NCRYPT_SSL_FUNCTION_TABLE*, UInt32, Win32cr::Foundation::HRESULT)
+
+  alias PFN_OFFLOAD_MOD_EXPO = Proc(UInt8*, UInt8*, UInt32, UInt8*, UInt32, UInt8*, Void*, UInt32, Win32cr::Foundation::BOOL)
+
+  alias CRYPT_VERIFY_IMAGE_A = Proc(Win32cr::Foundation::PSTR, UInt8*, Win32cr::Foundation::BOOL)
+
+  alias CRYPT_VERIFY_IMAGE_W = Proc(Win32cr::Foundation::PWSTR, UInt8*, Win32cr::Foundation::BOOL)
+
+  alias CRYPT_RETURN_HWND = Proc(Win32cr::Foundation::HWND*, Void)
+
+  alias PFN_CARD_ACQUIRE_CONTEXT = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt32, UInt32)
+
+  alias PFN_CARD_DELETE_CONTEXT = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt32)
+
+  alias PFN_CARD_QUERY_CAPABILITIES = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Security::Cryptography::CARD_CAPABILITIES*, UInt32)
+
+  alias PFN_CARD_GET_CHALLENGE_EX = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt32, UInt8**, UInt32*, UInt32, UInt32)
+
+  alias PFN_CARD_AUTHENTICATE_EX = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt32, UInt32, UInt8*, UInt32, UInt8**, UInt32*, UInt32*, UInt32)
+
+  alias PFN_CARD_CHANGE_AUTHENTICATOR_EX = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt32, UInt32, UInt8*, UInt32, UInt32, UInt8*, UInt32, UInt32, UInt32*, UInt32)
+
+  alias PFN_CARD_DEAUTHENTICATE_EX = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt32, UInt32, UInt32)
+
+  alias PFN_CARD_DELETE_CONTAINER = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8, UInt32, UInt32)
+
+  alias PFN_CARD_CREATE_CONTAINER = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8, UInt32, UInt32, UInt32, UInt8*, UInt32)
+
+  alias PFN_CARD_CREATE_CONTAINER_EX = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8, UInt32, UInt32, UInt32, UInt8*, UInt32, UInt32)
+
+  alias PFN_CARD_GET_CONTAINER_INFO = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8, UInt32, Win32cr::Security::Cryptography::CONTAINER_INFO*, UInt32)
+
+  alias PFN_CARD_AUTHENTICATE_PIN = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32)
+
+  alias PFN_CARD_GET_CHALLENGE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8**, UInt32*, UInt32)
+
+  alias PFN_CARD_AUTHENTICATE_CHALLENGE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8*, UInt32, UInt32*, UInt32)
+
+  alias PFN_CARD_UNBLOCK_PIN = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32)
+
+  alias PFN_CARD_CHANGE_AUTHENTICATOR = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8*, UInt32, UInt32, UInt32, UInt32*, UInt32)
+
+  alias PFN_CARD_DEAUTHENTICATE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PWSTR, UInt32, UInt32)
+
+  alias PFN_CARD_CREATE_DIRECTORY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PSTR, Win32cr::Security::Cryptography::CARD_DIRECTORY_ACCESS_CONDITION, UInt32)
+
+  alias PFN_CARD_DELETE_DIRECTORY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PSTR, UInt32)
+
+  alias PFN_CARD_CREATE_FILE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, Win32cr::Security::Cryptography::CARD_FILE_ACCESS_CONDITION, UInt32)
+
+  alias PFN_CARD_READ_FILE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt8**, UInt32*, UInt32)
+
+  alias PFN_CARD_WRITE_FILE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt8*, UInt32, UInt32)
+
+  alias PFN_CARD_DELETE_FILE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, UInt32, UInt32)
+
+  alias PFN_CARD_ENUM_FILES = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR*, UInt32*, UInt32, UInt32)
+
+  alias PFN_CARD_GET_FILE_INFO = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PSTR, Win32cr::Foundation::PSTR, Win32cr::Security::Cryptography::CARD_FILE_INFO*, UInt32)
+
+  alias PFN_CARD_QUERY_FREE_SPACE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt32, Win32cr::Security::Cryptography::CARD_FREE_SPACE_INFO*, UInt32)
+
+  alias PFN_CARD_QUERY_KEY_SIZES = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt32, UInt32, Win32cr::Security::Cryptography::CARD_KEY_SIZES*, UInt32)
+
+  alias PFN_CARD_RSA_DECRYPT = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Security::Cryptography::CARD_RSA_DECRYPT_INFO*, UInt32)
+
+  alias PFN_CARD_SIGN_DATA = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Security::Cryptography::CARD_SIGNING_INFO*, UInt32)
+
+  alias PFN_CARD_CONSTRUCT_DH_AGREEMENT = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Security::Cryptography::CARD_DH_AGREEMENT_INFO*, UInt32)
+
+  alias PFN_CARD_DERIVE_KEY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Security::Cryptography::CARD_DERIVE_KEY*, UInt32)
+
+  alias PFN_CARD_DESTROY_DH_AGREEMENT = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8, UInt32, UInt32)
+
+  alias PFN_CSP_GET_DH_AGREEMENT = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Void*, UInt8*, UInt32, UInt32)
+
+  alias PFN_CSP_ALLOC = Proc(LibC::UIntPtrT, Void*)
+
+  alias PFN_CSP_REALLOC = Proc(Void*, LibC::UIntPtrT, Void*)
+
+  alias PFN_CSP_FREE = Proc(Void*, Void)
+
+  alias PFN_CSP_CACHE_ADD_FILE = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, UInt32)
+
+  alias PFN_CSP_CACHE_LOOKUP_FILE = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, UInt8**, UInt32*, UInt32)
+
+  alias PFN_CSP_CACHE_DELETE_FILE = Proc(Void*, Win32cr::Foundation::PWSTR, UInt32, UInt32)
+
+  alias PFN_CSP_PAD_DATA = Proc(Win32cr::Security::Cryptography::CARD_SIGNING_INFO*, UInt32, UInt32*, UInt8**, UInt32)
+
+  alias PFN_CSP_UNPAD_DATA = Proc(Win32cr::Security::Cryptography::CARD_RSA_DECRYPT_INFO*, UInt32*, UInt8**, UInt32)
+
+  alias PFN_CARD_GET_CONTAINER_PROPERTY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, UInt32)
+
+  alias PFN_CARD_SET_CONTAINER_PROPERTY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32, UInt32)
+
+  alias PFN_CARD_GET_PROPERTY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, UInt32)
+
+  alias PFN_CARD_SET_PROPERTY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32, UInt32)
+
+  alias PFN_MD_IMPORT_SESSION_KEY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::UIntPtrT*, UInt8*, UInt32, UInt32)
+
+  alias PFN_MD_ENCRYPT_DATA = Proc(Win32cr::Security::Cryptography::CARD_DATA*, LibC::UIntPtrT, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32, Win32cr::Security::Cryptography::CARD_ENCRYPTED_DATA**, UInt32*, UInt32)
+
+  alias PFN_CARD_GET_SHARED_KEY_HANDLE = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8*, UInt32, UInt8**, UInt32*, LibC::UIntPtrT*, UInt32)
+
+  alias PFN_CARD_DESTROY_KEY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, LibC::UIntPtrT, UInt32)
+
+  alias PFN_CARD_GET_ALGORITHM_PROPERTY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, UInt32)
+
+  alias PFN_CARD_GET_KEY_PROPERTY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, LibC::UIntPtrT, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32*, UInt32, UInt32)
+
+  alias PFN_CARD_SET_KEY_PROPERTY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, LibC::UIntPtrT, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt32, UInt32)
+
+  alias PFN_CARD_IMPORT_SESSION_KEY = Proc(Win32cr::Security::Cryptography::CARD_DATA*, UInt8, Void*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::UIntPtrT*, UInt8*, UInt32, UInt32, UInt32)
+
+  alias PFN_CARD_PROCESS_ENCRYPTED_DATA = Proc(Win32cr::Security::Cryptography::CARD_DATA*, LibC::UIntPtrT, Win32cr::Foundation::PWSTR, Win32cr::Security::Cryptography::CARD_ENCRYPTED_DATA*, UInt32, UInt8*, UInt32, UInt32*, UInt32, UInt32)
+
+  CERT_SYSTEM_STORE_CURRENT_USER = 65536_u32
+  CERT_SYSTEM_STORE_LOCAL_MACHINE = 131072_u32
   CERT_COMPARE_SHIFT = 16_i32
   BCRYPT_OBJECT_ALIGNMENT = 16_u32
   BCRYPT_KDF_HASH = "HASH"
@@ -249,6 +600,8 @@ module Win32cr::Security::Cryptography
   BCRYPT_OPAQUE_KEY_BLOB = "OpaqueKeyBlob"
   BCRYPT_KEY_DATA_BLOB = "KeyDataBlob"
   BCRYPT_AES_WRAP_KEY_BLOB = "Rfc3565KeyWrapBlob"
+  BCRYPT_PKCS11_RSA_AES_WRAP_KEY_BLOB = "PKCS11RsaAesWrapBlob"
+  BCRYPT_PKCS11_RSA_AES_WRAP_BLOB_MAGIC = 1464877394_u32
   BCRYPT_OBJECT_LENGTH = "ObjectLength"
   BCRYPT_ALGORITHM_NAME = "AlgorithmName"
   BCRYPT_PROVIDER_HANDLE = "ProviderHandle"
@@ -266,6 +619,8 @@ module Win32cr::Security::Cryptography
   BCRYPT_SIGNATURE_LENGTH = "SignatureLength"
   BCRYPT_HASH_BLOCK_LENGTH = "HashBlockLength"
   BCRYPT_AUTH_TAG_LENGTH = "AuthTagLength"
+  BCRYPT_FUNCTION_NAME_STRING = "FunctionNameString"
+  BCRYPT_CUSTOMIZATION_STRING = "CustomizationString"
   BCRYPT_PRIMITIVE_TYPE = "PrimitiveType"
   BCRYPT_IS_KEYED_HASH = "IsKeyedHash"
   BCRYPT_IS_REUSABLE_HASH = "IsReusableHash"
@@ -278,6 +633,9 @@ module Win32cr::Security::Cryptography
   BCRYPT_HKDF_HASH_ALGORITHM = "HkdfHashAlgorithm"
   BCRYPT_HKDF_SALT_AND_FINALIZE = "HkdfSaltAndFinalize"
   BCRYPT_HKDF_PRK_AND_FINALIZE = "HkdfPrkAndFinalize"
+  BCRYPT_KEM_SHARED_SECRET_LENGTH = "KEMSharedSecretLength"
+  BCRYPT_KEM_CIPHERTEXT_LENGTH = "KEMCiphertextLength"
+  BCRYPT_PARAMETER_SET_NAME = "ParameterSetName"
   BCRYPT_INITIALIZATION_VECTOR = "IV"
   BCRYPT_CHAIN_MODE_NA = "ChainingModeN/A"
   BCRYPT_CHAIN_MODE_CBC = "ChainingModeCBC"
@@ -290,9 +648,10 @@ module Win32cr::Security::Cryptography
   BCRYPT_SUPPORTED_PAD_PKCS1_SIG = 4_u32
   BCRYPT_SUPPORTED_PAD_OAEP = 8_u32
   BCRYPT_SUPPORTED_PAD_PSS = 16_u32
-  BCRYPT_BLOCK_PADDING = 1_u32
   BCRYPT_GENERATE_IV = 32_u32
   BCRYPT_PAD_PKCS1_OPTIONAL_HASH_OID = 16_u32
+  BCRYPT_PAD_PQDSA = 32_u32
+  BCRYPT_MLDSA_EXTERNAL_MU = 64_u32
   BCRYPTBUFFER_VERSION = 0_u32
   BCRYPT_PUBLIC_KEY_BLOB = "PUBLICBLOB"
   BCRYPT_PRIVATE_KEY_BLOB = "PRIVATEBLOB"
@@ -308,6 +667,7 @@ module Win32cr::Security::Cryptography
   BCRYPT_ECCFULLPUBLIC_BLOB = "ECCFULLPUBLICBLOB"
   BCRYPT_ECCFULLPRIVATE_BLOB = "ECCFULLPRIVATEBLOB"
   SSL_ECCPUBLIC_BLOB = "SSLECCPUBLICBLOB"
+  TLS_13_PRE_SHARED_KEY = "TLS13PRESHAREDKEY"
   BCRYPT_ECDH_PUBLIC_P256_MAGIC = 827016005_u32
   BCRYPT_ECDH_PRIVATE_P256_MAGIC = 843793221_u32
   BCRYPT_ECDH_PUBLIC_P384_MAGIC = 860570437_u32
@@ -341,6 +701,24 @@ module Win32cr::Security::Cryptography
   BCRYPT_DSA_PRIVATE_MAGIC_V2 = 844517444_u32
   BCRYPT_KEY_DATA_BLOB_MAGIC = 1296188491_u32
   BCRYPT_KEY_DATA_BLOB_VERSION1 = 1_u32
+  BCRYPT_MLDSA_PUBLIC_MAGIC = 1263555396_u32
+  BCRYPT_MLDSA_PRIVATE_MAGIC = 1263752004_u32
+  BCRYPT_MLDSA_PRIVATE_SEED_MAGIC = 1397969732_u32
+  BCRYPT_SLHDSA_PUBLIC_MAGIC = 1263552595_u32
+  BCRYPT_SLHDSA_PRIVATE_MAGIC = 1263749203_u32
+  BCRYPT_LMS_PUBLIC_MAGIC = 1263553868_u32
+  BCRYPT_XMSS_PUBLIC_MAGIC = 1263553880_u32
+  BCRYPT_PQDSA_PUBLIC_BLOB = "PQDSAPUBLICBLOB"
+  BCRYPT_PQDSA_PRIVATE_BLOB = "PQDSAPRIVATEBLOB"
+  BCRYPT_PQDSA_PRIVATE_SEED_BLOB = "PQDSAPRIVATESEEDBLOB"
+  BCRYPT_MLKEM_PUBLIC_MAGIC = 1347112013_u32
+  BCRYPT_MLKEM_PRIVATE_MAGIC = 1380666445_u32
+  BCRYPT_MLKEM_PRIVATE_SEED_MAGIC = 1397443661_u32
+  BCRYPT_MLKEM_PUBLIC_BLOB = "MLKEMPUBLICBLOB"
+  BCRYPT_MLKEM_PRIVATE_BLOB = "MLKEMPRIVATEBLOB"
+  BCRYPT_MLKEM_PRIVATE_SEED_BLOB = "MLKEMPRIVATESEEDBLOB"
+  BCRYPT_MLKEM_ENCAPSULATION_BLOB = "MLKEMPUBLICBLOB"
+  BCRYPT_MLKEM_DECAPSULATION_BLOB = "MLKEMPRIVATEBLOB"
   BCRYPT_DSA_PARAMETERS = "DSAParameters"
   BCRYPT_DSA_PARAMETERS_MAGIC = 1297109828_u32
   BCRYPT_DSA_PARAMETERS_MAGIC_V2 = 843927620_u32
@@ -393,6 +771,24 @@ module Win32cr::Security::Cryptography
   BCRYPT_ECC_CURVE_X962P239V2 = "x962P239v2"
   BCRYPT_ECC_CURVE_X962P239V3 = "x962P239v3"
   BCRYPT_ECC_CURVE_X962P256V1 = "x962P256v1"
+  BCRYPT_MLDSA_PARAMETER_SET_44 = "44"
+  BCRYPT_MLDSA_PARAMETER_SET_65 = "65"
+  BCRYPT_MLDSA_PARAMETER_SET_87 = "87"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHA2_128S = "SHA2-128s"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_128S = "SHAKE-128s"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHA2_128F = "SHA2-128f"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_128F = "SHAKE-128f"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHA2_192S = "SHA2-192s"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_192S = "SHAKE-192s"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHA2_192F = "SHA2-192f"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_192F = "SHAKE-192f"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHA2_256S = "SHA2-256s"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_256S = "SHAKE-256s"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHA2_256F = "SHA2-256f"
+  BCRYPT_SLHDSA_PARAMETER_SET_SHAKE_256F = "SHAKE-256f"
+  BCRYPT_MLKEM_PARAMETER_SET_512 = "512"
+  BCRYPT_MLKEM_PARAMETER_SET_768 = "768"
+  BCRYPT_MLKEM_PARAMETER_SET_1024 = "1024"
   MS_PRIMITIVE_PROVIDER = "Microsoft Primitive Provider"
   MS_PLATFORM_CRYPTO_PROVIDER = "Microsoft Platform Crypto Provider"
   BCRYPT_RSA_ALGORITHM = "RSA"
@@ -435,81 +831,110 @@ module Win32cr::Security::Cryptography
   BCRYPT_XTS_AES_ALGORITHM = "XTS-AES"
   BCRYPT_HKDF_ALGORITHM = "HKDF"
   BCRYPT_CHACHA20_POLY1305_ALGORITHM = "CHACHA20_POLY1305"
+  BCRYPT_SHA3_256_ALGORITHM = "SHA3-256"
+  BCRYPT_SHA3_384_ALGORITHM = "SHA3-384"
+  BCRYPT_SHA3_512_ALGORITHM = "SHA3-512"
+  BCRYPT_CSHAKE128_ALGORITHM = "CSHAKE128"
+  BCRYPT_CSHAKE256_ALGORITHM = "CSHAKE256"
+  BCRYPT_KMAC128_ALGORITHM = "KMAC128"
+  BCRYPT_KMAC256_ALGORITHM = "KMAC256"
+  BCRYPT_SHAKE128_ALGORITHM = "SHAKE128"
+  BCRYPT_SHAKE256_ALGORITHM = "SHAKE256"
+  BCRYPT_MLDSA_ALGORITHM = "ML-DSA"
+  BCRYPT_SLHDSA_ALGORITHM = "SLH-DSA"
+  BCRYPT_LMS_ALGORITHM = "LMS"
+  BCRYPT_XMSS_ALGORITHM = "XMSS"
+  BCRYPT_MLKEM_ALGORITHM = "ML-KEM"
   BCRYPT_KEY_DERIVATION_INTERFACE = 7_u32
-  BCRYPT_MD2_ALG_HANDLE = 1_u32
-  BCRYPT_MD4_ALG_HANDLE = 17_u32
-  BCRYPT_MD5_ALG_HANDLE = 33_u32
-  BCRYPT_SHA1_ALG_HANDLE = 49_u32
-  BCRYPT_SHA256_ALG_HANDLE = 65_u32
-  BCRYPT_SHA384_ALG_HANDLE = 81_u32
-  BCRYPT_SHA512_ALG_HANDLE = 97_u32
-  BCRYPT_RC4_ALG_HANDLE = 113_u32
-  BCRYPT_RNG_ALG_HANDLE = 129_u32
-  BCRYPT_HMAC_MD5_ALG_HANDLE = 145_u32
-  BCRYPT_HMAC_SHA1_ALG_HANDLE = 161_u32
-  BCRYPT_HMAC_SHA256_ALG_HANDLE = 177_u32
-  BCRYPT_HMAC_SHA384_ALG_HANDLE = 193_u32
-  BCRYPT_HMAC_SHA512_ALG_HANDLE = 209_u32
-  BCRYPT_RSA_ALG_HANDLE = 225_u32
-  BCRYPT_ECDSA_ALG_HANDLE = 241_u32
-  BCRYPT_AES_CMAC_ALG_HANDLE = 257_u32
-  BCRYPT_AES_GMAC_ALG_HANDLE = 273_u32
-  BCRYPT_HMAC_MD2_ALG_HANDLE = 289_u32
-  BCRYPT_HMAC_MD4_ALG_HANDLE = 305_u32
-  BCRYPT_3DES_CBC_ALG_HANDLE = 321_u32
-  BCRYPT_3DES_ECB_ALG_HANDLE = 337_u32
-  BCRYPT_3DES_CFB_ALG_HANDLE = 353_u32
-  BCRYPT_3DES_112_CBC_ALG_HANDLE = 369_u32
-  BCRYPT_3DES_112_ECB_ALG_HANDLE = 385_u32
-  BCRYPT_3DES_112_CFB_ALG_HANDLE = 401_u32
-  BCRYPT_AES_CBC_ALG_HANDLE = 417_u32
-  BCRYPT_AES_ECB_ALG_HANDLE = 433_u32
-  BCRYPT_AES_CFB_ALG_HANDLE = 449_u32
-  BCRYPT_AES_CCM_ALG_HANDLE = 465_u32
-  BCRYPT_AES_GCM_ALG_HANDLE = 481_u32
-  BCRYPT_DES_CBC_ALG_HANDLE = 497_u32
-  BCRYPT_DES_ECB_ALG_HANDLE = 513_u32
-  BCRYPT_DES_CFB_ALG_HANDLE = 529_u32
-  BCRYPT_DESX_CBC_ALG_HANDLE = 545_u32
-  BCRYPT_DESX_ECB_ALG_HANDLE = 561_u32
-  BCRYPT_DESX_CFB_ALG_HANDLE = 577_u32
-  BCRYPT_RC2_CBC_ALG_HANDLE = 593_u32
-  BCRYPT_RC2_ECB_ALG_HANDLE = 609_u32
-  BCRYPT_RC2_CFB_ALG_HANDLE = 625_u32
-  BCRYPT_DH_ALG_HANDLE = 641_u32
-  BCRYPT_ECDH_ALG_HANDLE = 657_u32
-  BCRYPT_ECDH_P256_ALG_HANDLE = 673_u32
-  BCRYPT_ECDH_P384_ALG_HANDLE = 689_u32
-  BCRYPT_ECDH_P521_ALG_HANDLE = 705_u32
-  BCRYPT_DSA_ALG_HANDLE = 721_u32
-  BCRYPT_ECDSA_P256_ALG_HANDLE = 737_u32
-  BCRYPT_ECDSA_P384_ALG_HANDLE = 753_u32
-  BCRYPT_ECDSA_P521_ALG_HANDLE = 769_u32
-  BCRYPT_RSA_SIGN_ALG_HANDLE = 785_u32
-  BCRYPT_CAPI_KDF_ALG_HANDLE = 801_u32
-  BCRYPT_PBKDF2_ALG_HANDLE = 817_u32
-  BCRYPT_SP800108_CTR_HMAC_ALG_HANDLE = 833_u32
-  BCRYPT_SP80056A_CONCAT_ALG_HANDLE = 849_u32
-  BCRYPT_TLS1_1_KDF_ALG_HANDLE = 865_u32
-  BCRYPT_TLS1_2_KDF_ALG_HANDLE = 881_u32
-  BCRYPT_XTS_AES_ALG_HANDLE = 897_u32
-  BCRYPT_HKDF_ALG_HANDLE = 913_u32
-  BCRYPT_CHACHA20_POLY1305_ALG_HANDLE = 929_u32
+  BCRYPT_KEY_ENCAPSULATION_INTERFACE = 8_u32
+  BCRYPT_MD2_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x1_u64)
+  BCRYPT_MD4_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x11_u64)
+  BCRYPT_MD5_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x21_u64)
+  BCRYPT_SHA1_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x31_u64)
+  BCRYPT_SHA256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x41_u64)
+  BCRYPT_SHA384_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x51_u64)
+  BCRYPT_SHA512_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x61_u64)
+  BCRYPT_RC4_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x71_u64)
+  BCRYPT_RNG_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x81_u64)
+  BCRYPT_HMAC_MD5_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x91_u64)
+  BCRYPT_HMAC_SHA1_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0xa1_u64)
+  BCRYPT_HMAC_SHA256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0xb1_u64)
+  BCRYPT_HMAC_SHA384_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0xc1_u64)
+  BCRYPT_HMAC_SHA512_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0xd1_u64)
+  BCRYPT_RSA_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0xe1_u64)
+  BCRYPT_ECDSA_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0xf1_u64)
+  BCRYPT_AES_CMAC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x101_u64)
+  BCRYPT_AES_GMAC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x111_u64)
+  BCRYPT_HMAC_MD2_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x121_u64)
+  BCRYPT_HMAC_MD4_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x131_u64)
+  BCRYPT_3DES_CBC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x141_u64)
+  BCRYPT_3DES_ECB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x151_u64)
+  BCRYPT_3DES_CFB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x161_u64)
+  BCRYPT_3DES_112_CBC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x171_u64)
+  BCRYPT_3DES_112_ECB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x181_u64)
+  BCRYPT_3DES_112_CFB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x191_u64)
+  BCRYPT_AES_CBC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x1a1_u64)
+  BCRYPT_AES_ECB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x1b1_u64)
+  BCRYPT_AES_CFB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x1c1_u64)
+  BCRYPT_AES_CCM_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x1d1_u64)
+  BCRYPT_AES_GCM_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x1e1_u64)
+  BCRYPT_DES_CBC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x1f1_u64)
+  BCRYPT_DES_ECB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x201_u64)
+  BCRYPT_DES_CFB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x211_u64)
+  BCRYPT_DESX_CBC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x221_u64)
+  BCRYPT_DESX_ECB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x231_u64)
+  BCRYPT_DESX_CFB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x241_u64)
+  BCRYPT_RC2_CBC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x251_u64)
+  BCRYPT_RC2_ECB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x261_u64)
+  BCRYPT_RC2_CFB_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x271_u64)
+  BCRYPT_DH_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x281_u64)
+  BCRYPT_ECDH_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x291_u64)
+  BCRYPT_ECDH_P256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x2a1_u64)
+  BCRYPT_ECDH_P384_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x2b1_u64)
+  BCRYPT_ECDH_P521_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x2c1_u64)
+  BCRYPT_DSA_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x2d1_u64)
+  BCRYPT_ECDSA_P256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x2e1_u64)
+  BCRYPT_ECDSA_P384_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x2f1_u64)
+  BCRYPT_ECDSA_P521_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x301_u64)
+  BCRYPT_RSA_SIGN_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x311_u64)
+  BCRYPT_CAPI_KDF_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x321_u64)
+  BCRYPT_PBKDF2_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x331_u64)
+  BCRYPT_SP800108_CTR_HMAC_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x341_u64)
+  BCRYPT_SP80056A_CONCAT_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x351_u64)
+  BCRYPT_TLS1_1_KDF_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x361_u64)
+  BCRYPT_TLS1_2_KDF_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x371_u64)
+  BCRYPT_XTS_AES_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x381_u64)
+  BCRYPT_HKDF_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x391_u64)
+  BCRYPT_CHACHA20_POLY1305_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x3a1_u64)
+  BCRYPT_SHA3_256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x3b1_u64)
+  BCRYPT_SHA3_384_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x3c1_u64)
+  BCRYPT_SHA3_512_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x3d1_u64)
+  BCRYPT_HMAC_SHA3_256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x3e1_u64)
+  BCRYPT_HMAC_SHA3_384_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x3f1_u64)
+  BCRYPT_HMAC_SHA3_512_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x401_u64)
+  BCRYPT_CSHAKE128_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x411_u64)
+  BCRYPT_CSHAKE256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x421_u64)
+  BCRYPT_KMAC128_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x431_u64)
+  BCRYPT_KMAC256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x441_u64)
+  BCRYPT_SHAKE128_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x451_u64)
+  BCRYPT_SHAKE256_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x461_u64)
+  BCRYPT_MLDSA_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x471_u64)
+  BCRYPT_MLKEM_ALG_HANDLE = Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE.new(0x481_u64)
   BCRYPT_CAPI_AES_FLAG = 16_u32
   BCRYPT_MULTI_FLAG = 64_u32
+  BCRYPT_HASH_DONT_RESET_FLAG = 1_u32
   BCRYPT_TLS_CBC_HMAC_VERIFY_FLAG = 4_u32
   BCRYPT_BUFFERS_LOCKED_FLAG = 64_u32
   BCRYPT_EXTENDED_KEYSIZE = 128_u32
   BCRYPT_ENABLE_INCOMPATIBLE_FIPS_CHECKS = 256_u32
   BCRYPT_KEY_DERIVATION_OPERATION = 64_u32
+  BCRYPT_KEY_ENCAPSULATION_OPERATION = 128_u32
   BCRYPT_PUBLIC_KEY_FLAG = 1_u32
   BCRYPT_PRIVATE_KEY_FLAG = 2_u32
   BCRYPT_NO_KEY_VALIDATION = 8_u32
   BCRYPT_KEY_VALIDATION_RANGE = 16_u32
   BCRYPT_KEY_VALIDATION_RANGE_AND_ORDER = 24_u32
   BCRYPT_KEY_VALIDATION_REGENERATE = 32_u32
-  BCRYPT_RNG_USE_ENTROPY_IN_BUFFER = 1_u32
-  BCRYPT_USE_SYSTEM_PREFERRED_RNG = 2_u32
   BCRYPT_HASH_INTERFACE_MAJORVERSION_2 = 2_u32
   CRYPT_OVERWRITE = 1_u32
   CRYPT_PRIORITY_TOP = 0_u32
@@ -587,6 +1012,7 @@ module Win32cr::Security::Cryptography
   Dwforce_key_protection_disabled = 0_u32
   Dwforce_key_protection_user_select = 1_u32
   Dwforce_key_protection_high = 2_u32
+  CRYPTPROTECT_DEFAULT_PROVIDER = LibC::GUID.new(0xdf9d8cd0_u32, 0x1501_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x7a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x97_u8, 0xeb_u8])
   CRYPTPROTECT_PROMPT_ON_UNPROTECT = 1_u32
   CRYPTPROTECT_PROMPT_ON_PROTECT = 2_u32
   CRYPTPROTECT_PROMPT_RESERVED = 4_u32
@@ -611,6 +1037,7 @@ module Win32cr::Security::Cryptography
   MS_SMART_CARD_KEY_STORAGE_PROVIDER = "Microsoft Smart Card Key Storage Provider"
   MS_PLATFORM_KEY_STORAGE_PROVIDER = "Microsoft Platform Crypto Provider"
   MS_NGC_KEY_STORAGE_PROVIDER = "Microsoft Passport Key Storage Provider"
+  MS_PLUTON_CRYPTO_PROVIDER = "Microsoft Pluton Cryptographic Provider"
   TPM_RSA_SRK_SEAL_KEY = "MICROSOFT_PCP_KSP_RSA_SEAL_KEY_3BD1C4BF-004E-4E2F-8A4D-0BF633DCB074"
   NCRYPT_RSA_ALGORITHM = "RSA"
   NCRYPT_RSA_SIGN_ALGORITHM = "RSA_SIGN"
@@ -643,7 +1070,13 @@ module Win32cr::Security::Cryptography
   NCRYPT_ECDH_ALGORITHM = "ECDH"
   NCRYPT_KEY_STORAGE_ALGORITHM = "KEY_STORAGE"
   NCRYPT_HMAC_SHA256_ALGORITHM = "HMAC-SHA256"
+  NCRYPT_MLKEM_ALGORITHM = "ML-KEM"
+  NCRYPT_MLDSA_ALGORITHM = "ML-DSA"
+  NCRYPT_SLHDSA_ALGORITHM = "SLH-DSA"
+  NCRYPT_LMS_ALGORITHM = "LMS"
+  NCRYPT_XMSS_ALGORITHM = "XMSS"
   NCRYPT_KEY_DERIVATION_INTERFACE = 7_u32
+  NCRYPT_KEY_ENCAPSULATION_INTERFACE = 8_u32
   NCRYPT_KEY_PROTECTION_INTERFACE = 65540_u32
   NCRYPT_RSA_ALGORITHM_GROUP = "RSA"
   NCRYPT_DH_ALGORITHM_GROUP = "DH"
@@ -654,6 +1087,11 @@ module Win32cr::Security::Cryptography
   NCRYPT_RC2_ALGORITHM_GROUP = "RC2"
   NCRYPT_DES_ALGORITHM_GROUP = "DES"
   NCRYPT_KEY_DERIVATION_GROUP = "KEY_DERIVATION"
+  NCRYPT_MLKEM_ALGORITHM_GROUP = "MLKEM"
+  NCRYPT_MLDSA_ALGORITHM_GROUP = "MLDSA"
+  NCRYPT_SLHDSA_ALGORITHM_GROUP = "SLHDSA"
+  NCRYPT_LMS_ALGORITHM_GROUP = "LMS"
+  NCRYPT_XMSS_ALGORITHM_GROUP = "XMSS"
   NCRYPTBUFFER_VERSION = 0_u32
   NCRYPTBUFFER_EMPTY = 0_u32
   NCRYPTBUFFER_DATA = 1_u32
@@ -679,7 +1117,6 @@ module Win32cr::Security::Cryptography
   NCRYPTBUFFER_ATTESTATIONSTATEMENT_BLOB = 51_u32
   NCRYPTBUFFER_ATTESTATION_CLAIM_TYPE = 52_u32
   NCRYPTBUFFER_ATTESTATION_CLAIM_CHALLENGE_REQUIRED = 53_u32
-  NCRYPTBUFFER_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS = 54_u32
   NCRYPTBUFFER_ECC_CURVE_NAME = 60_u32
   NCRYPTBUFFER_ECC_PARAMETERS = 61_u32
   NCRYPTBUFFER_TPM_SEAL_PASSWORD = 70_u32
@@ -689,6 +1126,17 @@ module Win32cr::Security::Cryptography
   NCRYPTBUFFER_TPM_PLATFORM_CLAIM_PCR_MASK = 80_u32
   NCRYPTBUFFER_TPM_PLATFORM_CLAIM_NONCE = 81_u32
   NCRYPTBUFFER_TPM_PLATFORM_CLAIM_STATIC_CREATE = 82_u32
+  NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_HASH = 90_u32
+  NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_SCHEME = 91_u32
+  NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_ALGO = 92_u32
+  NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_SALT_SIZE = 93_u32
+  NCRYPTBUFFER_ATTESTATION_STATEMENT_SIGNATURE_PADDING_SALT = 93_u32
+  NCRYPTBUFFER_ATTESTATION_STATEMENT_NONCE = 49_u32
+  NCRYPTBUFFER_VBS_ATTESTATION_STATEMENT_ROOT_DETAILS = 94_u32
+  NCRYPTBUFFER_VBS_ATTESTATION_STATEMENT_IDENTITY_DETAILS = 95_u32
+  NCRYPTBUFFER_PKCS_AES_KEY_BITS = 96_u32
+  NCRYPTBUFFER_PKCS_PADDING_ALGO = 97_u32
+  NCRYPTBUFFER_PKCS_PADDING_LABEL = 98_u32
   NCRYPT_CIPHER_NO_PADDING_FLAG = 0_u32
   NCRYPT_CIPHER_BLOCK_PADDING_FLAG = 1_u32
   NCRYPT_CIPHER_OTHER_PADDING_FLAG = 2_u32
@@ -696,24 +1144,42 @@ module Win32cr::Security::Cryptography
   NCRYPT_KEY_ATTEST_MAGIC = 1146110283_u32
   NCRYPT_CLAIM_AUTHORITY_ONLY = 1_u32
   NCRYPT_CLAIM_SUBJECT_ONLY = 2_u32
-  NCRYPT_CLAIM_WEB_AUTH_SUBJECT_ONLY = 258_u32
   NCRYPT_CLAIM_AUTHORITY_AND_SUBJECT = 3_u32
-  NCRYPT_CLAIM_VSM_KEY_ATTESTATION_STATEMENT = 4_u32
+  NCRYPT_CLAIM_VBS_KEY_ATTESTATION_STATEMENT = 4_u32
+  NCRYPT_CLAIM_VBS_ROOT = 5_u32
+  NCRYPT_CLAIM_VBS_IDENTITY = 6_u32
+  NCRYPT_CLAIM_WEB_AUTH_SUBJECT_ONLY = 258_u32
   NCRYPT_CLAIM_UNKNOWN = 4096_u32
   NCRYPT_CLAIM_PLATFORM = 65536_u32
+  NCRYPT_CLAIM_WEB_AUTH_SUBJECT_ONLY_V2 = 259_u32
   NCRYPT_ISOLATED_KEY_FLAG_CREATED_IN_ISOLATION = 1_u32
   NCRYPT_ISOLATED_KEY_FLAG_IMPORT_ONLY = 2_u32
+  NCRYPT_ISOLATED_KEY_FLAG_PER_BOOT_KEY = 4_u32
+  NCRYPT_VBS_KEY_FLAG_CREATED_IN_ISOLATION = 1_u32
+  NCRYPT_VBS_KEY_FLAG_IMPORT_ONLY = 2_u32
+  NCRYPT_VBS_KEY_FLAG_PER_BOOT_KEY = 4_u32
+  NCRYPT_VBS_KEY_FLAG_IMPORT_EPHEMERAL_ONLY = 8_u32
   NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES_V0 = 0_u32
   NCRYPT_ISOLATED_KEY_ATTESTED_ATTRIBUTES_CURRENT_VERSION = 0_u32
-  NCRYPT_VSM_KEY_ATTESTATION_STATEMENT_V0 = 0_u32
-  NCRYPT_VSM_KEY_ATTESTATION_STATEMENT_CURRENT_VERSION = 0_u32
-  NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS_V0 = 0_u32
-  NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS_CURRENT_VERSION = 0_u32
+  NCRYPT_VBS_KEY_ATTESTED_ATTRIBUTES_CURRENT_VERSION = 0_u32
   NCRYPT_EXPORTED_ISOLATED_KEY_HEADER_V0 = 0_u32
   NCRYPT_EXPORTED_ISOLATED_KEY_HEADER_CURRENT_VERSION = 0_u32
+  NCRYPT_VBS_ROOT_ATTESTATION_HEADER_V0 = 0_u32
+  NCRYPT_VBS_ROOT_ATTESTATION_HEADER_CURRENT_VERSION = 0_u32
+  VBS_ROOT_ATTESTATION_HEADER_MAGIC = 1212371542_u32
+  NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING_V0 = 0_u32
+  NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING_CURRENT_VERSION = 0_u32
+  NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER_V0 = 0_u32
+  NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER_CURRENT_VERSION = 0_u32
+  VBS_IDENTITY_ATTESTATION_HEADER_MAGIC = 1212369238_u32
+  NCRYPT_VBS_KEY_ATTESTATION_STATEMENT_V1 = 1_u32
+  NCRYPT_VBS_KEY_ATTESTATION_STATEMENT_V2 = 2_u32
+  NCRYPT_VBS_KEY_ATTESTATION_STATEMENT_CURRENT_VERSION = 2_u32
+  VBS_KEY_ATTESTATION_STATEMENT_MAGIC = 1396788054_u32
   NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT_V0 = 0_u32
   NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT_CURRENT_VERSION = 0_u32
   NCRYPT_PAD_CIPHER_FLAG = 16_u32
+  NCRYPT_PAD_PQDSA_FLAG = 32_u32
   NCRYPT_ATTESTATION_FLAG = 32_u32
   NCRYPT_SEALING_FLAG = 256_u32
   NCRYPT_DO_NOT_FINALIZE_FLAG = 1024_u32
@@ -722,12 +1188,20 @@ module Win32cr::Security::Cryptography
   NCRYPT_TREAT_NIST_AS_GENERIC_ECC_FLAG = 8192_u32
   NCRYPT_NO_CACHED_PASSWORD = 16384_u32
   NCRYPT_PROTECT_TO_LOCAL_SYSTEM = 32768_u32
+  NCRYPT_REQUIRE_KDS_LRPC_BIND_FLAG = 536870912_u32
   NCRYPT_PREFER_VIRTUAL_ISOLATION_FLAG = 65536_u32
   NCRYPT_USE_VIRTUAL_ISOLATION_FLAG = 131072_u32
   NCRYPT_USE_PER_BOOT_KEY_FLAG = 262144_u32
+  NCRYPT_PREFER_VBS_FLAG = 65536_u32
+  NCRYPT_REQUIRE_VBS_FLAG = 131072_u32
+  NCRYPT_USE_VBS_PER_BOOT_KEY_FLAG = 262144_u32
+  NCRYPT_VBS_RETURN_CLAIM_DETAILS_FLAG = 1048576_u32
   NCRYPT_KEY_DERIVATION_OPERATION = 64_u32
+  NCRYPT_KEY_ENCAPSULATION_OPERATION = 128_u32
   NCRYPT_AUTHORITY_KEY_FLAG = 256_u32
+  NCRYPT_EXTENDED_ERRORS_FLAG = 268435456_u32
   NCRYPT_NAME_PROPERTY = "Name"
+  NCRYPT_EPHEMERAL_NAME_PROPERTY = "Ephemeral Name"
   NCRYPT_UNIQUE_NAME_PROPERTY = "Unique Name"
   NCRYPT_ALGORITHM_PROPERTY = "Algorithm Name"
   NCRYPT_LENGTH_PROPERTY = "Length"
@@ -773,6 +1247,11 @@ module Win32cr::Security::Cryptography
   NCRYPT_READER_ICON_PROPERTY = "SmartCardReaderIcon"
   NCRYPT_KDF_SECRET_VALUE = "KDFKeySecret"
   NCRYPT_DISMISS_UI_TIMEOUT_SEC_PROPERTY = "SmartCardDismissUITimeoutSeconds"
+  NCRYPT_VBS_ROOT_PUB_PROPERTY = "VBS_ROOT_PUB"
+  NCRYPT_CERTIFICATE_FROM_NVRAM_PROPERTY = "KeyCertificateFromTpmNvram"
+  NCRYPT_PARAMETER_SET_NAME_PROPERTY = "ParameterSetName"
+  NCRYPT_KEM_SHARED_SECRET_LENGTH_PROPERTY = "KEMSharedSecretLength"
+  NCRYPT_KEM_CIPHERTEXT_LENGTH_PROPERTY = "KEMCiphertextLength"
   NCRYPT_PCP_PLATFORM_TYPE_PROPERTY = "PCP_PLATFORM_TYPE"
   NCRYPT_PCP_PROVIDER_VERSION_PROPERTY = "PCP_PROVIDER_VERSION"
   NCRYPT_PCP_EKPUB_PROPERTY = "PCP_EKPUB"
@@ -840,6 +1319,15 @@ module Win32cr::Security::Cryptography
   NCRYPT_PCP_IDENTITY_KEY = 8_u32
   NCRYPT_PCP_HMACVERIFICATION_KEY = 16_u32
   NCRYPT_SCARD_NGC_KEY_NAME = "SmartCardNgcKeyName"
+  NCRYPT_PLUTON_EKCERT_PROPERTY = "PLUTON_EKCERT"
+  NCRYPT_PLUTON_EKPUB_PROPERTY = "PLUTON_EKPUB"
+  NCRYPT_PLUTON_RSA_EKCERT_PROPERTY = "PLUTON_RSA_EKCERT"
+  NCRYPT_PLUTON_RSA_EKPUB_PROPERTY = "PLUTON_RSA_EKPUB"
+  NCRYPT_PLUTON_ECC_EKCERT_PROPERTY = "PLUTON_ECC_EKCERT"
+  NCRYPT_PLUTON_ECC_EKPUB_PROPERTY = "PLUTON_ECC_EKPUB"
+  NCRYPT_PLUTON_SESSION_ID_PROPERTY = "PLUTON_SESSION_ID"
+  NCRYPT_PLUTON_KDF_PARENT_KEY_UNIQUE_NAME_PROPERTY = "PlutonKdfParentKeyUniqueName"
+  NCRYPT_PLUTON_KDF_PARAMS_BUFFER_DESC_PROPERTY = "PlutonKdfParamsBufferDesc"
   NCRYPT_INITIALIZATION_VECTOR = "IV"
   NCRYPT_CHANGEPASSWORD_PROPERTY = "PCP_CHANGEPASSWORD"
   NCRYPT_ALTERNATE_KEY_STORAGE_LOCATION_PROPERTY = "PCP_ALTERNATE_KEY_STORAGE_LOCATION"
@@ -850,6 +1338,7 @@ module Win32cr::Security::Cryptography
   NCRYPT_ALLOW_PLAINTEXT_EXPORT_FLAG = 2_u32
   NCRYPT_ALLOW_ARCHIVING_FLAG = 4_u32
   NCRYPT_ALLOW_PLAINTEXT_ARCHIVING_FLAG = 8_u32
+  NCRYPT_ALLOW_PKCS11_RSA_AES_EXPORT_FLAG = 16_u32
   NCRYPT_IMPL_HARDWARE_FLAG = 1_u32
   NCRYPT_IMPL_SOFTWARE_FLAG = 2_u32
   NCRYPT_IMPL_REMOVABLE_FLAG = 8_u32
@@ -858,7 +1347,10 @@ module Win32cr::Security::Cryptography
   NCRYPT_ALLOW_DECRYPT_FLAG = 1_u32
   NCRYPT_ALLOW_SIGNING_FLAG = 2_u32
   NCRYPT_ALLOW_KEY_AGREEMENT_FLAG = 4_u32
+  NCRYPT_ALLOW_KEY_ENVELOPE_FLAG = 8_u32
   NCRYPT_ALLOW_KEY_IMPORT_FLAG = 8_u32
+  NCRYPT_ALLOW_KEY_ATTESTATION_FLAG = 16_u32
+  NCRYPT_ALLOW_KEY_IMPORT_EPHEMERAL_FLAG = 32_u32
   NCRYPT_ALLOW_ALL_USAGES = 16777215_u32
   NCRYPT_UI_PROTECT_KEY_FLAG = 1_u32
   NCRYPT_UI_FORCE_HIGH_PROTECTION_FLAG = 2_u32
@@ -886,10 +1378,15 @@ module Win32cr::Security::Cryptography
   NCRYPT_PROTECTED_KEY_BLOB = "ProtectedKeyBlob"
   NCRYPT_TPM_LOADABLE_KEY_BLOB = "PcpTpmProtectedKeyBlob"
   NCRYPT_TPM_LOADABLE_KEY_BLOB_MAGIC = 1297371211_u32
+  NCRYPT_TPM_PERSISTENT_KEY_BLOB = "PcpTpmPersistentKeyBlob"
+  NCRYPT_TPM_PERSISTENT_KEY_BLOB_MAGIC = 1297371211_u32
   NCRYPT_PKCS7_ENVELOPE_BLOB = "PKCS7_ENVELOPE"
   NCRYPT_PKCS8_PRIVATE_KEY_BLOB = "PKCS8_PRIVATEKEY"
   NCRYPT_OPAQUETRANSPORT_BLOB = "OpaqueTransport"
   NCRYPT_ISOLATED_KEY_ENVELOPE_BLOB = "ISOLATED_KEY_ENVELOPE"
+  NCRYPT_PQ_PRIVATE_BLOB_MAGIC = 1380995408_u32
+  NCRYPT_PQ_PRIVATE_KEY_BLOB = "PQPrivateKeyBlob"
+  NCRYPT_PQ_PUBLIC_KEY_BLOB = "PUBLICBLOB"
   NCRYPT_DESCR_DELIMITER_OR = "OR"
   NCRYPT_DESCR_DELIMITER_AND = "AND"
   NCRYPT_DESCR_EQUAL = "="
@@ -1126,6 +1623,7 @@ module Win32cr::Security::Cryptography
   CRYPT_FASTSGC = 2_u32
   PP_CONTEXT_INFO = 11_u32
   PP_DISMISS_PIN_UI_SEC = 49_u32
+  PP_IS_PFX_EPHEMERAL = 50_u32
   PROV_RSA_FULL = 1_u32
   PROV_RSA_SIG = 2_u32
   PROV_DSS = 3_u32
@@ -1249,6 +1747,8 @@ module Win32cr::Security::Cryptography
   Szoid_rsa_prefersigneddata = "1.2.840.113549.1.9.15.1"
   Szoid_timestamp_token = "1.2.840.113549.1.9.16.1.4"
   Szoid_rfc3161_countersign = "1.3.6.1.4.1.311.3.3.1"
+  Szoid_rfc3161v21_countersign = "1.3.6.1.4.1.311.3.3.2"
+  Szoid_rfc3161v21_thumbprints = "1.3.6.1.4.1.311.3.3.3"
   Szoid_rsa_smimealg = "1.2.840.113549.1.9.16.3"
   Szoid_rsa_smimealgesdh = "1.2.840.113549.1.9.16.3.5"
   Szoid_rsa_smimealgcms3deswrap = "1.2.840.113549.1.9.16.3.6"
@@ -1391,6 +1891,41 @@ module Win32cr::Security::Cryptography
   Szoid_nist_sha256 = "2.16.840.1.101.3.4.2.1"
   Szoid_nist_sha384 = "2.16.840.1.101.3.4.2.2"
   Szoid_nist_sha512 = "2.16.840.1.101.3.4.2.3"
+  Szoid_nist_shake128 = "2.16.840.1.101.3.4.2.11"
+  Szoid_nist_shake256 = "2.16.840.1.101.3.4.2.12"
+  Szoid_nist_ml_dsa_44 = "2.16.840.1.101.3.4.3.17"
+  Szoid_nist_ml_dsa_65 = "2.16.840.1.101.3.4.3.18"
+  Szoid_nist_ml_dsa_87 = "2.16.840.1.101.3.4.3.19"
+  Szoid_nist_hash_ml_dsa_44_with_sha512 = "2.16.840.1.101.3.4.3.32"
+  Szoid_nist_hash_ml_dsa_65_with_sha512 = "2.16.840.1.101.3.4.3.33"
+  Szoid_nist_hash_ml_dsa_87_with_sha512 = "2.16.840.1.101.3.4.3.34"
+  Szoid_nist_ml_kem_512 = "2.16.840.1.101.3.4.4.1"
+  Szoid_nist_ml_kem_768 = "2.16.840.1.101.3.4.4.2"
+  Szoid_nist_ml_kem_1024 = "2.16.840.1.101.3.4.4.3"
+  Szoid_nist_slh_dsa_sha2_128s = "2.16.840.1.101.3.4.3.20"
+  Szoid_nist_slh_dsa_sha2_128f = "2.16.840.1.101.3.4.3.21"
+  Szoid_nist_slh_dsa_sha2_192s = "2.16.840.1.101.3.4.3.22"
+  Szoid_nist_slh_dsa_sha2_192f = "2.16.840.1.101.3.4.3.23"
+  Szoid_nist_slh_dsa_sha2_256s = "2.16.840.1.101.3.4.3.24"
+  Szoid_nist_slh_dsa_sha2_256f = "2.16.840.1.101.3.4.3.25"
+  Szoid_nist_slh_dsa_shake_128s = "2.16.840.1.101.3.4.3.26"
+  Szoid_nist_slh_dsa_shake_128f = "2.16.840.1.101.3.4.3.27"
+  Szoid_nist_slh_dsa_shake_192s = "2.16.840.1.101.3.4.3.28"
+  Szoid_nist_slh_dsa_shake_192f = "2.16.840.1.101.3.4.3.29"
+  Szoid_nist_slh_dsa_shake_256s = "2.16.840.1.101.3.4.3.30"
+  Szoid_nist_slh_dsa_shake_256f = "2.16.840.1.101.3.4.3.31"
+  Szoid_nist_hash_slh_dsa_sha2_128s_with_sha256 = "2.16.840.1.101.3.4.3.35"
+  Szoid_nist_hash_slh_dsa_sha2_128f_with_sha256 = "2.16.840.1.101.3.4.3.36"
+  Szoid_nist_hash_slh_dsa_sha2_192s_with_sha512 = "2.16.840.1.101.3.4.3.37"
+  Szoid_nist_hash_slh_dsa_sha2_192f_with_sha512 = "2.16.840.1.101.3.4.3.38"
+  Szoid_nist_hash_slh_dsa_sha2_256s_with_sha512 = "2.16.840.1.101.3.4.3.39"
+  Szoid_nist_hash_slh_dsa_sha2_256f_with_sha512 = "2.16.840.1.101.3.4.3.40"
+  Szoid_nist_hash_slh_dsa_shake_128s_with_shake128 = "2.16.840.1.101.3.4.3.41"
+  Szoid_nist_hash_slh_dsa_shake_128f_with_shake128 = "2.16.840.1.101.3.4.3.42"
+  Szoid_nist_hash_slh_dsa_shake_192s_with_shake256 = "2.16.840.1.101.3.4.3.43"
+  Szoid_nist_hash_slh_dsa_shake_192f_with_shake256 = "2.16.840.1.101.3.4.3.44"
+  Szoid_nist_hash_slh_dsa_shake_256s_with_shake256 = "2.16.840.1.101.3.4.3.45"
+  Szoid_nist_hash_slh_dsa_shake_256f_with_shake256 = "2.16.840.1.101.3.4.3.46"
   Szoid_common_name = "2.5.4.3"
   Szoid_sur_name = "2.5.4.4"
   Szoid_device_serial_number = "2.5.4.5"
@@ -1507,101 +2042,106 @@ module Win32cr::Security::Cryptography
   CRYPT_DECODE_ENABLE_PUNYCODE_FLAG = 33554432_u32
   CRYPT_DECODE_ENABLE_UTF8PERCENT_FLAG = 67108864_u32
   CRYPT_ENCODE_DECODE_NONE = 0_u32
-  X509_CERT = 1_i32
-  X509_CERT_TO_BE_SIGNED = 2_i32
-  X509_CERT_CRL_TO_BE_SIGNED = 3_i32
-  X509_CERT_REQUEST_TO_BE_SIGNED = 4_i32
-  X509_EXTENSIONS = 5_i32
-  X509_NAME_VALUE = 6_i32
-  X509_NAME = 7_i32
-  X509_PUBLIC_KEY_INFO = 8_i32
-  X509_AUTHORITY_KEY_ID = 9_i32
-  X509_KEY_ATTRIBUTES = 10_i32
-  X509_KEY_USAGE_RESTRICTION = 11_i32
-  X509_ALTERNATE_NAME = 12_i32
-  X509_BASIC_CONSTRAINTS = 13_i32
-  X509_KEY_USAGE = 14_i32
-  X509_BASIC_CONSTRAINTS2 = 15_i32
-  X509_CERT_POLICIES = 16_i32
-  PKCS_UTC_TIME = 17_i32
-  PKCS_TIME_REQUEST = 18_i32
-  RSA_CSP_PUBLICKEYBLOB = 19_i32
-  X509_UNICODE_NAME = 20_i32
-  X509_KEYGEN_REQUEST_TO_BE_SIGNED = 21_i32
-  PKCS_ATTRIBUTE = 22_i32
-  PKCS_CONTENT_INFO_SEQUENCE_OF_ANY = 23_i32
-  X509_UNICODE_NAME_VALUE = 24_i32
+  X509_CERT = Win32cr::Foundation::PSTR.new(0x1_u64)
+  X509_CERT_TO_BE_SIGNED = Win32cr::Foundation::PSTR.new(0x2_u64)
+  X509_CERT_CRL_TO_BE_SIGNED = Win32cr::Foundation::PSTR.new(0x3_u64)
+  X509_CERT_REQUEST_TO_BE_SIGNED = Win32cr::Foundation::PSTR.new(0x4_u64)
+  X509_NAME_VALUE = Win32cr::Foundation::PSTR.new(0x6_u64)
+  X509_PUBLIC_KEY_INFO = Win32cr::Foundation::PSTR.new(0x8_u64)
+  X509_EXTENSIONS = Win32cr::Foundation::PSTR.new(0x5_u64)
+  X509_NAME = Win32cr::Foundation::PSTR.new(0x7_u64)
+  WINCRYPT_X509_EXTENSIONS = Win32cr::Foundation::PSTR.new(0x5_u64)
+  WINCRYPT_X509_NAME = Win32cr::Foundation::PSTR.new(0x7_u64)
+  X509_AUTHORITY_KEY_ID = Win32cr::Foundation::PSTR.new(0x9_u64)
+  X509_KEY_ATTRIBUTES = Win32cr::Foundation::PSTR.new(0xa_u64)
+  X509_KEY_USAGE_RESTRICTION = Win32cr::Foundation::PSTR.new(0xb_u64)
+  X509_ALTERNATE_NAME = Win32cr::Foundation::PSTR.new(0xc_u64)
+  X509_BASIC_CONSTRAINTS = Win32cr::Foundation::PSTR.new(0xd_u64)
+  X509_KEY_USAGE = Win32cr::Foundation::PSTR.new(0xe_u64)
+  X509_BASIC_CONSTRAINTS2 = Win32cr::Foundation::PSTR.new(0xf_u64)
+  X509_CERT_POLICIES = Win32cr::Foundation::PSTR.new(0x10_u64)
+  PKCS_UTC_TIME = Win32cr::Foundation::PSTR.new(0x11_u64)
+  PKCS_TIME_REQUEST = Win32cr::Foundation::PSTR.new(0x12_u64)
+  RSA_CSP_PUBLICKEYBLOB = Win32cr::Foundation::PSTR.new(0x13_u64)
+  X509_UNICODE_NAME = Win32cr::Foundation::PSTR.new(0x14_u64)
+  X509_KEYGEN_REQUEST_TO_BE_SIGNED = Win32cr::Foundation::PSTR.new(0x15_u64)
+  PKCS_ATTRIBUTE = Win32cr::Foundation::PSTR.new(0x16_u64)
+  PKCS_CONTENT_INFO_SEQUENCE_OF_ANY = Win32cr::Foundation::PSTR.new(0x17_u64)
+  X509_UNICODE_NAME_VALUE = Win32cr::Foundation::PSTR.new(0x18_u64)
   X509_ANY_STRING = 6_i32
   X509_UNICODE_ANY_STRING = 24_i32
-  X509_OCTET_STRING = 25_i32
-  X509_BITS = 26_i32
-  X509_INTEGER = 27_i32
-  X509_MULTI_BYTE_INTEGER = 28_i32
-  X509_ENUMERATED = 29_i32
-  X509_CHOICE_OF_TIME = 30_i32
-  X509_AUTHORITY_KEY_ID2 = 31_i32
-  X509_AUTHORITY_INFO_ACCESS = 32_i32
+  X509_OCTET_STRING = Win32cr::Foundation::PSTR.new(0x19_u64)
+  X509_BITS = Win32cr::Foundation::PSTR.new(0x1a_u64)
+  X509_INTEGER = Win32cr::Foundation::PSTR.new(0x1b_u64)
+  X509_MULTI_BYTE_INTEGER = Win32cr::Foundation::PSTR.new(0x1c_u64)
+  X509_ENUMERATED = Win32cr::Foundation::PSTR.new(0x1d_u64)
+  X509_CHOICE_OF_TIME = Win32cr::Foundation::PSTR.new(0x1e_u64)
+  X509_AUTHORITY_KEY_ID2 = Win32cr::Foundation::PSTR.new(0x1f_u64)
+  X509_AUTHORITY_INFO_ACCESS = Win32cr::Foundation::PSTR.new(0x20_u64)
   X509_SUBJECT_INFO_ACCESS = 32_i32
   X509_CRL_REASON_CODE = 29_i32
-  PKCS_CONTENT_INFO = 33_i32
-  X509_SEQUENCE_OF_ANY = 34_i32
-  X509_CRL_DIST_POINTS = 35_i32
-  X509_ENHANCED_KEY_USAGE = 36_i32
-  PKCS_CTL = 37_i32
-  X509_MULTI_BYTE_UINT = 38_i32
+  PKCS_CONTENT_INFO = Win32cr::Foundation::PSTR.new(0x21_u64)
+  X509_SEQUENCE_OF_ANY = Win32cr::Foundation::PSTR.new(0x22_u64)
+  X509_CRL_DIST_POINTS = Win32cr::Foundation::PSTR.new(0x23_u64)
+  X509_ENHANCED_KEY_USAGE = Win32cr::Foundation::PSTR.new(0x24_u64)
+  PKCS_CTL = Win32cr::Foundation::PSTR.new(0x25_u64)
+  X509_MULTI_BYTE_UINT = Win32cr::Foundation::PSTR.new(0x26_u64)
   X509_DSS_PUBLICKEY = 38_i32
-  X509_DSS_PARAMETERS = 39_i32
-  X509_DSS_SIGNATURE = 40_i32
-  PKCS_RC2_CBC_PARAMETERS = 41_i32
-  PKCS_SMIME_CAPABILITIES = 42_i32
-  X509_QC_STATEMENTS_EXT = 42_i32
-  PKCS_RSA_PRIVATE_KEY = 43_i32
-  PKCS_PRIVATE_KEY_INFO = 44_i32
-  PKCS_ENCRYPTED_PRIVATE_KEY_INFO = 45_i32
-  X509_PKIX_POLICY_QUALIFIER_USERNOTICE = 46_i32
+  X509_DSS_PARAMETERS = Win32cr::Foundation::PSTR.new(0x27_u64)
+  X509_DSS_SIGNATURE = Win32cr::Foundation::PSTR.new(0x28_u64)
+  PKCS_RC2_CBC_PARAMETERS = Win32cr::Foundation::PSTR.new(0x29_u64)
+  PKCS_SMIME_CAPABILITIES = Win32cr::Foundation::PSTR.new(0x2a_u64)
+  X509_QC_STATEMENTS_EXT = Win32cr::Foundation::PSTR.new(0x2a_u64)
+  PKCS_RSA_PRIVATE_KEY = Win32cr::Foundation::PSTR.new(0x2b_u64)
+  PKCS_PRIVATE_KEY_INFO = Win32cr::Foundation::PSTR.new(0x2c_u64)
+  PKCS_ENCRYPTED_PRIVATE_KEY_INFO = Win32cr::Foundation::PSTR.new(0x2d_u64)
+  X509_PKIX_POLICY_QUALIFIER_USERNOTICE = Win32cr::Foundation::PSTR.new(0x2e_u64)
   X509_DH_PUBLICKEY = 38_i32
-  X509_DH_PARAMETERS = 47_i32
-  PKCS_ATTRIBUTES = 48_i32
-  PKCS_SORTED_CTL = 49_i32
-  X509_ECC_SIGNATURE = 47_i32
-  X942_DH_PARAMETERS = 50_i32
-  X509_BITS_WITHOUT_TRAILING_ZEROES = 51_i32
-  X942_OTHER_INFO = 52_i32
-  X509_CERT_PAIR = 53_i32
-  X509_ISSUING_DIST_POINT = 54_i32
-  X509_NAME_CONSTRAINTS = 55_i32
-  X509_POLICY_MAPPINGS = 56_i32
-  X509_POLICY_CONSTRAINTS = 57_i32
-  X509_CROSS_CERT_DIST_POINTS = 58_i32
-  CMC_DATA = 59_i32
-  CMC_RESPONSE = 60_i32
-  CMC_STATUS = 61_i32
-  CMC_ADD_EXTENSIONS = 62_i32
-  CMC_ADD_ATTRIBUTES = 63_i32
-  X509_CERTIFICATE_TEMPLATE = 64_i32
-  OCSP_SIGNED_REQUEST = 65_i32
-  OCSP_REQUEST = 66_i32
-  OCSP_RESPONSE = 67_i32
-  OCSP_BASIC_SIGNED_RESPONSE = 68_i32
-  OCSP_BASIC_RESPONSE = 69_i32
-  X509_LOGOTYPE_EXT = 70_i32
-  X509_BIOMETRIC_EXT = 71_i32
-  CNG_RSA_PUBLIC_KEY_BLOB = 72_i32
-  X509_OBJECT_IDENTIFIER = 73_i32
-  X509_ALGORITHM_IDENTIFIER = 74_i32
-  PKCS_RSA_SSA_PSS_PARAMETERS = 75_i32
-  PKCS_RSAES_OAEP_PARAMETERS = 76_i32
-  ECC_CMS_SHARED_INFO = 77_i32
-  TIMESTAMP_REQUEST = 78_i32
-  TIMESTAMP_RESPONSE = 79_i32
-  TIMESTAMP_INFO = 80_i32
-  X509_CERT_BUNDLE = 81_i32
-  X509_ECC_PRIVATE_KEY = 82_i32
-  CNG_RSA_PRIVATE_KEY_BLOB = 83_i32
-  X509_SUBJECT_DIR_ATTRS = 84_i32
-  X509_ECC_PARAMETERS = 85_i32
-  PKCS7_SIGNER_INFO = 500_i32
-  CMS_SIGNER_INFO = 501_i32
+  X509_DH_PARAMETERS = Win32cr::Foundation::PSTR.new(0x2f_u64)
+  PKCS_ATTRIBUTES = Win32cr::Foundation::PSTR.new(0x30_u64)
+  PKCS_SORTED_CTL = Win32cr::Foundation::PSTR.new(0x31_u64)
+  X509_ECC_SIGNATURE = Win32cr::Foundation::PSTR.new(0x2f_u64)
+  X942_DH_PARAMETERS = Win32cr::Foundation::PSTR.new(0x32_u64)
+  X509_BITS_WITHOUT_TRAILING_ZEROES = Win32cr::Foundation::PSTR.new(0x33_u64)
+  X942_OTHER_INFO = Win32cr::Foundation::PSTR.new(0x34_u64)
+  X509_CERT_PAIR = Win32cr::Foundation::PSTR.new(0x35_u64)
+  X509_ISSUING_DIST_POINT = Win32cr::Foundation::PSTR.new(0x36_u64)
+  X509_NAME_CONSTRAINTS = Win32cr::Foundation::PSTR.new(0x37_u64)
+  X509_POLICY_MAPPINGS = Win32cr::Foundation::PSTR.new(0x38_u64)
+  X509_POLICY_CONSTRAINTS = Win32cr::Foundation::PSTR.new(0x39_u64)
+  X509_CROSS_CERT_DIST_POINTS = Win32cr::Foundation::PSTR.new(0x3a_u64)
+  CMC_DATA = Win32cr::Foundation::PSTR.new(0x3b_u64)
+  CMC_RESPONSE = Win32cr::Foundation::PSTR.new(0x3c_u64)
+  CMC_STATUS = Win32cr::Foundation::PSTR.new(0x3d_u64)
+  CMC_ADD_EXTENSIONS = Win32cr::Foundation::PSTR.new(0x3e_u64)
+  CMC_ADD_ATTRIBUTES = Win32cr::Foundation::PSTR.new(0x3f_u64)
+  X509_CERTIFICATE_TEMPLATE = Win32cr::Foundation::PSTR.new(0x40_u64)
+  OCSP_SIGNED_REQUEST = Win32cr::Foundation::PSTR.new(0x41_u64)
+  OCSP_BASIC_SIGNED_RESPONSE = Win32cr::Foundation::PSTR.new(0x44_u64)
+  OCSP_BASIC_RESPONSE = Win32cr::Foundation::PSTR.new(0x45_u64)
+  OCSP_REQUEST = Win32cr::Foundation::PSTR.new(0x42_u64)
+  OCSP_RESPONSE = Win32cr::Foundation::PSTR.new(0x43_u64)
+  WINCRYPT_OCSP_REQUEST = Win32cr::Foundation::PSTR.new(0x42_u64)
+  WINCRYPT_OCSP_RESPONSE = Win32cr::Foundation::PSTR.new(0x43_u64)
+  X509_LOGOTYPE_EXT = Win32cr::Foundation::PSTR.new(0x46_u64)
+  X509_BIOMETRIC_EXT = Win32cr::Foundation::PSTR.new(0x47_u64)
+  CNG_RSA_PUBLIC_KEY_BLOB = Win32cr::Foundation::PSTR.new(0x48_u64)
+  X509_OBJECT_IDENTIFIER = Win32cr::Foundation::PSTR.new(0x49_u64)
+  X509_ALGORITHM_IDENTIFIER = Win32cr::Foundation::PSTR.new(0x4a_u64)
+  PKCS_RSA_SSA_PSS_PARAMETERS = Win32cr::Foundation::PSTR.new(0x4b_u64)
+  PKCS_RSAES_OAEP_PARAMETERS = Win32cr::Foundation::PSTR.new(0x4c_u64)
+  ECC_CMS_SHARED_INFO = Win32cr::Foundation::PSTR.new(0x4d_u64)
+  TIMESTAMP_REQUEST = Win32cr::Foundation::PSTR.new(0x4e_u64)
+  TIMESTAMP_RESPONSE = Win32cr::Foundation::PSTR.new(0x4f_u64)
+  TIMESTAMP_INFO = Win32cr::Foundation::PSTR.new(0x50_u64)
+  X509_CERT_BUNDLE = Win32cr::Foundation::PSTR.new(0x51_u64)
+  X509_ECC_PRIVATE_KEY = Win32cr::Foundation::PSTR.new(0x52_u64)
+  CNG_RSA_PRIVATE_KEY_BLOB = Win32cr::Foundation::PSTR.new(0x53_u64)
+  X509_SUBJECT_DIR_ATTRS = Win32cr::Foundation::PSTR.new(0x54_u64)
+  X509_ECC_PARAMETERS = Win32cr::Foundation::PSTR.new(0x55_u64)
+  PKCS7_SIGNER_INFO = Win32cr::Foundation::PSTR.new(0x1f4_u64)
+  WINCRYPT_PKCS7_SIGNER_INFO = Win32cr::Foundation::PSTR.new(0x1f4_u64)
+  CMS_SIGNER_INFO = Win32cr::Foundation::PSTR.new(0x1f5_u64)
   Szoid_authority_key_identifier = "2.5.29.1"
   Szoid_key_attributes = "2.5.29.2"
   Szoid_cert_policies_95 = "2.5.29.3"
@@ -1682,6 +2222,9 @@ module Win32cr::Security::Cryptography
   Szoid_encrypted_key_hash = "1.3.6.1.4.1.311.21.21"
   Szoid_certsrv_crossca_version = "1.3.6.1.4.1.311.21.22"
   Szoid_ntds_replication = "1.3.6.1.4.1.311.25.1"
+  Szoid_ntds_ca_security_ext = "1.3.6.1.4.1.311.25.2"
+  Szoid_ntds_objectsid = "1.3.6.1.4.1.311.25.2.1"
+  Wszuri_ntds_objectsid_prefix = "tag:microsoft.com,2022-09-14:sid:"
   Szoid_subject_dir_attrs = "2.5.29.9"
   Szoid_pkix_kp = "1.3.6.1.5.5.7.3"
   Szoid_pkix_kp_server_auth = "1.3.6.1.5.5.7.3.1"
@@ -1744,6 +2287,8 @@ module Win32cr::Security::Cryptography
   Szoid_biometric_signing = "1.3.6.1.4.1.311.10.3.41"
   Szoid_enclave_signing = "1.3.6.1.4.1.311.10.3.42"
   Szoid_sync_root_ctl_ext = "1.3.6.1.4.1.311.10.3.50"
+  Szoid_flight_ctl_ext = "1.3.6.1.4.1.311.10.3.51"
+  Szoid_cert_log_list_ext = "1.3.6.1.4.1.311.10.3.52"
   Szoid_hpkp_domain_name_ctl = "1.3.6.1.4.1.311.10.3.60"
   Szoid_hpkp_header_value_ctl = "1.3.6.1.4.1.311.10.3.61"
   Szoid_kp_kernel_mode_hal_extension_signing = "1.3.6.1.4.1.311.61.5.1"
@@ -1974,6 +2519,7 @@ module Win32cr::Security::Cryptography
   CRYPT_MATCH_ANY_ENCODING_TYPE = 4294967295_u32
   CALG_OID_INFO_CNG_ONLY = 4294967295_u32
   CALG_OID_INFO_PARAMETERS = 4294967294_u32
+  CALG_OID_INFO_PQ = 4294967293_u32
   CRYPT_OID_INFO_HASH_PARAMETERS_ALGORITHM = "CryptOIDInfoHashParameters"
   CRYPT_OID_INFO_ECC_PARAMETERS_ALGORITHM = "CryptOIDInfoECCParameters"
   CRYPT_OID_INFO_MGF1_PARAMETERS_ALGORITHM = "CryptOIDInfoMgf1Parameters"
@@ -1981,6 +2527,8 @@ module Win32cr::Security::Cryptography
   CRYPT_OID_INFO_OAEP_PARAMETERS_ALGORITHM = "CryptOIDInfoOAEPParameters"
   CRYPT_OID_INFO_ECC_WRAP_PARAMETERS_ALGORITHM = "CryptOIDInfoECCWrapParameters"
   CRYPT_OID_INFO_NO_PARAMETERS_ALGORITHM = "CryptOIDInfoNoParameters"
+  CRYPT_OID_INFO_NO_HASH_ALGORITHM = "NoHash"
+  CRYPT_OID_INFO_PREHASH_ALGORITHM = "PreHash"
   CRYPT_HASH_ALG_OID_GROUP_ID = 1_u32
   CRYPT_ENCRYPT_ALG_OID_GROUP_ID = 2_u32
   CRYPT_PUBKEY_ALG_OID_GROUP_ID = 3_u32
@@ -1994,6 +2542,13 @@ module Win32cr::Security::Cryptography
   CRYPT_LAST_OID_GROUP_ID = 10_u32
   CRYPT_FIRST_ALG_OID_GROUP_ID = 1_u32
   CRYPT_LAST_ALG_OID_GROUP_ID = 4_u32
+  CRYPT_OID_PQ_EXTRA_INFO_FLAGS_INDEX = 0_u32
+  CRYPT_OID_PQ_EXTRA_INFO_PUBLIC_MAGIC_INDEX = 1_u32
+  CRYPT_OID_PQ_EXTRA_INFO_PRIVATE_MAGIC_INDEX = 2_u32
+  CRYPT_OID_PQ_EXTRA_INFO_PUBLIC_KEY_LENGTH_INDEX = 3_u32
+  CRYPT_OID_PQ_EXTRA_INFO_PRIVATE_KEY_LENGTH_INDEX = 4_u32
+  CRYPT_OID_PQ_EXTRA_INFO_SIGNATURE_LENGTH_INDEX = 5_u32
+  CRYPT_OID_PQ_EXTRA_INFO_MAX_LENGTH = 6_u32
   CRYPT_OID_INHIBIT_SIGNATURE_FORMAT_FLAG = 1_u32
   CRYPT_OID_USE_PUBKEY_PARA_FOR_PKCS7_FLAG = 2_u32
   CRYPT_OID_NO_NULL_ALGORITHM_PARA_FLAG = 4_u32
@@ -2001,6 +2556,8 @@ module Win32cr::Security::Cryptography
   CRYPT_OID_PUBKEY_ENCRYPT_ONLY_FLAG = 1073741824_u32
   CRYPT_OID_USE_CURVE_NAME_FOR_ENCODE_FLAG = 536870912_u32
   CRYPT_OID_USE_CURVE_PARAMETERS_FOR_ENCODE_FLAG = 268435456_u32
+  CRYPT_OID_PUBKEY_PURE_ONLY_FLAG = 134217728_u32
+  CRYPT_OID_PUBKEY_PREHASH_ONLY_FLAG = 67108864_u32
   CRYPT_OID_INFO_OID_KEY = 1_u32
   CRYPT_OID_INFO_NAME_KEY = 2_u32
   CRYPT_OID_INFO_ALGID_KEY = 3_u32
@@ -2008,6 +2565,8 @@ module Win32cr::Security::Cryptography
   CRYPT_OID_INFO_CNG_ALGID_KEY = 5_u32
   CRYPT_OID_INFO_CNG_SIGN_KEY = 6_u32
   CRYPT_OID_INFO_OID_KEY_FLAGS_MASK = 4294901760_u32
+  CRYPT_OID_INFO_PUBKEY_PURE_KEY_FLAG = 134217728_u32
+  CRYPT_OID_INFO_PUBKEY_PREHASH_KEY_FLAG = 67108864_u32
   CRYPT_OID_DISABLE_SEARCH_DS_FLAG = 2147483648_u32
   CRYPT_OID_PREFER_CNG_ALGID_FLAG = 1073741824_u32
   CRYPT_OID_INFO_OID_GROUP_BIT_LEN_MASK = 268369920_u32
@@ -2024,6 +2583,7 @@ module Win32cr::Security::Cryptography
   Szoid_cert_strong_key_os_prefix = "1.3.6.1.4.1.311.72.2."
   Szoid_cert_strong_key_os_1 = "1.3.6.1.4.1.311.72.2.1"
   Szoid_cert_strong_key_os_current = "1.3.6.1.4.1.311.72.2.1"
+  Szoid_no_hash = "1.3.6.1.4.1.311.73.1"
   Szoid_pkcs_7_data = "1.2.840.113549.1.7.1"
   Szoid_pkcs_7_signed = "1.2.840.113549.1.7.2"
   Szoid_pkcs_7_enveloped = "1.2.840.113549.1.7.3"
@@ -2135,7 +2695,7 @@ module Win32cr::Security::Cryptography
   CMSG_OID_GEN_ENCRYPT_KEY_FUNC = "CryptMsgDllGenEncryptKey"
   CMSG_OID_EXPORT_ENCRYPT_KEY_FUNC = "CryptMsgDllExportEncryptKey"
   CMSG_OID_IMPORT_ENCRYPT_KEY_FUNC = "CryptMsgDllImportEncryptKey"
-  CMSG_DEFAULT_INSTALLABLE_FUNC_OID = 1_i32
+  CMSG_DEFAULT_INSTALLABLE_FUNC_OID = Win32cr::Foundation::PSTR.new(0x1_u64)
   CMSG_CONTENT_ENCRYPT_PAD_ENCODED_LEN_FLAG = 1_u32
   CMSG_CONTENT_ENCRYPT_FREE_PARA_FLAG = 1_u32
   CMSG_CONTENT_ENCRYPT_FREE_OBJID_FLAG = 2_u32
@@ -2265,7 +2825,9 @@ module Win32cr::Security::Cryptography
   CERT_CLR_DELETE_KEY_PROP_ID = 125_u32
   CERT_NOT_BEFORE_FILETIME_PROP_ID = 126_u32
   CERT_NOT_BEFORE_ENHKEY_USAGE_PROP_ID = 127_u32
-  CERT_FIRST_RESERVED_PROP_ID = 128_u32
+  CERT_DISALLOWED_CA_FILETIME_PROP_ID = 128_u32
+  CERT_SHA1_SHA256_HASH_PROP_ID = 129_u32
+  CERT_FIRST_RESERVED_PROP_ID = 130_u32
   CERT_LAST_RESERVED_PROP_ID = 32767_u32
   CERT_FIRST_USER_PROP_ID = 32768_u32
   CERT_LAST_USER_PROP_ID = 65535_u32
@@ -2274,9 +2836,11 @@ module Win32cr::Security::Cryptography
   Szoid_cert_issuer_serial_number_md5_hash_prop_id = "1.3.6.1.4.1.311.10.11.28"
   Szoid_cert_subject_name_md5_hash_prop_id = "1.3.6.1.4.1.311.10.11.29"
   Szoid_cert_md5_hash_prop_id = "1.3.6.1.4.1.311.10.11.4"
+  Szoid_cert_sha256_hash_prop_id = "1.3.6.1.4.1.311.10.11.107"
   Szoid_cert_signature_hash_prop_id = "1.3.6.1.4.1.311.10.11.15"
   Szoid_disallowed_hash = "1.3.6.1.4.1.311.10.11.15"
   Szoid_cert_disallowed_filetime_prop_id = "1.3.6.1.4.1.311.10.11.104"
+  Szoid_cert_disallowed_ca_filetime_prop_id = "1.3.6.1.4.1.311.10.11.128"
   CERT_ACCESS_STATE_WRITE_PERSIST_FLAG = 1_u32
   CERT_ACCESS_STATE_SYSTEM_STORE_FLAG = 2_u32
   CERT_ACCESS_STATE_LM_SYSTEM_STORE_FLAG = 4_u32
@@ -2285,29 +2849,29 @@ module Win32cr::Security::Cryptography
   Szoid_root_program_auto_update_ca_revocation = "1.3.6.1.4.1.311.60.3.1"
   Szoid_root_program_auto_update_end_revocation = "1.3.6.1.4.1.311.60.3.2"
   Szoid_root_program_no_ocsp_failover_to_crl = "1.3.6.1.4.1.311.60.3.3"
-  CERT_STORE_PROV_MSG = 1_i32
-  CERT_STORE_PROV_MEMORY = 2_i32
-  CERT_STORE_PROV_FILE = 3_i32
-  CERT_STORE_PROV_REG = 4_i32
-  CERT_STORE_PROV_PKCS7 = 5_i32
-  CERT_STORE_PROV_SERIALIZED = 6_i32
-  CERT_STORE_PROV_FILENAME_A = 7_i32
-  CERT_STORE_PROV_FILENAME_W = 8_i32
+  CERT_STORE_PROV_MSG = Win32cr::Foundation::PSTR.new(0x1_u64)
+  CERT_STORE_PROV_MEMORY = Win32cr::Foundation::PSTR.new(0x2_u64)
+  CERT_STORE_PROV_FILE = Win32cr::Foundation::PSTR.new(0x3_u64)
+  CERT_STORE_PROV_REG = Win32cr::Foundation::PSTR.new(0x4_u64)
+  CERT_STORE_PROV_PKCS7 = Win32cr::Foundation::PSTR.new(0x5_u64)
+  CERT_STORE_PROV_SERIALIZED = Win32cr::Foundation::PSTR.new(0x6_u64)
+  CERT_STORE_PROV_FILENAME_A = Win32cr::Foundation::PSTR.new(0x7_u64)
+  CERT_STORE_PROV_FILENAME_W = Win32cr::Foundation::PSTR.new(0x8_u64)
   CERT_STORE_PROV_FILENAME = 8_i32
-  CERT_STORE_PROV_SYSTEM_A = 9_i32
-  CERT_STORE_PROV_SYSTEM_W = 10_i32
+  CERT_STORE_PROV_SYSTEM_A = Win32cr::Foundation::PSTR.new(0x9_u64)
+  CERT_STORE_PROV_SYSTEM_W = Win32cr::Foundation::PSTR.new(0xa_u64)
   CERT_STORE_PROV_SYSTEM = 10_i32
-  CERT_STORE_PROV_COLLECTION = 11_i32
-  CERT_STORE_PROV_SYSTEM_REGISTRY_A = 12_i32
-  CERT_STORE_PROV_SYSTEM_REGISTRY_W = 13_i32
+  CERT_STORE_PROV_COLLECTION = Win32cr::Foundation::PSTR.new(0xb_u64)
+  CERT_STORE_PROV_SYSTEM_REGISTRY_A = Win32cr::Foundation::PSTR.new(0xc_u64)
+  CERT_STORE_PROV_SYSTEM_REGISTRY_W = Win32cr::Foundation::PSTR.new(0xd_u64)
   CERT_STORE_PROV_SYSTEM_REGISTRY = 13_i32
-  CERT_STORE_PROV_PHYSICAL_W = 14_i32
+  CERT_STORE_PROV_PHYSICAL_W = Win32cr::Foundation::PSTR.new(0xe_u64)
   CERT_STORE_PROV_PHYSICAL = 14_i32
-  CERT_STORE_PROV_SMART_CARD_W = 15_i32
+  CERT_STORE_PROV_SMART_CARD_W = Win32cr::Foundation::PSTR.new(0xf_u64)
   CERT_STORE_PROV_SMART_CARD = 15_i32
-  CERT_STORE_PROV_LDAP_W = 16_i32
+  CERT_STORE_PROV_LDAP_W = Win32cr::Foundation::PSTR.new(0x10_u64)
   CERT_STORE_PROV_LDAP = 16_i32
-  CERT_STORE_PROV_PKCS12 = 17_i32
+  CERT_STORE_PROV_PKCS12 = Win32cr::Foundation::PSTR.new(0x11_u64)
   Sz_cert_store_prov_memory = "Memory"
   Sz_cert_store_prov_filename_w = "File"
   Sz_cert_store_prov_filename = "File"
@@ -2471,6 +3035,8 @@ module Win32cr::Security::Cryptography
   CERT_COMPARE_SUBJECT_INFO_ACCESS = 19_u32
   CERT_COMPARE_HASH_STR = 20_u32
   CERT_COMPARE_HAS_PRIVATE_KEY = 21_u32
+  CERT_COMPARE_SHA256_HASH = 22_u32
+  CERT_COMPARE_SHA1_SHA256_HASH = 23_u32
   CERT_SET_PROPERTY_IGNORE_PERSIST_ERROR_FLAG = 2147483648_u32
   CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG = 1073741824_u32
   CTL_ENTRY_FROM_PROP_CHAIN_FLAG = 1_u32
@@ -2564,11 +3130,6 @@ module Win32cr::Security::Cryptography
   CRYPT_OID_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC = "CryptDllExportPublicKeyInfoFromBCryptKeyHandle"
   CRYPT_OID_IMPORT_PUBLIC_KEY_INFO_FUNC = "CryptDllImportPublicKeyInfoEx"
   CRYPT_OID_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC = "CryptDllImportPublicKeyInfoEx2"
-  CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG = 128_u32
-  CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK = 458752_u32
-  CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG = 65536_u32
-  CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG = 131072_u32
-  CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG = 262144_u32
   CRYPT_OID_IMPORT_PRIVATE_KEY_INFO_FUNC = "CryptDllImportPrivateKeyInfoEx"
   CRYPT_OID_EXPORT_PRIVATE_KEY_INFO_FUNC = "CryptDllExportPrivateKeyInfoEx"
   CRYPT_DELETE_KEYSET = 16_u32
@@ -2602,18 +3163,18 @@ module Win32cr::Security::Cryptography
   CRYPT_MESSAGE_KEYID_SIGNER_FLAG = 4_u32
   CRYPT_MESSAGE_SILENT_KEYSET_FLAG = 64_u32
   CRYPT_MESSAGE_KEYID_RECIPIENT_FLAG = 4_u32
-  CREDENTIAL_OID_PASSWORD_CREDENTIALS_A = 1_i32
-  CREDENTIAL_OID_PASSWORD_CREDENTIALS_W = 2_i32
+  CREDENTIAL_OID_PASSWORD_CREDENTIALS_A = Win32cr::Foundation::PSTR.new(0x1_u64)
+  CREDENTIAL_OID_PASSWORD_CREDENTIALS_W = Win32cr::Foundation::PSTR.new(0x2_u64)
   CREDENTIAL_OID_PASSWORD_CREDENTIALS = 2_i32
   SCHEME_OID_RETRIEVE_ENCODED_OBJECT_FUNC = "SchemeDllRetrieveEncodedObject"
   SCHEME_OID_RETRIEVE_ENCODED_OBJECTW_FUNC = "SchemeDllRetrieveEncodedObjectW"
   CONTEXT_OID_CREATE_OBJECT_CONTEXT_FUNC = "ContextDllCreateObjectContext"
-  CONTEXT_OID_CERTIFICATE = 1_i32
-  CONTEXT_OID_CRL = 2_i32
-  CONTEXT_OID_CTL = 3_i32
-  CONTEXT_OID_PKCS7 = 4_i32
-  CONTEXT_OID_CAPI2_ANY = 5_i32
-  CONTEXT_OID_OCSP_RESP = 6_i32
+  CONTEXT_OID_CERTIFICATE = Win32cr::Foundation::PSTR.new(0x1_u64)
+  CONTEXT_OID_CRL = Win32cr::Foundation::PSTR.new(0x2_u64)
+  CONTEXT_OID_CTL = Win32cr::Foundation::PSTR.new(0x3_u64)
+  CONTEXT_OID_PKCS7 = Win32cr::Foundation::PSTR.new(0x4_u64)
+  CONTEXT_OID_CAPI2_ANY = Win32cr::Foundation::PSTR.new(0x5_u64)
+  CONTEXT_OID_OCSP_RESP = Win32cr::Foundation::PSTR.new(0x6_u64)
   CRYPT_RETRIEVE_MULTIPLE_OBJECTS = 1_u32
   CRYPT_CACHE_ONLY_RETRIEVAL = 2_u32
   CRYPT_WIRE_ONLY_RETRIEVAL = 4_u32
@@ -2656,34 +3217,34 @@ module Win32cr::Security::Cryptography
   CRYPTNET_URL_CACHE_RESPONSE_HTTP = 1_u32
   CRYPTNET_URL_CACHE_RESPONSE_VALIDATED = 32768_u32
   CRYPT_RETRIEVE_MAX_ERROR_CONTENT_LENGTH = 4096_u32
-  CRYPT_PARAM_ASYNC_RETRIEVAL_COMPLETION = 1_i32
-  CRYPT_PARAM_CANCEL_ASYNC_RETRIEVAL = 2_i32
+  CRYPT_PARAM_ASYNC_RETRIEVAL_COMPLETION = Win32cr::Foundation::PSTR.new(0x1_u64)
+  CRYPT_PARAM_CANCEL_ASYNC_RETRIEVAL = Win32cr::Foundation::PSTR.new(0x2_u64)
   URL_OID_GET_OBJECT_URL_FUNC = "UrlDllGetObjectUrl"
-  URL_OID_CERTIFICATE_ISSUER = 1_i32
-  URL_OID_CERTIFICATE_CRL_DIST_POINT = 2_i32
-  URL_OID_CTL_ISSUER = 3_i32
-  URL_OID_CTL_NEXT_UPDATE = 4_i32
-  URL_OID_CRL_ISSUER = 5_i32
-  URL_OID_CERTIFICATE_FRESHEST_CRL = 6_i32
-  URL_OID_CRL_FRESHEST_CRL = 7_i32
-  URL_OID_CROSS_CERT_DIST_POINT = 8_i32
-  URL_OID_CERTIFICATE_OCSP = 9_i32
-  URL_OID_CERTIFICATE_OCSP_AND_CRL_DIST_POINT = 10_i32
-  URL_OID_CERTIFICATE_CRL_DIST_POINT_AND_OCSP = 11_i32
-  URL_OID_CROSS_CERT_SUBJECT_INFO_ACCESS = 12_i32
-  URL_OID_CERTIFICATE_ONLY_OCSP = 13_i32
+  URL_OID_CERTIFICATE_ISSUER = Win32cr::Foundation::PSTR.new(0x1_u64)
+  URL_OID_CERTIFICATE_CRL_DIST_POINT = Win32cr::Foundation::PSTR.new(0x2_u64)
+  URL_OID_CTL_ISSUER = Win32cr::Foundation::PSTR.new(0x3_u64)
+  URL_OID_CTL_NEXT_UPDATE = Win32cr::Foundation::PSTR.new(0x4_u64)
+  URL_OID_CRL_ISSUER = Win32cr::Foundation::PSTR.new(0x5_u64)
+  URL_OID_CERTIFICATE_FRESHEST_CRL = Win32cr::Foundation::PSTR.new(0x6_u64)
+  URL_OID_CRL_FRESHEST_CRL = Win32cr::Foundation::PSTR.new(0x7_u64)
+  URL_OID_CROSS_CERT_DIST_POINT = Win32cr::Foundation::PSTR.new(0x8_u64)
+  URL_OID_CERTIFICATE_OCSP = Win32cr::Foundation::PSTR.new(0x9_u64)
+  URL_OID_CERTIFICATE_OCSP_AND_CRL_DIST_POINT = Win32cr::Foundation::PSTR.new(0xa_u64)
+  URL_OID_CERTIFICATE_CRL_DIST_POINT_AND_OCSP = Win32cr::Foundation::PSTR.new(0xb_u64)
+  URL_OID_CROSS_CERT_SUBJECT_INFO_ACCESS = Win32cr::Foundation::PSTR.new(0xc_u64)
+  URL_OID_CERTIFICATE_ONLY_OCSP = Win32cr::Foundation::PSTR.new(0xd_u64)
   TIME_VALID_OID_GET_OBJECT_FUNC = "TimeValidDllGetObject"
-  TIME_VALID_OID_GET_CTL = 1_i32
-  TIME_VALID_OID_GET_CRL = 2_i32
-  TIME_VALID_OID_GET_CRL_FROM_CERT = 3_i32
-  TIME_VALID_OID_GET_FRESHEST_CRL_FROM_CERT = 4_i32
-  TIME_VALID_OID_GET_FRESHEST_CRL_FROM_CRL = 5_i32
+  TIME_VALID_OID_GET_CTL = Win32cr::Foundation::PSTR.new(0x1_u64)
+  TIME_VALID_OID_GET_CRL = Win32cr::Foundation::PSTR.new(0x2_u64)
+  TIME_VALID_OID_GET_CRL_FROM_CERT = Win32cr::Foundation::PSTR.new(0x3_u64)
+  TIME_VALID_OID_GET_FRESHEST_CRL_FROM_CERT = Win32cr::Foundation::PSTR.new(0x4_u64)
+  TIME_VALID_OID_GET_FRESHEST_CRL_FROM_CRL = Win32cr::Foundation::PSTR.new(0x5_u64)
   TIME_VALID_OID_FLUSH_OBJECT_FUNC = "TimeValidDllFlushObject"
-  TIME_VALID_OID_FLUSH_CTL = 1_i32
-  TIME_VALID_OID_FLUSH_CRL = 2_i32
-  TIME_VALID_OID_FLUSH_CRL_FROM_CERT = 3_i32
-  TIME_VALID_OID_FLUSH_FRESHEST_CRL_FROM_CERT = 4_i32
-  TIME_VALID_OID_FLUSH_FRESHEST_CRL_FROM_CRL = 5_i32
+  TIME_VALID_OID_FLUSH_CTL = Win32cr::Foundation::PSTR.new(0x1_u64)
+  TIME_VALID_OID_FLUSH_CRL = Win32cr::Foundation::PSTR.new(0x2_u64)
+  TIME_VALID_OID_FLUSH_CRL_FROM_CERT = Win32cr::Foundation::PSTR.new(0x3_u64)
+  TIME_VALID_OID_FLUSH_FRESHEST_CRL_FROM_CERT = Win32cr::Foundation::PSTR.new(0x4_u64)
+  TIME_VALID_OID_FLUSH_FRESHEST_CRL_FROM_CRL = Win32cr::Foundation::PSTR.new(0x5_u64)
   CRYPT_KEYID_MACHINE_FLAG = 32_u32
   CRYPT_KEYID_ALLOC_FLAG = 32768_u32
   CRYPT_KEYID_DELETE_FLAG = 16_u32
@@ -2718,6 +3279,12 @@ module Win32cr::Security::Cryptography
   CERT_CHAIN_MIN_RSA_PUB_KEY_BIT_LENGTH_VALUE_NAME = "MinRsaPubKeyBitLength"
   CERT_CHAIN_MIN_RSA_PUB_KEY_BIT_LENGTH_DEFAULT = 1023_u32
   CERT_CHAIN_MIN_RSA_PUB_KEY_BIT_LENGTH_DISABLE = 4294967295_u32
+  CERT_CHAIN_MIN_WEAK_RSA_PUB_KEY_BIT_LENGTH_VALUE_NAME = "MinWeakRsaPubKeyBitLength"
+  CERT_CHAIN_MIN_WEAK_RSA_PUB_KEY_BIT_LENGTH_DEFAULT = 2047_u32
+  CERT_CHAIN_MIN_WEAK_RSA_PUB_KEY_BIT_LENGTH_DISABLE = 4294967295_u32
+  CERT_CHAIN_MIN_TELEMETRY_RSA_PUB_KEY_BIT_LENGTH_VALUE_NAME = "MinTelemetryRsaPubKeyBitLength"
+  CERT_CHAIN_MIN_TELEMETRY_RSA_PUB_KEY_BIT_LENGTH_DEFAULT = 2047_u32
+  CERT_CHAIN_MIN_TELEMETRY_RSA_PUB_KEY_BIT_LENGTH_DISABLE = 4294967295_u32
   CERT_CHAIN_WEAK_RSA_PUB_KEY_TIME_VALUE_NAME = "WeakRsaPubKeyTime"
   CERT_CHAIN_WEAK_SIGNATURE_LOG_DIR_VALUE_NAME = "WeakSignatureLogDir"
   CERT_CHAIN_DEFAULT_CONFIG_SUBDIR = "Default"
@@ -2856,6 +3423,8 @@ module Win32cr::Security::Cryptography
   CERT_TRUST_HAS_NOT_SUPPORTED_CRITICAL_EXT = 134217728_u32
   CERT_TRUST_HAS_WEAK_SIGNATURE = 1048576_u32
   CERT_TRUST_HAS_WEAK_HYGIENE = 2097152_u32
+  CERT_TRUST_HAS_MIN_TELEMETRY_RSA = 4194304_u32
+  CERT_TRUST_HAS_MIN_WEAK_RSA = 8388608_u32
   CERT_TRUST_IS_PARTIAL_CHAIN = 65536_u32
   CERT_TRUST_CTL_IS_NOT_TIME_VALID = 131072_u32
   CERT_TRUST_CTL_IS_NOT_SIGNATURE_VALID = 262144_u32
@@ -2880,6 +3449,7 @@ module Win32cr::Security::Cryptography
   CERT_TRUST_IS_CA_TRUSTED = 16384_u32
   CERT_TRUST_HAS_AUTO_UPDATE_WEAK_SIGNATURE = 32768_u32
   CERT_TRUST_HAS_ALLOW_WEAK_SIGNATURE = 131072_u32
+  CERT_TRUST_BEFORE_DISALLOWED_CA_FILETIME = 2097152_u32
   CERT_TRUST_IS_COMPLEX_CHAIN = 65536_u32
   CERT_TRUST_SSL_TIME_VALID = 16777216_u32
   CERT_TRUST_NO_TIME_CHECK = 33554432_u32
@@ -2903,27 +3473,23 @@ module Win32cr::Security::Cryptography
   CERT_CHAIN_HAS_MOTW = 16384_u32
   CERT_CHAIN_ONLY_ADDITIONAL_AND_AUTH_ROOT = 32768_u32
   CERT_CHAIN_OPT_IN_WEAK_SIGNATURE = 65536_u32
-  REVOCATION_OID_CRL_REVOCATION = 1_i32
+  CERT_CHAIN_ENABLE_DISALLOWED_CA = 131072_u32
+  REVOCATION_OID_CRL_REVOCATION = Win32cr::Foundation::PSTR.new(0x1_u64)
   CERT_CHAIN_FIND_BY_ISSUER = 1_u32
-  CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG = 134217728_u32
   CRYPT_OID_VERIFY_CERTIFICATE_CHAIN_POLICY_FUNC = "CertDllVerifyCertificateChainPolicy"
-  CERT_CHAIN_POLICY_BASE = 1_i32
-  CERT_CHAIN_POLICY_AUTHENTICODE = 2_i32
-  CERT_CHAIN_POLICY_AUTHENTICODE_TS = 3_i32
-  CERT_CHAIN_POLICY_SSL = 4_i32
-  CERT_CHAIN_POLICY_BASIC_CONSTRAINTS = 5_i32
-  CERT_CHAIN_POLICY_NT_AUTH = 6_i32
-  CERT_CHAIN_POLICY_MICROSOFT_ROOT = 7_i32
-  CERT_CHAIN_POLICY_EV = 8_i32
-  CERT_CHAIN_POLICY_SSL_F12 = 9_i32
-  CERT_CHAIN_POLICY_SSL_HPKP_HEADER = 10_i32
-  CERT_CHAIN_POLICY_THIRD_PARTY_ROOT = 11_i32
-  CERT_CHAIN_POLICY_SSL_KEY_PIN = 12_i32
-  BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG = 2147483648_u32
-  BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG = 1073741824_u32
-  MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG = 65536_u32
-  MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG = 131072_u32
-  MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG = 262144_u32
+  CERT_CHAIN_POLICY_BASE = Win32cr::Foundation::PSTR.new(0x1_u64)
+  CERT_CHAIN_POLICY_AUTHENTICODE = Win32cr::Foundation::PSTR.new(0x2_u64)
+  CERT_CHAIN_POLICY_AUTHENTICODE_TS = Win32cr::Foundation::PSTR.new(0x3_u64)
+  CERT_CHAIN_POLICY_SSL = Win32cr::Foundation::PSTR.new(0x4_u64)
+  CERT_CHAIN_POLICY_BASIC_CONSTRAINTS = Win32cr::Foundation::PSTR.new(0x5_u64)
+  CERT_CHAIN_POLICY_NT_AUTH = Win32cr::Foundation::PSTR.new(0x6_u64)
+  CERT_CHAIN_POLICY_MICROSOFT_ROOT = Win32cr::Foundation::PSTR.new(0x7_u64)
+  CERT_CHAIN_POLICY_EV = Win32cr::Foundation::PSTR.new(0x8_u64)
+  CERT_CHAIN_POLICY_SSL_F12 = Win32cr::Foundation::PSTR.new(0x9_u64)
+  CERT_CHAIN_POLICY_SSL_HPKP_HEADER = Win32cr::Foundation::PSTR.new(0xa_u64)
+  CERT_CHAIN_POLICY_THIRD_PARTY_ROOT = Win32cr::Foundation::PSTR.new(0xb_u64)
+  CERT_CHAIN_POLICY_SSL_KEY_PIN = Win32cr::Foundation::PSTR.new(0xc_u64)
+  CERT_CHAIN_POLICY_CT = Win32cr::Foundation::PSTR.new(0xd_u64)
   SSL_F12_ERROR_TEXT_LENGTH = 256_u32
   CERT_CHAIN_POLICY_SSL_F12_SUCCESS_LEVEL = 0_u32
   CERT_CHAIN_POLICY_SSL_F12_WARNING_LEVEL = 1_u32
@@ -2940,6 +3506,36 @@ module Win32cr::Security::Cryptography
   CERT_CHAIN_POLICY_SSL_KEY_PIN_SUCCESS = 0_u32
   CERT_CHAIN_POLICY_SSL_KEY_PIN_MITM_WARNING = 1_u32
   CERT_CHAIN_POLICY_SSL_KEY_PIN_MISMATCH_WARNING = 2_u32
+  CERT_CHAIN_POLICY_CT_ERROR_UNDECODABLE_SCT_EXTENSION = -112_i32
+  CERT_CHAIN_POLICY_CT_ERROR_UNRETRIEVABLE_SCT_EXTENSION = -111_i32
+  CERT_CHAIN_POLICY_CT_ERROR_MISSING_SCT_EXTENSION = -110_i32
+  CERT_CHAIN_POLICY_CT_ERROR_INVALID_ISSUER_CERT = -101_i32
+  CERT_CHAIN_POLICY_CT_ERROR_INVALID_SUBJECT_CERT = -100_i32
+  CERT_CHAIN_POLICY_CT_ERROR_CANNOT_VALIDATE_SCT = -50_i32
+  CERT_CHAIN_POLICY_CT_ERROR_SCT_VALIDATION_STATUS_INSUFFICIENT = -4_i32
+  CERT_CHAIN_POLICY_CT_ERROR_SCT_VALIDATION_STATUS_UNKNOWN_VERSION = -3_i32
+  CERT_CHAIN_POLICY_CT_ERROR_SCT_VALIDATION_STATUS_UNKNOWN_LOG = -2_i32
+  CERT_CHAIN_POLICY_CT_ERROR_SCT_VALIDATION_STATUS_INVALID = -1_i32
+  CERT_CHAIN_POLICY_CT_SUCCESS_SCT_VALIDIDATION_STATUS_VALID = 0_u32
+  CERT_CHAIN_POLICY_CT_WARNING_OUT_OF_MEMORY = 1_u32
+  CERT_CHAIN_POLICY_CT_WARNING_BEFORE_CODE_SIGNING_CT_LOGGING = 2_u32
+  CERT_CHAIN_POLICY_CT_WARNING_NOT_THIRD_PARTY_CERT = 3_u32
+  CERT_CHAIN_POLICY_CT_WARNING_EXPIRED_ROOT_CTL = 4_u32
+  CERT_CHAIN_POLICY_CT_WARNING_INVALID_CHAIN_CONTEXT = 50_u32
+  CERT_CHAIN_POLICY_CT_WARNING_NOT_SUPPORTED_CA = 51_u32
+  CERT_CHAIN_POLICY_CT_WARNING_MISSING_ROOT_CTL = 52_u32
+  CERT_CHAIN_POLICY_CT_WARNING_MISSING_CT_EXT = 60_u32
+  CERT_CHAIN_POLICY_CT_WARNING_INVALID_CT_EXT = 61_u32
+  CERT_CHAIN_POLICY_CT_WARNING_UNABLE_TO_DECODE_EXT = 62_u32
+  CERT_CHAIN_POLICY_CT_WARNING_UNABLE_TO_DECODE_PARAMETERS = 70_u32
+  CERT_CHAIN_POLICY_CT_WARNING_INVALID_TEMP_FILE = 80_u32
+  CERT_CHAIN_POLICY_CT_WARNING_CANNOT_CREATE_TEMP_FILE = 81_u32
+  CERT_CHAIN_POLICY_CT_WARNING_CANNOT_WRITE_TEMP_FILE = 82_u32
+  CERT_CHAIN_POLICY_CT_WARNING_CANNOT_LOAD_CTLOG_STORE_FILE = 83_u32
+  CERT_CHAIN_POLICY_CT_WARNING_FAILED_INIT = 90_u32
+  CERT_CHAIN_POLICY_CT_WARNING_HASHING_ERROR = 200_u32
+  CERT_CHAIN_POLICY_CT_WARNING_INVALID_STR = 201_u32
+  CERT_CHAIN_POLICY_CT_WARNING_CANNOT_CREATE_POLICY = 300_u32
   CRYPT_STRING_BASE64URI = 13_u32
   CRYPT_STRING_ENCODEMASK = 255_u32
   CRYPT_STRING_RESERVED100 = 256_u32
@@ -2962,6 +3558,7 @@ module Win32cr::Security::Cryptography
   PKCS12_ONLY_NOT_ENCRYPTED_CERTIFICATES = 2048_u32
   PKCS12_VIRTUAL_ISOLATION_KEY = 65536_u32
   PKCS12_IMPORT_RESERVED_MASK = 4294901760_u32
+  PKCS12_NAMED_NO_PERSIST_KEY = 131072_u32
   PKCS12_ONLY_CERTIFICATES_PROVIDER_TYPE = 0_u32
   PKCS12_ONLY_CERTIFICATES_PROVIDER_NAME = "PfxProvider"
   PKCS12_ONLY_CERTIFICATES_CONTAINER_NAME = "PfxContainer"
@@ -2986,10 +3583,10 @@ module Win32cr::Security::Cryptography
   CERT_SERVER_OCSP_RESPONSE_OPEN_PARA_READ_FLAG = 1_u32
   CERT_SERVER_OCSP_RESPONSE_OPEN_PARA_WRITE_FLAG = 2_u32
   CERT_SERVER_OCSP_RESPONSE_ASYNC_FLAG = 1_u32
-  CERT_RETRIEVE_ISSUER_LOGO = 1_i32
-  CERT_RETRIEVE_SUBJECT_LOGO = 2_i32
-  CERT_RETRIEVE_COMMUNITY_LOGO = 3_i32
-  CERT_RETRIEVE_BIOMETRIC_PREDEFINED_BASE_TYPE = 1000_i32
+  CERT_RETRIEVE_ISSUER_LOGO = Win32cr::Foundation::PSTR.new(0x1_u64)
+  CERT_RETRIEVE_SUBJECT_LOGO = Win32cr::Foundation::PSTR.new(0x2_u64)
+  CERT_RETRIEVE_COMMUNITY_LOGO = Win32cr::Foundation::PSTR.new(0x3_u64)
+  CERT_RETRIEVE_BIOMETRIC_PREDEFINED_BASE_TYPE = Win32cr::Foundation::PSTR.new(0x3e8_u64)
   CERT_SELECT_MAX_PARA = 500_u32
   CERT_SELECT_BY_ISSUER_DISPLAYNAME = 12_u32
   CERT_SELECT_BY_FRIENDLYNAME = 13_u32
@@ -3060,6 +3657,263 @@ module Win32cr::Security::Cryptography
   AUDIT_STORE_EXPORT = 1074070020_i32
   AUDIT_STORE_DELETE = 1074070021_i32
   AUDIT_SERVICE_IDLE_STOP = 1074070022_i32
+  BCRYPT_ECC_PARAMETER_HEADER_V1 = 1_u32
+  BCRYPT_COPY_AFTER_PADDING_CHECK_FAILURE_FLAG = 256_u32
+  MS_SCHANNEL_PROVIDER = "Microsoft SSL Protocol Provider"
+  NCRYPT_SSL_CLIENT_FLAG = 1_u32
+  NCRYPT_SSL_SERVER_FLAG = 2_u32
+  SSL2_PROTOCOL_VERSION = 2_u32
+  SSL3_PROTOCOL_VERSION = 768_u32
+  TLS1_PROTOCOL_VERSION = 769_u32
+  TLS1_0_PROTOCOL_VERSION = 769_u32
+  TLS1_1_PROTOCOL_VERSION = 770_u32
+  TLS1_2_PROTOCOL_VERSION = 771_u32
+  TLS1_3_PROTOCOL_VERSION = 772_u32
+  DTLS1_0_PROTOCOL_VERSION = 65279_u32
+  DTLS1_2_PROTOCOL_VERSION = 65277_u32
+  TLS_RSA_WITH_NULL_MD5 = 1_u32
+  TLS_RSA_WITH_NULL_SHA = 2_u32
+  TLS_RSA_EXPORT_WITH_RC4_40_MD5 = 3_u32
+  TLS_RSA_WITH_RC4_128_MD5 = 4_u32
+  TLS_RSA_WITH_RC4_128_SHA = 5_u32
+  TLS_RSA_WITH_DES_CBC_SHA = 9_u32
+  TLS_RSA_WITH_3DES_EDE_CBC_SHA = 10_u32
+  TLS_DHE_DSS_WITH_DES_CBC_SHA = 18_u32
+  TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA = 19_u32
+  TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA = 22_u32
+  TLS_RSA_WITH_AES_128_CBC_SHA = 47_u32
+  TLS_DHE_DSS_WITH_AES_128_CBC_SHA = 50_u32
+  TLS_DHE_RSA_WITH_AES_128_CBC_SHA = 51_u32
+  TLS_RSA_WITH_AES_256_CBC_SHA = 53_u32
+  TLS_DHE_DSS_WITH_AES_256_CBC_SHA = 56_u32
+  TLS_DHE_RSA_WITH_AES_256_CBC_SHA = 57_u32
+  TLS_RSA_EXPORT1024_WITH_DES_CBC_SHA = 98_u32
+  TLS_DHE_DSS_EXPORT1024_WITH_DES_CBC_SHA = 99_u32
+  TLS_RSA_EXPORT1024_WITH_RC4_56_SHA = 100_u32
+  TLS_RSA_WITH_NULL_SHA256 = 59_u32
+  TLS_RSA_WITH_AES_128_CBC_SHA256 = 60_u32
+  TLS_RSA_WITH_AES_256_CBC_SHA256 = 61_u32
+  TLS_DHE_DSS_WITH_AES_128_CBC_SHA256 = 64_u32
+  TLS_DHE_DSS_WITH_AES_256_CBC_SHA256 = 106_u32
+  TLS_RSA_WITH_AES_128_GCM_SHA256 = 156_u32
+  TLS_RSA_WITH_AES_256_GCM_SHA384 = 157_u32
+  TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 = 158_u32
+  TLS_DHE_RSA_WITH_AES_256_GCM_SHA384 = 159_u32
+  TLS_PSK_WITH_AES_128_GCM_SHA256 = 168_u32
+  TLS_PSK_WITH_AES_256_GCM_SHA384 = 169_u32
+  TLS_PSK_WITH_AES_128_CBC_SHA256 = 174_u32
+  TLS_PSK_WITH_AES_256_CBC_SHA384 = 175_u32
+  TLS_PSK_WITH_NULL_SHA256 = 176_u32
+  TLS_PSK_WITH_NULL_SHA384 = 177_u32
+  TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA = 49161_u32
+  TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA = 49171_u32
+  TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA = 49162_u32
+  TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA = 49172_u32
+  TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 = 49187_u32
+  TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 = 49188_u32
+  TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 = 49195_u32
+  TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 = 49196_u32
+  TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256 = 49191_u32
+  TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384 = 49192_u32
+  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 = 49199_u32
+  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 = 49200_u32
+  TLS_AES_128_GCM_SHA256 = 4865_u32
+  TLS_AES_256_GCM_SHA384 = 4866_u32
+  SSL_CK_RC4_128_WITH_MD5 = 65664_u32
+  SSL_CK_RC4_128_EXPORT40_WITH_MD5 = 131200_u32
+  SSL_CK_RC2_128_CBC_WITH_MD5 = 196736_u32
+  SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5 = 262272_u32
+  SSL_CK_IDEA_128_CBC_WITH_MD5 = 327808_u32
+  SSL_CK_DES_64_CBC_WITH_MD5 = 393280_u32
+  SSL_CK_DES_192_EDE3_CBC_WITH_MD5 = 458944_u32
+  TLS_ECC_P256_CURVE_KEY_TYPE = 23_u32
+  TLS_ECC_P384_CURVE_KEY_TYPE = 24_u32
+  TLS_ECC_P521_CURVE_KEY_TYPE = 25_u32
+  SSL_ECDSA_ALGORITHM = "ECDSA"
+  TLS_PSK_EXCHANGE = "PSK"
+  TLS_RSA_PSK_EXCHANGE = "RSA_PSK"
+  NCRYPT_SSL_MAX_NAME_SIZE = 64_u32
+  NCRYPT_SSL_CIPHER_SUITE_EX_VERSION = 1_u32
+  NCRYPT_SSL_CIPHER_LENGTHS_BLOCK_PADDING = 1_u32
+  MSCRYPT_ECC_MAX_OID_LENGTH = 255_u32
+  MSCRYPT_ECC_MAX_CURVE_NAME_LENGTH = 255_u32
+  NCRYPT_SSL_EAP_PRF_FIELD = 255_u32
+  NCRYPT_SSL_EAP_ID = 0_u32
+  NCRYPT_SSL_EAP_TTLSV0_ID = 1_u32
+  NCRYPT_SSL_EAP_TTLSV0_CHLNG_ID = 2_u32
+  NCRYPT_SSL_EAP_FAST_ID = 3_u32
+  SSL_KEY_TYPE_PROPERTY = "KEYTYPE"
+  NCRYPT_SSL_SIGN_INCLUDE_HASHOID = 1_u32
+  NCRYPT_SSL_SIGN_USE_PSS_PADDING = 2_u32
+  NCRYPT_SSL_EXTERNAL_PSK_FLAG = 1_u32
+  NCRYPT_SSL_RESUMPTION_PSK_FLAG = 2_u32
+  CRYPT_PROVIDER_IOCTL__GET_SCHANNEL_INTERFACE = 4145180_u32
+  CRYPT_PROVSTRUC_VERSION_V3 = 3_u32
+  CRYPT_MAX_PROVIDER_ID = 999_u32
+  CRYPT_SIG_RESOURCE_VERSION = 256_u32
+  CRYPT_EXTERNAL_SIGNATURE_LENGTH = 136_u32
+  CRYPT_SIG_RESOURCE_NUMBER = 666_u32
+  CRYPT_SIG_RESOURCE = "#666"
+  CRYPT_MAC_RESOURCE_NUMBER = 667_u32
+  CRYPT_MAC_RESOURCE = "#667"
+  CUR_OFFLOAD_VERSION = 1_u32
+  ROLE_PIN_ALWAYS = 3_u32
+  ROLE_PUK = 4_u32
+  CP_PIV_CARD_CAPABILITY_CONTAINER = "PIV CCC"
+  CP_PIV_CARD_HOLDER_UNIQUE_IDENTIFIER = "PIV CHUID"
+  CP_PIV_CARD_HOLDER_UNSIGNED_UNIQUE_IDENTIFIER = "PIV UCHUID"
+  CP_PIV_FINGERPRINT = "PIV Fingerprint"
+  CP_PIV_SECURITY_OBJECT = "PIV Security Object"
+  CP_PIV_FACIAL_IMAGE = "PIV Facial Image"
+  CP_PIV_PRINTED_INFORMATION = "PIV Printed Information"
+  CP_PIV_GENERATE_KEY = "PIV Generate Key"
+  CP_CARD_PIV = "PIV Card"
+  CP_PIV_CERTIFICATE = "PIV Certificate"
+  CP_PIV_PUBLIC_KEY = "PIV Public Key"
+  CP_PIV_KEY_HISTORY_OBJECT = "PIV Key History Object"
+  CLMD_PIV_CERT_DATA_CURRENT_VERSION = 0_u32
+  CLMD_PIV_GENERATE_ASYMMETRIC_KEY_CURRENT_VERSION = 0_u32
+  CLMD_PIV_PUBLIC_KEY_DATA_CURRENT_VERSION = 0_u32
+  CLMD_FILE_TAG_PIV_AUTH_CERT = 6275333_u32
+  CLMD_FILE_TAG_SIG_CERT = 6275338_u32
+  CLMD_FILE_TAG_KEY_MGMT_CERT = 6275339_u32
+  CLMD_FILE_TAG_CARD_AUTH_CERT = 6275329_u32
+  CLMD_FILE_TAG_CHUID = 6275330_u32
+  CLMD_FILE_TAG_CARD_CAPABILITY_CONTAINER = 6275335_u32
+  CLMD_FILE_TAG_UNSIGNED_CHUID = 6275332_u32
+  CLMD_FILE_TAG_FINGERPRINT = 6275331_u32
+  CLMD_FILE_TAG_SECURITY_OBJECT = 6275334_u32
+  CLMD_FILE_TAG_FACIAL_IMAGE = 6275336_u32
+  CLMD_FILE_TAG_PRINTED_INFORMATION = 6275337_u32
+  CLMD_FILE_TAG_KEY_HISTORY = 6275340_u32
+  CLMD_FILE_TAG_FIRST_RETIRED_KEY_MGMT_KEY = 6275341_u32
+  CLMD_FILE_TAG_LAST_RETIRED_KEY_MGMT_KEY = 6275360_u32
+  SCARD_PROVIDER_CARD_MODULE = 2147483649_u32
+  CARD_DATA_VALUE_UNKNOWN = 4294967295_u32
+  Szbase_csp_dir = "mscp"
+  Szintermediate_certs_dir = "mscerts"
+  Szcache_file = "cardcf"
+  Szcard_identifier_file = "cardid"
+  Szcontainer_map_file = "cmapfile"
+  Szroot_store_file = "msroots"
+  Szuser_signature_cert_prefix = "ksc"
+  Szuser_keyexchange_cert_prefix = "kxc"
+  Szuser_signature_private_key_prefix = "kss"
+  Szuser_signature_public_key_prefix = "ksp"
+  Szuser_keyexchange_private_key_prefix = "kxs"
+  Szuser_keyexchange_public_key_prefix = "kxp"
+  Wszcard_user_everyone = "anonymous"
+  Wszcard_user_user = "user"
+  Wszcard_user_admin = "admin"
+  AT_ECDSA_P256 = 3_u32
+  AT_ECDSA_P384 = 4_u32
+  AT_ECDSA_P521 = 5_u32
+  AT_ECDHE_P256 = 6_u32
+  AT_ECDHE_P384 = 7_u32
+  AT_ECDHE_P521 = 8_u32
+  CARD_CACHE_FILE_CURRENT_VERSION = 1_u32
+  MAX_CONTAINER_NAME_LEN = 39_u32
+  CONTAINER_MAP_VALID_CONTAINER = 1_u32
+  CONTAINER_MAP_DEFAULT_CONTAINER = 2_u32
+  CARD_CAPABILITIES_CURRENT_VERSION = 1_u32
+  MAX_PINS = 8_u32
+  ROLE_EVERYONE = 0_u32
+  ROLE_USER = 1_u32
+  ROLE_ADMIN = 2_u32
+  PIN_SET_NONE = 0_u32
+  PIN_SET_ALL_ROLES = 255_u32
+  PIN_CHANGE_FLAG_UNBLOCK = 1_u32
+  PIN_CHANGE_FLAG_CHANGEPIN = 2_u32
+  CP_CACHE_MODE_GLOBAL_CACHE = 1_u32
+  CP_CACHE_MODE_SESSION_ONLY = 2_u32
+  CP_CACHE_MODE_NO_CACHE = 3_u32
+  CARD_AUTHENTICATE_GENERATE_SESSION_PIN = 268435456_u32
+  CARD_AUTHENTICATE_SESSION_PIN = 536870912_u32
+  CARD_PIN_STRENGTH_PLAINTEXT = 1_u32
+  CARD_PIN_STRENGTH_SESSION_PIN = 2_u32
+  CARD_PIN_SILENT_CONTEXT = 64_u32
+  PIN_CACHE_POLICY_CURRENT_VERSION = 6_u32
+  PIN_INFO_CURRENT_VERSION = 6_u32
+  PIN_INFO_REQUIRE_SECURE_ENTRY = 1_u32
+  CARD_CREATE_CONTAINER_KEY_GEN = 1_u32
+  CARD_CREATE_CONTAINER_KEY_IMPORT = 2_u32
+  CONTAINER_INFO_CURRENT_VERSION = 1_u32
+  CARD_AUTHENTICATE_PIN_CHALLENGE_RESPONSE = 1_u32
+  CARD_AUTHENTICATE_PIN_PIN = 2_u32
+  CARD_FILE_INFO_CURRENT_VERSION = 1_u32
+  CARD_FREE_SPACE_INFO_CURRENT_VERSION = 1_u32
+  CARD_KEY_SIZES_CURRENT_VERSION = 1_u32
+  CARD_RSA_KEY_DECRYPT_INFO_VERSION_ONE = 1_u32
+  CARD_RSA_KEY_DECRYPT_INFO_VERSION_TWO = 2_u32
+  CARD_RSA_KEY_DECRYPT_INFO_CURRENT_VERSION = 2_u32
+  CARD_PADDING_INFO_PRESENT = 1073741824_u32
+  CARD_BUFFER_SIZE_ONLY = 536870912_u32
+  CARD_PADDING_NONE = 1_u32
+  CARD_PADDING_PKCS1 = 2_u32
+  CARD_PADDING_PSS = 4_u32
+  CARD_PADDING_OAEP = 8_u32
+  CARD_SIGNING_INFO_BASIC_VERSION = 1_u32
+  CARD_SIGNING_INFO_CURRENT_VERSION = 2_u32
+  CARD_DH_AGREEMENT_INFO_VERSION = 2_u32
+  CARD_DERIVE_KEY_VERSION = 1_u32
+  CARD_DERIVE_KEY_VERSION_TWO = 2_u32
+  CARD_DERIVE_KEY_CURRENT_VERSION = 2_u32
+  CARD_RETURN_KEY_HANDLE = 16777216_u32
+  CCP_CONTAINER_INFO = "Container Info"
+  CCP_PIN_IDENTIFIER = "PIN Identifier"
+  CCP_ASSOCIATED_ECDH_KEY = "Associated ECDH Key"
+  CP_CARD_FREE_SPACE = "Free Space"
+  CP_CARD_CAPABILITIES = "Capabilities"
+  CP_CARD_KEYSIZES = "Key Sizes"
+  CP_CARD_READ_ONLY = "Read Only Mode"
+  CP_CARD_CACHE_MODE = "Cache Mode"
+  CP_SUPPORTS_WIN_X509_ENROLLMENT = "Supports Windows x.509 Enrollment"
+  CP_CARD_GUID = "Card Identifier"
+  CP_CARD_SERIAL_NO = "Card Serial Number"
+  CP_CARD_PIN_INFO = "PIN Information"
+  CP_CARD_LIST_PINS = "PIN List"
+  CP_CARD_AUTHENTICATED_STATE = "Authenticated State"
+  CP_CARD_PIN_STRENGTH_VERIFY = "PIN Strength Verify"
+  CP_CARD_PIN_STRENGTH_CHANGE = "PIN Strength Change"
+  CP_CARD_PIN_STRENGTH_UNBLOCK = "PIN Strength Unblock"
+  CP_PARENT_WINDOW = "Parent Window"
+  CP_PIN_CONTEXT_STRING = "PIN Context String"
+  CARD_SECURE_KEY_INJECTION_NO_CARD_MODE = 1_u32
+  CARD_KEY_IMPORT_PLAIN_TEXT = 1_u32
+  CARD_KEY_IMPORT_RSA_KEYEST = 2_u32
+  CARD_KEY_IMPORT_ECC_KEYEST = 4_u32
+  CARD_KEY_IMPORT_SHARED_SYMMETRIC = 8_u32
+  CARD_CIPHER_OPERATION = 1_u32
+  CARD_ASYMMETRIC_OPERATION = 2_u32
+  CARD_3DES_112_ALGORITHM = "3DES_112"
+  CARD_3DES_ALGORITHM = "3DES"
+  CARD_AES_ALGORITHM = "AES"
+  CARD_CHAIN_MODE_CBC = "ChainingModeCBC"
+  CARD_IMPORT_KEYPAIR_VERSION_SEVEN = 7_u32
+  CARD_IMPORT_KEYPAIR_CURRENT_VERSION = 7_u32
+  CARD_CHANGE_AUTHENTICATOR_VERSION_SEVEN = 7_u32
+  CARD_CHANGE_AUTHENTICATOR_CURRENT_VERSION = 7_u32
+  CARD_CHANGE_AUTHENTICATOR_RESPONSE_VERSION_SEVEN = 7_u32
+  CARD_CHANGE_AUTHENTICATOR_RESPONSE_CURRENT_VERSION = 7_u32
+  CARD_AUTHENTICATE_VERSION_SEVEN = 7_u32
+  CARD_AUTHENTICATE_CURRENT_VERSION = 7_u32
+  CARD_AUTHENTICATE_RESPONSE_VERSION_SEVEN = 7_u32
+  CARD_AUTHENTICATE_RESPONSE_CURRENT_VERSION = 7_u32
+  CP_KEY_IMPORT_SUPPORT = "Key Import Support"
+  CP_ENUM_ALGORITHMS = "Algorithms"
+  CP_PADDING_SCHEMES = "Padding Schemes"
+  CP_CHAINING_MODES = "Chaining Modes"
+  CSF_IMPORT_KEYPAIR = "Import Key Pair"
+  CSF_CHANGE_AUTHENTICATOR = "Change Authenticator"
+  CSF_AUTHENTICATE = "Authenticate"
+  CKP_CHAINING_MODE = "ChainingMode"
+  CKP_INITIALIZATION_VECTOR = "IV"
+  CKP_BLOCK_LENGTH = "BlockLength"
+  CARD_DATA_VERSION_SEVEN = 7_u32
+  CARD_DATA_VERSION_SIX = 6_u32
+  CARD_DATA_VERSION_FIVE = 5_u32
+  CARD_DATA_VERSION_FOUR = 4_u32
+  CARD_DATA_CURRENT_VERSION = 7_u32
 
   CLSID_CCertSrvSetupKeyInformation = LibC::GUID.new(0x38373906_u32, 0x5433_u16, 0x4633_u16, StaticArray[0xb0_u8, 0xfb_u8, 0x29_u8, 0xb7_u8, 0xe7_u8, 0x82_u8, 0x62_u8, 0xe1_u8])
 
@@ -3114,6 +3968,8 @@ module Win32cr::Security::Cryptography
     CERT_FIND_SUBJECT_STR = 524295_u32
     CERT_FIND_CROSS_CERT_DIST_POINTS = 1114112_u32
     CERT_FIND_PUBKEY_MD5_HASH = 1179648_u32
+    CERT_FIND_SHA256_HASH = 1441792_u32
+    CERT_FIND_SHA1_SHA256_HASH = 1507328_u32
     CERT_FIND_SUBJECT_STR_A = 458759_u32
     CERT_FIND_SUBJECT_STR_W = 524295_u32
     CERT_FIND_ISSUER_STR_A = 458756_u32
@@ -3182,29 +4038,30 @@ module Win32cr::Security::Cryptography
     CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED = 8_u32
     CERT_QUERY_FORMAT_FLAG_ALL = 14_u32
   end
+  @[Flags]
   enum CERT_QUERY_ENCODING_TYPE : UInt32
     X509_ASN_ENCODING = 1_u32
     PKCS_7_ASN_ENCODING = 65536_u32
   end
-  enum CERT_RDN_ATTR_VALUE_TYPE : UInt32
-    CERT_RDN_ANY_TYPE = 0_u32
-    CERT_RDN_NUMERIC_STRING = 3_u32
-    CERT_RDN_PRINTABLE_STRING = 4_u32
-    CERT_RDN_T61_STRING = 5_u32
-    CERT_RDN_VIDEOTEX_STRING = 6_u32
-    CERT_RDN_IA5_STRING = 7_u32
-    CERT_RDN_GRAPHIC_STRING = 8_u32
-    CERT_RDN_ISO646_STRING = 9_u32
-    CERT_RDN_GENERAL_STRING = 10_u32
-    CERT_RDN_INT4_STRING = 11_u32
-    CERT_RDN_UNICODE_STRING = 12_u32
-    CERT_RDN_BMP_STRING = 12_u32
-    CERT_RDN_ENCODED_BLOB = 1_u32
-    CERT_RDN_OCTET_STRING = 2_u32
-    CERT_RDN_TELETEX_STRING = 5_u32
-    CERT_RDN_UNIVERSAL_STRING = 11_u32
-    CERT_RDN_UTF8_STRING = 13_u32
-    CERT_RDN_VISIBLE_STRING = 9_u32
+  enum CERT_RDN_ATTR_VALUE_TYPE
+    CERT_RDN_ANY_TYPE = 0_i32
+    CERT_RDN_NUMERIC_STRING = 3_i32
+    CERT_RDN_PRINTABLE_STRING = 4_i32
+    CERT_RDN_T61_STRING = 5_i32
+    CERT_RDN_VIDEOTEX_STRING = 6_i32
+    CERT_RDN_IA5_STRING = 7_i32
+    CERT_RDN_GRAPHIC_STRING = 8_i32
+    CERT_RDN_ISO646_STRING = 9_i32
+    CERT_RDN_GENERAL_STRING = 10_i32
+    CERT_RDN_INT4_STRING = 11_i32
+    CERT_RDN_UNICODE_STRING = 12_i32
+    CERT_RDN_BMP_STRING = 12_i32
+    CERT_RDN_ENCODED_BLOB = 1_i32
+    CERT_RDN_OCTET_STRING = 2_i32
+    CERT_RDN_TELETEX_STRING = 5_i32
+    CERT_RDN_UNIVERSAL_STRING = 11_i32
+    CERT_RDN_UTF8_STRING = 13_i32
+    CERT_RDN_VISIBLE_STRING = 9_i32
   end
   enum CERT_STRING_TYPE : UInt32
     CERT_SIMPLE_NAME_STR = 1_u32
@@ -3232,11 +4089,15 @@ module Win32cr::Security::Cryptography
     NCRYPT_SCHANNEL_SIGNATURE_INTERFACE = 65539_u32
   end
   @[Flags]
-  enum NCRYPT_FLAGS : UInt32
+  enum BCRYPT_FLAGS : UInt32
+    BCRYPT_BLOCK_PADDING = 1_u32
     BCRYPT_PAD_NONE = 1_u32
     BCRYPT_PAD_OAEP = 4_u32
     BCRYPT_PAD_PKCS1 = 2_u32
     BCRYPT_PAD_PSS = 8_u32
+  end
+  @[Flags]
+  enum NCRYPT_FLAGS : UInt32
     NCRYPT_SILENT_FLAG = 64_u32
     NCRYPT_NO_PADDING_FLAG = 1_u32
     NCRYPT_PAD_OAEP_FLAG = 4_u32
@@ -3295,10 +4156,15 @@ module Win32cr::Security::Cryptography
   @[Flags]
   enum CRYPT_ACQUIRE_FLAGS : UInt32
     CRYPT_ACQUIRE_CACHE_FLAG = 1_u32
+    CRYPT_ACQUIRE_USE_PROV_INFO_FLAG = 2_u32
     CRYPT_ACQUIRE_COMPARE_KEY_FLAG = 4_u32
     CRYPT_ACQUIRE_NO_HEALING = 8_u32
     CRYPT_ACQUIRE_SILENT_FLAG = 64_u32
-    CRYPT_ACQUIRE_USE_PROV_INFO_FLAG = 2_u32
+    CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG = 128_u32
+    CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK = 458752_u32
+    CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG = 65536_u32
+    CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG = 131072_u32
+    CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG = 262144_u32
   end
   @[Flags]
   enum CRYPT_GET_URL_FLAGS : UInt32
@@ -3414,6 +4280,7 @@ module Win32cr::Security::Cryptography
     CMSG_SIGNED_AND_ENVELOPED = 4_u32
     CMSG_HASHED = 5_u32
   end
+  @[Flags]
   enum CERT_OPEN_STORE_FLAGS : UInt32
     CERT_STORE_BACKUP_RESTORE_FLAG = 2048_u32
     CERT_STORE_CREATE_NEW_FLAG = 8192_u32
@@ -3547,12 +4414,13 @@ module Win32cr::Security::Cryptography
     CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE = 1_u32
     CERT_BIOMETRIC_OID_DATA_CHOICE = 2_u32
   end
+  @[Flags]
   enum CERT_CHAIN_POLICY_FLAGS : UInt32
     CERT_CHAIN_POLICY_IGNORE_NOT_TIME_VALID_FLAG = 1_u32
     CERT_CHAIN_POLICY_IGNORE_CTL_NOT_TIME_VALID_FLAG = 2_u32
     CERT_CHAIN_POLICY_IGNORE_NOT_TIME_NESTED_FLAG = 4_u32
-    CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS = 7_u32
     CERT_CHAIN_POLICY_IGNORE_INVALID_BASIC_CONSTRAINTS_FLAG = 8_u32
+    CERT_CHAIN_POLICY_IGNORE_ALL_NOT_TIME_VALID_FLAGS = 7_u32
     CERT_CHAIN_POLICY_ALLOW_UNKNOWN_CA_FLAG = 16_u32
     CERT_CHAIN_POLICY_IGNORE_WRONG_USAGE_FLAG = 32_u32
     CERT_CHAIN_POLICY_IGNORE_INVALID_NAME_FLAG = 64_u32
@@ -3566,6 +4434,12 @@ module Win32cr::Security::Cryptography
     CERT_CHAIN_POLICY_TRUST_TESTROOT_FLAG = 16384_u32
     CERT_CHAIN_POLICY_IGNORE_NOT_SUPPORTED_CRITICAL_EXT_FLAG = 8192_u32
     CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG = 4096_u32
+    CERT_CHAIN_POLICY_IGNORE_WEAK_SIGNATURE_FLAG = 134217728_u32
+    BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_CA_FLAG = 2147483648_u32
+    BASIC_CONSTRAINTS_CERT_CHAIN_POLICY_END_ENTITY_FLAG = 1073741824_u32
+    MICROSOFT_ROOT_CERT_CHAIN_POLICY_ENABLE_TEST_ROOT_FLAG = 65536_u32
+    MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG = 131072_u32
+    MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG = 262144_u32
   end
   @[Flags]
   enum CERT_STRONG_SIGN_FLAGS : UInt32
@@ -3655,6 +4529,105 @@ module Win32cr::Security::Cryptography
     NCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE = 3_u32
     NCRYPT_SECRET_AGREEMENT_INTERFACE = 4_u32
     NCRYPT_SIGNATURE_INTERFACE = 5_u32
+  end
+  enum BCRYPTGENRANDOM_FLAGS : UInt32
+    BCRYPT_RNG_USE_ENTROPY_IN_BUFFER = 1_u32
+    BCRYPT_USE_SYSTEM_PREFERRED_RNG = 2_u32
+  end
+  @[Flags]
+  enum SIGNER_SIGN_FLAGS : UInt32
+    SIG_APPEND = 4096_u32
+    SPC_INC_PE_RESOURCES_FLAG = 128_u32
+    SPC_INC_PE_DEBUG_INFO_FLAG = 64_u32
+    SPC_INC_PE_IMPORT_ADDR_TABLE_FLAG = 32_u32
+    SPC_EXC_PE_PAGE_HASHES_FLAG = 16_u32
+    SPC_INC_PE_PAGE_HASHES_FLAG = 256_u32
+    SPC_DIGEST_GENERATE_FLAG = 512_u32
+    SPC_DIGEST_SIGN_FLAG = 1024_u32
+    SPC_DIGEST_SIGN_EX_FLAG = 16384_u32
+  end
+  enum SIGNER_TIMESTAMP_FLAGS : UInt32
+    SIGNER_TIMESTAMP_AUTHENTICODE = 1_u32
+    SIGNER_TIMESTAMP_RFC3161 = 2_u32
+  end
+  enum SIGNER_SUBJECT_CHOICE : UInt32
+    SIGNER_SUBJECT_FILE = 1_u32
+    SIGNER_SUBJECT_BLOB = 2_u32
+  end
+  enum SIGNER_SIGNATURE_ATTRIBUTE_CHOICE : UInt32
+    SIGNER_NO_ATTR = 0_u32
+    SIGNER_AUTHCODE_ATTR = 1_u32
+  end
+  enum SIGNER_PRIVATE_KEY_CHOICE : UInt32
+    PVK_TYPE_FILE_NAME = 1_u32
+    PVK_TYPE_KEYCONTAINER = 2_u32
+  end
+  @[Flags]
+  enum SIGNER_CERT_POLICY : UInt32
+    SIGNER_CERT_POLICY_STORE = 1_u32
+    SIGNER_CERT_POLICY_CHAIN = 2_u32
+    SIGNER_CERT_POLICY_SPC = 4_u32
+    SIGNER_CERT_POLICY_CHAIN_NO_ROOT = 8_u32
+  end
+  enum SIGNER_CERT_CHOICE : UInt32
+    SIGNER_CERT_SPC_FILE = 1_u32
+    SIGNER_CERT_STORE = 2_u32
+    SIGNER_CERT_SPC_CHAIN = 3_u32
+  end
+  enum ALG_ID : UInt32
+    CALG_MD2 = 32769_u32
+    CALG_MD4 = 32770_u32
+    CALG_MD5 = 32771_u32
+    CALG_SHA = 32772_u32
+    CALG_SHA1 = 32772_u32
+    CALG_MAC = 32773_u32
+    CALG_RSA_SIGN = 9216_u32
+    CALG_DSS_SIGN = 8704_u32
+    CALG_NO_SIGN = 8192_u32
+    CALG_RSA_KEYX = 41984_u32
+    CALG_DES = 26113_u32
+    CALG_3DES_112 = 26121_u32
+    CALG_3DES = 26115_u32
+    CALG_DESX = 26116_u32
+    CALG_RC2 = 26114_u32
+    CALG_RC4 = 26625_u32
+    CALG_SEAL = 26626_u32
+    CALG_DH_SF = 43521_u32
+    CALG_DH_EPHEM = 43522_u32
+    CALG_AGREEDKEY_ANY = 43523_u32
+    CALG_KEA_KEYX = 43524_u32
+    CALG_HUGHES_MD5 = 40963_u32
+    CALG_SKIPJACK = 26122_u32
+    CALG_TEK = 26123_u32
+    CALG_CYLINK_MEK = 26124_u32
+    CALG_SSL3_SHAMD5 = 32776_u32
+    CALG_SSL3_MASTER = 19457_u32
+    CALG_SCHANNEL_MASTER_HASH = 19458_u32
+    CALG_SCHANNEL_MAC_KEY = 19459_u32
+    CALG_SCHANNEL_ENC_KEY = 19463_u32
+    CALG_PCT1_MASTER = 19460_u32
+    CALG_SSL2_MASTER = 19461_u32
+    CALG_TLS1_MASTER = 19462_u32
+    CALG_RC5 = 26125_u32
+    CALG_HMAC = 32777_u32
+    CALG_TLS1PRF = 32778_u32
+    CALG_HASH_REPLACE_OWF = 32779_u32
+    CALG_AES_128 = 26126_u32
+    CALG_AES_192 = 26127_u32
+    CALG_AES_256 = 26128_u32
+    CALG_AES = 26129_u32
+    CALG_SHA_256 = 32780_u32
+    CALG_SHA_384 = 32781_u32
+    CALG_SHA_512 = 32782_u32
+    CALG_ECDH = 43525_u32
+    CALG_ECDH_EPHEM = 44550_u32
+    CALG_ECMQV = 40961_u32
+    CALG_ECDSA = 8707_u32
+    CALG_NULLCIPHER = 24576_u32
+    CALG_THIRDPARTY_KEY_EXCHANGE = 45056_u32
+    CALG_THIRDPARTY_SIGNATURE = 12288_u32
+    CALG_THIRDPARTY_CIPHER = 28672_u32
+    CALG_THIRDPARTY_HASH = 36864_u32
   end
   enum ECC_CURVE_TYPE_ENUM
     BCRYPT_ECC_PRIME_SHORT_WEIERSTRASS_CURVE = 1_i32
@@ -3777,52 +4750,87 @@ module Win32cr::Security::Cryptography
     ENUM_CEPSETUPPROP_URL = 2_i32
     ENUM_CEPSETUPPROP_KEYBASED_RENEWAL = 3_i32
   end
+  enum CARD_DIRECTORY_ACCESS_CONDITION
+    InvalidDirAc = 0_i32
+    UserCreateDeleteDirAc = 1_i32
+    AdminCreateDeleteDirAc = 2_i32
+  end
+  enum CARD_FILE_ACCESS_CONDITION
+    InvalidAc = 0_i32
+    EveryoneReadUserWriteAc = 1_i32
+    UserWriteExecuteAc = 2_i32
+    EveryoneReadAdminWriteAc = 3_i32
+    UnknownAc = 4_i32
+    UserReadWriteAc = 5_i32
+    AdminReadWriteAc = 6_i32
+  end
+  enum SECRET_TYPE
+    AlphaNumericPinType = 0_i32
+    ExternalPinType = 1_i32
+    ChallengeResponsePinType = 2_i32
+    EmptyPinType = 3_i32
+  end
+  enum SECRET_PURPOSE
+    AuthenticationPin = 0_i32
+    DigitalSignaturePin = 1_i32
+    EncryptionPin = 2_i32
+    NonRepudiationPin = 3_i32
+    AdministratorPin = 4_i32
+    PrimaryCardPin = 5_i32
+    UnblockOnlyPin = 6_i32
+  end
+  enum PIN_CACHE_POLICY_TYPE
+    PinCacheNormal = 0_i32
+    PinCacheTimed = 1_i32
+    PinCacheNone = 2_i32
+    PinCacheAlwaysPrompt = 3_i32
+  end
 
   @[Extern]
   struct CMS_KEY_INFO
     property dwVersion : UInt32
-    property algid : UInt32
+    property algid : Win32cr::Security::Cryptography::ALG_ID
     property pbOID : UInt8*
     property cbOID : UInt32
-    def initialize(@dwVersion : UInt32, @algid : UInt32, @pbOID : UInt8*, @cbOID : UInt32)
+    def initialize(@dwVersion : UInt32, @algid : Win32cr::Security::Cryptography::ALG_ID, @pbOID : UInt8*, @cbOID : UInt32)
     end
   end
 
   @[Extern]
-  struct HMAC_Info
-    property hash_algid : UInt32
+  struct HMAC_INFO
+    property hash_algid : Win32cr::Security::Cryptography::ALG_ID
     property pbInnerString : UInt8*
     property cbInnerString : UInt32
     property pbOuterString : UInt8*
     property cbOuterString : UInt32
-    def initialize(@hash_algid : UInt32, @pbInnerString : UInt8*, @cbInnerString : UInt32, @pbOuterString : UInt8*, @cbOuterString : UInt32)
+    def initialize(@hash_algid : Win32cr::Security::Cryptography::ALG_ID, @pbInnerString : UInt8*, @cbInnerString : UInt32, @pbOuterString : UInt8*, @cbOuterString : UInt32)
     end
   end
 
   @[Extern]
   struct SCHANNEL_ALG
     property dwUse : UInt32
-    property algid : UInt32
+    property algid : Win32cr::Security::Cryptography::ALG_ID
     property cBits : UInt32
     property dwFlags : UInt32
     property dwReserved : UInt32
-    def initialize(@dwUse : UInt32, @algid : UInt32, @cBits : UInt32, @dwFlags : UInt32, @dwReserved : UInt32)
+    def initialize(@dwUse : UInt32, @algid : Win32cr::Security::Cryptography::ALG_ID, @cBits : UInt32, @dwFlags : UInt32, @dwReserved : UInt32)
     end
   end
 
   @[Extern]
   struct PROV_ENUMALGS
-    property aiAlgid : UInt32
+    property aiAlgid : Win32cr::Security::Cryptography::ALG_ID
     property dwBitLen : UInt32
     property dwNameLen : UInt32
     property szName : Win32cr::Foundation::CHAR[20]
-    def initialize(@aiAlgid : UInt32, @dwBitLen : UInt32, @dwNameLen : UInt32, @szName : Win32cr::Foundation::CHAR[20])
+    def initialize(@aiAlgid : Win32cr::Security::Cryptography::ALG_ID, @dwBitLen : UInt32, @dwNameLen : UInt32, @szName : Win32cr::Foundation::CHAR[20])
     end
   end
 
   @[Extern]
   struct PROV_ENUMALGS_EX
-    property aiAlgid : UInt32
+    property aiAlgid : Win32cr::Security::Cryptography::ALG_ID
     property dwDefaultLen : UInt32
     property dwMinLen : UInt32
     property dwMaxLen : UInt32
@@ -3831,7 +4839,7 @@ module Win32cr::Security::Cryptography
     property szName : Win32cr::Foundation::CHAR[20]
     property dwLongNameLen : UInt32
     property szLongName : Win32cr::Foundation::CHAR[40]
-    def initialize(@aiAlgid : UInt32, @dwDefaultLen : UInt32, @dwMinLen : UInt32, @dwMaxLen : UInt32, @dwProtocols : UInt32, @dwNameLen : UInt32, @szName : Win32cr::Foundation::CHAR[20], @dwLongNameLen : UInt32, @szLongName : Win32cr::Foundation::CHAR[40])
+    def initialize(@aiAlgid : Win32cr::Security::Cryptography::ALG_ID, @dwDefaultLen : UInt32, @dwMinLen : UInt32, @dwMaxLen : UInt32, @dwProtocols : UInt32, @dwNameLen : UInt32, @szName : Win32cr::Foundation::CHAR[20], @dwLongNameLen : UInt32, @szLongName : Win32cr::Foundation::CHAR[40])
     end
   end
 
@@ -3840,8 +4848,8 @@ module Win32cr::Security::Cryptography
     property bType : UInt8
     property bVersion : UInt8
     property reserved : UInt16
-    property aiKeyAlg : UInt32
-    def initialize(@bType : UInt8, @bVersion : UInt8, @reserved : UInt16, @aiKeyAlg : UInt32)
+    property aiKeyAlg : Win32cr::Security::Cryptography::ALG_ID
+    def initialize(@bType : UInt8, @bVersion : UInt8, @reserved : UInt16, @aiKeyAlg : Win32cr::Security::Cryptography::ALG_ID)
     end
   end
 
@@ -3962,7 +4970,7 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
-  struct CRYPTOAPI_BLOB
+  struct CRYPT_INTEGER_BLOB
     property cbData : UInt32
     property pbData : UInt8*
     def initialize(@cbData : UInt32, @pbData : UInt8*)
@@ -3972,11 +4980,11 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CMS_DH_KEY_INFO
     property dwVersion : UInt32
-    property algid : UInt32
+    property algid : Win32cr::Security::Cryptography::ALG_ID
     property pszContentEncObjId : Win32cr::Foundation::PSTR
-    property pub_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property pub_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pReserved : Void*
-    def initialize(@dwVersion : UInt32, @algid : UInt32, @pszContentEncObjId : Win32cr::Foundation::PSTR, @pub_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pReserved : Void*)
+    def initialize(@dwVersion : UInt32, @algid : Win32cr::Security::Cryptography::ALG_ID, @pszContentEncObjId : Win32cr::Foundation::PSTR, @pub_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pReserved : Void*)
     end
   end
 
@@ -4030,6 +5038,15 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
+  struct BCRYPT_PQDSA_PADDING_INFO
+    property pbCtx : UInt8*
+    property cbCtx : UInt32
+    property pszPrehashAlgId : Win32cr::Foundation::PWSTR
+    def initialize(@pbCtx : UInt8*, @cbCtx : UInt32, @pszPrehashAlgId : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
   struct BCRYPT_AUTHENTICATED_CIPHER_MODE_INFO
     property cbSize : UInt32
     property dwInfoVersion : UInt32
@@ -4045,6 +5062,16 @@ module Win32cr::Security::Cryptography
     property cbData : UInt64
     property dwFlags : UInt32
     def initialize(@cbSize : UInt32, @dwInfoVersion : UInt32, @pbNonce : UInt8*, @cbNonce : UInt32, @pbAuthData : UInt8*, @cbAuthData : UInt32, @pbTag : UInt8*, @cbTag : UInt32, @pbMacContext : UInt8*, @cbMacContext : UInt32, @cbAAD : UInt32, @cbData : UInt64, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_PKCS11_RSA_AES_WRAP_BLOB
+    property dwMagic : UInt32
+    property cbKey : UInt32
+    property cbPaddingAlgId : UInt32
+    property cbPaddingLabel : UInt32
+    def initialize(@dwMagic : UInt32, @cbKey : UInt32, @cbPaddingAlgId : UInt32, @cbPaddingLabel : UInt32)
     end
   end
 
@@ -4162,6 +5189,24 @@ module Win32cr::Security::Cryptography
     property dwVersion : UInt32
     property cbKeyData : UInt32
     def initialize(@dwMagic : UInt32, @dwVersion : UInt32, @cbKeyData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_PQDSA_KEY_BLOB
+    property dwMagic : UInt32
+    property cbParameterSet : UInt32
+    property cbKey : UInt32
+    def initialize(@dwMagic : UInt32, @cbParameterSet : UInt32, @cbKey : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_MLKEM_KEY_BLOB
+    property dwMagic : UInt32
+    property cbParameterSet : UInt32
+    property cbKey : UInt32
+    def initialize(@dwMagic : UInt32, @cbParameterSet : UInt32, @cbKey : UInt32)
     end
   end
 
@@ -4406,29 +5451,6 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
-  struct NCRYPT_VSM_KEY_ATTESTATION_STATEMENT
-    property magic : UInt32
-    property version : UInt32
-    property cbSignature : UInt32
-    property cbReport : UInt32
-    property cbAttributes : UInt32
-    def initialize(@magic : UInt32, @version : UInt32, @cbSignature : UInt32, @cbReport : UInt32, @cbAttributes : UInt32)
-    end
-  end
-
-  @[Extern]
-  struct NCRYPT_VSM_KEY_ATTESTATION_CLAIM_RESTRICTIONS
-    property version : UInt32
-    property trustlet_id : UInt64
-    property min_svn : UInt32
-    property flags_mask : UInt32
-    property flags_expected : UInt32
-    property _bitfield : UInt32
-    def initialize(@version : UInt32, @trustlet_id : UInt64, @min_svn : UInt32, @flags_mask : UInt32, @flags_expected : UInt32, @_bitfield : UInt32)
-    end
-  end
-
-  @[Extern]
   struct NCRYPT_EXPORTED_ISOLATED_KEY_HEADER
     property version : UInt32
     property key_usage : UInt32
@@ -4446,6 +5468,72 @@ module Win32cr::Security::Cryptography
   struct NCRYPT_EXPORTED_ISOLATED_KEY_ENVELOPE
     property header : Win32cr::Security::Cryptography::NCRYPT_EXPORTED_ISOLATED_KEY_HEADER
     def initialize(@header : Win32cr::Security::Cryptography::NCRYPT_EXPORTED_ISOLATED_KEY_HEADER)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_VBS_ROOT_ATTESTATION_HEADER
+    property magic : UInt32
+    property version : UInt32
+    property cbAttributes : UInt32
+    property cbNonce : UInt32
+    property cbReport : UInt32
+    property cbSignature : UInt32
+    def initialize(@magic : UInt32, @version : UInt32, @cbAttributes : UInt32, @cbNonce : UInt32, @cbReport : UInt32, @cbSignature : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_VBS_IDENTITY_ATTESTATION_PADDING
+    property version : UInt32
+    property ulPaddingScheme : UInt32
+    property cbHashAlg : UInt32
+    property ulSalt : UInt32
+    def initialize(@version : UInt32, @ulPaddingScheme : UInt32, @cbHashAlg : UInt32, @ulSalt : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_VBS_IDENTITY_ATTESTATION_HEADER
+    property magic : UInt32
+    property version : UInt32
+    property cbAttributes : UInt32
+    property cbNonce : UInt32
+    property cbHashAlg : UInt32
+    property cbPadding : UInt32
+    property cbSignatureAlg : UInt32
+    property cbSignature : UInt32
+    def initialize(@magic : UInt32, @version : UInt32, @cbAttributes : UInt32, @cbNonce : UInt32, @cbHashAlg : UInt32, @cbPadding : UInt32, @cbSignatureAlg : UInt32, @cbSignature : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_VBS_KEY_ATTESTATION_STATEMENT
+    property magic : UInt32
+    property version : UInt32
+    property claim_type : UInt32
+    def initialize(@magic : UInt32, @version : UInt32, @claim_type : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_VBS_ROOT_KEY_ATTESTATION_CLAIM_DETAILS
+    property ulKeyFlags : UInt32
+    property ullTrustletId : UInt64
+    property ulTrustletSecurityVersion : UInt32
+    property ulTrustletDebuggable : UInt32
+    def initialize(@ulKeyFlags : UInt32, @ullTrustletId : UInt64, @ulTrustletSecurityVersion : UInt32, @ulTrustletDebuggable : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_VBS_IDENTITY_KEY_ATTESTATION_CLAIM_DETAILS
+    property ulKeyFlags : UInt32
+    property pszSignatureHashAlg : Win32cr::Foundation::PWSTR
+    property ulPaddingScheme : UInt32
+    property pszPaddingHashAlg : Win32cr::Foundation::PWSTR
+    property ulPaddingSalt : UInt32
+    def initialize(@ulKeyFlags : UInt32, @pszSignatureHashAlg : Win32cr::Foundation::PWSTR, @ulPaddingScheme : UInt32, @pszPaddingHashAlg : Win32cr::Foundation::PWSTR, @ulPaddingSalt : UInt32)
     end
   end
 
@@ -4554,7 +5642,7 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
-  struct NCRYPT_PCP_RAW_POLICYDIGEST
+  struct NCRYPT_PCP_RAW_POLICYDIGEST_INFO
     property dwVersion : UInt32
     property cbDigest : UInt32
     def initialize(@dwVersion : UInt32, @cbDigest : UInt32)
@@ -4583,6 +5671,24 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
+  struct NCRYPT_TPM_PERSISTENT_KEY_BLOB_HEADER
+    property magic : UInt32
+    property cbHeader : UInt32
+    property tpmHandle : UInt32
+    def initialize(@magic : UInt32, @cbHeader : UInt32, @tpmHandle : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_PQ_BLOB
+    property dwMagic : UInt32
+    property cbBCryptType : UInt32
+    property cbBCryptBlob : UInt32
+    def initialize(@dwMagic : UInt32, @cbBCryptType : UInt32, @cbBCryptBlob : UInt32)
+    end
+  end
+
+  @[Extern]
   struct CRYPT_BIT_BLOB
     property cbData : UInt32
     property pbData : UInt8*
@@ -4594,8 +5700,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CRYPT_ALGORITHM_IDENTIFIER
     property pszObjId : Win32cr::Foundation::PSTR
-    property parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property parameters : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @parameters : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -4610,8 +5716,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CRYPT_HASH_INFO
     property hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -4619,16 +5725,16 @@ module Win32cr::Security::Cryptography
   struct CERT_EXTENSION
     property pszObjId : Win32cr::Foundation::PSTR
     property fCritical : Win32cr::Foundation::BOOL
-    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @fCritical : Win32cr::Foundation::BOOL, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @fCritical : Win32cr::Foundation::BOOL, @value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
   @[Extern]
   struct CRYPT_ATTRIBUTE_TYPE_VALUE
     property pszObjId : Win32cr::Foundation::PSTR
-    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -4636,8 +5742,8 @@ module Win32cr::Security::Cryptography
   struct CRYPT_ATTRIBUTE
     property pszObjId : Win32cr::Foundation::PSTR
     property cValue : UInt32
-    property rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @cValue : UInt32, @rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rgValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @cValue : UInt32, @rgValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
@@ -4653,8 +5759,8 @@ module Win32cr::Security::Cryptography
   struct CERT_RDN_ATTR
     property pszObjId : Win32cr::Foundation::PSTR
     property dwValueType : Win32cr::Security::Cryptography::CERT_RDN_ATTR_VALUE_TYPE
-    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @dwValueType : Win32cr::Security::Cryptography::CERT_RDN_ATTR_VALUE_TYPE, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @dwValueType : Win32cr::Security::Cryptography::CERT_RDN_ATTR_VALUE_TYPE, @value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -4677,8 +5783,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERT_NAME_VALUE
     property dwValueType : UInt32
-    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@dwValueType : UInt32, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@dwValueType : UInt32, @value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -4693,10 +5799,10 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CRYPT_ECC_PRIVATE_KEY_INFO
     property dwVersion : UInt32
-    property private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property private_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property szCurveOid : Win32cr::Foundation::PSTR
     property public_key : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
-    def initialize(@dwVersion : UInt32, @private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @szCurveOid : Win32cr::Foundation::PSTR, @public_key : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB)
+    def initialize(@dwVersion : UInt32, @private_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @szCurveOid : Win32cr::Foundation::PSTR, @public_key : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB)
     end
   end
 
@@ -4704,28 +5810,28 @@ module Win32cr::Security::Cryptography
   struct CRYPT_PRIVATE_KEY_INFO
     property version : UInt32
     property algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property private_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pAttributes : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*
-    def initialize(@version : UInt32, @algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pAttributes : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*)
+    def initialize(@version : UInt32, @algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @private_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pAttributes : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*)
     end
   end
 
   @[Extern]
   struct CRYPT_ENCRYPTED_PRIVATE_KEY_INFO
     property encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property encrypted_private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property encrypted_private_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_private_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
   @[Extern]
   struct CRYPT_PKCS8_IMPORT_PARAMS
-    property private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property private_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pResolvehCryptProvFunc : Win32cr::Security::Cryptography::PCRYPT_RESOLVE_HCRYPTPROV_FUNC
     property pVoidResolveFunc : Void*
     property pDecryptPrivateKeyFunc : Win32cr::Security::Cryptography::PCRYPT_DECRYPT_PRIVATE_KEY_FUNC
     property pVoidDecryptFunc : Void*
-    def initialize(@private_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pResolvehCryptProvFunc : Win32cr::Security::Cryptography::PCRYPT_RESOLVE_HCRYPTPROV_FUNC, @pVoidResolveFunc : Void*, @pDecryptPrivateKeyFunc : Win32cr::Security::Cryptography::PCRYPT_DECRYPT_PRIVATE_KEY_FUNC, @pVoidDecryptFunc : Void*)
+    def initialize(@private_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pResolvehCryptProvFunc : Win32cr::Security::Cryptography::PCRYPT_RESOLVE_HCRYPTPROV_FUNC, @pVoidResolveFunc : Void*, @pDecryptPrivateKeyFunc : Win32cr::Security::Cryptography::PCRYPT_DECRYPT_PRIVATE_KEY_FUNC, @pVoidDecryptFunc : Void*)
     end
   end
 
@@ -4743,28 +5849,28 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERT_INFO
     property dwVersion : UInt32
-    property serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property not_before : Win32cr::Foundation::FILETIME
     property not_after : Win32cr::Foundation::FILETIME
-    property subject : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property subject : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO
     property issuer_unique_id : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
     property subject_unique_id : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
     property cExtension : UInt32
     property rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
-    def initialize(@dwVersion : UInt32, @serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @not_before : Win32cr::Foundation::FILETIME, @not_after : Win32cr::Foundation::FILETIME, @subject : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO, @issuer_unique_id : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @subject_unique_id : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
+    def initialize(@dwVersion : UInt32, @serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @not_before : Win32cr::Foundation::FILETIME, @not_after : Win32cr::Foundation::FILETIME, @subject : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO, @issuer_unique_id : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @subject_unique_id : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
     end
   end
 
   @[Extern]
   struct CRL_ENTRY
-    property serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property revocation_date : Win32cr::Foundation::FILETIME
     property cExtension : UInt32
     property rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
-    def initialize(@serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @revocation_date : Win32cr::Foundation::FILETIME, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
+    def initialize(@serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @revocation_date : Win32cr::Foundation::FILETIME, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
     end
   end
 
@@ -4772,14 +5878,14 @@ module Win32cr::Security::Cryptography
   struct CRL_INFO
     property dwVersion : UInt32
     property signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property this_update : Win32cr::Foundation::FILETIME
     property next_update : Win32cr::Foundation::FILETIME
     property cCRLEntry : UInt32
     property rgCRLEntry : Win32cr::Security::Cryptography::CRL_ENTRY*
     property cExtension : UInt32
     property rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
-    def initialize(@dwVersion : UInt32, @signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @this_update : Win32cr::Foundation::FILETIME, @next_update : Win32cr::Foundation::FILETIME, @cCRLEntry : UInt32, @rgCRLEntry : Win32cr::Security::Cryptography::CRL_ENTRY*, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
+    def initialize(@dwVersion : UInt32, @signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @this_update : Win32cr::Foundation::FILETIME, @next_update : Win32cr::Foundation::FILETIME, @cCRLEntry : UInt32, @rgCRLEntry : Win32cr::Security::Cryptography::CRL_ENTRY*, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
     end
   end
 
@@ -4803,11 +5909,11 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERT_REQUEST_INFO
     property dwVersion : UInt32
-    property subject : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property subject : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO
     property cAttribute : UInt32
     property rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
-    def initialize(@dwVersion : UInt32, @subject : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO, @cAttribute : UInt32, @rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*)
+    def initialize(@dwVersion : UInt32, @subject : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @subject_public_key_info : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO, @cAttribute : UInt32, @rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*)
     end
   end
 
@@ -4822,10 +5928,10 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CERT_SIGNED_CONTENT_INFO
-    property to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property to_be_signed : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
     property signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
-    def initialize(@to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB)
+    def initialize(@to_be_signed : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB)
     end
   end
 
@@ -4839,10 +5945,10 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CTL_ENTRY
-    property subject_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property subject_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property cAttribute : UInt32
     property rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
-    def initialize(@subject_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cAttribute : UInt32, @rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*)
+    def initialize(@subject_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cAttribute : UInt32, @rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*)
     end
   end
 
@@ -4850,8 +5956,8 @@ module Win32cr::Security::Cryptography
   struct CTL_INFO
     property dwVersion : UInt32
     property subject_usage : Win32cr::Security::Cryptography::CTL_USAGE
-    property list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property sequence_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property list_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property sequence_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property this_update : Win32cr::Foundation::FILETIME
     property next_update : Win32cr::Foundation::FILETIME
     property subject_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
@@ -4859,7 +5965,7 @@ module Win32cr::Security::Cryptography
     property rgCTLEntry : Win32cr::Security::Cryptography::CTL_ENTRY*
     property cExtension : UInt32
     property rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
-    def initialize(@dwVersion : UInt32, @subject_usage : Win32cr::Security::Cryptography::CTL_USAGE, @list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @sequence_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @this_update : Win32cr::Foundation::FILETIME, @next_update : Win32cr::Foundation::FILETIME, @subject_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @cCTLEntry : UInt32, @rgCTLEntry : Win32cr::Security::Cryptography::CTL_ENTRY*, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
+    def initialize(@dwVersion : UInt32, @subject_usage : Win32cr::Security::Cryptography::CTL_USAGE, @list_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @sequence_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @this_update : Win32cr::Foundation::FILETIME, @next_update : Win32cr::Foundation::FILETIME, @subject_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @cCTLEntry : UInt32, @rgCTLEntry : Win32cr::Security::Cryptography::CTL_ENTRY*, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
     end
   end
 
@@ -4867,10 +5973,10 @@ module Win32cr::Security::Cryptography
   struct CRYPT_TIME_STAMP_REQUEST_INFO
     property pszTimeStampAlgorithm : Win32cr::Foundation::PSTR
     property pszContentType : Win32cr::Foundation::PSTR
-    property content : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property content : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property cAttribute : UInt32
     property rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
-    def initialize(@pszTimeStampAlgorithm : Win32cr::Foundation::PSTR, @pszContentType : Win32cr::Foundation::PSTR, @content : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cAttribute : UInt32, @rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*)
+    def initialize(@pszTimeStampAlgorithm : Win32cr::Foundation::PSTR, @pszContentType : Win32cr::Foundation::PSTR, @content : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cAttribute : UInt32, @rgAttribute : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*)
     end
   end
 
@@ -4919,10 +6025,10 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CERT_AUTHORITY_KEY_ID_INFO
-    property key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property cert_issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property cert_serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cert_issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cert_serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property cert_issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property cert_serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cert_issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cert_serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -4936,10 +6042,10 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CERT_KEY_ATTRIBUTES_INFO
-    property key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property intended_key_usage : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
     property pPrivateKeyUsagePeriod : Win32cr::Security::Cryptography::CERT_PRIVATE_KEY_VALIDITY*
-    def initialize(@key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @intended_key_usage : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @pPrivateKeyUsagePeriod : Win32cr::Security::Cryptography::CERT_PRIVATE_KEY_VALIDITY*)
+    def initialize(@key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @intended_key_usage : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @pPrivateKeyUsagePeriod : Win32cr::Security::Cryptography::CERT_PRIVATE_KEY_VALIDITY*)
     end
   end
 
@@ -4963,8 +6069,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERT_OTHER_NAME
     property pszObjId : Win32cr::Foundation::PSTR
-    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -4979,11 +6085,11 @@ module Win32cr::Security::Cryptography
     property pOtherName : Win32cr::Security::Cryptography::CERT_OTHER_NAME*
     property pwszRfc822Name : Win32cr::Foundation::PWSTR
     property pwszDNSName : Win32cr::Foundation::PWSTR
-    property directory_name : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property directory_name : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pwszURL : Win32cr::Foundation::PWSTR
-    property ip_address : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property ip_address : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pszRegisteredID : Win32cr::Foundation::PSTR
-    def initialize(@pOtherName : Win32cr::Security::Cryptography::CERT_OTHER_NAME*, @pwszRfc822Name : Win32cr::Foundation::PWSTR, @pwszDNSName : Win32cr::Foundation::PWSTR, @directory_name : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pwszURL : Win32cr::Foundation::PWSTR, @ip_address : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pszRegisteredID : Win32cr::Foundation::PSTR)
+    def initialize(@pOtherName : Win32cr::Security::Cryptography::CERT_OTHER_NAME*, @pwszRfc822Name : Win32cr::Foundation::PWSTR, @pwszDNSName : Win32cr::Foundation::PWSTR, @directory_name : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pwszURL : Win32cr::Foundation::PWSTR, @ip_address : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pszRegisteredID : Win32cr::Foundation::PSTR)
     end
     end
 
@@ -5005,8 +6111,8 @@ module Win32cr::Security::Cryptography
     property fPathLenConstraint : Win32cr::Foundation::BOOL
     property dwPathLenConstraint : UInt32
     property cSubtreesConstraint : UInt32
-    property rgSubtreesConstraint : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@subject_type : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @fPathLenConstraint : Win32cr::Foundation::BOOL, @dwPathLenConstraint : UInt32, @cSubtreesConstraint : UInt32, @rgSubtreesConstraint : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rgSubtreesConstraint : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@subject_type : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @fPathLenConstraint : Win32cr::Foundation::BOOL, @dwPathLenConstraint : UInt32, @cSubtreesConstraint : UInt32, @rgSubtreesConstraint : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
@@ -5022,8 +6128,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERT_POLICY_QUALIFIER_INFO
     property pszPolicyQualifierId : Win32cr::Foundation::PSTR
-    property qualifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszPolicyQualifierId : Win32cr::Foundation::PSTR, @qualifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property qualifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszPolicyQualifierId : Win32cr::Foundation::PSTR, @qualifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5065,8 +6171,8 @@ module Win32cr::Security::Cryptography
   struct CPS_URLS
     property pszURL : Win32cr::Foundation::PWSTR
     property pAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*
-    property pDigest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@pszURL : Win32cr::Foundation::PWSTR, @pAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, @pDigest : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property pDigest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@pszURL : Win32cr::Foundation::PWSTR, @pAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, @pDigest : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
@@ -5111,33 +6217,33 @@ module Win32cr::Security::Cryptography
   struct CRYPT_CONTENT_INFO_SEQUENCE_OF_ANY
     property pszObjId : Win32cr::Foundation::PSTR
     property cValue : UInt32
-    property rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @cValue : UInt32, @rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rgValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @cValue : UInt32, @rgValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
   @[Extern]
   struct CRYPT_CONTENT_INFO
     property pszObjId : Win32cr::Foundation::PSTR
-    property content : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @content : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property content : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @content : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
   @[Extern]
   struct CRYPT_SEQUENCE_OF_ANY
     property cValue : UInt32
-    property rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@cValue : UInt32, @rgValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rgValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@cValue : UInt32, @rgValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
   @[Extern]
   struct CERT_AUTHORITY_KEY_ID2_INFO
-    property key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property authority_cert_issuer : Win32cr::Security::Cryptography::CERT_ALT_NAME_INFO
-    property authority_cert_serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @authority_cert_issuer : Win32cr::Security::Cryptography::CERT_ALT_NAME_INFO, @authority_cert_serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property authority_cert_serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @authority_cert_issuer : Win32cr::Security::Cryptography::CERT_ALT_NAME_INFO, @authority_cert_serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5202,9 +6308,9 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CERT_PAIR
-    property forward : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property reverse : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@forward : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @reverse : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property forward : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property reverse : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@forward : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @reverse : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5241,26 +6347,26 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CERT_DSS_PARAMETERS
-    property p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property q : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @q : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property p : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property q : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property g : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@p : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @q : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @g : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
   @[Extern]
   struct CERT_DH_PARAMETERS
-    property p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property p : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property g : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@p : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @g : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
   @[Extern]
   struct CERT_ECC_SIGNATURE
-    property r : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property s : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@r : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @s : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property r : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property s : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@r : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @s : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5274,12 +6380,12 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CERT_X942_DH_PARAMETERS
-    property p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property q : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property j : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property p : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property g : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property q : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property j : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pValidationParams : Win32cr::Security::Cryptography::CERT_X942_DH_VALIDATION_PARAMS*
-    def initialize(@p : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @g : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @q : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @j : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pValidationParams : Win32cr::Security::Cryptography::CERT_X942_DH_VALIDATION_PARAMS*)
+    def initialize(@p : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @g : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @q : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @j : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pValidationParams : Win32cr::Security::Cryptography::CERT_X942_DH_VALIDATION_PARAMS*)
     end
   end
 
@@ -5288,17 +6394,17 @@ module Win32cr::Security::Cryptography
     property pszContentEncryptionObjId : Win32cr::Foundation::PSTR
     property rgbCounter : UInt8[4]
     property rgbKeyLength : UInt8[4]
-    property pub_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszContentEncryptionObjId : Win32cr::Foundation::PSTR, @rgbCounter : UInt8[4], @rgbKeyLength : UInt8[4], @pub_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property pub_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszContentEncryptionObjId : Win32cr::Foundation::PSTR, @rgbCounter : UInt8[4], @rgbKeyLength : UInt8[4], @pub_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
   @[Extern]
   struct CRYPT_ECC_CMS_SHARED_INFO
     property algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property entity_u_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property entity_u_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property rgbSuppPubInfo : UInt8[4]
-    def initialize(@algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @entity_u_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @rgbSuppPubInfo : UInt8[4])
+    def initialize(@algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @entity_u_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @rgbSuppPubInfo : UInt8[4])
     end
   end
 
@@ -5314,8 +6420,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CRYPT_SMIME_CAPABILITY
     property pszObjId : Win32cr::Foundation::PSTR
-    property parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property parameters : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @parameters : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5330,8 +6436,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERT_QC_STATEMENT
     property pszStatementId : Win32cr::Foundation::PSTR
-    property statement_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszStatementId : Win32cr::Foundation::PSTR, @statement_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property statement_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszStatementId : Win32cr::Foundation::PSTR, @statement_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5364,8 +6470,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CRYPT_PSOURCE_ALGORITHM
     property pszObjId : Win32cr::Foundation::PSTR
-    property encoding_parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @encoding_parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property encoding_parameters : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@pszObjId : Win32cr::Foundation::PSTR, @encoding_parameters : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5389,8 +6495,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CMC_TAGGED_CERT_REQUEST
     property dwBodyPartID : UInt32
-    property signed_cert_request : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@dwBodyPartID : UInt32, @signed_cert_request : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property signed_cert_request : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@dwBodyPartID : UInt32, @signed_cert_request : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5414,8 +6520,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CMC_TAGGED_CONTENT_INFO
     property dwBodyPartID : UInt32
-    property encoded_content_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@dwBodyPartID : UInt32, @encoded_content_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property encoded_content_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@dwBodyPartID : UInt32, @encoded_content_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5423,8 +6529,8 @@ module Win32cr::Security::Cryptography
   struct CMC_TAGGED_OTHER_MSG
     property dwBodyPartID : UInt32
     property pszObjId : Win32cr::Foundation::PSTR
-    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@dwBodyPartID : UInt32, @pszObjId : Win32cr::Foundation::PSTR, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@dwBodyPartID : UInt32, @pszObjId : Win32cr::Foundation::PSTR, @value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5456,9 +6562,9 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CMC_PEND_INFO
-    property pend_token : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property pend_token : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pend_time : Win32cr::Foundation::FILETIME
-    def initialize(@pend_token : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pend_time : Win32cr::Foundation::FILETIME)
+    def initialize(@pend_token : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pend_time : Win32cr::Foundation::FILETIME)
     end
   end
 
@@ -5519,9 +6625,9 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERT_HASHED_URL
     property hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pwszUrl : Win32cr::Foundation::PWSTR
-    def initialize(@hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pwszUrl : Win32cr::Foundation::PWSTR)
+    def initialize(@hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pwszUrl : Win32cr::Foundation::PWSTR)
     end
   end
 
@@ -5672,26 +6778,26 @@ module Win32cr::Security::Cryptography
     property signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
     property signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
     property cCertEncoded : UInt32
-    property rgCertEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @cCertEncoded : UInt32, @rgCertEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rgCertEncoded : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@signature_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @signature : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @cCertEncoded : UInt32, @rgCertEncoded : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
   @[Extern]
   struct OCSP_SIGNED_REQUEST_INFO
-    property to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property to_be_signed : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pOptionalSignatureInfo : Win32cr::Security::Cryptography::OCSP_SIGNATURE_INFO*
-    def initialize(@to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pOptionalSignatureInfo : Win32cr::Security::Cryptography::OCSP_SIGNATURE_INFO*)
+    def initialize(@to_be_signed : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pOptionalSignatureInfo : Win32cr::Security::Cryptography::OCSP_SIGNATURE_INFO*)
     end
   end
 
   @[Extern]
   struct OCSP_CERT_ID
     property hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property issuer_name_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property issuer_key_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @issuer_name_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @issuer_key_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property issuer_name_hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property issuer_key_hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @issuer_name_hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @issuer_key_hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5720,16 +6826,16 @@ module Win32cr::Security::Cryptography
   struct OCSP_RESPONSE_INFO
     property dwStatus : UInt32
     property pszObjId : Win32cr::Foundation::PSTR
-    property value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@dwStatus : UInt32, @pszObjId : Win32cr::Foundation::PSTR, @value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@dwStatus : UInt32, @pszObjId : Win32cr::Foundation::PSTR, @value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
   @[Extern]
   struct OCSP_BASIC_SIGNED_RESPONSE_INFO
-    property to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property to_be_signed : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property signature_info : Win32cr::Security::Cryptography::OCSP_SIGNATURE_INFO
-    def initialize(@to_be_signed : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @signature_info : Win32cr::Security::Cryptography::OCSP_SIGNATURE_INFO)
+    def initialize(@to_be_signed : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @signature_info : Win32cr::Security::Cryptography::OCSP_SIGNATURE_INFO)
     end
   end
 
@@ -5777,9 +6883,9 @@ module Win32cr::Security::Cryptography
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
     struct Anonymous_e__Union_
-    property by_name_responder_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property by_key_responder_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@by_name_responder_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @by_key_responder_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property by_name_responder_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property by_key_responder_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@by_name_responder_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @by_key_responder_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
     end
 
@@ -5820,19 +6926,19 @@ module Win32cr::Security::Cryptography
     property pwszName : Win32cr::Foundation::PWSTR
     property dwGroupId : UInt32
     property anonymous : Anonymous_e__Union_
-    property extra_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property extra_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property dwValue : UInt32
-    property algid : UInt32
+    property algid : Win32cr::Security::Cryptography::ALG_ID
     property dwLength : UInt32
-    def initialize(@dwValue : UInt32, @algid : UInt32, @dwLength : UInt32)
+    def initialize(@dwValue : UInt32, @algid : Win32cr::Security::Cryptography::ALG_ID, @dwLength : UInt32)
     end
     end
 
-    def initialize(@cbSize : UInt32, @pszOID : Win32cr::Foundation::PSTR, @pwszName : Win32cr::Foundation::PWSTR, @dwGroupId : UInt32, @anonymous : Anonymous_e__Union_, @extra_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    def initialize(@cbSize : UInt32, @pszOID : Win32cr::Foundation::PSTR, @pwszName : Win32cr::Foundation::PWSTR, @dwGroupId : UInt32, @anonymous : Anonymous_e__Union_, @extra_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5867,9 +6973,9 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CERT_ISSUER_SERIAL_NUMBER
-    property issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -5882,9 +6988,9 @@ module Win32cr::Security::Cryptography
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property issuer_serial_number : Win32cr::Security::Cryptography::CERT_ISSUER_SERIAL_NUMBER
-    property key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property hash_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@issuer_serial_number : Win32cr::Security::Cryptography::CERT_ISSUER_SERIAL_NUMBER, @key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @hash_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property hash_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@issuer_serial_number : Win32cr::Security::Cryptography::CERT_ISSUER_SERIAL_NUMBER, @key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @hash_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
     end
 
@@ -5924,10 +7030,10 @@ module Win32cr::Security::Cryptography
     property cSigners : UInt32
     property rgSigners : Win32cr::Security::Cryptography::CMSG_SIGNER_ENCODE_INFO*
     property cCertEncoded : UInt32
-    property rgCertEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property rgCertEncoded : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
     property cCrlEncoded : UInt32
-    property rgCrlEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@cbSize : UInt32, @cSigners : UInt32, @rgSigners : Win32cr::Security::Cryptography::CMSG_SIGNER_ENCODE_INFO*, @cCertEncoded : UInt32, @rgCertEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @cCrlEncoded : UInt32, @rgCrlEncoded : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rgCrlEncoded : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@cbSize : UInt32, @cSigners : UInt32, @rgSigners : Win32cr::Security::Cryptography::CMSG_SIGNER_ENCODE_INFO*, @cCertEncoded : UInt32, @rgCertEncoded : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, @cCrlEncoded : UInt32, @rgCrlEncoded : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
@@ -5977,7 +7083,7 @@ module Win32cr::Security::Cryptography
     property dwKeySpec : UInt32
     property dwKeyChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_OPTION
     property anonymous : Anonymous_e__Union_
-    property user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property user_keying_material : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property cRecipientEncryptedKeys : UInt32
     property rgpRecipientEncryptedKeys : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO**
 
@@ -5990,7 +7096,7 @@ module Win32cr::Security::Cryptography
     end
     end
 
-    def initialize(@cbSize : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @pvKeyEncryptionAuxInfo : Void*, @key_wrap_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @pvKeyWrapAuxInfo : Void*, @hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, @dwKeySpec : UInt32, @dwKeyChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_OPTION, @anonymous : Anonymous_e__Union_, @user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cRecipientEncryptedKeys : UInt32, @rgpRecipientEncryptedKeys : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO**)
+    def initialize(@cbSize : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @pvKeyEncryptionAuxInfo : Void*, @key_wrap_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @pvKeyWrapAuxInfo : Void*, @hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, @dwKeySpec : UInt32, @dwKeyChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_OPTION, @anonymous : Anonymous_e__Union_, @user_keying_material : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cRecipientEncryptedKeys : UInt32, @rgpRecipientEncryptedKeys : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO**)
     end
   end
 
@@ -6002,7 +7108,7 @@ module Win32cr::Security::Cryptography
     property hCryptProv : LibC::UIntPtrT
     property dwKeyChoice : UInt32
     property anonymous : Anonymous_e__Union_
-    property key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property date : Win32cr::Foundation::FILETIME
     property pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*
 
@@ -6015,7 +7121,7 @@ module Win32cr::Security::Cryptography
     end
     end
 
-    def initialize(@cbSize : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @pvKeyEncryptionAuxInfo : Void*, @hCryptProv : LibC::UIntPtrT, @dwKeyChoice : UInt32, @anonymous : Anonymous_e__Union_, @key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @date : Win32cr::Foundation::FILETIME, @pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*)
+    def initialize(@cbSize : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @pvKeyEncryptionAuxInfo : Void*, @hCryptProv : LibC::UIntPtrT, @dwKeyChoice : UInt32, @anonymous : Anonymous_e__Union_, @key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @date : Win32cr::Foundation::FILETIME, @pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*)
     end
   end
 
@@ -6102,14 +7208,14 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CMSG_SIGNER_INFO
     property dwVersion : UInt32
-    property issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
     property hash_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property encrypted_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property encrypted_hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property auth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES
     property unauth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES
-    def initialize(@dwVersion : UInt32, @issuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hash_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @auth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES, @unauth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES)
+    def initialize(@dwVersion : UInt32, @issuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hash_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @auth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES, @unauth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES)
     end
   end
 
@@ -6119,10 +7225,10 @@ module Win32cr::Security::Cryptography
     property signer_id : Win32cr::Security::Cryptography::CERT_ID
     property hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
     property hash_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property encrypted_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property encrypted_hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property auth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES
     property unauth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES
-    def initialize(@dwVersion : UInt32, @signer_id : Win32cr::Security::Cryptography::CERT_ID, @hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hash_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_hash : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @auth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES, @unauth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES)
+    def initialize(@dwVersion : UInt32, @signer_id : Win32cr::Security::Cryptography::CERT_ID, @hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hash_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_hash : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @auth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES, @unauth_attrs : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES)
     end
   end
 
@@ -6131,18 +7237,18 @@ module Win32cr::Security::Cryptography
     property dwVersion : UInt32
     property recipient_id : Win32cr::Security::Cryptography::CERT_ID
     property key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@dwVersion : UInt32, @recipient_id : Win32cr::Security::Cryptography::CERT_ID, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@dwVersion : UInt32, @recipient_id : Win32cr::Security::Cryptography::CERT_ID, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
   @[Extern]
   struct CMSG_RECIPIENT_ENCRYPTED_KEY_INFO
     property recipient_id : Win32cr::Security::Cryptography::CERT_ID
-    property encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property date : Win32cr::Foundation::FILETIME
     property pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*
-    def initialize(@recipient_id : Win32cr::Security::Cryptography::CERT_ID, @encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @date : Win32cr::Foundation::FILETIME, @pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*)
+    def initialize(@recipient_id : Win32cr::Security::Cryptography::CERT_ID, @encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @date : Win32cr::Foundation::FILETIME, @pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*)
     end
   end
 
@@ -6151,7 +7257,7 @@ module Win32cr::Security::Cryptography
     property dwVersion : UInt32
     property dwOriginatorChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ORIGINATOR
     property anonymous : Anonymous_e__Union_
-    property user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property user_keying_material : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
     property cRecipientEncryptedKeys : UInt32
     property rgpRecipientEncryptedKeys : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCRYPTED_KEY_INFO**
@@ -6165,19 +7271,19 @@ module Win32cr::Security::Cryptography
     end
     end
 
-    def initialize(@dwVersion : UInt32, @dwOriginatorChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ORIGINATOR, @anonymous : Anonymous_e__Union_, @user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @cRecipientEncryptedKeys : UInt32, @rgpRecipientEncryptedKeys : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCRYPTED_KEY_INFO**)
+    def initialize(@dwVersion : UInt32, @dwOriginatorChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ORIGINATOR, @anonymous : Anonymous_e__Union_, @user_keying_material : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @cRecipientEncryptedKeys : UInt32, @rgpRecipientEncryptedKeys : Win32cr::Security::Cryptography::CMSG_RECIPIENT_ENCRYPTED_KEY_INFO**)
     end
   end
 
   @[Extern]
   struct CMSG_MAIL_LIST_RECIPIENT_INFO
     property dwVersion : UInt32
-    property key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property date : Win32cr::Foundation::FILETIME
     property pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*
-    def initialize(@dwVersion : UInt32, @key_id : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @date : Win32cr::Foundation::FILETIME, @pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*)
+    def initialize(@dwVersion : UInt32, @key_id : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @date : Win32cr::Foundation::FILETIME, @pOtherAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE_TYPE_VALUE*)
     end
   end
 
@@ -6301,8 +7407,8 @@ module Win32cr::Security::Cryptography
   struct CMSG_CTRL_ADD_SIGNER_UNAUTH_ATTR_PARA
     property cbSize : UInt32
     property dwSignerIndex : UInt32
-    property blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@cbSize : UInt32, @dwSignerIndex : UInt32, @blob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property blob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@cbSize : UInt32, @dwSignerIndex : UInt32, @blob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -6351,17 +7457,17 @@ module Win32cr::Security::Cryptography
     property cbSize : UInt32
     property dwRecipientIndex : UInt32
     property key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property dwFlags : UInt32
-    def initialize(@cbSize : UInt32, @dwRecipientIndex : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwFlags : UInt32)
+    def initialize(@cbSize : UInt32, @dwRecipientIndex : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @dwFlags : UInt32)
     end
   end
 
   @[Extern]
   struct CMSG_KEY_AGREE_KEY_ENCRYPT_INFO
     property cbSize : UInt32
-    property encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@cbSize : UInt32, @encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@cbSize : UInt32, @encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -6370,7 +7476,7 @@ module Win32cr::Security::Cryptography
     property cbSize : UInt32
     property dwRecipientIndex : UInt32
     property key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property user_keying_material : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property dwOriginatorChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ORIGINATOR
     property anonymous : Anonymous_e__Union_
     property cKeyAgreeKeyEncryptInfo : UInt32
@@ -6386,7 +7492,7 @@ module Win32cr::Security::Cryptography
     end
     end
 
-    def initialize(@cbSize : UInt32, @dwRecipientIndex : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @user_keying_material : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwOriginatorChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ORIGINATOR, @anonymous : Anonymous_e__Union_, @cKeyAgreeKeyEncryptInfo : UInt32, @rgpKeyAgreeKeyEncryptInfo : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_KEY_ENCRYPT_INFO**, @dwFlags : UInt32)
+    def initialize(@cbSize : UInt32, @dwRecipientIndex : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @user_keying_material : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @dwOriginatorChoice : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_ORIGINATOR, @anonymous : Anonymous_e__Union_, @cKeyAgreeKeyEncryptInfo : UInt32, @rgpKeyAgreeKeyEncryptInfo : Win32cr::Security::Cryptography::CMSG_KEY_AGREE_KEY_ENCRYPT_INFO**, @dwFlags : UInt32)
     end
   end
 
@@ -6395,9 +7501,9 @@ module Win32cr::Security::Cryptography
     property cbSize : UInt32
     property dwRecipientIndex : UInt32
     property key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property dwFlags : UInt32
-    def initialize(@cbSize : UInt32, @dwRecipientIndex : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_key : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwFlags : UInt32)
+    def initialize(@cbSize : UInt32, @dwRecipientIndex : UInt32, @key_encryption_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @encrypted_key : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @dwFlags : UInt32)
     end
   end
 
@@ -6418,23 +7524,23 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CERT_CONTEXT
-    property dwCertEncodingType : UInt32
+    property dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE
     property pbCertEncoded : UInt8*
     property cbCertEncoded : UInt32
     property pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*
     property hCertStore : Win32cr::Security::Cryptography::HCERTSTORE
-    def initialize(@dwCertEncodingType : UInt32, @pbCertEncoded : UInt8*, @cbCertEncoded : UInt32, @pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*, @hCertStore : Win32cr::Security::Cryptography::HCERTSTORE)
+    def initialize(@dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, @pbCertEncoded : UInt8*, @cbCertEncoded : UInt32, @pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*, @hCertStore : Win32cr::Security::Cryptography::HCERTSTORE)
     end
   end
 
   @[Extern]
   struct CRL_CONTEXT
-    property dwCertEncodingType : UInt32
+    property dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE
     property pbCrlEncoded : UInt8*
     property cbCrlEncoded : UInt32
     property pCrlInfo : Win32cr::Security::Cryptography::CRL_INFO*
     property hCertStore : Win32cr::Security::Cryptography::HCERTSTORE
-    def initialize(@dwCertEncodingType : UInt32, @pbCrlEncoded : UInt8*, @cbCrlEncoded : UInt32, @pCrlInfo : Win32cr::Security::Cryptography::CRL_INFO*, @hCertStore : Win32cr::Security::Cryptography::HCERTSTORE)
+    def initialize(@dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, @pbCrlEncoded : UInt8*, @cbCrlEncoded : UInt32, @pCrlInfo : Win32cr::Security::Cryptography::CRL_INFO*, @hCertStore : Win32cr::Security::Cryptography::HCERTSTORE)
     end
   end
 
@@ -6515,6 +7621,16 @@ module Win32cr::Security::Cryptography
     property anonymous1 : Anonymous1_e__Union_
     property anonymous2 : Anonymous2_e__Union_
 
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property hKeyBase : Win32cr::System::Registry::HKEY
+    property pvBase : Void*
+    def initialize(@hKeyBase : Win32cr::System::Registry::HKEY, @pvBase : Void*)
+    end
+    end
+
+
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
@@ -6522,16 +7638,6 @@ module Win32cr::Security::Cryptography
     property pszSystemStore : Win32cr::Foundation::PSTR
     property pwszSystemStore : Win32cr::Foundation::PWSTR
     def initialize(@pvSystemStore : Void*, @pszSystemStore : Win32cr::Foundation::PSTR, @pwszSystemStore : Win32cr::Foundation::PWSTR)
-    end
-    end
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property hKeyBase : Win32cr::System::Registry::HKEY
-    property pvBase : Void*
-    def initialize(@hKeyBase : Win32cr::System::Registry::HKEY, @pvBase : Void*)
     end
     end
 
@@ -6597,8 +7703,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CTL_ANY_SUBJECT_INFO
     property subject_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property subject_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@subject_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @subject_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property subject_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@subject_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @subject_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -6606,9 +7712,9 @@ module Win32cr::Security::Cryptography
   struct CTL_FIND_USAGE_PARA
     property cbSize : UInt32
     property subject_usage : Win32cr::Security::Cryptography::CTL_USAGE
-    property list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property list_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pSigner : Win32cr::Security::Cryptography::CERT_INFO*
-    def initialize(@cbSize : UInt32, @subject_usage : Win32cr::Security::Cryptography::CTL_USAGE, @list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pSigner : Win32cr::Security::Cryptography::CERT_INFO*)
+    def initialize(@cbSize : UInt32, @subject_usage : Win32cr::Security::Cryptography::CTL_USAGE, @list_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pSigner : Win32cr::Security::Cryptography::CERT_INFO*)
     end
   end
 
@@ -6646,22 +7752,22 @@ module Win32cr::Security::Cryptography
     property pszOpenStoreProvider : Win32cr::Foundation::PSTR
     property dwOpenEncodingType : UInt32
     property dwOpenFlags : UInt32
-    property open_parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property open_parameters : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property dwFlags : UInt32
     property dwPriority : UInt32
-    def initialize(@cbSize : UInt32, @pszOpenStoreProvider : Win32cr::Foundation::PSTR, @dwOpenEncodingType : UInt32, @dwOpenFlags : UInt32, @open_parameters : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @dwFlags : UInt32, @dwPriority : UInt32)
+    def initialize(@cbSize : UInt32, @pszOpenStoreProvider : Win32cr::Foundation::PSTR, @dwOpenEncodingType : UInt32, @dwOpenFlags : UInt32, @open_parameters : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @dwFlags : UInt32, @dwPriority : UInt32)
     end
   end
 
   @[Extern]
   struct CTL_VERIFY_USAGE_PARA
     property cbSize : UInt32
-    property list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property list_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property cCtlStore : UInt32
     property rghCtlStore : Win32cr::Security::Cryptography::HCERTSTORE*
     property cSignerStore : UInt32
     property rghSignerStore : Win32cr::Security::Cryptography::HCERTSTORE*
-    def initialize(@cbSize : UInt32, @list_identifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cCtlStore : UInt32, @rghCtlStore : Win32cr::Security::Cryptography::HCERTSTORE*, @cSignerStore : UInt32, @rghSignerStore : Win32cr::Security::Cryptography::HCERTSTORE*)
+    def initialize(@cbSize : UInt32, @list_identifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cCtlStore : UInt32, @rghCtlStore : Win32cr::Security::Cryptography::HCERTSTORE*, @cSignerStore : UInt32, @rghSignerStore : Win32cr::Security::Cryptography::HCERTSTORE*)
     end
   end
 
@@ -6715,9 +7821,9 @@ module Win32cr::Security::Cryptography
 
   @[Extern]
   struct CRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO
-    property cert_sign_hash_cng_alg_prop_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property cert_issuer_pub_key_bit_length_prop_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@cert_sign_hash_cng_alg_prop_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cert_issuer_pub_key_bit_length_prop_data : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property cert_sign_hash_cng_alg_prop_data : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property cert_issuer_pub_key_bit_length_prop_data : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@cert_sign_hash_cng_alg_prop_data : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cert_issuer_pub_key_bit_length_prop_data : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -6839,17 +7945,17 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERT_CHAIN
     property cCerts : UInt32
-    property certs : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property certs : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
     property keyLocatorInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO
-    def initialize(@cCerts : UInt32, @certs : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @keyLocatorInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO)
+    def initialize(@cCerts : UInt32, @certs : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, @keyLocatorInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO)
     end
   end
 
   @[Extern]
   struct CRYPT_BLOB_ARRAY
     property cBlob : UInt32
-    property rgBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@cBlob : UInt32, @rgBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rgBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@cBlob : UInt32, @rgBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
@@ -6928,8 +8034,8 @@ module Win32cr::Security::Cryptography
     property fProxyCacheRetrieval : Win32cr::Foundation::BOOL
     property dwHttpStatusCode : UInt32
     property ppwszErrorResponseHeaders : Win32cr::Foundation::PWSTR*
-    property ppErrorContentBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**
-    def initialize(@cbSize : UInt32, @pLastSyncTime : Win32cr::Foundation::FILETIME*, @dwMaxUrlRetrievalByteCount : UInt32, @pPreFetchInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_PRE_FETCH_INFO*, @pFlushInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_FLUSH_INFO*, @ppResponseInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_RESPONSE_INFO**, @pwszCacheFileNamePrefix : Win32cr::Foundation::PWSTR, @pftCacheResync : Win32cr::Foundation::FILETIME*, @fProxyCacheRetrieval : Win32cr::Foundation::BOOL, @dwHttpStatusCode : UInt32, @ppwszErrorResponseHeaders : Win32cr::Foundation::PWSTR*, @ppErrorContentBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB**)
+    property ppErrorContentBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB**
+    def initialize(@cbSize : UInt32, @pLastSyncTime : Win32cr::Foundation::FILETIME*, @dwMaxUrlRetrievalByteCount : UInt32, @pPreFetchInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_PRE_FETCH_INFO*, @pFlushInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_FLUSH_INFO*, @ppResponseInfo : Win32cr::Security::Cryptography::CRYPTNET_URL_CACHE_RESPONSE_INFO**, @pwszCacheFileNamePrefix : Win32cr::Foundation::PWSTR, @pftCacheResync : Win32cr::Foundation::FILETIME*, @fProxyCacheRetrieval : Win32cr::Foundation::BOOL, @dwHttpStatusCode : UInt32, @ppwszErrorResponseHeaders : Win32cr::Foundation::PWSTR*, @ppErrorContentBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB**)
     end
   end
 
@@ -6975,8 +8081,8 @@ module Win32cr::Security::Cryptography
     property pLastSyncTime : Win32cr::Foundation::FILETIME*
     property pMaxAgeTime : Win32cr::Foundation::FILETIME*
     property pChainPara : Win32cr::Security::Cryptography::CERT_REVOCATION_CHAIN_PARA*
-    property pDeltaCrlIndicator : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@cbSize : UInt32, @iDeltaCrlIndicator : Int32, @pftCacheResync : Win32cr::Foundation::FILETIME*, @pLastSyncTime : Win32cr::Foundation::FILETIME*, @pMaxAgeTime : Win32cr::Foundation::FILETIME*, @pChainPara : Win32cr::Security::Cryptography::CERT_REVOCATION_CHAIN_PARA*, @pDeltaCrlIndicator : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property pDeltaCrlIndicator : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@cbSize : UInt32, @iDeltaCrlIndicator : Int32, @pftCacheResync : Win32cr::Foundation::FILETIME*, @pLastSyncTime : Win32cr::Foundation::FILETIME*, @pMaxAgeTime : Win32cr::Foundation::FILETIME*, @pChainPara : Win32cr::Security::Cryptography::CERT_REVOCATION_CHAIN_PARA*, @pDeltaCrlIndicator : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
@@ -7091,7 +8197,14 @@ module Win32cr::Security::Cryptography
   struct CERT_CHAIN_PARA
     property cbSize : UInt32
     property requested_usage : Win32cr::Security::Cryptography::CERT_USAGE_MATCH
-    def initialize(@cbSize : UInt32, @requested_usage : Win32cr::Security::Cryptography::CERT_USAGE_MATCH)
+    property requested_issuance_policy : Win32cr::Security::Cryptography::CERT_USAGE_MATCH
+    property dwUrlRetrievalTimeout : UInt32
+    property fCheckRevocationFreshnessTime : Win32cr::Foundation::BOOL
+    property dwRevocationFreshnessTime : UInt32
+    property pftCacheResync : Win32cr::Foundation::FILETIME*
+    property pStrongSignPara : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*
+    property dwStrongSignFlags : UInt32
+    def initialize(@cbSize : UInt32, @requested_usage : Win32cr::Security::Cryptography::CERT_USAGE_MATCH, @requested_issuance_policy : Win32cr::Security::Cryptography::CERT_USAGE_MATCH, @dwUrlRetrievalTimeout : UInt32, @fCheckRevocationFreshnessTime : Win32cr::Foundation::BOOL, @dwRevocationFreshnessTime : UInt32, @pftCacheResync : Win32cr::Foundation::FILETIME*, @pStrongSignPara : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, @dwStrongSignFlags : UInt32)
     end
   end
 
@@ -7125,10 +8238,10 @@ module Win32cr::Security::Cryptography
     property dwKeySpec : UInt32
     property dwAcquirePrivateKeyFlags : UInt32
     property cIssuer : UInt32
-    property rgIssuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property rgIssuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
     property pfnFindCallback : Win32cr::Security::Cryptography::PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK
     property pvFindArg : Void*
-    def initialize(@cbSize : UInt32, @pszUsageIdentifier : Win32cr::Foundation::PSTR, @dwKeySpec : UInt32, @dwAcquirePrivateKeyFlags : UInt32, @cIssuer : UInt32, @rgIssuer : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @pfnFindCallback : Win32cr::Security::Cryptography::PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK, @pvFindArg : Void*)
+    def initialize(@cbSize : UInt32, @pszUsageIdentifier : Win32cr::Foundation::PSTR, @dwKeySpec : UInt32, @dwAcquirePrivateKeyFlags : UInt32, @cIssuer : UInt32, @rgIssuer : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, @pfnFindCallback : Win32cr::Security::Cryptography::PFN_CERT_CHAIN_FIND_BY_ISSUER_CALLBACK, @pvFindArg : Void*)
     end
   end
 
@@ -7255,6 +8368,17 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
+  struct CT_EXTRA_CERT_CHAIN_POLICY_STATUS
+    property cbSize : UInt32
+    property lErrorStatus : Int32
+    property lErrorSubStatus : Int32
+    property cEntries : UInt32
+    property cValidated : UInt32
+    def initialize(@cbSize : UInt32, @lErrorStatus : Int32, @lErrorSubStatus : Int32, @cEntries : UInt32, @cValidated : UInt32)
+    end
+  end
+
+  @[Extern]
   struct CRYPT_PKCS12_PBE_PARAMS
     property iIterations : Int32
     property cbSalt : UInt32
@@ -7316,13 +8440,13 @@ module Win32cr::Security::Cryptography
   struct CRYPT_TIMESTAMP_REQUEST
     property dwVersion : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_VERSION
     property hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property hashed_message : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property hashed_message : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pszTSAPolicyId : Win32cr::Foundation::PSTR
-    property nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property nonce : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property fCertReq : Win32cr::Foundation::BOOL
     property cExtension : UInt32
     property rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
-    def initialize(@dwVersion : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_VERSION, @hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hashed_message : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pszTSAPolicyId : Win32cr::Foundation::PSTR, @nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @fCertReq : Win32cr::Foundation::BOOL, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
+    def initialize(@dwVersion : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_VERSION, @hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hashed_message : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pszTSAPolicyId : Win32cr::Foundation::PSTR, @nonce : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @fCertReq : Win32cr::Foundation::BOOL, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
     end
   end
 
@@ -7332,8 +8456,8 @@ module Win32cr::Security::Cryptography
     property cFreeText : UInt32
     property rgFreeText : Win32cr::Foundation::PWSTR*
     property failure_info : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB
-    property content_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@dwStatus : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_RESPONSE_STATUS, @cFreeText : UInt32, @rgFreeText : Win32cr::Foundation::PWSTR*, @failure_info : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @content_info : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property content_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@dwStatus : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_RESPONSE_STATUS, @cFreeText : UInt32, @rgFreeText : Win32cr::Foundation::PWSTR*, @failure_info : Win32cr::Security::Cryptography::CRYPT_BIT_BLOB, @content_info : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -7351,16 +8475,16 @@ module Win32cr::Security::Cryptography
     property dwVersion : UInt32
     property pszTSAPolicyId : Win32cr::Foundation::PSTR
     property hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER
-    property hashed_message : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property hashed_message : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property ftTime : Win32cr::Foundation::FILETIME
     property pvAccuracy : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_ACCURACY*
     property fOrdering : Win32cr::Foundation::BOOL
-    property nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    property tsa : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property nonce : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    property tsa : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property cExtension : UInt32
     property rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
-    def initialize(@dwVersion : UInt32, @pszTSAPolicyId : Win32cr::Foundation::PSTR, @hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hashed_message : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @serial_number : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @ftTime : Win32cr::Foundation::FILETIME, @pvAccuracy : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_ACCURACY*, @fOrdering : Win32cr::Foundation::BOOL, @nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @tsa : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
+    def initialize(@dwVersion : UInt32, @pszTSAPolicyId : Win32cr::Foundation::PSTR, @hash_algorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER, @hashed_message : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @serial_number : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @ftTime : Win32cr::Foundation::FILETIME, @pvAccuracy : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_ACCURACY*, @fOrdering : Win32cr::Foundation::BOOL, @nonce : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @tsa : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
     end
   end
 
@@ -7377,10 +8501,10 @@ module Win32cr::Security::Cryptography
   struct CRYPT_TIMESTAMP_PARA
     property pszTSAPolicyId : Win32cr::Foundation::PSTR
     property fRequestCerts : Win32cr::Foundation::BOOL
-    property nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property nonce : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property cExtension : UInt32
     property rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*
-    def initialize(@pszTSAPolicyId : Win32cr::Foundation::PSTR, @fRequestCerts : Win32cr::Foundation::BOOL, @nonce : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
+    def initialize(@pszTSAPolicyId : Win32cr::Foundation::PSTR, @fRequestCerts : Win32cr::Foundation::BOOL, @nonce : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cExtension : UInt32, @rgExtension : Win32cr::Security::Cryptography::CERT_EXTENSION*)
     end
   end
 
@@ -7419,6 +8543,194 @@ module Win32cr::Security::Cryptography
     property pfnStreamOutput : Win32cr::Security::Cryptography::PFNCryptStreamOutputCallbackEx
     property pvCallbackCtxt : Void*
     def initialize(@pfnStreamOutput : Win32cr::Security::Cryptography::PFNCryptStreamOutputCallbackEx, @pvCallbackCtxt : Void*)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_ATTR_AUTHCODE
+    property cbSize : UInt32
+    property fCommercial : Win32cr::Foundation::BOOL
+    property fIndividual : Win32cr::Foundation::BOOL
+    property pwszName : Win32cr::Foundation::PWSTR
+    property pwszInfo : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @fCommercial : Win32cr::Foundation::BOOL, @fIndividual : Win32cr::Foundation::BOOL, @pwszName : Win32cr::Foundation::PWSTR, @pwszInfo : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_BLOB_INFO
+    property cbSize : UInt32
+    property pGuidSubject : LibC::GUID*
+    property cbBlob : UInt32
+    property pbBlob : UInt8*
+    property pwszDisplayName : Win32cr::Foundation::PWSTR
+    def initialize(@cbSize : UInt32, @pGuidSubject : LibC::GUID*, @cbBlob : UInt32, @pbBlob : UInt8*, @pwszDisplayName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_CERT_STORE_INFO
+    property cbSize : UInt32
+    property pSigningCert : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    property dwCertPolicy : Win32cr::Security::Cryptography::SIGNER_CERT_POLICY
+    property hCertStore : Win32cr::Security::Cryptography::HCERTSTORE
+    def initialize(@cbSize : UInt32, @pSigningCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, @dwCertPolicy : Win32cr::Security::Cryptography::SIGNER_CERT_POLICY, @hCertStore : Win32cr::Security::Cryptography::HCERTSTORE)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_SPC_CHAIN_INFO
+    property cbSize : UInt32
+    property pwszSpcFile : Win32cr::Foundation::PWSTR
+    property dwCertPolicy : UInt32
+    property hCertStore : Win32cr::Security::Cryptography::HCERTSTORE
+    def initialize(@cbSize : UInt32, @pwszSpcFile : Win32cr::Foundation::PWSTR, @dwCertPolicy : UInt32, @hCertStore : Win32cr::Security::Cryptography::HCERTSTORE)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_CERT
+    property cbSize : UInt32
+    property dwCertChoice : Win32cr::Security::Cryptography::SIGNER_CERT_CHOICE
+    property anonymous : Anonymous_e__Union_
+    property hwnd : Win32cr::Foundation::HWND
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pwszSpcFile : Win32cr::Foundation::PWSTR
+    property pCertStoreInfo : Win32cr::Security::Cryptography::SIGNER_CERT_STORE_INFO*
+    property pSpcChainInfo : Win32cr::Security::Cryptography::SIGNER_SPC_CHAIN_INFO*
+    def initialize(@pwszSpcFile : Win32cr::Foundation::PWSTR, @pCertStoreInfo : Win32cr::Security::Cryptography::SIGNER_CERT_STORE_INFO*, @pSpcChainInfo : Win32cr::Security::Cryptography::SIGNER_SPC_CHAIN_INFO*)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @dwCertChoice : Win32cr::Security::Cryptography::SIGNER_CERT_CHOICE, @anonymous : Anonymous_e__Union_, @hwnd : Win32cr::Foundation::HWND)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_CONTEXT
+    property cbSize : UInt32
+    property cbBlob : UInt32
+    property pbBlob : UInt8*
+    def initialize(@cbSize : UInt32, @cbBlob : UInt32, @pbBlob : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_DIGEST_SIGN_INFO
+    property cbSize : UInt32
+    property dwDigestSignChoice : UInt32
+    property anonymous : Anonymous_e__Union_
+    property pMetadataBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    property dwReserved : UInt32
+    property dwReserved2 : UInt32
+    property dwReserved3 : UInt32
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pfnAuthenticodeDigestSign : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN
+    property pfnAuthenticodeDigestSignWithFileHandle : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE
+    property pfnAuthenticodeDigestSignEx : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN_EX
+    property pfnAuthenticodeDigestSignExWithFileHandle : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE
+    def initialize(@pfnAuthenticodeDigestSign : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN, @pfnAuthenticodeDigestSignWithFileHandle : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN_WITHFILEHANDLE, @pfnAuthenticodeDigestSignEx : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN_EX, @pfnAuthenticodeDigestSignExWithFileHandle : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN_EX_WITHFILEHANDLE)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @dwDigestSignChoice : UInt32, @anonymous : Anonymous_e__Union_, @pMetadataBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, @dwReserved : UInt32, @dwReserved2 : UInt32, @dwReserved3 : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_DIGEST_SIGN_INFO_V1
+    property cbSize : UInt32
+    property pfnAuthenticodeDigestSign : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN
+    property pMetadataBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@cbSize : UInt32, @pfnAuthenticodeDigestSign : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN, @pMetadataBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_DIGEST_SIGN_INFO_V2
+    property cbSize : UInt32
+    property pfnAuthenticodeDigestSign : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN
+    property pfnAuthenticodeDigestSignEx : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN_EX
+    property pMetadataBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@cbSize : UInt32, @pfnAuthenticodeDigestSign : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN, @pfnAuthenticodeDigestSignEx : Win32cr::Security::Cryptography::PFN_AUTHENTICODE_DIGEST_SIGN_EX, @pMetadataBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_FILE_INFO
+    property cbSize : UInt32
+    property pwszFileName : Win32cr::Foundation::PWSTR
+    property hFile : Win32cr::Foundation::HANDLE
+    def initialize(@cbSize : UInt32, @pwszFileName : Win32cr::Foundation::PWSTR, @hFile : Win32cr::Foundation::HANDLE)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_PROVIDER_INFO
+    property cbSize : UInt32
+    property pwszProviderName : Win32cr::Foundation::PWSTR
+    property dwProviderType : UInt32
+    property dwKeySpec : UInt32
+    property dwPvkChoice : Win32cr::Security::Cryptography::SIGNER_PRIVATE_KEY_CHOICE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pwszPvkFileName : Win32cr::Foundation::PWSTR
+    property pwszKeyContainer : Win32cr::Foundation::PWSTR
+    def initialize(@pwszPvkFileName : Win32cr::Foundation::PWSTR, @pwszKeyContainer : Win32cr::Foundation::PWSTR)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @pwszProviderName : Win32cr::Foundation::PWSTR, @dwProviderType : UInt32, @dwKeySpec : UInt32, @dwPvkChoice : Win32cr::Security::Cryptography::SIGNER_PRIVATE_KEY_CHOICE, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_SIGNATURE_INFO
+    property cbSize : UInt32
+    property algidHash : Win32cr::Security::Cryptography::ALG_ID
+    property dwAttrChoice : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_ATTRIBUTE_CHOICE
+    property anonymous : Anonymous_e__Union_
+    property psAuthenticated : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*
+    property psUnauthenticated : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pAttrAuthcode : Win32cr::Security::Cryptography::SIGNER_ATTR_AUTHCODE*
+    def initialize(@pAttrAuthcode : Win32cr::Security::Cryptography::SIGNER_ATTR_AUTHCODE*)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @algidHash : Win32cr::Security::Cryptography::ALG_ID, @dwAttrChoice : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_ATTRIBUTE_CHOICE, @anonymous : Anonymous_e__Union_, @psAuthenticated : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, @psUnauthenticated : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*)
+    end
+  end
+
+  @[Extern]
+  struct SIGNER_SUBJECT_INFO
+    property cbSize : UInt32
+    property pdwIndex : UInt32*
+    property dwSubjectChoice : Win32cr::Security::Cryptography::SIGNER_SUBJECT_CHOICE
+    property anonymous : Anonymous_e__Union_
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property pSignerFileInfo : Win32cr::Security::Cryptography::SIGNER_FILE_INFO*
+    property pSignerBlobInfo : Win32cr::Security::Cryptography::SIGNER_BLOB_INFO*
+    def initialize(@pSignerFileInfo : Win32cr::Security::Cryptography::SIGNER_FILE_INFO*, @pSignerBlobInfo : Win32cr::Security::Cryptography::SIGNER_BLOB_INFO*)
+    end
+    end
+
+    def initialize(@cbSize : UInt32, @pdwIndex : UInt32*, @dwSubjectChoice : Win32cr::Security::Cryptography::SIGNER_SUBJECT_CHOICE, @anonymous : Anonymous_e__Union_)
     end
   end
 
@@ -7625,10 +8937,10 @@ module Win32cr::Security::Cryptography
     property wszUri : Win32cr::Foundation::PWSTR
     property wszType : Win32cr::Foundation::PWSTR
     property digest_method : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM
-    property digest_value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property digest_value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property cTransform : UInt32
     property rgTransform : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*
-    def initialize(@cbSize : UInt32, @hReference : Void*, @wszId : Win32cr::Foundation::PWSTR, @wszUri : Win32cr::Foundation::PWSTR, @wszType : Win32cr::Foundation::PWSTR, @digest_method : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM, @digest_value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @cTransform : UInt32, @rgTransform : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*)
+    def initialize(@cbSize : UInt32, @hReference : Void*, @wszId : Win32cr::Foundation::PWSTR, @wszUri : Win32cr::Foundation::PWSTR, @wszType : Win32cr::Foundation::PWSTR, @digest_method : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM, @digest_value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @cTransform : UInt32, @rgTransform : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*)
     end
   end
 
@@ -7672,11 +8984,11 @@ module Win32cr::Security::Cryptography
     property hSignature : Void*
     property wszId : Win32cr::Foundation::PWSTR
     property signed_info : Win32cr::Security::Cryptography::CRYPT_XML_SIGNED_INFO
-    property signature_value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property signature_value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property pKeyInfo : Win32cr::Security::Cryptography::CRYPT_XML_KEY_INFO*
     property cObject : UInt32
     property rgpObject : Win32cr::Security::Cryptography::CRYPT_XML_OBJECT**
-    def initialize(@cbSize : UInt32, @hSignature : Void*, @wszId : Win32cr::Foundation::PWSTR, @signed_info : Win32cr::Security::Cryptography::CRYPT_XML_SIGNED_INFO, @signature_value : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @pKeyInfo : Win32cr::Security::Cryptography::CRYPT_XML_KEY_INFO*, @cObject : UInt32, @rgpObject : Win32cr::Security::Cryptography::CRYPT_XML_OBJECT**)
+    def initialize(@cbSize : UInt32, @hSignature : Void*, @wszId : Win32cr::Foundation::PWSTR, @signed_info : Win32cr::Security::Cryptography::CRYPT_XML_SIGNED_INFO, @signature_value : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @pKeyInfo : Win32cr::Security::Cryptography::CRYPT_XML_KEY_INFO*, @cObject : UInt32, @rgpObject : Win32cr::Security::Cryptography::CRYPT_XML_OBJECT**)
     end
   end
 
@@ -7695,13 +9007,13 @@ module Win32cr::Security::Cryptography
   struct CRYPT_XML_KEYINFO_PARAM
     property wszId : Win32cr::Foundation::PWSTR
     property wszKeyName : Win32cr::Foundation::PWSTR
-    property ski : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
+    property ski : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
     property wszSubjectName : Win32cr::Foundation::PWSTR
     property cCertificate : UInt32
-    property rgCertificate : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
+    property rgCertificate : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
     property cCRL : UInt32
-    property rgCRL : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@wszId : Win32cr::Foundation::PWSTR, @wszKeyName : Win32cr::Foundation::PWSTR, @ski : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB, @wszSubjectName : Win32cr::Foundation::PWSTR, @cCertificate : UInt32, @rgCertificate : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, @cCRL : UInt32, @rgCRL : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rgCRL : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@wszId : Win32cr::Foundation::PWSTR, @wszKeyName : Win32cr::Foundation::PWSTR, @ski : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB, @wszSubjectName : Win32cr::Foundation::PWSTR, @cCertificate : UInt32, @rgCertificate : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, @cCRL : UInt32, @rgCRL : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
@@ -7808,8 +9120,8 @@ module Win32cr::Security::Cryptography
   struct ENDPOINTADDRESS
     property serviceUrl : Win32cr::Foundation::PWSTR
     property policyUrl : Win32cr::Foundation::PWSTR
-    property rawCertificate : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB
-    def initialize(@serviceUrl : Win32cr::Foundation::PWSTR, @policyUrl : Win32cr::Foundation::PWSTR, @rawCertificate : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB)
+    property rawCertificate : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB
+    def initialize(@serviceUrl : Win32cr::Foundation::PWSTR, @policyUrl : Win32cr::Foundation::PWSTR, @rawCertificate : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB)
     end
   end
 
@@ -7826,8 +9138,8 @@ module Win32cr::Security::Cryptography
   @[Extern]
   struct CERTIFICATE_CHAIN_BLOB
     property certCount : UInt32
-    property rawCertificates : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*
-    def initialize(@certCount : UInt32, @rawCertificates : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*)
+    property rawCertificates : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*
+    def initialize(@certCount : UInt32, @rawCertificates : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*)
     end
   end
 
@@ -7866,30 +9178,689 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
-  record ICertSrvSetupKeyInformationVtbl,
+  struct BCRYPT_ECC_PARAMETER_HEADER
+    property dwVersion : UInt32
+    property dwCurveType : Win32cr::Security::Cryptography::ECC_CURVE_TYPE_ENUM
+    property dwCurveGenerationAlgId : Win32cr::Security::Cryptography::ECC_CURVE_ALG_ID_ENUM
+    property cbFieldLength : UInt32
+    property cbSubgroupOrder : UInt32
+    property cbCofactor : UInt32
+    property cbSeed : UInt32
+    def initialize(@dwVersion : UInt32, @dwCurveType : Win32cr::Security::Cryptography::ECC_CURVE_TYPE_ENUM, @dwCurveGenerationAlgId : Win32cr::Security::Cryptography::ECC_CURVE_ALG_ID_ENUM, @cbFieldLength : UInt32, @cbSubgroupOrder : UInt32, @cbCofactor : UInt32, @cbSeed : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_CIPHER_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn
+    property get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn
+    property set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn
+    property close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn
+    property generate_key : Win32cr::Security::Cryptography::BCryptGenerateSymmetricKeyFn
+    property encrypt : Win32cr::Security::Cryptography::BCryptEncryptFn
+    property decrypt : Win32cr::Security::Cryptography::BCryptDecryptFn
+    property import_key : Win32cr::Security::Cryptography::BCryptImportKeyFn
+    property export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn
+    property duplicate_key : Win32cr::Security::Cryptography::BCryptDuplicateKeyFn
+    property destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn, @get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn, @set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn, @close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn, @generate_key : Win32cr::Security::Cryptography::BCryptGenerateSymmetricKeyFn, @encrypt : Win32cr::Security::Cryptography::BCryptEncryptFn, @decrypt : Win32cr::Security::Cryptography::BCryptDecryptFn, @import_key : Win32cr::Security::Cryptography::BCryptImportKeyFn, @export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn, @duplicate_key : Win32cr::Security::Cryptography::BCryptDuplicateKeyFn, @destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_HASH_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn
+    property get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn
+    property set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn
+    property close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn
+    property create_hash : Win32cr::Security::Cryptography::BCryptCreateHashFn
+    property hash_data : Win32cr::Security::Cryptography::BCryptHashDataFn
+    property finish_hash : Win32cr::Security::Cryptography::BCryptFinishHashFn
+    property duplicate_hash : Win32cr::Security::Cryptography::BCryptDuplicateHashFn
+    property destroy_hash : Win32cr::Security::Cryptography::BCryptDestroyHashFn
+    property create_multi_hash : Win32cr::Security::Cryptography::BCryptCreateMultiHashFn
+    property process_multi_operations : Win32cr::Security::Cryptography::BCryptProcessMultiOperationsFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn, @get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn, @set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn, @close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn, @create_hash : Win32cr::Security::Cryptography::BCryptCreateHashFn, @hash_data : Win32cr::Security::Cryptography::BCryptHashDataFn, @finish_hash : Win32cr::Security::Cryptography::BCryptFinishHashFn, @duplicate_hash : Win32cr::Security::Cryptography::BCryptDuplicateHashFn, @destroy_hash : Win32cr::Security::Cryptography::BCryptDestroyHashFn, @create_multi_hash : Win32cr::Security::Cryptography::BCryptCreateMultiHashFn, @process_multi_operations : Win32cr::Security::Cryptography::BCryptProcessMultiOperationsFn)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_ASYMMETRIC_ENCRYPTION_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn
+    property get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn
+    property set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn
+    property close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn
+    property generate_key_pair : Win32cr::Security::Cryptography::BCryptGenerateKeyPairFn
+    property finalize_key_pair : Win32cr::Security::Cryptography::BCryptFinalizeKeyPairFn
+    property encrypt : Win32cr::Security::Cryptography::BCryptEncryptFn
+    property decrypt : Win32cr::Security::Cryptography::BCryptDecryptFn
+    property import_key_pair : Win32cr::Security::Cryptography::BCryptImportKeyPairFn
+    property export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn
+    property destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn
+    property sign_hash : Win32cr::Security::Cryptography::BCryptSignHashFn
+    property verify_signature : Win32cr::Security::Cryptography::BCryptVerifySignatureFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn, @get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn, @set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn, @close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn, @generate_key_pair : Win32cr::Security::Cryptography::BCryptGenerateKeyPairFn, @finalize_key_pair : Win32cr::Security::Cryptography::BCryptFinalizeKeyPairFn, @encrypt : Win32cr::Security::Cryptography::BCryptEncryptFn, @decrypt : Win32cr::Security::Cryptography::BCryptDecryptFn, @import_key_pair : Win32cr::Security::Cryptography::BCryptImportKeyPairFn, @export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn, @destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn, @sign_hash : Win32cr::Security::Cryptography::BCryptSignHashFn, @verify_signature : Win32cr::Security::Cryptography::BCryptVerifySignatureFn)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_SECRET_AGREEMENT_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn
+    property get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn
+    property set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn
+    property close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn
+    property secret_agreement : Win32cr::Security::Cryptography::BCryptSecretAgreementFn
+    property derive_key : Win32cr::Security::Cryptography::BCryptDeriveKeyFn
+    property destroy_secret : Win32cr::Security::Cryptography::BCryptDestroySecretFn
+    property generate_key_pair : Win32cr::Security::Cryptography::BCryptGenerateKeyPairFn
+    property finalize_key_pair : Win32cr::Security::Cryptography::BCryptFinalizeKeyPairFn
+    property import_key_pair : Win32cr::Security::Cryptography::BCryptImportKeyPairFn
+    property export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn
+    property destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn, @get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn, @set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn, @close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn, @secret_agreement : Win32cr::Security::Cryptography::BCryptSecretAgreementFn, @derive_key : Win32cr::Security::Cryptography::BCryptDeriveKeyFn, @destroy_secret : Win32cr::Security::Cryptography::BCryptDestroySecretFn, @generate_key_pair : Win32cr::Security::Cryptography::BCryptGenerateKeyPairFn, @finalize_key_pair : Win32cr::Security::Cryptography::BCryptFinalizeKeyPairFn, @import_key_pair : Win32cr::Security::Cryptography::BCryptImportKeyPairFn, @export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn, @destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_SIGNATURE_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn
+    property get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn
+    property set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn
+    property close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn
+    property generate_key_pair : Win32cr::Security::Cryptography::BCryptGenerateKeyPairFn
+    property finalize_key_pair : Win32cr::Security::Cryptography::BCryptFinalizeKeyPairFn
+    property sign_hash : Win32cr::Security::Cryptography::BCryptSignHashFn
+    property verify_signature : Win32cr::Security::Cryptography::BCryptVerifySignatureFn
+    property import_key_pair : Win32cr::Security::Cryptography::BCryptImportKeyPairFn
+    property export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn
+    property destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn, @get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn, @set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn, @close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn, @generate_key_pair : Win32cr::Security::Cryptography::BCryptGenerateKeyPairFn, @finalize_key_pair : Win32cr::Security::Cryptography::BCryptFinalizeKeyPairFn, @sign_hash : Win32cr::Security::Cryptography::BCryptSignHashFn, @verify_signature : Win32cr::Security::Cryptography::BCryptVerifySignatureFn, @import_key_pair : Win32cr::Security::Cryptography::BCryptImportKeyPairFn, @export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn, @destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_RNG_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn
+    property get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn
+    property set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn
+    property close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn
+    property gen_random : Win32cr::Security::Cryptography::BCryptGenRandomFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn, @get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn, @set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn, @close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn, @gen_random : Win32cr::Security::Cryptography::BCryptGenRandomFn)
+    end
+  end
+
+  @[Extern]
+  struct BCRYPT_KEY_DERIVATION_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn
+    property get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn
+    property set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn
+    property close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn
+    property generate_key : Win32cr::Security::Cryptography::BCryptGenerateSymmetricKeyFn
+    property destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn
+    property key_derivation : Win32cr::Security::Cryptography::BCryptKeyDerivationFn
+    property export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn
+    property import_key : Win32cr::Security::Cryptography::BCryptImportKeyFn
+    property duplicate_key : Win32cr::Security::Cryptography::BCryptDuplicateKeyFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @open_algorithm_provider : Win32cr::Security::Cryptography::BCryptOpenAlgorithmProviderFn, @get_property : Win32cr::Security::Cryptography::BCryptGetPropertyFn, @set_property : Win32cr::Security::Cryptography::BCryptSetPropertyFn, @close_algorithm_provider : Win32cr::Security::Cryptography::BCryptCloseAlgorithmProviderFn, @generate_key : Win32cr::Security::Cryptography::BCryptGenerateSymmetricKeyFn, @destroy_key : Win32cr::Security::Cryptography::BCryptDestroyKeyFn, @key_derivation : Win32cr::Security::Cryptography::BCryptKeyDerivationFn, @export_key : Win32cr::Security::Cryptography::BCryptExportKeyFn, @import_key : Win32cr::Security::Cryptography::BCryptImportKeyFn, @duplicate_key : Win32cr::Security::Cryptography::BCryptDuplicateKeyFn)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_UI_POLICY_BLOB
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property cbCreationTitle : UInt32
+    property cbFriendlyName : UInt32
+    property cbDescription : UInt32
+    def initialize(@dwVersion : UInt32, @dwFlags : UInt32, @cbCreationTitle : UInt32, @cbFriendlyName : UInt32, @cbDescription : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_KEY_STORAGE_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property open_provider : Win32cr::Security::Cryptography::NCryptOpenStorageProviderFn
+    property open_key : Win32cr::Security::Cryptography::NCryptOpenKeyFn
+    property create_persisted_key : Win32cr::Security::Cryptography::NCryptCreatePersistedKeyFn
+    property get_provider_property : Win32cr::Security::Cryptography::NCryptGetProviderPropertyFn
+    property get_key_property : Win32cr::Security::Cryptography::NCryptGetKeyPropertyFn
+    property set_provider_property : Win32cr::Security::Cryptography::NCryptSetProviderPropertyFn
+    property set_key_property : Win32cr::Security::Cryptography::NCryptSetKeyPropertyFn
+    property finalize_key : Win32cr::Security::Cryptography::NCryptFinalizeKeyFn
+    property delete_key : Win32cr::Security::Cryptography::NCryptDeleteKeyFn
+    property free_provider : Win32cr::Security::Cryptography::NCryptFreeProviderFn
+    property free_key : Win32cr::Security::Cryptography::NCryptFreeKeyFn
+    property free_buffer : Win32cr::Security::Cryptography::NCryptFreeBufferFn
+    property encrypt : Win32cr::Security::Cryptography::NCryptEncryptFn
+    property decrypt : Win32cr::Security::Cryptography::NCryptDecryptFn
+    property is_alg_supported : Win32cr::Security::Cryptography::NCryptIsAlgSupportedFn
+    property enum_algorithms : Win32cr::Security::Cryptography::NCryptEnumAlgorithmsFn
+    property enum_keys : Win32cr::Security::Cryptography::NCryptEnumKeysFn
+    property import_key : Win32cr::Security::Cryptography::NCryptImportKeyFn
+    property export_key : Win32cr::Security::Cryptography::NCryptExportKeyFn
+    property sign_hash : Win32cr::Security::Cryptography::NCryptSignHashFn
+    property verify_signature : Win32cr::Security::Cryptography::NCryptVerifySignatureFn
+    property prompt_user : Win32cr::Security::Cryptography::NCryptPromptUserFn
+    property notify_change_key : Win32cr::Security::Cryptography::NCryptNotifyChangeKeyFn
+    property secret_agreement : Win32cr::Security::Cryptography::NCryptSecretAgreementFn
+    property derive_key : Win32cr::Security::Cryptography::NCryptDeriveKeyFn
+    property free_secret : Win32cr::Security::Cryptography::NCryptFreeSecretFn
+    property key_derivation : Win32cr::Security::Cryptography::NCryptKeyDerivationFn
+    property create_claim : Win32cr::Security::Cryptography::NCryptCreateClaimFn
+    property verify_claim : Win32cr::Security::Cryptography::NCryptVerifyClaimFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @open_provider : Win32cr::Security::Cryptography::NCryptOpenStorageProviderFn, @open_key : Win32cr::Security::Cryptography::NCryptOpenKeyFn, @create_persisted_key : Win32cr::Security::Cryptography::NCryptCreatePersistedKeyFn, @get_provider_property : Win32cr::Security::Cryptography::NCryptGetProviderPropertyFn, @get_key_property : Win32cr::Security::Cryptography::NCryptGetKeyPropertyFn, @set_provider_property : Win32cr::Security::Cryptography::NCryptSetProviderPropertyFn, @set_key_property : Win32cr::Security::Cryptography::NCryptSetKeyPropertyFn, @finalize_key : Win32cr::Security::Cryptography::NCryptFinalizeKeyFn, @delete_key : Win32cr::Security::Cryptography::NCryptDeleteKeyFn, @free_provider : Win32cr::Security::Cryptography::NCryptFreeProviderFn, @free_key : Win32cr::Security::Cryptography::NCryptFreeKeyFn, @free_buffer : Win32cr::Security::Cryptography::NCryptFreeBufferFn, @encrypt : Win32cr::Security::Cryptography::NCryptEncryptFn, @decrypt : Win32cr::Security::Cryptography::NCryptDecryptFn, @is_alg_supported : Win32cr::Security::Cryptography::NCryptIsAlgSupportedFn, @enum_algorithms : Win32cr::Security::Cryptography::NCryptEnumAlgorithmsFn, @enum_keys : Win32cr::Security::Cryptography::NCryptEnumKeysFn, @import_key : Win32cr::Security::Cryptography::NCryptImportKeyFn, @export_key : Win32cr::Security::Cryptography::NCryptExportKeyFn, @sign_hash : Win32cr::Security::Cryptography::NCryptSignHashFn, @verify_signature : Win32cr::Security::Cryptography::NCryptVerifySignatureFn, @prompt_user : Win32cr::Security::Cryptography::NCryptPromptUserFn, @notify_change_key : Win32cr::Security::Cryptography::NCryptNotifyChangeKeyFn, @secret_agreement : Win32cr::Security::Cryptography::NCryptSecretAgreementFn, @derive_key : Win32cr::Security::Cryptography::NCryptDeriveKeyFn, @free_secret : Win32cr::Security::Cryptography::NCryptFreeSecretFn, @key_derivation : Win32cr::Security::Cryptography::NCryptKeyDerivationFn, @create_claim : Win32cr::Security::Cryptography::NCryptCreateClaimFn, @verify_claim : Win32cr::Security::Cryptography::NCryptVerifyClaimFn)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_SSL_CIPHER_SUITE
+    property dwProtocol : UInt32
+    property dwCipherSuite : UInt32
+    property dwBaseCipherSuite : UInt32
+    property szCipherSuite : UInt16[64]
+    property szCipher : UInt16[64]
+    property dwCipherLen : UInt32
+    property dwCipherBlockLen : UInt32
+    property szHash : UInt16[64]
+    property dwHashLen : UInt32
+    property szExchange : UInt16[64]
+    property dwMinExchangeLen : UInt32
+    property dwMaxExchangeLen : UInt32
+    property szCertificate : UInt16[64]
+    property dwKeyType : UInt32
+    def initialize(@dwProtocol : UInt32, @dwCipherSuite : UInt32, @dwBaseCipherSuite : UInt32, @szCipherSuite : UInt16[64], @szCipher : UInt16[64], @dwCipherLen : UInt32, @dwCipherBlockLen : UInt32, @szHash : UInt16[64], @dwHashLen : UInt32, @szExchange : UInt16[64], @dwMinExchangeLen : UInt32, @dwMaxExchangeLen : UInt32, @szCertificate : UInt16[64], @dwKeyType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_SSL_CIPHER_SUITE_EX
+    property dwVersion : UInt32
+    property dwProtocol : UInt32
+    property dwCipherSuite : UInt32
+    property dwBaseCipherSuite : UInt32
+    property szCipherSuite : UInt16[64]
+    property szCipher : UInt16[64]
+    property dwCipherLen : UInt32
+    property dwCipherBlockLen : UInt32
+    property szHash : UInt16[64]
+    property dwHashLen : UInt32
+    property szExchange : UInt16[64]
+    property dwMinExchangeLen : UInt32
+    property dwMaxExchangeLen : UInt32
+    property szCertificate : UInt16[64]
+    property dwKeyType : UInt32
+    property szCipherMode : UInt16[64]
+    def initialize(@dwVersion : UInt32, @dwProtocol : UInt32, @dwCipherSuite : UInt32, @dwBaseCipherSuite : UInt32, @szCipherSuite : UInt16[64], @szCipher : UInt16[64], @dwCipherLen : UInt32, @dwCipherBlockLen : UInt32, @szHash : UInt16[64], @dwHashLen : UInt32, @szExchange : UInt16[64], @dwMinExchangeLen : UInt32, @dwMaxExchangeLen : UInt32, @szCertificate : UInt16[64], @dwKeyType : UInt32, @szCipherMode : UInt16[64])
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_SSL_CIPHER_LENGTHS
+    property cbLength : UInt32
+    property dwHeaderLen : UInt32
+    property dwFixedTrailerLen : UInt32
+    property dwMaxVariableTrailerLen : UInt32
+    property dwFlags : UInt32
+    def initialize(@cbLength : UInt32, @dwHeaderLen : UInt32, @dwFixedTrailerLen : UInt32, @dwMaxVariableTrailerLen : UInt32, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_SSL_ECC_CURVE
+    property szCurveName : UInt16[255]
+    property szOID : Win32cr::Foundation::CHAR[255]
+    property dwPublicKeyLength : UInt32
+    property dwCurveType : UInt32
+    property dwFlags : UInt32
+    def initialize(@szCurveName : UInt16[255], @szOID : Win32cr::Foundation::CHAR[255], @dwPublicKeyLength : UInt32, @dwCurveType : UInt32, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct NCRYPT_SSL_FUNCTION_TABLE
+    property version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION
+    property compute_client_auth_hash : Win32cr::Security::Cryptography::SslComputeClientAuthHashFn
+    property compute_eap_key_block : Win32cr::Security::Cryptography::SslComputeEapKeyBlockFn
+    property compute_finished_hash : Win32cr::Security::Cryptography::SslComputeFinishedHashFn
+    property create_ephemeral_key : Win32cr::Security::Cryptography::SslCreateEphemeralKeyFn
+    property create_handshake_hash : Win32cr::Security::Cryptography::SslCreateHandshakeHashFn
+    property decrypt_packet : Win32cr::Security::Cryptography::SslDecryptPacketFn
+    property encrypt_packet : Win32cr::Security::Cryptography::SslEncryptPacketFn
+    property enum_cipher_suites : Win32cr::Security::Cryptography::SslEnumCipherSuitesFn
+    property export_key : Win32cr::Security::Cryptography::SslExportKeyFn
+    property free_buffer : Win32cr::Security::Cryptography::SslFreeBufferFn
+    property free_object : Win32cr::Security::Cryptography::SslFreeObjectFn
+    property generate_master_key : Win32cr::Security::Cryptography::SslGenerateMasterKeyFn
+    property generate_session_keys : Win32cr::Security::Cryptography::SslGenerateSessionKeysFn
+    property get_key_property : Win32cr::Security::Cryptography::SslGetKeyPropertyFn
+    property get_provider_property : Win32cr::Security::Cryptography::SslGetProviderPropertyFn
+    property hash_handshake : Win32cr::Security::Cryptography::SslHashHandshakeFn
+    property import_master_key : Win32cr::Security::Cryptography::SslImportMasterKeyFn
+    property import_key : Win32cr::Security::Cryptography::SslImportKeyFn
+    property lookup_cipher_suite_info : Win32cr::Security::Cryptography::SslLookupCipherSuiteInfoFn
+    property open_private_key : Win32cr::Security::Cryptography::SslOpenPrivateKeyFn
+    property open_provider : Win32cr::Security::Cryptography::SslOpenProviderFn
+    property sign_hash : Win32cr::Security::Cryptography::SslSignHashFn
+    property verify_signature : Win32cr::Security::Cryptography::SslVerifySignatureFn
+    property lookup_cipher_lengths : Win32cr::Security::Cryptography::SslLookupCipherLengthsFn
+    property create_client_auth_hash : Win32cr::Security::Cryptography::SslCreateClientAuthHashFn
+    property get_cipher_suite_prf_hash_algorithm : Win32cr::Security::Cryptography::SslGetCipherSuitePRFHashAlgorithmFn
+    property compute_session_hash : Win32cr::Security::Cryptography::SslComputeSessionHashFn
+    property generate_pre_master_key : Win32cr::Security::Cryptography::SslGeneratePreMasterKeyFn
+    property enum_ecc_curves : Win32cr::Security::Cryptography::SslEnumEccCurvesFn
+    property export_keying_material : Win32cr::Security::Cryptography::SslExportKeyingMaterialFn
+    property extract_early_key : Win32cr::Security::Cryptography::SslExtractEarlyKeyFn
+    property extract_handshake_key : Win32cr::Security::Cryptography::SslExtractHandshakeKeyFn
+    property extract_master_key : Win32cr::Security::Cryptography::SslExtractMasterKeyFn
+    property expand_traffic_keys : Win32cr::Security::Cryptography::SslExpandTrafficKeysFn
+    property expand_write_key : Win32cr::Security::Cryptography::SslExpandWriteKeyFn
+    property expand_exporter_master_key : Win32cr::Security::Cryptography::SslExpandExporterMasterKeyFn
+    property enum_cipher_suites_ex : Win32cr::Security::Cryptography::SslEnumCipherSuitesExFn
+    property expand_resumption_master_key : Win32cr::Security::Cryptography::SslExpandResumptionMasterKeyFn
+    property duplicate_transcript_hash : Win32cr::Security::Cryptography::SslDuplicateTranscriptHashFn
+    property expand_binder_key : Win32cr::Security::Cryptography::SslExpandBinderKeyFn
+    property expand_pre_shared_key : Win32cr::Security::Cryptography::SslExpandPreSharedKeyFn
+    def initialize(@version : Win32cr::Security::Cryptography::BCRYPT_INTERFACE_VERSION, @compute_client_auth_hash : Win32cr::Security::Cryptography::SslComputeClientAuthHashFn, @compute_eap_key_block : Win32cr::Security::Cryptography::SslComputeEapKeyBlockFn, @compute_finished_hash : Win32cr::Security::Cryptography::SslComputeFinishedHashFn, @create_ephemeral_key : Win32cr::Security::Cryptography::SslCreateEphemeralKeyFn, @create_handshake_hash : Win32cr::Security::Cryptography::SslCreateHandshakeHashFn, @decrypt_packet : Win32cr::Security::Cryptography::SslDecryptPacketFn, @encrypt_packet : Win32cr::Security::Cryptography::SslEncryptPacketFn, @enum_cipher_suites : Win32cr::Security::Cryptography::SslEnumCipherSuitesFn, @export_key : Win32cr::Security::Cryptography::SslExportKeyFn, @free_buffer : Win32cr::Security::Cryptography::SslFreeBufferFn, @free_object : Win32cr::Security::Cryptography::SslFreeObjectFn, @generate_master_key : Win32cr::Security::Cryptography::SslGenerateMasterKeyFn, @generate_session_keys : Win32cr::Security::Cryptography::SslGenerateSessionKeysFn, @get_key_property : Win32cr::Security::Cryptography::SslGetKeyPropertyFn, @get_provider_property : Win32cr::Security::Cryptography::SslGetProviderPropertyFn, @hash_handshake : Win32cr::Security::Cryptography::SslHashHandshakeFn, @import_master_key : Win32cr::Security::Cryptography::SslImportMasterKeyFn, @import_key : Win32cr::Security::Cryptography::SslImportKeyFn, @lookup_cipher_suite_info : Win32cr::Security::Cryptography::SslLookupCipherSuiteInfoFn, @open_private_key : Win32cr::Security::Cryptography::SslOpenPrivateKeyFn, @open_provider : Win32cr::Security::Cryptography::SslOpenProviderFn, @sign_hash : Win32cr::Security::Cryptography::SslSignHashFn, @verify_signature : Win32cr::Security::Cryptography::SslVerifySignatureFn, @lookup_cipher_lengths : Win32cr::Security::Cryptography::SslLookupCipherLengthsFn, @create_client_auth_hash : Win32cr::Security::Cryptography::SslCreateClientAuthHashFn, @get_cipher_suite_prf_hash_algorithm : Win32cr::Security::Cryptography::SslGetCipherSuitePRFHashAlgorithmFn, @compute_session_hash : Win32cr::Security::Cryptography::SslComputeSessionHashFn, @generate_pre_master_key : Win32cr::Security::Cryptography::SslGeneratePreMasterKeyFn, @enum_ecc_curves : Win32cr::Security::Cryptography::SslEnumEccCurvesFn, @export_keying_material : Win32cr::Security::Cryptography::SslExportKeyingMaterialFn, @extract_early_key : Win32cr::Security::Cryptography::SslExtractEarlyKeyFn, @extract_handshake_key : Win32cr::Security::Cryptography::SslExtractHandshakeKeyFn, @extract_master_key : Win32cr::Security::Cryptography::SslExtractMasterKeyFn, @expand_traffic_keys : Win32cr::Security::Cryptography::SslExpandTrafficKeysFn, @expand_write_key : Win32cr::Security::Cryptography::SslExpandWriteKeyFn, @expand_exporter_master_key : Win32cr::Security::Cryptography::SslExpandExporterMasterKeyFn, @enum_cipher_suites_ex : Win32cr::Security::Cryptography::SslEnumCipherSuitesExFn, @expand_resumption_master_key : Win32cr::Security::Cryptography::SslExpandResumptionMasterKeyFn, @duplicate_transcript_hash : Win32cr::Security::Cryptography::SslDuplicateTranscriptHashFn, @expand_binder_key : Win32cr::Security::Cryptography::SslExpandBinderKeyFn, @expand_pre_shared_key : Win32cr::Security::Cryptography::SslExpandPreSharedKeyFn)
+    end
+  end
+
+  @[Extern]
+  struct OFFLOAD_PRIVATE_KEY
+    property dwVersion : UInt32
+    property cbPrime1 : UInt32
+    property cbPrime2 : UInt32
+    property pbPrime1 : UInt8*
+    property pbPrime2 : UInt8*
+    def initialize(@dwVersion : UInt32, @cbPrime1 : UInt32, @cbPrime2 : UInt32, @pbPrime1 : UInt8*, @pbPrime2 : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct VTableProvStruc
+    property version : UInt32
+    property func_verify_image : Win32cr::Security::Cryptography::CRYPT_VERIFY_IMAGE_A
+    property func_returnh_wnd : Win32cr::Security::Cryptography::CRYPT_RETURN_HWND
+    property dwProvType : UInt32
+    property pbContextInfo : UInt8*
+    property cbContextInfo : UInt32
+    property pszProvName : Win32cr::Foundation::PSTR
+    def initialize(@version : UInt32, @func_verify_image : Win32cr::Security::Cryptography::CRYPT_VERIFY_IMAGE_A, @func_returnh_wnd : Win32cr::Security::Cryptography::CRYPT_RETURN_HWND, @dwProvType : UInt32, @pbContextInfo : UInt8*, @cbContextInfo : UInt32, @pszProvName : Win32cr::Foundation::PSTR)
+    end
+  end
+
+  @[Extern]
+  struct VTableProvStrucW
+    property version : UInt32
+    property func_verify_image : Win32cr::Security::Cryptography::CRYPT_VERIFY_IMAGE_W
+    property func_returnh_wnd : Win32cr::Security::Cryptography::CRYPT_RETURN_HWND
+    property dwProvType : UInt32
+    property pbContextInfo : UInt8*
+    property cbContextInfo : UInt32
+    property pszProvName : Win32cr::Foundation::PWSTR
+    def initialize(@version : UInt32, @func_verify_image : Win32cr::Security::Cryptography::CRYPT_VERIFY_IMAGE_W, @func_returnh_wnd : Win32cr::Security::Cryptography::CRYPT_RETURN_HWND, @dwProvType : UInt32, @pbContextInfo : UInt8*, @cbContextInfo : UInt32, @pszProvName : Win32cr::Foundation::PWSTR)
+    end
+  end
+
+  @[Extern]
+  struct InFileSignatureResource
+    property dwVersion : UInt32
+    property dwCrcOffset : UInt32
+    property rgbSignature : UInt8[88]
+    def initialize(@dwVersion : UInt32, @dwCrcOffset : UInt32, @rgbSignature : UInt8[88])
+    end
+  end
+
+  @[Extern]
+  struct CARD_CACHE_FILE_FORMAT
+    property bVersion : UInt8
+    property bPinsFreshness : UInt8
+    property wContainersFreshness : UInt16
+    property wFilesFreshness : UInt16
+    def initialize(@bVersion : UInt8, @bPinsFreshness : UInt8, @wContainersFreshness : UInt16, @wFilesFreshness : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CONTAINER_MAP_RECORD
+    property wszGuid : UInt16[40]
+    property bFlags : UInt8
+    property bReserved : UInt8
+    property wSigKeySizeBits : UInt16
+    property wKeyExchangeKeySizeBits : UInt16
+    def initialize(@wszGuid : UInt16[40], @bFlags : UInt8, @bReserved : UInt8, @wSigKeySizeBits : UInt16, @wKeyExchangeKeySizeBits : UInt16)
+    end
+  end
+
+  @[Extern]
+  struct CARD_CAPABILITIES
+    property dwVersion : UInt32
+    property fCertificateCompression : Win32cr::Foundation::BOOL
+    property fKeyGen : Win32cr::Foundation::BOOL
+    def initialize(@dwVersion : UInt32, @fCertificateCompression : Win32cr::Foundation::BOOL, @fKeyGen : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct PIN_CACHE_POLICY
+    property dwVersion : UInt32
+    property pin_cache_policy_type : Win32cr::Security::Cryptography::PIN_CACHE_POLICY_TYPE
+    property dwPinCachePolicyInfo : UInt32
+    def initialize(@dwVersion : UInt32, @pin_cache_policy_type : Win32cr::Security::Cryptography::PIN_CACHE_POLICY_TYPE, @dwPinCachePolicyInfo : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct PIN_INFO
+    property dwVersion : UInt32
+    property pin_type : Win32cr::Security::Cryptography::SECRET_TYPE
+    property pin_purpose : Win32cr::Security::Cryptography::SECRET_PURPOSE
+    property dwChangePermission : UInt32
+    property dwUnblockPermission : UInt32
+    property pin_cache_policy : Win32cr::Security::Cryptography::PIN_CACHE_POLICY
+    property dwFlags : UInt32
+    def initialize(@dwVersion : UInt32, @pin_type : Win32cr::Security::Cryptography::SECRET_TYPE, @pin_purpose : Win32cr::Security::Cryptography::SECRET_PURPOSE, @dwChangePermission : UInt32, @dwUnblockPermission : UInt32, @pin_cache_policy : Win32cr::Security::Cryptography::PIN_CACHE_POLICY, @dwFlags : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CONTAINER_INFO
+    property dwVersion : UInt32
+    property dwReserved : UInt32
+    property cbSigPublicKey : UInt32
+    property pbSigPublicKey : UInt8*
+    property cbKeyExPublicKey : UInt32
+    property pbKeyExPublicKey : UInt8*
+    def initialize(@dwVersion : UInt32, @dwReserved : UInt32, @cbSigPublicKey : UInt32, @pbSigPublicKey : UInt8*, @cbKeyExPublicKey : UInt32, @pbKeyExPublicKey : UInt8*)
+    end
+  end
+
+  @[Extern]
+  struct CARD_FILE_INFO
+    property dwVersion : UInt32
+    property cbFileSize : UInt32
+    property access_condition : Win32cr::Security::Cryptography::CARD_FILE_ACCESS_CONDITION
+    def initialize(@dwVersion : UInt32, @cbFileSize : UInt32, @access_condition : Win32cr::Security::Cryptography::CARD_FILE_ACCESS_CONDITION)
+    end
+  end
+
+  @[Extern]
+  struct CARD_FREE_SPACE_INFO
+    property dwVersion : UInt32
+    property dwBytesAvailable : UInt32
+    property dwKeyContainersAvailable : UInt32
+    property dwMaxKeyContainers : UInt32
+    def initialize(@dwVersion : UInt32, @dwBytesAvailable : UInt32, @dwKeyContainersAvailable : UInt32, @dwMaxKeyContainers : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CARD_KEY_SIZES
+    property dwVersion : UInt32
+    property dwMinimumBitlen : UInt32
+    property dwDefaultBitlen : UInt32
+    property dwMaximumBitlen : UInt32
+    property dwIncrementalBitlen : UInt32
+    def initialize(@dwVersion : UInt32, @dwMinimumBitlen : UInt32, @dwDefaultBitlen : UInt32, @dwMaximumBitlen : UInt32, @dwIncrementalBitlen : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CARD_RSA_DECRYPT_INFO
+    property dwVersion : UInt32
+    property bContainerIndex : UInt8
+    property dwKeySpec : UInt32
+    property pbData : UInt8*
+    property cbData : UInt32
+    property pPaddingInfo : Void*
+    property dwPaddingType : UInt32
+    def initialize(@dwVersion : UInt32, @bContainerIndex : UInt8, @dwKeySpec : UInt32, @pbData : UInt8*, @cbData : UInt32, @pPaddingInfo : Void*, @dwPaddingType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CARD_SIGNING_INFO
+    property dwVersion : UInt32
+    property bContainerIndex : UInt8
+    property dwKeySpec : UInt32
+    property dwSigningFlags : UInt32
+    property aiHashAlg : Win32cr::Security::Cryptography::ALG_ID
+    property pbData : UInt8*
+    property cbData : UInt32
+    property pbSignedData : UInt8*
+    property cbSignedData : UInt32
+    property pPaddingInfo : Void*
+    property dwPaddingType : UInt32
+    def initialize(@dwVersion : UInt32, @bContainerIndex : UInt8, @dwKeySpec : UInt32, @dwSigningFlags : UInt32, @aiHashAlg : Win32cr::Security::Cryptography::ALG_ID, @pbData : UInt8*, @cbData : UInt32, @pbSignedData : UInt8*, @cbSignedData : UInt32, @pPaddingInfo : Void*, @dwPaddingType : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CARD_DH_AGREEMENT_INFO
+    property dwVersion : UInt32
+    property bContainerIndex : UInt8
+    property dwFlags : UInt32
+    property dwPublicKey : UInt32
+    property pbPublicKey : UInt8*
+    property pbReserved : UInt8*
+    property cbReserved : UInt32
+    property bSecretAgreementIndex : UInt8
+    def initialize(@dwVersion : UInt32, @bContainerIndex : UInt8, @dwFlags : UInt32, @dwPublicKey : UInt32, @pbPublicKey : UInt8*, @pbReserved : UInt8*, @cbReserved : UInt32, @bSecretAgreementIndex : UInt8)
+    end
+  end
+
+  @[Extern]
+  struct CARD_DERIVE_KEY
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property pwszKDF : Win32cr::Foundation::PWSTR
+    property bSecretAgreementIndex : UInt8
+    property pParameterList : Void*
+    property pbDerivedKey : UInt8*
+    property cbDerivedKey : UInt32
+    property pwszAlgId : Win32cr::Foundation::PWSTR
+    property dwKeyLen : UInt32
+    property hKey : LibC::UIntPtrT
+    def initialize(@dwVersion : UInt32, @dwFlags : UInt32, @pwszKDF : Win32cr::Foundation::PWSTR, @bSecretAgreementIndex : UInt8, @pParameterList : Void*, @pbDerivedKey : UInt8*, @cbDerivedKey : UInt32, @pwszAlgId : Win32cr::Foundation::PWSTR, @dwKeyLen : UInt32, @hKey : LibC::UIntPtrT)
+    end
+  end
+
+  @[Extern]
+  struct CARD_ENCRYPTED_DATA
+    property pbEncryptedData : UInt8*
+    property cbEncryptedData : UInt32
+    def initialize(@pbEncryptedData : UInt8*, @cbEncryptedData : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CARD_IMPORT_KEYPAIR
+    property dwVersion : UInt32
+    property bContainerIndex : UInt8
+    property pin_id : UInt32
+    property dwKeySpec : UInt32
+    property dwKeySize : UInt32
+    property cbInput : UInt32
+    property pbInput : UInt8[1]
+    def initialize(@dwVersion : UInt32, @bContainerIndex : UInt8, @pin_id : UInt32, @dwKeySpec : UInt32, @dwKeySize : UInt32, @cbInput : UInt32, @pbInput : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct CARD_CHANGE_AUTHENTICATOR
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property dwAuthenticatingPinId : UInt32
+    property cbAuthenticatingPinData : UInt32
+    property dwTargetPinId : UInt32
+    property cbTargetData : UInt32
+    property cRetryCount : UInt32
+    property pbData : UInt8[1]
+    def initialize(@dwVersion : UInt32, @dwFlags : UInt32, @dwAuthenticatingPinId : UInt32, @cbAuthenticatingPinData : UInt32, @dwTargetPinId : UInt32, @cbTargetData : UInt32, @cRetryCount : UInt32, @pbData : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct CARD_CHANGE_AUTHENTICATOR_RESPONSE
+    property dwVersion : UInt32
+    property cAttemptsRemaining : UInt32
+    def initialize(@dwVersion : UInt32, @cAttemptsRemaining : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CARD_AUTHENTICATE
+    property dwVersion : UInt32
+    property dwFlags : UInt32
+    property pin_id : UInt32
+    property cbPinData : UInt32
+    property pbPinData : UInt8[1]
+    def initialize(@dwVersion : UInt32, @dwFlags : UInt32, @pin_id : UInt32, @cbPinData : UInt32, @pbPinData : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct CARD_AUTHENTICATE_RESPONSE
+    property dwVersion : UInt32
+    property cbSessionPin : UInt32
+    property cAttemptsRemaining : UInt32
+    property pbSessionPin : UInt8[1]
+    def initialize(@dwVersion : UInt32, @cbSessionPin : UInt32, @cAttemptsRemaining : UInt32, @pbSessionPin : UInt8[1])
+    end
+  end
+
+  @[Extern]
+  struct CARD_DATA
+    property dwVersion : UInt32
+    property pbAtr : UInt8*
+    property cbAtr : UInt32
+    property pwszCardName : Win32cr::Foundation::PWSTR
+    property pfnCspAlloc : Win32cr::Security::Cryptography::PFN_CSP_ALLOC
+    property pfnCspReAlloc : Win32cr::Security::Cryptography::PFN_CSP_REALLOC
+    property pfnCspFree : Win32cr::Security::Cryptography::PFN_CSP_FREE
+    property pfnCspCacheAddFile : Win32cr::Security::Cryptography::PFN_CSP_CACHE_ADD_FILE
+    property pfnCspCacheLookupFile : Win32cr::Security::Cryptography::PFN_CSP_CACHE_LOOKUP_FILE
+    property pfnCspCacheDeleteFile : Win32cr::Security::Cryptography::PFN_CSP_CACHE_DELETE_FILE
+    property pvCacheContext : Void*
+    property pfnCspPadData : Win32cr::Security::Cryptography::PFN_CSP_PAD_DATA
+    property hSCardCtx : LibC::UIntPtrT
+    property hScard : LibC::UIntPtrT
+    property pvVendorSpecific : Void*
+    property pfnCardDeleteContext : Win32cr::Security::Cryptography::PFN_CARD_DELETE_CONTEXT
+    property pfnCardQueryCapabilities : Win32cr::Security::Cryptography::PFN_CARD_QUERY_CAPABILITIES
+    property pfnCardDeleteContainer : Win32cr::Security::Cryptography::PFN_CARD_DELETE_CONTAINER
+    property pfnCardCreateContainer : Win32cr::Security::Cryptography::PFN_CARD_CREATE_CONTAINER
+    property pfnCardGetContainerInfo : Win32cr::Security::Cryptography::PFN_CARD_GET_CONTAINER_INFO
+    property pfnCardAuthenticatePin : Win32cr::Security::Cryptography::PFN_CARD_AUTHENTICATE_PIN
+    property pfnCardGetChallenge : Win32cr::Security::Cryptography::PFN_CARD_GET_CHALLENGE
+    property pfnCardAuthenticateChallenge : Win32cr::Security::Cryptography::PFN_CARD_AUTHENTICATE_CHALLENGE
+    property pfnCardUnblockPin : Win32cr::Security::Cryptography::PFN_CARD_UNBLOCK_PIN
+    property pfnCardChangeAuthenticator : Win32cr::Security::Cryptography::PFN_CARD_CHANGE_AUTHENTICATOR
+    property pfnCardDeauthenticate : Win32cr::Security::Cryptography::PFN_CARD_DEAUTHENTICATE
+    property pfnCardCreateDirectory : Win32cr::Security::Cryptography::PFN_CARD_CREATE_DIRECTORY
+    property pfnCardDeleteDirectory : Win32cr::Security::Cryptography::PFN_CARD_DELETE_DIRECTORY
+    property pvUnused3 : Void*
+    property pvUnused4 : Void*
+    property pfnCardCreateFile : Win32cr::Security::Cryptography::PFN_CARD_CREATE_FILE
+    property pfnCardReadFile : Win32cr::Security::Cryptography::PFN_CARD_READ_FILE
+    property pfnCardWriteFile : Win32cr::Security::Cryptography::PFN_CARD_WRITE_FILE
+    property pfnCardDeleteFile : Win32cr::Security::Cryptography::PFN_CARD_DELETE_FILE
+    property pfnCardEnumFiles : Win32cr::Security::Cryptography::PFN_CARD_ENUM_FILES
+    property pfnCardGetFileInfo : Win32cr::Security::Cryptography::PFN_CARD_GET_FILE_INFO
+    property pfnCardQueryFreeSpace : Win32cr::Security::Cryptography::PFN_CARD_QUERY_FREE_SPACE
+    property pfnCardQueryKeySizes : Win32cr::Security::Cryptography::PFN_CARD_QUERY_KEY_SIZES
+    property pfnCardSignData : Win32cr::Security::Cryptography::PFN_CARD_SIGN_DATA
+    property pfnCardRSADecrypt : Win32cr::Security::Cryptography::PFN_CARD_RSA_DECRYPT
+    property pfnCardConstructDHAgreement : Win32cr::Security::Cryptography::PFN_CARD_CONSTRUCT_DH_AGREEMENT
+    property pfnCardDeriveKey : Win32cr::Security::Cryptography::PFN_CARD_DERIVE_KEY
+    property pfnCardDestroyDHAgreement : Win32cr::Security::Cryptography::PFN_CARD_DESTROY_DH_AGREEMENT
+    property pfnCspGetDHAgreement : Win32cr::Security::Cryptography::PFN_CSP_GET_DH_AGREEMENT
+    property pfnCardGetChallengeEx : Win32cr::Security::Cryptography::PFN_CARD_GET_CHALLENGE_EX
+    property pfnCardAuthenticateEx : Win32cr::Security::Cryptography::PFN_CARD_AUTHENTICATE_EX
+    property pfnCardChangeAuthenticatorEx : Win32cr::Security::Cryptography::PFN_CARD_CHANGE_AUTHENTICATOR_EX
+    property pfnCardDeauthenticateEx : Win32cr::Security::Cryptography::PFN_CARD_DEAUTHENTICATE_EX
+    property pfnCardGetContainerProperty : Win32cr::Security::Cryptography::PFN_CARD_GET_CONTAINER_PROPERTY
+    property pfnCardSetContainerProperty : Win32cr::Security::Cryptography::PFN_CARD_SET_CONTAINER_PROPERTY
+    property pfnCardGetProperty : Win32cr::Security::Cryptography::PFN_CARD_GET_PROPERTY
+    property pfnCardSetProperty : Win32cr::Security::Cryptography::PFN_CARD_SET_PROPERTY
+    property pfnCspUnpadData : Win32cr::Security::Cryptography::PFN_CSP_UNPAD_DATA
+    property pfnMDImportSessionKey : Win32cr::Security::Cryptography::PFN_MD_IMPORT_SESSION_KEY
+    property pfnMDEncryptData : Win32cr::Security::Cryptography::PFN_MD_ENCRYPT_DATA
+    property pfnCardImportSessionKey : Win32cr::Security::Cryptography::PFN_CARD_IMPORT_SESSION_KEY
+    property pfnCardGetSharedKeyHandle : Win32cr::Security::Cryptography::PFN_CARD_GET_SHARED_KEY_HANDLE
+    property pfnCardGetAlgorithmProperty : Win32cr::Security::Cryptography::PFN_CARD_GET_ALGORITHM_PROPERTY
+    property pfnCardGetKeyProperty : Win32cr::Security::Cryptography::PFN_CARD_GET_KEY_PROPERTY
+    property pfnCardSetKeyProperty : Win32cr::Security::Cryptography::PFN_CARD_SET_KEY_PROPERTY
+    property pfnCardDestroyKey : Win32cr::Security::Cryptography::PFN_CARD_DESTROY_KEY
+    property pfnCardProcessEncryptedData : Win32cr::Security::Cryptography::PFN_CARD_PROCESS_ENCRYPTED_DATA
+    property pfnCardCreateContainerEx : Win32cr::Security::Cryptography::PFN_CARD_CREATE_CONTAINER_EX
+    def initialize(@dwVersion : UInt32, @pbAtr : UInt8*, @cbAtr : UInt32, @pwszCardName : Win32cr::Foundation::PWSTR, @pfnCspAlloc : Win32cr::Security::Cryptography::PFN_CSP_ALLOC, @pfnCspReAlloc : Win32cr::Security::Cryptography::PFN_CSP_REALLOC, @pfnCspFree : Win32cr::Security::Cryptography::PFN_CSP_FREE, @pfnCspCacheAddFile : Win32cr::Security::Cryptography::PFN_CSP_CACHE_ADD_FILE, @pfnCspCacheLookupFile : Win32cr::Security::Cryptography::PFN_CSP_CACHE_LOOKUP_FILE, @pfnCspCacheDeleteFile : Win32cr::Security::Cryptography::PFN_CSP_CACHE_DELETE_FILE, @pvCacheContext : Void*, @pfnCspPadData : Win32cr::Security::Cryptography::PFN_CSP_PAD_DATA, @hSCardCtx : LibC::UIntPtrT, @hScard : LibC::UIntPtrT, @pvVendorSpecific : Void*, @pfnCardDeleteContext : Win32cr::Security::Cryptography::PFN_CARD_DELETE_CONTEXT, @pfnCardQueryCapabilities : Win32cr::Security::Cryptography::PFN_CARD_QUERY_CAPABILITIES, @pfnCardDeleteContainer : Win32cr::Security::Cryptography::PFN_CARD_DELETE_CONTAINER, @pfnCardCreateContainer : Win32cr::Security::Cryptography::PFN_CARD_CREATE_CONTAINER, @pfnCardGetContainerInfo : Win32cr::Security::Cryptography::PFN_CARD_GET_CONTAINER_INFO, @pfnCardAuthenticatePin : Win32cr::Security::Cryptography::PFN_CARD_AUTHENTICATE_PIN, @pfnCardGetChallenge : Win32cr::Security::Cryptography::PFN_CARD_GET_CHALLENGE, @pfnCardAuthenticateChallenge : Win32cr::Security::Cryptography::PFN_CARD_AUTHENTICATE_CHALLENGE, @pfnCardUnblockPin : Win32cr::Security::Cryptography::PFN_CARD_UNBLOCK_PIN, @pfnCardChangeAuthenticator : Win32cr::Security::Cryptography::PFN_CARD_CHANGE_AUTHENTICATOR, @pfnCardDeauthenticate : Win32cr::Security::Cryptography::PFN_CARD_DEAUTHENTICATE, @pfnCardCreateDirectory : Win32cr::Security::Cryptography::PFN_CARD_CREATE_DIRECTORY, @pfnCardDeleteDirectory : Win32cr::Security::Cryptography::PFN_CARD_DELETE_DIRECTORY, @pvUnused3 : Void*, @pvUnused4 : Void*, @pfnCardCreateFile : Win32cr::Security::Cryptography::PFN_CARD_CREATE_FILE, @pfnCardReadFile : Win32cr::Security::Cryptography::PFN_CARD_READ_FILE, @pfnCardWriteFile : Win32cr::Security::Cryptography::PFN_CARD_WRITE_FILE, @pfnCardDeleteFile : Win32cr::Security::Cryptography::PFN_CARD_DELETE_FILE, @pfnCardEnumFiles : Win32cr::Security::Cryptography::PFN_CARD_ENUM_FILES, @pfnCardGetFileInfo : Win32cr::Security::Cryptography::PFN_CARD_GET_FILE_INFO, @pfnCardQueryFreeSpace : Win32cr::Security::Cryptography::PFN_CARD_QUERY_FREE_SPACE, @pfnCardQueryKeySizes : Win32cr::Security::Cryptography::PFN_CARD_QUERY_KEY_SIZES, @pfnCardSignData : Win32cr::Security::Cryptography::PFN_CARD_SIGN_DATA, @pfnCardRSADecrypt : Win32cr::Security::Cryptography::PFN_CARD_RSA_DECRYPT, @pfnCardConstructDHAgreement : Win32cr::Security::Cryptography::PFN_CARD_CONSTRUCT_DH_AGREEMENT, @pfnCardDeriveKey : Win32cr::Security::Cryptography::PFN_CARD_DERIVE_KEY, @pfnCardDestroyDHAgreement : Win32cr::Security::Cryptography::PFN_CARD_DESTROY_DH_AGREEMENT, @pfnCspGetDHAgreement : Win32cr::Security::Cryptography::PFN_CSP_GET_DH_AGREEMENT, @pfnCardGetChallengeEx : Win32cr::Security::Cryptography::PFN_CARD_GET_CHALLENGE_EX, @pfnCardAuthenticateEx : Win32cr::Security::Cryptography::PFN_CARD_AUTHENTICATE_EX, @pfnCardChangeAuthenticatorEx : Win32cr::Security::Cryptography::PFN_CARD_CHANGE_AUTHENTICATOR_EX, @pfnCardDeauthenticateEx : Win32cr::Security::Cryptography::PFN_CARD_DEAUTHENTICATE_EX, @pfnCardGetContainerProperty : Win32cr::Security::Cryptography::PFN_CARD_GET_CONTAINER_PROPERTY, @pfnCardSetContainerProperty : Win32cr::Security::Cryptography::PFN_CARD_SET_CONTAINER_PROPERTY, @pfnCardGetProperty : Win32cr::Security::Cryptography::PFN_CARD_GET_PROPERTY, @pfnCardSetProperty : Win32cr::Security::Cryptography::PFN_CARD_SET_PROPERTY, @pfnCspUnpadData : Win32cr::Security::Cryptography::PFN_CSP_UNPAD_DATA, @pfnMDImportSessionKey : Win32cr::Security::Cryptography::PFN_MD_IMPORT_SESSION_KEY, @pfnMDEncryptData : Win32cr::Security::Cryptography::PFN_MD_ENCRYPT_DATA, @pfnCardImportSessionKey : Win32cr::Security::Cryptography::PFN_CARD_IMPORT_SESSION_KEY, @pfnCardGetSharedKeyHandle : Win32cr::Security::Cryptography::PFN_CARD_GET_SHARED_KEY_HANDLE, @pfnCardGetAlgorithmProperty : Win32cr::Security::Cryptography::PFN_CARD_GET_ALGORITHM_PROPERTY, @pfnCardGetKeyProperty : Win32cr::Security::Cryptography::PFN_CARD_GET_KEY_PROPERTY, @pfnCardSetKeyProperty : Win32cr::Security::Cryptography::PFN_CARD_SET_KEY_PROPERTY, @pfnCardDestroyKey : Win32cr::Security::Cryptography::PFN_CARD_DESTROY_KEY, @pfnCardProcessEncryptedData : Win32cr::Security::Cryptography::PFN_CARD_PROCESS_ENCRYPTED_DATA, @pfnCardCreateContainerEx : Win32cr::Security::Cryptography::PFN_CARD_CREATE_CONTAINER_EX)
+    end
+  end
+
+  @[Extern]
+  struct CLMD_PIV_CERT_DATA
+    property dwVersion : UInt32
+    property dwCertTag : UInt32
+    property pbCert : UInt8*
+    property cbCert : UInt32
+    def initialize(@dwVersion : UInt32, @dwCertTag : UInt32, @pbCert : UInt8*, @cbCert : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLMD_PIV_GENERATE_ASYMMETRIC_KEY
+    property dwVersion : UInt32
+    property bAlgorithmId : UInt8
+    property bKeyId : UInt8
+    property pbKey : UInt8*
+    property cbKey : UInt32
+    def initialize(@dwVersion : UInt32, @bAlgorithmId : UInt8, @bKeyId : UInt8, @pbKey : UInt8*, @cbKey : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct CLMD_PIV_PUBLIC_KEY_DATA
+    property dwVersion : UInt32
+    property bKeyId : UInt8
+    property pbPublicKey : UInt8*
+    property cbPublicKey : UInt32
+    def initialize(@dwVersion : UInt32, @bKeyId : UInt8, @pbPublicKey : UInt8*, @cbPublicKey : UInt32)
+    end
+  end
+
+  @[Extern]
+
+  record ICertSrvSetupKeyInformationVtable,
     query_interface : Proc(ICertSrvSetupKeyInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertSrvSetupKeyInformation*, UInt32),
     release : Proc(ICertSrvSetupKeyInformation*, UInt32),
     get_type_info_count : Proc(ICertSrvSetupKeyInformation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertSrvSetupKeyInformation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertSrvSetupKeyInformation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertSrvSetupKeyInformation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertSrvSetupKeyInformation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ProviderName : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ProviderName : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Length : Proc(ICertSrvSetupKeyInformation*, Int32*, Win32cr::Foundation::HRESULT),
     put_Length : Proc(ICertSrvSetupKeyInformation*, Int32, Win32cr::Foundation::HRESULT),
-    get_Existing : Proc(ICertSrvSetupKeyInformation*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Existing : Proc(ICertSrvSetupKeyInformation*, Int16, Win32cr::Foundation::HRESULT),
+    get_Existing : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Existing : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ContainerName : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ContainerName : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_HashAlgorithm : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_HashAlgorithm : Proc(ICertSrvSetupKeyInformation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_ExistingCACertificate : Proc(ICertSrvSetupKeyInformation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_ExistingCACertificate : Proc(ICertSrvSetupKeyInformation*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_ExistingCACertificate : Proc(ICertSrvSetupKeyInformation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_ExistingCACertificate : Proc(ICertSrvSetupKeyInformation*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertSrvSetupKeyInformation, lpVtbl : ICertSrvSetupKeyInformationVtbl* do
+  record ICertSrvSetupKeyInformation, lpVtbl : ICertSrvSetupKeyInformationVtable* do
     GUID = LibC::GUID.new(0x6ba73778_u32, 0x36da_u16, 0x4c39_u16, StaticArray[0x8a_u8, 0x85_u8, 0xbc_u8, 0xfa_u8, 0x7d_u8, 0x0_u8, 0x7_u8, 0x93_u8])
     def query_interface(this : ICertSrvSetupKeyInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7909,8 +9880,8 @@ module Win32cr::Security::Cryptography
     def get_i_ds_of_names(this : ICertSrvSetupKeyInformation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertSrvSetupKeyInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertSrvSetupKeyInformation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ProviderName(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ProviderName.call(this, pVal)
@@ -7924,10 +9895,10 @@ module Win32cr::Security::Cryptography
     def put_Length(this : ICertSrvSetupKeyInformation*, lVal : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Length.call(this, lVal)
     end
-    def get_Existing(this : ICertSrvSetupKeyInformation*, pVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Existing(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Existing.call(this, pVal)
     end
-    def put_Existing(this : ICertSrvSetupKeyInformation*, bVal : Int16) : Win32cr::Foundation::HRESULT
+    def put_Existing(this : ICertSrvSetupKeyInformation*, bVal : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Existing.call(this, bVal)
     end
     def get_ContainerName(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -7942,32 +9913,33 @@ module Win32cr::Security::Cryptography
     def put_HashAlgorithm(this : ICertSrvSetupKeyInformation*, bstrVal : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HashAlgorithm.call(this, bstrVal)
     end
-    def get_ExistingCACertificate(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ExistingCACertificate(this : ICertSrvSetupKeyInformation*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ExistingCACertificate.call(this, pVal)
     end
-    def put_ExistingCACertificate(this : ICertSrvSetupKeyInformation*, varVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_ExistingCACertificate(this : ICertSrvSetupKeyInformation*, varVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ExistingCACertificate.call(this, varVal)
     end
 
   end
 
   @[Extern]
-  record ICertSrvSetupKeyInformationCollectionVtbl,
+
+  record ICertSrvSetupKeyInformationCollectionVtable,
     query_interface : Proc(ICertSrvSetupKeyInformationCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertSrvSetupKeyInformationCollection*, UInt32),
     release : Proc(ICertSrvSetupKeyInformationCollection*, UInt32),
     get_type_info_count : Proc(ICertSrvSetupKeyInformationCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertSrvSetupKeyInformationCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertSrvSetupKeyInformationCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertSrvSetupKeyInformationCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertSrvSetupKeyInformationCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ICertSrvSetupKeyInformationCollection*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(ICertSrvSetupKeyInformationCollection*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(ICertSrvSetupKeyInformationCollection*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ICertSrvSetupKeyInformationCollection*, Int32*, Win32cr::Foundation::HRESULT),
     add : Proc(ICertSrvSetupKeyInformationCollection*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertSrvSetupKeyInformationCollection, lpVtbl : ICertSrvSetupKeyInformationCollectionVtbl* do
+  record ICertSrvSetupKeyInformationCollection, lpVtbl : ICertSrvSetupKeyInformationCollectionVtable* do
     GUID = LibC::GUID.new(0xe65c8b00_u32, 0xe58f_u16, 0x41f9_u16, StaticArray[0xa9_u8, 0xec_u8, 0xa2_u8, 0x8d_u8, 0x74_u8, 0x27_u8, 0xc8_u8, 0x44_u8])
     def query_interface(this : ICertSrvSetupKeyInformationCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7987,13 +9959,13 @@ module Win32cr::Security::Cryptography
     def get_i_ds_of_names(this : ICertSrvSetupKeyInformationCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertSrvSetupKeyInformationCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertSrvSetupKeyInformationCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : ICertSrvSetupKeyInformationCollection*, ppVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppVal)
     end
-    def get_Item(this : ICertSrvSetupKeyInformationCollection*, index : Int32, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : ICertSrvSetupKeyInformationCollection*, index : Int32, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pVal)
     end
     def get_Count(this : ICertSrvSetupKeyInformationCollection*, pVal : Int32*) : Win32cr::Foundation::HRESULT
@@ -8006,38 +9978,39 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
-  record ICertSrvSetupVtbl,
+
+  record ICertSrvSetupVtable,
     query_interface : Proc(ICertSrvSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertSrvSetup*, UInt32),
     release : Proc(ICertSrvSetup*, UInt32),
     get_type_info_count : Proc(ICertSrvSetup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertSrvSetup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertSrvSetup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertSrvSetup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertSrvSetup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CAErrorId : Proc(ICertSrvSetup*, Int32*, Win32cr::Foundation::HRESULT),
     get_CAErrorString : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    initialize_defaults : Proc(ICertSrvSetup*, Int16, Int16, Win32cr::Foundation::HRESULT),
-    get_ca_setup_property : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_ca_setup_property : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    is_property_editable : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Int16*, Win32cr::Foundation::HRESULT),
-    get_supported_ca_types : Proc(ICertSrvSetup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_provider_name_list : Proc(ICertSrvSetup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_key_length_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_hash_algorithm_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_private_key_container_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    initialize_defaults : Proc(ICertSrvSetup*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_ca_setup_property : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_ca_setup_property : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    is_property_editable : Proc(ICertSrvSetup*, Win32cr::Security::Cryptography::CASetupProperty, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_supported_ca_types : Proc(ICertSrvSetup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_provider_name_list : Proc(ICertSrvSetup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_key_length_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_hash_algorithm_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_private_key_container_list : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_existing_ca_certificates : Proc(ICertSrvSetup*, Void**, Win32cr::Foundation::HRESULT),
-    ca_import_pfx : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT),
-    set_ca_distinguished_name : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Int16, Int16, Int16, Win32cr::Foundation::HRESULT),
-    set_database_information : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
+    ca_import_pfx : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
+    set_ca_distinguished_name : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    set_database_information : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     set_parent_ca_information : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     set_web_ca_information : Proc(ICertSrvSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     install : Proc(ICertSrvSetup*, Win32cr::Foundation::HRESULT),
-    pre_un_install : Proc(ICertSrvSetup*, Int16, Win32cr::Foundation::HRESULT),
+    pre_un_install : Proc(ICertSrvSetup*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     post_un_install : Proc(ICertSrvSetup*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertSrvSetup, lpVtbl : ICertSrvSetupVtbl* do
+  record ICertSrvSetup, lpVtbl : ICertSrvSetupVtable* do
     GUID = LibC::GUID.new(0xb760a1bb_u32, 0x4784_u16, 0x44c0_u16, StaticArray[0x8f_u8, 0x12_u8, 0x55_u8, 0x5f_u8, 0x7_u8, 0x80_u8, 0xff_u8, 0x25_u8])
     def query_interface(this : ICertSrvSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8057,8 +10030,8 @@ module Win32cr::Security::Cryptography
     def get_i_ds_of_names(this : ICertSrvSetup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertSrvSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertSrvSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CAErrorId(this : ICertSrvSetup*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CAErrorId.call(this, pVal)
@@ -8066,43 +10039,43 @@ module Win32cr::Security::Cryptography
     def get_CAErrorString(this : ICertSrvSetup*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CAErrorString.call(this, pVal)
     end
-    def initialize_defaults(this : ICertSrvSetup*, bServer : Int16, bClient : Int16) : Win32cr::Foundation::HRESULT
+    def initialize_defaults(this : ICertSrvSetup*, bServer : Win32cr::Foundation::VARIANT_BOOL, bClient : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_defaults.call(this, bServer, bClient)
     end
-    def get_ca_setup_property(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ca_setup_property(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ca_setup_property.call(this, propertyId, pPropertyValue)
     end
-    def set_ca_setup_property(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_ca_setup_property(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_ca_setup_property.call(this, propertyId, pPropertyValue)
     end
-    def is_property_editable(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pbEditable : Int16*) : Win32cr::Foundation::HRESULT
+    def is_property_editable(this : ICertSrvSetup*, propertyId : Win32cr::Security::Cryptography::CASetupProperty, pbEditable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_property_editable.call(this, propertyId, pbEditable)
     end
-    def get_supported_ca_types(this : ICertSrvSetup*, pCATypes : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_supported_ca_types(this : ICertSrvSetup*, pCATypes : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_supported_ca_types.call(this, pCATypes)
     end
-    def get_provider_name_list(this : ICertSrvSetup*, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_provider_name_list(this : ICertSrvSetup*, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_provider_name_list.call(this, pVal)
     end
-    def get_key_length_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_key_length_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_key_length_list.call(this, bstrProviderName, pVal)
     end
-    def get_hash_algorithm_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_hash_algorithm_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_hash_algorithm_list.call(this, bstrProviderName, pVal)
     end
-    def get_private_key_container_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_private_key_container_list(this : ICertSrvSetup*, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_private_key_container_list.call(this, bstrProviderName, pVal)
     end
     def get_existing_ca_certificates(this : ICertSrvSetup*, ppVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_existing_ca_certificates.call(this, ppVal)
     end
-    def ca_import_pfx(this : ICertSrvSetup*, bstrFileName : Win32cr::Foundation::BSTR, bstrPasswd : Win32cr::Foundation::BSTR, bOverwriteExistingKey : Int16, ppVal : Void**) : Win32cr::Foundation::HRESULT
+    def ca_import_pfx(this : ICertSrvSetup*, bstrFileName : Win32cr::Foundation::BSTR, bstrPasswd : Win32cr::Foundation::BSTR, bOverwriteExistingKey : Win32cr::Foundation::VARIANT_BOOL, ppVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.ca_import_pfx.call(this, bstrFileName, bstrPasswd, bOverwriteExistingKey, ppVal)
     end
-    def set_ca_distinguished_name(this : ICertSrvSetup*, bstrCADN : Win32cr::Foundation::BSTR, bIgnoreUnicode : Int16, bOverwriteExistingKey : Int16, bOverwriteExistingCAInDS : Int16) : Win32cr::Foundation::HRESULT
+    def set_ca_distinguished_name(this : ICertSrvSetup*, bstrCADN : Win32cr::Foundation::BSTR, bIgnoreUnicode : Win32cr::Foundation::VARIANT_BOOL, bOverwriteExistingKey : Win32cr::Foundation::VARIANT_BOOL, bOverwriteExistingCAInDS : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_ca_distinguished_name.call(this, bstrCADN, bIgnoreUnicode, bOverwriteExistingKey, bOverwriteExistingCAInDS)
     end
-    def set_database_information(this : ICertSrvSetup*, bstrDBDirectory : Win32cr::Foundation::BSTR, bstrLogDirectory : Win32cr::Foundation::BSTR, bstrSharedFolder : Win32cr::Foundation::BSTR, bForceOverwrite : Int16) : Win32cr::Foundation::HRESULT
+    def set_database_information(this : ICertSrvSetup*, bstrDBDirectory : Win32cr::Foundation::BSTR, bstrLogDirectory : Win32cr::Foundation::BSTR, bstrSharedFolder : Win32cr::Foundation::BSTR, bForceOverwrite : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_database_information.call(this, bstrDBDirectory, bstrLogDirectory, bstrSharedFolder, bForceOverwrite)
     end
     def set_parent_ca_information(this : ICertSrvSetup*, bstrCAConfiguration : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8114,7 +10087,7 @@ module Win32cr::Security::Cryptography
     def install(this : ICertSrvSetup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install.call(this)
     end
-    def pre_un_install(this : ICertSrvSetup*, bClientOnly : Int16) : Win32cr::Foundation::HRESULT
+    def pre_un_install(this : ICertSrvSetup*, bClientOnly : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.pre_un_install.call(this, bClientOnly)
     end
     def post_un_install(this : ICertSrvSetup*) : Win32cr::Foundation::HRESULT
@@ -8124,30 +10097,31 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
-  record IMSCEPSetupVtbl,
+
+  record IMSCEPSetupVtable,
     query_interface : Proc(IMSCEPSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSCEPSetup*, UInt32),
     release : Proc(IMSCEPSetup*, UInt32),
     get_type_info_count : Proc(IMSCEPSetup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSCEPSetup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSCEPSetup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSCEPSetup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSCEPSetup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_MSCEPErrorId : Proc(IMSCEPSetup*, Int32*, Win32cr::Foundation::HRESULT),
     get_MSCEPErrorString : Proc(IMSCEPSetup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_defaults : Proc(IMSCEPSetup*, Win32cr::Foundation::HRESULT),
-    get_mscep_setup_property : Proc(IMSCEPSetup*, Win32cr::Security::Cryptography::MSCEPSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_mscep_setup_property : Proc(IMSCEPSetup*, Win32cr::Security::Cryptography::MSCEPSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_mscep_setup_property : Proc(IMSCEPSetup*, Win32cr::Security::Cryptography::MSCEPSetupProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_mscep_setup_property : Proc(IMSCEPSetup*, Win32cr::Security::Cryptography::MSCEPSetupProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     set_account_information : Proc(IMSCEPSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    is_mscep_store_empty : Proc(IMSCEPSetup*, Int16*, Win32cr::Foundation::HRESULT),
-    get_provider_name_list : Proc(IMSCEPSetup*, Int16, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_key_length_list : Proc(IMSCEPSetup*, Int16, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    is_mscep_store_empty : Proc(IMSCEPSetup*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_provider_name_list : Proc(IMSCEPSetup*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_key_length_list : Proc(IMSCEPSetup*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     install : Proc(IMSCEPSetup*, Win32cr::Foundation::HRESULT),
     pre_un_install : Proc(IMSCEPSetup*, Win32cr::Foundation::HRESULT),
     post_un_install : Proc(IMSCEPSetup*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSCEPSetup, lpVtbl : IMSCEPSetupVtbl* do
+  record IMSCEPSetup, lpVtbl : IMSCEPSetupVtable* do
     GUID = LibC::GUID.new(0x4f7761bb_u32, 0x9f3b_u16, 0x4592_u16, StaticArray[0x9e_u8, 0xe0_u8, 0x9a_u8, 0x73_u8, 0x25_u8, 0x9c_u8, 0x31_u8, 0x3e_u8])
     def query_interface(this : IMSCEPSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8167,8 +10141,8 @@ module Win32cr::Security::Cryptography
     def get_i_ds_of_names(this : IMSCEPSetup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSCEPSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSCEPSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_MSCEPErrorId(this : IMSCEPSetup*, pVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MSCEPErrorId.call(this, pVal)
@@ -8179,22 +10153,22 @@ module Win32cr::Security::Cryptography
     def initialize_defaults(this : IMSCEPSetup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_defaults.call(this)
     end
-    def get_mscep_setup_property(this : IMSCEPSetup*, propertyId : Win32cr::Security::Cryptography::MSCEPSetupProperty, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_mscep_setup_property(this : IMSCEPSetup*, propertyId : Win32cr::Security::Cryptography::MSCEPSetupProperty, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_mscep_setup_property.call(this, propertyId, pVal)
     end
-    def set_mscep_setup_property(this : IMSCEPSetup*, propertyId : Win32cr::Security::Cryptography::MSCEPSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_mscep_setup_property(this : IMSCEPSetup*, propertyId : Win32cr::Security::Cryptography::MSCEPSetupProperty, pPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_mscep_setup_property.call(this, propertyId, pPropertyValue)
     end
     def set_account_information(this : IMSCEPSetup*, bstrUserName : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_account_information.call(this, bstrUserName, bstrPassword)
     end
-    def is_mscep_store_empty(this : IMSCEPSetup*, pbEmpty : Int16*) : Win32cr::Foundation::HRESULT
+    def is_mscep_store_empty(this : IMSCEPSetup*, pbEmpty : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_mscep_store_empty.call(this, pbEmpty)
     end
-    def get_provider_name_list(this : IMSCEPSetup*, bExchange : Int16, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_provider_name_list(this : IMSCEPSetup*, bExchange : Win32cr::Foundation::VARIANT_BOOL, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_provider_name_list.call(this, bExchange, pVal)
     end
-    def get_key_length_list(this : IMSCEPSetup*, bExchange : Int16, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_key_length_list(this : IMSCEPSetup*, bExchange : Win32cr::Foundation::VARIANT_BOOL, bstrProviderName : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_key_length_list.call(this, bExchange, bstrProviderName, pVal)
     end
     def install(this : IMSCEPSetup*) : Win32cr::Foundation::HRESULT
@@ -8210,25 +10184,26 @@ module Win32cr::Security::Cryptography
   end
 
   @[Extern]
-  record ICertificateEnrollmentServerSetupVtbl,
+
+  record ICertificateEnrollmentServerSetupVtable,
     query_interface : Proc(ICertificateEnrollmentServerSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificateEnrollmentServerSetup*, UInt32),
     release : Proc(ICertificateEnrollmentServerSetup*, UInt32),
     get_type_info_count : Proc(ICertificateEnrollmentServerSetup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertificateEnrollmentServerSetup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertificateEnrollmentServerSetup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertificateEnrollmentServerSetup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertificateEnrollmentServerSetup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ErrorString : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_install_defaults : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Security::Cryptography::CESSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Security::Cryptography::CESSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Security::Cryptography::CESSetupProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Security::Cryptography::CESSetupProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     set_application_pool_credentials : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     install : Proc(ICertificateEnrollmentServerSetup*, Win32cr::Foundation::HRESULT),
-    un_install : Proc(ICertificateEnrollmentServerSetup*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    un_install : Proc(ICertificateEnrollmentServerSetup*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertificateEnrollmentServerSetup, lpVtbl : ICertificateEnrollmentServerSetupVtbl* do
+  record ICertificateEnrollmentServerSetup, lpVtbl : ICertificateEnrollmentServerSetupVtable* do
     GUID = LibC::GUID.new(0x70027fdb_u32, 0x9dd9_u16, 0x4921_u16, StaticArray[0x89_u8, 0x44_u8, 0xb3_u8, 0x5c_u8, 0xb3_u8, 0x1b_u8, 0xd2_u8, 0xec_u8])
     def query_interface(this : ICertificateEnrollmentServerSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8248,8 +10223,8 @@ module Win32cr::Security::Cryptography
     def get_i_ds_of_names(this : ICertificateEnrollmentServerSetup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertificateEnrollmentServerSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertificateEnrollmentServerSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ErrorString(this : ICertificateEnrollmentServerSetup*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ErrorString.call(this, pVal)
@@ -8257,10 +10232,10 @@ module Win32cr::Security::Cryptography
     def initialize_install_defaults(this : ICertificateEnrollmentServerSetup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_install_defaults.call(this)
     end
-    def get_property(this : ICertificateEnrollmentServerSetup*, propertyId : Win32cr::Security::Cryptography::CESSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : ICertificateEnrollmentServerSetup*, propertyId : Win32cr::Security::Cryptography::CESSetupProperty, pPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, propertyId, pPropertyValue)
     end
-    def set_property(this : ICertificateEnrollmentServerSetup*, propertyId : Win32cr::Security::Cryptography::CESSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_property(this : ICertificateEnrollmentServerSetup*, propertyId : Win32cr::Security::Cryptography::CESSetupProperty, pPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, propertyId, pPropertyValue)
     end
     def set_application_pool_credentials(this : ICertificateEnrollmentServerSetup*, bstrUsername : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -8269,31 +10244,32 @@ module Win32cr::Security::Cryptography
     def install(this : ICertificateEnrollmentServerSetup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install.call(this)
     end
-    def un_install(this : ICertificateEnrollmentServerSetup*, pCAConfig : Win32cr::System::Com::VARIANT*, pAuthentication : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def un_install(this : ICertificateEnrollmentServerSetup*, pCAConfig : Win32cr::System::Variant::VARIANT*, pAuthentication : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.un_install.call(this, pCAConfig, pAuthentication)
     end
 
   end
 
   @[Extern]
-  record ICertificateEnrollmentPolicyServerSetupVtbl,
+
+  record ICertificateEnrollmentPolicyServerSetupVtable,
     query_interface : Proc(ICertificateEnrollmentPolicyServerSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32),
     release : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32),
     get_type_info_count : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ICertificateEnrollmentPolicyServerSetup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ICertificateEnrollmentPolicyServerSetup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ICertificateEnrollmentPolicyServerSetup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ICertificateEnrollmentPolicyServerSetup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ErrorString : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     initialize_install_defaults : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Security::Cryptography::CEPSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Security::Cryptography::CEPSetupProperty, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Security::Cryptography::CEPSetupProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Security::Cryptography::CEPSetupProperty, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     install : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::Foundation::HRESULT),
-    un_install : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    un_install : Proc(ICertificateEnrollmentPolicyServerSetup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ICertificateEnrollmentPolicyServerSetup, lpVtbl : ICertificateEnrollmentPolicyServerSetupVtbl* do
+  record ICertificateEnrollmentPolicyServerSetup, lpVtbl : ICertificateEnrollmentPolicyServerSetupVtable* do
     GUID = LibC::GUID.new(0x859252cc_u32, 0x238c_u16, 0x4a88_u16, StaticArray[0xb8_u8, 0xfd_u8, 0xa3_u8, 0x7e_u8, 0x7d_u8, 0x4_u8, 0xe6_u8, 0x8b_u8])
     def query_interface(this : ICertificateEnrollmentPolicyServerSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8313,8 +10289,8 @@ module Win32cr::Security::Cryptography
     def get_i_ds_of_names(this : ICertificateEnrollmentPolicyServerSetup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ICertificateEnrollmentPolicyServerSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ICertificateEnrollmentPolicyServerSetup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ErrorString(this : ICertificateEnrollmentPolicyServerSetup*, pVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ErrorString.call(this, pVal)
@@ -8322,899 +10298,1371 @@ module Win32cr::Security::Cryptography
     def initialize_install_defaults(this : ICertificateEnrollmentPolicyServerSetup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_install_defaults.call(this)
     end
-    def get_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyId : Win32cr::Security::Cryptography::CEPSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyId : Win32cr::Security::Cryptography::CEPSetupProperty, pPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, propertyId, pPropertyValue)
     end
-    def set_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyId : Win32cr::Security::Cryptography::CEPSetupProperty, pPropertyValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_property(this : ICertificateEnrollmentPolicyServerSetup*, propertyId : Win32cr::Security::Cryptography::CEPSetupProperty, pPropertyValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, propertyId, pPropertyValue)
     end
     def install(this : ICertificateEnrollmentPolicyServerSetup*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.install.call(this)
     end
-    def un_install(this : ICertificateEnrollmentPolicyServerSetup*, pAuthKeyBasedRenewal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def un_install(this : ICertificateEnrollmentPolicyServerSetup*, pAuthKeyBasedRenewal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.un_install.call(this, pAuthKeyBasedRenewal)
     end
 
   end
 
+  def systemPrng(pbRandomData : UInt8*, cbRandomData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.SystemPrng(pbRandomData, cbRandomData)
+    {% end %}
+  end
+
+  def processPrng(pbData : UInt8*, cbData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.ProcessPrng(pbData, cbData)
+    {% end %}
+  end
+
   def cryptAcquireContextA(phProv : LibC::UIntPtrT*, szContainer : Win32cr::Foundation::PSTR, szProvider : Win32cr::Foundation::PSTR, dwProvType : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptAcquireContextA(phProv, szContainer, szProvider, dwProvType, dwFlags)
+    {% end %}
   end
 
   def cryptAcquireContextW(phProv : LibC::UIntPtrT*, szContainer : Win32cr::Foundation::PWSTR, szProvider : Win32cr::Foundation::PWSTR, dwProvType : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptAcquireContextW(phProv, szContainer, szProvider, dwProvType, dwFlags)
+    {% end %}
   end
 
   def cryptReleaseContext(hProv : LibC::UIntPtrT, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptReleaseContext(hProv, dwFlags)
+    {% end %}
   end
 
-  def cryptGenKey(hProv : LibC::UIntPtrT, algid : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+  def cryptGenKey(hProv : LibC::UIntPtrT, algid : Win32cr::Security::Cryptography::ALG_ID, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGenKey(hProv, algid, dwFlags, phKey)
+    {% end %}
   end
 
-  def cryptDeriveKey(hProv : LibC::UIntPtrT, algid : UInt32, hBaseData : LibC::UIntPtrT, dwFlags : UInt32, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+  def cryptDeriveKey(hProv : LibC::UIntPtrT, algid : Win32cr::Security::Cryptography::ALG_ID, hBaseData : LibC::UIntPtrT, dwFlags : UInt32, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDeriveKey(hProv, algid, hBaseData, dwFlags, phKey)
+    {% end %}
   end
 
   def cryptDestroyKey(hKey : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDestroyKey(hKey)
+    {% end %}
   end
 
   def cryptSetKeyParam(hKey : LibC::UIntPtrT, dwParam : Win32cr::Security::Cryptography::CRYPT_KEY_PARAM_ID, pbData : UInt8*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetKeyParam(hKey, dwParam, pbData, dwFlags)
+    {% end %}
   end
 
   def cryptGetKeyParam(hKey : LibC::UIntPtrT, dwParam : Win32cr::Security::Cryptography::CRYPT_KEY_PARAM_ID, pbData : UInt8*, pdwDataLen : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetKeyParam(hKey, dwParam, pbData, pdwDataLen, dwFlags)
+    {% end %}
   end
 
   def cryptSetHashParam(hHash : LibC::UIntPtrT, dwParam : Win32cr::Security::Cryptography::CRYPT_SET_HASH_PARAM, pbData : UInt8*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetHashParam(hHash, dwParam, pbData, dwFlags)
+    {% end %}
   end
 
   def cryptGetHashParam(hHash : LibC::UIntPtrT, dwParam : UInt32, pbData : UInt8*, pdwDataLen : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetHashParam(hHash, dwParam, pbData, pdwDataLen, dwFlags)
+    {% end %}
   end
 
   def cryptSetProvParam(hProv : LibC::UIntPtrT, dwParam : Win32cr::Security::Cryptography::CRYPT_SET_PROV_PARAM_ID, pbData : UInt8*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetProvParam(hProv, dwParam, pbData, dwFlags)
+    {% end %}
   end
 
   def cryptGetProvParam(hProv : LibC::UIntPtrT, dwParam : UInt32, pbData : UInt8*, pdwDataLen : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetProvParam(hProv, dwParam, pbData, pdwDataLen, dwFlags)
+    {% end %}
   end
 
   def cryptGenRandom(hProv : LibC::UIntPtrT, dwLen : UInt32, pbBuffer : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGenRandom(hProv, dwLen, pbBuffer)
+    {% end %}
   end
 
   def cryptGetUserKey(hProv : LibC::UIntPtrT, dwKeySpec : UInt32, phUserKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetUserKey(hProv, dwKeySpec, phUserKey)
+    {% end %}
   end
 
   def cryptExportKey(hKey : LibC::UIntPtrT, hExpKey : LibC::UIntPtrT, dwBlobType : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, pbData : UInt8*, pdwDataLen : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptExportKey(hKey, hExpKey, dwBlobType, dwFlags, pbData, pdwDataLen)
+    {% end %}
   end
 
   def cryptImportKey(hProv : LibC::UIntPtrT, pbData : UInt8*, dwDataLen : UInt32, hPubKey : LibC::UIntPtrT, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptImportKey(hProv, pbData, dwDataLen, hPubKey, dwFlags, phKey)
+    {% end %}
   end
 
   def cryptEncrypt(hKey : LibC::UIntPtrT, hHash : LibC::UIntPtrT, final : Win32cr::Foundation::BOOL, dwFlags : UInt32, pbData : UInt8*, pdwDataLen : UInt32*, dwBufLen : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEncrypt(hKey, hHash, final, dwFlags, pbData, pdwDataLen, dwBufLen)
+    {% end %}
   end
 
   def cryptDecrypt(hKey : LibC::UIntPtrT, hHash : LibC::UIntPtrT, final : Win32cr::Foundation::BOOL, dwFlags : UInt32, pbData : UInt8*, pdwDataLen : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDecrypt(hKey, hHash, final, dwFlags, pbData, pdwDataLen)
+    {% end %}
   end
 
-  def cryptCreateHash(hProv : LibC::UIntPtrT, algid : UInt32, hKey : LibC::UIntPtrT, dwFlags : UInt32, phHash : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+  def cryptCreateHash(hProv : LibC::UIntPtrT, algid : Win32cr::Security::Cryptography::ALG_ID, hKey : LibC::UIntPtrT, dwFlags : UInt32, phHash : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCreateHash(hProv, algid, hKey, dwFlags, phHash)
+    {% end %}
   end
 
   def cryptHashData(hHash : LibC::UIntPtrT, pbData : UInt8*, dwDataLen : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptHashData(hHash, pbData, dwDataLen, dwFlags)
+    {% end %}
   end
 
   def cryptHashSessionKey(hHash : LibC::UIntPtrT, hKey : LibC::UIntPtrT, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptHashSessionKey(hHash, hKey, dwFlags)
+    {% end %}
   end
 
   def cryptDestroyHash(hHash : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDestroyHash(hHash)
+    {% end %}
   end
 
   def cryptSignHashA(hHash : LibC::UIntPtrT, dwKeySpec : UInt32, szDescription : Win32cr::Foundation::PSTR, dwFlags : UInt32, pbSignature : UInt8*, pdwSigLen : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSignHashA(hHash, dwKeySpec, szDescription, dwFlags, pbSignature, pdwSigLen)
+    {% end %}
   end
 
   def cryptSignHashW(hHash : LibC::UIntPtrT, dwKeySpec : UInt32, szDescription : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pbSignature : UInt8*, pdwSigLen : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSignHashW(hHash, dwKeySpec, szDescription, dwFlags, pbSignature, pdwSigLen)
+    {% end %}
   end
 
   def cryptVerifySignatureA(hHash : LibC::UIntPtrT, pbSignature : UInt8*, dwSigLen : UInt32, hPubKey : LibC::UIntPtrT, szDescription : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifySignatureA(hHash, pbSignature, dwSigLen, hPubKey, szDescription, dwFlags)
+    {% end %}
   end
 
   def cryptVerifySignatureW(hHash : LibC::UIntPtrT, pbSignature : UInt8*, dwSigLen : UInt32, hPubKey : LibC::UIntPtrT, szDescription : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifySignatureW(hHash, pbSignature, dwSigLen, hPubKey, szDescription, dwFlags)
+    {% end %}
   end
 
   def cryptSetProviderA(pszProvName : Win32cr::Foundation::PSTR, dwProvType : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetProviderA(pszProvName, dwProvType)
+    {% end %}
   end
 
   def cryptSetProviderW(pszProvName : Win32cr::Foundation::PWSTR, dwProvType : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetProviderW(pszProvName, dwProvType)
+    {% end %}
   end
 
   def cryptSetProviderExA(pszProvName : Win32cr::Foundation::PSTR, dwProvType : UInt32, pdwReserved : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetProviderExA(pszProvName, dwProvType, pdwReserved, dwFlags)
+    {% end %}
   end
 
   def cryptSetProviderExW(pszProvName : Win32cr::Foundation::PWSTR, dwProvType : UInt32, pdwReserved : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetProviderExW(pszProvName, dwProvType, pdwReserved, dwFlags)
+    {% end %}
   end
 
   def cryptGetDefaultProviderA(dwProvType : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pszProvName : Win32cr::Foundation::PSTR, pcbProvName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetDefaultProviderA(dwProvType, pdwReserved, dwFlags, pszProvName, pcbProvName)
+    {% end %}
   end
 
   def cryptGetDefaultProviderW(dwProvType : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pszProvName : Win32cr::Foundation::PWSTR, pcbProvName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetDefaultProviderW(dwProvType, pdwReserved, dwFlags, pszProvName, pcbProvName)
+    {% end %}
   end
 
   def cryptEnumProviderTypesA(dwIndex : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pdwProvType : UInt32*, szTypeName : Win32cr::Foundation::PSTR, pcbTypeName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEnumProviderTypesA(dwIndex, pdwReserved, dwFlags, pdwProvType, szTypeName, pcbTypeName)
+    {% end %}
   end
 
   def cryptEnumProviderTypesW(dwIndex : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pdwProvType : UInt32*, szTypeName : Win32cr::Foundation::PWSTR, pcbTypeName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEnumProviderTypesW(dwIndex, pdwReserved, dwFlags, pdwProvType, szTypeName, pcbTypeName)
+    {% end %}
   end
 
   def cryptEnumProvidersA(dwIndex : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pdwProvType : UInt32*, szProvName : Win32cr::Foundation::PSTR, pcbProvName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEnumProvidersA(dwIndex, pdwReserved, dwFlags, pdwProvType, szProvName, pcbProvName)
+    {% end %}
   end
 
   def cryptEnumProvidersW(dwIndex : UInt32, pdwReserved : UInt32*, dwFlags : UInt32, pdwProvType : UInt32*, szProvName : Win32cr::Foundation::PWSTR, pcbProvName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEnumProvidersW(dwIndex, pdwReserved, dwFlags, pdwProvType, szProvName, pcbProvName)
+    {% end %}
   end
 
   def cryptContextAddRef(hProv : LibC::UIntPtrT, pdwReserved : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptContextAddRef(hProv, pdwReserved, dwFlags)
+    {% end %}
   end
 
   def cryptDuplicateKey(hKey : LibC::UIntPtrT, pdwReserved : UInt32*, dwFlags : UInt32, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDuplicateKey(hKey, pdwReserved, dwFlags, phKey)
+    {% end %}
   end
 
   def cryptDuplicateHash(hHash : LibC::UIntPtrT, pdwReserved : UInt32*, dwFlags : UInt32, phHash : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDuplicateHash(hHash, pdwReserved, dwFlags, phHash)
+    {% end %}
   end
 
   def bCryptOpenAlgorithmProvider(phAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE*, pszAlgId : Win32cr::Foundation::PWSTR, pszImplementation : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Security::Cryptography::BCRYPT_OPEN_ALGORITHM_PROVIDER_FLAGS) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptOpenAlgorithmProvider(phAlgorithm, pszAlgId, pszImplementation, dwFlags)
+    {% end %}
   end
 
   def bCryptEnumAlgorithms(dwAlgOperations : Win32cr::Security::Cryptography::BCRYPT_OPERATION, pAlgCount : UInt32*, ppAlgList : Win32cr::Security::Cryptography::BCRYPT_ALGORITHM_IDENTIFIER**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptEnumAlgorithms(dwAlgOperations, pAlgCount, ppAlgList, dwFlags)
+    {% end %}
   end
 
   def bCryptEnumProviders(pszAlgId : Win32cr::Foundation::PWSTR, pImplCount : UInt32*, ppImplList : Win32cr::Security::Cryptography::BCRYPT_PROVIDER_NAME**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptEnumProviders(pszAlgId, pImplCount, ppImplList, dwFlags)
+    {% end %}
   end
 
   def bCryptGetProperty(hObject : Win32cr::Security::Cryptography::BCRYPT_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptGetProperty(hObject, pszProperty, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
   end
 
   def bCryptSetProperty(hObject : Win32cr::Security::Cryptography::BCRYPT_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptSetProperty(hObject, pszProperty, pbInput, cbInput, dwFlags)
+    {% end %}
   end
 
   def bCryptCloseAlgorithmProvider(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptCloseAlgorithmProvider(hAlgorithm, dwFlags)
+    {% end %}
   end
 
   def bCryptFreeBuffer(pvBuffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.BCryptFreeBuffer(pvBuffer)
+    {% end %}
   end
 
   def bCryptGenerateSymmetricKey(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, pbKeyObject : UInt8*, cbKeyObject : UInt32, pbSecret : UInt8*, cbSecret : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptGenerateSymmetricKey(hAlgorithm, phKey, pbKeyObject, cbKeyObject, pbSecret, cbSecret, dwFlags)
+    {% end %}
   end
 
   def bCryptGenerateKeyPair(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, dwLength : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptGenerateKeyPair(hAlgorithm, phKey, dwLength, dwFlags)
+    {% end %}
   end
 
-  def bCryptEncrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+  def bCryptEncrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::BCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptEncrypt(hKey, pbInput, cbInput, pPaddingInfo, pbIV, cbIV, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
   end
 
-  def bCryptDecrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+  def bCryptDecrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::BCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDecrypt(hKey, pbInput, cbInput, pPaddingInfo, pbIV, cbIV, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
   end
 
   def bCryptExportKey(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, hExportKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptExportKey(hKey, hExportKey, pszBlobType, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
   end
 
   def bCryptImportKey(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, hImportKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, pbKeyObject : UInt8*, cbKeyObject : UInt32, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptImportKey(hAlgorithm, hImportKey, pszBlobType, phKey, pbKeyObject, cbKeyObject, pbInput, cbInput, dwFlags)
+    {% end %}
   end
 
   def bCryptImportKeyPair(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, hImportKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptImportKeyPair(hAlgorithm, hImportKey, pszBlobType, phKey, pbInput, cbInput, dwFlags)
+    {% end %}
   end
 
   def bCryptDuplicateKey(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, phNewKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, pbKeyObject : UInt8*, cbKeyObject : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDuplicateKey(hKey, phNewKey, pbKeyObject, cbKeyObject, dwFlags)
+    {% end %}
   end
 
   def bCryptFinalizeKeyPair(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptFinalizeKeyPair(hKey, dwFlags)
+    {% end %}
   end
 
   def bCryptDestroyKey(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDestroyKey(hKey)
+    {% end %}
   end
 
   def bCryptDestroySecret(hSecret : Win32cr::Security::Cryptography::BCRYPT_SECRET_HANDLE) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDestroySecret(hSecret)
+    {% end %}
   end
 
-  def bCryptSignHash(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+  def bCryptSignHash(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::BCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptSignHash(hKey, pPaddingInfo, pbInput, cbInput, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
   end
 
-  def bCryptVerifySignature(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHash : UInt8*, cbHash : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+  def bCryptVerifySignature(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHash : UInt8*, cbHash : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : Win32cr::Security::Cryptography::BCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptVerifySignature(hKey, pPaddingInfo, pbHash, cbHash, pbSignature, cbSignature, dwFlags)
+    {% end %}
   end
 
   def bCryptSecretAgreement(hPrivKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, hPubKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, phAgreedSecret : Win32cr::Security::Cryptography::BCRYPT_SECRET_HANDLE*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptSecretAgreement(hPrivKey, hPubKey, phAgreedSecret, dwFlags)
+    {% end %}
   end
 
   def bCryptDeriveKey(hSharedSecret : Win32cr::Security::Cryptography::BCRYPT_SECRET_HANDLE, pwszKDF : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDeriveKey(hSharedSecret, pwszKDF, pParameterList, pbDerivedKey, cbDerivedKey, pcbResult, dwFlags)
+    {% end %}
   end
 
   def bCryptKeyDerivation(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptKeyDerivation(hKey, pParameterList, pbDerivedKey, cbDerivedKey, pcbResult, dwFlags)
+    {% end %}
   end
 
   def bCryptCreateHash(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE*, pbHashObject : UInt8*, cbHashObject : UInt32, pbSecret : UInt8*, cbSecret : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptCreateHash(hAlgorithm, phHash, pbHashObject, cbHashObject, pbSecret, cbSecret, dwFlags)
+    {% end %}
   end
 
   def bCryptHashData(hHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptHashData(hHash, pbInput, cbInput, dwFlags)
+    {% end %}
   end
 
   def bCryptFinishHash(hHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, pbOutput : UInt8*, cbOutput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptFinishHash(hHash, pbOutput, cbOutput, dwFlags)
+    {% end %}
   end
 
   def bCryptCreateMultiHash(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE*, nHashes : UInt32, pbHashObject : UInt8*, cbHashObject : UInt32, pbSecret : UInt8*, cbSecret : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptCreateMultiHash(hAlgorithm, phHash, nHashes, pbHashObject, cbHashObject, pbSecret, cbSecret, dwFlags)
+    {% end %}
   end
 
   def bCryptProcessMultiOperations(hObject : Win32cr::Security::Cryptography::BCRYPT_HANDLE, operationType : Win32cr::Security::Cryptography::BCRYPT_MULTI_OPERATION_TYPE, pOperations : Void*, cbOperations : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptProcessMultiOperations(hObject, operationType, pOperations, cbOperations, dwFlags)
+    {% end %}
   end
 
   def bCryptDuplicateHash(hHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, phNewHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE*, pbHashObject : UInt8*, cbHashObject : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDuplicateHash(hHash, phNewHash, pbHashObject, cbHashObject, dwFlags)
+    {% end %}
   end
 
   def bCryptDestroyHash(hHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDestroyHash(hHash)
+    {% end %}
   end
 
   def bCryptHash(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbSecret : UInt8*, cbSecret : UInt32, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptHash(hAlgorithm, pbSecret, cbSecret, pbInput, cbInput, pbOutput, cbOutput)
+    {% end %}
   end
 
-  def bCryptGenRandom(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbBuffer : UInt8*, cbBuffer : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+  def bCryptGenRandom(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbBuffer : UInt8*, cbBuffer : UInt32, dwFlags : Win32cr::Security::Cryptography::BCRYPTGENRANDOM_FLAGS) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptGenRandom(hAlgorithm, pbBuffer, cbBuffer, dwFlags)
+    {% end %}
   end
 
   def bCryptDeriveKeyCapi(hHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, hTargetAlg : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDeriveKeyCapi(hHash, hTargetAlg, pbDerivedKey, cbDerivedKey, dwFlags)
+    {% end %}
   end
 
   def bCryptDeriveKeyPBKDF2(hPrf : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbPassword : UInt8*, cbPassword : UInt32, pbSalt : UInt8*, cbSalt : UInt32, cIterations : UInt64, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDeriveKeyPBKDF2(hPrf, pbPassword, cbPassword, pbSalt, cbSalt, cIterations, pbDerivedKey, cbDerivedKey, dwFlags)
+    {% end %}
+  end
+
+  def bCryptEncapsulate(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbSecretKey : UInt8*, cbSecretKey : UInt32, pcbSecretKey : UInt32*, pbCipherText : UInt8*, cbCipherText : UInt32, pcbCipherText : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.BCryptEncapsulate(hKey, pbSecretKey, cbSecretKey, pcbSecretKey, pbCipherText, cbCipherText, pcbCipherText, dwFlags)
+    {% end %}
+  end
+
+  def bCryptDecapsulate(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbCipherText : UInt8*, cbCipherText : UInt32, pbSecretKey : UInt8*, cbSecretKey : UInt32, pcbSecretKey : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.BCryptDecapsulate(hKey, pbCipherText, cbCipherText, pbSecretKey, cbSecretKey, pcbSecretKey, dwFlags)
+    {% end %}
   end
 
   def bCryptQueryProviderRegistration(pszProvider : Win32cr::Foundation::PWSTR, dwMode : Win32cr::Security::Cryptography::BCRYPT_QUERY_PROVIDER_MODE, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_PROVIDER_REG**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptQueryProviderRegistration(pszProvider, dwMode, dwInterface, pcbBuffer, ppBuffer)
+    {% end %}
   end
 
   def bCryptEnumRegisteredProviders(pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_PROVIDERS**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptEnumRegisteredProviders(pcbBuffer, ppBuffer)
+    {% end %}
   end
 
   def bCryptCreateContext(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, pConfig : Win32cr::Security::Cryptography::CRYPT_CONTEXT_CONFIG*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptCreateContext(dwTable, pszContext, pConfig)
+    {% end %}
   end
 
   def bCryptDeleteContext(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptDeleteContext(dwTable, pszContext)
+    {% end %}
   end
 
   def bCryptEnumContexts(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXTS**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptEnumContexts(dwTable, pcbBuffer, ppBuffer)
+    {% end %}
   end
 
   def bCryptConfigureContext(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, pConfig : Win32cr::Security::Cryptography::CRYPT_CONTEXT_CONFIG*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptConfigureContext(dwTable, pszContext, pConfig)
+    {% end %}
   end
 
   def bCryptQueryContextConfiguration(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXT_CONFIG**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptQueryContextConfiguration(dwTable, pszContext, pcbBuffer, ppBuffer)
+    {% end %}
   end
 
   def bCryptAddContextFunction(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, dwPosition : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptAddContextFunction(dwTable, pszContext, dwInterface, pszFunction, dwPosition)
+    {% end %}
   end
 
   def bCryptRemoveContextFunction(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptRemoveContextFunction(dwTable, pszContext, dwInterface, pszFunction)
+    {% end %}
   end
 
   def bCryptEnumContextFunctions(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXT_FUNCTIONS**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptEnumContextFunctions(dwTable, pszContext, dwInterface, pcbBuffer, ppBuffer)
+    {% end %}
   end
 
   def bCryptConfigureContextFunction(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pConfig : Win32cr::Security::Cryptography::CRYPT_CONTEXT_FUNCTION_CONFIG*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptConfigureContextFunction(dwTable, pszContext, dwInterface, pszFunction, pConfig)
+    {% end %}
   end
 
   def bCryptQueryContextFunctionConfiguration(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXT_FUNCTION_CONFIG**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptQueryContextFunctionConfiguration(dwTable, pszContext, dwInterface, pszFunction, pcbBuffer, ppBuffer)
+    {% end %}
   end
 
   def bCryptEnumContextFunctionProviders(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_CONTEXT_FUNCTION_PROVIDERS**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptEnumContextFunctionProviders(dwTable, pszContext, dwInterface, pszFunction, pcbBuffer, ppBuffer)
+    {% end %}
   end
 
   def bCryptSetContextFunctionProperty(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pszProperty : Win32cr::Foundation::PWSTR, cbValue : UInt32, pbValue : UInt8*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptSetContextFunctionProperty(dwTable, pszContext, dwInterface, pszFunction, pszProperty, cbValue, pbValue)
+    {% end %}
   end
 
   def bCryptQueryContextFunctionProperty(dwTable : Win32cr::Security::Cryptography::BCRYPT_TABLE, pszContext : Win32cr::Foundation::PWSTR, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pszFunction : Win32cr::Foundation::PWSTR, pszProperty : Win32cr::Foundation::PWSTR, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptQueryContextFunctionProperty(dwTable, pszContext, dwInterface, pszFunction, pszProperty, pcbValue, ppbValue)
+    {% end %}
   end
 
   def bCryptRegisterConfigChangeNotify(phEvent : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptRegisterConfigChangeNotify(phEvent)
+    {% end %}
   end
 
   def bCryptUnregisterConfigChangeNotify(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptUnregisterConfigChangeNotify(hEvent)
+    {% end %}
   end
 
   def bCryptResolveProviders(pszContext : Win32cr::Foundation::PWSTR, dwInterface : UInt32, pszFunction : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR, dwMode : Win32cr::Security::Cryptography::BCRYPT_QUERY_PROVIDER_MODE, dwFlags : Win32cr::Security::Cryptography::BCRYPT_RESOLVE_PROVIDERS_FLAGS, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_PROVIDER_REFS**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptResolveProviders(pszContext, dwInterface, pszFunction, pszProvider, dwMode, dwFlags, pcbBuffer, ppBuffer)
+    {% end %}
   end
 
   def bCryptGetFipsAlgorithmMode(pfEnabled : UInt8*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.BCryptGetFipsAlgorithmMode(pfEnabled)
+    {% end %}
   end
 
   def nCryptOpenStorageProvider(phProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE*, pszProviderName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptOpenStorageProvider(phProvider, pszProviderName, dwFlags)
+    {% end %}
   end
 
   def nCryptEnumAlgorithms(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, dwAlgOperations : Win32cr::Security::Cryptography::NCRYPT_OPERATION, pdwAlgCount : UInt32*, ppAlgList : Win32cr::Security::Cryptography::NCryptAlgorithmName**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptEnumAlgorithms(hProvider, dwAlgOperations, pdwAlgCount, ppAlgList, dwFlags)
+    {% end %}
   end
 
   def nCryptIsAlgSupported(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, pszAlgId : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptIsAlgSupported(hProvider, pszAlgId, dwFlags)
+    {% end %}
   end
 
   def nCryptEnumKeys(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, pszScope : Win32cr::Foundation::PWSTR, ppKeyName : Win32cr::Security::Cryptography::NCryptKeyName**, ppEnumState : Void**, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptEnumKeys(hProvider, pszScope, ppKeyName, ppEnumState, dwFlags)
+    {% end %}
   end
 
   def nCryptEnumStorageProviders(pdwProviderCount : UInt32*, ppProviderList : Win32cr::Security::Cryptography::NCryptProviderName**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptEnumStorageProviders(pdwProviderCount, ppProviderList, dwFlags)
+    {% end %}
   end
 
   def nCryptFreeBuffer(pvInput : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptFreeBuffer(pvInput)
+    {% end %}
   end
 
   def nCryptOpenKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pszKeyName : Win32cr::Foundation::PWSTR, dwLegacyKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptOpenKey(hProvider, phKey, pszKeyName, dwLegacyKeySpec, dwFlags)
+    {% end %}
   end
 
   def nCryptCreatePersistedKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pszAlgId : Win32cr::Foundation::PWSTR, pszKeyName : Win32cr::Foundation::PWSTR, dwLegacyKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptCreatePersistedKey(hProvider, phKey, pszAlgId, pszKeyName, dwLegacyKeySpec, dwFlags)
+    {% end %}
   end
 
   def nCryptGetProperty(hObject : Win32cr::Security::Cryptography::NCRYPT_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::OBJECT_SECURITY_INFORMATION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptGetProperty(hObject, pszProperty, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
   end
 
   def nCryptSetProperty(hObject : Win32cr::Security::Cryptography::NCRYPT_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, pbInput : UInt8*, cbInput : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptSetProperty(hObject, pszProperty, pbInput, cbInput, dwFlags)
+    {% end %}
   end
 
   def nCryptFinalizeKey(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptFinalizeKey(hKey, dwFlags)
+    {% end %}
   end
 
   def nCryptEncrypt(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptEncrypt(hKey, pbInput, cbInput, pPaddingInfo, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
   end
 
   def nCryptDecrypt(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptDecrypt(hKey, pbInput, cbInput, pPaddingInfo, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
+  end
+
+  def nCryptEncapsulate(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbSecretKey : UInt8*, cbSecretKey : UInt32, pcbSecretKey : UInt32*, pbCipherText : UInt8*, cbCipherText : UInt32, pcbCipherText : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.NCryptEncapsulate(hKey, pbSecretKey, cbSecretKey, pcbSecretKey, pbCipherText, cbCipherText, pcbCipherText, dwFlags)
+    {% end %}
+  end
+
+  def nCryptDecapsulate(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbCipherText : UInt8*, cbCipherText : UInt32, pbSecretKey : UInt8*, cbSecretKey : UInt32, pcbSecretKey : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.NCryptDecapsulate(hKey, pbCipherText, cbCipherText, pbSecretKey, cbSecretKey, pcbSecretKey, dwFlags)
+    {% end %}
   end
 
   def nCryptImportKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hImportKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pbData : UInt8*, cbData : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptImportKey(hProvider, hImportKey, pszBlobType, pParameterList, phKey, pbData, cbData, dwFlags)
+    {% end %}
   end
 
   def nCryptExportKey(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hExportKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptExportKey(hKey, hExportKey, pszBlobType, pParameterList, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
   end
 
   def nCryptSignHash(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHashValue : UInt8*, cbHashValue : UInt32, pbSignature : UInt8*, cbSignature : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptSignHash(hKey, pPaddingInfo, pbHashValue, cbHashValue, pbSignature, cbSignature, pcbResult, dwFlags)
+    {% end %}
   end
 
   def nCryptVerifySignature(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHashValue : UInt8*, cbHashValue : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptVerifySignature(hKey, pPaddingInfo, pbHashValue, cbHashValue, pbSignature, cbSignature, dwFlags)
+    {% end %}
   end
 
   def nCryptDeleteKey(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptDeleteKey(hKey, dwFlags)
+    {% end %}
   end
 
   def nCryptFreeObject(hObject : Win32cr::Security::Cryptography::NCRYPT_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptFreeObject(hObject)
+    {% end %}
   end
 
   def nCryptIsKeyHandle(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.NCryptIsKeyHandle(hKey)
+    {% end %}
   end
 
   def nCryptTranslateHandle(phProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE*, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, hLegacyProv : LibC::UIntPtrT, hLegacyKey : LibC::UIntPtrT, dwLegacyKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptTranslateHandle(phProvider, phKey, hLegacyProv, hLegacyKey, dwLegacyKeySpec, dwFlags)
+    {% end %}
   end
 
   def nCryptNotifyChangeKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phEvent : Win32cr::Foundation::HANDLE*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptNotifyChangeKey(hProvider, phEvent, dwFlags)
+    {% end %}
   end
 
   def nCryptSecretAgreement(hPrivKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hPubKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phAgreedSecret : Win32cr::Security::Cryptography::NCRYPT_SECRET_HANDLE*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptSecretAgreement(hPrivKey, hPubKey, phAgreedSecret, dwFlags)
+    {% end %}
   end
 
   def nCryptDeriveKey(hSharedSecret : Win32cr::Security::Cryptography::NCRYPT_SECRET_HANDLE, pwszKDF : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptDeriveKey(hSharedSecret, pwszKDF, pParameterList, pbDerivedKey, cbDerivedKey, pcbResult, dwFlags)
+    {% end %}
   end
 
   def nCryptKeyDerivation(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptKeyDerivation(hKey, pParameterList, pbDerivedKey, cbDerivedKey, pcbResult, dwFlags)
+    {% end %}
   end
 
   def nCryptCreateClaim(hSubjectKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hAuthorityKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwClaimType : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbClaimBlob : UInt8*, cbClaimBlob : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptCreateClaim(hSubjectKey, hAuthorityKey, dwClaimType, pParameterList, pbClaimBlob, cbClaimBlob, pcbResult, dwFlags)
+    {% end %}
   end
 
   def nCryptVerifyClaim(hSubjectKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hAuthorityKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwClaimType : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbClaimBlob : UInt8*, cbClaimBlob : UInt32, pOutput : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptVerifyClaim(hSubjectKey, hAuthorityKey, dwClaimType, pParameterList, pbClaimBlob, cbClaimBlob, pOutput, dwFlags)
+    {% end %}
   end
 
-  def cryptFormatObject(dwCertEncodingType : UInt32, dwFormatType : UInt32, dwFormatStrType : UInt32, pFormatStruct : Void*, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, pbFormat : Void*, pcbFormat : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptFormatObject(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFormatType : UInt32, dwFormatStrType : UInt32, pFormatStruct : Void*, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, pbFormat : Void*, pcbFormat : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptFormatObject(dwCertEncodingType, dwFormatType, dwFormatStrType, pFormatStruct, lpszStructType, pbEncoded, cbEncoded, pbFormat, pcbFormat)
+    {% end %}
   end
 
   def cryptEncodeObjectEx(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_ENCODE_OBJECT_FLAGS, pEncodePara : Win32cr::Security::Cryptography::CRYPT_ENCODE_PARA*, pvEncoded : Void*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEncodeObjectEx(dwCertEncodingType, lpszStructType, pvStructInfo, dwFlags, pEncodePara, pvEncoded, pcbEncoded)
+    {% end %}
   end
 
-  def cryptEncodeObject(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptEncodeObject(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEncodeObject(dwCertEncodingType, lpszStructType, pvStructInfo, pbEncoded, pcbEncoded)
+    {% end %}
   end
 
-  def cryptDecodeObjectEx(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pDecodePara : Win32cr::Security::Cryptography::CRYPT_DECODE_PARA*, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptDecodeObjectEx(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pDecodePara : Win32cr::Security::Cryptography::CRYPT_DECODE_PARA*, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDecodeObjectEx(dwCertEncodingType, lpszStructType, pbEncoded, cbEncoded, dwFlags, pDecodePara, pvStructInfo, pcbStructInfo)
+    {% end %}
   end
 
-  def cryptDecodeObject(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptDecodeObject(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDecodeObject(dwCertEncodingType, lpszStructType, pbEncoded, cbEncoded, dwFlags, pvStructInfo, pcbStructInfo)
+    {% end %}
   end
 
-  def cryptInstallOIDFunctionAddress(hModule : Win32cr::Foundation::HINSTANCE, dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, cFuncEntry : UInt32, rgFuncEntry : Win32cr::Security::Cryptography::CRYPT_OID_FUNC_ENTRY*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+  def cryptInstallOIDFunctionAddress(hModule : Win32cr::Foundation::HMODULE, dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, cFuncEntry : UInt32, rgFuncEntry : Win32cr::Security::Cryptography::CRYPT_OID_FUNC_ENTRY*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptInstallOIDFunctionAddress(hModule, dwEncodingType, pszFuncName, cFuncEntry, rgFuncEntry, dwFlags)
+    {% end %}
   end
 
   def cryptInitOIDFunctionSet(pszFuncName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.CryptInitOIDFunctionSet(pszFuncName, dwFlags)
+    {% end %}
   end
 
   def cryptGetOIDFunctionAddress(hFuncSet : Void*, dwEncodingType : UInt32, pszOID : Win32cr::Foundation::PSTR, dwFlags : UInt32, ppvFuncAddr : Void**, phFuncAddr : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetOIDFunctionAddress(hFuncSet, dwEncodingType, pszOID, dwFlags, ppvFuncAddr, phFuncAddr)
+    {% end %}
   end
 
-  def cryptGetDefaultOIDDllList(hFuncSet : Void*, dwEncodingType : UInt32, pwszDllList : UInt16*, pcchDllList : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptGetDefaultOIDDllList(hFuncSet : Void*, dwEncodingType : UInt32, pwszDllList : Win32cr::Foundation::PWSTR, pcchDllList : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetDefaultOIDDllList(hFuncSet, dwEncodingType, pwszDllList, pcchDllList)
+    {% end %}
   end
 
   def cryptGetDefaultOIDFunctionAddress(hFuncSet : Void*, dwEncodingType : UInt32, pwszDll : Win32cr::Foundation::PWSTR, dwFlags : UInt32, ppvFuncAddr : Void**, phFuncAddr : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetDefaultOIDFunctionAddress(hFuncSet, dwEncodingType, pwszDll, dwFlags, ppvFuncAddr, phFuncAddr)
+    {% end %}
   end
 
   def cryptFreeOIDFunctionAddress(hFuncAddr : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptFreeOIDFunctionAddress(hFuncAddr, dwFlags)
+    {% end %}
   end
 
   def cryptRegisterOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR, pwszDll : Win32cr::Foundation::PWSTR, pszOverrideFuncName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptRegisterOIDFunction(dwEncodingType, pszFuncName, pszOID, pwszDll, pszOverrideFuncName)
+    {% end %}
   end
 
   def cryptUnregisterOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUnregisterOIDFunction(dwEncodingType, pszFuncName, pszOID)
+    {% end %}
   end
 
   def cryptRegisterDefaultOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, dwIndex : UInt32, pwszDll : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptRegisterDefaultOIDFunction(dwEncodingType, pszFuncName, dwIndex, pwszDll)
+    {% end %}
   end
 
   def cryptUnregisterDefaultOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pwszDll : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUnregisterDefaultOIDFunction(dwEncodingType, pszFuncName, pwszDll)
+    {% end %}
   end
 
   def cryptSetOIDFunctionValue(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR, pwszValueName : Win32cr::Foundation::PWSTR, dwValueType : Win32cr::System::Registry::REG_VALUE_TYPE, pbValueData : UInt8*, cbValueData : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetOIDFunctionValue(dwEncodingType, pszFuncName, pszOID, pwszValueName, dwValueType, pbValueData, cbValueData)
+    {% end %}
   end
 
   def cryptGetOIDFunctionValue(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR, pwszValueName : Win32cr::Foundation::PWSTR, pdwValueType : UInt32*, pbValueData : UInt8*, pcbValueData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetOIDFunctionValue(dwEncodingType, pszFuncName, pszOID, pwszValueName, pdwValueType, pbValueData, pcbValueData)
+    {% end %}
   end
 
   def cryptEnumOIDFunction(dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, pszOID : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvArg : Void*, pfnEnumOIDFunc : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_OID_FUNC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEnumOIDFunction(dwEncodingType, pszFuncName, pszOID, dwFlags, pvArg, pfnEnumOIDFunc)
+    {% end %}
   end
 
   def cryptFindOIDInfo(dwKeyType : UInt32, pvKey : Void*, dwGroupId : UInt32) : Win32cr::Security::Cryptography::CRYPT_OID_INFO*
+    {% if !flag?(:docs) %}
     C.CryptFindOIDInfo(dwKeyType, pvKey, dwGroupId)
+    {% end %}
   end
 
   def cryptRegisterOIDInfo(pInfo : Win32cr::Security::Cryptography::CRYPT_OID_INFO*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptRegisterOIDInfo(pInfo, dwFlags)
+    {% end %}
   end
 
   def cryptUnregisterOIDInfo(pInfo : Win32cr::Security::Cryptography::CRYPT_OID_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUnregisterOIDInfo(pInfo)
+    {% end %}
   end
 
   def cryptEnumOIDInfo(dwGroupId : UInt32, dwFlags : UInt32, pvArg : Void*, pfnEnumOIDInfo : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_OID_INFO) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEnumOIDInfo(dwGroupId, dwFlags, pvArg, pfnEnumOIDInfo)
+    {% end %}
   end
 
   def cryptFindLocalizedName(pwszCryptName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.CryptFindLocalizedName(pwszCryptName)
+    {% end %}
   end
 
   def cryptMsgOpenToEncode(dwMsgEncodingType : UInt32, dwFlags : UInt32, dwMsgType : Win32cr::Security::Cryptography::CRYPT_MSG_TYPE, pvMsgEncodeInfo : Void*, pszInnerContentObjID : Win32cr::Foundation::PSTR, pStreamInfo : Win32cr::Security::Cryptography::CMSG_STREAM_INFO*) : Void*
+    {% if !flag?(:docs) %}
     C.CryptMsgOpenToEncode(dwMsgEncodingType, dwFlags, dwMsgType, pvMsgEncodeInfo, pszInnerContentObjID, pStreamInfo)
+    {% end %}
   end
 
   def cryptMsgCalculateEncodedLength(dwMsgEncodingType : UInt32, dwFlags : UInt32, dwMsgType : UInt32, pvMsgEncodeInfo : Void*, pszInnerContentObjID : Win32cr::Foundation::PSTR, cbData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CryptMsgCalculateEncodedLength(dwMsgEncodingType, dwFlags, dwMsgType, pvMsgEncodeInfo, pszInnerContentObjID, cbData)
+    {% end %}
   end
 
   def cryptMsgOpenToDecode(dwMsgEncodingType : UInt32, dwFlags : UInt32, dwMsgType : UInt32, hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, pRecipientInfo : Win32cr::Security::Cryptography::CERT_INFO*, pStreamInfo : Win32cr::Security::Cryptography::CMSG_STREAM_INFO*) : Void*
+    {% if !flag?(:docs) %}
     C.CryptMsgOpenToDecode(dwMsgEncodingType, dwFlags, dwMsgType, hCryptProv, pRecipientInfo, pStreamInfo)
+    {% end %}
   end
 
   def cryptMsgDuplicate(hCryptMsg : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.CryptMsgDuplicate(hCryptMsg)
+    {% end %}
   end
 
   def cryptMsgClose(hCryptMsg : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgClose(hCryptMsg)
+    {% end %}
   end
 
   def cryptMsgUpdate(hCryptMsg : Void*, pbData : UInt8*, cbData : UInt32, fFinal : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgUpdate(hCryptMsg, pbData, cbData, fFinal)
+    {% end %}
   end
 
   def cryptMsgGetParam(hCryptMsg : Void*, dwParamType : UInt32, dwIndex : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgGetParam(hCryptMsg, dwParamType, dwIndex, pvData, pcbData)
+    {% end %}
   end
 
   def cryptMsgControl(hCryptMsg : Void*, dwFlags : UInt32, dwCtrlType : UInt32, pvCtrlPara : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgControl(hCryptMsg, dwFlags, dwCtrlType, pvCtrlPara)
+    {% end %}
   end
 
   def cryptMsgVerifyCountersignatureEncoded(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwEncodingType : UInt32, pbSignerInfo : UInt8*, cbSignerInfo : UInt32, pbSignerInfoCountersignature : UInt8*, cbSignerInfoCountersignature : UInt32, pciCountersigner : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgVerifyCountersignatureEncoded(hCryptProv, dwEncodingType, pbSignerInfo, cbSignerInfo, pbSignerInfoCountersignature, cbSignerInfoCountersignature, pciCountersigner)
+    {% end %}
   end
 
   def cryptMsgVerifyCountersignatureEncodedEx(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwEncodingType : UInt32, pbSignerInfo : UInt8*, cbSignerInfo : UInt32, pbSignerInfoCountersignature : UInt8*, cbSignerInfoCountersignature : UInt32, dwSignerType : UInt32, pvSigner : Void*, dwFlags : UInt32, pvExtra : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgVerifyCountersignatureEncodedEx(hCryptProv, dwEncodingType, pbSignerInfo, cbSignerInfo, pbSignerInfoCountersignature, cbSignerInfoCountersignature, dwSignerType, pvSigner, dwFlags, pvExtra)
+    {% end %}
   end
 
   def cryptMsgCountersign(hCryptMsg : Void*, dwIndex : UInt32, cCountersigners : UInt32, rgCountersigners : Win32cr::Security::Cryptography::CMSG_SIGNER_ENCODE_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgCountersign(hCryptMsg, dwIndex, cCountersigners, rgCountersigners)
+    {% end %}
   end
 
   def cryptMsgCountersignEncoded(dwEncodingType : UInt32, pbSignerInfo : UInt8*, cbSignerInfo : UInt32, cCountersigners : UInt32, rgCountersigners : Win32cr::Security::Cryptography::CMSG_SIGNER_ENCODE_INFO*, pbCountersignature : UInt8*, pcbCountersignature : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgCountersignEncoded(dwEncodingType, pbSignerInfo, cbSignerInfo, cCountersigners, rgCountersigners, pbCountersignature, pcbCountersignature)
+    {% end %}
   end
 
   def certOpenStore(lpszStoreProvider : Win32cr::Foundation::PSTR, dwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwFlags : Win32cr::Security::Cryptography::CERT_OPEN_STORE_FLAGS, pvPara : Void*) : Win32cr::Security::Cryptography::HCERTSTORE
+    {% if !flag?(:docs) %}
     C.CertOpenStore(lpszStoreProvider, dwEncodingType, hCryptProv, dwFlags, pvPara)
+    {% end %}
   end
 
   def certDuplicateStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE) : Win32cr::Security::Cryptography::HCERTSTORE
+    {% if !flag?(:docs) %}
     C.CertDuplicateStore(hCertStore)
+    {% end %}
   end
 
   def certSaveStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwSaveAs : Win32cr::Security::Cryptography::CERT_STORE_SAVE_AS, dwSaveTo : Win32cr::Security::Cryptography::CERT_STORE_SAVE_TO, pvSaveToPara : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSaveStore(hCertStore, dwEncodingType, dwSaveAs, dwSaveTo, pvSaveToPara, dwFlags)
+    {% end %}
   end
 
   #def certCloseStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwFlags : UInt32) : Win32cr::Foundation::BOOL
     #C.CertCloseStore(hCertStore, dwFlags)
   #end
 
-  def certGetSubjectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pCertId : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+  def certGetSubjectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertId : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertGetSubjectCertificateFromStore(hCertStore, dwCertEncodingType, pCertId)
+    {% end %}
   end
 
   #def certEnumCertificatesInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
     #C.CertEnumCertificatesInStore(hCertStore, pPrevCertContext)
   #end
 
-  def certFindCertificateInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_FLAGS, pvFindPara : Void*, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+  def certFindCertificateInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_FLAGS, pvFindPara : Void*, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertFindCertificateInStore(hCertStore, dwCertEncodingType, dwFindFlags, dwFindType, pvFindPara, pPrevCertContext)
+    {% end %}
   end
 
   def certGetIssuerCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pSubjectContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPrevIssuerContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pdwFlags : UInt32*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertGetIssuerCertificateFromStore(hCertStore, pSubjectContext, pPrevIssuerContext, pdwFlags)
+    {% end %}
   end
 
   def certVerifySubjectCertificateContext(pSubject : Win32cr::Security::Cryptography::CERT_CONTEXT*, pIssuer : Win32cr::Security::Cryptography::CERT_CONTEXT*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertVerifySubjectCertificateContext(pSubject, pIssuer, pdwFlags)
+    {% end %}
   end
 
   def certDuplicateCertificateContext(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertDuplicateCertificateContext(pCertContext)
+    {% end %}
   end
 
-  def certCreateCertificateContext(dwCertEncodingType : UInt32, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+  def certCreateCertificateContext(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertCreateCertificateContext(dwCertEncodingType, pbCertEncoded, cbCertEncoded)
+    {% end %}
   end
 
   def certFreeCertificateContext(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertFreeCertificateContext(pCertContext)
+    {% end %}
   end
 
   def certSetCertificateContextProperty(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwPropId : UInt32, dwFlags : UInt32, pvData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSetCertificateContextProperty(pCertContext, dwPropId, dwFlags, pvData)
+    {% end %}
   end
 
   def certGetCertificateContextProperty(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwPropId : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertGetCertificateContextProperty(pCertContext, dwPropId, pvData, pcbData)
+    {% end %}
   end
 
   def certEnumCertificateContextProperties(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwPropId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertEnumCertificateContextProperties(pCertContext, dwPropId)
+    {% end %}
   end
 
   def certCreateCTLEntryFromCertificateContextProperties(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, cOptAttr : UInt32, rgOptAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*, dwFlags : UInt32, pvReserved : Void*, pCtlEntry : Win32cr::Security::Cryptography::CTL_ENTRY*, pcbCtlEntry : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertCreateCTLEntryFromCertificateContextProperties(pCertContext, cOptAttr, rgOptAttr, dwFlags, pvReserved, pCtlEntry, pcbCtlEntry)
+    {% end %}
   end
 
   def certSetCertificateContextPropertiesFromCTLEntry(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pCtlEntry : Win32cr::Security::Cryptography::CTL_ENTRY*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSetCertificateContextPropertiesFromCTLEntry(pCertContext, pCtlEntry, dwFlags)
+    {% end %}
   end
 
   def certGetCRLFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pIssuerContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, pdwFlags : UInt32*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertGetCRLFromStore(hCertStore, pIssuerContext, pPrevCrlContext, pdwFlags)
+    {% end %}
   end
 
   def certEnumCRLsInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertEnumCRLsInStore(hCertStore, pPrevCrlContext)
+    {% end %}
   end
 
-  def certFindCRLInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : UInt32, pvFindPara : Void*, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+  def certFindCRLInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFindFlags : UInt32, dwFindType : UInt32, pvFindPara : Void*, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertFindCRLInStore(hCertStore, dwCertEncodingType, dwFindFlags, dwFindType, pvFindPara, pPrevCrlContext)
+    {% end %}
   end
 
   def certDuplicateCRLContext(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertDuplicateCRLContext(pCrlContext)
+    {% end %}
   end
 
-  def certCreateCRLContext(dwCertEncodingType : UInt32, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+  def certCreateCRLContext(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertCreateCRLContext(dwCertEncodingType, pbCrlEncoded, cbCrlEncoded)
+    {% end %}
   end
 
   def certFreeCRLContext(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertFreeCRLContext(pCrlContext)
+    {% end %}
   end
 
   def certSetCRLContextProperty(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwPropId : UInt32, dwFlags : UInt32, pvData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSetCRLContextProperty(pCrlContext, dwPropId, dwFlags, pvData)
+    {% end %}
   end
 
   def certGetCRLContextProperty(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwPropId : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertGetCRLContextProperty(pCrlContext, dwPropId, pvData, pcbData)
+    {% end %}
   end
 
   def certEnumCRLContextProperties(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwPropId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertEnumCRLContextProperties(pCrlContext, dwPropId)
+    {% end %}
   end
 
   def certFindCertificateInCRL(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*, ppCrlEntry : Win32cr::Security::Cryptography::CRL_ENTRY**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertFindCertificateInCRL(pCert, pCrlContext, dwFlags, pvReserved, ppCrlEntry)
+    {% end %}
   end
 
   def certIsValidCRLForCertificate(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pCrl : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertIsValidCRLForCertificate(pCert, pCrl, dwFlags, pvReserved)
+    {% end %}
   end
 
-  def certAddEncodedCertificateToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pbCertEncoded : UInt8*, cbCertEncoded : UInt32, dwAddDisposition : UInt32, ppCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+  def certAddEncodedCertificateToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCertEncoded : UInt8*, cbCertEncoded : UInt32, dwAddDisposition : UInt32, ppCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddEncodedCertificateToStore(hCertStore, dwCertEncodingType, pbCertEncoded, cbCertEncoded, dwAddDisposition, ppCertContext)
+    {% end %}
   end
 
   def certAddCertificateContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddCertificateContextToStore(hCertStore, pCertContext, dwAddDisposition, ppStoreContext)
+    {% end %}
   end
 
   def certAddSerializedElementToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pbElement : UInt8*, cbElement : UInt32, dwAddDisposition : UInt32, dwFlags : UInt32, dwContextTypeFlags : UInt32, pdwContextType : UInt32*, ppvContext : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddSerializedElementToStore(hCertStore, pbElement, cbElement, dwAddDisposition, dwFlags, dwContextTypeFlags, pdwContextType, ppvContext)
+    {% end %}
   end
 
   def certDeleteCertificateFromStore(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertDeleteCertificateFromStore(pCertContext)
+    {% end %}
   end
 
-  def certAddEncodedCRLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32, dwAddDisposition : UInt32, ppCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
+  def certAddEncodedCRLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32, dwAddDisposition : UInt32, ppCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddEncodedCRLToStore(hCertStore, dwCertEncodingType, pbCrlEncoded, cbCrlEncoded, dwAddDisposition, ppCrlContext)
+    {% end %}
   end
 
   def certAddCRLContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddCRLContextToStore(hCertStore, pCrlContext, dwAddDisposition, ppStoreContext)
+    {% end %}
   end
 
   def certDeleteCRLFromStore(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertDeleteCRLFromStore(pCrlContext)
+    {% end %}
   end
 
   def certSerializeCertificateStoreElement(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32, pbElement : UInt8*, pcbElement : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSerializeCertificateStoreElement(pCertContext, dwFlags, pbElement, pcbElement)
+    {% end %}
   end
 
   def certSerializeCRLStoreElement(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwFlags : UInt32, pbElement : UInt8*, pcbElement : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSerializeCRLStoreElement(pCrlContext, dwFlags, pbElement, pcbElement)
+    {% end %}
   end
 
   def certDuplicateCTLContext(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Security::Cryptography::CTL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertDuplicateCTLContext(pCtlContext)
+    {% end %}
   end
 
   def certCreateCTLContext(dwMsgAndCertEncodingType : UInt32, pbCtlEncoded : UInt8*, cbCtlEncoded : UInt32) : Win32cr::Security::Cryptography::CTL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertCreateCTLContext(dwMsgAndCertEncodingType, pbCtlEncoded, cbCtlEncoded)
+    {% end %}
   end
 
   def certFreeCTLContext(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertFreeCTLContext(pCtlContext)
+    {% end %}
   end
 
   def certSetCTLContextProperty(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwPropId : UInt32, dwFlags : UInt32, pvData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSetCTLContextProperty(pCtlContext, dwPropId, dwFlags, pvData)
+    {% end %}
   end
 
   def certGetCTLContextProperty(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwPropId : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertGetCTLContextProperty(pCtlContext, dwPropId, pvData, pcbData)
+    {% end %}
   end
 
   def certEnumCTLContextProperties(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwPropId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertEnumCTLContextProperties(pCtlContext, dwPropId)
+    {% end %}
   end
 
   def certEnumCTLsInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Security::Cryptography::CTL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertEnumCTLsInStore(hCertStore, pPrevCtlContext)
+    {% end %}
   end
 
   def certFindSubjectInCTL(dwEncodingType : UInt32, dwSubjectType : UInt32, pvSubject : Void*, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32) : Win32cr::Security::Cryptography::CTL_ENTRY*
+    {% if !flag?(:docs) %}
     C.CertFindSubjectInCTL(dwEncodingType, dwSubjectType, pvSubject, pCtlContext, dwFlags)
+    {% end %}
   end
 
   def certFindCTLInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwMsgAndCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_TYPE, pvFindPara : Void*, pPrevCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Security::Cryptography::CTL_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertFindCTLInStore(hCertStore, dwMsgAndCertEncodingType, dwFindFlags, dwFindType, pvFindPara, pPrevCtlContext)
+    {% end %}
   end
 
-  def certAddEncodedCTLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwMsgAndCertEncodingType : UInt32, pbCtlEncoded : UInt8*, cbCtlEncoded : UInt32, dwAddDisposition : UInt32, ppCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
+  def certAddEncodedCTLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwMsgAndCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCtlEncoded : UInt8*, cbCtlEncoded : UInt32, dwAddDisposition : UInt32, ppCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddEncodedCTLToStore(hCertStore, dwMsgAndCertEncodingType, pbCtlEncoded, cbCtlEncoded, dwAddDisposition, ppCtlContext)
+    {% end %}
   end
 
   def certAddCTLContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddCTLContextToStore(hCertStore, pCtlContext, dwAddDisposition, ppStoreContext)
+    {% end %}
   end
 
   def certSerializeCTLStoreElement(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32, pbElement : UInt8*, pcbElement : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSerializeCTLStoreElement(pCtlContext, dwFlags, pbElement, pcbElement)
+    {% end %}
   end
 
   def certDeleteCTLFromStore(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertDeleteCTLFromStore(pCtlContext)
+    {% end %}
   end
 
   def certAddCertificateLinkToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddCertificateLinkToStore(hCertStore, pCertContext, dwAddDisposition, ppStoreContext)
+    {% end %}
   end
 
   def certAddCRLLinkToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddCRLLinkToStore(hCertStore, pCrlContext, dwAddDisposition, ppStoreContext)
+    {% end %}
   end
 
   def certAddCTLLinkToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddCTLLinkToStore(hCertStore, pCtlContext, dwAddDisposition, ppStoreContext)
+    {% end %}
   end
 
   def certAddStoreToCollection(hCollectionStore : Win32cr::Security::Cryptography::HCERTSTORE, hSiblingStore : Win32cr::Security::Cryptography::HCERTSTORE, dwUpdateFlags : UInt32, dwPriority : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddStoreToCollection(hCollectionStore, hSiblingStore, dwUpdateFlags, dwPriority)
+    {% end %}
   end
 
   def certRemoveStoreFromCollection(hCollectionStore : Win32cr::Security::Cryptography::HCERTSTORE, hSiblingStore : Win32cr::Security::Cryptography::HCERTSTORE) : Void
+    {% if !flag?(:docs) %}
     C.CertRemoveStoreFromCollection(hCollectionStore, hSiblingStore)
+    {% end %}
   end
 
   def certControlStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwFlags : Win32cr::Security::Cryptography::CERT_CONTROL_STORE_FLAGS, dwCtrlType : UInt32, pvCtrlPara : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertControlStore(hCertStore, dwFlags, dwCtrlType, pvCtrlPara)
+    {% end %}
   end
 
   def certSetStoreProperty(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwPropId : UInt32, dwFlags : UInt32, pvData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSetStoreProperty(hCertStore, dwPropId, dwFlags, pvData)
+    {% end %}
   end
 
   def certGetStoreProperty(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwPropId : UInt32, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertGetStoreProperty(hCertStore, dwPropId, pvData, pcbData)
+    {% end %}
   end
 
   def certCreateContext(dwContextType : UInt32, dwEncodingType : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pCreatePara : Win32cr::Security::Cryptography::CERT_CREATE_CONTEXT_PARA*) : Void*
+    {% if !flag?(:docs) %}
     C.CertCreateContext(dwContextType, dwEncodingType, pbEncoded, cbEncoded, dwFlags, pCreatePara)
+    {% end %}
   end
 
   def certRegisterSystemStore(pvSystemStore : Void*, dwFlags : UInt32, pStoreInfo : Win32cr::Security::Cryptography::CERT_SYSTEM_STORE_INFO*, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertRegisterSystemStore(pvSystemStore, dwFlags, pStoreInfo, pvReserved)
+    {% end %}
   end
 
   def certRegisterPhysicalStore(pvSystemStore : Void*, dwFlags : UInt32, pwszStoreName : Win32cr::Foundation::PWSTR, pStoreInfo : Win32cr::Security::Cryptography::CERT_PHYSICAL_STORE_INFO*, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertRegisterPhysicalStore(pvSystemStore, dwFlags, pwszStoreName, pStoreInfo, pvReserved)
+    {% end %}
   end
 
   def certUnregisterSystemStore(pvSystemStore : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertUnregisterSystemStore(pvSystemStore, dwFlags)
+    {% end %}
   end
 
   def certUnregisterPhysicalStore(pvSystemStore : Void*, dwFlags : UInt32, pwszStoreName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertUnregisterPhysicalStore(pvSystemStore, dwFlags, pwszStoreName)
+    {% end %}
   end
 
   def certEnumSystemStoreLocation(dwFlags : UInt32, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CERT_ENUM_SYSTEM_STORE_LOCATION) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertEnumSystemStoreLocation(dwFlags, pvArg, pfnEnum)
+    {% end %}
   end
 
   def certEnumSystemStore(dwFlags : UInt32, pvSystemStoreLocationPara : Void*, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CERT_ENUM_SYSTEM_STORE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertEnumSystemStore(dwFlags, pvSystemStoreLocationPara, pvArg, pfnEnum)
+    {% end %}
   end
 
   def certEnumPhysicalStore(pvSystemStore : Void*, dwFlags : UInt32, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CERT_ENUM_PHYSICAL_STORE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertEnumPhysicalStore(pvSystemStore, dwFlags, pvArg, pfnEnum)
+    {% end %}
   end
 
   #def certGetEnhancedKeyUsage(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32, pUsage : Win32cr::Security::Cryptography::CTL_USAGE*, pcbUsage : UInt32*) : Win32cr::Foundation::BOOL
@@ -9222,291 +11670,435 @@ module Win32cr::Security::Cryptography
   #end
 
   def certSetEnhancedKeyUsage(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pUsage : Win32cr::Security::Cryptography::CTL_USAGE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSetEnhancedKeyUsage(pCertContext, pUsage)
+    {% end %}
   end
 
   def certAddEnhancedKeyUsageIdentifier(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pszUsageIdentifier : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddEnhancedKeyUsageIdentifier(pCertContext, pszUsageIdentifier)
+    {% end %}
   end
 
   def certRemoveEnhancedKeyUsageIdentifier(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pszUsageIdentifier : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertRemoveEnhancedKeyUsageIdentifier(pCertContext, pszUsageIdentifier)
+    {% end %}
   end
 
   def certGetValidUsages(cCerts : UInt32, rghCerts : Win32cr::Security::Cryptography::CERT_CONTEXT**, cNumOIDs : Int32*, rghOIDs : Win32cr::Foundation::PSTR*, pcbOIDs : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertGetValidUsages(cCerts, rghCerts, cNumOIDs, rghOIDs, pcbOIDs)
+    {% end %}
   end
 
   def cryptMsgGetAndVerifySigner(hCryptMsg : Void*, cSignerStore : UInt32, rghSignerStore : Win32cr::Security::Cryptography::HCERTSTORE*, dwFlags : UInt32, ppSigner : Win32cr::Security::Cryptography::CERT_CONTEXT**, pdwSignerIndex : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgGetAndVerifySigner(hCryptMsg, cSignerStore, rghSignerStore, dwFlags, ppSigner, pdwSignerIndex)
+    {% end %}
   end
 
   def cryptMsgSignCTL(dwMsgEncodingType : UInt32, pbCtlContent : UInt8*, cbCtlContent : UInt32, pSignInfo : Win32cr::Security::Cryptography::CMSG_SIGNED_ENCODE_INFO*, dwFlags : UInt32, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgSignCTL(dwMsgEncodingType, pbCtlContent, cbCtlContent, pSignInfo, dwFlags, pbEncoded, pcbEncoded)
+    {% end %}
   end
 
   def cryptMsgEncodeAndSignCTL(dwMsgEncodingType : UInt32, pCtlInfo : Win32cr::Security::Cryptography::CTL_INFO*, pSignInfo : Win32cr::Security::Cryptography::CMSG_SIGNED_ENCODE_INFO*, dwFlags : UInt32, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptMsgEncodeAndSignCTL(dwMsgEncodingType, pCtlInfo, pSignInfo, dwFlags, pbEncoded, pcbEncoded)
+    {% end %}
   end
 
-  def certFindSubjectInSortedCTL(pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+  def certFindSubjectInSortedCTL(pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertFindSubjectInSortedCTL(pSubjectIdentifier, pCtlContext, dwFlags, pvReserved, pEncodedAttributes)
+    {% end %}
   end
 
-  def certEnumSubjectInSortedCTL(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, ppvNextSubject : Void**, pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+  def certEnumSubjectInSortedCTL(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, ppvNextSubject : Void**, pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertEnumSubjectInSortedCTL(pCtlContext, ppvNextSubject, pSubjectIdentifier, pEncodedAttributes)
+    {% end %}
   end
 
   def certVerifyCTLUsage(dwEncodingType : UInt32, dwSubjectType : UInt32, pvSubject : Void*, pSubjectUsage : Win32cr::Security::Cryptography::CTL_USAGE*, dwFlags : UInt32, pVerifyUsagePara : Win32cr::Security::Cryptography::CTL_VERIFY_USAGE_PARA*, pVerifyUsageStatus : Win32cr::Security::Cryptography::CTL_VERIFY_USAGE_STATUS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertVerifyCTLUsage(dwEncodingType, dwSubjectType, pvSubject, pSubjectUsage, dwFlags, pVerifyUsagePara, pVerifyUsageStatus)
+    {% end %}
   end
 
   def certVerifyRevocation(dwEncodingType : UInt32, dwRevType : UInt32, cContext : UInt32, rgpvContext : Void**, dwFlags : UInt32, pRevPara : Win32cr::Security::Cryptography::CERT_REVOCATION_PARA*, pRevStatus : Win32cr::Security::Cryptography::CERT_REVOCATION_STATUS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertVerifyRevocation(dwEncodingType, dwRevType, cContext, rgpvContext, dwFlags, pRevPara, pRevStatus)
+    {% end %}
   end
 
-  def certCompareIntegerBlob(pInt1 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pInt2 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+  def certCompareIntegerBlob(pInt1 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pInt2 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertCompareIntegerBlob(pInt1, pInt2)
+    {% end %}
   end
 
-  def certCompareCertificate(dwCertEncodingType : UInt32, pCertId1 : Win32cr::Security::Cryptography::CERT_INFO*, pCertId2 : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+  def certCompareCertificate(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertId1 : Win32cr::Security::Cryptography::CERT_INFO*, pCertId2 : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertCompareCertificate(dwCertEncodingType, pCertId1, pCertId2)
+    {% end %}
   end
 
-  def certCompareCertificateName(dwCertEncodingType : UInt32, pCertName1 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pCertName2 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+  def certCompareCertificateName(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertName1 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pCertName2 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertCompareCertificateName(dwCertEncodingType, pCertName1, pCertName2)
+    {% end %}
   end
 
-  def certIsRDNAttrsInCertificateName(dwCertEncodingType : UInt32, dwFlags : UInt32, pCertName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pRDN : Win32cr::Security::Cryptography::CERT_RDN*) : Win32cr::Foundation::BOOL
+  def certIsRDNAttrsInCertificateName(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFlags : UInt32, pCertName : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pRDN : Win32cr::Security::Cryptography::CERT_RDN*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertIsRDNAttrsInCertificateName(dwCertEncodingType, dwFlags, pCertName, pRDN)
+    {% end %}
   end
 
-  def certComparePublicKeyInfo(dwCertEncodingType : UInt32, pPublicKey1 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pPublicKey2 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
+  def certComparePublicKeyInfo(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pPublicKey1 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pPublicKey2 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertComparePublicKeyInfo(dwCertEncodingType, pPublicKey1, pPublicKey2)
+    {% end %}
   end
 
-  def certGetPublicKeyLength(dwCertEncodingType : UInt32, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : UInt32
+  def certGetPublicKeyLength(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.CertGetPublicKeyLength(dwCertEncodingType, pPublicKey)
+    {% end %}
   end
 
-  def cryptVerifyCertificateSignature(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
+  def cryptVerifyCertificateSignature(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbEncoded : UInt8*, cbEncoded : UInt32, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifyCertificateSignature(hCryptProv, dwCertEncodingType, pbEncoded, cbEncoded, pPublicKey)
+    {% end %}
   end
 
-  def cryptVerifyCertificateSignatureEx(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, dwSubjectType : UInt32, pvSubject : Void*, dwIssuerType : UInt32, pvIssuer : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_VERIFY_CERT_FLAGS, pvExtra : Void*) : Win32cr::Foundation::BOOL
+  def cryptVerifyCertificateSignatureEx(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwSubjectType : UInt32, pvSubject : Void*, dwIssuerType : UInt32, pvIssuer : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_VERIFY_CERT_FLAGS, pvExtra : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifyCertificateSignatureEx(hCryptProv, dwCertEncodingType, dwSubjectType, pvSubject, dwIssuerType, pvIssuer, dwFlags, pvExtra)
+    {% end %}
   end
 
   def certIsStrongHashToSign(pStrongSignPara : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, pSigningCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertIsStrongHashToSign(pStrongSignPara, pwszCNGHashAlgid, pSigningCert)
+    {% end %}
   end
 
-  def cryptHashToBeSigned(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptHashToBeSigned(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptHashToBeSigned(hCryptProv, dwCertEncodingType, pbEncoded, cbEncoded, pbComputedHash, pcbComputedHash)
+    {% end %}
   end
 
-  def cryptHashCertificate(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : UInt32, dwFlags : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptHashCertificate(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : Win32cr::Security::Cryptography::ALG_ID, dwFlags : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptHashCertificate(hCryptProv, algid, dwFlags, pbEncoded, cbEncoded, pbComputedHash, pcbComputedHash)
+    {% end %}
   end
 
   def cryptHashCertificate2(pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pvReserved : Void*, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptHashCertificate2(pwszCNGHashAlgid, dwFlags, pvReserved, pbEncoded, cbEncoded, pbComputedHash, pcbComputedHash)
+    {% end %}
   end
 
-  def cryptSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pbEncodedToBeSigned : UInt8*, cbEncodedToBeSigned : UInt32, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbSignature : UInt8*, pcbSignature : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbEncodedToBeSigned : UInt8*, cbEncodedToBeSigned : UInt32, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbSignature : UInt8*, pcbSignature : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSignCertificate(hCryptProvOrNCryptKey, dwKeySpec, dwCertEncodingType, pbEncodedToBeSigned, cbEncodedToBeSigned, pSignatureAlgorithm, pvHashAuxInfo, pbSignature, pcbSignature)
+    {% end %}
   end
 
-  def cryptSignAndEncodeCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptSignAndEncodeCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSignAndEncodeCertificate(hCryptProvOrNCryptKey, dwKeySpec, dwCertEncodingType, lpszStructType, pvStructInfo, pSignatureAlgorithm, pvHashAuxInfo, pbEncoded, pcbEncoded)
+    {% end %}
   end
 
   def certVerifyTimeValidity(pTimeToVerify : Win32cr::Foundation::FILETIME*, pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*) : Int32
+    {% if !flag?(:docs) %}
     C.CertVerifyTimeValidity(pTimeToVerify, pCertInfo)
+    {% end %}
   end
 
   def certVerifyCRLTimeValidity(pTimeToVerify : Win32cr::Foundation::FILETIME*, pCrlInfo : Win32cr::Security::Cryptography::CRL_INFO*) : Int32
+    {% if !flag?(:docs) %}
     C.CertVerifyCRLTimeValidity(pTimeToVerify, pCrlInfo)
+    {% end %}
   end
 
   def certVerifyValidityNesting(pSubjectInfo : Win32cr::Security::Cryptography::CERT_INFO*, pIssuerInfo : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertVerifyValidityNesting(pSubjectInfo, pIssuerInfo)
+    {% end %}
   end
 
-  def certVerifyCRLRevocation(dwCertEncodingType : UInt32, pCertId : Win32cr::Security::Cryptography::CERT_INFO*, cCrlInfo : UInt32, rgpCrlInfo : Win32cr::Security::Cryptography::CRL_INFO**) : Win32cr::Foundation::BOOL
+  def certVerifyCRLRevocation(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertId : Win32cr::Security::Cryptography::CERT_INFO*, cCrlInfo : UInt32, rgpCrlInfo : Win32cr::Security::Cryptography::CRL_INFO**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertVerifyCRLRevocation(dwCertEncodingType, pCertId, cCrlInfo, rgpCrlInfo)
+    {% end %}
   end
 
   def certAlgIdToOID(dwAlgId : UInt32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.CertAlgIdToOID(dwAlgId)
+    {% end %}
   end
 
   def certOIDToAlgId(pszObjId : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.CertOIDToAlgId(pszObjId)
+    {% end %}
   end
 
   def certFindExtension(pszObjId : Win32cr::Foundation::PSTR, cExtensions : UInt32, rgExtensions : Win32cr::Security::Cryptography::CERT_EXTENSION*) : Win32cr::Security::Cryptography::CERT_EXTENSION*
+    {% if !flag?(:docs) %}
     C.CertFindExtension(pszObjId, cExtensions, rgExtensions)
+    {% end %}
   end
 
   def certFindAttribute(pszObjId : Win32cr::Foundation::PSTR, cAttr : UInt32, rgAttr : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*) : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTE*
+    {% if !flag?(:docs) %}
     C.CertFindAttribute(pszObjId, cAttr, rgAttr)
+    {% end %}
   end
 
   def certFindRDNAttr(pszObjId : Win32cr::Foundation::PSTR, pName : Win32cr::Security::Cryptography::CERT_NAME_INFO*) : Win32cr::Security::Cryptography::CERT_RDN_ATTR*
+    {% if !flag?(:docs) %}
     C.CertFindRDNAttr(pszObjId, pName)
+    {% end %}
   end
 
-  def certGetIntendedKeyUsage(dwCertEncodingType : UInt32, pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*, pbKeyUsage : UInt8*, cbKeyUsage : UInt32) : Win32cr::Foundation::BOOL
+  def certGetIntendedKeyUsage(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*, pbKeyUsage : UInt8*, cbKeyUsage : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertGetIntendedKeyUsage(dwCertEncodingType, pCertInfo, pbKeyUsage, cbKeyUsage)
+    {% end %}
   end
 
   def cryptInstallDefaultContext(hCryptProv : LibC::UIntPtrT, dwDefaultType : Win32cr::Security::Cryptography::CRYPT_DEFAULT_CONTEXT_TYPE, pvDefaultPara : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_DEFAULT_CONTEXT_FLAGS, pvReserved : Void*, phDefaultContext : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptInstallDefaultContext(hCryptProv, dwDefaultType, pvDefaultPara, dwFlags, pvReserved, phDefaultContext)
+    {% end %}
   end
 
   def cryptUninstallDefaultContext(hDefaultContext : Void*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUninstallDefaultContext(hDefaultContext, dwFlags, pvReserved)
+    {% end %}
   end
 
-  def cryptExportPublicKeyInfo(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptExportPublicKeyInfo(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptExportPublicKeyInfo(hCryptProvOrNCryptKey, dwKeySpec, dwCertEncodingType, pInfo, pcbInfo)
+    {% end %}
   end
 
-  def cryptExportPublicKeyInfoEx(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptExportPublicKeyInfoEx(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptExportPublicKeyInfoEx(hCryptProvOrNCryptKey, dwKeySpec, dwCertEncodingType, pszPublicKeyObjId, dwFlags, pvAuxInfo, pInfo, pcbInfo)
+    {% end %}
   end
 
-  def cryptExportPublicKeyInfoFromBCryptKeyHandle(hBCryptKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwCertEncodingType : UInt32, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptExportPublicKeyInfoFromBCryptKeyHandle(hBCryptKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptExportPublicKeyInfoFromBCryptKeyHandle(hBCryptKey, dwCertEncodingType, pszPublicKeyObjId, dwFlags, pvAuxInfo, pInfo, pcbInfo)
+    {% end %}
   end
 
-  def cryptImportPublicKeyInfo(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+  def cryptImportPublicKeyInfo(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptImportPublicKeyInfo(hCryptProv, dwCertEncodingType, pInfo, phKey)
+    {% end %}
   end
 
-  def cryptImportPublicKeyInfoEx(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, aiKeyAlg : UInt32, dwFlags : UInt32, pvAuxInfo : Void*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+  def cryptImportPublicKeyInfoEx(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, aiKeyAlg : Win32cr::Security::Cryptography::ALG_ID, dwFlags : UInt32, pvAuxInfo : Void*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptImportPublicKeyInfoEx(hCryptProv, dwCertEncodingType, pInfo, aiKeyAlg, dwFlags, pvAuxInfo, phKey)
+    {% end %}
   end
 
-  def cryptImportPublicKeyInfoEx2(dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, dwFlags : Win32cr::Security::Cryptography::CRYPT_IMPORT_PUBLIC_KEY_FLAGS, pvAuxInfo : Void*, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*) : Win32cr::Foundation::BOOL
+  def cryptImportPublicKeyInfoEx2(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, dwFlags : Win32cr::Security::Cryptography::CRYPT_IMPORT_PUBLIC_KEY_FLAGS, pvAuxInfo : Void*, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptImportPublicKeyInfoEx2(dwCertEncodingType, pInfo, dwFlags, pvAuxInfo, phKey)
+    {% end %}
   end
 
   def cryptAcquireCertificatePrivateKey(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : Win32cr::Security::Cryptography::CRYPT_ACQUIRE_FLAGS, pvParameters : Void*, phCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE*, pdwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC*, pfCallerFreeProvOrNCryptKey : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptAcquireCertificatePrivateKey(pCert, dwFlags, pvParameters, phCryptProvOrNCryptKey, pdwKeySpec, pfCallerFreeProvOrNCryptKey)
+    {% end %}
   end
 
   def cryptFindCertificateKeyProvInfo(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : Win32cr::Security::Cryptography::CRYPT_FIND_FLAGS, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptFindCertificateKeyProvInfo(pCert, dwFlags, pvReserved)
+    {% end %}
   end
 
   def cryptImportPKCS8(sPrivateKeyAndParams : Win32cr::Security::Cryptography::CRYPT_PKCS8_IMPORT_PARAMS, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phCryptProv : LibC::UIntPtrT*, pvAuxInfo : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptImportPKCS8(sPrivateKeyAndParams, dwFlags, phCryptProv, pvAuxInfo)
+    {% end %}
   end
 
   def cryptExportPKCS8(hCryptProv : LibC::UIntPtrT, dwKeySpec : UInt32, pszPrivateKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pbPrivateKeyBlob : UInt8*, pcbPrivateKeyBlob : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptExportPKCS8(hCryptProv, dwKeySpec, pszPrivateKeyObjId, dwFlags, pvAuxInfo, pbPrivateKeyBlob, pcbPrivateKeyBlob)
+    {% end %}
   end
 
-  def cryptHashPublicKeyInfo(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : UInt32, dwFlags : UInt32, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptHashPublicKeyInfo(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : Win32cr::Security::Cryptography::ALG_ID, dwFlags : UInt32, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptHashPublicKeyInfo(hCryptProv, algid, dwFlags, dwCertEncodingType, pInfo, pbComputedHash, pcbComputedHash)
+    {% end %}
   end
 
-  def certRDNValueToStrA(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, psz : UInt8*, csz : UInt32) : UInt32
+  def certRDNValueToStrA(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, psz : Win32cr::Foundation::PSTR, csz : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertRDNValueToStrA(dwValueType, pValue, psz, csz)
+    {% end %}
   end
 
-  def certRDNValueToStrW(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, psz : UInt16*, csz : UInt32) : UInt32
+  def certRDNValueToStrW(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, psz : Win32cr::Foundation::PWSTR, csz : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertRDNValueToStrW(dwValueType, pValue, psz, csz)
+    {% end %}
   end
 
-  def certNameToStrA(dwCertEncodingType : UInt32, pName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : UInt8*, csz : UInt32) : UInt32
+  def certNameToStrA(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pName : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : Win32cr::Foundation::PSTR, csz : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertNameToStrA(dwCertEncodingType, pName, dwStrType, psz, csz)
+    {% end %}
   end
 
-  def certNameToStrW(dwCertEncodingType : UInt32, pName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : UInt16*, csz : UInt32) : UInt32
+  def certNameToStrW(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pName : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : Win32cr::Foundation::PWSTR, csz : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertNameToStrW(dwCertEncodingType, pName, dwStrType, psz, csz)
+    {% end %}
   end
 
-  def certStrToNameA(dwCertEncodingType : UInt32, pszX500 : Win32cr::Foundation::PSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+  def certStrToNameA(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszX500 : Win32cr::Foundation::PSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertStrToNameA(dwCertEncodingType, pszX500, dwStrType, pvReserved, pbEncoded, pcbEncoded, ppszError)
+    {% end %}
   end
 
-  def certStrToNameW(dwCertEncodingType : UInt32, pszX500 : Win32cr::Foundation::PWSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+  def certStrToNameW(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszX500 : Win32cr::Foundation::PWSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertStrToNameW(dwCertEncodingType, pszX500, dwStrType, pvReserved, pbEncoded, pcbEncoded, ppszError)
+    {% end %}
   end
 
-  def certGetNameStringA(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : UInt8*, cchNameString : UInt32) : UInt32
+  def certGetNameStringA(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : Win32cr::Foundation::PSTR, cchNameString : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertGetNameStringA(pCertContext, dwType, dwFlags, pvTypePara, pszNameString, cchNameString)
+    {% end %}
   end
 
-  def certGetNameStringW(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : UInt16*, cchNameString : UInt32) : UInt32
+  def certGetNameStringW(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : Win32cr::Foundation::PWSTR, cchNameString : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CertGetNameStringW(pCertContext, dwType, dwFlags, pvTypePara, pszNameString, cchNameString)
+    {% end %}
   end
 
   def cryptSignMessage(pSignPara : Win32cr::Security::Cryptography::CRYPT_SIGN_MESSAGE_PARA*, fDetachedSignature : Win32cr::Foundation::BOOL, cToBeSigned : UInt32, rgpbToBeSigned : UInt8**, rgcbToBeSigned : UInt32*, pbSignedBlob : UInt8*, pcbSignedBlob : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSignMessage(pSignPara, fDetachedSignature, cToBeSigned, rgpbToBeSigned, rgcbToBeSigned, pbSignedBlob, pcbSignedBlob)
+    {% end %}
   end
 
   def cryptVerifyMessageSignature(pVerifyPara : Win32cr::Security::Cryptography::CRYPT_VERIFY_MESSAGE_PARA*, dwSignerIndex : UInt32, pbSignedBlob : UInt8*, cbSignedBlob : UInt32, pbDecoded : UInt8*, pcbDecoded : UInt32*, ppSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifyMessageSignature(pVerifyPara, dwSignerIndex, pbSignedBlob, cbSignedBlob, pbDecoded, pcbDecoded, ppSignerCert)
+    {% end %}
   end
 
   def cryptGetMessageSignerCount(dwMsgEncodingType : UInt32, pbSignedBlob : UInt8*, cbSignedBlob : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.CryptGetMessageSignerCount(dwMsgEncodingType, pbSignedBlob, cbSignedBlob)
+    {% end %}
   end
 
   def cryptGetMessageCertificates(dwMsgAndCertEncodingType : UInt32, hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwFlags : UInt32, pbSignedBlob : UInt8*, cbSignedBlob : UInt32) : Win32cr::Security::Cryptography::HCERTSTORE
+    {% if !flag?(:docs) %}
     C.CryptGetMessageCertificates(dwMsgAndCertEncodingType, hCryptProv, dwFlags, pbSignedBlob, cbSignedBlob)
+    {% end %}
   end
 
   def cryptVerifyDetachedMessageSignature(pVerifyPara : Win32cr::Security::Cryptography::CRYPT_VERIFY_MESSAGE_PARA*, dwSignerIndex : UInt32, pbDetachedSignBlob : UInt8*, cbDetachedSignBlob : UInt32, cToBeSigned : UInt32, rgpbToBeSigned : UInt8**, rgcbToBeSigned : UInt32*, ppSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifyDetachedMessageSignature(pVerifyPara, dwSignerIndex, pbDetachedSignBlob, cbDetachedSignBlob, cToBeSigned, rgpbToBeSigned, rgcbToBeSigned, ppSignerCert)
+    {% end %}
   end
 
   def cryptEncryptMessage(pEncryptPara : Win32cr::Security::Cryptography::CRYPT_ENCRYPT_MESSAGE_PARA*, cRecipientCert : UInt32, rgpRecipientCert : Win32cr::Security::Cryptography::CERT_CONTEXT**, pbToBeEncrypted : UInt8*, cbToBeEncrypted : UInt32, pbEncryptedBlob : UInt8*, pcbEncryptedBlob : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEncryptMessage(pEncryptPara, cRecipientCert, rgpRecipientCert, pbToBeEncrypted, cbToBeEncrypted, pbEncryptedBlob, pcbEncryptedBlob)
+    {% end %}
   end
 
   def cryptDecryptMessage(pDecryptPara : Win32cr::Security::Cryptography::CRYPT_DECRYPT_MESSAGE_PARA*, pbEncryptedBlob : UInt8*, cbEncryptedBlob : UInt32, pbDecrypted : UInt8*, pcbDecrypted : UInt32*, ppXchgCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDecryptMessage(pDecryptPara, pbEncryptedBlob, cbEncryptedBlob, pbDecrypted, pcbDecrypted, ppXchgCert)
+    {% end %}
   end
 
   def cryptSignAndEncryptMessage(pSignPara : Win32cr::Security::Cryptography::CRYPT_SIGN_MESSAGE_PARA*, pEncryptPara : Win32cr::Security::Cryptography::CRYPT_ENCRYPT_MESSAGE_PARA*, cRecipientCert : UInt32, rgpRecipientCert : Win32cr::Security::Cryptography::CERT_CONTEXT**, pbToBeSignedAndEncrypted : UInt8*, cbToBeSignedAndEncrypted : UInt32, pbSignedAndEncryptedBlob : UInt8*, pcbSignedAndEncryptedBlob : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSignAndEncryptMessage(pSignPara, pEncryptPara, cRecipientCert, rgpRecipientCert, pbToBeSignedAndEncrypted, cbToBeSignedAndEncrypted, pbSignedAndEncryptedBlob, pcbSignedAndEncryptedBlob)
+    {% end %}
   end
 
   def cryptDecryptAndVerifyMessageSignature(pDecryptPara : Win32cr::Security::Cryptography::CRYPT_DECRYPT_MESSAGE_PARA*, pVerifyPara : Win32cr::Security::Cryptography::CRYPT_VERIFY_MESSAGE_PARA*, dwSignerIndex : UInt32, pbEncryptedBlob : UInt8*, cbEncryptedBlob : UInt32, pbDecrypted : UInt8*, pcbDecrypted : UInt32*, ppXchgCert : Win32cr::Security::Cryptography::CERT_CONTEXT**, ppSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDecryptAndVerifyMessageSignature(pDecryptPara, pVerifyPara, dwSignerIndex, pbEncryptedBlob, cbEncryptedBlob, pbDecrypted, pcbDecrypted, ppXchgCert, ppSignerCert)
+    {% end %}
   end
 
   def cryptDecodeMessage(dwMsgTypeFlags : UInt32, pDecryptPara : Win32cr::Security::Cryptography::CRYPT_DECRYPT_MESSAGE_PARA*, pVerifyPara : Win32cr::Security::Cryptography::CRYPT_VERIFY_MESSAGE_PARA*, dwSignerIndex : UInt32, pbEncodedBlob : UInt8*, cbEncodedBlob : UInt32, dwPrevInnerContentType : UInt32, pdwMsgType : UInt32*, pdwInnerContentType : UInt32*, pbDecoded : UInt8*, pcbDecoded : UInt32*, ppXchgCert : Win32cr::Security::Cryptography::CERT_CONTEXT**, ppSignerCert : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptDecodeMessage(dwMsgTypeFlags, pDecryptPara, pVerifyPara, dwSignerIndex, pbEncodedBlob, cbEncodedBlob, dwPrevInnerContentType, pdwMsgType, pdwInnerContentType, pbDecoded, pcbDecoded, ppXchgCert, ppSignerCert)
+    {% end %}
   end
 
   def cryptHashMessage(pHashPara : Win32cr::Security::Cryptography::CRYPT_HASH_MESSAGE_PARA*, fDetachedHash : Win32cr::Foundation::BOOL, cToBeHashed : UInt32, rgpbToBeHashed : UInt8**, rgcbToBeHashed : UInt32*, pbHashedBlob : UInt8*, pcbHashedBlob : UInt32*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptHashMessage(pHashPara, fDetachedHash, cToBeHashed, rgpbToBeHashed, rgcbToBeHashed, pbHashedBlob, pcbHashedBlob, pbComputedHash, pcbComputedHash)
+    {% end %}
   end
 
   def cryptVerifyMessageHash(pHashPara : Win32cr::Security::Cryptography::CRYPT_HASH_MESSAGE_PARA*, pbHashedBlob : UInt8*, cbHashedBlob : UInt32, pbToBeHashed : UInt8*, pcbToBeHashed : UInt32*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifyMessageHash(pHashPara, pbHashedBlob, cbHashedBlob, pbToBeHashed, pcbToBeHashed, pbComputedHash, pcbComputedHash)
+    {% end %}
   end
 
   def cryptVerifyDetachedMessageHash(pHashPara : Win32cr::Security::Cryptography::CRYPT_HASH_MESSAGE_PARA*, pbDetachedHashBlob : UInt8*, cbDetachedHashBlob : UInt32, cToBeHashed : UInt32, rgpbToBeHashed : UInt8**, rgcbToBeHashed : UInt32*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifyDetachedMessageHash(pHashPara, pbDetachedHashBlob, cbDetachedHashBlob, cToBeHashed, rgpbToBeHashed, rgcbToBeHashed, pbComputedHash, pcbComputedHash)
+    {% end %}
   end
 
   def cryptSignMessageWithKey(pSignPara : Win32cr::Security::Cryptography::CRYPT_KEY_SIGN_MESSAGE_PARA*, pbToBeSigned : UInt8*, cbToBeSigned : UInt32, pbSignedBlob : UInt8*, pcbSignedBlob : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSignMessageWithKey(pSignPara, pbToBeSigned, cbToBeSigned, pbSignedBlob, pcbSignedBlob)
+    {% end %}
   end
 
   def cryptVerifyMessageSignatureWithKey(pVerifyPara : Win32cr::Security::Cryptography::CRYPT_KEY_VERIFY_MESSAGE_PARA*, pPublicKeyInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pbSignedBlob : UInt8*, cbSignedBlob : UInt32, pbDecoded : UInt8*, pcbDecoded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifyMessageSignatureWithKey(pVerifyPara, pPublicKeyInfo, pbSignedBlob, cbSignedBlob, pbDecoded, pcbDecoded)
+    {% end %}
   end
 
   def certOpenSystemStoreA(hProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, szSubsystemProtocol : Win32cr::Foundation::PSTR) : Win32cr::Security::Cryptography::HCERTSTORE
+    {% if !flag?(:docs) %}
     C.CertOpenSystemStoreA(hProv, szSubsystemProtocol)
+    {% end %}
   end
 
   #def certOpenSystemStoreW(hProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, szSubsystemProtocol : Win32cr::Foundation::PWSTR) : Win32cr::Security::Cryptography::HCERTSTORE
@@ -9514,426 +12106,1049 @@ module Win32cr::Security::Cryptography
   #end
 
   def certAddEncodedCertificateToSystemStoreA(szCertStoreName : Win32cr::Foundation::PSTR, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddEncodedCertificateToSystemStoreA(szCertStoreName, pbCertEncoded, cbCertEncoded)
+    {% end %}
   end
 
   def certAddEncodedCertificateToSystemStoreW(szCertStoreName : Win32cr::Foundation::PWSTR, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertAddEncodedCertificateToSystemStoreW(szCertStoreName, pbCertEncoded, cbCertEncoded)
+    {% end %}
   end
 
   def findCertsByIssuer(pCertChains : Win32cr::Security::Cryptography::CERT_CHAIN*, pcbCertChains : UInt32*, pcCertChains : UInt32*, pbEncodedIssuerName : UInt8*, cbEncodedIssuerName : UInt32, pwszPurpose : Win32cr::Foundation::PWSTR, dwKeySpec : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FindCertsByIssuer(pCertChains, pcbCertChains, pcCertChains, pbEncodedIssuerName, cbEncodedIssuerName, pwszPurpose, dwKeySpec)
+    {% end %}
   end
 
   def cryptQueryObject(dwObjectType : Win32cr::Security::Cryptography::CERT_QUERY_OBJECT_TYPE, pvObject : Void*, dwExpectedContentTypeFlags : Win32cr::Security::Cryptography::CERT_QUERY_CONTENT_TYPE_FLAGS, dwExpectedFormatTypeFlags : Win32cr::Security::Cryptography::CERT_QUERY_FORMAT_TYPE_FLAGS, dwFlags : UInt32, pdwMsgAndCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE*, pdwContentType : Win32cr::Security::Cryptography::CERT_QUERY_CONTENT_TYPE*, pdwFormatType : Win32cr::Security::Cryptography::CERT_QUERY_FORMAT_TYPE*, phCertStore : Win32cr::Security::Cryptography::HCERTSTORE*, phMsg : Void**, ppvContext : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptQueryObject(dwObjectType, pvObject, dwExpectedContentTypeFlags, dwExpectedFormatTypeFlags, dwFlags, pdwMsgAndCertEncodingType, pdwContentType, pdwFormatType, phCertStore, phMsg, ppvContext)
+    {% end %}
   end
 
   def cryptMemAlloc(cbSize : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.CryptMemAlloc(cbSize)
+    {% end %}
   end
 
   def cryptMemRealloc(pv : Void*, cbSize : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.CryptMemRealloc(pv, cbSize)
+    {% end %}
   end
 
   def cryptMemFree(pv : Void*) : Void
+    {% if !flag?(:docs) %}
     C.CryptMemFree(pv)
+    {% end %}
   end
 
   def cryptCreateAsyncHandle(dwFlags : UInt32, phAsync : Win32cr::Security::Cryptography::HCRYPTASYNC*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCreateAsyncHandle(dwFlags, phAsync)
+    {% end %}
   end
 
   def cryptSetAsyncParam(hAsync : Win32cr::Security::Cryptography::HCRYPTASYNC, pszParamOid : Win32cr::Foundation::PSTR, pvParam : Void*, pfnFree : Win32cr::Security::Cryptography::PFN_CRYPT_ASYNC_PARAM_FREE_FUNC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetAsyncParam(hAsync, pszParamOid, pvParam, pfnFree)
+    {% end %}
   end
 
   def cryptGetAsyncParam(hAsync : Win32cr::Security::Cryptography::HCRYPTASYNC, pszParamOid : Win32cr::Foundation::PSTR, ppvParam : Void**, ppfnFree : Win32cr::Security::Cryptography::PFN_CRYPT_ASYNC_PARAM_FREE_FUNC*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetAsyncParam(hAsync, pszParamOid, ppvParam, ppfnFree)
+    {% end %}
   end
 
   def cryptCloseAsyncHandle(hAsync : Win32cr::Security::Cryptography::HCRYPTASYNC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCloseAsyncHandle(hAsync)
+    {% end %}
   end
 
   def cryptRetrieveObjectByUrlA(pszUrl : Win32cr::Foundation::PSTR, pszObjectOid : Win32cr::Foundation::PSTR, dwRetrievalFlags : UInt32, dwTimeout : UInt32, ppvObject : Void**, hAsyncRetrieve : Win32cr::Security::Cryptography::HCRYPTASYNC, pCredentials : Win32cr::Security::Cryptography::CRYPT_CREDENTIALS*, pvVerify : Void*, pAuxInfo : Win32cr::Security::Cryptography::CRYPT_RETRIEVE_AUX_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptRetrieveObjectByUrlA(pszUrl, pszObjectOid, dwRetrievalFlags, dwTimeout, ppvObject, hAsyncRetrieve, pCredentials, pvVerify, pAuxInfo)
+    {% end %}
   end
 
   def cryptRetrieveObjectByUrlW(pszUrl : Win32cr::Foundation::PWSTR, pszObjectOid : Win32cr::Foundation::PSTR, dwRetrievalFlags : UInt32, dwTimeout : UInt32, ppvObject : Void**, hAsyncRetrieve : Win32cr::Security::Cryptography::HCRYPTASYNC, pCredentials : Win32cr::Security::Cryptography::CRYPT_CREDENTIALS*, pvVerify : Void*, pAuxInfo : Win32cr::Security::Cryptography::CRYPT_RETRIEVE_AUX_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptRetrieveObjectByUrlW(pszUrl, pszObjectOid, dwRetrievalFlags, dwTimeout, ppvObject, hAsyncRetrieve, pCredentials, pvVerify, pAuxInfo)
+    {% end %}
   end
 
   def cryptInstallCancelRetrieval(pfnCancel : Win32cr::Security::Cryptography::PFN_CRYPT_CANCEL_RETRIEVAL, pvArg : Void*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptInstallCancelRetrieval(pfnCancel, pvArg, dwFlags, pvReserved)
+    {% end %}
   end
 
   def cryptUninstallCancelRetrieval(dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUninstallCancelRetrieval(dwFlags, pvReserved)
+    {% end %}
   end
 
   def cryptGetObjectUrl(pszUrlOid : Win32cr::Foundation::PSTR, pvPara : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_GET_URL_FLAGS, pUrlArray : Win32cr::Security::Cryptography::CRYPT_URL_ARRAY*, pcbUrlArray : UInt32*, pUrlInfo : Win32cr::Security::Cryptography::CRYPT_URL_INFO*, pcbUrlInfo : UInt32*, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetObjectUrl(pszUrlOid, pvPara, dwFlags, pUrlArray, pcbUrlArray, pUrlInfo, pcbUrlInfo, pvReserved)
+    {% end %}
   end
 
-  def certCreateSelfSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, pSubjectIssuerBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwFlags : Win32cr::Security::Cryptography::CERT_CREATE_SELFSIGN_FLAGS, pKeyProvInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pStartTime : Win32cr::Foundation::SYSTEMTIME*, pEndTime : Win32cr::Foundation::SYSTEMTIME*, pExtensions : Win32cr::Security::Cryptography::CERT_EXTENSIONS*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+  def certCreateSelfSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, pSubjectIssuerBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwFlags : Win32cr::Security::Cryptography::CERT_CREATE_SELFSIGN_FLAGS, pKeyProvInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pStartTime : Win32cr::Foundation::SYSTEMTIME*, pEndTime : Win32cr::Foundation::SYSTEMTIME*, pExtensions : Win32cr::Security::Cryptography::CERT_EXTENSIONS*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertCreateSelfSignCertificate(hCryptProvOrNCryptKey, pSubjectIssuerBlob, dwFlags, pKeyProvInfo, pSignatureAlgorithm, pStartTime, pEndTime, pExtensions)
+    {% end %}
   end
 
-  def cryptGetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptGetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptGetKeyIdentifierProperty(pKeyIdentifier, dwPropId, dwFlags, pwszComputerName, pvReserved, pvData, pcbData)
+    {% end %}
   end
 
-  def cryptSetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*) : Win32cr::Foundation::BOOL
+  def cryptSetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSetKeyIdentifierProperty(pKeyIdentifier, dwPropId, dwFlags, pwszComputerName, pvReserved, pvData)
+    {% end %}
   end
 
-  def cryptEnumKeyIdentifierProperties(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_KEYID_PROP) : Win32cr::Foundation::BOOL
+  def cryptEnumKeyIdentifierProperties(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_KEYID_PROP) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptEnumKeyIdentifierProperties(pKeyIdentifier, dwPropId, dwFlags, pwszComputerName, pvReserved, pvArg, pfnEnum)
+    {% end %}
   end
 
-  def cryptCreateKeyIdentifierFromCSP(dwCertEncodingType : UInt32, pszPubKeyOID : Win32cr::Foundation::PSTR, pPubKeyStruc : Win32cr::Security::Cryptography::PUBLICKEYSTRUC*, cbPubKeyStruc : UInt32, dwFlags : UInt32, pvReserved : Void*, pbHash : UInt8*, pcbHash : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptCreateKeyIdentifierFromCSP(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszPubKeyOID : Win32cr::Foundation::PSTR, pPubKeyStruc : Win32cr::Security::Cryptography::PUBLICKEYSTRUC*, cbPubKeyStruc : UInt32, dwFlags : UInt32, pvReserved : Void*, pbHash : UInt8*, pcbHash : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptCreateKeyIdentifierFromCSP(dwCertEncodingType, pszPubKeyOID, pPubKeyStruc, cbPubKeyStruc, dwFlags, pvReserved, pbHash, pcbHash)
+    {% end %}
   end
 
   def certCreateCertificateChainEngine(pConfig : Win32cr::Security::Cryptography::CERT_CHAIN_ENGINE_CONFIG*, phChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertCreateCertificateChainEngine(pConfig, phChainEngine)
+    {% end %}
   end
 
   def certFreeCertificateChainEngine(hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE) : Void
+    {% if !flag?(:docs) %}
     C.CertFreeCertificateChainEngine(hChainEngine)
+    {% end %}
   end
 
   def certResyncCertificateChainEngine(hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertResyncCertificateChainEngine(hChainEngine)
+    {% end %}
   end
 
   def certGetCertificateChain(hChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTime : Win32cr::Foundation::FILETIME*, hAdditionalStore : Win32cr::Security::Cryptography::HCERTSTORE, pChainPara : Win32cr::Security::Cryptography::CERT_CHAIN_PARA*, dwFlags : UInt32, pvReserved : Void*, ppChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertGetCertificateChain(hChainEngine, pCertContext, pTime, hAdditionalStore, pChainPara, dwFlags, pvReserved, ppChainContext)
+    {% end %}
   end
 
   def certFreeCertificateChain(pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Void
+    {% if !flag?(:docs) %}
     C.CertFreeCertificateChain(pChainContext)
+    {% end %}
   end
 
   def certDuplicateCertificateChain(pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertDuplicateCertificateChain(pChainContext)
+    {% end %}
   end
 
-  def certFindChainInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : Win32cr::Security::Cryptography::CERT_FIND_CHAIN_IN_STORE_FLAGS, dwFindType : UInt32, pvFindPara : Void*, pPrevChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+  def certFindChainInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFindFlags : Win32cr::Security::Cryptography::CERT_FIND_CHAIN_IN_STORE_FLAGS, dwFindType : UInt32, pvFindPara : Void*, pPrevChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertFindChainInStore(hCertStore, dwCertEncodingType, dwFindFlags, dwFindType, pvFindPara, pPrevChainContext)
+    {% end %}
   end
 
   def certVerifyCertificateChainPolicy(pszPolicyOID : Win32cr::Foundation::PSTR, pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, pPolicyPara : Win32cr::Security::Cryptography::CERT_CHAIN_POLICY_PARA*, pPolicyStatus : Win32cr::Security::Cryptography::CERT_CHAIN_POLICY_STATUS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertVerifyCertificateChainPolicy(pszPolicyOID, pChainContext, pPolicyPara, pPolicyStatus)
+    {% end %}
   end
 
-  def cryptStringToBinaryA(pszString : UInt8*, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptStringToBinaryA(pszString : Win32cr::Foundation::PSTR, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptStringToBinaryA(pszString, cchString, dwFlags, pbBinary, pcbBinary, pdwSkip, pdwFlags)
+    {% end %}
   end
 
-  def cryptStringToBinaryW(pszString : UInt16*, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptStringToBinaryW(pszString : Win32cr::Foundation::PWSTR, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptStringToBinaryW(pszString, cchString, dwFlags, pbBinary, pcbBinary, pdwSkip, pdwFlags)
+    {% end %}
   end
 
-  def cryptBinaryToStringA(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : UInt8*, pcchString : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptBinaryToStringA(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : Win32cr::Foundation::PSTR, pcchString : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptBinaryToStringA(pbBinary, cbBinary, dwFlags, pszString, pcchString)
+    {% end %}
   end
 
-  def cryptBinaryToStringW(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : UInt16*, pcchString : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptBinaryToStringW(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : Win32cr::Foundation::PWSTR, pcchString : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptBinaryToStringW(pbBinary, cbBinary, dwFlags, pszString, pcchString)
+    {% end %}
   end
 
-  def pFXImportCertStore(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS) : Win32cr::Security::Cryptography::HCERTSTORE
+  def pFXImportCertStore(pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS) : Win32cr::Security::Cryptography::HCERTSTORE
+    {% if !flag?(:docs) %}
     C.PFXImportCertStore(pPFX, szPassword, dwFlags)
+    {% end %}
   end
 
-  def pFXIsPFXBlob(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+  def pFXIsPFXBlob(pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PFXIsPFXBlob(pPFX)
+    {% end %}
   end
 
-  def pFXVerifyPassword(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+  def pFXVerifyPassword(pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PFXVerifyPassword(pPFX, szPassword, dwFlags)
+    {% end %}
   end
 
-  def pFXExportCertStoreEx(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, pvPara : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+  def pFXExportCertStoreEx(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szPassword : Win32cr::Foundation::PWSTR, pvPara : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PFXExportCertStoreEx(hStore, pPFX, szPassword, pvPara, dwFlags)
+    {% end %}
   end
 
-  def pFXExportCertStore(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+  def pFXExportCertStore(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PFXExportCertStore(hStore, pPFX, szPassword, dwFlags)
+    {% end %}
   end
 
   def certOpenServerOcspResponse(pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, dwFlags : UInt32, pOpenPara : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_OPEN_PARA*) : Void*
+    {% if !flag?(:docs) %}
     C.CertOpenServerOcspResponse(pChainContext, dwFlags, pOpenPara)
+    {% end %}
   end
 
   def certAddRefServerOcspResponse(hServerOcspResponse : Void*) : Void
+    {% if !flag?(:docs) %}
     C.CertAddRefServerOcspResponse(hServerOcspResponse)
+    {% end %}
   end
 
   def certCloseServerOcspResponse(hServerOcspResponse : Void*, dwFlags : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.CertCloseServerOcspResponse(hServerOcspResponse, dwFlags)
+    {% end %}
   end
 
   def certGetServerOcspResponseContext(hServerOcspResponse : Void*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CertGetServerOcspResponseContext(hServerOcspResponse, dwFlags, pvReserved)
+    {% end %}
   end
 
   def certAddRefServerOcspResponseContext(pServerOcspResponseContext : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_CONTEXT*) : Void
+    {% if !flag?(:docs) %}
     C.CertAddRefServerOcspResponseContext(pServerOcspResponseContext)
+    {% end %}
   end
 
   def certFreeServerOcspResponseContext(pServerOcspResponseContext : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_CONTEXT*) : Void
+    {% if !flag?(:docs) %}
     C.CertFreeServerOcspResponseContext(pServerOcspResponseContext)
+    {% end %}
   end
 
   def certRetrieveLogoOrBiometricInfo(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, lpszLogoOrBiometricType : Win32cr::Foundation::PSTR, dwRetrievalFlags : UInt32, dwTimeout : UInt32, dwFlags : UInt32, pvReserved : Void*, ppbData : UInt8**, pcbData : UInt32*, ppwszMimeType : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertRetrieveLogoOrBiometricInfo(pCertContext, lpszLogoOrBiometricType, dwRetrievalFlags, dwTimeout, dwFlags, pvReserved, ppbData, pcbData, ppwszMimeType)
+    {% end %}
   end
 
   def certSelectCertificateChains(pSelectionContext : LibC::GUID*, dwFlags : UInt32, pChainParameters : Win32cr::Security::Cryptography::CERT_SELECT_CHAIN_PARA*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, hStore : Win32cr::Security::Cryptography::HCERTSTORE, pcSelection : UInt32*, pprgpSelection : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT***) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertSelectCertificateChains(pSelectionContext, dwFlags, pChainParameters, cCriteria, rgpCriteria, hStore, pcSelection, pprgpSelection)
+    {% end %}
   end
 
   def certFreeCertificateChainList(prgpSelection : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**) : Void
+    {% if !flag?(:docs) %}
     C.CertFreeCertificateChainList(prgpSelection)
+    {% end %}
   end
 
   def cryptRetrieveTimeStamp(wszUrl : Win32cr::Foundation::PWSTR, dwRetrievalFlags : UInt32, dwTimeout : UInt32, pszHashId : Win32cr::Foundation::PSTR, pPara : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_PARA*, pbData : UInt8*, cbData : UInt32, ppTsContext : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_CONTEXT**, ppTsSigner : Win32cr::Security::Cryptography::CERT_CONTEXT**, phStore : Win32cr::Security::Cryptography::HCERTSTORE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptRetrieveTimeStamp(wszUrl, dwRetrievalFlags, dwTimeout, pszHashId, pPara, pbData, cbData, ppTsContext, ppTsSigner, phStore)
+    {% end %}
   end
 
   def cryptVerifyTimeStampSignature(pbTSContentInfo : UInt8*, cbTSContentInfo : UInt32, pbData : UInt8*, cbData : UInt32, hAdditionalStore : Win32cr::Security::Cryptography::HCERTSTORE, ppTsContext : Win32cr::Security::Cryptography::CRYPT_TIMESTAMP_CONTEXT**, ppTsSigner : Win32cr::Security::Cryptography::CERT_CONTEXT**, phStore : Win32cr::Security::Cryptography::HCERTSTORE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptVerifyTimeStampSignature(pbTSContentInfo, cbTSContentInfo, pbData, cbData, hAdditionalStore, ppTsContext, ppTsSigner, phStore)
+    {% end %}
   end
 
   def certIsWeakHash(dwHashUseType : UInt32, pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, dwChainFlags : UInt32, pSignerChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, pTimeStamp : Win32cr::Foundation::FILETIME*, pwszFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CertIsWeakHash(dwHashUseType, pwszCNGHashAlgid, dwChainFlags, pSignerChainContext, pTimeStamp, pwszFileName)
+    {% end %}
   end
 
-  def cryptProtectData(pDataIn : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szDataDescr : Win32cr::Foundation::PWSTR, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+  def cryptProtectData(pDataIn : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szDataDescr : Win32cr::Foundation::PWSTR, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptProtectData(pDataIn, szDataDescr, pOptionalEntropy, pvReserved, pPromptStruct, dwFlags, pDataOut)
+    {% end %}
   end
 
-  def cryptUnprotectData(pDataIn : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, ppszDataDescr : Win32cr::Foundation::PWSTR*, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+  def cryptUnprotectData(pDataIn : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, ppszDataDescr : Win32cr::Foundation::PWSTR*, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUnprotectData(pDataIn, ppszDataDescr, pOptionalEntropy, pvReserved, pPromptStruct, dwFlags, pDataOut)
+    {% end %}
   end
 
-  def cryptUpdateProtectedState(pOldSid : Win32cr::Foundation::PSID, pwszOldPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pdwSuccessCount : UInt32*, pdwFailureCount : UInt32*) : Win32cr::Foundation::BOOL
+  def cryptUpdateProtectedState(pOldSid : Win32cr::Security::PSID, pwszOldPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pdwSuccessCount : UInt32*, pdwFailureCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUpdateProtectedState(pOldSid, pwszOldPassword, dwFlags, pdwSuccessCount, pdwFailureCount)
+    {% end %}
   end
 
   def cryptProtectMemory(pDataIn : Void*, cbDataIn : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptProtectMemory(pDataIn, cbDataIn, dwFlags)
+    {% end %}
   end
 
   def cryptUnprotectMemory(pDataIn : Void*, cbDataIn : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUnprotectMemory(pDataIn, cbDataIn, dwFlags)
+    {% end %}
   end
 
   def nCryptRegisterProtectionDescriptorName(pwszName : Win32cr::Foundation::PWSTR, pwszDescriptorString : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptRegisterProtectionDescriptorName(pwszName, pwszDescriptorString, dwFlags)
+    {% end %}
   end
 
-  def nCryptQueryProtectionDescriptorName(pwszName : Win32cr::Foundation::PWSTR, pwszDescriptorString : UInt16*, pcDescriptorString : LibC::UIntPtrT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+  def nCryptQueryProtectionDescriptorName(pwszName : Win32cr::Foundation::PWSTR, pwszDescriptorString : Win32cr::Foundation::PWSTR, pcDescriptorString : LibC::UIntPtrT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptQueryProtectionDescriptorName(pwszName, pwszDescriptorString, pcDescriptorString, dwFlags)
+    {% end %}
   end
 
   def nCryptCreateProtectionDescriptor(pwszDescriptorString : Win32cr::Foundation::PWSTR, dwFlags : UInt32, phDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptCreateProtectionDescriptor(pwszDescriptorString, dwFlags, phDescriptor)
+    {% end %}
   end
 
   def nCryptCloseProtectionDescriptor(hDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptCloseProtectionDescriptor(hDescriptor)
+    {% end %}
   end
 
   def nCryptGetProtectionDescriptorInfo(hDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE, pMemPara : Win32cr::Security::Cryptography::NCRYPT_ALLOC_PARA*, dwInfoType : UInt32, ppvInfo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptGetProtectionDescriptorInfo(hDescriptor, pMemPara, dwInfoType, ppvInfo)
+    {% end %}
   end
 
   def nCryptProtectSecret(hDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE, dwFlags : UInt32, pbData : UInt8*, cbData : UInt32, pMemPara : Win32cr::Security::Cryptography::NCRYPT_ALLOC_PARA*, hWnd : Win32cr::Foundation::HWND, ppbProtectedBlob : UInt8**, pcbProtectedBlob : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptProtectSecret(hDescriptor, dwFlags, pbData, cbData, pMemPara, hWnd, ppbProtectedBlob, pcbProtectedBlob)
+    {% end %}
   end
 
   def nCryptUnprotectSecret(phDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS, pbProtectedBlob : UInt8*, cbProtectedBlob : UInt32, pMemPara : Win32cr::Security::Cryptography::NCRYPT_ALLOC_PARA*, hWnd : Win32cr::Foundation::HWND, ppbData : UInt8**, pcbData : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptUnprotectSecret(phDescriptor, dwFlags, pbProtectedBlob, cbProtectedBlob, pMemPara, hWnd, ppbData, pcbData)
+    {% end %}
   end
 
   def nCryptStreamOpenToProtect(hDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE, dwFlags : UInt32, hWnd : Win32cr::Foundation::HWND, pStreamInfo : Win32cr::Security::Cryptography::NCRYPT_PROTECT_STREAM_INFO*, phStream : Win32cr::Security::NCRYPT_STREAM_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptStreamOpenToProtect(hDescriptor, dwFlags, hWnd, pStreamInfo, phStream)
+    {% end %}
   end
 
   def nCryptStreamOpenToUnprotect(pStreamInfo : Win32cr::Security::Cryptography::NCRYPT_PROTECT_STREAM_INFO*, dwFlags : UInt32, hWnd : Win32cr::Foundation::HWND, phStream : Win32cr::Security::NCRYPT_STREAM_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptStreamOpenToUnprotect(pStreamInfo, dwFlags, hWnd, phStream)
+    {% end %}
   end
 
   def nCryptStreamOpenToUnprotectEx(pStreamInfo : Win32cr::Security::Cryptography::NCRYPT_PROTECT_STREAM_INFO_EX*, dwFlags : UInt32, hWnd : Win32cr::Foundation::HWND, phStream : Win32cr::Security::NCRYPT_STREAM_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptStreamOpenToUnprotectEx(pStreamInfo, dwFlags, hWnd, phStream)
+    {% end %}
   end
 
   def nCryptStreamUpdate(hStream : Win32cr::Security::NCRYPT_STREAM_HANDLE, pbData : UInt8*, cbData : LibC::UIntPtrT, fFinal : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptStreamUpdate(hStream, pbData, cbData, fFinal)
+    {% end %}
   end
 
   def nCryptStreamClose(hStream : Win32cr::Security::NCRYPT_STREAM_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NCryptStreamClose(hStream)
+    {% end %}
+  end
+
+  def signError : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignError
+    {% end %}
+  end
+
+  def signerFreeSignerContext(pSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerFreeSignerContext(pSignerContext)
+    {% end %}
+  end
+
+  def signerSign(pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pSignerCert : Win32cr::Security::Cryptography::SIGNER_CERT*, pSignatureInfo : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_INFO*, pProviderInfo : Win32cr::Security::Cryptography::SIGNER_PROVIDER_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerSign(pSubjectInfo, pSignerCert, pSignatureInfo, pProviderInfo, pwszHttpTimeStamp, psRequest, pSipData)
+    {% end %}
+  end
+
+  def signerSignEx(dwFlags : Win32cr::Security::Cryptography::SIGNER_SIGN_FLAGS, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pSignerCert : Win32cr::Security::Cryptography::SIGNER_CERT*, pSignatureInfo : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_INFO*, pProviderInfo : Win32cr::Security::Cryptography::SIGNER_PROVIDER_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerSignEx(dwFlags, pSubjectInfo, pSignerCert, pSignatureInfo, pProviderInfo, pwszHttpTimeStamp, psRequest, pSipData, ppSignerContext)
+    {% end %}
+  end
+
+  def signerSignEx2(dwFlags : Win32cr::Security::Cryptography::SIGNER_SIGN_FLAGS, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pSignerCert : Win32cr::Security::Cryptography::SIGNER_CERT*, pSignatureInfo : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_INFO*, pProviderInfo : Win32cr::Security::Cryptography::SIGNER_PROVIDER_INFO*, dwTimestampFlags : Win32cr::Security::Cryptography::SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid : Win32cr::Foundation::PSTR, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**, pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerSignEx2(dwFlags, pSubjectInfo, pSignerCert, pSignatureInfo, pProviderInfo, dwTimestampFlags, pszTimestampAlgorithmOid, pwszHttpTimeStamp, psRequest, pSipData, ppSignerContext, pCryptoPolicy, pReserved)
+    {% end %}
+  end
+
+  def signerSignEx3(dwFlags : Win32cr::Security::Cryptography::SIGNER_SIGN_FLAGS, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pSignerCert : Win32cr::Security::Cryptography::SIGNER_CERT*, pSignatureInfo : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_INFO*, pProviderInfo : Win32cr::Security::Cryptography::SIGNER_PROVIDER_INFO*, dwTimestampFlags : Win32cr::Security::Cryptography::SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid : Win32cr::Foundation::PSTR, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**, pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pDigestSignInfo : Win32cr::Security::Cryptography::SIGNER_DIGEST_SIGN_INFO*, pReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerSignEx3(dwFlags, pSubjectInfo, pSignerCert, pSignatureInfo, pProviderInfo, dwTimestampFlags, pszTimestampAlgorithmOid, pwszHttpTimeStamp, psRequest, pSipData, ppSignerContext, pCryptoPolicy, pDigestSignInfo, pReserved)
+    {% end %}
+  end
+
+  def signerTimeStamp(pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerTimeStamp(pSubjectInfo, pwszHttpTimeStamp, psRequest, pSipData)
+    {% end %}
+  end
+
+  def signerTimeStampEx(dwFlags : UInt32, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerTimeStampEx(dwFlags, pSubjectInfo, pwszHttpTimeStamp, psRequest, pSipData, ppSignerContext)
+    {% end %}
+  end
+
+  def signerTimeStampEx2(dwFlags : Win32cr::Security::Cryptography::SIGNER_TIMESTAMP_FLAGS, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, dwAlgId : Win32cr::Security::Cryptography::ALG_ID, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerTimeStampEx2(dwFlags, pSubjectInfo, pwszHttpTimeStamp, dwAlgId, psRequest, pSipData, ppSignerContext)
+    {% end %}
+  end
+
+  def signerTimeStampEx3(dwFlags : Win32cr::Security::Cryptography::SIGNER_TIMESTAMP_FLAGS, dwIndex : UInt32, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, pszAlgorithmOid : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**, pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SignerTimeStampEx3(dwFlags, dwIndex, pSubjectInfo, pwszHttpTimeStamp, pszAlgorithmOid, psRequest, pSipData, ppSignerContext, pCryptoPolicy, pReserved)
+    {% end %}
   end
 
   def cryptXmlClose(hCryptXml : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlClose(hCryptXml)
+    {% end %}
   end
 
   def cryptXmlGetTransforms(ppConfig : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_CHAIN_CONFIG**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlGetTransforms(ppConfig)
+    {% end %}
   end
 
   def cryptXmlOpenToEncode(pConfig : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_CHAIN_CONFIG*, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, wszId : Win32cr::Foundation::PWSTR, rgProperty : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY*, cProperty : UInt32, pEncoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB*, phSignature : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlOpenToEncode(pConfig, dwFlags, wszId, rgProperty, cProperty, pEncoded, phSignature)
+    {% end %}
   end
 
   def cryptXmlOpenToDecode(pConfig : Win32cr::Security::Cryptography::CRYPT_XML_TRANSFORM_CHAIN_CONFIG*, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, rgProperty : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY*, cProperty : UInt32, pEncoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB*, phCryptXml : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlOpenToDecode(pConfig, dwFlags, rgProperty, cProperty, pEncoded, phCryptXml)
+    {% end %}
   end
 
   def cryptXmlAddObject(hSignatureOrObject : Void*, dwFlags : UInt32, rgProperty : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY*, cProperty : UInt32, pEncoded : Win32cr::Security::Cryptography::CRYPT_XML_BLOB*, ppObject : Win32cr::Security::Cryptography::CRYPT_XML_OBJECT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlAddObject(hSignatureOrObject, dwFlags, rgProperty, cProperty, pEncoded, ppObject)
+    {% end %}
   end
 
   def cryptXmlCreateReference(hCryptXml : Void*, dwFlags : UInt32, wszId : Win32cr::Foundation::PWSTR, wszURI : Win32cr::Foundation::PWSTR, wszType : Win32cr::Foundation::PWSTR, pDigestMethod : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, cTransform : UInt32, rgTransform : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, phReference : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlCreateReference(hCryptXml, dwFlags, wszId, wszURI, wszType, pDigestMethod, cTransform, rgTransform, phReference)
+    {% end %}
   end
 
   def cryptXmlDigestReference(hReference : Void*, dwFlags : UInt32, pDataProviderIn : Win32cr::Security::Cryptography::CRYPT_XML_DATA_PROVIDER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlDigestReference(hReference, dwFlags, pDataProviderIn)
+    {% end %}
   end
 
   def cryptXmlSetHMACSecret(hSignature : Void*, pbSecret : UInt8*, cbSecret : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlSetHMACSecret(hSignature, pbSecret, cbSecret)
+    {% end %}
   end
 
   def cryptXmlSign(hSignature : Void*, hKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, dwKeyInfoSpec : Win32cr::Security::Cryptography::CRYPT_XML_KEYINFO_SPEC, pvKeyInfoSpec : Void*, pSignatureMethod : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, pCanonicalization : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlSign(hSignature, hKey, dwKeySpec, dwFlags, dwKeyInfoSpec, pvKeyInfoSpec, pSignatureMethod, pCanonicalization)
+    {% end %}
   end
 
   def cryptXmlImportPublicKey(dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, pKeyValue : Win32cr::Security::Cryptography::CRYPT_XML_KEY_VALUE*, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlImportPublicKey(dwFlags, pKeyValue, phKey)
+    {% end %}
   end
 
   def cryptXmlVerifySignature(hSignature : Void*, hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlVerifySignature(hSignature, hKey, dwFlags)
+    {% end %}
   end
 
   def cryptXmlGetDocContext(hCryptXml : Void*, ppStruct : Win32cr::Security::Cryptography::CRYPT_XML_DOC_CTXT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlGetDocContext(hCryptXml, ppStruct)
+    {% end %}
   end
 
   def cryptXmlGetSignature(hCryptXml : Void*, ppStruct : Win32cr::Security::Cryptography::CRYPT_XML_SIGNATURE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlGetSignature(hCryptXml, ppStruct)
+    {% end %}
   end
 
   def cryptXmlGetReference(hCryptXml : Void*, ppStruct : Win32cr::Security::Cryptography::CRYPT_XML_REFERENCE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlGetReference(hCryptXml, ppStruct)
+    {% end %}
   end
 
   def cryptXmlGetStatus(hCryptXml : Void*, pStatus : Win32cr::Security::Cryptography::CRYPT_XML_STATUS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlGetStatus(hCryptXml, pStatus)
+    {% end %}
   end
 
   def cryptXmlEncode(hCryptXml : Void*, dwCharset : Win32cr::Security::Cryptography::CRYPT_XML_CHARSET, rgProperty : Win32cr::Security::Cryptography::CRYPT_XML_PROPERTY*, cProperty : UInt32, pvCallbackState : Void*, pfnWrite : Win32cr::Security::Cryptography::PFN_CRYPT_XML_WRITE_CALLBACK) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlEncode(hCryptXml, dwCharset, rgProperty, cProperty, pvCallbackState, pfnWrite)
+    {% end %}
   end
 
   def cryptXmlGetAlgorithmInfo(pXmlAlgorithm : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM*, dwFlags : Win32cr::Security::Cryptography::CRYPT_XML_FLAGS, ppAlgInfo : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlGetAlgorithmInfo(pXmlAlgorithm, dwFlags, ppAlgInfo)
+    {% end %}
   end
 
   def cryptXmlFindAlgorithmInfo(dwFindByType : UInt32, pvFindBy : Void*, dwGroupId : UInt32, dwFlags : UInt32) : Win32cr::Security::Cryptography::CRYPT_XML_ALGORITHM_INFO*
+    {% if !flag?(:docs) %}
     C.CryptXmlFindAlgorithmInfo(dwFindByType, pvFindBy, dwGroupId, dwFlags)
+    {% end %}
   end
 
   def cryptXmlEnumAlgorithmInfo(dwGroupId : UInt32, dwFlags : UInt32, pvArg : Void*, pfnEnumAlgInfo : Win32cr::Security::Cryptography::PFN_CRYPT_XML_ENUM_ALG_INFO) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CryptXmlEnumAlgorithmInfo(dwGroupId, dwFlags, pvArg, pfnEnumAlgInfo)
+    {% end %}
   end
 
   def getToken(cPolicyChain : UInt32, pPolicyChain : Win32cr::Security::Cryptography::POLICY_ELEMENT*, securityToken : Win32cr::Security::Cryptography::GENERIC_XML_TOKEN**, phProofTokenCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetToken(cPolicyChain, pPolicyChain, securityToken, phProofTokenCrypto)
+    {% end %}
   end
 
   def manageCardSpace : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ManageCardSpace
+    {% end %}
   end
 
   def importInformationCard(fileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ImportInformationCard(fileName)
+    {% end %}
   end
 
   def encrypt(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, fOAEP : Win32cr::Foundation::BOOL, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.Encrypt(hCrypto, fOAEP, cbInData, pInData, pcbOutData, ppOutData)
+    {% end %}
   end
 
   def decrypt(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, fOAEP : Win32cr::Foundation::BOOL, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.Decrypt(hCrypto, fOAEP, cbInData, pInData, pcbOutData, ppOutData)
+    {% end %}
   end
 
   def signHash(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbHash : UInt32, pHash : UInt8*, hashAlgOid : Win32cr::Foundation::PWSTR, pcbSig : UInt32*, ppSig : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SignHash(hCrypto, cbHash, pHash, hashAlgOid, pcbSig, ppSig)
+    {% end %}
   end
 
   def verifyHash(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbHash : UInt32, pHash : UInt8*, hashAlgOid : Win32cr::Foundation::PWSTR, cbSig : UInt32, pSig : UInt8*, pfVerified : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.VerifyHash(hCrypto, cbHash, pHash, hashAlgOid, cbSig, pSig, pfVerified)
+    {% end %}
   end
 
   def getCryptoTransform(hSymmetricCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, mode : UInt32, padding : Win32cr::Security::Cryptography::PaddingMode, feedbackSize : UInt32, direction : Win32cr::Security::Cryptography::Direction, cbIV : UInt32, pIV : UInt8*, pphTransform : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetCryptoTransform(hSymmetricCrypto, mode, padding, feedbackSize, direction, cbIV, pIV, pphTransform)
+    {% end %}
   end
 
   def getKeyedHash(hSymmetricCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, pphHash : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetKeyedHash(hSymmetricCrypto, pphHash)
+    {% end %}
   end
 
   def transformBlock(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TransformBlock(hCrypto, cbInData, pInData, pcbOutData, ppOutData)
+    {% end %}
   end
 
   def transformFinalBlock(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TransformFinalBlock(hCrypto, cbInData, pInData, pcbOutData, ppOutData)
+    {% end %}
   end
 
   def hashCore(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbInData : UInt32, pInData : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HashCore(hCrypto, cbInData, pInData)
+    {% end %}
   end
 
   def hashFinal(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbInData : UInt32, pInData : UInt8*, pcbOutData : UInt32*, ppOutData : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HashFinal(hCrypto, cbInData, pInData, pcbOutData, ppOutData)
+    {% end %}
   end
 
   def freeToken(pAllocMemory : Win32cr::Security::Cryptography::GENERIC_XML_TOKEN*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeToken(pAllocMemory)
+    {% end %}
   end
 
   def closeCryptoHandle(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CloseCryptoHandle(hCrypto)
+    {% end %}
   end
 
   def generateDerivedKey(hCrypto : Win32cr::Security::Cryptography::INFORMATIONCARD_CRYPTO_HANDLE*, cbLabel : UInt32, pLabel : UInt8*, cbNonce : UInt32, pNonce : UInt8*, derivedKeyLength : UInt32, offset : UInt32, algId : Win32cr::Foundation::PWSTR, pcbKey : UInt32*, ppKey : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GenerateDerivedKey(hCrypto, cbLabel, pLabel, cbNonce, pNonce, derivedKeyLength, offset, algId, pcbKey, ppKey)
+    {% end %}
   end
 
   def getBrowserToken(dwParamType : UInt32, pParam : Void*, pcbToken : UInt32*, ppToken : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetBrowserToken(dwParamType, pParam, pcbToken, ppToken)
+    {% end %}
   end
 
+  def getCipherInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_CIPHER_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetCipherInterface(pszProviderName, pszAlgId, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def getHashInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_HASH_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetHashInterface(pszProviderName, pszAlgId, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def getAsymmetricEncryptionInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_ASYMMETRIC_ENCRYPTION_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetAsymmetricEncryptionInterface(pszProviderName, pszAlgId, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def getSecretAgreementInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_SECRET_AGREEMENT_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetSecretAgreementInterface(pszProviderName, pszAlgId, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def getSignatureInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_SIGNATURE_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetSignatureInterface(pszProviderName, pszAlgId, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def getRngInterface(pszProviderName : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_RNG_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetRngInterface(pszProviderName, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def getKeyDerivationInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_KEY_DERIVATION_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetKeyDerivationInterface(pszProviderName, pszAlgId, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def bCryptRegisterProvider(pszProvider : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pReg : Win32cr::Security::Cryptography::CRYPT_PROVIDER_REG*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.BCryptRegisterProvider(pszProvider, dwFlags, pReg)
+    {% end %}
+  end
+
+  def bCryptUnregisterProvider(pszProvider : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.BCryptUnregisterProvider(pszProvider)
+    {% end %}
+  end
+
+  def bCryptAddContextFunctionProvider(dwTable : UInt32, pszContext : Win32cr::Foundation::PWSTR, dwInterface : UInt32, pszFunction : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR, dwPosition : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.BCryptAddContextFunctionProvider(dwTable, pszContext, dwInterface, pszFunction, pszProvider, dwPosition)
+    {% end %}
+  end
+
+  def bCryptRemoveContextFunctionProvider(dwTable : UInt32, pszContext : Win32cr::Foundation::PWSTR, dwInterface : UInt32, pszFunction : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.BCryptRemoveContextFunctionProvider(dwTable, pszContext, dwInterface, pszFunction, pszProvider)
+    {% end %}
+  end
+
+  def getKeyStorageInterface(pszProviderName : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::NCRYPT_KEY_STORAGE_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetKeyStorageInterface(pszProviderName, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def sslChangeNotify(hEvent : Win32cr::Foundation::HANDLE, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslChangeNotify(hEvent, dwFlags)
+    {% end %}
+  end
+
+  def sslComputeClientAuthHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, pszAlgId : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslComputeClientAuthHash(hSslProvider, hMasterKey, hHandshakeHash, pszAlgId, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
+  end
+
+  def sslComputeEapKeyBlock(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbRandoms : UInt8*, cbRandoms : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslComputeEapKeyBlock(hSslProvider, hMasterKey, pbRandoms, cbRandoms, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
+  end
+
+  def sslComputeFinishedHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, pbOutput : UInt8*, cbOutput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslComputeFinishedHash(hSslProvider, hMasterKey, hHandshakeHash, pbOutput, cbOutput, dwFlags)
+    {% end %}
+  end
+
+  def sslCreateEphemeralKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phEphemeralKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, dwKeyType : UInt32, dwKeyBitLen : UInt32, pbParams : UInt8*, cbParams : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslCreateEphemeralKey(hSslProvider, phEphemeralKey, dwProtocol, dwCipherSuite, dwKeyType, dwKeyBitLen, pbParams, cbParams, dwFlags)
+    {% end %}
+  end
+
+  def sslCreateHandshakeHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslCreateHandshakeHash(hSslProvider, phHandshakeHash, dwProtocol, dwCipherSuite, dwFlags)
+    {% end %}
+  end
+
+  def sslDecryptPacket(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, sequence_number : UInt64, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslDecryptPacket(hSslProvider, hKey, pbInput, cbInput, pbOutput, cbOutput, pcbResult, sequence_number, dwFlags)
+    {% end %}
+  end
+
+  def sslEncryptPacket(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, sequence_number : UInt64, dwContentType : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslEncryptPacket(hSslProvider, hKey, pbInput, cbInput, pbOutput, cbOutput, pcbResult, sequence_number, dwContentType, dwFlags)
+    {% end %}
+  end
+
+  def sslEnumCipherSuites(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, ppCipherSuite : Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE**, ppEnumState : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslEnumCipherSuites(hSslProvider, hPrivateKey, ppCipherSuite, ppEnumState, dwFlags)
+    {% end %}
+  end
+
+  def sslEnumCipherSuitesEx(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, ppCipherSuite : Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE_EX**, ppEnumState : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslEnumCipherSuitesEx(hSslProvider, hPrivateKey, ppCipherSuite, ppEnumState, dwFlags)
+    {% end %}
+  end
+
+  def sslEnumEccCurves(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, pEccCurveCount : UInt32*, ppEccCurve : Win32cr::Security::Cryptography::NCRYPT_SSL_ECC_CURVE**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslEnumEccCurves(hSslProvider, pEccCurveCount, ppEccCurve, dwFlags)
+    {% end %}
+  end
+
+  def sslEnumProtocolProviders(pdwProviderCount : UInt32*, ppProviderList : Win32cr::Security::Cryptography::NCryptProviderName**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslEnumProtocolProviders(pdwProviderCount, ppProviderList, dwFlags)
+    {% end %}
+  end
+
+  def sslExportKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExportKey(hSslProvider, hKey, pszBlobType, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
+  end
+
+  def sslFreeBuffer(pvInput : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslFreeBuffer(pvInput)
+    {% end %}
+  end
+
+  def sslFreeObject(hObject : Win32cr::Security::Cryptography::NCRYPT_HANDLE, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslFreeObject(hObject, dwFlags)
+    {% end %}
+  end
+
+  def sslGenerateMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hPublicKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslGenerateMasterKey(hSslProvider, hPrivateKey, hPublicKey, phMasterKey, dwProtocol, dwCipherSuite, pParameterList, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
+  end
+
+  def sslGenerateSessionKeys(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phReadKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, phWriteKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslGenerateSessionKeys(hSslProvider, hMasterKey, phReadKey, phWriteKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslGetKeyProperty(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, ppbOutput : UInt8**, pcbOutput : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslGetKeyProperty(hKey, pszProperty, ppbOutput, pcbOutput, dwFlags)
+    {% end %}
+  end
+
+  def sslGetProviderProperty(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, ppbOutput : UInt8**, pcbOutput : UInt32*, ppEnumState : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslGetProviderProperty(hSslProvider, pszProperty, ppbOutput, pcbOutput, ppEnumState, dwFlags)
+    {% end %}
+  end
+
+  def sslHashHandshake(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslHashHandshake(hSslProvider, hHandshakeHash, pbInput, cbInput, dwFlags)
+    {% end %}
+  end
+
+  def sslImportKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pszBlobType : Win32cr::Foundation::PWSTR, pbKeyBlob : UInt8*, cbKeyBlob : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslImportKey(hSslProvider, phKey, pszBlobType, pbKeyBlob, cbKeyBlob, dwFlags)
+    {% end %}
+  end
+
+  def sslImportMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbEncryptedKey : UInt8*, cbEncryptedKey : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslImportMasterKey(hSslProvider, hPrivateKey, phMasterKey, dwProtocol, dwCipherSuite, pParameterList, pbEncryptedKey, cbEncryptedKey, dwFlags)
+    {% end %}
+  end
+
+  def sslLookupCipherSuiteInfo(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, dwProtocol : UInt32, dwCipherSuite : UInt32, dwKeyType : UInt32, pCipherSuite : Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslLookupCipherSuiteInfo(hSslProvider, dwProtocol, dwCipherSuite, dwKeyType, pCipherSuite, dwFlags)
+    {% end %}
+  end
+
+  def sslOpenPrivateKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslOpenPrivateKey(hSslProvider, phPrivateKey, pCertContext, dwFlags)
+    {% end %}
+  end
+
+  def sslOpenProvider(phSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE*, pszProviderName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslOpenProvider(phSslProvider, pszProviderName, dwFlags)
+    {% end %}
+  end
+
+  def sslSignHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbHashValue : UInt8*, cbHashValue : UInt32, pbSignature : UInt8*, cbSignature : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslSignHash(hSslProvider, hPrivateKey, pbHashValue, cbHashValue, pbSignature, cbSignature, pcbResult, dwFlags)
+    {% end %}
+  end
+
+  def sslVerifySignature(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPublicKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbHashValue : UInt8*, cbHashValue : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslVerifySignature(hSslProvider, hPublicKey, pbHashValue, cbHashValue, pbSignature, cbSignature, dwFlags)
+    {% end %}
+  end
+
+  def sslLookupCipherLengths(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, dwProtocol : UInt32, dwCipherSuite : UInt32, dwKeyType : UInt32, pCipherLengths : Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_LENGTHS*, cbCipherLengths : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslLookupCipherLengths(hSslProvider, dwProtocol, dwCipherSuite, dwKeyType, pCipherLengths, cbCipherLengths, dwFlags)
+    {% end %}
+  end
+
+  def sslCreateClientAuthHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pszHashAlgId : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslCreateClientAuthHash(hSslProvider, phHandshakeHash, dwProtocol, dwCipherSuite, pszHashAlgId, dwFlags)
+    {% end %}
+  end
+
+  def sslGetCipherSuitePRFHashAlgorithm(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, dwProtocol : UInt32, dwCipherSuite : UInt32, dwKeyType : UInt32, szPRFHash : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslGetCipherSuitePRFHashAlgorithm(hSslProvider, dwProtocol, dwCipherSuite, dwKeyType, szPRFHash, dwFlags)
+    {% end %}
+  end
+
+  def sslComputeSessionHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, dwProtocol : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslComputeSessionHash(hSslProvider, hHandshakeHash, dwProtocol, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
+  end
+
+  def sslGeneratePreMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPublicKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phPreMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslGeneratePreMasterKey(hSslProvider, hPublicKey, phPreMasterKey, dwProtocol, dwCipherSuite, pParameterList, pbOutput, cbOutput, pcbResult, dwFlags)
+    {% end %}
+  end
+
+  def sslExportKeyingMaterial(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, sLabel : Win32cr::Foundation::PSTR, pbRandoms : UInt8*, cbRandoms : UInt32, pbContextValue : UInt8*, cbContextValue : UInt16, pbOutput : UInt8*, cbOutput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExportKeyingMaterial(hSslProvider, hMasterKey, sLabel, pbRandoms, cbRandoms, pbContextValue, cbContextValue, pbOutput, cbOutput, dwFlags)
+    {% end %}
+  end
+
+  def sslExtractEarlyKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPreSharedKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phEarlyKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExtractEarlyKey(hSslProvider, hPreSharedKey, phEarlyKey, dwProtocol, dwCipherSuite, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslExtractHandshakeKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hPublicKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hEarlyKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phHandshakeKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExtractHandshakeKey(hSslProvider, hPrivateKey, hPublicKey, hEarlyKey, phHandshakeKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslExtractMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hHandshakeKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExtractMasterKey(hSslProvider, hHandshakeKey, phMasterKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslExpandTrafficKeys(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hBaseKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHashValue : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, phClientTrafficKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, phServerTrafficKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExpandTrafficKeys(hSslProvider, hBaseKey, hHashValue, phClientTrafficKey, phServerTrafficKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslExpandWriteKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hBaseTrafficKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phWriteKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExpandWriteKey(hSslProvider, hBaseTrafficKey, phWriteKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslExpandExporterMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hBaseKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHashValue : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, phExporterMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExpandExporterMasterKey(hSslProvider, hBaseKey, hHashValue, phExporterMasterKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslExpandResumptionMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHashValue : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, phResumptionMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExpandResumptionMasterKey(hSslProvider, hMasterKey, hHashValue, phResumptionMasterKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslDuplicateTranscriptHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hTranscriptHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, phTranscriptHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslDuplicateTranscriptHash(hSslProvider, hTranscriptHash, phTranscriptHash, dwFlags)
+    {% end %}
+  end
+
+  def sslExpandBinderKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hEarlyKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phBinderKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExpandBinderKey(hSslProvider, hEarlyKey, phBinderKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def sslExpandPreSharedKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hResumptionMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbTicketNonce : UInt8*, cbTicketNonce : UInt32, phPreSharedKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslExpandPreSharedKey(hSslProvider, hResumptionMasterKey, pbTicketNonce, cbTicketNonce, phPreSharedKey, pParameterList, dwFlags)
+    {% end %}
+  end
+
+  def getSChannelInterface(pszProviderName : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::NCRYPT_SSL_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
+    C.GetSChannelInterface(pszProviderName, ppFunctionTable, dwFlags)
+    {% end %}
+  end
+
+  def sslIncrementProviderReferenceCount(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslIncrementProviderReferenceCount(hSslProvider)
+    {% end %}
+  end
+
+  def sslDecrementProviderReferenceCount(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.SslDecrementProviderReferenceCount(hSslProvider)
+    {% end %}
+  end
+
+  @[Link("bcryptprimitives")]
   @[Link("advapi32")]
   @[Link("bcrypt")]
   @[Link("ncrypt")]
   @[Link("crypt32")]
   @[Link("wintrust")]
   @[Link("cryptnet")]
+  @[Link("mssign32")]
   @[Link("cryptxml")]
   @[Link("infocardapi")]
+  {% if !flag?(:docs) %}
   lib C
+    # :nodoc:
+    fun SystemPrng(pbRandomData : UInt8*, cbRandomData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun ProcessPrng(pbData : UInt8*, cbData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
     # :nodoc:
     fun CryptAcquireContextA(phProv : LibC::UIntPtrT*, szContainer : Win32cr::Foundation::PSTR, szProvider : Win32cr::Foundation::PSTR, dwProvType : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
@@ -9944,10 +13159,10 @@ module Win32cr::Security::Cryptography
     fun CryptReleaseContext(hProv : LibC::UIntPtrT, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptGenKey(hProv : LibC::UIntPtrT, algid : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    fun CryptGenKey(hProv : LibC::UIntPtrT, algid : Win32cr::Security::Cryptography::ALG_ID, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptDeriveKey(hProv : LibC::UIntPtrT, algid : UInt32, hBaseData : LibC::UIntPtrT, dwFlags : UInt32, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    fun CryptDeriveKey(hProv : LibC::UIntPtrT, algid : Win32cr::Security::Cryptography::ALG_ID, hBaseData : LibC::UIntPtrT, dwFlags : UInt32, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptDestroyKey(hKey : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
@@ -9989,7 +13204,7 @@ module Win32cr::Security::Cryptography
     fun CryptDecrypt(hKey : LibC::UIntPtrT, hHash : LibC::UIntPtrT, final : Win32cr::Foundation::BOOL, dwFlags : UInt32, pbData : UInt8*, pdwDataLen : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptCreateHash(hProv : LibC::UIntPtrT, algid : UInt32, hKey : LibC::UIntPtrT, dwFlags : UInt32, phHash : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    fun CryptCreateHash(hProv : LibC::UIntPtrT, algid : Win32cr::Security::Cryptography::ALG_ID, hKey : LibC::UIntPtrT, dwFlags : UInt32, phHash : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptHashData(hHash : LibC::UIntPtrT, pbData : UInt8*, dwDataLen : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
@@ -10079,10 +13294,10 @@ module Win32cr::Security::Cryptography
     fun BCryptGenerateKeyPair(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*, dwLength : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
-    fun BCryptEncrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+    fun BCryptEncrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::BCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
-    fun BCryptDecrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+    fun BCryptDecrypt(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbIV : UInt8*, cbIV : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::BCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
     fun BCryptExportKey(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, hExportKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
@@ -10106,10 +13321,10 @@ module Win32cr::Security::Cryptography
     fun BCryptDestroySecret(hSecret : Win32cr::Security::Cryptography::BCRYPT_SECRET_HANDLE) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
-    fun BCryptSignHash(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+    fun BCryptSignHash(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::BCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
-    fun BCryptVerifySignature(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHash : UInt8*, cbHash : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
+    fun BCryptVerifySignature(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pPaddingInfo : Void*, pbHash : UInt8*, cbHash : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : Win32cr::Security::Cryptography::BCRYPT_FLAGS) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
     fun BCryptSecretAgreement(hPrivKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, hPubKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, phAgreedSecret : Win32cr::Security::Cryptography::BCRYPT_SECRET_HANDLE*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
@@ -10145,13 +13360,19 @@ module Win32cr::Security::Cryptography
     fun BCryptHash(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbSecret : UInt8*, cbSecret : UInt32, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
-    fun BCryptGenRandom(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbBuffer : UInt8*, cbBuffer : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+    fun BCryptGenRandom(hAlgorithm : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbBuffer : UInt8*, cbBuffer : UInt32, dwFlags : Win32cr::Security::Cryptography::BCRYPTGENRANDOM_FLAGS) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
     fun BCryptDeriveKeyCapi(hHash : Win32cr::Security::Cryptography::BCRYPT_HASH_HANDLE, hTargetAlg : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
     fun BCryptDeriveKeyPBKDF2(hPrf : Win32cr::Security::Cryptography::BCRYPT_ALG_HANDLE, pbPassword : UInt8*, cbPassword : UInt32, pbSalt : UInt8*, cbSalt : UInt32, cIterations : UInt64, pbDerivedKey : UInt8*, cbDerivedKey : UInt32, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun BCryptEncapsulate(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbSecretKey : UInt8*, cbSecretKey : UInt32, pcbSecretKey : UInt32*, pbCipherText : UInt8*, cbCipherText : UInt32, pcbCipherText : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun BCryptDecapsulate(hKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, pbCipherText : UInt8*, cbCipherText : UInt32, pbSecretKey : UInt8*, cbSecretKey : UInt32, pcbSecretKey : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
 
     # :nodoc:
     fun BCryptQueryProviderRegistration(pszProvider : Win32cr::Foundation::PWSTR, dwMode : Win32cr::Security::Cryptography::BCRYPT_QUERY_PROVIDER_MODE, dwInterface : Win32cr::Security::Cryptography::BCRYPT_INTERFACE, pcbBuffer : UInt32*, ppBuffer : Win32cr::Security::Cryptography::CRYPT_PROVIDER_REG**) : Win32cr::Foundation::NTSTATUS
@@ -10250,6 +13471,12 @@ module Win32cr::Security::Cryptography
     fun NCryptDecrypt(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pPaddingInfo : Void*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
+    fun NCryptEncapsulate(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbSecretKey : UInt8*, cbSecretKey : UInt32, pcbSecretKey : UInt32*, pbCipherText : UInt8*, cbCipherText : UInt32, pcbCipherText : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun NCryptDecapsulate(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbCipherText : UInt8*, cbCipherText : UInt32, pbSecretKey : UInt8*, cbSecretKey : UInt32, pcbSecretKey : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
     fun NCryptImportKey(hProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hImportKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pbData : UInt8*, cbData : UInt32, dwFlags : Win32cr::Security::Cryptography::NCRYPT_FLAGS) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
@@ -10292,22 +13519,22 @@ module Win32cr::Security::Cryptography
     fun NCryptVerifyClaim(hSubjectKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hAuthorityKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, dwClaimType : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbClaimBlob : UInt8*, cbClaimBlob : UInt32, pOutput : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun CryptFormatObject(dwCertEncodingType : UInt32, dwFormatType : UInt32, dwFormatStrType : UInt32, pFormatStruct : Void*, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, pbFormat : Void*, pcbFormat : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptFormatObject(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFormatType : UInt32, dwFormatStrType : UInt32, pFormatStruct : Void*, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, pbFormat : Void*, pcbFormat : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptEncodeObjectEx(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_ENCODE_OBJECT_FLAGS, pEncodePara : Win32cr::Security::Cryptography::CRYPT_ENCODE_PARA*, pvEncoded : Void*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptEncodeObject(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptEncodeObject(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptDecodeObjectEx(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pDecodePara : Win32cr::Security::Cryptography::CRYPT_DECODE_PARA*, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptDecodeObjectEx(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pDecodePara : Win32cr::Security::Cryptography::CRYPT_DECODE_PARA*, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptDecodeObject(dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptDecodeObject(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pbEncoded : UInt8*, cbEncoded : UInt32, dwFlags : UInt32, pvStructInfo : Void*, pcbStructInfo : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptInstallOIDFunctionAddress(hModule : Win32cr::Foundation::HINSTANCE, dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, cFuncEntry : UInt32, rgFuncEntry : Win32cr::Security::Cryptography::CRYPT_OID_FUNC_ENTRY*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    fun CryptInstallOIDFunctionAddress(hModule : Win32cr::Foundation::HMODULE, dwEncodingType : UInt32, pszFuncName : Win32cr::Foundation::PSTR, cFuncEntry : UInt32, rgFuncEntry : Win32cr::Security::Cryptography::CRYPT_OID_FUNC_ENTRY*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptInitOIDFunctionSet(pszFuncName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Void*
@@ -10316,7 +13543,7 @@ module Win32cr::Security::Cryptography
     fun CryptGetOIDFunctionAddress(hFuncSet : Void*, dwEncodingType : UInt32, pszOID : Win32cr::Foundation::PSTR, dwFlags : UInt32, ppvFuncAddr : Void**, phFuncAddr : Void**) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptGetDefaultOIDDllList(hFuncSet : Void*, dwEncodingType : UInt32, pwszDllList : UInt16*, pcchDllList : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptGetDefaultOIDDllList(hFuncSet : Void*, dwEncodingType : UInt32, pwszDllList : Win32cr::Foundation::PWSTR, pcchDllList : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptGetDefaultOIDFunctionAddress(hFuncSet : Void*, dwEncodingType : UInt32, pwszDll : Win32cr::Foundation::PWSTR, dwFlags : UInt32, ppvFuncAddr : Void**, phFuncAddr : Void**) : Win32cr::Foundation::BOOL
@@ -10410,14 +13637,14 @@ module Win32cr::Security::Cryptography
     #fun CertCloseStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertGetSubjectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pCertId : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    fun CertGetSubjectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertId : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
 
     # Commented out due to being part of LibC
     # :nodoc:
     #fun CertEnumCertificatesInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
 
     # :nodoc:
-    fun CertFindCertificateInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_FLAGS, pvFindPara : Void*, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    fun CertFindCertificateInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_FLAGS, pvFindPara : Void*, pPrevCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
 
     # :nodoc:
     fun CertGetIssuerCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pSubjectContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pPrevIssuerContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, pdwFlags : UInt32*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
@@ -10429,7 +13656,7 @@ module Win32cr::Security::Cryptography
     fun CertDuplicateCertificateContext(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
 
     # :nodoc:
-    fun CertCreateCertificateContext(dwCertEncodingType : UInt32, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    fun CertCreateCertificateContext(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCertEncoded : UInt8*, cbCertEncoded : UInt32) : Win32cr::Security::Cryptography::CERT_CONTEXT*
 
     # :nodoc:
     fun CertFreeCertificateContext(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
@@ -10456,13 +13683,13 @@ module Win32cr::Security::Cryptography
     fun CertEnumCRLsInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
 
     # :nodoc:
-    fun CertFindCRLInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : UInt32, pvFindPara : Void*, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+    fun CertFindCRLInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFindFlags : UInt32, dwFindType : UInt32, pvFindPara : Void*, pPrevCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
 
     # :nodoc:
     fun CertDuplicateCRLContext(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Security::Cryptography::CRL_CONTEXT*
 
     # :nodoc:
-    fun CertCreateCRLContext(dwCertEncodingType : UInt32, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32) : Win32cr::Security::Cryptography::CRL_CONTEXT*
+    fun CertCreateCRLContext(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32) : Win32cr::Security::Cryptography::CRL_CONTEXT*
 
     # :nodoc:
     fun CertFreeCRLContext(pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*) : Win32cr::Foundation::BOOL
@@ -10483,7 +13710,7 @@ module Win32cr::Security::Cryptography
     fun CertIsValidCRLForCertificate(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pCrl : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertAddEncodedCertificateToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pbCertEncoded : UInt8*, cbCertEncoded : UInt32, dwAddDisposition : UInt32, ppCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
+    fun CertAddEncodedCertificateToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCertEncoded : UInt8*, cbCertEncoded : UInt32, dwAddDisposition : UInt32, ppCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertAddCertificateContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CERT_CONTEXT**) : Win32cr::Foundation::BOOL
@@ -10495,7 +13722,7 @@ module Win32cr::Security::Cryptography
     fun CertDeleteCertificateFromStore(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertAddEncodedCRLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32, dwAddDisposition : UInt32, ppCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
+    fun CertAddEncodedCRLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCrlEncoded : UInt8*, cbCrlEncoded : UInt32, dwAddDisposition : UInt32, ppCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertAddCRLContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCrlContext : Win32cr::Security::Cryptography::CRL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CRL_CONTEXT**) : Win32cr::Foundation::BOOL
@@ -10537,7 +13764,7 @@ module Win32cr::Security::Cryptography
     fun CertFindCTLInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwMsgAndCertEncodingType : UInt32, dwFindFlags : UInt32, dwFindType : Win32cr::Security::Cryptography::CERT_FIND_TYPE, pvFindPara : Void*, pPrevCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*) : Win32cr::Security::Cryptography::CTL_CONTEXT*
 
     # :nodoc:
-    fun CertAddEncodedCTLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwMsgAndCertEncodingType : UInt32, pbCtlEncoded : UInt8*, cbCtlEncoded : UInt32, dwAddDisposition : UInt32, ppCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
+    fun CertAddEncodedCTLToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwMsgAndCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbCtlEncoded : UInt8*, cbCtlEncoded : UInt32, dwAddDisposition : UInt32, ppCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertAddCTLContextToStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwAddDisposition : UInt32, ppStoreContext : Win32cr::Security::Cryptography::CTL_CONTEXT**) : Win32cr::Foundation::BOOL
@@ -10622,10 +13849,10 @@ module Win32cr::Security::Cryptography
     fun CryptMsgEncodeAndSignCTL(dwMsgEncodingType : UInt32, pCtlInfo : Win32cr::Security::Cryptography::CTL_INFO*, pSignInfo : Win32cr::Security::Cryptography::CMSG_SIGNED_ENCODE_INFO*, dwFlags : UInt32, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertFindSubjectInSortedCTL(pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+    fun CertFindSubjectInSortedCTL(pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, dwFlags : UInt32, pvReserved : Void*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertEnumSubjectInSortedCTL(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, ppvNextSubject : Void**, pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+    fun CertEnumSubjectInSortedCTL(pCtlContext : Win32cr::Security::Cryptography::CTL_CONTEXT*, ppvNextSubject : Void**, pSubjectIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pEncodedAttributes : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertVerifyCTLUsage(dwEncodingType : UInt32, dwSubjectType : UInt32, pvSubject : Void*, pSubjectUsage : Win32cr::Security::Cryptography::CTL_USAGE*, dwFlags : UInt32, pVerifyUsagePara : Win32cr::Security::Cryptography::CTL_VERIFY_USAGE_PARA*, pVerifyUsageStatus : Win32cr::Security::Cryptography::CTL_VERIFY_USAGE_STATUS*) : Win32cr::Foundation::BOOL
@@ -10634,46 +13861,46 @@ module Win32cr::Security::Cryptography
     fun CertVerifyRevocation(dwEncodingType : UInt32, dwRevType : UInt32, cContext : UInt32, rgpvContext : Void**, dwFlags : UInt32, pRevPara : Win32cr::Security::Cryptography::CERT_REVOCATION_PARA*, pRevStatus : Win32cr::Security::Cryptography::CERT_REVOCATION_STATUS*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertCompareIntegerBlob(pInt1 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pInt2 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+    fun CertCompareIntegerBlob(pInt1 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pInt2 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertCompareCertificate(dwCertEncodingType : UInt32, pCertId1 : Win32cr::Security::Cryptography::CERT_INFO*, pCertId2 : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+    fun CertCompareCertificate(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertId1 : Win32cr::Security::Cryptography::CERT_INFO*, pCertId2 : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertCompareCertificateName(dwCertEncodingType : UInt32, pCertName1 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pCertName2 : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+    fun CertCompareCertificateName(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertName1 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pCertName2 : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertIsRDNAttrsInCertificateName(dwCertEncodingType : UInt32, dwFlags : UInt32, pCertName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pRDN : Win32cr::Security::Cryptography::CERT_RDN*) : Win32cr::Foundation::BOOL
+    fun CertIsRDNAttrsInCertificateName(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFlags : UInt32, pCertName : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pRDN : Win32cr::Security::Cryptography::CERT_RDN*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertComparePublicKeyInfo(dwCertEncodingType : UInt32, pPublicKey1 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pPublicKey2 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
+    fun CertComparePublicKeyInfo(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pPublicKey1 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pPublicKey2 : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertGetPublicKeyLength(dwCertEncodingType : UInt32, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : UInt32
+    fun CertGetPublicKeyLength(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : UInt32
 
     # :nodoc:
-    fun CryptVerifyCertificateSignature(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
+    fun CryptVerifyCertificateSignature(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbEncoded : UInt8*, cbEncoded : UInt32, pPublicKey : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptVerifyCertificateSignatureEx(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, dwSubjectType : UInt32, pvSubject : Void*, dwIssuerType : UInt32, pvIssuer : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_VERIFY_CERT_FLAGS, pvExtra : Void*) : Win32cr::Foundation::BOOL
+    fun CryptVerifyCertificateSignatureEx(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwSubjectType : UInt32, pvSubject : Void*, dwIssuerType : UInt32, pvIssuer : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_VERIFY_CERT_FLAGS, pvExtra : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertIsStrongHashToSign(pStrongSignPara : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, pSigningCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptHashToBeSigned(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptHashToBeSigned(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptHashCertificate(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : UInt32, dwFlags : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptHashCertificate(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : Win32cr::Security::Cryptography::ALG_ID, dwFlags : UInt32, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptHashCertificate2(pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pvReserved : Void*, pbEncoded : UInt8*, cbEncoded : UInt32, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pbEncodedToBeSigned : UInt8*, cbEncodedToBeSigned : UInt32, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbSignature : UInt8*, pcbSignature : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pbEncodedToBeSigned : UInt8*, cbEncodedToBeSigned : UInt32, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbSignature : UInt8*, pcbSignature : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptSignAndEncodeCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwCertEncodingType : UInt32, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptSignAndEncodeCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, lpszStructType : Win32cr::Foundation::PSTR, pvStructInfo : Void*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pvHashAuxInfo : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertVerifyTimeValidity(pTimeToVerify : Win32cr::Foundation::FILETIME*, pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*) : Int32
@@ -10685,7 +13912,7 @@ module Win32cr::Security::Cryptography
     fun CertVerifyValidityNesting(pSubjectInfo : Win32cr::Security::Cryptography::CERT_INFO*, pIssuerInfo : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertVerifyCRLRevocation(dwCertEncodingType : UInt32, pCertId : Win32cr::Security::Cryptography::CERT_INFO*, cCrlInfo : UInt32, rgpCrlInfo : Win32cr::Security::Cryptography::CRL_INFO**) : Win32cr::Foundation::BOOL
+    fun CertVerifyCRLRevocation(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertId : Win32cr::Security::Cryptography::CERT_INFO*, cCrlInfo : UInt32, rgpCrlInfo : Win32cr::Security::Cryptography::CRL_INFO**) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertAlgIdToOID(dwAlgId : UInt32) : Win32cr::Foundation::PSTR
@@ -10703,7 +13930,7 @@ module Win32cr::Security::Cryptography
     fun CertFindRDNAttr(pszObjId : Win32cr::Foundation::PSTR, pName : Win32cr::Security::Cryptography::CERT_NAME_INFO*) : Win32cr::Security::Cryptography::CERT_RDN_ATTR*
 
     # :nodoc:
-    fun CertGetIntendedKeyUsage(dwCertEncodingType : UInt32, pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*, pbKeyUsage : UInt8*, cbKeyUsage : UInt32) : Win32cr::Foundation::BOOL
+    fun CertGetIntendedKeyUsage(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pCertInfo : Win32cr::Security::Cryptography::CERT_INFO*, pbKeyUsage : UInt8*, cbKeyUsage : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptInstallDefaultContext(hCryptProv : LibC::UIntPtrT, dwDefaultType : Win32cr::Security::Cryptography::CRYPT_DEFAULT_CONTEXT_TYPE, pvDefaultPara : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_DEFAULT_CONTEXT_FLAGS, pvReserved : Void*, phDefaultContext : Void**) : Win32cr::Foundation::BOOL
@@ -10712,22 +13939,22 @@ module Win32cr::Security::Cryptography
     fun CryptUninstallDefaultContext(hDefaultContext : Void*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptExportPublicKeyInfo(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptExportPublicKeyInfo(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptExportPublicKeyInfoEx(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : UInt32, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptExportPublicKeyInfoEx(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, dwKeySpec : UInt32, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptExportPublicKeyInfoFromBCryptKeyHandle(hBCryptKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwCertEncodingType : UInt32, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptExportPublicKeyInfoFromBCryptKeyHandle(hBCryptKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszPublicKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pcbInfo : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptImportPublicKeyInfo(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    fun CryptImportPublicKeyInfo(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptImportPublicKeyInfoEx(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, aiKeyAlg : UInt32, dwFlags : UInt32, pvAuxInfo : Void*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    fun CryptImportPublicKeyInfoEx(hCryptProv : LibC::UIntPtrT, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, aiKeyAlg : Win32cr::Security::Cryptography::ALG_ID, dwFlags : UInt32, pvAuxInfo : Void*, phKey : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptImportPublicKeyInfoEx2(dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, dwFlags : Win32cr::Security::Cryptography::CRYPT_IMPORT_PUBLIC_KEY_FLAGS, pvAuxInfo : Void*, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*) : Win32cr::Foundation::BOOL
+    fun CryptImportPublicKeyInfoEx2(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, dwFlags : Win32cr::Security::Cryptography::CRYPT_IMPORT_PUBLIC_KEY_FLAGS, pvAuxInfo : Void*, phKey : Win32cr::Security::Cryptography::BCRYPT_KEY_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptAcquireCertificatePrivateKey(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : Win32cr::Security::Cryptography::CRYPT_ACQUIRE_FLAGS, pvParameters : Void*, phCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE*, pdwKeySpec : Win32cr::Security::Cryptography::CERT_KEY_SPEC*, pfCallerFreeProvOrNCryptKey : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
@@ -10742,31 +13969,31 @@ module Win32cr::Security::Cryptography
     fun CryptExportPKCS8(hCryptProv : LibC::UIntPtrT, dwKeySpec : UInt32, pszPrivateKeyObjId : Win32cr::Foundation::PSTR, dwFlags : UInt32, pvAuxInfo : Void*, pbPrivateKeyBlob : UInt8*, pcbPrivateKeyBlob : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptHashPublicKeyInfo(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : UInt32, dwFlags : UInt32, dwCertEncodingType : UInt32, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptHashPublicKeyInfo(hCryptProv : Win32cr::Security::Cryptography::HCRYPTPROV_LEGACY, algid : Win32cr::Security::Cryptography::ALG_ID, dwFlags : UInt32, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pInfo : Win32cr::Security::Cryptography::CERT_PUBLIC_KEY_INFO*, pbComputedHash : UInt8*, pcbComputedHash : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertRDNValueToStrA(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, psz : UInt8*, csz : UInt32) : UInt32
+    fun CertRDNValueToStrA(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, psz : Win32cr::Foundation::PSTR, csz : UInt32) : UInt32
 
     # :nodoc:
-    fun CertRDNValueToStrW(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, psz : UInt16*, csz : UInt32) : UInt32
+    fun CertRDNValueToStrW(dwValueType : UInt32, pValue : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, psz : Win32cr::Foundation::PWSTR, csz : UInt32) : UInt32
 
     # :nodoc:
-    fun CertNameToStrA(dwCertEncodingType : UInt32, pName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : UInt8*, csz : UInt32) : UInt32
+    fun CertNameToStrA(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pName : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : Win32cr::Foundation::PSTR, csz : UInt32) : UInt32
 
     # :nodoc:
-    fun CertNameToStrW(dwCertEncodingType : UInt32, pName : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : UInt16*, csz : UInt32) : UInt32
+    fun CertNameToStrW(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pName : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, psz : Win32cr::Foundation::PWSTR, csz : UInt32) : UInt32
 
     # :nodoc:
-    fun CertStrToNameA(dwCertEncodingType : UInt32, pszX500 : Win32cr::Foundation::PSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    fun CertStrToNameA(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszX500 : Win32cr::Foundation::PSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertStrToNameW(dwCertEncodingType : UInt32, pszX500 : Win32cr::Foundation::PWSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    fun CertStrToNameW(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszX500 : Win32cr::Foundation::PWSTR, dwStrType : Win32cr::Security::Cryptography::CERT_STRING_TYPE, pvReserved : Void*, pbEncoded : UInt8*, pcbEncoded : UInt32*, ppszError : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertGetNameStringA(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : UInt8*, cchNameString : UInt32) : UInt32
+    fun CertGetNameStringA(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : Win32cr::Foundation::PSTR, cchNameString : UInt32) : UInt32
 
     # :nodoc:
-    fun CertGetNameStringW(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : UInt16*, cchNameString : UInt32) : UInt32
+    fun CertGetNameStringW(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwType : UInt32, dwFlags : UInt32, pvTypePara : Void*, pszNameString : Win32cr::Foundation::PWSTR, cchNameString : UInt32) : UInt32
 
     # :nodoc:
     fun CryptSignMessage(pSignPara : Win32cr::Security::Cryptography::CRYPT_SIGN_MESSAGE_PARA*, fDetachedSignature : Win32cr::Foundation::BOOL, cToBeSigned : UInt32, rgpbToBeSigned : UInt8**, rgcbToBeSigned : UInt32*, pbSignedBlob : UInt8*, pcbSignedBlob : UInt32*) : Win32cr::Foundation::BOOL
@@ -10869,19 +14096,19 @@ module Win32cr::Security::Cryptography
     fun CryptGetObjectUrl(pszUrlOid : Win32cr::Foundation::PSTR, pvPara : Void*, dwFlags : Win32cr::Security::Cryptography::CRYPT_GET_URL_FLAGS, pUrlArray : Win32cr::Security::Cryptography::CRYPT_URL_ARRAY*, pcbUrlArray : UInt32*, pUrlInfo : Win32cr::Security::Cryptography::CRYPT_URL_INFO*, pcbUrlInfo : UInt32*, pvReserved : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CertCreateSelfSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, pSubjectIssuerBlob : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwFlags : Win32cr::Security::Cryptography::CERT_CREATE_SELFSIGN_FLAGS, pKeyProvInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pStartTime : Win32cr::Foundation::SYSTEMTIME*, pEndTime : Win32cr::Foundation::SYSTEMTIME*, pExtensions : Win32cr::Security::Cryptography::CERT_EXTENSIONS*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    fun CertCreateSelfSignCertificate(hCryptProvOrNCryptKey : Win32cr::Security::Cryptography::HCRYPTPROV_OR_NCRYPT_KEY_HANDLE, pSubjectIssuerBlob : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwFlags : Win32cr::Security::Cryptography::CERT_CREATE_SELFSIGN_FLAGS, pKeyProvInfo : Win32cr::Security::Cryptography::CRYPT_KEY_PROV_INFO*, pSignatureAlgorithm : Win32cr::Security::Cryptography::CRYPT_ALGORITHM_IDENTIFIER*, pStartTime : Win32cr::Foundation::SYSTEMTIME*, pEndTime : Win32cr::Foundation::SYSTEMTIME*, pExtensions : Win32cr::Security::Cryptography::CERT_EXTENSIONS*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
 
     # :nodoc:
-    fun CryptGetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptGetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*, pcbData : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptSetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*) : Win32cr::Foundation::BOOL
+    fun CryptSetKeyIdentifierProperty(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvData : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptEnumKeyIdentifierProperties(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_KEYID_PROP) : Win32cr::Foundation::BOOL
+    fun CryptEnumKeyIdentifierProperties(pKeyIdentifier : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, dwPropId : UInt32, dwFlags : UInt32, pwszComputerName : Win32cr::Foundation::PWSTR, pvReserved : Void*, pvArg : Void*, pfnEnum : Win32cr::Security::Cryptography::PFN_CRYPT_ENUM_KEYID_PROP) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptCreateKeyIdentifierFromCSP(dwCertEncodingType : UInt32, pszPubKeyOID : Win32cr::Foundation::PSTR, pPubKeyStruc : Win32cr::Security::Cryptography::PUBLICKEYSTRUC*, cbPubKeyStruc : UInt32, dwFlags : UInt32, pvReserved : Void*, pbHash : UInt8*, pcbHash : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptCreateKeyIdentifierFromCSP(dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pszPubKeyOID : Win32cr::Foundation::PSTR, pPubKeyStruc : Win32cr::Security::Cryptography::PUBLICKEYSTRUC*, cbPubKeyStruc : UInt32, dwFlags : UInt32, pvReserved : Void*, pbHash : UInt8*, pcbHash : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertCreateCertificateChainEngine(pConfig : Win32cr::Security::Cryptography::CERT_CHAIN_ENGINE_CONFIG*, phChainEngine : Win32cr::Security::Cryptography::HCERTCHAINENGINE*) : Win32cr::Foundation::BOOL
@@ -10902,37 +14129,37 @@ module Win32cr::Security::Cryptography
     fun CertDuplicateCertificateChain(pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
 
     # :nodoc:
-    fun CertFindChainInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : UInt32, dwFindFlags : Win32cr::Security::Cryptography::CERT_FIND_CHAIN_IN_STORE_FLAGS, dwFindType : UInt32, pvFindPara : Void*, pPrevChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
+    fun CertFindChainInStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, dwCertEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, dwFindFlags : Win32cr::Security::Cryptography::CERT_FIND_CHAIN_IN_STORE_FLAGS, dwFindType : UInt32, pvFindPara : Void*, pPrevChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*) : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*
 
     # :nodoc:
     fun CertVerifyCertificateChainPolicy(pszPolicyOID : Win32cr::Foundation::PSTR, pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, pPolicyPara : Win32cr::Security::Cryptography::CERT_CHAIN_POLICY_PARA*, pPolicyStatus : Win32cr::Security::Cryptography::CERT_CHAIN_POLICY_STATUS*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptStringToBinaryA(pszString : UInt8*, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptStringToBinaryA(pszString : Win32cr::Foundation::PSTR, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptStringToBinaryW(pszString : UInt16*, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptStringToBinaryW(pszString : Win32cr::Foundation::PWSTR, cchString : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pbBinary : UInt8*, pcbBinary : UInt32*, pdwSkip : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptBinaryToStringA(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : UInt8*, pcchString : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptBinaryToStringA(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : Win32cr::Foundation::PSTR, pcchString : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptBinaryToStringW(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : UInt16*, pcchString : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptBinaryToStringW(pbBinary : UInt8*, cbBinary : UInt32, dwFlags : Win32cr::Security::Cryptography::CRYPT_STRING, pszString : Win32cr::Foundation::PWSTR, pcchString : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun PFXImportCertStore(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS) : Win32cr::Security::Cryptography::HCERTSTORE
+    fun PFXImportCertStore(pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Security::Cryptography::CRYPT_KEY_FLAGS) : Win32cr::Security::Cryptography::HCERTSTORE
 
     # :nodoc:
-    fun PFXIsPFXBlob(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+    fun PFXIsPFXBlob(pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun PFXVerifyPassword(pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    fun PFXVerifyPassword(pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun PFXExportCertStoreEx(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, pvPara : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    fun PFXExportCertStoreEx(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szPassword : Win32cr::Foundation::PWSTR, pvPara : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun PFXExportCertStore(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    fun PFXExportCertStore(hStore : Win32cr::Security::Cryptography::HCERTSTORE, pPFX : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CertOpenServerOcspResponse(pChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, dwFlags : UInt32, pOpenPara : Win32cr::Security::Cryptography::CERT_SERVER_OCSP_RESPONSE_OPEN_PARA*) : Void*
@@ -10971,13 +14198,13 @@ module Win32cr::Security::Cryptography
     fun CertIsWeakHash(dwHashUseType : UInt32, pwszCNGHashAlgid : Win32cr::Foundation::PWSTR, dwChainFlags : UInt32, pSignerChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT*, pTimeStamp : Win32cr::Foundation::FILETIME*, pwszFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptProtectData(pDataIn : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, szDataDescr : Win32cr::Foundation::PWSTR, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+    fun CryptProtectData(pDataIn : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, szDataDescr : Win32cr::Foundation::PWSTR, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptUnprotectData(pDataIn : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, ppszDataDescr : Win32cr::Foundation::PWSTR*, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPTOAPI_BLOB*) : Win32cr::Foundation::BOOL
+    fun CryptUnprotectData(pDataIn : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, ppszDataDescr : Win32cr::Foundation::PWSTR*, pOptionalEntropy : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*, pvReserved : Void*, pPromptStruct : Win32cr::Security::Cryptography::CRYPTPROTECT_PROMPTSTRUCT*, dwFlags : UInt32, pDataOut : Win32cr::Security::Cryptography::CRYPT_INTEGER_BLOB*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CryptUpdateProtectedState(pOldSid : Win32cr::Foundation::PSID, pwszOldPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pdwSuccessCount : UInt32*, pdwFailureCount : UInt32*) : Win32cr::Foundation::BOOL
+    fun CryptUpdateProtectedState(pOldSid : Win32cr::Security::PSID, pwszOldPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pdwSuccessCount : UInt32*, pdwFailureCount : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CryptProtectMemory(pDataIn : Void*, cbDataIn : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
@@ -10989,7 +14216,7 @@ module Win32cr::Security::Cryptography
     fun NCryptRegisterProtectionDescriptorName(pwszName : Win32cr::Foundation::PWSTR, pwszDescriptorString : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
-    fun NCryptQueryProtectionDescriptorName(pwszName : Win32cr::Foundation::PWSTR, pwszDescriptorString : UInt16*, pcDescriptorString : LibC::UIntPtrT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    fun NCryptQueryProtectionDescriptorName(pwszName : Win32cr::Foundation::PWSTR, pwszDescriptorString : Win32cr::Foundation::PWSTR, pcDescriptorString : LibC::UIntPtrT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun NCryptCreateProtectionDescriptor(pwszDescriptorString : Win32cr::Foundation::PWSTR, dwFlags : UInt32, phDescriptor : Win32cr::Security::NCRYPT_DESCRIPTOR_HANDLE*) : Win32cr::Foundation::HRESULT
@@ -11020,6 +14247,36 @@ module Win32cr::Security::Cryptography
 
     # :nodoc:
     fun NCryptStreamClose(hStream : Win32cr::Security::NCRYPT_STREAM_HANDLE) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignError : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerFreeSignerContext(pSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerSign(pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pSignerCert : Win32cr::Security::Cryptography::SIGNER_CERT*, pSignatureInfo : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_INFO*, pProviderInfo : Win32cr::Security::Cryptography::SIGNER_PROVIDER_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerSignEx(dwFlags : Win32cr::Security::Cryptography::SIGNER_SIGN_FLAGS, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pSignerCert : Win32cr::Security::Cryptography::SIGNER_CERT*, pSignatureInfo : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_INFO*, pProviderInfo : Win32cr::Security::Cryptography::SIGNER_PROVIDER_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerSignEx2(dwFlags : Win32cr::Security::Cryptography::SIGNER_SIGN_FLAGS, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pSignerCert : Win32cr::Security::Cryptography::SIGNER_CERT*, pSignatureInfo : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_INFO*, pProviderInfo : Win32cr::Security::Cryptography::SIGNER_PROVIDER_INFO*, dwTimestampFlags : Win32cr::Security::Cryptography::SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid : Win32cr::Foundation::PSTR, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**, pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pReserved : Void*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerSignEx3(dwFlags : Win32cr::Security::Cryptography::SIGNER_SIGN_FLAGS, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pSignerCert : Win32cr::Security::Cryptography::SIGNER_CERT*, pSignatureInfo : Win32cr::Security::Cryptography::SIGNER_SIGNATURE_INFO*, pProviderInfo : Win32cr::Security::Cryptography::SIGNER_PROVIDER_INFO*, dwTimestampFlags : Win32cr::Security::Cryptography::SIGNER_TIMESTAMP_FLAGS, pszTimestampAlgorithmOid : Win32cr::Foundation::PSTR, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**, pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pDigestSignInfo : Win32cr::Security::Cryptography::SIGNER_DIGEST_SIGN_INFO*, pReserved : Void*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerTimeStamp(pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerTimeStampEx(dwFlags : UInt32, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerTimeStampEx2(dwFlags : Win32cr::Security::Cryptography::SIGNER_TIMESTAMP_FLAGS, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, dwAlgId : Win32cr::Security::Cryptography::ALG_ID, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SignerTimeStampEx3(dwFlags : Win32cr::Security::Cryptography::SIGNER_TIMESTAMP_FLAGS, dwIndex : UInt32, pSubjectInfo : Win32cr::Security::Cryptography::SIGNER_SUBJECT_INFO*, pwszHttpTimeStamp : Win32cr::Foundation::PWSTR, pszAlgorithmOid : Win32cr::Foundation::PWSTR, psRequest : Win32cr::Security::Cryptography::CRYPT_ATTRIBUTES*, pSipData : Void*, ppSignerContext : Win32cr::Security::Cryptography::SIGNER_CONTEXT**, pCryptoPolicy : Win32cr::Security::Cryptography::CERT_STRONG_SIGN_PARA*, pReserved : Void*) : Win32cr::Foundation::HRESULT
 
     # :nodoc:
     fun CryptXmlClose(hCryptXml : Void*) : Win32cr::Foundation::HRESULT
@@ -11129,5 +14386,180 @@ module Win32cr::Security::Cryptography
     # :nodoc:
     fun GetBrowserToken(dwParamType : UInt32, pParam : Void*, pcbToken : UInt32*, ppToken : UInt8**) : Win32cr::Foundation::HRESULT
 
+    # :nodoc:
+    fun GetCipherInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_CIPHER_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun GetHashInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_HASH_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun GetAsymmetricEncryptionInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_ASYMMETRIC_ENCRYPTION_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun GetSecretAgreementInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_SECRET_AGREEMENT_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun GetSignatureInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_SIGNATURE_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun GetRngInterface(pszProviderName : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_RNG_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun GetKeyDerivationInterface(pszProviderName : Win32cr::Foundation::PWSTR, pszAlgId : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::BCRYPT_KEY_DERIVATION_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun BCryptRegisterProvider(pszProvider : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pReg : Win32cr::Security::Cryptography::CRYPT_PROVIDER_REG*) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun BCryptUnregisterProvider(pszProvider : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun BCryptAddContextFunctionProvider(dwTable : UInt32, pszContext : Win32cr::Foundation::PWSTR, dwInterface : UInt32, pszFunction : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR, dwPosition : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun BCryptRemoveContextFunctionProvider(dwTable : UInt32, pszContext : Win32cr::Foundation::PWSTR, dwInterface : UInt32, pszFunction : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun GetKeyStorageInterface(pszProviderName : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::NCRYPT_KEY_STORAGE_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun SslChangeNotify(hEvent : Win32cr::Foundation::HANDLE, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslComputeClientAuthHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, pszAlgId : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslComputeEapKeyBlock(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbRandoms : UInt8*, cbRandoms : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslComputeFinishedHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, pbOutput : UInt8*, cbOutput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslCreateEphemeralKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phEphemeralKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, dwKeyType : UInt32, dwKeyBitLen : UInt32, pbParams : UInt8*, cbParams : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslCreateHandshakeHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslDecryptPacket(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, sequence_number : UInt64, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslEncryptPacket(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbInput : UInt8*, cbInput : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, sequence_number : UInt64, dwContentType : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslEnumCipherSuites(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, ppCipherSuite : Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE**, ppEnumState : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslEnumCipherSuitesEx(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, ppCipherSuite : Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE_EX**, ppEnumState : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslEnumEccCurves(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, pEccCurveCount : UInt32*, ppEccCurve : Win32cr::Security::Cryptography::NCRYPT_SSL_ECC_CURVE**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslEnumProtocolProviders(pdwProviderCount : UInt32*, ppProviderList : Win32cr::Security::Cryptography::NCryptProviderName**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExportKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszBlobType : Win32cr::Foundation::PWSTR, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslFreeBuffer(pvInput : Void*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslFreeObject(hObject : Win32cr::Security::Cryptography::NCRYPT_HANDLE, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslGenerateMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hPublicKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslGenerateSessionKeys(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phReadKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, phWriteKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslGetKeyProperty(hKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, ppbOutput : UInt8**, pcbOutput : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslGetProviderProperty(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, pszProperty : Win32cr::Foundation::PWSTR, ppbOutput : UInt8**, pcbOutput : UInt32*, ppEnumState : Void**, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslHashHandshake(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, pbInput : UInt8*, cbInput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslImportKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pszBlobType : Win32cr::Foundation::PWSTR, pbKeyBlob : UInt8*, cbKeyBlob : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslImportMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbEncryptedKey : UInt8*, cbEncryptedKey : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslLookupCipherSuiteInfo(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, dwProtocol : UInt32, dwCipherSuite : UInt32, dwKeyType : UInt32, pCipherSuite : Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_SUITE*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslOpenPrivateKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslOpenProvider(phSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE*, pszProviderName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslSignHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbHashValue : UInt8*, cbHashValue : UInt32, pbSignature : UInt8*, cbSignature : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslVerifySignature(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPublicKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbHashValue : UInt8*, cbHashValue : UInt32, pbSignature : UInt8*, cbSignature : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslLookupCipherLengths(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, dwProtocol : UInt32, dwCipherSuite : UInt32, dwKeyType : UInt32, pCipherLengths : Win32cr::Security::Cryptography::NCRYPT_SSL_CIPHER_LENGTHS*, cbCipherLengths : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslCreateClientAuthHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, phHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pszHashAlgId : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslGetCipherSuitePRFHashAlgorithm(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, dwProtocol : UInt32, dwCipherSuite : UInt32, dwKeyType : UInt32, szPRFHash : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslComputeSessionHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hHandshakeHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, dwProtocol : UInt32, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslGeneratePreMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPublicKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phPreMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, pbOutput : UInt8*, cbOutput : UInt32, pcbResult : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExportKeyingMaterial(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, sLabel : Win32cr::Foundation::PSTR, pbRandoms : UInt8*, cbRandoms : UInt32, pbContextValue : UInt8*, cbContextValue : UInt16, pbOutput : UInt8*, cbOutput : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExtractEarlyKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPreSharedKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phEarlyKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, dwProtocol : UInt32, dwCipherSuite : UInt32, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExtractHandshakeKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hPrivateKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hPublicKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hEarlyKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phHandshakeKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExtractMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hHandshakeKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExpandTrafficKeys(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hBaseKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHashValue : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, phClientTrafficKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, phServerTrafficKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExpandWriteKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hBaseTrafficKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phWriteKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExpandExporterMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hBaseKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHashValue : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, phExporterMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExpandResumptionMasterKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, hHashValue : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, phResumptionMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslDuplicateTranscriptHash(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hTranscriptHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE, phTranscriptHash : Win32cr::Security::Cryptography::NCRYPT_HASH_HANDLE*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExpandBinderKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hEarlyKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, phBinderKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslExpandPreSharedKey(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE, hResumptionMasterKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE, pbTicketNonce : UInt8*, cbTicketNonce : UInt32, phPreSharedKey : Win32cr::Security::Cryptography::NCRYPT_KEY_HANDLE*, pParameterList : Win32cr::Security::Cryptography::BCryptBufferDesc*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun GetSChannelInterface(pszProviderName : Win32cr::Foundation::PWSTR, ppFunctionTable : Win32cr::Security::Cryptography::NCRYPT_SSL_FUNCTION_TABLE**, dwFlags : UInt32) : Win32cr::Foundation::NTSTATUS
+
+    # :nodoc:
+    fun SslIncrementProviderReferenceCount(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun SslDecrementProviderReferenceCount(hSslProvider : Win32cr::Security::Cryptography::NCRYPT_PROV_HANDLE) : Win32cr::Foundation::HRESULT
+
   end
+  {% end %}
 end

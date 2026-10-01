@@ -1,15 +1,16 @@
 require "./structured_storage.cr"
-require "./../foundation.cr"
 
 module Win32cr::Storage::Jet
   extend self
+  alias JET_INSTANCE = LibC::UIntPtrT
+  alias JET_SESID = LibC::UIntPtrT
   alias JET_OSSNAPID = LibC::UIntPtrT
   alias JET_LS = LibC::UIntPtrT
-  alias JET_PFNSTATUS = Proc(Win32cr::Storage::StructuredStorage::JET_SESID, UInt32, UInt32, Void*, Int32)
+  alias JET_PFNSTATUS = Proc(Win32cr::Storage::Jet::JET_SESID, UInt32, UInt32, Void*, Int32)
 
-  alias JET_CALLBACK = Proc(Win32cr::Storage::StructuredStorage::JET_SESID, UInt32, Win32cr::Storage::StructuredStorage::JET_TABLEID, UInt32, Void*, Void*, Void*, Win32cr::Storage::StructuredStorage::JET_API_PTR, Int32)
+  alias JET_CALLBACK = Proc(Win32cr::Storage::Jet::JET_SESID, UInt32, Win32cr::Storage::StructuredStorage::JET_TABLEID, UInt32, Void*, Void*, Void*, Win32cr::Storage::StructuredStorage::JET_API_PTR, Int32)
 
-  alias JET_PFNDURABLECOMMITCALLBACK = Proc(Win32cr::Storage::StructuredStorage::JET_INSTANCE, Win32cr::Storage::Jet::JET_COMMIT_ID*, UInt32, Int32)
+  alias JET_PFNDURABLECOMMITCALLBACK = Proc(Win32cr::Storage::Jet::JET_INSTANCE, Win32cr::Storage::Jet::JET_COMMIT_ID*, UInt32, Int32)
 
   alias JET_PFNREALLOC = Proc(Void*, Void*, UInt32, Void*)
 
@@ -20,6 +21,15 @@ module Win32cr::Storage::Jet
   JET_bitConfigStoreReadControlDefault = 0_u32
   JET_wszConfigStoreRelPathSysParamDefault = "SysParamDefault"
   JET_wszConfigStoreRelPathSysParamOverride = "SysParamOverride"
+  JET_efvUseEngineDefault = 1073741825_u32
+  JET_efvUsePersistedFormat = 1073741826_u32
+  JET_efvAllowHigherPersistedFormat = 1090519040_u32
+  JET_efvWindows19H1Rtm = 8920_u32
+  JET_efvWindows10v2004 = 9180_u32
+  JET_efvWindowsServer2022 = 9360_u32
+  JET_efvWindows11v21H2 = 9400_u32
+  JET_efvWindows11v22H2 = 9480_u32
+  JET_efvWindows11v23H2 = 9600_u32
   JET_bitDefragmentBatchStart = 1_u32
   JET_bitDefragmentBatchStop = 2_u32
   JET_bitDefragmentAvailSpaceTreesOnly = 64_u32
@@ -69,6 +79,7 @@ module Win32cr::Storage::Jet
   JET_ccolMost = 65248_u32
   JET_ccolFixedMost = 127_u32
   JET_ccolVarMost = 128_u32
+  JET_ccolTaggedMost = 64993_u32
   JET_EventLoggingDisable = 0_u32
   JET_EventLoggingLevelMin = 1_u32
   JET_EventLoggingLevelLow = 25_u32
@@ -213,15 +224,19 @@ module Win32cr::Storage::Jet
   JET_paramDurableCommitCallback = 187_u32
   JET_paramEnableSqm = 188_u32
   JET_paramConfigStoreSpec = 189_u32
+  JET_paramEngineFormatVersion = 194_u32
   JET_paramUseFlushForWriteDurability = 214_u32
   JET_paramEnableRBS = 215_u32
   JET_paramRBSFilePath = 216_u32
-  JET_paramMaxValueInvalid = 217_u32
+  JET_paramPerfmonRefreshInterval = 217_u32
+  JET_paramEnableBlockCache = 218_u32
+  JET_paramTraceFlags = 223_u32
+  JET_paramMaxValueInvalid = 232_u32
   JET_sesparamCommitDefault = 4097_u32
   JET_sesparamTransactionLevel = 4099_u32
   JET_sesparamOperationContext = 4100_u32
   JET_sesparamCorrelationID = 4101_u32
-  JET_sesparamMaxValueInvalid = 4110_u32
+  JET_sesparamMaxValueInvalid = 4111_u32
   JET_bitESE98FileNames = 1_u32
   JET_bitEightDotThreeSoftCompat = 2_u32
   JET_bitHungIOEvent = 1_u32
@@ -378,6 +393,7 @@ module Win32cr::Storage::Jet
   JET_bitTTForwardOnly = 64_u32
   JET_bitTTIntrinsicLVsOnly = 128_u32
   JET_bitTTDotNetGuid = 256_u32
+  JET_bitTTMaterializeBBT = 512_u32
   JET_bitSetAppendLV = 1_u32
   JET_bitSetOverwriteLV = 4_u32
   JET_bitSetSizeLV = 8_u32
@@ -472,11 +488,6 @@ module Win32cr::Storage::Jet
   JET_filetypeCheckpoint = 4_u32
   JET_filetypeTempDatabase = 5_u32
   JET_filetypeFlushMap = 7_u32
-  JET_revertstateNone = 0_u32
-  JET_revertstateInProgress = 1_u32
-  JET_revertstateCopingLogs = 2_u32
-  JET_revertstateCompleted = 3_u32
-  JET_bitDeleteAllExistingLogs = 1_u32
   JET_coltypNil = 0_u32
   JET_coltypBit = 1_u32
   JET_coltypUnsignedByte = 2_u32
@@ -530,7 +541,7 @@ module Win32cr::Storage::Jet
   JET_bitStopServiceBackgroundUserTasks = 2_u32
   JET_bitStopServiceQuiesceCaches = 4_u32
   JET_bitStopServiceResume = 2147483648_u32
-  JET_errSuccess = 0_u32
+  JET_errSuccess = 0_i32
   JET_wrnNyi = -1_i32
   JET_errRfsFailure = -100_i32
   JET_errRfsNotArmed = -101_i32
@@ -564,6 +575,8 @@ module Win32cr::Storage::Jet
   JET_errBadLineCount = -354_i32
   JET_errPageTagCorrupted = -357_i32
   JET_errNodeCorrupted = -358_i32
+  JET_errBBTNodeCorrupted = -364_i32
+  JET_errBBTBuffCorrupted = -365_i32
   JET_wrnSeparateLongValue = 406_u32
   JET_errKeyTooBig = -408_i32
   JET_errCannotSeparateIntrinsicLV = -416_i32
@@ -670,6 +683,9 @@ module Win32cr::Storage::Jet
   JET_errEngineFormatVersionParamTooLowForRequestedFeature = -621_i32
   JET_errEngineFormatVersionSpecifiedTooLowForLogVersion = -622_i32
   JET_errEngineFormatVersionSpecifiedTooLowForDatabaseVersion = -623_i32
+  JET_errDbTimeBeyondMaxRequired = -625_i32
+  JET_errLogOperationInconsistentWithDatabase = -626_i32
+  JET_errInsertKeyOutOfOrder = -627_i32
   JET_errBackupAbortByServer = -801_i32
   JET_errInvalidGrbit = -900_i32
   JET_errTermInProgress = -1000_i32
@@ -906,6 +922,8 @@ module Win32cr::Storage::Jet
   JET_errUpdateMustVersion = -1621_i32
   JET_errDecryptionFailed = -1622_i32
   JET_errEncryptionBadItag = -1623_i32
+  JET_errSetAutoIncrementTooHigh = -1624_i32
+  JET_errAutoIncrementNotSet = -1625_i32
   JET_errTooManySorts = -1701_i32
   JET_errInvalidOnSort = -1702_i32
   JET_errTempFileOpenError = -1803_i32
@@ -953,6 +971,8 @@ module Win32cr::Storage::Jet
   JET_errFileIORetry = -4003_i32
   JET_errFileIOFail = -4004_i32
   JET_errFileCompressed = -4005_i32
+  JET_errClientSpaceBegin = -10000_i32
+  JET_errClientSpaceEnd = -11999_i32
   JET_BASE_NAME_LENGTH = 3_u32
   JET_bitDumpMinimum = 1_u32
   JET_bitDumpMaximum = 2_u32
@@ -1011,25 +1031,129 @@ module Win32cr::Storage::Jet
   end
   {% end %}
 
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_OBJECTINFO
+    property cbStruct : UInt32
+    property objtyp : UInt32
+    property dtCreate : Float64
+    property dtUpdate : Float64
+    property grbit : UInt32
+    property flags : UInt32
+    property cRecord : UInt32
+    property cPage : UInt32
+    def initialize(@cbStruct : UInt32, @objtyp : UInt32, @dtCreate : Float64, @dtUpdate : Float64, @grbit : UInt32, @flags : UInt32, @cRecord : UInt32, @cPage : UInt32)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_RECPOS2
+    property cbStruct : UInt32
+    property centriesLTDeprecated : UInt32
+    property centriesInRangeDeprecated : UInt32
+    property centriesTotalDeprecated : UInt32
+    property centriesLT : UInt64
+    property centriesTotal : UInt64
+    def initialize(@cbStruct : UInt32, @centriesLTDeprecated : UInt32, @centriesInRangeDeprecated : UInt32, @centriesTotalDeprecated : UInt32, @centriesLT : UInt64, @centriesTotal : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_THREADSTATS2
+    property cbStruct : UInt32
+    property cPageReferenced : UInt32
+    property cPageRead : UInt32
+    property cPagePreread : UInt32
+    property cPageDirtied : UInt32
+    property cPageRedirtied : UInt32
+    property cLogRecord : UInt32
+    property cbLogRecord : UInt32
+    property cusecPageCacheMiss : UInt64
+    property cPageCacheMiss : UInt32
+    def initialize(@cbStruct : UInt32, @cPageReferenced : UInt32, @cPageRead : UInt32, @cPagePreread : UInt32, @cPageDirtied : UInt32, @cPageRedirtied : UInt32, @cLogRecord : UInt32, @cbLogRecord : UInt32, @cusecPageCacheMiss : UInt64, @cPageCacheMiss : UInt32)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_COMMIT_ID
+    property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
+    property reserved : Int32
+    property commitId : Int64
+    def initialize(@signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @reserved : Int32, @commitId : Int64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_RECSIZE
+    property cbData : UInt64
+    property cbLongValueData : UInt64
+    property cbOverhead : UInt64
+    property cbLongValueOverhead : UInt64
+    property cNonTaggedColumns : UInt64
+    property cTaggedColumns : UInt64
+    property cLongValues : UInt64
+    property cMultiValues : UInt64
+    def initialize(@cbData : UInt64, @cbLongValueData : UInt64, @cbOverhead : UInt64, @cbLongValueOverhead : UInt64, @cNonTaggedColumns : UInt64, @cTaggedColumns : UInt64, @cLongValues : UInt64, @cMultiValues : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:x86_64) || flag?(:arm) %}
+  @[Extern]
+  struct JET_RECSIZE2
+    property cbData : UInt64
+    property cbLongValueData : UInt64
+    property cbOverhead : UInt64
+    property cbLongValueOverhead : UInt64
+    property cNonTaggedColumns : UInt64
+    property cTaggedColumns : UInt64
+    property cLongValues : UInt64
+    property cMultiValues : UInt64
+    property cCompressedColumns : UInt64
+    property cbDataCompressed : UInt64
+    property cbLongValueDataCompressed : UInt64
+    def initialize(@cbData : UInt64, @cbLongValueData : UInt64, @cbOverhead : UInt64, @cbLongValueOverhead : UInt64, @cNonTaggedColumns : UInt64, @cTaggedColumns : UInt64, @cLongValues : UInt64, @cMultiValues : UInt64, @cCompressedColumns : UInt64, @cbDataCompressed : UInt64, @cbLongValueDataCompressed : UInt64)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct JET_INDEXID
+    property cbStruct : UInt32
+    property rgbIndexId : UInt8[12]
+    def initialize(@cbStruct : UInt32, @rgbIndexId : UInt8[12])
+    end
+  end
+  {% end %}
+
   @[Extern]
   struct JET_RSTMAP_A
-    property szDatabaseName : Win32cr::Foundation::PSTR
-    property szNewDatabaseName : Win32cr::Foundation::PSTR
-    def initialize(@szDatabaseName : Win32cr::Foundation::PSTR, @szNewDatabaseName : Win32cr::Foundation::PSTR)
+    property szDatabaseName : Int8*
+    property szNewDatabaseName : Int8*
+    def initialize(@szDatabaseName : Int8*, @szNewDatabaseName : Int8*)
     end
   end
 
   @[Extern]
   struct JET_RSTMAP_W
-    property szDatabaseName : Win32cr::Foundation::PWSTR
-    property szNewDatabaseName : Win32cr::Foundation::PWSTR
-    def initialize(@szDatabaseName : Win32cr::Foundation::PWSTR, @szNewDatabaseName : Win32cr::Foundation::PWSTR)
+    property szDatabaseName : UInt16*
+    property szNewDatabaseName : UInt16*
+    def initialize(@szDatabaseName : UInt16*, @szNewDatabaseName : UInt16*)
     end
   end
 
   @[Extern]
-  struct CONVERT_A
-    property szOldDll : Win32cr::Foundation::PSTR
+  struct JET_CONVERT_A
+    property szOldDll : Int8*
     property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
@@ -1050,13 +1174,13 @@ module Win32cr::Storage::Jet
     end
     end
 
-    def initialize(@szOldDll : Win32cr::Foundation::PSTR, @anonymous : Anonymous_e__Union_)
+    def initialize(@szOldDll : Int8*, @anonymous : Anonymous_e__Union_)
     end
   end
 
   @[Extern]
-  struct CONVERT_W
-    property szOldDll : Win32cr::Foundation::PWSTR
+  struct JET_CONVERT_W
+    property szOldDll : UInt16*
     property anonymous : Anonymous_e__Union_
 
     # Nested Type Anonymous_e__Union_
@@ -1077,7 +1201,7 @@ module Win32cr::Storage::Jet
     end
     end
 
-    def initialize(@szOldDll : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_)
+    def initialize(@szOldDll : UInt16*, @anonymous : Anonymous_e__Union_)
     end
   end
 
@@ -1122,7 +1246,7 @@ module Win32cr::Storage::Jet
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct JET_OBJECTINFO
     property cbStruct : UInt32
@@ -1205,9 +1329,9 @@ module Win32cr::Storage::Jet
     property wFiller : UInt16
     property cbMax : UInt32
     property grbit : UInt32
-    property szBaseTableName : Win32cr::Foundation::CHAR[256]
-    property szBaseColumnName : Win32cr::Foundation::CHAR[256]
-    def initialize(@cbStruct : UInt32, @columnid : UInt32, @coltyp : UInt32, @wCountry : UInt16, @langid : UInt16, @cp : UInt16, @wFiller : UInt16, @cbMax : UInt32, @grbit : UInt32, @szBaseTableName : Win32cr::Foundation::CHAR[256], @szBaseColumnName : Win32cr::Foundation::CHAR[256])
+    property szBaseTableName : Int8[256]
+    property szBaseColumnName : Int8[256]
+    def initialize(@cbStruct : UInt32, @columnid : UInt32, @coltyp : UInt32, @wCountry : UInt16, @langid : UInt16, @cp : UInt16, @wFiller : UInt16, @cbMax : UInt32, @grbit : UInt32, @szBaseTableName : Int8[256], @szBaseColumnName : Int8[256])
     end
   end
 
@@ -1256,7 +1380,7 @@ module Win32cr::Storage::Jet
   @[Extern]
   struct JET_COLUMNCREATE_A
     property cbStruct : UInt32
-    property szColumnName : Win32cr::Foundation::PSTR
+    property szColumnName : Int8*
     property coltyp : UInt32
     property cbMax : UInt32
     property grbit : UInt32
@@ -1265,14 +1389,14 @@ module Win32cr::Storage::Jet
     property cp : UInt32
     property columnid : UInt32
     property err : Int32
-    def initialize(@cbStruct : UInt32, @szColumnName : Win32cr::Foundation::PSTR, @coltyp : UInt32, @cbMax : UInt32, @grbit : UInt32, @pvDefault : Void*, @cbDefault : UInt32, @cp : UInt32, @columnid : UInt32, @err : Int32)
+    def initialize(@cbStruct : UInt32, @szColumnName : Int8*, @coltyp : UInt32, @cbMax : UInt32, @grbit : UInt32, @pvDefault : Void*, @cbDefault : UInt32, @cp : UInt32, @columnid : UInt32, @err : Int32)
     end
   end
 
   @[Extern]
   struct JET_COLUMNCREATE_W
     property cbStruct : UInt32
-    property szColumnName : Win32cr::Foundation::PWSTR
+    property szColumnName : UInt16*
     property coltyp : UInt32
     property cbMax : UInt32
     property grbit : UInt32
@@ -1281,45 +1405,45 @@ module Win32cr::Storage::Jet
     property cp : UInt32
     property columnid : UInt32
     property err : Int32
-    def initialize(@cbStruct : UInt32, @szColumnName : Win32cr::Foundation::PWSTR, @coltyp : UInt32, @cbMax : UInt32, @grbit : UInt32, @pvDefault : Void*, @cbDefault : UInt32, @cp : UInt32, @columnid : UInt32, @err : Int32)
+    def initialize(@cbStruct : UInt32, @szColumnName : UInt16*, @coltyp : UInt32, @cbMax : UInt32, @grbit : UInt32, @pvDefault : Void*, @cbDefault : UInt32, @cp : UInt32, @columnid : UInt32, @err : Int32)
     end
   end
 
   @[Extern]
   struct JET_USERDEFINEDDEFAULT_A
-    property szCallback : Win32cr::Foundation::PSTR
+    property szCallback : Int8*
     property pbUserData : UInt8*
     property cbUserData : UInt32
-    property szDependantColumns : Win32cr::Foundation::PSTR
-    def initialize(@szCallback : Win32cr::Foundation::PSTR, @pbUserData : UInt8*, @cbUserData : UInt32, @szDependantColumns : Win32cr::Foundation::PSTR)
+    property szDependantColumns : Int8*
+    def initialize(@szCallback : Int8*, @pbUserData : UInt8*, @cbUserData : UInt32, @szDependantColumns : Int8*)
     end
   end
 
   @[Extern]
   struct JET_USERDEFINEDDEFAULT_W
-    property szCallback : Win32cr::Foundation::PWSTR
+    property szCallback : UInt16*
     property pbUserData : UInt8*
     property cbUserData : UInt32
-    property szDependantColumns : Win32cr::Foundation::PWSTR
-    def initialize(@szCallback : Win32cr::Foundation::PWSTR, @pbUserData : UInt8*, @cbUserData : UInt32, @szDependantColumns : Win32cr::Foundation::PWSTR)
+    property szDependantColumns : UInt16*
+    def initialize(@szCallback : UInt16*, @pbUserData : UInt8*, @cbUserData : UInt32, @szDependantColumns : UInt16*)
     end
   end
 
   @[Extern]
   struct JET_CONDITIONALCOLUMN_A
     property cbStruct : UInt32
-    property szColumnName : Win32cr::Foundation::PSTR
+    property szColumnName : Int8*
     property grbit : UInt32
-    def initialize(@cbStruct : UInt32, @szColumnName : Win32cr::Foundation::PSTR, @grbit : UInt32)
+    def initialize(@cbStruct : UInt32, @szColumnName : Int8*, @grbit : UInt32)
     end
   end
 
   @[Extern]
   struct JET_CONDITIONALCOLUMN_W
     property cbStruct : UInt32
-    property szColumnName : Win32cr::Foundation::PWSTR
+    property szColumnName : UInt16*
     property grbit : UInt32
-    def initialize(@cbStruct : UInt32, @szColumnName : Win32cr::Foundation::PWSTR, @grbit : UInt32)
+    def initialize(@cbStruct : UInt32, @szColumnName : UInt16*, @grbit : UInt32)
     end
   end
 
@@ -1333,9 +1457,9 @@ module Win32cr::Storage::Jet
 
   @[Extern]
   struct JET_UNICODEINDEX2
-    property szLocaleName : Win32cr::Foundation::PWSTR
+    property szLocaleName : UInt16*
     property dwMapFlags : UInt32
-    def initialize(@szLocaleName : Win32cr::Foundation::PWSTR, @dwMapFlags : UInt32)
+    def initialize(@szLocaleName : UInt16*, @dwMapFlags : UInt32)
     end
   end
 
@@ -1367,8 +1491,8 @@ module Win32cr::Storage::Jet
   @[Extern]
   struct JET_INDEXCREATE_A
     property cbStruct : UInt32
-    property szIndexName : Win32cr::Foundation::PSTR
-    property szKey : Win32cr::Foundation::PSTR
+    property szIndexName : Int8*
+    property szKey : Int8*
     property cbKey : UInt32
     property grbit : UInt32
     property ulDensity : UInt32
@@ -1398,15 +1522,15 @@ module Win32cr::Storage::Jet
     end
     end
 
-    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PSTR, @szKey : Win32cr::Foundation::PSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32)
+    def initialize(@cbStruct : UInt32, @szIndexName : Int8*, @szKey : Int8*, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32)
     end
   end
 
   @[Extern]
   struct JET_INDEXCREATE_W
     property cbStruct : UInt32
-    property szIndexName : Win32cr::Foundation::PWSTR
-    property szKey : Win32cr::Foundation::PWSTR
+    property szIndexName : UInt16*
+    property szKey : UInt16*
     property cbKey : UInt32
     property grbit : UInt32
     property ulDensity : UInt32
@@ -1436,15 +1560,15 @@ module Win32cr::Storage::Jet
     end
     end
 
-    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PWSTR, @szKey : Win32cr::Foundation::PWSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32)
+    def initialize(@cbStruct : UInt32, @szIndexName : UInt16*, @szKey : UInt16*, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32)
     end
   end
 
   @[Extern]
   struct JET_INDEXCREATE2_A
     property cbStruct : UInt32
-    property szIndexName : Win32cr::Foundation::PSTR
-    property szKey : Win32cr::Foundation::PSTR
+    property szIndexName : Int8*
+    property szKey : Int8*
     property cbKey : UInt32
     property grbit : UInt32
     property ulDensity : UInt32
@@ -1475,15 +1599,15 @@ module Win32cr::Storage::Jet
     end
     end
 
-    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PSTR, @szKey : Win32cr::Foundation::PSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
+    def initialize(@cbStruct : UInt32, @szIndexName : Int8*, @szKey : Int8*, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
     end
   end
 
   @[Extern]
   struct JET_INDEXCREATE2_W
     property cbStruct : UInt32
-    property szIndexName : Win32cr::Foundation::PWSTR
-    property szKey : Win32cr::Foundation::PWSTR
+    property szIndexName : UInt16*
+    property szKey : UInt16*
     property cbKey : UInt32
     property grbit : UInt32
     property ulDensity : UInt32
@@ -1514,15 +1638,15 @@ module Win32cr::Storage::Jet
     end
     end
 
-    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PWSTR, @szKey : Win32cr::Foundation::PWSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
+    def initialize(@cbStruct : UInt32, @szIndexName : UInt16*, @szKey : UInt16*, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
     end
   end
 
   @[Extern]
   struct JET_INDEXCREATE3_A
     property cbStruct : UInt32
-    property szIndexName : Win32cr::Foundation::PSTR
-    property szKey : Win32cr::Foundation::PSTR
+    property szIndexName : Int8*
+    property szKey : Int8*
     property cbKey : UInt32
     property grbit : UInt32
     property ulDensity : UInt32
@@ -1543,15 +1667,15 @@ module Win32cr::Storage::Jet
     end
     end
 
-    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PSTR, @szKey : Win32cr::Foundation::PSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*, @anonymous : Anonymous_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
+    def initialize(@cbStruct : UInt32, @szIndexName : Int8*, @szKey : Int8*, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*, @anonymous : Anonymous_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_A*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
     end
   end
 
   @[Extern]
   struct JET_INDEXCREATE3_W
     property cbStruct : UInt32
-    property szIndexName : Win32cr::Foundation::PWSTR
-    property szKey : Win32cr::Foundation::PWSTR
+    property szIndexName : UInt16*
+    property szKey : UInt16*
     property cbKey : UInt32
     property grbit : UInt32
     property ulDensity : UInt32
@@ -1572,15 +1696,15 @@ module Win32cr::Storage::Jet
     end
     end
 
-    def initialize(@cbStruct : UInt32, @szIndexName : Win32cr::Foundation::PWSTR, @szKey : Win32cr::Foundation::PWSTR, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*, @anonymous : Anonymous_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
+    def initialize(@cbStruct : UInt32, @szIndexName : UInt16*, @szKey : UInt16*, @cbKey : UInt32, @grbit : UInt32, @ulDensity : UInt32, @pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX2*, @anonymous : Anonymous_e__Union_, @rgconditionalcolumn : Win32cr::Storage::Jet::JET_CONDITIONALCOLUMN_W*, @cConditionalColumn : UInt32, @err : Int32, @cbKeyMost : UInt32, @pSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*)
     end
   end
 
   @[Extern]
   struct JET_TABLECREATE_A
     property cbStruct : UInt32
-    property szTableName : Win32cr::Foundation::PSTR
-    property szTemplateTableName : Win32cr::Foundation::PSTR
+    property szTableName : Int8*
+    property szTemplateTableName : Int8*
     property ulPages : UInt32
     property ulDensity : UInt32
     property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*
@@ -1590,15 +1714,15 @@ module Win32cr::Storage::Jet
     property grbit : UInt32
     property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
     property cCreated : UInt32
-    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PSTR, @szTemplateTableName : Win32cr::Foundation::PSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, @cIndexes : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    def initialize(@cbStruct : UInt32, @szTableName : Int8*, @szTemplateTableName : Int8*, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, @cIndexes : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
     end
   end
 
   @[Extern]
   struct JET_TABLECREATE_W
     property cbStruct : UInt32
-    property szTableName : Win32cr::Foundation::PWSTR
-    property szTemplateTableName : Win32cr::Foundation::PWSTR
+    property szTableName : UInt16*
+    property szTemplateTableName : UInt16*
     property ulPages : UInt32
     property ulDensity : UInt32
     property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*
@@ -1608,62 +1732,62 @@ module Win32cr::Storage::Jet
     property grbit : UInt32
     property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
     property cCreated : UInt32
-    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PWSTR, @szTemplateTableName : Win32cr::Foundation::PWSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, @cIndexes : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    def initialize(@cbStruct : UInt32, @szTableName : UInt16*, @szTemplateTableName : UInt16*, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, @cIndexes : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
     end
   end
 
   @[Extern]
   struct JET_TABLECREATE2_A
     property cbStruct : UInt32
-    property szTableName : Win32cr::Foundation::PSTR
-    property szTemplateTableName : Win32cr::Foundation::PSTR
+    property szTableName : Int8*
+    property szTemplateTableName : Int8*
     property ulPages : UInt32
     property ulDensity : UInt32
     property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*
     property cColumns : UInt32
     property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*
     property cIndexes : UInt32
-    property szCallback : Win32cr::Foundation::PSTR
+    property szCallback : Int8*
     property cbtyp : UInt32
     property grbit : UInt32
     property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
     property cCreated : UInt32
-    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PSTR, @szTemplateTableName : Win32cr::Foundation::PSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PSTR, @cbtyp : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    def initialize(@cbStruct : UInt32, @szTableName : Int8*, @szTemplateTableName : Int8*, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, @cIndexes : UInt32, @szCallback : Int8*, @cbtyp : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
     end
   end
 
   @[Extern]
   struct JET_TABLECREATE2_W
     property cbStruct : UInt32
-    property szTableName : Win32cr::Foundation::PWSTR
-    property szTemplateTableName : Win32cr::Foundation::PWSTR
+    property szTableName : UInt16*
+    property szTemplateTableName : UInt16*
     property ulPages : UInt32
     property ulDensity : UInt32
     property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*
     property cColumns : UInt32
     property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*
     property cIndexes : UInt32
-    property szCallback : Win32cr::Foundation::PWSTR
+    property szCallback : UInt16*
     property cbtyp : UInt32
     property grbit : UInt32
     property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
     property cCreated : UInt32
-    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PWSTR, @szTemplateTableName : Win32cr::Foundation::PWSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PWSTR, @cbtyp : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    def initialize(@cbStruct : UInt32, @szTableName : UInt16*, @szTemplateTableName : UInt16*, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, @cIndexes : UInt32, @szCallback : UInt16*, @cbtyp : UInt32, @grbit : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
     end
   end
 
   @[Extern]
   struct JET_TABLECREATE3_A
     property cbStruct : UInt32
-    property szTableName : Win32cr::Foundation::PSTR
-    property szTemplateTableName : Win32cr::Foundation::PSTR
+    property szTableName : Int8*
+    property szTemplateTableName : Int8*
     property ulPages : UInt32
     property ulDensity : UInt32
     property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*
     property cColumns : UInt32
     property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*
     property cIndexes : UInt32
-    property szCallback : Win32cr::Foundation::PSTR
+    property szCallback : Int8*
     property cbtyp : UInt32
     property grbit : UInt32
     property pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
@@ -1671,22 +1795,22 @@ module Win32cr::Storage::Jet
     property cbSeparateLV : UInt32
     property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
     property cCreated : UInt32
-    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PSTR, @szTemplateTableName : Win32cr::Foundation::PSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PSTR, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    def initialize(@cbStruct : UInt32, @szTableName : Int8*, @szTemplateTableName : Int8*, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*, @cIndexes : UInt32, @szCallback : Int8*, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
     end
   end
 
   @[Extern]
   struct JET_TABLECREATE3_W
     property cbStruct : UInt32
-    property szTableName : Win32cr::Foundation::PWSTR
-    property szTemplateTableName : Win32cr::Foundation::PWSTR
+    property szTableName : UInt16*
+    property szTemplateTableName : UInt16*
     property ulPages : UInt32
     property ulDensity : UInt32
     property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*
     property cColumns : UInt32
     property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*
     property cIndexes : UInt32
-    property szCallback : Win32cr::Foundation::PWSTR
+    property szCallback : UInt16*
     property cbtyp : UInt32
     property grbit : UInt32
     property pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
@@ -1694,22 +1818,22 @@ module Win32cr::Storage::Jet
     property cbSeparateLV : UInt32
     property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
     property cCreated : UInt32
-    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PWSTR, @szTemplateTableName : Win32cr::Foundation::PWSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PWSTR, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    def initialize(@cbStruct : UInt32, @szTableName : UInt16*, @szTemplateTableName : UInt16*, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*, @cIndexes : UInt32, @szCallback : UInt16*, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
     end
   end
 
   @[Extern]
   struct JET_TABLECREATE4_A
     property cbStruct : UInt32
-    property szTableName : Win32cr::Foundation::PSTR
-    property szTemplateTableName : Win32cr::Foundation::PSTR
+    property szTableName : Int8*
+    property szTemplateTableName : Int8*
     property ulPages : UInt32
     property ulDensity : UInt32
     property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*
     property cColumns : UInt32
     property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*
     property cIndexes : UInt32
-    property szCallback : Win32cr::Foundation::PSTR
+    property szCallback : Int8*
     property cbtyp : UInt32
     property grbit : UInt32
     property pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
@@ -1717,22 +1841,22 @@ module Win32cr::Storage::Jet
     property cbSeparateLV : UInt32
     property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
     property cCreated : UInt32
-    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PSTR, @szTemplateTableName : Win32cr::Foundation::PSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PSTR, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    def initialize(@cbStruct : UInt32, @szTableName : Int8*, @szTemplateTableName : Int8*, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_A*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*, @cIndexes : UInt32, @szCallback : Int8*, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
     end
   end
 
   @[Extern]
   struct JET_TABLECREATE4_W
     property cbStruct : UInt32
-    property szTableName : Win32cr::Foundation::PWSTR
-    property szTemplateTableName : Win32cr::Foundation::PWSTR
+    property szTableName : UInt16*
+    property szTemplateTableName : UInt16*
     property ulPages : UInt32
     property ulDensity : UInt32
     property rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*
     property cColumns : UInt32
     property rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*
     property cIndexes : UInt32
-    property szCallback : Win32cr::Foundation::PWSTR
+    property szCallback : UInt16*
     property cbtyp : UInt32
     property grbit : UInt32
     property pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*
@@ -1740,7 +1864,7 @@ module Win32cr::Storage::Jet
     property cbSeparateLV : UInt32
     property tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID
     property cCreated : UInt32
-    def initialize(@cbStruct : UInt32, @szTableName : Win32cr::Foundation::PWSTR, @szTemplateTableName : Win32cr::Foundation::PWSTR, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*, @cIndexes : UInt32, @szCallback : Win32cr::Foundation::PWSTR, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
+    def initialize(@cbStruct : UInt32, @szTableName : UInt16*, @szTemplateTableName : UInt16*, @ulPages : UInt32, @ulDensity : UInt32, @rgcolumncreate : Win32cr::Storage::Jet::JET_COLUMNCREATE_W*, @cColumns : UInt32, @rgindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*, @cIndexes : UInt32, @szCallback : UInt16*, @cbtyp : UInt32, @grbit : UInt32, @pSeqSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @pLVSpacehints : Win32cr::Storage::Jet::JET_SPACEHINTS*, @cbSeparateLV : UInt32, @tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, @cCreated : UInt32)
     end
   end
 
@@ -1803,6 +1927,20 @@ module Win32cr::Storage::Jet
     end
   end
 
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct JET_RECPOS2
+    property cbStruct : UInt32
+    property centriesLTDeprecated : UInt32
+    property centriesInRangeDeprecated : UInt32
+    property centriesTotalDeprecated : UInt32
+    property centriesLT : UInt64
+    property centriesTotal : UInt64
+    def initialize(@cbStruct : UInt32, @centriesLTDeprecated : UInt32, @centriesInRangeDeprecated : UInt32, @centriesTotalDeprecated : UInt32, @centriesLT : UInt64, @centriesTotal : UInt64)
+    end
+  end
+  {% end %}
+
   @[Extern]
   struct JET_RECORDLIST
     property cbStruct : UInt32
@@ -1845,38 +1983,19 @@ module Win32cr::Storage::Jet
 
   @[Extern]
   struct JET_LOGTIME
-    property bSeconds : Win32cr::Foundation::CHAR
-    property bMinutes : Win32cr::Foundation::CHAR
-    property bHours : Win32cr::Foundation::CHAR
-    property bDay : Win32cr::Foundation::CHAR
-    property bMonth : Win32cr::Foundation::CHAR
-    property bYear : Win32cr::Foundation::CHAR
+    property bSeconds : Int8
+    property bMinutes : Int8
+    property bHours : Int8
+    property bDay : Int8
+    property bMonth : Int8
+    property bYear : Int8
     property anonymous1 : Anonymous1_e__Union_
     property anonymous2 : Anonymous2_e__Union_
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property bFiller2 : Win32cr::Foundation::CHAR
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt8
-    def initialize(@_bitfield : UInt8)
-    end
-      end
-
-    def initialize(@bFiller2 : Win32cr::Foundation::CHAR, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
-    property bFiller1 : Win32cr::Foundation::CHAR
+    property bFiller1 : UInt8
     property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
@@ -1887,48 +2006,48 @@ module Win32cr::Storage::Jet
     end
       end
 
-    def initialize(@bFiller1 : Win32cr::Foundation::CHAR, @anonymous : Anonymous_e__Struct_)
+    def initialize(@bFiller1 : UInt8, @anonymous : Anonymous_e__Struct_)
     end
     end
 
-    def initialize(@bSeconds : Win32cr::Foundation::CHAR, @bMinutes : Win32cr::Foundation::CHAR, @bHours : Win32cr::Foundation::CHAR, @bDay : Win32cr::Foundation::CHAR, @bMonth : Win32cr::Foundation::CHAR, @bYear : Win32cr::Foundation::CHAR, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property bFiller2 : UInt8
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@bFiller2 : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@bSeconds : Int8, @bMinutes : Int8, @bHours : Int8, @bDay : Int8, @bMonth : Int8, @bYear : Int8, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
     end
   end
 
   @[Extern]
   struct JET_BKLOGTIME
-    property bSeconds : Win32cr::Foundation::CHAR
-    property bMinutes : Win32cr::Foundation::CHAR
-    property bHours : Win32cr::Foundation::CHAR
-    property bDay : Win32cr::Foundation::CHAR
-    property bMonth : Win32cr::Foundation::CHAR
-    property bYear : Win32cr::Foundation::CHAR
+    property bSeconds : Int8
+    property bMinutes : Int8
+    property bHours : Int8
+    property bDay : Int8
+    property bMonth : Int8
+    property bYear : Int8
     property anonymous1 : Anonymous1_e__Union_
     property anonymous2 : Anonymous2_e__Union_
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property bFiller2 : Win32cr::Foundation::CHAR
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt8
-    def initialize(@_bitfield : UInt8)
-    end
-      end
-
-    def initialize(@bFiller2 : Win32cr::Foundation::CHAR, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
-    property bFiller1 : Win32cr::Foundation::CHAR
+    property bFiller1 : UInt8
     property anonymous : Anonymous_e__Struct_
 
       # Nested Type Anonymous_e__Struct_
@@ -1939,11 +2058,30 @@ module Win32cr::Storage::Jet
     end
       end
 
-    def initialize(@bFiller1 : Win32cr::Foundation::CHAR, @anonymous : Anonymous_e__Struct_)
+    def initialize(@bFiller1 : UInt8, @anonymous : Anonymous_e__Struct_)
     end
     end
 
-    def initialize(@bSeconds : Win32cr::Foundation::CHAR, @bMinutes : Win32cr::Foundation::CHAR, @bHours : Win32cr::Foundation::CHAR, @bDay : Win32cr::Foundation::CHAR, @bMonth : Win32cr::Foundation::CHAR, @bYear : Win32cr::Foundation::CHAR, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property bFiller2 : UInt8
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+      end
+
+    def initialize(@bFiller2 : UInt8, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@bSeconds : Int8, @bMinutes : Int8, @bHours : Int8, @bDay : Int8, @bMonth : Int8, @bYear : Int8, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_)
     end
   end
 
@@ -1960,8 +2098,8 @@ module Win32cr::Storage::Jet
   struct JET_SIGNATURE
     property ulRandom : UInt32
     property logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME
-    property szComputerName : Win32cr::Foundation::CHAR[16]
-    def initialize(@ulRandom : UInt32, @logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME, @szComputerName : Win32cr::Foundation::CHAR[16])
+    property szComputerName : Int8[16]
+    def initialize(@ulRandom : UInt32, @logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME, @szComputerName : Int8[16])
     end
   end
 
@@ -2156,7 +2294,7 @@ module Win32cr::Storage::Jet
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct JET_THREADSTATS2
     property cbStruct : UInt32
@@ -2210,42 +2348,13 @@ module Win32cr::Storage::Jet
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct JET_COMMIT_ID
     property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
     property reserved : Int32
     property commitId : Int64
     def initialize(@signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @reserved : Int32, @commitId : Int64)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  struct JET_RBSINFOMISC
-    property lRBSGeneration : Int32
-    property logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME
-    property logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME
-    property ulMajor : UInt32
-    property ulMinor : UInt32
-    property cbLogicalFileSize : UInt64
-    def initialize(@lRBSGeneration : Int32, @logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME, @logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME, @ulMajor : UInt32, @ulMinor : UInt32, @cbLogicalFileSize : UInt64)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:x86_64) || flag?(:arm) %}
-  @[Extern]
-  struct JET_RBSREVERTINFOMISC
-    property lGenMinRevertStart : Int32
-    property lGenMaxRevertStart : Int32
-    property lGenMinRevertEnd : Int32
-    property lGenMaxRevertEnd : Int32
-    property logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME
-    property cSecRevert : UInt64
-    property cPagesReverted : UInt64
-    def initialize(@lGenMinRevertStart : Int32, @lGenMaxRevertStart : Int32, @lGenMinRevertEnd : Int32, @lGenMaxRevertEnd : Int32, @logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME, @cSecRevert : UInt64, @cPagesReverted : UInt64)
     end
   end
   {% end %}
@@ -2278,9 +2387,9 @@ module Win32cr::Storage::Jet
   struct JET_SETSYSPARAM_A
     property paramid : UInt32
     property lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR
-    property sz : Win32cr::Foundation::PSTR
+    property sz : Int8*
     property err : Int32
-    def initialize(@paramid : UInt32, @lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, @sz : Win32cr::Foundation::PSTR, @err : Int32)
+    def initialize(@paramid : UInt32, @lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, @sz : Int8*, @err : Int32)
     end
   end
 
@@ -2288,9 +2397,9 @@ module Win32cr::Storage::Jet
   struct JET_SETSYSPARAM_W
     property paramid : UInt32
     property lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR
-    property sz : Win32cr::Foundation::PWSTR
+    property sz : UInt16*
     property err : Int32
-    def initialize(@paramid : UInt32, @lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, @sz : Win32cr::Foundation::PWSTR, @err : Int32)
+    def initialize(@paramid : UInt32, @lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, @sz : UInt16*, @err : Int32)
     end
   end
 
@@ -2340,22 +2449,22 @@ module Win32cr::Storage::Jet
     property anonymous1 : Anonymous1_e__Struct_
     property anonymous2 : Anonymous2_e__Struct_
 
-      # Nested Type Anonymous2_e__Struct_
-      @[Extern]
-      struct Anonymous2_e__Struct_
-    property cbData : UInt32
-    property pvData : Void*
-    def initialize(@cbData : UInt32, @pvData : Void*)
-    end
-      end
-
-
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
       struct Anonymous1_e__Struct_
     property cEnumColumnValue : UInt32
     property rgEnumColumnValue : Win32cr::Storage::Jet::JET_ENUMCOLUMNVALUE*
     def initialize(@cEnumColumnValue : UInt32, @rgEnumColumnValue : Win32cr::Storage::Jet::JET_ENUMCOLUMNVALUE*)
+    end
+      end
+
+
+      # Nested Type Anonymous2_e__Struct_
+      @[Extern]
+      struct Anonymous2_e__Struct_
+    property cbData : UInt32
+    property pvData : Void*
+    def initialize(@cbData : UInt32, @pvData : Void*)
     end
       end
 
@@ -2367,7 +2476,7 @@ module Win32cr::Storage::Jet
     end
   end
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct JET_RECSIZE
     property cbData : UInt64
@@ -2383,7 +2492,7 @@ module Win32cr::Storage::Jet
   end
   {% end %}
 
-  {% if flag?(:x86_64) || flag?(:arm) %}
+  {% if flag?(:i386) %}
   @[Extern]
   struct JET_RECSIZE2
     property cbData : UInt64
@@ -2407,8 +2516,8 @@ module Win32cr::Storage::Jet
     property cbSize : UInt32
     property ulGenLow : UInt32
     property ulGenHigh : UInt32
-    property szBaseName : Win32cr::Foundation::CHAR[4]
-    def initialize(@cbSize : UInt32, @ulGenLow : UInt32, @ulGenHigh : UInt32, @szBaseName : Win32cr::Foundation::CHAR[4])
+    property szBaseName : Int8[4]
+    def initialize(@cbSize : UInt32, @ulGenLow : UInt32, @ulGenHigh : UInt32, @szBaseName : Int8[4])
     end
   end
 
@@ -2424,1124 +2533,1464 @@ module Win32cr::Storage::Jet
 
   @[Extern]
   struct JET_INSTANCE_INFO_A
-    property hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE
-    property szInstanceName : Win32cr::Foundation::PSTR
+    property hInstanceId : Win32cr::Storage::Jet::JET_INSTANCE
+    property szInstanceName : Int8*
     property cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR
     property szDatabaseFileName : Int8**
     property szDatabaseDisplayName : Int8**
     property szDatabaseSLVFileName_Obsolete : Int8**
-    def initialize(@hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE, @szInstanceName : Win32cr::Foundation::PSTR, @cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR, @szDatabaseFileName : Int8**, @szDatabaseDisplayName : Int8**, @szDatabaseSLVFileName_Obsolete : Int8**)
+    def initialize(@hInstanceId : Win32cr::Storage::Jet::JET_INSTANCE, @szInstanceName : Int8*, @cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR, @szDatabaseFileName : Int8**, @szDatabaseDisplayName : Int8**, @szDatabaseSLVFileName_Obsolete : Int8**)
     end
   end
 
   @[Extern]
   struct JET_INSTANCE_INFO_W
-    property hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE
-    property szInstanceName : Win32cr::Foundation::PWSTR
+    property hInstanceId : Win32cr::Storage::Jet::JET_INSTANCE
+    property szInstanceName : UInt16*
     property cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR
     property szDatabaseFileName : UInt16**
     property szDatabaseDisplayName : UInt16**
     property szDatabaseSLVFileName_Obsolete : UInt16**
-    def initialize(@hInstanceId : Win32cr::Storage::StructuredStorage::JET_INSTANCE, @szInstanceName : Win32cr::Foundation::PWSTR, @cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR, @szDatabaseFileName : UInt16**, @szDatabaseDisplayName : UInt16**, @szDatabaseSLVFileName_Obsolete : UInt16**)
+    def initialize(@hInstanceId : Win32cr::Storage::Jet::JET_INSTANCE, @szInstanceName : UInt16*, @cDatabases : Win32cr::Storage::StructuredStorage::JET_API_PTR, @szDatabaseFileName : UInt16**, @szDatabaseDisplayName : UInt16**, @szDatabaseSLVFileName_Obsolete : UInt16**)
     end
   end
 
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct JET_INDEXID
-    property cbStruct : UInt32
-    property rgbIndexId : UInt8[12]
-    def initialize(@cbStruct : UInt32, @rgbIndexId : UInt8[12])
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct JET_OBJECTINFO
-    property cbStruct : UInt32
-    property objtyp : UInt32
-    property dtCreate : Float64
-    property dtUpdate : Float64
-    property grbit : UInt32
-    property flags : UInt32
-    property cRecord : UInt32
-    property cPage : UInt32
-    def initialize(@cbStruct : UInt32, @objtyp : UInt32, @dtCreate : Float64, @dtUpdate : Float64, @grbit : UInt32, @flags : UInt32, @cRecord : UInt32, @cPage : UInt32)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct JET_THREADSTATS2
-    property cbStruct : UInt32
-    property cPageReferenced : UInt32
-    property cPageRead : UInt32
-    property cPagePreread : UInt32
-    property cPageDirtied : UInt32
-    property cPageRedirtied : UInt32
-    property cLogRecord : UInt32
-    property cbLogRecord : UInt32
-    property cusecPageCacheMiss : UInt64
-    property cPageCacheMiss : UInt32
-    def initialize(@cbStruct : UInt32, @cPageReferenced : UInt32, @cPageRead : UInt32, @cPagePreread : UInt32, @cPageDirtied : UInt32, @cPageRedirtied : UInt32, @cLogRecord : UInt32, @cbLogRecord : UInt32, @cusecPageCacheMiss : UInt64, @cPageCacheMiss : UInt32)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct JET_COMMIT_ID
-    property signLog : Win32cr::Storage::Jet::JET_SIGNATURE
-    property reserved : Int32
-    property commitId : Int64
-    def initialize(@signLog : Win32cr::Storage::Jet::JET_SIGNATURE, @reserved : Int32, @commitId : Int64)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct JET_RBSINFOMISC
-    property lRBSGeneration : Int32
-    property logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME
-    property logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME
-    property ulMajor : UInt32
-    property ulMinor : UInt32
-    property cbLogicalFileSize : UInt64
-    def initialize(@lRBSGeneration : Int32, @logtimeCreate : Win32cr::Storage::Jet::JET_LOGTIME, @logtimeCreatePrevRBS : Win32cr::Storage::Jet::JET_LOGTIME, @ulMajor : UInt32, @ulMinor : UInt32, @cbLogicalFileSize : UInt64)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct JET_RBSREVERTINFOMISC
-    property lGenMinRevertStart : Int32
-    property lGenMaxRevertStart : Int32
-    property lGenMinRevertEnd : Int32
-    property lGenMaxRevertEnd : Int32
-    property logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME
-    property cSecRevert : UInt64
-    property cPagesReverted : UInt64
-    def initialize(@lGenMinRevertStart : Int32, @lGenMaxRevertStart : Int32, @lGenMinRevertEnd : Int32, @lGenMaxRevertEnd : Int32, @logtimeRevertFrom : Win32cr::Storage::Jet::JET_LOGTIME, @cSecRevert : UInt64, @cPagesReverted : UInt64)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct JET_RECSIZE
-    property cbData : UInt64
-    property cbLongValueData : UInt64
-    property cbOverhead : UInt64
-    property cbLongValueOverhead : UInt64
-    property cNonTaggedColumns : UInt64
-    property cTaggedColumns : UInt64
-    property cLongValues : UInt64
-    property cMultiValues : UInt64
-    def initialize(@cbData : UInt64, @cbLongValueData : UInt64, @cbOverhead : UInt64, @cbLongValueOverhead : UInt64, @cNonTaggedColumns : UInt64, @cTaggedColumns : UInt64, @cLongValues : UInt64, @cMultiValues : UInt64)
-    end
-  end
-  {% end %}
-
-  {% if flag?(:i386) %}
-  @[Extern]
-  struct JET_RECSIZE2
-    property cbData : UInt64
-    property cbLongValueData : UInt64
-    property cbOverhead : UInt64
-    property cbLongValueOverhead : UInt64
-    property cNonTaggedColumns : UInt64
-    property cTaggedColumns : UInt64
-    property cLongValues : UInt64
-    property cMultiValues : UInt64
-    property cCompressedColumns : UInt64
-    property cbDataCompressed : UInt64
-    property cbLongValueDataCompressed : UInt64
-    def initialize(@cbData : UInt64, @cbLongValueData : UInt64, @cbOverhead : UInt64, @cbLongValueOverhead : UInt64, @cNonTaggedColumns : UInt64, @cTaggedColumns : UInt64, @cLongValues : UInt64, @cMultiValues : UInt64, @cCompressedColumns : UInt64, @cbDataCompressed : UInt64, @cbLongValueDataCompressed : UInt64)
-    end
-  end
-  {% end %}
-
-  def jetInit(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*) : Int32
+  def jetInit(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*) : Int32
+    {% if !flag?(:docs) %}
     C.JetInit(pinstance)
+    {% end %}
   end
 
-  def jetInit2(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, grbit : UInt32) : Int32
+  def jetInit2(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetInit2(pinstance, grbit)
+    {% end %}
   end
 
-  def jetInit3A(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, prstInfo : Win32cr::Storage::Jet::JET_RSTINFO_A*, grbit : UInt32) : Int32
+  def jetInit3A(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, prstInfo : Win32cr::Storage::Jet::JET_RSTINFO_A*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetInit3A(pinstance, prstInfo, grbit)
+    {% end %}
   end
 
-  def jetInit3W(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, prstInfo : Win32cr::Storage::Jet::JET_RSTINFO_W*, grbit : UInt32) : Int32
+  def jetInit3W(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, prstInfo : Win32cr::Storage::Jet::JET_RSTINFO_W*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetInit3W(pinstance, prstInfo, grbit)
+    {% end %}
   end
 
-  def jetCreateInstanceA(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, szInstanceName : Int8*) : Int32
+  def jetCreateInstanceA(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, szInstanceName : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateInstanceA(pinstance, szInstanceName)
+    {% end %}
   end
 
-  def jetCreateInstanceW(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, szInstanceName : UInt16*) : Int32
+  def jetCreateInstanceW(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, szInstanceName : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateInstanceW(pinstance, szInstanceName)
+    {% end %}
   end
 
-  def jetCreateInstance2A(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, szInstanceName : Int8*, szDisplayName : Int8*, grbit : UInt32) : Int32
+  def jetCreateInstance2A(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, szInstanceName : Int8*, szDisplayName : Int8*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateInstance2A(pinstance, szInstanceName, szDisplayName, grbit)
+    {% end %}
   end
 
-  def jetCreateInstance2W(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, szInstanceName : UInt16*, szDisplayName : UInt16*, grbit : UInt32) : Int32
+  def jetCreateInstance2W(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, szInstanceName : UInt16*, szDisplayName : UInt16*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateInstance2W(pinstance, szInstanceName, szDisplayName, grbit)
+    {% end %}
   end
 
-  def jetGetInstanceMiscInfo(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetInstanceMiscInfo(instance : Win32cr::Storage::Jet::JET_INSTANCE, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetInstanceMiscInfo(instance, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetTerm(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+  def jetTerm(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
+    {% if !flag?(:docs) %}
     C.JetTerm(instance)
+    {% end %}
   end
 
-  def jetTerm2(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+  def jetTerm2(instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetTerm2(instance, grbit)
+    {% end %}
   end
 
   def jetStopService : Int32
+    {% if !flag?(:docs) %}
     C.JetStopService
+    {% end %}
   end
 
-  def jetStopServiceInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+  def jetStopServiceInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
+    {% if !flag?(:docs) %}
     C.JetStopServiceInstance(instance)
+    {% end %}
   end
 
-  def jetStopServiceInstance2(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+  def jetStopServiceInstance2(instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetStopServiceInstance2(instance, grbit)
+    {% end %}
   end
 
   def jetStopBackup : Int32
+    {% if !flag?(:docs) %}
     C.JetStopBackup
+    {% end %}
   end
 
-  def jetStopBackupInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+  def jetStopBackupInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
+    {% if !flag?(:docs) %}
     C.JetStopBackupInstance(instance)
+    {% end %}
   end
 
-  def jetSetSystemParameterA(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, sesid : Win32cr::Storage::StructuredStorage::JET_SESID, paramid : UInt32, lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, szParam : Int8*) : Int32
+  def jetSetSystemParameterA(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, sesid : Win32cr::Storage::Jet::JET_SESID, paramid : UInt32, lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, szParam : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetSystemParameterA(pinstance, sesid, paramid, lParam, szParam)
+    {% end %}
   end
 
-  def jetSetSystemParameterW(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, sesid : Win32cr::Storage::StructuredStorage::JET_SESID, paramid : UInt32, lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, szParam : UInt16*) : Int32
+  def jetSetSystemParameterW(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, sesid : Win32cr::Storage::Jet::JET_SESID, paramid : UInt32, lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, szParam : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetSystemParameterW(pinstance, sesid, paramid, lParam, szParam)
+    {% end %}
   end
 
-  def jetGetSystemParameterA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, sesid : Win32cr::Storage::StructuredStorage::JET_SESID, paramid : UInt32, plParam : Win32cr::Storage::StructuredStorage::JET_API_PTR*, szParam : Int8*, cbMax : UInt32) : Int32
+  def jetGetSystemParameterA(instance : Win32cr::Storage::Jet::JET_INSTANCE, sesid : Win32cr::Storage::Jet::JET_SESID, paramid : UInt32, plParam : Win32cr::Storage::StructuredStorage::JET_API_PTR*, szParam : Int8*, cbMax : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetSystemParameterA(instance, sesid, paramid, plParam, szParam, cbMax)
+    {% end %}
   end
 
-  def jetGetSystemParameterW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, sesid : Win32cr::Storage::StructuredStorage::JET_SESID, paramid : UInt32, plParam : Win32cr::Storage::StructuredStorage::JET_API_PTR*, szParam : UInt16*, cbMax : UInt32) : Int32
+  def jetGetSystemParameterW(instance : Win32cr::Storage::Jet::JET_INSTANCE, sesid : Win32cr::Storage::Jet::JET_SESID, paramid : UInt32, plParam : Win32cr::Storage::StructuredStorage::JET_API_PTR*, szParam : UInt16*, cbMax : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetSystemParameterW(instance, sesid, paramid, plParam, szParam, cbMax)
+    {% end %}
   end
 
   def jetEnableMultiInstanceA(psetsysparam : Win32cr::Storage::Jet::JET_SETSYSPARAM_A*, csetsysparam : UInt32, pcsetsucceed : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetEnableMultiInstanceA(psetsysparam, csetsysparam, pcsetsucceed)
+    {% end %}
   end
 
   def jetEnableMultiInstanceW(psetsysparam : Win32cr::Storage::Jet::JET_SETSYSPARAM_W*, csetsysparam : UInt32, pcsetsucceed : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetEnableMultiInstanceW(psetsysparam, csetsysparam, pcsetsucceed)
+    {% end %}
   end
 
   def jetGetThreadStats(pvResult : Void*, cbMax : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetThreadStats(pvResult, cbMax)
+    {% end %}
   end
 
-  def jetBeginSessionA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, psesid : Win32cr::Storage::StructuredStorage::JET_SESID*, szUserName : Int8*, szPassword : Int8*) : Int32
+  def jetBeginSessionA(instance : Win32cr::Storage::Jet::JET_INSTANCE, psesid : Win32cr::Storage::Jet::JET_SESID*, szUserName : Int8*, szPassword : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetBeginSessionA(instance, psesid, szUserName, szPassword)
+    {% end %}
   end
 
-  def jetBeginSessionW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, psesid : Win32cr::Storage::StructuredStorage::JET_SESID*, szUserName : UInt16*, szPassword : UInt16*) : Int32
+  def jetBeginSessionW(instance : Win32cr::Storage::Jet::JET_INSTANCE, psesid : Win32cr::Storage::Jet::JET_SESID*, szUserName : UInt16*, szPassword : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetBeginSessionW(instance, psesid, szUserName, szPassword)
+    {% end %}
   end
 
-  def jetDupSession(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, psesid : Win32cr::Storage::StructuredStorage::JET_SESID*) : Int32
+  def jetDupSession(sesid : Win32cr::Storage::Jet::JET_SESID, psesid : Win32cr::Storage::Jet::JET_SESID*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDupSession(sesid, psesid)
+    {% end %}
   end
 
-  def jetEndSession(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+  def jetEndSession(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetEndSession(sesid, grbit)
+    {% end %}
   end
 
-  def jetGetVersion(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, pwVersion : UInt32*) : Int32
+  def jetGetVersion(sesid : Win32cr::Storage::Jet::JET_SESID, pwVersion : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetVersion(sesid, pwVersion)
+    {% end %}
   end
 
-  def jetIdle(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+  def jetIdle(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetIdle(sesid, grbit)
+    {% end %}
   end
 
-  def jetCreateDatabaseA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, szConnect : Int8*, pdbid : UInt32*, grbit : UInt32) : Int32
+  def jetCreateDatabaseA(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, szConnect : Int8*, pdbid : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateDatabaseA(sesid, szFilename, szConnect, pdbid, grbit)
+    {% end %}
   end
 
-  def jetCreateDatabaseW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, szConnect : UInt16*, pdbid : UInt32*, grbit : UInt32) : Int32
+  def jetCreateDatabaseW(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, szConnect : UInt16*, pdbid : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateDatabaseW(sesid, szFilename, szConnect, pdbid, grbit)
+    {% end %}
   end
 
-  def jetCreateDatabase2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, cpgDatabaseSizeMax : UInt32, pdbid : UInt32*, grbit : UInt32) : Int32
+  def jetCreateDatabase2A(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, cpgDatabaseSizeMax : UInt32, pdbid : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateDatabase2A(sesid, szFilename, cpgDatabaseSizeMax, pdbid, grbit)
+    {% end %}
   end
 
-  def jetCreateDatabase2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, cpgDatabaseSizeMax : UInt32, pdbid : UInt32*, grbit : UInt32) : Int32
+  def jetCreateDatabase2W(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, cpgDatabaseSizeMax : UInt32, pdbid : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateDatabase2W(sesid, szFilename, cpgDatabaseSizeMax, pdbid, grbit)
+    {% end %}
   end
 
-  def jetAttachDatabaseA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, grbit : UInt32) : Int32
+  def jetAttachDatabaseA(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetAttachDatabaseA(sesid, szFilename, grbit)
+    {% end %}
   end
 
-  def jetAttachDatabaseW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, grbit : UInt32) : Int32
+  def jetAttachDatabaseW(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetAttachDatabaseW(sesid, szFilename, grbit)
+    {% end %}
   end
 
-  def jetAttachDatabase2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, cpgDatabaseSizeMax : UInt32, grbit : UInt32) : Int32
+  def jetAttachDatabase2A(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, cpgDatabaseSizeMax : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetAttachDatabase2A(sesid, szFilename, cpgDatabaseSizeMax, grbit)
+    {% end %}
   end
 
-  def jetAttachDatabase2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, cpgDatabaseSizeMax : UInt32, grbit : UInt32) : Int32
+  def jetAttachDatabase2W(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, cpgDatabaseSizeMax : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetAttachDatabase2W(sesid, szFilename, cpgDatabaseSizeMax, grbit)
+    {% end %}
   end
 
-  def jetDetachDatabaseA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*) : Int32
+  def jetDetachDatabaseA(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDetachDatabaseA(sesid, szFilename)
+    {% end %}
   end
 
-  def jetDetachDatabaseW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*) : Int32
+  def jetDetachDatabaseW(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDetachDatabaseW(sesid, szFilename)
+    {% end %}
   end
 
-  def jetDetachDatabase2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, grbit : UInt32) : Int32
+  def jetDetachDatabase2A(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDetachDatabase2A(sesid, szFilename, grbit)
+    {% end %}
   end
 
-  def jetDetachDatabase2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, grbit : UInt32) : Int32
+  def jetDetachDatabase2W(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDetachDatabase2W(sesid, szFilename, grbit)
+    {% end %}
   end
 
-  def jetGetObjectInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, objtyp : UInt32, szContainerName : Int8*, szObjectName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetObjectInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, objtyp : UInt32, szContainerName : Int8*, szObjectName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetObjectInfoA(sesid, dbid, objtyp, szContainerName, szObjectName, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetGetObjectInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, objtyp : UInt32, szContainerName : UInt16*, szObjectName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetObjectInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, objtyp : UInt32, szContainerName : UInt16*, szObjectName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetObjectInfoW(sesid, dbid, objtyp, szContainerName, szObjectName, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetGetTableInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetTableInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetTableInfoA(sesid, tableid, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetGetTableInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetTableInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetTableInfoW(sesid, tableid, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetCreateTableA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, lPages : UInt32, lDensity : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+  def jetCreateTableA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, lPages : UInt32, lDensity : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableA(sesid, dbid, szTableName, lPages, lDensity, ptableid)
+    {% end %}
   end
 
-  def jetCreateTableW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, lPages : UInt32, lDensity : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+  def jetCreateTableW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, lPages : UInt32, lDensity : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableW(sesid, dbid, szTableName, lPages, lDensity, ptableid)
+    {% end %}
   end
 
-  def jetCreateTableColumnIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE_A*) : Int32
+  def jetCreateTableColumnIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE_A*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableColumnIndexA(sesid, dbid, ptablecreate)
+    {% end %}
   end
 
-  def jetCreateTableColumnIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE_W*) : Int32
+  def jetCreateTableColumnIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE_W*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableColumnIndexW(sesid, dbid, ptablecreate)
+    {% end %}
   end
 
-  def jetCreateTableColumnIndex2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE2_A*) : Int32
+  def jetCreateTableColumnIndex2A(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE2_A*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableColumnIndex2A(sesid, dbid, ptablecreate)
+    {% end %}
   end
 
-  def jetCreateTableColumnIndex2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE2_W*) : Int32
+  def jetCreateTableColumnIndex2W(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE2_W*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableColumnIndex2W(sesid, dbid, ptablecreate)
+    {% end %}
   end
 
-  def jetCreateTableColumnIndex3A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE3_A*) : Int32
+  def jetCreateTableColumnIndex3A(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE3_A*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableColumnIndex3A(sesid, dbid, ptablecreate)
+    {% end %}
   end
 
-  def jetCreateTableColumnIndex3W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE3_W*) : Int32
+  def jetCreateTableColumnIndex3W(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE3_W*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableColumnIndex3W(sesid, dbid, ptablecreate)
+    {% end %}
   end
 
-  def jetCreateTableColumnIndex4A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE4_A*) : Int32
+  def jetCreateTableColumnIndex4A(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE4_A*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableColumnIndex4A(sesid, dbid, ptablecreate)
+    {% end %}
   end
 
-  def jetCreateTableColumnIndex4W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE4_W*) : Int32
+  def jetCreateTableColumnIndex4W(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE4_W*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateTableColumnIndex4W(sesid, dbid, ptablecreate)
+    {% end %}
   end
 
-  def jetDeleteTableA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*) : Int32
+  def jetDeleteTableA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDeleteTableA(sesid, dbid, szTableName)
+    {% end %}
   end
 
-  def jetDeleteTableW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*) : Int32
+  def jetDeleteTableW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDeleteTableW(sesid, dbid, szTableName)
+    {% end %}
   end
 
-  def jetRenameTableA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szName : Int8*, szNameNew : Int8*) : Int32
+  def jetRenameTableA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szName : Int8*, szNameNew : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetRenameTableA(sesid, dbid, szName, szNameNew)
+    {% end %}
   end
 
-  def jetRenameTableW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szName : UInt16*, szNameNew : UInt16*) : Int32
+  def jetRenameTableW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szName : UInt16*, szNameNew : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetRenameTableW(sesid, dbid, szName, szNameNew)
+    {% end %}
   end
 
-  def jetGetTableColumnInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetTableColumnInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetTableColumnInfoA(sesid, tableid, szColumnName, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetGetTableColumnInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetTableColumnInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetTableColumnInfoW(sesid, tableid, szColumnName, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetGetColumnInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, pColumnNameOrId : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetColumnInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, pColumnNameOrId : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetColumnInfoA(sesid, dbid, szTableName, pColumnNameOrId, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetGetColumnInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, pwColumnNameOrId : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetColumnInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, pwColumnNameOrId : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetColumnInfoW(sesid, dbid, szTableName, pwColumnNameOrId, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetAddColumnA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, pcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, pvDefault : Void*, cbDefault : UInt32, pcolumnid : UInt32*) : Int32
+  def jetAddColumnA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, pcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, pvDefault : Void*, cbDefault : UInt32, pcolumnid : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetAddColumnA(sesid, tableid, szColumnName, pcolumndef, pvDefault, cbDefault, pcolumnid)
+    {% end %}
   end
 
-  def jetAddColumnW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, pcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, pvDefault : Void*, cbDefault : UInt32, pcolumnid : UInt32*) : Int32
+  def jetAddColumnW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, pcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, pvDefault : Void*, cbDefault : UInt32, pcolumnid : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetAddColumnW(sesid, tableid, szColumnName, pcolumndef, pvDefault, cbDefault, pcolumnid)
+    {% end %}
   end
 
-  def jetDeleteColumnA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*) : Int32
+  def jetDeleteColumnA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDeleteColumnA(sesid, tableid, szColumnName)
+    {% end %}
   end
 
-  def jetDeleteColumnW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*) : Int32
+  def jetDeleteColumnW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDeleteColumnW(sesid, tableid, szColumnName)
+    {% end %}
   end
 
-  def jetDeleteColumn2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, grbit : UInt32) : Int32
+  def jetDeleteColumn2A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDeleteColumn2A(sesid, tableid, szColumnName, grbit)
+    {% end %}
   end
 
-  def jetDeleteColumn2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, grbit : UInt32) : Int32
+  def jetDeleteColumn2W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDeleteColumn2W(sesid, tableid, szColumnName, grbit)
+    {% end %}
   end
 
-  def jetRenameColumnA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szName : Int8*, szNameNew : Int8*, grbit : UInt32) : Int32
+  def jetRenameColumnA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szName : Int8*, szNameNew : Int8*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetRenameColumnA(sesid, tableid, szName, szNameNew, grbit)
+    {% end %}
   end
 
-  def jetRenameColumnW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szName : UInt16*, szNameNew : UInt16*, grbit : UInt32) : Int32
+  def jetRenameColumnW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szName : UInt16*, szNameNew : UInt16*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetRenameColumnW(sesid, tableid, szName, szNameNew, grbit)
+    {% end %}
   end
 
-  def jetSetColumnDefaultValueA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, szColumnName : Int8*, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+  def jetSetColumnDefaultValueA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, szColumnName : Int8*, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetColumnDefaultValueA(sesid, dbid, szTableName, szColumnName, pvData, cbData, grbit)
+    {% end %}
   end
 
-  def jetSetColumnDefaultValueW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, szColumnName : UInt16*, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+  def jetSetColumnDefaultValueW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, szColumnName : UInt16*, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetColumnDefaultValueW(sesid, dbid, szTableName, szColumnName, pvData, cbData, grbit)
+    {% end %}
   end
 
-  def jetGetTableIndexInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+  def jetGetTableIndexInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetTableIndexInfoA(sesid, tableid, szIndexName, pvResult, cbResult, info_level)
+    {% end %}
   end
 
-  def jetGetTableIndexInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+  def jetGetTableIndexInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetTableIndexInfoW(sesid, tableid, szIndexName, pvResult, cbResult, info_level)
+    {% end %}
   end
 
-  def jetGetIndexInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, szIndexName : Int8*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+  def jetGetIndexInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, szIndexName : Int8*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetIndexInfoA(sesid, dbid, szTableName, szIndexName, pvResult, cbResult, info_level)
+    {% end %}
   end
 
-  def jetGetIndexInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, szIndexName : UInt16*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+  def jetGetIndexInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, szIndexName : UInt16*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetIndexInfoW(sesid, dbid, szTableName, szIndexName, pvResult, cbResult, info_level)
+    {% end %}
   end
 
-  def jetCreateIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32, szKey : Win32cr::Foundation::PSTR, cbKey : UInt32, lDensity : UInt32) : Int32
+  def jetCreateIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32, szKey : Int8*, cbKey : UInt32, lDensity : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateIndexA(sesid, tableid, szIndexName, grbit, szKey, cbKey, lDensity)
+    {% end %}
   end
 
-  def jetCreateIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32, szKey : Win32cr::Foundation::PWSTR, cbKey : UInt32, lDensity : UInt32) : Int32
+  def jetCreateIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32, szKey : UInt16*, cbKey : UInt32, lDensity : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateIndexW(sesid, tableid, szIndexName, grbit, szKey, cbKey, lDensity)
+    {% end %}
   end
 
-  def jetCreateIndex2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, cIndexCreate : UInt32) : Int32
+  def jetCreateIndex2A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, cIndexCreate : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateIndex2A(sesid, tableid, pindexcreate, cIndexCreate)
+    {% end %}
   end
 
-  def jetCreateIndex2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, cIndexCreate : UInt32) : Int32
+  def jetCreateIndex2W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, cIndexCreate : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateIndex2W(sesid, tableid, pindexcreate, cIndexCreate)
+    {% end %}
   end
 
-  def jetCreateIndex3A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*, cIndexCreate : UInt32) : Int32
+  def jetCreateIndex3A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*, cIndexCreate : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateIndex3A(sesid, tableid, pindexcreate, cIndexCreate)
+    {% end %}
   end
 
-  def jetCreateIndex3W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*, cIndexCreate : UInt32) : Int32
+  def jetCreateIndex3W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*, cIndexCreate : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateIndex3W(sesid, tableid, pindexcreate, cIndexCreate)
+    {% end %}
   end
 
-  def jetCreateIndex4A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*, cIndexCreate : UInt32) : Int32
+  def jetCreateIndex4A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*, cIndexCreate : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateIndex4A(sesid, tableid, pindexcreate, cIndexCreate)
+    {% end %}
   end
 
-  def jetCreateIndex4W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*, cIndexCreate : UInt32) : Int32
+  def jetCreateIndex4W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*, cIndexCreate : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCreateIndex4W(sesid, tableid, pindexcreate, cIndexCreate)
+    {% end %}
   end
 
-  def jetDeleteIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*) : Int32
+  def jetDeleteIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDeleteIndexA(sesid, tableid, szIndexName)
+    {% end %}
   end
 
-  def jetDeleteIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*) : Int32
+  def jetDeleteIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetDeleteIndexW(sesid, tableid, szIndexName)
+    {% end %}
   end
 
-  def jetBeginTransaction(sesid : Win32cr::Storage::StructuredStorage::JET_SESID) : Int32
+  def jetBeginTransaction(sesid : Win32cr::Storage::Jet::JET_SESID) : Int32
+    {% if !flag?(:docs) %}
     C.JetBeginTransaction(sesid)
+    {% end %}
   end
 
-  def jetBeginTransaction2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+  def jetBeginTransaction2(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetBeginTransaction2(sesid, grbit)
+    {% end %}
   end
 
-  def jetBeginTransaction3(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, trxid : Int64, grbit : UInt32) : Int32
+  def jetBeginTransaction3(sesid : Win32cr::Storage::Jet::JET_SESID, trxid : Int64, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetBeginTransaction3(sesid, trxid, grbit)
+    {% end %}
   end
 
-  def jetCommitTransaction(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+  def jetCommitTransaction(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCommitTransaction(sesid, grbit)
+    {% end %}
   end
 
-  def jetCommitTransaction2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32, cmsecDurableCommit : UInt32, pCommitId : Win32cr::Storage::Jet::JET_COMMIT_ID*) : Int32
+  def jetCommitTransaction2(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32, cmsecDurableCommit : UInt32, pCommitId : Win32cr::Storage::Jet::JET_COMMIT_ID*) : Int32
+    {% if !flag?(:docs) %}
     C.JetCommitTransaction2(sesid, grbit, cmsecDurableCommit, pCommitId)
+    {% end %}
   end
 
-  def jetRollback(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+  def jetRollback(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetRollback(sesid, grbit)
+    {% end %}
   end
 
-  def jetGetDatabaseInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetDatabaseInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetDatabaseInfoA(sesid, dbid, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetGetDatabaseInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetDatabaseInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetDatabaseInfoW(sesid, dbid, pvResult, cbMax, info_level)
+    {% end %}
   end
 
   def jetGetDatabaseFileInfoA(szDatabaseName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetDatabaseFileInfoA(szDatabaseName, pvResult, cbMax, info_level)
+    {% end %}
   end
 
   def jetGetDatabaseFileInfoW(szDatabaseName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetDatabaseFileInfoW(szDatabaseName, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetOpenDatabaseA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, szConnect : Int8*, pdbid : UInt32*, grbit : UInt32) : Int32
+  def jetOpenDatabaseA(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, szConnect : Int8*, pdbid : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenDatabaseA(sesid, szFilename, szConnect, pdbid, grbit)
+    {% end %}
   end
 
-  def jetOpenDatabaseW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, szConnect : UInt16*, pdbid : UInt32*, grbit : UInt32) : Int32
+  def jetOpenDatabaseW(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, szConnect : UInt16*, pdbid : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenDatabaseW(sesid, szFilename, szConnect, pdbid, grbit)
+    {% end %}
   end
 
-  def jetCloseDatabase(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, grbit : UInt32) : Int32
+  def jetCloseDatabase(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCloseDatabase(sesid, dbid, grbit)
+    {% end %}
   end
 
-  def jetOpenTableA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, pvParameters : Void*, cbParameters : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+  def jetOpenTableA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, pvParameters : Void*, cbParameters : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenTableA(sesid, dbid, szTableName, pvParameters, cbParameters, grbit, ptableid)
+    {% end %}
   end
 
-  def jetOpenTableW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, pvParameters : Void*, cbParameters : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+  def jetOpenTableW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, pvParameters : Void*, cbParameters : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenTableW(sesid, dbid, szTableName, pvParameters, cbParameters, grbit, ptableid)
+    {% end %}
   end
 
-  def jetSetTableSequential(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+  def jetSetTableSequential(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetTableSequential(sesid, tableid, grbit)
+    {% end %}
   end
 
-  def jetResetTableSequential(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+  def jetResetTableSequential(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetResetTableSequential(sesid, tableid, grbit)
+    {% end %}
   end
 
-  def jetCloseTable(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+  def jetCloseTable(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+    {% if !flag?(:docs) %}
     C.JetCloseTable(sesid, tableid)
+    {% end %}
   end
 
-  def jetDelete(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+  def jetDelete(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+    {% if !flag?(:docs) %}
     C.JetDelete(sesid, tableid)
+    {% end %}
   end
 
-  def jetUpdate(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32, pcbActual : UInt32*) : Int32
+  def jetUpdate(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetUpdate(sesid, tableid, pvBookmark, cbBookmark, pcbActual)
+    {% end %}
   end
 
-  def jetUpdate2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32, pcbActual : UInt32*, grbit : UInt32) : Int32
+  def jetUpdate2(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32, pcbActual : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetUpdate2(sesid, tableid, pvBookmark, cbBookmark, pcbActual, grbit)
+    {% end %}
   end
 
-  def jetEscrowUpdate(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pv : Void*, cbMax : UInt32, pvOld : Void*, cbOldMax : UInt32, pcbOldActual : UInt32*, grbit : UInt32) : Int32
+  def jetEscrowUpdate(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pv : Void*, cbMax : UInt32, pvOld : Void*, cbOldMax : UInt32, pcbOldActual : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetEscrowUpdate(sesid, tableid, columnid, pv, cbMax, pvOld, cbOldMax, pcbOldActual, grbit)
+    {% end %}
   end
 
-  def jetRetrieveColumn(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pvData : Void*, cbData : UInt32, pcbActual : UInt32*, grbit : UInt32, pretinfo : Win32cr::Storage::Jet::JET_RETINFO*) : Int32
+  def jetRetrieveColumn(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pvData : Void*, cbData : UInt32, pcbActual : UInt32*, grbit : UInt32, pretinfo : Win32cr::Storage::Jet::JET_RETINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.JetRetrieveColumn(sesid, tableid, columnid, pvData, cbData, pcbActual, grbit, pretinfo)
+    {% end %}
   end
 
-  def jetRetrieveColumns(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pretrievecolumn : Win32cr::Storage::Jet::JET_RETRIEVECOLUMN*, cretrievecolumn : UInt32) : Int32
+  def jetRetrieveColumns(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pretrievecolumn : Win32cr::Storage::Jet::JET_RETRIEVECOLUMN*, cretrievecolumn : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetRetrieveColumns(sesid, tableid, pretrievecolumn, cretrievecolumn)
+    {% end %}
   end
 
-  def jetEnumerateColumns(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cEnumColumnId : UInt32, rgEnumColumnId : Win32cr::Storage::Jet::JET_ENUMCOLUMNID*, pcEnumColumn : UInt32*, prgEnumColumn : Win32cr::Storage::Jet::JET_ENUMCOLUMN**, pfnRealloc : Win32cr::Storage::Jet::JET_PFNREALLOC, pvReallocContext : Void*, cbDataMost : UInt32, grbit : UInt32) : Int32
+  def jetEnumerateColumns(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cEnumColumnId : UInt32, rgEnumColumnId : Win32cr::Storage::Jet::JET_ENUMCOLUMNID*, pcEnumColumn : UInt32*, prgEnumColumn : Win32cr::Storage::Jet::JET_ENUMCOLUMN**, pfnRealloc : Win32cr::Storage::Jet::JET_PFNREALLOC, pvReallocContext : Void*, cbDataMost : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetEnumerateColumns(sesid, tableid, cEnumColumnId, rgEnumColumnId, pcEnumColumn, prgEnumColumn, pfnRealloc, pvReallocContext, cbDataMost, grbit)
+    {% end %}
   end
 
-  def jetGetRecordSize(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precsize : Win32cr::Storage::Jet::JET_RECSIZE*, grbit : UInt32) : Int32
+  def jetGetRecordSize(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precsize : Win32cr::Storage::Jet::JET_RECSIZE*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetRecordSize(sesid, tableid, precsize, grbit)
+    {% end %}
   end
 
-  def jetGetRecordSize2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precsize : Win32cr::Storage::Jet::JET_RECSIZE2*, grbit : UInt32) : Int32
+  def jetGetRecordSize2(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precsize : Win32cr::Storage::Jet::JET_RECSIZE2*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetRecordSize2(sesid, tableid, precsize, grbit)
+    {% end %}
   end
 
-  def jetSetColumn(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pvData : Void*, cbData : UInt32, grbit : UInt32, psetinfo : Win32cr::Storage::Jet::JET_SETINFO*) : Int32
+  def jetSetColumn(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pvData : Void*, cbData : UInt32, grbit : UInt32, psetinfo : Win32cr::Storage::Jet::JET_SETINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetColumn(sesid, tableid, columnid, pvData, cbData, grbit, psetinfo)
+    {% end %}
   end
 
-  def jetSetColumns(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, psetcolumn : Win32cr::Storage::Jet::JET_SETCOLUMN*, csetcolumn : UInt32) : Int32
+  def jetSetColumns(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, psetcolumn : Win32cr::Storage::Jet::JET_SETCOLUMN*, csetcolumn : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetColumns(sesid, tableid, psetcolumn, csetcolumn)
+    {% end %}
   end
 
-  def jetPrepareUpdate(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, prep : UInt32) : Int32
+  def jetPrepareUpdate(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, prep : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetPrepareUpdate(sesid, tableid, prep)
+    {% end %}
   end
 
-  def jetGetRecordPosition(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precpos : Win32cr::Storage::Jet::JET_RECPOS*, cbRecpos : UInt32) : Int32
+  def jetGetRecordPosition(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precpos : Win32cr::Storage::Jet::JET_RECPOS*, cbRecpos : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetRecordPosition(sesid, tableid, precpos, cbRecpos)
+    {% end %}
   end
 
-  def jetGotoPosition(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precpos : Win32cr::Storage::Jet::JET_RECPOS*) : Int32
+  def jetGotoPosition(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precpos : Win32cr::Storage::Jet::JET_RECPOS*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGotoPosition(sesid, tableid, precpos)
+    {% end %}
   end
 
-  def jetGetCursorInfo(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+  def jetGetCursorInfo(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetCursorInfo(sesid, tableid, pvResult, cbMax, info_level)
+    {% end %}
   end
 
-  def jetDupCursor(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, grbit : UInt32) : Int32
+  def jetDupCursor(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDupCursor(sesid, tableid, ptableid, grbit)
+    {% end %}
   end
 
-  def jetGetCurrentIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, cbIndexName : UInt32) : Int32
+  def jetGetCurrentIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, cbIndexName : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetCurrentIndexA(sesid, tableid, szIndexName, cbIndexName)
+    {% end %}
   end
 
-  def jetGetCurrentIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, cbIndexName : UInt32) : Int32
+  def jetGetCurrentIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, cbIndexName : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetCurrentIndexW(sesid, tableid, szIndexName, cbIndexName)
+    {% end %}
   end
 
-  def jetSetCurrentIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*) : Int32
+  def jetSetCurrentIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCurrentIndexA(sesid, tableid, szIndexName)
+    {% end %}
   end
 
-  def jetSetCurrentIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*) : Int32
+  def jetSetCurrentIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCurrentIndexW(sesid, tableid, szIndexName)
+    {% end %}
   end
 
-  def jetSetCurrentIndex2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32) : Int32
+  def jetSetCurrentIndex2A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCurrentIndex2A(sesid, tableid, szIndexName, grbit)
+    {% end %}
   end
 
-  def jetSetCurrentIndex2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32) : Int32
+  def jetSetCurrentIndex2W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCurrentIndex2W(sesid, tableid, szIndexName, grbit)
+    {% end %}
   end
 
-  def jetSetCurrentIndex3A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32, itagSequence : UInt32) : Int32
+  def jetSetCurrentIndex3A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32, itagSequence : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCurrentIndex3A(sesid, tableid, szIndexName, grbit, itagSequence)
+    {% end %}
   end
 
-  def jetSetCurrentIndex3W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32, itagSequence : UInt32) : Int32
+  def jetSetCurrentIndex3W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32, itagSequence : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCurrentIndex3W(sesid, tableid, szIndexName, grbit, itagSequence)
+    {% end %}
   end
 
-  def jetSetCurrentIndex4A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, pindexid : Win32cr::Storage::Jet::JET_INDEXID*, grbit : UInt32, itagSequence : UInt32) : Int32
+  def jetSetCurrentIndex4A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, pindexid : Win32cr::Storage::Jet::JET_INDEXID*, grbit : UInt32, itagSequence : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCurrentIndex4A(sesid, tableid, szIndexName, pindexid, grbit, itagSequence)
+    {% end %}
   end
 
-  def jetSetCurrentIndex4W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, pindexid : Win32cr::Storage::Jet::JET_INDEXID*, grbit : UInt32, itagSequence : UInt32) : Int32
+  def jetSetCurrentIndex4W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, pindexid : Win32cr::Storage::Jet::JET_INDEXID*, grbit : UInt32, itagSequence : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCurrentIndex4W(sesid, tableid, szIndexName, pindexid, grbit, itagSequence)
+    {% end %}
   end
 
-  def jetMove(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cRow : Int32, grbit : UInt32) : Int32
+  def jetMove(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cRow : Int32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetMove(sesid, tableid, cRow, grbit)
+    {% end %}
   end
 
-  def jetSetCursorFilter(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgColumnFilters : Win32cr::Storage::Jet::JET_INDEX_COLUMN*, cColumnFilters : UInt32, grbit : UInt32) : Int32
+  def jetSetCursorFilter(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgColumnFilters : Win32cr::Storage::Jet::JET_INDEX_COLUMN*, cColumnFilters : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetCursorFilter(sesid, tableid, rgColumnFilters, cColumnFilters, grbit)
+    {% end %}
   end
 
-  def jetGetLock(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+  def jetGetLock(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetLock(sesid, tableid, grbit)
+    {% end %}
   end
 
-  def jetMakeKey(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+  def jetMakeKey(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetMakeKey(sesid, tableid, pvData, cbData, grbit)
+    {% end %}
   end
 
-  def jetSeek(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+  def jetSeek(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSeek(sesid, tableid, grbit)
+    {% end %}
   end
 
-  def jetPrereadKeys(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgpvKeys : Void**, rgcbKeys : UInt32*, ckeys : Int32, pckeysPreread : Int32*, grbit : UInt32) : Int32
+  def jetPrereadKeys(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgpvKeys : Void**, rgcbKeys : UInt32*, ckeys : Int32, pckeysPreread : Int32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetPrereadKeys(sesid, tableid, rgpvKeys, rgcbKeys, ckeys, pckeysPreread, grbit)
+    {% end %}
   end
 
-  def jetPrereadIndexRanges(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgIndexRanges : Win32cr::Storage::Jet::JET_INDEX_RANGE*, cIndexRanges : UInt32, pcRangesPreread : UInt32*, rgcolumnidPreread : UInt32*, ccolumnidPreread : UInt32, grbit : UInt32) : Int32
+  def jetPrereadIndexRanges(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgIndexRanges : Win32cr::Storage::Jet::JET_INDEX_RANGE*, cIndexRanges : UInt32, pcRangesPreread : UInt32*, rgcolumnidPreread : UInt32*, ccolumnidPreread : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetPrereadIndexRanges(sesid, tableid, rgIndexRanges, cIndexRanges, pcRangesPreread, rgcolumnidPreread, ccolumnidPreread, grbit)
+    {% end %}
   end
 
-  def jetGetBookmark(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+  def jetGetBookmark(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetBookmark(sesid, tableid, pvBookmark, cbMax, pcbActual)
+    {% end %}
   end
 
-  def jetGetSecondaryIndexBookmark(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvSecondaryKey : Void*, cbSecondaryKeyMax : UInt32, pcbSecondaryKeyActual : UInt32*, pvPrimaryBookmark : Void*, cbPrimaryBookmarkMax : UInt32, pcbPrimaryBookmarkActual : UInt32*, grbit : UInt32) : Int32
+  def jetGetSecondaryIndexBookmark(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvSecondaryKey : Void*, cbSecondaryKeyMax : UInt32, pcbSecondaryKeyActual : UInt32*, pvPrimaryBookmark : Void*, cbPrimaryBookmarkMax : UInt32, pcbPrimaryBookmarkActual : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetSecondaryIndexBookmark(sesid, tableid, pvSecondaryKey, cbSecondaryKeyMax, pcbSecondaryKeyActual, pvPrimaryBookmark, cbPrimaryBookmarkMax, pcbPrimaryBookmarkActual, grbit)
+    {% end %}
   end
 
-  def jetCompactA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseSrc : Int8*, szDatabaseDest : Int8*, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS, pconvert : Win32cr::Storage::Jet::CONVERT_A*, grbit : UInt32) : Int32
+  def jetCompactA(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseSrc : Int8*, szDatabaseDest : Int8*, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS, pconvert : Win32cr::Storage::Jet::JET_CONVERT_A*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCompactA(sesid, szDatabaseSrc, szDatabaseDest, pfnStatus, pconvert, grbit)
+    {% end %}
   end
 
-  def jetCompactW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseSrc : UInt16*, szDatabaseDest : UInt16*, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS, pconvert : Win32cr::Storage::Jet::CONVERT_W*, grbit : UInt32) : Int32
+  def jetCompactW(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseSrc : UInt16*, szDatabaseDest : UInt16*, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS, pconvert : Win32cr::Storage::Jet::JET_CONVERT_W*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetCompactW(sesid, szDatabaseSrc, szDatabaseDest, pfnStatus, pconvert, grbit)
+    {% end %}
   end
 
-  def jetDefragmentA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, grbit : UInt32) : Int32
+  def jetDefragmentA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDefragmentA(sesid, dbid, szTableName, pcPasses, pcSeconds, grbit)
+    {% end %}
   end
 
-  def jetDefragmentW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, grbit : UInt32) : Int32
+  def jetDefragmentW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDefragmentW(sesid, dbid, szTableName, pcPasses, pcSeconds, grbit)
+    {% end %}
   end
 
-  def jetDefragment2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, grbit : UInt32) : Int32
+  def jetDefragment2A(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDefragment2A(sesid, dbid, szTableName, pcPasses, pcSeconds, callback, grbit)
+    {% end %}
   end
 
-  def jetDefragment2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, grbit : UInt32) : Int32
+  def jetDefragment2W(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDefragment2W(sesid, dbid, szTableName, pcPasses, pcSeconds, callback, grbit)
+    {% end %}
   end
 
-  def jetDefragment3A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseName : Int8*, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, grbit : UInt32) : Int32
+  def jetDefragment3A(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseName : Int8*, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDefragment3A(sesid, szDatabaseName, szTableName, pcPasses, pcSeconds, callback, pvContext, grbit)
+    {% end %}
   end
 
-  def jetDefragment3W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseName : UInt16*, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, grbit : UInt32) : Int32
+  def jetDefragment3W(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseName : UInt16*, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetDefragment3W(sesid, szDatabaseName, szTableName, pcPasses, pcSeconds, callback, pvContext, grbit)
+    {% end %}
   end
 
-  def jetSetDatabaseSizeA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseName : Int8*, cpg : UInt32, pcpgReal : UInt32*) : Int32
+  def jetSetDatabaseSizeA(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseName : Int8*, cpg : UInt32, pcpgReal : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetDatabaseSizeA(sesid, szDatabaseName, cpg, pcpgReal)
+    {% end %}
   end
 
-  def jetSetDatabaseSizeW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseName : UInt16*, cpg : UInt32, pcpgReal : UInt32*) : Int32
+  def jetSetDatabaseSizeW(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseName : UInt16*, cpg : UInt32, pcpgReal : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetDatabaseSizeW(sesid, szDatabaseName, cpg, pcpgReal)
+    {% end %}
   end
 
-  def jetGrowDatabase(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, cpg : UInt32, pcpgReal : UInt32*) : Int32
+  def jetGrowDatabase(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, cpg : UInt32, pcpgReal : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGrowDatabase(sesid, dbid, cpg, pcpgReal)
+    {% end %}
   end
 
-  def jetResizeDatabase(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, cpgTarget : UInt32, pcpgActual : UInt32*, grbit : UInt32) : Int32
+  def jetResizeDatabase(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, cpgTarget : UInt32, pcpgActual : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetResizeDatabase(sesid, dbid, cpgTarget, pcpgActual, grbit)
+    {% end %}
   end
 
-  def jetSetSessionContext(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, ulContext : Win32cr::Storage::StructuredStorage::JET_API_PTR) : Int32
+  def jetSetSessionContext(sesid : Win32cr::Storage::Jet::JET_SESID, ulContext : Win32cr::Storage::StructuredStorage::JET_API_PTR) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetSessionContext(sesid, ulContext)
+    {% end %}
   end
 
-  def jetResetSessionContext(sesid : Win32cr::Storage::StructuredStorage::JET_SESID) : Int32
+  def jetResetSessionContext(sesid : Win32cr::Storage::Jet::JET_SESID) : Int32
+    {% if !flag?(:docs) %}
     C.JetResetSessionContext(sesid)
+    {% end %}
   end
 
-  def jetGotoBookmark(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32) : Int32
+  def jetGotoBookmark(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGotoBookmark(sesid, tableid, pvBookmark, cbBookmark)
+    {% end %}
   end
 
-  def jetGotoSecondaryIndexBookmark(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvSecondaryKey : Void*, cbSecondaryKey : UInt32, pvPrimaryBookmark : Void*, cbPrimaryBookmark : UInt32, grbit : UInt32) : Int32
+  def jetGotoSecondaryIndexBookmark(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvSecondaryKey : Void*, cbSecondaryKey : UInt32, pvPrimaryBookmark : Void*, cbPrimaryBookmark : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGotoSecondaryIndexBookmark(sesid, tableid, pvSecondaryKey, cbSecondaryKey, pvPrimaryBookmark, cbPrimaryBookmark, grbit)
+    {% end %}
   end
 
-  def jetIntersectIndexes(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, rgindexrange : Win32cr::Storage::Jet::JET_INDEXRANGE*, cindexrange : UInt32, precordlist : Win32cr::Storage::Jet::JET_RECORDLIST*, grbit : UInt32) : Int32
+  def jetIntersectIndexes(sesid : Win32cr::Storage::Jet::JET_SESID, rgindexrange : Win32cr::Storage::Jet::JET_INDEXRANGE*, cindexrange : UInt32, precordlist : Win32cr::Storage::Jet::JET_RECORDLIST*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetIntersectIndexes(sesid, rgindexrange, cindexrange, precordlist, grbit)
+    {% end %}
   end
 
-  def jetComputeStats(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+  def jetComputeStats(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+    {% if !flag?(:docs) %}
     C.JetComputeStats(sesid, tableid)
+    {% end %}
   end
 
-  def jetOpenTempTable(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+  def jetOpenTempTable(sesid : Win32cr::Storage::Jet::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenTempTable(sesid, prgcolumndef, ccolumn, grbit, ptableid, prgcolumnid)
+    {% end %}
   end
 
-  def jetOpenTempTable2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, lcid : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+  def jetOpenTempTable2(sesid : Win32cr::Storage::Jet::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, lcid : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenTempTable2(sesid, prgcolumndef, ccolumn, lcid, grbit, ptableid, prgcolumnid)
+    {% end %}
   end
 
-  def jetOpenTempTable3(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+  def jetOpenTempTable3(sesid : Win32cr::Storage::Jet::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenTempTable3(sesid, prgcolumndef, ccolumn, pidxunicode, grbit, ptableid, prgcolumnid)
+    {% end %}
   end
 
-  def jetOpenTemporaryTable(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, popentemporarytable : Win32cr::Storage::Jet::JET_OPENTEMPORARYTABLE*) : Int32
+  def jetOpenTemporaryTable(sesid : Win32cr::Storage::Jet::JET_SESID, popentemporarytable : Win32cr::Storage::Jet::JET_OPENTEMPORARYTABLE*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenTemporaryTable(sesid, popentemporarytable)
+    {% end %}
   end
 
-  def jetOpenTemporaryTable2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, popentemporarytable : Win32cr::Storage::Jet::JET_OPENTEMPORARYTABLE2*) : Int32
+  def jetOpenTemporaryTable2(sesid : Win32cr::Storage::Jet::JET_SESID, popentemporarytable : Win32cr::Storage::Jet::JET_OPENTEMPORARYTABLE2*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenTemporaryTable2(sesid, popentemporarytable)
+    {% end %}
   end
 
   def jetBackupA(szBackupPath : Int8*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetBackupA(szBackupPath, grbit, pfnStatus)
+    {% end %}
   end
 
   def jetBackupW(szBackupPath : UInt16*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetBackupW(szBackupPath, grbit, pfnStatus)
+    {% end %}
   end
 
-  def jetBackupInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szBackupPath : Int8*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+  def jetBackupInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szBackupPath : Int8*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetBackupInstanceA(instance, szBackupPath, grbit, pfnStatus)
+    {% end %}
   end
 
-  def jetBackupInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szBackupPath : UInt16*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+  def jetBackupInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, szBackupPath : UInt16*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetBackupInstanceW(instance, szBackupPath, grbit, pfnStatus)
+    {% end %}
   end
 
   def jetRestoreA(szSource : Int8*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetRestoreA(szSource, pfn)
+    {% end %}
   end
 
   def jetRestoreW(szSource : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetRestoreW(szSource, pfn)
+    {% end %}
   end
 
   def jetRestore2A(sz : Int8*, szDest : Int8*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetRestore2A(sz, szDest, pfn)
+    {% end %}
   end
 
   def jetRestore2W(sz : UInt16*, szDest : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetRestore2W(sz, szDest, pfn)
+    {% end %}
   end
 
-  def jetRestoreInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, sz : Int8*, szDest : Int8*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+  def jetRestoreInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, sz : Int8*, szDest : Int8*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetRestoreInstanceA(instance, sz, szDest, pfn)
+    {% end %}
   end
 
-  def jetRestoreInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, sz : UInt16*, szDest : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+  def jetRestoreInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, sz : UInt16*, szDest : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetRestoreInstanceW(instance, sz, szDest, pfn)
+    {% end %}
   end
 
-  def jetSetIndexRange(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableidSrc : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+  def jetSetIndexRange(sesid : Win32cr::Storage::Jet::JET_SESID, tableidSrc : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetIndexRange(sesid, tableidSrc, grbit)
+    {% end %}
   end
 
-  def jetIndexRecordCount(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pcrec : UInt32*, crecMax : UInt32) : Int32
+  def jetIndexRecordCount(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pcrec : UInt32*, crecMax : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetIndexRecordCount(sesid, tableid, pcrec, crecMax)
+    {% end %}
   end
 
-  def jetRetrieveKey(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvKey : Void*, cbMax : UInt32, pcbActual : UInt32*, grbit : UInt32) : Int32
+  def jetRetrieveKey(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvKey : Void*, cbMax : UInt32, pcbActual : UInt32*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetRetrieveKey(sesid, tableid, pvKey, cbMax, pcbActual, grbit)
+    {% end %}
   end
 
   def jetBeginExternalBackup(grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetBeginExternalBackup(grbit)
+    {% end %}
   end
 
-  def jetBeginExternalBackupInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+  def jetBeginExternalBackupInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetBeginExternalBackupInstance(instance, grbit)
+    {% end %}
   end
 
   def jetGetAttachInfoA(szzDatabases : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetAttachInfoA(szzDatabases, cbMax, pcbActual)
+    {% end %}
   end
 
   def jetGetAttachInfoW(wszzDatabases : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetAttachInfoW(wszzDatabases, cbMax, pcbActual)
+    {% end %}
   end
 
-  def jetGetAttachInfoInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzDatabases : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+  def jetGetAttachInfoInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzDatabases : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetAttachInfoInstanceA(instance, szzDatabases, cbMax, pcbActual)
+    {% end %}
   end
 
-  def jetGetAttachInfoInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzDatabases : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+  def jetGetAttachInfoInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzDatabases : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetAttachInfoInstanceW(instance, szzDatabases, cbMax, pcbActual)
+    {% end %}
   end
 
   def jetOpenFileA(szFileName : Int8*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenFileA(szFileName, phfFile, pulFileSizeLow, pulFileSizeHigh)
+    {% end %}
   end
 
   def jetOpenFileW(szFileName : UInt16*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenFileW(szFileName, phfFile, pulFileSizeLow, pulFileSizeHigh)
+    {% end %}
   end
 
-  def jetOpenFileInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szFileName : Int8*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
+  def jetOpenFileInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szFileName : Int8*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenFileInstanceA(instance, szFileName, phfFile, pulFileSizeLow, pulFileSizeHigh)
+    {% end %}
   end
 
-  def jetOpenFileInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szFileName : UInt16*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
+  def jetOpenFileInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, szFileName : UInt16*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetOpenFileInstanceW(instance, szFileName, phfFile, pulFileSizeLow, pulFileSizeHigh)
+    {% end %}
   end
 
   def jetReadFile(hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE, pv : Void*, cb : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetReadFile(hfFile, pv, cb, pcbActual)
+    {% end %}
   end
 
-  def jetReadFileInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE, pv : Void*, cb : UInt32, pcbActual : UInt32*) : Int32
+  def jetReadFileInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE, hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE, pv : Void*, cb : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetReadFileInstance(instance, hfFile, pv, cb, pcbActual)
+    {% end %}
   end
 
   def jetCloseFile(hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.JetCloseFile(hfFile)
+    {% end %}
   end
 
-  def jetCloseFileInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
+  def jetCloseFileInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE, hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.JetCloseFileInstance(instance, hfFile)
+    {% end %}
   end
 
   def jetGetLogInfoA(szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetLogInfoA(szzLogs, cbMax, pcbActual)
+    {% end %}
   end
 
   def jetGetLogInfoW(szzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetLogInfoW(szzLogs, cbMax, pcbActual)
+    {% end %}
   end
 
-  def jetGetLogInfoInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+  def jetGetLogInfoInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetLogInfoInstanceA(instance, szzLogs, cbMax, pcbActual)
+    {% end %}
   end
 
-  def jetGetLogInfoInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+  def jetGetLogInfoInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetLogInfoInstanceW(instance, wszzLogs, cbMax, pcbActual)
+    {% end %}
   end
 
-  def jetGetLogInfoInstance2A(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_A*) : Int32
+  def jetGetLogInfoInstance2A(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_A*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetLogInfoInstance2A(instance, szzLogs, cbMax, pcbActual, pLogInfo)
+    {% end %}
   end
 
-  def jetGetLogInfoInstance2W(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_W*) : Int32
+  def jetGetLogInfoInstance2W(instance : Win32cr::Storage::Jet::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_W*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetLogInfoInstance2W(instance, wszzLogs, cbMax, pcbActual, pLogInfo)
+    {% end %}
   end
 
-  def jetGetTruncateLogInfoInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+  def jetGetTruncateLogInfoInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetTruncateLogInfoInstanceA(instance, szzLogs, cbMax, pcbActual)
+    {% end %}
   end
 
-  def jetGetTruncateLogInfoInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+  def jetGetTruncateLogInfoInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetTruncateLogInfoInstanceW(instance, wszzLogs, cbMax, pcbActual)
+    {% end %}
   end
 
   def jetTruncateLog : Int32
+    {% if !flag?(:docs) %}
     C.JetTruncateLog
+    {% end %}
   end
 
-  def jetTruncateLogInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+  def jetTruncateLogInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
+    {% if !flag?(:docs) %}
     C.JetTruncateLogInstance(instance)
+    {% end %}
   end
 
   def jetEndExternalBackup : Int32
+    {% if !flag?(:docs) %}
     C.JetEndExternalBackup
+    {% end %}
   end
 
-  def jetEndExternalBackupInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+  def jetEndExternalBackupInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
+    {% if !flag?(:docs) %}
     C.JetEndExternalBackupInstance(instance)
+    {% end %}
   end
 
-  def jetEndExternalBackupInstance2(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+  def jetEndExternalBackupInstance2(instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetEndExternalBackupInstance2(instance, grbit)
+    {% end %}
   end
 
   def jetExternalRestoreA(szCheckpointFilePath : Int8*, szLogPath : Int8*, rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_A*, crstfilemap : Int32, szBackupLogPath : Int8*, genLow : Int32, genHigh : Int32, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetExternalRestoreA(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, genLow, genHigh, pfn)
+    {% end %}
   end
 
   def jetExternalRestoreW(szCheckpointFilePath : UInt16*, szLogPath : UInt16*, rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_W*, crstfilemap : Int32, szBackupLogPath : UInt16*, genLow : Int32, genHigh : Int32, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetExternalRestoreW(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, genLow, genHigh, pfn)
+    {% end %}
   end
 
   def jetExternalRestore2A(szCheckpointFilePath : Int8*, szLogPath : Int8*, rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_A*, crstfilemap : Int32, szBackupLogPath : Int8*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_A*, szTargetInstanceName : Int8*, szTargetInstanceLogPath : Int8*, szTargetInstanceCheckpointPath : Int8*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetExternalRestore2A(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, pLogInfo, szTargetInstanceName, szTargetInstanceLogPath, szTargetInstanceCheckpointPath, pfn)
+    {% end %}
   end
 
   def jetExternalRestore2W(szCheckpointFilePath : UInt16*, szLogPath : UInt16*, rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_W*, crstfilemap : Int32, szBackupLogPath : UInt16*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_W*, szTargetInstanceName : UInt16*, szTargetInstanceLogPath : UInt16*, szTargetInstanceCheckpointPath : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    {% if !flag?(:docs) %}
     C.JetExternalRestore2W(szCheckpointFilePath, szLogPath, rgrstmap, crstfilemap, szBackupLogPath, pLogInfo, szTargetInstanceName, szTargetInstanceLogPath, szTargetInstanceCheckpointPath, pfn)
+    {% end %}
   end
 
-  def jetRegisterCallback(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cbtyp : UInt32, pCallback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, phCallbackId : Win32cr::Storage::StructuredStorage::JET_HANDLE*) : Int32
+  def jetRegisterCallback(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cbtyp : UInt32, pCallback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, phCallbackId : Win32cr::Storage::StructuredStorage::JET_HANDLE*) : Int32
+    {% if !flag?(:docs) %}
     C.JetRegisterCallback(sesid, tableid, cbtyp, pCallback, pvContext, phCallbackId)
+    {% end %}
   end
 
-  def jetUnregisterCallback(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cbtyp : UInt32, hCallbackId : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
+  def jetUnregisterCallback(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cbtyp : UInt32, hCallbackId : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.JetUnregisterCallback(sesid, tableid, cbtyp, hCallbackId)
+    {% end %}
   end
 
   def jetGetInstanceInfoA(pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_A**) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetInstanceInfoA(pcInstanceInfo, paInstanceInfo)
+    {% end %}
   end
 
   def jetGetInstanceInfoW(pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_W**) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetInstanceInfoW(pcInstanceInfo, paInstanceInfo)
+    {% end %}
   end
 
-  def jetFreeBuffer(pbBuf : Win32cr::Foundation::PSTR) : Int32
+  def jetFreeBuffer(pbBuf : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.JetFreeBuffer(pbBuf)
+    {% end %}
   end
 
-  def jetSetLS(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, ls : Win32cr::Storage::Jet::JET_LS, grbit : UInt32) : Int32
+  def jetSetLS(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, ls : Win32cr::Storage::Jet::JET_LS, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetLS(sesid, tableid, ls, grbit)
+    {% end %}
   end
 
-  def jetGetLS(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pls : Win32cr::Storage::Jet::JET_LS*, grbit : UInt32) : Int32
+  def jetGetLS(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pls : Win32cr::Storage::Jet::JET_LS*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetLS(sesid, tableid, pls, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotPrepare(psnapId : Win32cr::Storage::Jet::JET_OSSNAPID*, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotPrepare(psnapId, grbit)
+    {% end %}
   end
 
-  def jetOSSnapshotPrepareInstance(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+  def jetOSSnapshotPrepareInstance(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotPrepareInstance(snapId, instance, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotFreezeA(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_A**, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotFreezeA(snapId, pcInstanceInfo, paInstanceInfo, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotFreezeW(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_W**, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotFreezeW(snapId, pcInstanceInfo, paInstanceInfo, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotThaw(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotThaw(snapId, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotAbort(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotAbort(snapId, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotTruncateLog(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotTruncateLog(snapId, grbit)
+    {% end %}
   end
 
-  def jetOSSnapshotTruncateLogInstance(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+  def jetOSSnapshotTruncateLogInstance(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotTruncateLogInstance(snapId, instance, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotGetFreezeInfoA(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_A**, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotGetFreezeInfoA(snapId, pcInstanceInfo, paInstanceInfo, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotGetFreezeInfoW(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_W**, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotGetFreezeInfoW(snapId, pcInstanceInfo, paInstanceInfo, grbit)
+    {% end %}
   end
 
   def jetOSSnapshotEnd(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetOSSnapshotEnd(snapId, grbit)
+    {% end %}
   end
 
   def jetConfigureProcessForCrashDump(grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetConfigureProcessForCrashDump(grbit)
+    {% end %}
   end
 
   def jetGetErrorInfoW(pvContext : Void*, pvResult : Void*, cbMax : UInt32, info_level : UInt32, grbit : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetErrorInfoW(pvContext, pvResult, cbMax, info_level, grbit)
+    {% end %}
   end
 
-  def jetSetSessionParameter(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, sesparamid : UInt32, pvParam : Void*, cbParam : UInt32) : Int32
+  def jetSetSessionParameter(sesid : Win32cr::Storage::Jet::JET_SESID, sesparamid : UInt32, pvParam : Void*, cbParam : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.JetSetSessionParameter(sesid, sesparamid, pvParam, cbParam)
+    {% end %}
   end
 
-  def jetGetSessionParameter(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, sesparamid : UInt32, pvParam : Void*, cbParamMax : UInt32, pcbParamActual : UInt32*) : Int32
+  def jetGetSessionParameter(sesid : Win32cr::Storage::Jet::JET_SESID, sesparamid : UInt32, pvParam : Void*, cbParamMax : UInt32, pcbParamActual : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.JetGetSessionParameter(sesid, sesparamid, pvParam, cbParamMax, pcbParamActual)
+    {% end %}
   end
 
   @[Link("esent")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun JetInit(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*) : Int32
+    fun JetInit(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*) : Int32
 
     # :nodoc:
-    fun JetInit2(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, grbit : UInt32) : Int32
+    fun JetInit2(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetInit3A(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, prstInfo : Win32cr::Storage::Jet::JET_RSTINFO_A*, grbit : UInt32) : Int32
+    fun JetInit3A(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, prstInfo : Win32cr::Storage::Jet::JET_RSTINFO_A*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetInit3W(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, prstInfo : Win32cr::Storage::Jet::JET_RSTINFO_W*, grbit : UInt32) : Int32
+    fun JetInit3W(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, prstInfo : Win32cr::Storage::Jet::JET_RSTINFO_W*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateInstanceA(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, szInstanceName : Int8*) : Int32
+    fun JetCreateInstanceA(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, szInstanceName : Int8*) : Int32
 
     # :nodoc:
-    fun JetCreateInstanceW(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, szInstanceName : UInt16*) : Int32
+    fun JetCreateInstanceW(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, szInstanceName : UInt16*) : Int32
 
     # :nodoc:
-    fun JetCreateInstance2A(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, szInstanceName : Int8*, szDisplayName : Int8*, grbit : UInt32) : Int32
+    fun JetCreateInstance2A(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, szInstanceName : Int8*, szDisplayName : Int8*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateInstance2W(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, szInstanceName : UInt16*, szDisplayName : UInt16*, grbit : UInt32) : Int32
+    fun JetCreateInstance2W(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, szInstanceName : UInt16*, szDisplayName : UInt16*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetInstanceMiscInfo(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetInstanceMiscInfo(instance : Win32cr::Storage::Jet::JET_INSTANCE, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetTerm(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+    fun JetTerm(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
 
     # :nodoc:
-    fun JetTerm2(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+    fun JetTerm2(instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
 
     # :nodoc:
     fun JetStopService : Int32
 
     # :nodoc:
-    fun JetStopServiceInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+    fun JetStopServiceInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
 
     # :nodoc:
-    fun JetStopServiceInstance2(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+    fun JetStopServiceInstance2(instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
 
     # :nodoc:
     fun JetStopBackup : Int32
 
     # :nodoc:
-    fun JetStopBackupInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+    fun JetStopBackupInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
 
     # :nodoc:
-    fun JetSetSystemParameterA(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, sesid : Win32cr::Storage::StructuredStorage::JET_SESID, paramid : UInt32, lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, szParam : Int8*) : Int32
+    fun JetSetSystemParameterA(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, sesid : Win32cr::Storage::Jet::JET_SESID, paramid : UInt32, lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, szParam : Int8*) : Int32
 
     # :nodoc:
-    fun JetSetSystemParameterW(pinstance : Win32cr::Storage::StructuredStorage::JET_INSTANCE*, sesid : Win32cr::Storage::StructuredStorage::JET_SESID, paramid : UInt32, lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, szParam : UInt16*) : Int32
+    fun JetSetSystemParameterW(pinstance : Win32cr::Storage::Jet::JET_INSTANCE*, sesid : Win32cr::Storage::Jet::JET_SESID, paramid : UInt32, lParam : Win32cr::Storage::StructuredStorage::JET_API_PTR, szParam : UInt16*) : Int32
 
     # :nodoc:
-    fun JetGetSystemParameterA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, sesid : Win32cr::Storage::StructuredStorage::JET_SESID, paramid : UInt32, plParam : Win32cr::Storage::StructuredStorage::JET_API_PTR*, szParam : Int8*, cbMax : UInt32) : Int32
+    fun JetGetSystemParameterA(instance : Win32cr::Storage::Jet::JET_INSTANCE, sesid : Win32cr::Storage::Jet::JET_SESID, paramid : UInt32, plParam : Win32cr::Storage::StructuredStorage::JET_API_PTR*, szParam : Int8*, cbMax : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetSystemParameterW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, sesid : Win32cr::Storage::StructuredStorage::JET_SESID, paramid : UInt32, plParam : Win32cr::Storage::StructuredStorage::JET_API_PTR*, szParam : UInt16*, cbMax : UInt32) : Int32
+    fun JetGetSystemParameterW(instance : Win32cr::Storage::Jet::JET_INSTANCE, sesid : Win32cr::Storage::Jet::JET_SESID, paramid : UInt32, plParam : Win32cr::Storage::StructuredStorage::JET_API_PTR*, szParam : UInt16*, cbMax : UInt32) : Int32
 
     # :nodoc:
     fun JetEnableMultiInstanceA(psetsysparam : Win32cr::Storage::Jet::JET_SETSYSPARAM_A*, csetsysparam : UInt32, pcsetsucceed : UInt32*) : Int32
@@ -3553,220 +4002,220 @@ module Win32cr::Storage::Jet
     fun JetGetThreadStats(pvResult : Void*, cbMax : UInt32) : Int32
 
     # :nodoc:
-    fun JetBeginSessionA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, psesid : Win32cr::Storage::StructuredStorage::JET_SESID*, szUserName : Int8*, szPassword : Int8*) : Int32
+    fun JetBeginSessionA(instance : Win32cr::Storage::Jet::JET_INSTANCE, psesid : Win32cr::Storage::Jet::JET_SESID*, szUserName : Int8*, szPassword : Int8*) : Int32
 
     # :nodoc:
-    fun JetBeginSessionW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, psesid : Win32cr::Storage::StructuredStorage::JET_SESID*, szUserName : UInt16*, szPassword : UInt16*) : Int32
+    fun JetBeginSessionW(instance : Win32cr::Storage::Jet::JET_INSTANCE, psesid : Win32cr::Storage::Jet::JET_SESID*, szUserName : UInt16*, szPassword : UInt16*) : Int32
 
     # :nodoc:
-    fun JetDupSession(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, psesid : Win32cr::Storage::StructuredStorage::JET_SESID*) : Int32
+    fun JetDupSession(sesid : Win32cr::Storage::Jet::JET_SESID, psesid : Win32cr::Storage::Jet::JET_SESID*) : Int32
 
     # :nodoc:
-    fun JetEndSession(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+    fun JetEndSession(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetVersion(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, pwVersion : UInt32*) : Int32
+    fun JetGetVersion(sesid : Win32cr::Storage::Jet::JET_SESID, pwVersion : UInt32*) : Int32
 
     # :nodoc:
-    fun JetIdle(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+    fun JetIdle(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateDatabaseA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, szConnect : Int8*, pdbid : UInt32*, grbit : UInt32) : Int32
+    fun JetCreateDatabaseA(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, szConnect : Int8*, pdbid : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateDatabaseW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, szConnect : UInt16*, pdbid : UInt32*, grbit : UInt32) : Int32
+    fun JetCreateDatabaseW(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, szConnect : UInt16*, pdbid : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateDatabase2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, cpgDatabaseSizeMax : UInt32, pdbid : UInt32*, grbit : UInt32) : Int32
+    fun JetCreateDatabase2A(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, cpgDatabaseSizeMax : UInt32, pdbid : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateDatabase2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, cpgDatabaseSizeMax : UInt32, pdbid : UInt32*, grbit : UInt32) : Int32
+    fun JetCreateDatabase2W(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, cpgDatabaseSizeMax : UInt32, pdbid : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetAttachDatabaseA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, grbit : UInt32) : Int32
+    fun JetAttachDatabaseA(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetAttachDatabaseW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, grbit : UInt32) : Int32
+    fun JetAttachDatabaseW(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetAttachDatabase2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, cpgDatabaseSizeMax : UInt32, grbit : UInt32) : Int32
+    fun JetAttachDatabase2A(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, cpgDatabaseSizeMax : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetAttachDatabase2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, cpgDatabaseSizeMax : UInt32, grbit : UInt32) : Int32
+    fun JetAttachDatabase2W(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, cpgDatabaseSizeMax : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDetachDatabaseA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*) : Int32
+    fun JetDetachDatabaseA(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*) : Int32
 
     # :nodoc:
-    fun JetDetachDatabaseW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*) : Int32
+    fun JetDetachDatabaseW(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*) : Int32
 
     # :nodoc:
-    fun JetDetachDatabase2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, grbit : UInt32) : Int32
+    fun JetDetachDatabase2A(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDetachDatabase2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, grbit : UInt32) : Int32
+    fun JetDetachDatabase2W(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetObjectInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, objtyp : UInt32, szContainerName : Int8*, szObjectName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetObjectInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, objtyp : UInt32, szContainerName : Int8*, szObjectName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetObjectInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, objtyp : UInt32, szContainerName : UInt16*, szObjectName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetObjectInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, objtyp : UInt32, szContainerName : UInt16*, szObjectName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetTableInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetTableInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetTableInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetTableInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateTableA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, lPages : UInt32, lDensity : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+    fun JetCreateTableA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, lPages : UInt32, lDensity : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
 
     # :nodoc:
-    fun JetCreateTableW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, lPages : UInt32, lDensity : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+    fun JetCreateTableW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, lPages : UInt32, lDensity : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
 
     # :nodoc:
-    fun JetCreateTableColumnIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE_A*) : Int32
+    fun JetCreateTableColumnIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE_A*) : Int32
 
     # :nodoc:
-    fun JetCreateTableColumnIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE_W*) : Int32
+    fun JetCreateTableColumnIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE_W*) : Int32
 
     # :nodoc:
-    fun JetCreateTableColumnIndex2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE2_A*) : Int32
+    fun JetCreateTableColumnIndex2A(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE2_A*) : Int32
 
     # :nodoc:
-    fun JetCreateTableColumnIndex2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE2_W*) : Int32
+    fun JetCreateTableColumnIndex2W(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE2_W*) : Int32
 
     # :nodoc:
-    fun JetCreateTableColumnIndex3A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE3_A*) : Int32
+    fun JetCreateTableColumnIndex3A(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE3_A*) : Int32
 
     # :nodoc:
-    fun JetCreateTableColumnIndex3W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE3_W*) : Int32
+    fun JetCreateTableColumnIndex3W(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE3_W*) : Int32
 
     # :nodoc:
-    fun JetCreateTableColumnIndex4A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE4_A*) : Int32
+    fun JetCreateTableColumnIndex4A(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE4_A*) : Int32
 
     # :nodoc:
-    fun JetCreateTableColumnIndex4W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE4_W*) : Int32
+    fun JetCreateTableColumnIndex4W(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, ptablecreate : Win32cr::Storage::Jet::JET_TABLECREATE4_W*) : Int32
 
     # :nodoc:
-    fun JetDeleteTableA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*) : Int32
+    fun JetDeleteTableA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*) : Int32
 
     # :nodoc:
-    fun JetDeleteTableW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*) : Int32
+    fun JetDeleteTableW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*) : Int32
 
     # :nodoc:
-    fun JetRenameTableA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szName : Int8*, szNameNew : Int8*) : Int32
+    fun JetRenameTableA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szName : Int8*, szNameNew : Int8*) : Int32
 
     # :nodoc:
-    fun JetRenameTableW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szName : UInt16*, szNameNew : UInt16*) : Int32
+    fun JetRenameTableW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szName : UInt16*, szNameNew : UInt16*) : Int32
 
     # :nodoc:
-    fun JetGetTableColumnInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetTableColumnInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetTableColumnInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetTableColumnInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetColumnInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, pColumnNameOrId : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetColumnInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, pColumnNameOrId : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetColumnInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, pwColumnNameOrId : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetColumnInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, pwColumnNameOrId : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetAddColumnA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, pcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, pvDefault : Void*, cbDefault : UInt32, pcolumnid : UInt32*) : Int32
+    fun JetAddColumnA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, pcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, pvDefault : Void*, cbDefault : UInt32, pcolumnid : UInt32*) : Int32
 
     # :nodoc:
-    fun JetAddColumnW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, pcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, pvDefault : Void*, cbDefault : UInt32, pcolumnid : UInt32*) : Int32
+    fun JetAddColumnW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, pcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, pvDefault : Void*, cbDefault : UInt32, pcolumnid : UInt32*) : Int32
 
     # :nodoc:
-    fun JetDeleteColumnA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*) : Int32
+    fun JetDeleteColumnA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*) : Int32
 
     # :nodoc:
-    fun JetDeleteColumnW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*) : Int32
+    fun JetDeleteColumnW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*) : Int32
 
     # :nodoc:
-    fun JetDeleteColumn2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, grbit : UInt32) : Int32
+    fun JetDeleteColumn2A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : Int8*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDeleteColumn2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, grbit : UInt32) : Int32
+    fun JetDeleteColumn2W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szColumnName : UInt16*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetRenameColumnA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szName : Int8*, szNameNew : Int8*, grbit : UInt32) : Int32
+    fun JetRenameColumnA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szName : Int8*, szNameNew : Int8*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetRenameColumnW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szName : UInt16*, szNameNew : UInt16*, grbit : UInt32) : Int32
+    fun JetRenameColumnW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szName : UInt16*, szNameNew : UInt16*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetColumnDefaultValueA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, szColumnName : Int8*, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+    fun JetSetColumnDefaultValueA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, szColumnName : Int8*, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetColumnDefaultValueW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, szColumnName : UInt16*, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+    fun JetSetColumnDefaultValueW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, szColumnName : UInt16*, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetTableIndexInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+    fun JetGetTableIndexInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetTableIndexInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+    fun JetGetTableIndexInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetIndexInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, szIndexName : Int8*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+    fun JetGetIndexInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, szIndexName : Int8*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetIndexInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, szIndexName : UInt16*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
+    fun JetGetIndexInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, szIndexName : UInt16*, pvResult : Void*, cbResult : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32, szKey : Win32cr::Foundation::PSTR, cbKey : UInt32, lDensity : UInt32) : Int32
+    fun JetCreateIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32, szKey : Int8*, cbKey : UInt32, lDensity : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32, szKey : Win32cr::Foundation::PWSTR, cbKey : UInt32, lDensity : UInt32) : Int32
+    fun JetCreateIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32, szKey : UInt16*, cbKey : UInt32, lDensity : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateIndex2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, cIndexCreate : UInt32) : Int32
+    fun JetCreateIndex2A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_A*, cIndexCreate : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateIndex2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, cIndexCreate : UInt32) : Int32
+    fun JetCreateIndex2W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE_W*, cIndexCreate : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateIndex3A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*, cIndexCreate : UInt32) : Int32
+    fun JetCreateIndex3A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_A*, cIndexCreate : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateIndex3W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*, cIndexCreate : UInt32) : Int32
+    fun JetCreateIndex3W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE2_W*, cIndexCreate : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateIndex4A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*, cIndexCreate : UInt32) : Int32
+    fun JetCreateIndex4A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_A*, cIndexCreate : UInt32) : Int32
 
     # :nodoc:
-    fun JetCreateIndex4W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*, cIndexCreate : UInt32) : Int32
+    fun JetCreateIndex4W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pindexcreate : Win32cr::Storage::Jet::JET_INDEXCREATE3_W*, cIndexCreate : UInt32) : Int32
 
     # :nodoc:
-    fun JetDeleteIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*) : Int32
+    fun JetDeleteIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*) : Int32
 
     # :nodoc:
-    fun JetDeleteIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*) : Int32
+    fun JetDeleteIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*) : Int32
 
     # :nodoc:
-    fun JetBeginTransaction(sesid : Win32cr::Storage::StructuredStorage::JET_SESID) : Int32
+    fun JetBeginTransaction(sesid : Win32cr::Storage::Jet::JET_SESID) : Int32
 
     # :nodoc:
-    fun JetBeginTransaction2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+    fun JetBeginTransaction2(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetBeginTransaction3(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, trxid : Int64, grbit : UInt32) : Int32
+    fun JetBeginTransaction3(sesid : Win32cr::Storage::Jet::JET_SESID, trxid : Int64, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCommitTransaction(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+    fun JetCommitTransaction(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCommitTransaction2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32, cmsecDurableCommit : UInt32, pCommitId : Win32cr::Storage::Jet::JET_COMMIT_ID*) : Int32
+    fun JetCommitTransaction2(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32, cmsecDurableCommit : UInt32, pCommitId : Win32cr::Storage::Jet::JET_COMMIT_ID*) : Int32
 
     # :nodoc:
-    fun JetRollback(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, grbit : UInt32) : Int32
+    fun JetRollback(sesid : Win32cr::Storage::Jet::JET_SESID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetDatabaseInfoA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetDatabaseInfoA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetDatabaseInfoW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetDatabaseInfoW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
     fun JetGetDatabaseFileInfoA(szDatabaseName : Int8*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
@@ -3775,202 +4224,202 @@ module Win32cr::Storage::Jet
     fun JetGetDatabaseFileInfoW(szDatabaseName : UInt16*, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetOpenDatabaseA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : Int8*, szConnect : Int8*, pdbid : UInt32*, grbit : UInt32) : Int32
+    fun JetOpenDatabaseA(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : Int8*, szConnect : Int8*, pdbid : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetOpenDatabaseW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szFilename : UInt16*, szConnect : UInt16*, pdbid : UInt32*, grbit : UInt32) : Int32
+    fun JetOpenDatabaseW(sesid : Win32cr::Storage::Jet::JET_SESID, szFilename : UInt16*, szConnect : UInt16*, pdbid : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCloseDatabase(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, grbit : UInt32) : Int32
+    fun JetCloseDatabase(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetOpenTableA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, pvParameters : Void*, cbParameters : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+    fun JetOpenTableA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, pvParameters : Void*, cbParameters : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
 
     # :nodoc:
-    fun JetOpenTableW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, pvParameters : Void*, cbParameters : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
+    fun JetOpenTableW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, pvParameters : Void*, cbParameters : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*) : Int32
 
     # :nodoc:
-    fun JetSetTableSequential(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    fun JetSetTableSequential(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetResetTableSequential(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    fun JetResetTableSequential(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCloseTable(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+    fun JetCloseTable(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
 
     # :nodoc:
-    fun JetDelete(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+    fun JetDelete(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
 
     # :nodoc:
-    fun JetUpdate(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32, pcbActual : UInt32*) : Int32
+    fun JetUpdate(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetUpdate2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32, pcbActual : UInt32*, grbit : UInt32) : Int32
+    fun JetUpdate2(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32, pcbActual : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetEscrowUpdate(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pv : Void*, cbMax : UInt32, pvOld : Void*, cbOldMax : UInt32, pcbOldActual : UInt32*, grbit : UInt32) : Int32
+    fun JetEscrowUpdate(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pv : Void*, cbMax : UInt32, pvOld : Void*, cbOldMax : UInt32, pcbOldActual : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetRetrieveColumn(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pvData : Void*, cbData : UInt32, pcbActual : UInt32*, grbit : UInt32, pretinfo : Win32cr::Storage::Jet::JET_RETINFO*) : Int32
+    fun JetRetrieveColumn(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pvData : Void*, cbData : UInt32, pcbActual : UInt32*, grbit : UInt32, pretinfo : Win32cr::Storage::Jet::JET_RETINFO*) : Int32
 
     # :nodoc:
-    fun JetRetrieveColumns(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pretrievecolumn : Win32cr::Storage::Jet::JET_RETRIEVECOLUMN*, cretrievecolumn : UInt32) : Int32
+    fun JetRetrieveColumns(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pretrievecolumn : Win32cr::Storage::Jet::JET_RETRIEVECOLUMN*, cretrievecolumn : UInt32) : Int32
 
     # :nodoc:
-    fun JetEnumerateColumns(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cEnumColumnId : UInt32, rgEnumColumnId : Win32cr::Storage::Jet::JET_ENUMCOLUMNID*, pcEnumColumn : UInt32*, prgEnumColumn : Win32cr::Storage::Jet::JET_ENUMCOLUMN**, pfnRealloc : Win32cr::Storage::Jet::JET_PFNREALLOC, pvReallocContext : Void*, cbDataMost : UInt32, grbit : UInt32) : Int32
+    fun JetEnumerateColumns(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cEnumColumnId : UInt32, rgEnumColumnId : Win32cr::Storage::Jet::JET_ENUMCOLUMNID*, pcEnumColumn : UInt32*, prgEnumColumn : Win32cr::Storage::Jet::JET_ENUMCOLUMN**, pfnRealloc : Win32cr::Storage::Jet::JET_PFNREALLOC, pvReallocContext : Void*, cbDataMost : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetRecordSize(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precsize : Win32cr::Storage::Jet::JET_RECSIZE*, grbit : UInt32) : Int32
+    fun JetGetRecordSize(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precsize : Win32cr::Storage::Jet::JET_RECSIZE*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetRecordSize2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precsize : Win32cr::Storage::Jet::JET_RECSIZE2*, grbit : UInt32) : Int32
+    fun JetGetRecordSize2(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precsize : Win32cr::Storage::Jet::JET_RECSIZE2*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetColumn(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pvData : Void*, cbData : UInt32, grbit : UInt32, psetinfo : Win32cr::Storage::Jet::JET_SETINFO*) : Int32
+    fun JetSetColumn(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, columnid : UInt32, pvData : Void*, cbData : UInt32, grbit : UInt32, psetinfo : Win32cr::Storage::Jet::JET_SETINFO*) : Int32
 
     # :nodoc:
-    fun JetSetColumns(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, psetcolumn : Win32cr::Storage::Jet::JET_SETCOLUMN*, csetcolumn : UInt32) : Int32
+    fun JetSetColumns(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, psetcolumn : Win32cr::Storage::Jet::JET_SETCOLUMN*, csetcolumn : UInt32) : Int32
 
     # :nodoc:
-    fun JetPrepareUpdate(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, prep : UInt32) : Int32
+    fun JetPrepareUpdate(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, prep : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetRecordPosition(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precpos : Win32cr::Storage::Jet::JET_RECPOS*, cbRecpos : UInt32) : Int32
+    fun JetGetRecordPosition(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precpos : Win32cr::Storage::Jet::JET_RECPOS*, cbRecpos : UInt32) : Int32
 
     # :nodoc:
-    fun JetGotoPosition(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precpos : Win32cr::Storage::Jet::JET_RECPOS*) : Int32
+    fun JetGotoPosition(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, precpos : Win32cr::Storage::Jet::JET_RECPOS*) : Int32
 
     # :nodoc:
-    fun JetGetCursorInfo(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
+    fun JetGetCursorInfo(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvResult : Void*, cbMax : UInt32, info_level : UInt32) : Int32
 
     # :nodoc:
-    fun JetDupCursor(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, grbit : UInt32) : Int32
+    fun JetDupCursor(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetCurrentIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, cbIndexName : UInt32) : Int32
+    fun JetGetCurrentIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, cbIndexName : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetCurrentIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, cbIndexName : UInt32) : Int32
+    fun JetGetCurrentIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, cbIndexName : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetCurrentIndexA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*) : Int32
+    fun JetSetCurrentIndexA(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*) : Int32
 
     # :nodoc:
-    fun JetSetCurrentIndexW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*) : Int32
+    fun JetSetCurrentIndexW(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*) : Int32
 
     # :nodoc:
-    fun JetSetCurrentIndex2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32) : Int32
+    fun JetSetCurrentIndex2A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetCurrentIndex2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32) : Int32
+    fun JetSetCurrentIndex2W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetCurrentIndex3A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32, itagSequence : UInt32) : Int32
+    fun JetSetCurrentIndex3A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, grbit : UInt32, itagSequence : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetCurrentIndex3W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32, itagSequence : UInt32) : Int32
+    fun JetSetCurrentIndex3W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, grbit : UInt32, itagSequence : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetCurrentIndex4A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, pindexid : Win32cr::Storage::Jet::JET_INDEXID*, grbit : UInt32, itagSequence : UInt32) : Int32
+    fun JetSetCurrentIndex4A(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : Int8*, pindexid : Win32cr::Storage::Jet::JET_INDEXID*, grbit : UInt32, itagSequence : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetCurrentIndex4W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, pindexid : Win32cr::Storage::Jet::JET_INDEXID*, grbit : UInt32, itagSequence : UInt32) : Int32
+    fun JetSetCurrentIndex4W(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, szIndexName : UInt16*, pindexid : Win32cr::Storage::Jet::JET_INDEXID*, grbit : UInt32, itagSequence : UInt32) : Int32
 
     # :nodoc:
-    fun JetMove(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cRow : Int32, grbit : UInt32) : Int32
+    fun JetMove(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cRow : Int32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetCursorFilter(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgColumnFilters : Win32cr::Storage::Jet::JET_INDEX_COLUMN*, cColumnFilters : UInt32, grbit : UInt32) : Int32
+    fun JetSetCursorFilter(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgColumnFilters : Win32cr::Storage::Jet::JET_INDEX_COLUMN*, cColumnFilters : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetLock(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    fun JetGetLock(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetMakeKey(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
+    fun JetMakeKey(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvData : Void*, cbData : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSeek(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    fun JetSeek(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetPrereadKeys(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgpvKeys : Void**, rgcbKeys : UInt32*, ckeys : Int32, pckeysPreread : Int32*, grbit : UInt32) : Int32
+    fun JetPrereadKeys(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgpvKeys : Void**, rgcbKeys : UInt32*, ckeys : Int32, pckeysPreread : Int32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetPrereadIndexRanges(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgIndexRanges : Win32cr::Storage::Jet::JET_INDEX_RANGE*, cIndexRanges : UInt32, pcRangesPreread : UInt32*, rgcolumnidPreread : UInt32*, ccolumnidPreread : UInt32, grbit : UInt32) : Int32
+    fun JetPrereadIndexRanges(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, rgIndexRanges : Win32cr::Storage::Jet::JET_INDEX_RANGE*, cIndexRanges : UInt32, pcRangesPreread : UInt32*, rgcolumnidPreread : UInt32*, ccolumnidPreread : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetBookmark(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    fun JetGetBookmark(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetGetSecondaryIndexBookmark(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvSecondaryKey : Void*, cbSecondaryKeyMax : UInt32, pcbSecondaryKeyActual : UInt32*, pvPrimaryBookmark : Void*, cbPrimaryBookmarkMax : UInt32, pcbPrimaryBookmarkActual : UInt32*, grbit : UInt32) : Int32
+    fun JetGetSecondaryIndexBookmark(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvSecondaryKey : Void*, cbSecondaryKeyMax : UInt32, pcbSecondaryKeyActual : UInt32*, pvPrimaryBookmark : Void*, cbPrimaryBookmarkMax : UInt32, pcbPrimaryBookmarkActual : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCompactA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseSrc : Int8*, szDatabaseDest : Int8*, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS, pconvert : Win32cr::Storage::Jet::CONVERT_A*, grbit : UInt32) : Int32
+    fun JetCompactA(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseSrc : Int8*, szDatabaseDest : Int8*, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS, pconvert : Win32cr::Storage::Jet::JET_CONVERT_A*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetCompactW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseSrc : UInt16*, szDatabaseDest : UInt16*, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS, pconvert : Win32cr::Storage::Jet::CONVERT_W*, grbit : UInt32) : Int32
+    fun JetCompactW(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseSrc : UInt16*, szDatabaseDest : UInt16*, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS, pconvert : Win32cr::Storage::Jet::JET_CONVERT_W*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDefragmentA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, grbit : UInt32) : Int32
+    fun JetDefragmentA(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDefragmentW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, grbit : UInt32) : Int32
+    fun JetDefragmentW(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDefragment2A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, grbit : UInt32) : Int32
+    fun JetDefragment2A(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDefragment2W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, grbit : UInt32) : Int32
+    fun JetDefragment2W(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDefragment3A(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseName : Int8*, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, grbit : UInt32) : Int32
+    fun JetDefragment3A(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseName : Int8*, szTableName : Int8*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetDefragment3W(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseName : UInt16*, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, grbit : UInt32) : Int32
+    fun JetDefragment3W(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseName : UInt16*, szTableName : UInt16*, pcPasses : UInt32*, pcSeconds : UInt32*, callback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetDatabaseSizeA(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseName : Int8*, cpg : UInt32, pcpgReal : UInt32*) : Int32
+    fun JetSetDatabaseSizeA(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseName : Int8*, cpg : UInt32, pcpgReal : UInt32*) : Int32
 
     # :nodoc:
-    fun JetSetDatabaseSizeW(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, szDatabaseName : UInt16*, cpg : UInt32, pcpgReal : UInt32*) : Int32
+    fun JetSetDatabaseSizeW(sesid : Win32cr::Storage::Jet::JET_SESID, szDatabaseName : UInt16*, cpg : UInt32, pcpgReal : UInt32*) : Int32
 
     # :nodoc:
-    fun JetGrowDatabase(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, cpg : UInt32, pcpgReal : UInt32*) : Int32
+    fun JetGrowDatabase(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, cpg : UInt32, pcpgReal : UInt32*) : Int32
 
     # :nodoc:
-    fun JetResizeDatabase(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, dbid : UInt32, cpgTarget : UInt32, pcpgActual : UInt32*, grbit : UInt32) : Int32
+    fun JetResizeDatabase(sesid : Win32cr::Storage::Jet::JET_SESID, dbid : UInt32, cpgTarget : UInt32, pcpgActual : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetSessionContext(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, ulContext : Win32cr::Storage::StructuredStorage::JET_API_PTR) : Int32
+    fun JetSetSessionContext(sesid : Win32cr::Storage::Jet::JET_SESID, ulContext : Win32cr::Storage::StructuredStorage::JET_API_PTR) : Int32
 
     # :nodoc:
-    fun JetResetSessionContext(sesid : Win32cr::Storage::StructuredStorage::JET_SESID) : Int32
+    fun JetResetSessionContext(sesid : Win32cr::Storage::Jet::JET_SESID) : Int32
 
     # :nodoc:
-    fun JetGotoBookmark(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32) : Int32
+    fun JetGotoBookmark(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvBookmark : Void*, cbBookmark : UInt32) : Int32
 
     # :nodoc:
-    fun JetGotoSecondaryIndexBookmark(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvSecondaryKey : Void*, cbSecondaryKey : UInt32, pvPrimaryBookmark : Void*, cbPrimaryBookmark : UInt32, grbit : UInt32) : Int32
+    fun JetGotoSecondaryIndexBookmark(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvSecondaryKey : Void*, cbSecondaryKey : UInt32, pvPrimaryBookmark : Void*, cbPrimaryBookmark : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetIntersectIndexes(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, rgindexrange : Win32cr::Storage::Jet::JET_INDEXRANGE*, cindexrange : UInt32, precordlist : Win32cr::Storage::Jet::JET_RECORDLIST*, grbit : UInt32) : Int32
+    fun JetIntersectIndexes(sesid : Win32cr::Storage::Jet::JET_SESID, rgindexrange : Win32cr::Storage::Jet::JET_INDEXRANGE*, cindexrange : UInt32, precordlist : Win32cr::Storage::Jet::JET_RECORDLIST*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetComputeStats(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
+    fun JetComputeStats(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID) : Int32
 
     # :nodoc:
-    fun JetOpenTempTable(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+    fun JetOpenTempTable(sesid : Win32cr::Storage::Jet::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
 
     # :nodoc:
-    fun JetOpenTempTable2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, lcid : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+    fun JetOpenTempTable2(sesid : Win32cr::Storage::Jet::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, lcid : UInt32, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
 
     # :nodoc:
-    fun JetOpenTempTable3(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
+    fun JetOpenTempTable3(sesid : Win32cr::Storage::Jet::JET_SESID, prgcolumndef : Win32cr::Storage::Jet::JET_COLUMNDEF*, ccolumn : UInt32, pidxunicode : Win32cr::Storage::Jet::JET_UNICODEINDEX*, grbit : UInt32, ptableid : Win32cr::Storage::StructuredStorage::JET_TABLEID*, prgcolumnid : UInt32*) : Int32
 
     # :nodoc:
-    fun JetOpenTemporaryTable(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, popentemporarytable : Win32cr::Storage::Jet::JET_OPENTEMPORARYTABLE*) : Int32
+    fun JetOpenTemporaryTable(sesid : Win32cr::Storage::Jet::JET_SESID, popentemporarytable : Win32cr::Storage::Jet::JET_OPENTEMPORARYTABLE*) : Int32
 
     # :nodoc:
-    fun JetOpenTemporaryTable2(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, popentemporarytable : Win32cr::Storage::Jet::JET_OPENTEMPORARYTABLE2*) : Int32
+    fun JetOpenTemporaryTable2(sesid : Win32cr::Storage::Jet::JET_SESID, popentemporarytable : Win32cr::Storage::Jet::JET_OPENTEMPORARYTABLE2*) : Int32
 
     # :nodoc:
     fun JetBackupA(szBackupPath : Int8*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
@@ -3979,10 +4428,10 @@ module Win32cr::Storage::Jet
     fun JetBackupW(szBackupPath : UInt16*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
 
     # :nodoc:
-    fun JetBackupInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szBackupPath : Int8*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    fun JetBackupInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szBackupPath : Int8*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
 
     # :nodoc:
-    fun JetBackupInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szBackupPath : UInt16*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    fun JetBackupInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, szBackupPath : UInt16*, grbit : UInt32, pfnStatus : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
 
     # :nodoc:
     fun JetRestoreA(szSource : Int8*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
@@ -3997,25 +4446,25 @@ module Win32cr::Storage::Jet
     fun JetRestore2W(sz : UInt16*, szDest : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
 
     # :nodoc:
-    fun JetRestoreInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, sz : Int8*, szDest : Int8*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    fun JetRestoreInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, sz : Int8*, szDest : Int8*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
 
     # :nodoc:
-    fun JetRestoreInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, sz : UInt16*, szDest : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
+    fun JetRestoreInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, sz : UInt16*, szDest : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
 
     # :nodoc:
-    fun JetSetIndexRange(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableidSrc : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
+    fun JetSetIndexRange(sesid : Win32cr::Storage::Jet::JET_SESID, tableidSrc : Win32cr::Storage::StructuredStorage::JET_TABLEID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetIndexRecordCount(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pcrec : UInt32*, crecMax : UInt32) : Int32
+    fun JetIndexRecordCount(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pcrec : UInt32*, crecMax : UInt32) : Int32
 
     # :nodoc:
-    fun JetRetrieveKey(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvKey : Void*, cbMax : UInt32, pcbActual : UInt32*, grbit : UInt32) : Int32
+    fun JetRetrieveKey(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pvKey : Void*, cbMax : UInt32, pcbActual : UInt32*, grbit : UInt32) : Int32
 
     # :nodoc:
     fun JetBeginExternalBackup(grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetBeginExternalBackupInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+    fun JetBeginExternalBackupInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
 
     # :nodoc:
     fun JetGetAttachInfoA(szzDatabases : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
@@ -4024,10 +4473,10 @@ module Win32cr::Storage::Jet
     fun JetGetAttachInfoW(wszzDatabases : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetGetAttachInfoInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzDatabases : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    fun JetGetAttachInfoInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzDatabases : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetGetAttachInfoInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzDatabases : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    fun JetGetAttachInfoInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzDatabases : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
     fun JetOpenFileA(szFileName : Int8*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
@@ -4036,22 +4485,22 @@ module Win32cr::Storage::Jet
     fun JetOpenFileW(szFileName : UInt16*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
 
     # :nodoc:
-    fun JetOpenFileInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szFileName : Int8*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
+    fun JetOpenFileInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szFileName : Int8*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
 
     # :nodoc:
-    fun JetOpenFileInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szFileName : UInt16*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
+    fun JetOpenFileInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, szFileName : UInt16*, phfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE*, pulFileSizeLow : UInt32*, pulFileSizeHigh : UInt32*) : Int32
 
     # :nodoc:
     fun JetReadFile(hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE, pv : Void*, cb : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetReadFileInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE, pv : Void*, cb : UInt32, pcbActual : UInt32*) : Int32
+    fun JetReadFileInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE, hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE, pv : Void*, cb : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
     fun JetCloseFile(hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
 
     # :nodoc:
-    fun JetCloseFileInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
+    fun JetCloseFileInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE, hfFile : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
 
     # :nodoc:
     fun JetGetLogInfoA(szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
@@ -4060,37 +4509,37 @@ module Win32cr::Storage::Jet
     fun JetGetLogInfoW(szzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetGetLogInfoInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    fun JetGetLogInfoInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetGetLogInfoInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    fun JetGetLogInfoInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetGetLogInfoInstance2A(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_A*) : Int32
+    fun JetGetLogInfoInstance2A(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_A*) : Int32
 
     # :nodoc:
-    fun JetGetLogInfoInstance2W(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_W*) : Int32
+    fun JetGetLogInfoInstance2W(instance : Win32cr::Storage::Jet::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_W*) : Int32
 
     # :nodoc:
-    fun JetGetTruncateLogInfoInstanceA(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    fun JetGetTruncateLogInfoInstanceA(instance : Win32cr::Storage::Jet::JET_INSTANCE, szzLogs : Int8*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
-    fun JetGetTruncateLogInfoInstanceW(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
+    fun JetGetTruncateLogInfoInstanceW(instance : Win32cr::Storage::Jet::JET_INSTANCE, wszzLogs : UInt16*, cbMax : UInt32, pcbActual : UInt32*) : Int32
 
     # :nodoc:
     fun JetTruncateLog : Int32
 
     # :nodoc:
-    fun JetTruncateLogInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+    fun JetTruncateLogInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
 
     # :nodoc:
     fun JetEndExternalBackup : Int32
 
     # :nodoc:
-    fun JetEndExternalBackupInstance(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE) : Int32
+    fun JetEndExternalBackupInstance(instance : Win32cr::Storage::Jet::JET_INSTANCE) : Int32
 
     # :nodoc:
-    fun JetEndExternalBackupInstance2(instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+    fun JetEndExternalBackupInstance2(instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
 
     # :nodoc:
     fun JetExternalRestoreA(szCheckpointFilePath : Int8*, szLogPath : Int8*, rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_A*, crstfilemap : Int32, szBackupLogPath : Int8*, genLow : Int32, genHigh : Int32, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
@@ -4105,10 +4554,10 @@ module Win32cr::Storage::Jet
     fun JetExternalRestore2W(szCheckpointFilePath : UInt16*, szLogPath : UInt16*, rgrstmap : Win32cr::Storage::Jet::JET_RSTMAP_W*, crstfilemap : Int32, szBackupLogPath : UInt16*, pLogInfo : Win32cr::Storage::Jet::JET_LOGINFO_W*, szTargetInstanceName : UInt16*, szTargetInstanceLogPath : UInt16*, szTargetInstanceCheckpointPath : UInt16*, pfn : Win32cr::Storage::Jet::JET_PFNSTATUS) : Int32
 
     # :nodoc:
-    fun JetRegisterCallback(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cbtyp : UInt32, pCallback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, phCallbackId : Win32cr::Storage::StructuredStorage::JET_HANDLE*) : Int32
+    fun JetRegisterCallback(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cbtyp : UInt32, pCallback : Win32cr::Storage::Jet::JET_CALLBACK, pvContext : Void*, phCallbackId : Win32cr::Storage::StructuredStorage::JET_HANDLE*) : Int32
 
     # :nodoc:
-    fun JetUnregisterCallback(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cbtyp : UInt32, hCallbackId : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
+    fun JetUnregisterCallback(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, cbtyp : UInt32, hCallbackId : Win32cr::Storage::StructuredStorage::JET_HANDLE) : Int32
 
     # :nodoc:
     fun JetGetInstanceInfoA(pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_A**) : Int32
@@ -4117,19 +4566,19 @@ module Win32cr::Storage::Jet
     fun JetGetInstanceInfoW(pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_W**) : Int32
 
     # :nodoc:
-    fun JetFreeBuffer(pbBuf : Win32cr::Foundation::PSTR) : Int32
+    fun JetFreeBuffer(pbBuf : Int8*) : Int32
 
     # :nodoc:
-    fun JetSetLS(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, ls : Win32cr::Storage::Jet::JET_LS, grbit : UInt32) : Int32
+    fun JetSetLS(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, ls : Win32cr::Storage::Jet::JET_LS, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetLS(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pls : Win32cr::Storage::Jet::JET_LS*, grbit : UInt32) : Int32
+    fun JetGetLS(sesid : Win32cr::Storage::Jet::JET_SESID, tableid : Win32cr::Storage::StructuredStorage::JET_TABLEID, pls : Win32cr::Storage::Jet::JET_LS*, grbit : UInt32) : Int32
 
     # :nodoc:
     fun JetOSSnapshotPrepare(psnapId : Win32cr::Storage::Jet::JET_OSSNAPID*, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetOSSnapshotPrepareInstance(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+    fun JetOSSnapshotPrepareInstance(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
 
     # :nodoc:
     fun JetOSSnapshotFreezeA(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_A**, grbit : UInt32) : Int32
@@ -4147,7 +4596,7 @@ module Win32cr::Storage::Jet
     fun JetOSSnapshotTruncateLog(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetOSSnapshotTruncateLogInstance(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, instance : Win32cr::Storage::StructuredStorage::JET_INSTANCE, grbit : UInt32) : Int32
+    fun JetOSSnapshotTruncateLogInstance(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, instance : Win32cr::Storage::Jet::JET_INSTANCE, grbit : UInt32) : Int32
 
     # :nodoc:
     fun JetOSSnapshotGetFreezeInfoA(snapId : Win32cr::Storage::Jet::JET_OSSNAPID, pcInstanceInfo : UInt32*, paInstanceInfo : Win32cr::Storage::Jet::JET_INSTANCE_INFO_A**, grbit : UInt32) : Int32
@@ -4165,10 +4614,11 @@ module Win32cr::Storage::Jet
     fun JetGetErrorInfoW(pvContext : Void*, pvResult : Void*, cbMax : UInt32, info_level : UInt32, grbit : UInt32) : Int32
 
     # :nodoc:
-    fun JetSetSessionParameter(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, sesparamid : UInt32, pvParam : Void*, cbParam : UInt32) : Int32
+    fun JetSetSessionParameter(sesid : Win32cr::Storage::Jet::JET_SESID, sesparamid : UInt32, pvParam : Void*, cbParam : UInt32) : Int32
 
     # :nodoc:
-    fun JetGetSessionParameter(sesid : Win32cr::Storage::StructuredStorage::JET_SESID, sesparamid : UInt32, pvParam : Void*, cbParamMax : UInt32, pcbParamActual : UInt32*) : Int32
+    fun JetGetSessionParameter(sesid : Win32cr::Storage::Jet::JET_SESID, sesparamid : UInt32, pvParam : Void*, cbParamMax : UInt32, pcbParamActual : UInt32*) : Int32
 
   end
+  {% end %}
 end

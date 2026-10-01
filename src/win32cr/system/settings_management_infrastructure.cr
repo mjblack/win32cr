@@ -1,5 +1,6 @@
-require "./com.cr"
 require "./../foundation.cr"
+require "./com.cr"
+require "./variant.cr"
 
 module Win32cr::System::SettingsManagementInfrastructure
   extend self
@@ -114,17 +115,18 @@ module Win32cr::System::SettingsManagementInfrastructure
   end
 
   @[Extern]
-  record IItemEnumeratorVtbl,
+
+  record IItemEnumeratorVtable,
     query_interface : Proc(IItemEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IItemEnumerator*, UInt32),
     release : Proc(IItemEnumerator*, UInt32),
-    current : Proc(IItemEnumerator*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    current : Proc(IItemEnumerator*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     move_next : Proc(IItemEnumerator*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     reset : Proc(IItemEnumerator*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IItemEnumerator, lpVtbl : IItemEnumeratorVtbl* do
+  record IItemEnumerator, lpVtbl : IItemEnumeratorVtable* do
     GUID = LibC::GUID.new(0x9f7d7bb7_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : IItemEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -135,7 +137,7 @@ module Win32cr::System::SettingsManagementInfrastructure
     def release(this : IItemEnumerator*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def current(this : IItemEnumerator*, item : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def current(this : IItemEnumerator*, item : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.current.call(this, item)
     end
     def move_next(this : IItemEnumerator*, item_valid : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -148,7 +150,8 @@ module Win32cr::System::SettingsManagementInfrastructure
   end
 
   @[Extern]
-  record ISettingsIdentityVtbl,
+
+  record ISettingsIdentityVtable,
     query_interface : Proc(ISettingsIdentity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISettingsIdentity*, UInt32),
     release : Proc(ISettingsIdentity*, UInt32),
@@ -159,7 +162,7 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  record ISettingsIdentity, lpVtbl : ISettingsIdentityVtbl* do
+  record ISettingsIdentity, lpVtbl : ISettingsIdentityVtable* do
     GUID = LibC::GUID.new(0x9f7d7bb6_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -186,7 +189,8 @@ module Win32cr::System::SettingsManagementInfrastructure
   end
 
   @[Extern]
-  record ITargetInfoVtbl,
+
+  record ITargetInfoVtable,
     query_interface : Proc(ITargetInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetInfo*, UInt32),
     release : Proc(ITargetInfo*, UInt32),
@@ -204,7 +208,7 @@ module Win32cr::System::SettingsManagementInfrastructure
     expand_target : Proc(ITargetInfo*, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     expand_target_path : Proc(ITargetInfo*, Win32cr::Foundation::BOOL, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_module_path : Proc(ITargetInfo*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    load_module : Proc(ITargetInfo*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HINSTANCE*, Win32cr::Foundation::HRESULT),
+    load_module : Proc(ITargetInfo*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HMODULE*, Win32cr::Foundation::HRESULT),
     set_wow64_context : Proc(ITargetInfo*, Win32cr::Foundation::PWSTR, UInt8*, Win32cr::Foundation::HRESULT),
     translate_wow64 : Proc(ITargetInfo*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     set_schema_hive_location : Proc(ITargetInfo*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
@@ -214,7 +218,7 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  record ITargetInfo, lpVtbl : ITargetInfoVtbl* do
+  record ITargetInfo, lpVtbl : ITargetInfoVtable* do
     GUID = LibC::GUID.new(0x9f7d7bb8_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ITargetInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -267,7 +271,7 @@ module Win32cr::System::SettingsManagementInfrastructure
     def set_module_path(this : ITargetInfo*, module__ : Win32cr::Foundation::PWSTR, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_module_path.call(this, module__, path)
     end
-    def load_module(this : ITargetInfo*, module__ : Win32cr::Foundation::PWSTR, module_handle : Win32cr::Foundation::HINSTANCE*) : Win32cr::Foundation::HRESULT
+    def load_module(this : ITargetInfo*, module__ : Win32cr::Foundation::PWSTR, module_handle : Win32cr::Foundation::HMODULE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.load_module.call(this, module__, module_handle)
     end
     def set_wow64_context(this : ITargetInfo*, installer_module : Win32cr::Foundation::PWSTR, wow64_context : UInt8*) : Win32cr::Foundation::HRESULT
@@ -292,7 +296,8 @@ module Win32cr::System::SettingsManagementInfrastructure
   end
 
   @[Extern]
-  record ISettingsEngineVtbl,
+
+  record ISettingsEngineVtable,
     query_interface : Proc(ISettingsEngine*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISettingsEngine*, UInt32),
     release : Proc(ISettingsEngine*, UInt32),
@@ -303,7 +308,7 @@ module Win32cr::System::SettingsManagementInfrastructure
     get_store_status : Proc(ISettingsEngine*, Void*, Win32cr::System::SettingsManagementInfrastructure::WcmUserStatus*, Win32cr::Foundation::HRESULT),
     load_store : Proc(ISettingsEngine*, UInt32, Win32cr::Foundation::HRESULT),
     unload_store : Proc(ISettingsEngine*, Void*, Win32cr::Foundation::HRESULT),
-    register_namespace : Proc(ISettingsEngine*, Void*, Void*, Win32cr::Foundation::BOOL, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    register_namespace : Proc(ISettingsEngine*, Void*, Void*, Win32cr::Foundation::BOOL, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     unregister_namespace : Proc(ISettingsEngine*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     create_target_info : Proc(ISettingsEngine*, Void**, Win32cr::Foundation::HRESULT),
     get_target_info : Proc(ISettingsEngine*, Void**, Win32cr::Foundation::HRESULT),
@@ -315,7 +320,7 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  record ISettingsEngine, lpVtbl : ISettingsEngineVtbl* do
+  record ISettingsEngine, lpVtbl : ISettingsEngineVtable* do
     GUID = LibC::GUID.new(0x9f7d7bb9_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -347,7 +352,7 @@ module Win32cr::System::SettingsManagementInfrastructure
     def unload_store(this : ISettingsEngine*, reserved : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unload_store.call(this, reserved)
     end
-    def register_namespace(this : ISettingsEngine*, settings_id : Void*, stream : Void*, push_settings : Win32cr::Foundation::BOOL, results : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def register_namespace(this : ISettingsEngine*, settings_id : Void*, stream : Void*, push_settings : Win32cr::Foundation::BOOL, results : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_namespace.call(this, settings_id, stream, push_settings, results)
     end
     def unregister_namespace(this : ISettingsEngine*, settings_id : Void*, remove_settings : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -378,13 +383,14 @@ module Win32cr::System::SettingsManagementInfrastructure
   end
 
   @[Extern]
-  record ISettingsItemVtbl,
+
+  record ISettingsItemVtable,
     query_interface : Proc(ISettingsItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISettingsItem*, UInt32),
     release : Proc(ISettingsItem*, UInt32),
     get_name : Proc(ISettingsItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_value : Proc(ISettingsItem*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_value : Proc(ISettingsItem*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_value : Proc(ISettingsItem*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_value : Proc(ISettingsItem*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_setting_type : Proc(ISettingsItem*, Win32cr::System::SettingsManagementInfrastructure::WcmSettingType*, Win32cr::Foundation::HRESULT),
     get_data_type : Proc(ISettingsItem*, Win32cr::System::SettingsManagementInfrastructure::WcmDataType*, Win32cr::Foundation::HRESULT),
     get_value_raw : Proc(ISettingsItem*, UInt8**, UInt32*, Win32cr::Foundation::HRESULT),
@@ -396,18 +402,18 @@ module Win32cr::System::SettingsManagementInfrastructure
     create_setting_by_path : Proc(ISettingsItem*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     remove_setting_by_path : Proc(ISettingsItem*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     get_list_key_information : Proc(ISettingsItem*, Win32cr::Foundation::BSTR*, Win32cr::System::SettingsManagementInfrastructure::WcmDataType*, Win32cr::Foundation::HRESULT),
-    create_list_element : Proc(ISettingsItem*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    create_list_element : Proc(ISettingsItem*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     remove_list_element : Proc(ISettingsItem*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     attributes : Proc(ISettingsItem*, Void**, Win32cr::Foundation::HRESULT),
-    get_attribute : Proc(ISettingsItem*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_attribute : Proc(ISettingsItem*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_path : Proc(ISettingsItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_restriction_facets : Proc(ISettingsItem*, Win32cr::System::SettingsManagementInfrastructure::WcmRestrictionFacets*, Win32cr::Foundation::HRESULT),
-    get_restriction : Proc(ISettingsItem*, Win32cr::System::SettingsManagementInfrastructure::WcmRestrictionFacets, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_key_value : Proc(ISettingsItem*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_restriction : Proc(ISettingsItem*, Win32cr::System::SettingsManagementInfrastructure::WcmRestrictionFacets, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_key_value : Proc(ISettingsItem*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISettingsItem, lpVtbl : ISettingsItemVtbl* do
+  record ISettingsItem, lpVtbl : ISettingsItemVtable* do
     GUID = LibC::GUID.new(0x9f7d7bbb_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -421,10 +427,10 @@ module Win32cr::System::SettingsManagementInfrastructure
     def get_name(this : ISettingsItem*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
     end
-    def get_value(this : ISettingsItem*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_value(this : ISettingsItem*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, value)
     end
-    def set_value(this : ISettingsItem*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_value(this : ISettingsItem*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_value.call(this, value)
     end
     def get_setting_type(this : ISettingsItem*, type__ : Win32cr::System::SettingsManagementInfrastructure::WcmSettingType*) : Win32cr::Foundation::HRESULT
@@ -460,7 +466,7 @@ module Win32cr::System::SettingsManagementInfrastructure
     def get_list_key_information(this : ISettingsItem*, key_name : Win32cr::Foundation::BSTR*, data_type : Win32cr::System::SettingsManagementInfrastructure::WcmDataType*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_list_key_information.call(this, key_name, data_type)
     end
-    def create_list_element(this : ISettingsItem*, key_data : Win32cr::System::Com::VARIANT*, child : Void**) : Win32cr::Foundation::HRESULT
+    def create_list_element(this : ISettingsItem*, key_data : Win32cr::System::Variant::VARIANT*, child : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_list_element.call(this, key_data, child)
     end
     def remove_list_element(this : ISettingsItem*, element_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -469,7 +475,7 @@ module Win32cr::System::SettingsManagementInfrastructure
     def attributes(this : ISettingsItem*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.attributes.call(this, attributes)
     end
-    def get_attribute(this : ISettingsItem*, name : Win32cr::Foundation::PWSTR, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_attribute(this : ISettingsItem*, name : Win32cr::Foundation::PWSTR, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attribute.call(this, name, value)
     end
     def get_path(this : ISettingsItem*, path : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -478,17 +484,18 @@ module Win32cr::System::SettingsManagementInfrastructure
     def get_restriction_facets(this : ISettingsItem*, restriction_facets : Win32cr::System::SettingsManagementInfrastructure::WcmRestrictionFacets*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_restriction_facets.call(this, restriction_facets)
     end
-    def get_restriction(this : ISettingsItem*, restriction_facet : Win32cr::System::SettingsManagementInfrastructure::WcmRestrictionFacets, facet_data : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_restriction(this : ISettingsItem*, restriction_facet : Win32cr::System::SettingsManagementInfrastructure::WcmRestrictionFacets, facet_data : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_restriction.call(this, restriction_facet, facet_data)
     end
-    def get_key_value(this : ISettingsItem*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_key_value(this : ISettingsItem*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_key_value.call(this, value)
     end
 
   end
 
   @[Extern]
-  record ISettingsNamespaceVtbl,
+
+  record ISettingsNamespaceVtable,
     query_interface : Proc(ISettingsNamespace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISettingsNamespace*, UInt32),
     release : Proc(ISettingsNamespace*, UInt32),
@@ -498,11 +505,11 @@ module Win32cr::System::SettingsManagementInfrastructure
     get_setting_by_path : Proc(ISettingsNamespace*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     create_setting_by_path : Proc(ISettingsNamespace*, Win32cr::Foundation::PWSTR, Void**, Win32cr::Foundation::HRESULT),
     remove_setting_by_path : Proc(ISettingsNamespace*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    get_attribute : Proc(ISettingsNamespace*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_attribute : Proc(ISettingsNamespace*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISettingsNamespace, lpVtbl : ISettingsNamespaceVtbl* do
+  record ISettingsNamespace, lpVtbl : ISettingsNamespaceVtable* do
     GUID = LibC::GUID.new(0x9f7d7bba_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsNamespace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -531,14 +538,15 @@ module Win32cr::System::SettingsManagementInfrastructure
     def remove_setting_by_path(this : ISettingsNamespace*, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove_setting_by_path.call(this, path)
     end
-    def get_attribute(this : ISettingsNamespace*, name : Win32cr::Foundation::PWSTR, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_attribute(this : ISettingsNamespace*, name : Win32cr::Foundation::PWSTR, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attribute.call(this, name, value)
     end
 
   end
 
   @[Extern]
-  record ISettingsResultVtbl,
+
+  record ISettingsResultVtable,
     query_interface : Proc(ISettingsResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISettingsResult*, UInt32),
     release : Proc(ISettingsResult*, UInt32),
@@ -551,7 +559,7 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  record ISettingsResult, lpVtbl : ISettingsResultVtbl* do
+  record ISettingsResult, lpVtbl : ISettingsResultVtable* do
     GUID = LibC::GUID.new(0x9f7d7bbc_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -584,7 +592,8 @@ module Win32cr::System::SettingsManagementInfrastructure
   end
 
   @[Extern]
-  record ISettingsContextVtbl,
+
+  record ISettingsContextVtable,
     query_interface : Proc(ISettingsContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISettingsContext*, UInt32),
     release : Proc(ISettingsContext*, UInt32),
@@ -598,7 +607,7 @@ module Win32cr::System::SettingsManagementInfrastructure
 
 
   @[Extern]
-  record ISettingsContext, lpVtbl : ISettingsContextVtbl* do
+  record ISettingsContext, lpVtbl : ISettingsContextVtable* do
     GUID = LibC::GUID.new(0x9f7d7bbd_u32, 0x20b3_u16, 0x11da_u16, StaticArray[0x81_u8, 0xa5_u8, 0x0_u8, 0x30_u8, 0xf1_u8, 0x64_u8, 0x2e_u8, 0x3c_u8])
     def query_interface(this : ISettingsContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

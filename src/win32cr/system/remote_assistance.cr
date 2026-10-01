@@ -30,7 +30,8 @@ module Win32cr::System::RemoteAssistance
   end
 
   @[Extern]
-  record IRendezvousSessionVtbl,
+
+  record IRendezvousSessionVtable,
     query_interface : Proc(IRendezvousSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRendezvousSession*, UInt32),
     release : Proc(IRendezvousSession*, UInt32),
@@ -42,7 +43,7 @@ module Win32cr::System::RemoteAssistance
 
 
   @[Extern]
-  record IRendezvousSession, lpVtbl : IRendezvousSessionVtbl* do
+  record IRendezvousSession, lpVtbl : IRendezvousSessionVtable* do
     GUID = LibC::GUID.new(0x9ba4b1dd_u32, 0x8b0c_u16, 0x48b7_u16, StaticArray[0x9e_u8, 0x7c_u8, 0x2f_u8, 0x25_u8, 0x85_u8, 0x7c_u8, 0x8d_u8, 0xf5_u8])
     def query_interface(this : IRendezvousSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -72,18 +73,19 @@ module Win32cr::System::RemoteAssistance
   end
 
   @[Extern]
-  record DRendezvousSessionEventsVtbl,
+
+  record DRendezvousSessionEventsVtable,
     query_interface : Proc(DRendezvousSessionEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DRendezvousSessionEvents*, UInt32),
     release : Proc(DRendezvousSessionEvents*, UInt32),
     get_type_info_count : Proc(DRendezvousSessionEvents*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(DRendezvousSessionEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(DRendezvousSessionEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(DRendezvousSessionEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(DRendezvousSessionEvents*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record DRendezvousSessionEvents, lpVtbl : DRendezvousSessionEventsVtbl* do
+  record DRendezvousSessionEvents, lpVtbl : DRendezvousSessionEventsVtable* do
     GUID = LibC::GUID.new(0x3fa19cf8_u32, 0x64c4_u16, 0x4f53_u16, StaticArray[0xae_u8, 0x60_u8, 0x63_u8, 0x5b_u8, 0x38_u8, 0x6_u8, 0xec_u8, 0xa6_u8])
     def query_interface(this : DRendezvousSessionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -103,14 +105,15 @@ module Win32cr::System::RemoteAssistance
     def get_i_ds_of_names(this : DRendezvousSessionEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : DRendezvousSessionEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : DRendezvousSessionEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IRendezvousApplicationVtbl,
+
+  record IRendezvousApplicationVtable,
     query_interface : Proc(IRendezvousApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRendezvousApplication*, UInt32),
     release : Proc(IRendezvousApplication*, UInt32),
@@ -118,7 +121,7 @@ module Win32cr::System::RemoteAssistance
 
 
   @[Extern]
-  record IRendezvousApplication, lpVtbl : IRendezvousApplicationVtbl* do
+  record IRendezvousApplication, lpVtbl : IRendezvousApplicationVtable* do
     GUID = LibC::GUID.new(0x4f4d070b_u32, 0xa275_u16, 0x49fb_u16, StaticArray[0xb1_u8, 0xd_u8, 0x8e_u8, 0xc2_u8, 0x63_u8, 0x87_u8, 0xb5_u8, 0xd_u8])
     def query_interface(this : IRendezvousApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

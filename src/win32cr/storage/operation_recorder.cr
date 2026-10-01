@@ -31,14 +31,19 @@ module Win32cr::Storage::OperationRecorder
   end
 
   def operationStart(operation_start_params : Win32cr::Storage::OperationRecorder::OPERATION_START_PARAMETERS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OperationStart(operation_start_params)
+    {% end %}
   end
 
   def operationEnd(operation_end_params : Win32cr::Storage::OperationRecorder::OPERATION_END_PARAMETERS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OperationEnd(operation_end_params)
+    {% end %}
   end
 
   @[Link("advapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun OperationStart(operation_start_params : Win32cr::Storage::OperationRecorder::OPERATION_START_PARAMETERS*) : Win32cr::Foundation::BOOL
@@ -47,4 +52,5 @@ module Win32cr::Storage::OperationRecorder
     fun OperationEnd(operation_end_params : Win32cr::Storage::OperationRecorder::OPERATION_END_PARAMETERS*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

@@ -1,5 +1,6 @@
-require "./../ui/controls.cr"
 require "./../foundation.cr"
+require "./../ui/controls.cr"
+require "./../system/variant.cr"
 require "./../system/com.cr"
 require "./../system/search.cr"
 
@@ -7,39 +8,6 @@ module Win32cr::Data::HtmlHelp
   extend self
   alias PFNCOLHEAPFREE = Proc(Void*, Int32)
 
-  HH_DISPLAY_TOPIC = 0_u32
-  HH_HELP_FINDER = 0_u32
-  HH_DISPLAY_TOC = 1_u32
-  HH_DISPLAY_INDEX = 2_u32
-  HH_DISPLAY_SEARCH = 3_u32
-  HH_SET_WIN_TYPE = 4_u32
-  HH_GET_WIN_TYPE = 5_u32
-  HH_GET_WIN_HANDLE = 6_u32
-  HH_ENUM_INFO_TYPE = 7_u32
-  HH_SET_INFO_TYPE = 8_u32
-  HH_SYNC = 9_u32
-  HH_RESERVED1 = 10_u32
-  HH_RESERVED2 = 11_u32
-  HH_RESERVED3 = 12_u32
-  HH_KEYWORD_LOOKUP = 13_u32
-  HH_DISPLAY_TEXT_POPUP = 14_u32
-  HH_HELP_CONTEXT = 15_u32
-  HH_TP_HELP_CONTEXTMENU = 16_u32
-  HH_TP_HELP_WM_HELP = 17_u32
-  HH_CLOSE_ALL = 18_u32
-  HH_ALINK_LOOKUP = 19_u32
-  HH_GET_LAST_ERROR = 20_u32
-  HH_ENUM_CATEGORY = 21_u32
-  HH_ENUM_CATEGORY_IT = 22_u32
-  HH_RESET_IT_FILTER = 23_u32
-  HH_SET_INCLUSIVE_FILTER = 24_u32
-  HH_SET_EXCLUSIVE_FILTER = 25_u32
-  HH_INITIALIZE = 28_u32
-  HH_UNINITIALIZE = 29_u32
-  HH_SET_QUERYSERVICE = 30_u32
-  HH_PRETRANSLATEMESSAGE = 253_u32
-  HH_SET_GLOBAL_PROPERTY = 252_u32
-  HH_SAFE_DISPLAY_TOPIC = 32_u32
   HHWIN_PROP_TAB_AUTOHIDESHOW = 1_u32
   HHWIN_PROP_ONTOP = 2_u32
   HHWIN_PROP_NOTITLEBAR = 4_u32
@@ -128,17 +96,20 @@ module Win32cr::Data::HtmlHelp
   IDTB_ZOOM = 222_u32
   IDTB_TOC_NEXT = 223_u32
   IDTB_TOC_PREV = 224_u32
-  HH_MAX_TABS = 19_u32
-  HH_FTS_DEFAULT_PROXIMITY = -1_i32
-  CLSID_IITPropList = "4662daae-d393-11d0-9a56-00c04fb68bf7"
+  HHN_FIRST = 4294966436_u32
+  HHN_LAST = 4294966417_u32
+  HHN_NAVCOMPLETE = 4294966436_u32
+  HHN_TRACK = 4294966435_u32
+  HHN_WINDOW_CREATE = 4294966434_u32
+  CLSID_IITPropList = LibC::GUID.new(0x4662daae_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   PROP_ADD = 0_u32
   PROP_DELETE = 1_u32
   PROP_UPDATE = 2_u32
   TYPE_VALUE = 0_u32
   TYPE_POINTER = 1_u32
   TYPE_STRING = 2_u32
-  CLSID_IITDatabase = "66673452-8c23-11d0-a84e-00aa006c7d01"
-  CLSID_IITDatabaseLocal = "4662daa9-d393-11d0-9a56-00c04fb68bf7"
+  CLSID_IITDatabase = LibC::GUID.new(0x66673452_u32, 0x8c23_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x4e_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
+  CLSID_IITDatabaseLocal = LibC::GUID.new(0x4662daa9_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   STDPROP_UID = 1_u32
   STDPROP_TITLE = 2_u32
   STDPROP_USERDATA = 3_u32
@@ -158,14 +129,14 @@ module Win32cr::Data::HtmlHelp
   SZ_WWDEST_GLOBAL = "GLOBAL"
   SZ_WWDEST_KEY = "KEY"
   SZ_WWDEST_OCC = "OCC"
-  CLSID_IITCmdInt = "4662daa2-d393-11d0-9a56-00c04fb68bf7"
-  CLSID_IITSvMgr = "4662daa3-d393-11d0-9a56-00c04fb68bf7"
-  CLSID_IITWordWheelUpdate = "4662daa5-d393-11d0-9a56-00c04fb68bf7"
-  CLSID_IITGroupUpdate = "4662daa4-d393-11d0-9a56-00c04fb68bf7"
-  CLSID_IITIndexBuild = "8fa0d5aa-dedf-11d0-9a61-00c04fb68bf7"
-  CLSID_IITWWFilterBuild = "8fa0d5ab-dedf-11d0-9a61-00c04fb68bf7"
-  CLSID_IITWordWheel = "d73725c2-8c12-11d0-a84e-00aa006c7d01"
-  CLSID_IITWordWheelLocal = "4662daa8-d393-11d0-9a56-00c04fb68bf7"
+  CLSID_IITCmdInt = LibC::GUID.new(0x4662daa2_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
+  CLSID_IITSvMgr = LibC::GUID.new(0x4662daa3_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
+  CLSID_IITWordWheelUpdate = LibC::GUID.new(0x4662daa5_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
+  CLSID_IITGroupUpdate = LibC::GUID.new(0x4662daa4_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
+  CLSID_IITIndexBuild = LibC::GUID.new(0x8fa0d5aa_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
+  CLSID_IITWWFilterBuild = LibC::GUID.new(0x8fa0d5ab_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
+  CLSID_IITWordWheel = LibC::GUID.new(0xd73725c2_u32, 0x8c12_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x4e_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
+  CLSID_IITWordWheelLocal = LibC::GUID.new(0x4662daa8_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   ITWW_OPEN_NOCONNECT = 1_u32
   ITWW_CBKEY_MAX = 1024_u32
   IITWBC_BREAK_ACCEPT_WILDCARDS = 1_u32
@@ -232,10 +203,10 @@ module Win32cr::Data::HtmlHelp
   E_RESULTSETEMPTY = -2147479419_i32
   E_TOOMANYCOLUMNS = -2147479418_i32
   E_NOKEYPROP = -2147479417_i32
-  CLSID_IITResultSet = "4662daa7-d393-11d0-9a56-00c04fb68bf7"
+  CLSID_IITResultSet = LibC::GUID.new(0x4662daa7_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   MAX_COLUMNS = 256_u32
-  CLSID_ITStdBreaker = "4662daaf-d393-11d0-9a56-00c04fb68bf7"
-  CLSID_ITEngStemmer = "8fa0d5a8-dedf-11d0-9a61-00c04fb68bf7"
+  CLSID_ITStdBreaker = LibC::GUID.new(0x4662daaf_u32, 0xd393_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x56_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
+  CLSID_ITEngStemmer = LibC::GUID.new(0x8fa0d5a8_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
   HHWIN_NAVTYPE_TOC = 0_i32
   HHWIN_NAVTYPE_INDEX = 1_i32
   HHWIN_NAVTYPE_SEARCH = 2_i32
@@ -282,9 +253,43 @@ module Win32cr::Data::HtmlHelp
   HHACT_NOTES = 22_i32
   HHACT_LAST_ENUM = 23_i32
 
-  @[Flags]
-  enum WORD_WHEEL_OPEN_FLAGS : UInt32
-    ITWW_OPEN_CONNECT = 0_u32
+  enum HTML_HELP_COMMAND
+    HH_DISPLAY_TOPIC = 0_i32
+    HH_HELP_FINDER = 0_i32
+    HH_DISPLAY_TOC = 1_i32
+    HH_DISPLAY_INDEX = 2_i32
+    HH_DISPLAY_SEARCH = 3_i32
+    HH_SET_WIN_TYPE = 4_i32
+    HH_GET_WIN_TYPE = 5_i32
+    HH_GET_WIN_HANDLE = 6_i32
+    HH_ENUM_INFO_TYPE = 7_i32
+    HH_SET_INFO_TYPE = 8_i32
+    HH_SYNC = 9_i32
+    HH_RESERVED1 = 10_i32
+    HH_RESERVED2 = 11_i32
+    HH_RESERVED3 = 12_i32
+    HH_KEYWORD_LOOKUP = 13_i32
+    HH_DISPLAY_TEXT_POPUP = 14_i32
+    HH_HELP_CONTEXT = 15_i32
+    HH_TP_HELP_CONTEXTMENU = 16_i32
+    HH_TP_HELP_WM_HELP = 17_i32
+    HH_CLOSE_ALL = 18_i32
+    HH_ALINK_LOOKUP = 19_i32
+    HH_GET_LAST_ERROR = 20_i32
+    HH_ENUM_CATEGORY = 21_i32
+    HH_ENUM_CATEGORY_IT = 22_i32
+    HH_RESET_IT_FILTER = 23_i32
+    HH_SET_INCLUSIVE_FILTER = 24_i32
+    HH_SET_EXCLUSIVE_FILTER = 25_i32
+    HH_INITIALIZE = 28_i32
+    HH_UNINITIALIZE = 29_i32
+    HH_SET_QUERYSERVICE = 30_i32
+    HH_PRETRANSLATEMESSAGE = 253_i32
+    HH_SET_GLOBAL_PROPERTY = 252_i32
+    HH_SAFE_DISPLAY_TOPIC = 32_i32
+    HH_MAX_TABS = 19_i32
+    HH_MAX_TABS_CUSTOM = 9_i32
+    HH_FTS_DEFAULT_PROXIMITY = -1_i32
   end
   enum HH_GPROPID
     HH_GPROPID_SINGLETHREAD = 1_i32
@@ -314,11 +319,11 @@ module Win32cr::Data::HtmlHelp
     property idString : UInt32
     property pszText : Int8*
     property pt : Win32cr::Foundation::POINT
-    property clrForeground : UInt32
-    property clrBackground : UInt32
+    property clrForeground : Win32cr::Foundation::COLORREF
+    property clrBackground : Win32cr::Foundation::COLORREF
     property rcMargins : Win32cr::Foundation::RECT
     property pszFont : Int8*
-    def initialize(@cbStruct : Int32, @hinst : Win32cr::Foundation::HINSTANCE, @idString : UInt32, @pszText : Int8*, @pt : Win32cr::Foundation::POINT, @clrForeground : UInt32, @clrBackground : UInt32, @rcMargins : Win32cr::Foundation::RECT, @pszFont : Int8*)
+    def initialize(@cbStruct : Int32, @hinst : Win32cr::Foundation::HINSTANCE, @idString : UInt32, @pszText : Int8*, @pt : Win32cr::Foundation::POINT, @clrForeground : Win32cr::Foundation::COLORREF, @clrBackground : Win32cr::Foundation::COLORREF, @rcMargins : Win32cr::Foundation::RECT, @pszFont : Int8*)
     end
   end
 
@@ -434,8 +439,8 @@ module Win32cr::Data::HtmlHelp
   @[Extern]
   struct HH_GLOBAL_PROPERTY
     property id : Win32cr::Data::HtmlHelp::HH_GPROPID
-    property var : Win32cr::System::Com::VARIANT
-    def initialize(@id : Win32cr::Data::HtmlHelp::HH_GPROPID, @var : Win32cr::System::Com::VARIANT)
+    property var : Win32cr::System::Variant::VARIANT
+    def initialize(@id : Win32cr::Data::HtmlHelp::HH_GPROPID, @var : Win32cr::System::Variant::VARIANT)
     end
   end
 
@@ -462,24 +467,6 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  struct IITGroup
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IITQuery
-    def initialize()
-    end
-  end
-
-  @[Extern]
-  struct IITStopWordList
-    def initialize()
-    end
-  end
-
-  @[Extern]
   struct ROWSTATUS
     property lRowFirst : Int32
     property cRows : Int32
@@ -498,7 +485,8 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IITPropListVtbl,
+
+  record IITPropListVtable,
     query_interface : Proc(IITPropList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IITPropList*, UInt32),
     release : Proc(IITPropList*, UInt32),
@@ -506,7 +494,7 @@ module Win32cr::Data::HtmlHelp
     is_dirty : Proc(IITPropList*, Win32cr::Foundation::HRESULT),
     load : Proc(IITPropList*, Void*, Win32cr::Foundation::HRESULT),
     save : Proc(IITPropList*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_size_max : Proc(IITPropList*, Win32cr::Foundation::ULARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    get_size_max : Proc(IITPropList*, UInt64*, Win32cr::Foundation::HRESULT),
     init_new : Proc(IITPropList*, Win32cr::Foundation::HRESULT),
     set_1 : Proc(IITPropList*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     set_2 : Proc(IITPropList*, UInt32, Void*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
@@ -529,7 +517,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IITPropList, lpVtbl : IITPropListVtbl* do
+  record IITPropList, lpVtbl : IITPropListVtable* do
     GUID = LibC::GUID.new(0x1f403bb1_u32, 0x9997_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x50_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
     def query_interface(this : IITPropList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -552,7 +540,7 @@ module Win32cr::Data::HtmlHelp
     def save(this : IITPropList*, pStm : Void*, fClearDirty : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, pStm, fClearDirty)
     end
-    def get_size_max(this : IITPropList*, pCbSize : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    def get_size_max(this : IITPropList*, pCbSize : UInt64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_size_max.call(this, pCbSize)
     end
     def init_new(this : IITPropList*) : Win32cr::Foundation::HRESULT
@@ -616,7 +604,8 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IITDatabaseVtbl,
+
+  record IITDatabaseVtable,
     query_interface : Proc(IITDatabase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IITDatabase*, UInt32),
     release : Proc(IITDatabase*, UInt32),
@@ -628,7 +617,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IITDatabase, lpVtbl : IITDatabaseVtbl* do
+  record IITDatabase, lpVtbl : IITDatabaseVtable* do
     GUID = LibC::GUID.new(0x8fa0d5a2_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IITDatabase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -658,81 +647,8 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IITWordWheelVtbl,
-    query_interface : Proc(IITWordWheel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IITWordWheel*, UInt32),
-    release : Proc(IITWordWheel*, UInt32),
-    open : Proc(IITWordWheel*, Void*, Win32cr::Foundation::PWSTR, Win32cr::Data::HtmlHelp::WORD_WHEEL_OPEN_FLAGS, Win32cr::Foundation::HRESULT),
-    close : Proc(IITWordWheel*, Win32cr::Foundation::HRESULT),
-    get_locale_info : Proc(IITWordWheel*, UInt32*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_sorter_instance : Proc(IITWordWheel*, UInt32*, Win32cr::Foundation::HRESULT),
-    count : Proc(IITWordWheel*, Int32*, Win32cr::Foundation::HRESULT),
-    lookup_1 : Proc(IITWordWheel*, Void*, Win32cr::Foundation::BOOL, Int32*, Win32cr::Foundation::HRESULT),
-    lookup_2 : Proc(IITWordWheel*, Int32, Void*, Int32, Win32cr::Foundation::HRESULT),
-    lookup_3 : Proc(IITWordWheel*, Int32, Void*, UInt32, Win32cr::Foundation::HRESULT),
-    set_group : Proc(IITWordWheel*, Win32cr::Data::HtmlHelp::IITGroup*, Win32cr::Foundation::HRESULT),
-    get_group : Proc(IITWordWheel*, Win32cr::Data::HtmlHelp::IITGroup**, Win32cr::Foundation::HRESULT),
-    get_data_count : Proc(IITWordWheel*, Int32, UInt32*, Win32cr::Foundation::HRESULT),
-    get_data : Proc(IITWordWheel*, Int32, Void*, Win32cr::Foundation::HRESULT),
-    get_data_columns : Proc(IITWordWheel*, Void*, Win32cr::Foundation::HRESULT)
 
-
-  @[Extern]
-  record IITWordWheel, lpVtbl : IITWordWheelVtbl* do
-    GUID = LibC::GUID.new(0x8fa0d5a4_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
-    def query_interface(this : IITWordWheel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : IITWordWheel*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : IITWordWheel*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def open(this : IITWordWheel*, lpITDB : Void*, lpszMoniker : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Data::HtmlHelp::WORD_WHEEL_OPEN_FLAGS) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.open.call(this, lpITDB, lpszMoniker, dwFlags)
-    end
-    def close(this : IITWordWheel*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.close.call(this)
-    end
-    def get_locale_info(this : IITWordWheel*, pdwCodePageID : UInt32*, plcid : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_locale_info.call(this, pdwCodePageID, plcid)
-    end
-    def get_sorter_instance(this : IITWordWheel*, pdwObjInstance : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_sorter_instance.call(this, pdwObjInstance)
-    end
-    def count(this : IITWordWheel*, pcEntries : Int32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.count.call(this, pcEntries)
-    end
-    def lookup_1(this : IITWordWheel*, lpcvPrefix : Void*, fExactMatch : Win32cr::Foundation::BOOL, plEntry : Int32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.lookup_1.call(this, lpcvPrefix, fExactMatch, plEntry)
-    end
-    def lookup_2(this : IITWordWheel*, lEntry : Int32, lpITResult : Void*, cEntries : Int32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.lookup_2.call(this, lEntry, lpITResult, cEntries)
-    end
-    def lookup_3(this : IITWordWheel*, lEntry : Int32, lpvKeyBuf : Void*, cbKeyBuf : UInt32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.lookup_3.call(this, lEntry, lpvKeyBuf, cbKeyBuf)
-    end
-    def set_group(this : IITWordWheel*, piitGroup : Win32cr::Data::HtmlHelp::IITGroup*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.set_group.call(this, piitGroup)
-    end
-    def get_group(this : IITWordWheel*, ppiitGroup : Win32cr::Data::HtmlHelp::IITGroup**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_group.call(this, ppiitGroup)
-    end
-    def get_data_count(this : IITWordWheel*, lEntry : Int32, pdwCount : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_data_count.call(this, lEntry, pdwCount)
-    end
-    def get_data(this : IITWordWheel*, lEntry : Int32, lpITResult : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_data.call(this, lEntry, lpITResult)
-    end
-    def get_data_columns(this : IITWordWheel*, pRS : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_data_columns.call(this, pRS)
-    end
-
-  end
-
-  @[Extern]
-  record IStemSinkVtbl,
+  record IStemSinkVtable,
     query_interface : Proc(IStemSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStemSink*, UInt32),
     release : Proc(IStemSink*, UInt32),
@@ -741,7 +657,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IStemSink, lpVtbl : IStemSinkVtbl* do
+  record IStemSink, lpVtbl : IStemSinkVtable* do
     GUID = LibC::GUID.new(0xfe77c330_u32, 0x7f42_u16, 0x11ce_u16, StaticArray[0xbe_u8, 0x57_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x51_u8, 0xfe_u8, 0x20_u8])
     def query_interface(this : IStemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -762,7 +678,8 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IStemmerConfigVtbl,
+
+  record IStemmerConfigVtable,
     query_interface : Proc(IStemmerConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStemmerConfig*, UInt32),
     release : Proc(IStemmerConfig*, UInt32),
@@ -774,7 +691,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IStemmerConfig, lpVtbl : IStemmerConfigVtbl* do
+  record IStemmerConfig, lpVtbl : IStemmerConfigVtable* do
     GUID = LibC::GUID.new(0x8fa0d5a7_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IStemmerConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -804,7 +721,8 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IWordBreakerConfigVtbl,
+
+  record IWordBreakerConfigVtable,
     query_interface : Proc(IWordBreakerConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWordBreakerConfig*, UInt32),
     release : Proc(IWordBreakerConfig*, UInt32),
@@ -820,7 +738,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IWordBreakerConfig, lpVtbl : IWordBreakerConfigVtbl* do
+  record IWordBreakerConfig, lpVtbl : IWordBreakerConfigVtable* do
     GUID = LibC::GUID.new(0x8fa0d5a6_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IWordBreakerConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -862,7 +780,8 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IITResultSetVtbl,
+
+  record IITResultSetVtable,
     query_interface : Proc(IITResultSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IITResultSet*, UInt32),
     release : Proc(IITResultSet*, UInt32),
@@ -899,7 +818,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IITResultSet, lpVtbl : IITResultSetVtbl* do
+  record IITResultSet, lpVtbl : IITResultSetVtable* do
     GUID = LibC::GUID.new(0x3bb91d41_u32, 0x998b_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x50_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
     def query_interface(this : IITResultSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1003,4 +922,27 @@ module Win32cr::Data::HtmlHelp
 
   end
 
+  def htmlHelpA(hwndCaller : Win32cr::Foundation::HWND, pszFile : Win32cr::Foundation::PSTR, uCommand : Win32cr::Data::HtmlHelp::HTML_HELP_COMMAND, dwData : LibC::UIntPtrT) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
+    C.HtmlHelpA(hwndCaller, pszFile, uCommand, dwData)
+    {% end %}
+  end
+
+  def htmlHelpW(hwndCaller : Win32cr::Foundation::HWND, pszFile : Win32cr::Foundation::PWSTR, uCommand : Win32cr::Data::HtmlHelp::HTML_HELP_COMMAND, dwData : LibC::UIntPtrT) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
+    C.HtmlHelpW(hwndCaller, pszFile, uCommand, dwData)
+    {% end %}
+  end
+
+  @[Link("hhctrl.ocx")]
+  {% if !flag?(:docs) %}
+  lib C
+    # :nodoc:
+    fun HtmlHelpA(hwndCaller : Win32cr::Foundation::HWND, pszFile : Win32cr::Foundation::PSTR, uCommand : Win32cr::Data::HtmlHelp::HTML_HELP_COMMAND, dwData : LibC::UIntPtrT) : Win32cr::Foundation::HWND
+
+    # :nodoc:
+    fun HtmlHelpW(hwndCaller : Win32cr::Foundation::HWND, pszFile : Win32cr::Foundation::PWSTR, uCommand : Win32cr::Data::HtmlHelp::HTML_HELP_COMMAND, dwData : LibC::UIntPtrT) : Win32cr::Foundation::HWND
+
+  end
+  {% end %}
 end

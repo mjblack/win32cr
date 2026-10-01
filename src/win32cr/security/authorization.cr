@@ -1,23 +1,25 @@
-require "./../security.cr"
 require "./../foundation.cr"
+require "./../security.cr"
 require "./../system/com.cr"
+require "./../system/variant.cr"
 require "./../system/threading.cr"
 
 module Win32cr::Security::Authorization
   extend self
-  alias AUTHZ_ACCESS_CHECK_RESULTS_HANDLE = LibC::IntPtrT
-  alias AUTHZ_CLIENT_CONTEXT_HANDLE = LibC::IntPtrT
-  alias AUTHZ_RESOURCE_MANAGER_HANDLE = LibC::IntPtrT
-  alias AUTHZ_AUDIT_EVENT_HANDLE = LibC::IntPtrT
-  alias AUTHZ_AUDIT_EVENT_TYPE_HANDLE = LibC::IntPtrT
-  alias AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE = LibC::IntPtrT
+  alias AUTHZ_ACCESS_CHECK_RESULTS_HANDLE = Void*
+  alias AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE = Void*
+  alias AUTHZ_CLIENT_CONTEXT_HANDLE = Void*
+  alias AUTHZ_RESOURCE_MANAGER_HANDLE = Void*
+  alias AUTHZ_AUDIT_EVENT_HANDLE = Void*
+  alias AUTHZ_AUDIT_EVENT_TYPE_HANDLE = Void*
+  alias AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE = Void*
   alias PFN_AUTHZ_DYNAMIC_ACCESS_CHECK = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Win32cr::Security::ACE_HEADER*, Void*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::BOOL)
 
   alias PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Void*, Win32cr::Security::SID_AND_ATTRIBUTES**, UInt32*, Win32cr::Security::SID_AND_ATTRIBUTES**, UInt32*, Win32cr::Foundation::BOOL)
 
   alias PFN_AUTHZ_FREE_DYNAMIC_GROUPS = Proc(Win32cr::Security::SID_AND_ATTRIBUTES*, Void)
 
-  alias PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Win32cr::Foundation::PSID, Void*, Win32cr::Foundation::BOOL*, Void**, Win32cr::Foundation::BOOL)
+  alias PFN_AUTHZ_GET_CENTRAL_ACCESS_POLICY = Proc(Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, Win32cr::Security::PSID, Void*, Win32cr::Foundation::BOOL*, Void**, Win32cr::Foundation::BOOL)
 
   alias PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY = Proc(Void*, Void)
 
@@ -155,6 +157,8 @@ module Win32cr::Security::Authorization
   SDDL_PROTECTED_USERS = "AP"
   SDDL_KEY_ADMINS = "KA"
   SDDL_ENTERPRISE_KEY_ADMINS = "EK"
+  SDDL_USER_MODE_HARDWARE_OPERATORS = "HO"
+  SDDL_OPENSSH_USERS = "SH"
   SDDL_ML_LOW = "LW"
   SDDL_ML_MEDIUM = "ME"
   SDDL_ML_MEDIUM_PLUS = "MP"
@@ -776,7 +780,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  struct FN_OBJECT_MGR_FUNCTIONS
+  struct FN_OBJECT_MGR_FUNCTS
     property placeholder : UInt32
     def initialize(@placeholder : UInt32)
     end
@@ -900,20 +904,13 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  struct AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__
-    property unused : Int32
-    def initialize(@unused : Int32)
-    end
-  end
-
-  @[Extern]
   struct AUTHZ_ACCESS_REQUEST
     property desired_access : UInt32
-    property principal_self_sid : Win32cr::Foundation::PSID
+    property principal_self_sid : Win32cr::Security::PSID
     property object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*
     property object_type_list_length : UInt32
     property optional_arguments : Void*
-    def initialize(@desired_access : UInt32, @principal_self_sid : Win32cr::Foundation::PSID, @object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, @object_type_list_length : UInt32, @optional_arguments : Void*)
+    def initialize(@desired_access : UInt32, @principal_self_sid : Win32cr::Security::PSID, @object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, @object_type_list_length : UInt32, @optional_arguments : Void*)
     end
   end
 
@@ -1031,7 +1028,7 @@ module Win32cr::Security::Authorization
     property szExecutableImagePath : Win32cr::Foundation::PWSTR
     property anonymous : Anonymous_e__Union_
     property dwObjectTypeNameCount : UInt32
-    property object_type_names : Win32cr::Security::Authorization::AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET*
+    property object_type_names : Win32cr::Security::Authorization::AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET[1]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
@@ -1042,19 +1039,20 @@ module Win32cr::Security::Authorization
     end
     end
 
-    def initialize(@dwFlags : UInt32, @szEventSourceName : Win32cr::Foundation::PWSTR, @szEventMessageFile : Win32cr::Foundation::PWSTR, @szEventSourceXmlSchemaFile : Win32cr::Foundation::PWSTR, @szEventAccessStringsFile : Win32cr::Foundation::PWSTR, @szExecutableImagePath : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_, @dwObjectTypeNameCount : UInt32, @object_type_names : Win32cr::Security::Authorization::AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET*)
+    def initialize(@dwFlags : UInt32, @szEventSourceName : Win32cr::Foundation::PWSTR, @szEventMessageFile : Win32cr::Foundation::PWSTR, @szEventSourceXmlSchemaFile : Win32cr::Foundation::PWSTR, @szEventAccessStringsFile : Win32cr::Foundation::PWSTR, @szExecutableImagePath : Win32cr::Foundation::PWSTR, @anonymous : Anonymous_e__Union_, @dwObjectTypeNameCount : UInt32, @object_type_names : Win32cr::Security::Authorization::AUTHZ_REGISTRATION_OBJECT_TYPE_NAME_OFFSET[1])
     end
   end
 
   @[Extern]
-  record IAzAuthorizationStoreVtbl,
+
+  record IAzAuthorizationStoreVtable,
     query_interface : Proc(IAzAuthorizationStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzAuthorizationStore*, UInt32),
     release : Proc(IAzAuthorizationStore*, UInt32),
     get_type_info_count : Proc(IAzAuthorizationStore*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzAuthorizationStore*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzAuthorizationStore*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzAuthorizationStore*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzAuthorizationStore*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ApplicationData : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1068,48 +1066,48 @@ module Win32cr::Security::Authorization
     get_GenerateAudits : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_GenerateAudits : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzAuthorizationStore*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzAuthorizationStore*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzAuthorizationStore*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzAuthorizationStore*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministrators : Proc(IAzAuthorizationStore*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReaders : Proc(IAzAuthorizationStore*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize__ : Proc(IAzAuthorizationStore*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    update_cache : Proc(IAzAuthorizationStore*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete : Proc(IAzAuthorizationStore*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzAuthorizationStore*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzAuthorizationStore*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzAuthorizationStore*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzAuthorizationStore*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministrators : Proc(IAzAuthorizationStore*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReaders : Proc(IAzAuthorizationStore*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IAzAuthorizationStore*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    update_cache : Proc(IAzAuthorizationStore*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete : Proc(IAzAuthorizationStore*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Applications : Proc(IAzAuthorizationStore*, Void**, Win32cr::Foundation::HRESULT),
-    open_application : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_application : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ApplicationGroups : Proc(IAzAuthorizationStore*, Void**, Win32cr::Foundation::HRESULT),
-    create_application_group : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    open_application_group : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application_group : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzAuthorizationStore*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsers : Proc(IAzAuthorizationStore*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    create_application_group : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    open_application_group : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application_group : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzAuthorizationStore*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsers : Proc(IAzAuthorizationStore*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_TargetMachine : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ApplyStoreSacl : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_ApplyStoreSacl : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministratorsName : Proc(IAzAuthorizationStore*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReadersName : Proc(IAzAuthorizationStore*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsersName : Proc(IAzAuthorizationStore*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministratorsName : Proc(IAzAuthorizationStore*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReadersName : Proc(IAzAuthorizationStore*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsersName : Proc(IAzAuthorizationStore*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     close_application : Proc(IAzAuthorizationStore*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzAuthorizationStore, lpVtbl : IAzAuthorizationStoreVtbl* do
+  record IAzAuthorizationStore, lpVtbl : IAzAuthorizationStoreVtable* do
     GUID = LibC::GUID.new(0xedbd9ca9_u32, 0x9b82_u16, 0x4f6a_u16, StaticArray[0x9e_u8, 0x8b_u8, 0x98_u8, 0x30_u8, 0x1e_u8, 0x45_u8, 0xf_u8, 0x14_u8])
     def query_interface(this : IAzAuthorizationStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1129,8 +1127,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzAuthorizationStore*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzAuthorizationStore*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzAuthorizationStore*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Description(this : IAzAuthorizationStore*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, pbstrDescription)
@@ -1171,79 +1169,79 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzAuthorizationStore*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzAuthorizationStore*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzAuthorizationStore*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzAuthorizationStore*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzAuthorizationStore*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzAuthorizationStore*, lPropId : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzAuthorizationStore*, lPropId : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzAuthorizationStore*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzAuthorizationStore*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def get_PolicyAdministrators(this : IAzAuthorizationStore*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministrators(this : IAzAuthorizationStore*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministrators.call(this, pvarAdmins)
     end
-    def get_PolicyReaders(this : IAzAuthorizationStore*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReaders(this : IAzAuthorizationStore*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReaders.call(this, pvarReaders)
     end
-    def add_policy_administrator(this : IAzAuthorizationStore*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator(this : IAzAuthorizationStore*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator(this : IAzAuthorizationStore*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator(this : IAzAuthorizationStore*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader(this : IAzAuthorizationStore*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader(this : IAzAuthorizationStore*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader(this : IAzAuthorizationStore*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader(this : IAzAuthorizationStore*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader.call(this, bstrReader, varReserved)
     end
-    def initialize__(this : IAzAuthorizationStore*, lFlags : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, bstrPolicyURL : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def initialize__(this : IAzAuthorizationStore*, lFlags : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, bstrPolicyURL : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, lFlags, bstrPolicyURL, varReserved)
     end
-    def update_cache(this : IAzAuthorizationStore*, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def update_cache(this : IAzAuthorizationStore*, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.update_cache.call(this, varReserved)
     end
-    def delete(this : IAzAuthorizationStore*, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete(this : IAzAuthorizationStore*, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this, varReserved)
     end
     def get_Applications(this : IAzAuthorizationStore*, ppAppCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Applications.call(this, ppAppCollection)
     end
-    def open_application(this : IAzAuthorizationStore*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def open_application(this : IAzAuthorizationStore*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def create_application(this : IAzAuthorizationStore*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def create_application(this : IAzAuthorizationStore*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def delete_application(this : IAzAuthorizationStore*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application(this : IAzAuthorizationStore*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application.call(this, bstrApplicationName, varReserved)
     end
     def get_ApplicationGroups(this : IAzAuthorizationStore*, ppGroupCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ApplicationGroups.call(this, ppGroupCollection)
     end
-    def create_application_group(this : IAzAuthorizationStore*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def create_application_group(this : IAzAuthorizationStore*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def open_application_group(this : IAzAuthorizationStore*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def open_application_group(this : IAzAuthorizationStore*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def delete_application_group(this : IAzAuthorizationStore*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application_group(this : IAzAuthorizationStore*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application_group.call(this, bstrGroupName, varReserved)
     end
-    def submit(this : IAzAuthorizationStore*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzAuthorizationStore*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def get_DelegatedPolicyUsers(this : IAzAuthorizationStore*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsers(this : IAzAuthorizationStore*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsers.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user(this : IAzAuthorizationStore*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user(this : IAzAuthorizationStore*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user(this : IAzAuthorizationStore*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user(this : IAzAuthorizationStore*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
     def get_TargetMachine(this : IAzAuthorizationStore*, pbstrTargetMachine : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1255,31 +1253,31 @@ module Win32cr::Security::Authorization
     def put_ApplyStoreSacl(this : IAzAuthorizationStore*, bApplyStoreSacl : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ApplyStoreSacl.call(this, bApplyStoreSacl)
     end
-    def get_PolicyAdministratorsName(this : IAzAuthorizationStore*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministratorsName(this : IAzAuthorizationStore*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministratorsName.call(this, pvarAdmins)
     end
-    def get_PolicyReadersName(this : IAzAuthorizationStore*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReadersName(this : IAzAuthorizationStore*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReadersName.call(this, pvarReaders)
     end
-    def add_policy_administrator_name(this : IAzAuthorizationStore*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator_name(this : IAzAuthorizationStore*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator_name(this : IAzAuthorizationStore*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator_name(this : IAzAuthorizationStore*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader_name(this : IAzAuthorizationStore*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader_name(this : IAzAuthorizationStore*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader_name(this : IAzAuthorizationStore*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader_name(this : IAzAuthorizationStore*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def get_DelegatedPolicyUsersName(this : IAzAuthorizationStore*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsersName(this : IAzAuthorizationStore*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsersName.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user_name(this : IAzAuthorizationStore*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user_name(this : IAzAuthorizationStore*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user_name(this : IAzAuthorizationStore*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user_name(this : IAzAuthorizationStore*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
     def close_application(this : IAzAuthorizationStore*, bstrApplicationName : Win32cr::Foundation::BSTR, lFlag : Int32) : Win32cr::Foundation::HRESULT
@@ -1289,14 +1287,15 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzAuthorizationStore2Vtbl,
+
+  record IAzAuthorizationStore2Vtable,
     query_interface : Proc(IAzAuthorizationStore2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzAuthorizationStore2*, UInt32),
     release : Proc(IAzAuthorizationStore2*, UInt32),
     get_type_info_count : Proc(IAzAuthorizationStore2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzAuthorizationStore2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzAuthorizationStore2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzAuthorizationStore2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzAuthorizationStore2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ApplicationData : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1310,50 +1309,50 @@ module Win32cr::Security::Authorization
     get_GenerateAudits : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_GenerateAudits : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzAuthorizationStore2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzAuthorizationStore2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzAuthorizationStore2*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzAuthorizationStore2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministrators : Proc(IAzAuthorizationStore2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReaders : Proc(IAzAuthorizationStore2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize__ : Proc(IAzAuthorizationStore2*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    update_cache : Proc(IAzAuthorizationStore2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete : Proc(IAzAuthorizationStore2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzAuthorizationStore2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzAuthorizationStore2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzAuthorizationStore2*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzAuthorizationStore2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministrators : Proc(IAzAuthorizationStore2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReaders : Proc(IAzAuthorizationStore2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IAzAuthorizationStore2*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    update_cache : Proc(IAzAuthorizationStore2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete : Proc(IAzAuthorizationStore2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Applications : Proc(IAzAuthorizationStore2*, Void**, Win32cr::Foundation::HRESULT),
-    open_application : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_application : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ApplicationGroups : Proc(IAzAuthorizationStore2*, Void**, Win32cr::Foundation::HRESULT),
-    create_application_group : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    open_application_group : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application_group : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzAuthorizationStore2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsers : Proc(IAzAuthorizationStore2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    create_application_group : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    open_application_group : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application_group : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzAuthorizationStore2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsers : Proc(IAzAuthorizationStore2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_TargetMachine : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ApplyStoreSacl : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_ApplyStoreSacl : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministratorsName : Proc(IAzAuthorizationStore2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReadersName : Proc(IAzAuthorizationStore2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsersName : Proc(IAzAuthorizationStore2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministratorsName : Proc(IAzAuthorizationStore2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReadersName : Proc(IAzAuthorizationStore2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsersName : Proc(IAzAuthorizationStore2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     close_application : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
-    open_application2 : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application2 : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    open_application2 : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application2 : Proc(IAzAuthorizationStore2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzAuthorizationStore2, lpVtbl : IAzAuthorizationStore2Vtbl* do
+  record IAzAuthorizationStore2, lpVtbl : IAzAuthorizationStore2Vtable* do
     GUID = LibC::GUID.new(0xb11e5584_u32, 0xd577_u16, 0x4273_u16, StaticArray[0xb6_u8, 0xc5_u8, 0x9_u8, 0x73_u8, 0xe0_u8, 0xf8_u8, 0xe8_u8, 0xd_u8])
     def query_interface(this : IAzAuthorizationStore2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1373,8 +1372,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzAuthorizationStore2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzAuthorizationStore2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzAuthorizationStore2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Description(this : IAzAuthorizationStore2*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, pbstrDescription)
@@ -1415,79 +1414,79 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzAuthorizationStore2*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzAuthorizationStore2*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzAuthorizationStore2*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzAuthorizationStore2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzAuthorizationStore2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzAuthorizationStore2*, lPropId : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzAuthorizationStore2*, lPropId : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzAuthorizationStore2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzAuthorizationStore2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def get_PolicyAdministrators(this : IAzAuthorizationStore2*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministrators(this : IAzAuthorizationStore2*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministrators.call(this, pvarAdmins)
     end
-    def get_PolicyReaders(this : IAzAuthorizationStore2*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReaders(this : IAzAuthorizationStore2*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReaders.call(this, pvarReaders)
     end
-    def add_policy_administrator(this : IAzAuthorizationStore2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator(this : IAzAuthorizationStore2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator(this : IAzAuthorizationStore2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator(this : IAzAuthorizationStore2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader(this : IAzAuthorizationStore2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader(this : IAzAuthorizationStore2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader(this : IAzAuthorizationStore2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader(this : IAzAuthorizationStore2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader.call(this, bstrReader, varReserved)
     end
-    def initialize__(this : IAzAuthorizationStore2*, lFlags : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, bstrPolicyURL : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def initialize__(this : IAzAuthorizationStore2*, lFlags : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, bstrPolicyURL : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, lFlags, bstrPolicyURL, varReserved)
     end
-    def update_cache(this : IAzAuthorizationStore2*, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def update_cache(this : IAzAuthorizationStore2*, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.update_cache.call(this, varReserved)
     end
-    def delete(this : IAzAuthorizationStore2*, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete(this : IAzAuthorizationStore2*, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this, varReserved)
     end
     def get_Applications(this : IAzAuthorizationStore2*, ppAppCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Applications.call(this, ppAppCollection)
     end
-    def open_application(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def open_application(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def create_application(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def create_application(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def delete_application(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application.call(this, bstrApplicationName, varReserved)
     end
     def get_ApplicationGroups(this : IAzAuthorizationStore2*, ppGroupCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ApplicationGroups.call(this, ppGroupCollection)
     end
-    def create_application_group(this : IAzAuthorizationStore2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def create_application_group(this : IAzAuthorizationStore2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def open_application_group(this : IAzAuthorizationStore2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def open_application_group(this : IAzAuthorizationStore2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def delete_application_group(this : IAzAuthorizationStore2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application_group(this : IAzAuthorizationStore2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application_group.call(this, bstrGroupName, varReserved)
     end
-    def submit(this : IAzAuthorizationStore2*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzAuthorizationStore2*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def get_DelegatedPolicyUsers(this : IAzAuthorizationStore2*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsers(this : IAzAuthorizationStore2*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsers.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user(this : IAzAuthorizationStore2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user(this : IAzAuthorizationStore2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user(this : IAzAuthorizationStore2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user(this : IAzAuthorizationStore2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
     def get_TargetMachine(this : IAzAuthorizationStore2*, pbstrTargetMachine : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1499,54 +1498,55 @@ module Win32cr::Security::Authorization
     def put_ApplyStoreSacl(this : IAzAuthorizationStore2*, bApplyStoreSacl : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ApplyStoreSacl.call(this, bApplyStoreSacl)
     end
-    def get_PolicyAdministratorsName(this : IAzAuthorizationStore2*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministratorsName(this : IAzAuthorizationStore2*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministratorsName.call(this, pvarAdmins)
     end
-    def get_PolicyReadersName(this : IAzAuthorizationStore2*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReadersName(this : IAzAuthorizationStore2*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReadersName.call(this, pvarReaders)
     end
-    def add_policy_administrator_name(this : IAzAuthorizationStore2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator_name(this : IAzAuthorizationStore2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator_name(this : IAzAuthorizationStore2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator_name(this : IAzAuthorizationStore2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader_name(this : IAzAuthorizationStore2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader_name(this : IAzAuthorizationStore2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader_name(this : IAzAuthorizationStore2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader_name(this : IAzAuthorizationStore2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def get_DelegatedPolicyUsersName(this : IAzAuthorizationStore2*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsersName(this : IAzAuthorizationStore2*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsersName.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user_name(this : IAzAuthorizationStore2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user_name(this : IAzAuthorizationStore2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user_name(this : IAzAuthorizationStore2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user_name(this : IAzAuthorizationStore2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
     def close_application(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, lFlag : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close_application.call(this, bstrApplicationName, lFlag)
     end
-    def open_application2(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def open_application2(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application2.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def create_application2(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def create_application2(this : IAzAuthorizationStore2*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application2.call(this, bstrApplicationName, varReserved, ppApplication)
     end
 
   end
 
   @[Extern]
-  record IAzAuthorizationStore3Vtbl,
+
+  record IAzAuthorizationStore3Vtable,
     query_interface : Proc(IAzAuthorizationStore3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzAuthorizationStore3*, UInt32),
     release : Proc(IAzAuthorizationStore3*, UInt32),
     get_type_info_count : Proc(IAzAuthorizationStore3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzAuthorizationStore3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzAuthorizationStore3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzAuthorizationStore3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzAuthorizationStore3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ApplicationData : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1560,55 +1560,55 @@ module Win32cr::Security::Authorization
     get_GenerateAudits : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_GenerateAudits : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzAuthorizationStore3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzAuthorizationStore3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzAuthorizationStore3*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzAuthorizationStore3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministrators : Proc(IAzAuthorizationStore3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReaders : Proc(IAzAuthorizationStore3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize__ : Proc(IAzAuthorizationStore3*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    update_cache : Proc(IAzAuthorizationStore3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete : Proc(IAzAuthorizationStore3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzAuthorizationStore3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzAuthorizationStore3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzAuthorizationStore3*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzAuthorizationStore3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministrators : Proc(IAzAuthorizationStore3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReaders : Proc(IAzAuthorizationStore3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize__ : Proc(IAzAuthorizationStore3*, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    update_cache : Proc(IAzAuthorizationStore3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete : Proc(IAzAuthorizationStore3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Applications : Proc(IAzAuthorizationStore3*, Void**, Win32cr::Foundation::HRESULT),
-    open_application : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_application : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ApplicationGroups : Proc(IAzAuthorizationStore3*, Void**, Win32cr::Foundation::HRESULT),
-    create_application_group : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    open_application_group : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application_group : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzAuthorizationStore3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsers : Proc(IAzAuthorizationStore3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    create_application_group : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    open_application_group : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application_group : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzAuthorizationStore3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsers : Proc(IAzAuthorizationStore3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_TargetMachine : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ApplyStoreSacl : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_ApplyStoreSacl : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministratorsName : Proc(IAzAuthorizationStore3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReadersName : Proc(IAzAuthorizationStore3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsersName : Proc(IAzAuthorizationStore3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministratorsName : Proc(IAzAuthorizationStore3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReadersName : Proc(IAzAuthorizationStore3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsersName : Proc(IAzAuthorizationStore3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user_name : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     close_application : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
-    open_application2 : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application2 : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    is_update_needed : Proc(IAzAuthorizationStore3*, Int16*, Win32cr::Foundation::HRESULT),
-    bizrule_group_supported : Proc(IAzAuthorizationStore3*, Int16*, Win32cr::Foundation::HRESULT),
+    open_application2 : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application2 : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    is_update_needed : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    bizrule_group_supported : Proc(IAzAuthorizationStore3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     upgrade_stores_functional_level : Proc(IAzAuthorizationStore3*, Int32, Win32cr::Foundation::HRESULT),
-    is_functional_level_upgrade_supported : Proc(IAzAuthorizationStore3*, Int32, Int16*, Win32cr::Foundation::HRESULT),
+    is_functional_level_upgrade_supported : Proc(IAzAuthorizationStore3*, Int32, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_schema_version : Proc(IAzAuthorizationStore3*, Int32*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzAuthorizationStore3, lpVtbl : IAzAuthorizationStore3Vtbl* do
+  record IAzAuthorizationStore3, lpVtbl : IAzAuthorizationStore3Vtable* do
     GUID = LibC::GUID.new(0xabc08425_u32, 0xc86_u16, 0x4fa0_u16, StaticArray[0x9b_u8, 0xe3_u8, 0x71_u8, 0x89_u8, 0x95_u8, 0x6c_u8, 0x92_u8, 0x6e_u8])
     def query_interface(this : IAzAuthorizationStore3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1628,8 +1628,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzAuthorizationStore3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzAuthorizationStore3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzAuthorizationStore3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Description(this : IAzAuthorizationStore3*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Description.call(this, pbstrDescription)
@@ -1670,79 +1670,79 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzAuthorizationStore3*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzAuthorizationStore3*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzAuthorizationStore3*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzAuthorizationStore3*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzAuthorizationStore3*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzAuthorizationStore3*, lPropId : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzAuthorizationStore3*, lPropId : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzAuthorizationStore3*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzAuthorizationStore3*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def get_PolicyAdministrators(this : IAzAuthorizationStore3*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministrators(this : IAzAuthorizationStore3*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministrators.call(this, pvarAdmins)
     end
-    def get_PolicyReaders(this : IAzAuthorizationStore3*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReaders(this : IAzAuthorizationStore3*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReaders.call(this, pvarReaders)
     end
-    def add_policy_administrator(this : IAzAuthorizationStore3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator(this : IAzAuthorizationStore3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator(this : IAzAuthorizationStore3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator(this : IAzAuthorizationStore3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader(this : IAzAuthorizationStore3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader(this : IAzAuthorizationStore3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader(this : IAzAuthorizationStore3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader(this : IAzAuthorizationStore3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader.call(this, bstrReader, varReserved)
     end
-    def initialize__(this : IAzAuthorizationStore3*, lFlags : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, bstrPolicyURL : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def initialize__(this : IAzAuthorizationStore3*, lFlags : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, bstrPolicyURL : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize__.call(this, lFlags, bstrPolicyURL, varReserved)
     end
-    def update_cache(this : IAzAuthorizationStore3*, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def update_cache(this : IAzAuthorizationStore3*, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.update_cache.call(this, varReserved)
     end
-    def delete(this : IAzAuthorizationStore3*, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete(this : IAzAuthorizationStore3*, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this, varReserved)
     end
     def get_Applications(this : IAzAuthorizationStore3*, ppAppCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Applications.call(this, ppAppCollection)
     end
-    def open_application(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def open_application(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def create_application(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def create_application(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def delete_application(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application.call(this, bstrApplicationName, varReserved)
     end
     def get_ApplicationGroups(this : IAzAuthorizationStore3*, ppGroupCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ApplicationGroups.call(this, ppGroupCollection)
     end
-    def create_application_group(this : IAzAuthorizationStore3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def create_application_group(this : IAzAuthorizationStore3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def open_application_group(this : IAzAuthorizationStore3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def open_application_group(this : IAzAuthorizationStore3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def delete_application_group(this : IAzAuthorizationStore3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application_group(this : IAzAuthorizationStore3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application_group.call(this, bstrGroupName, varReserved)
     end
-    def submit(this : IAzAuthorizationStore3*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzAuthorizationStore3*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def get_DelegatedPolicyUsers(this : IAzAuthorizationStore3*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsers(this : IAzAuthorizationStore3*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsers.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user(this : IAzAuthorizationStore3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user(this : IAzAuthorizationStore3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user(this : IAzAuthorizationStore3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user(this : IAzAuthorizationStore3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
     def get_TargetMachine(this : IAzAuthorizationStore3*, pbstrTargetMachine : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1754,52 +1754,52 @@ module Win32cr::Security::Authorization
     def put_ApplyStoreSacl(this : IAzAuthorizationStore3*, bApplyStoreSacl : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ApplyStoreSacl.call(this, bApplyStoreSacl)
     end
-    def get_PolicyAdministratorsName(this : IAzAuthorizationStore3*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministratorsName(this : IAzAuthorizationStore3*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministratorsName.call(this, pvarAdmins)
     end
-    def get_PolicyReadersName(this : IAzAuthorizationStore3*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReadersName(this : IAzAuthorizationStore3*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReadersName.call(this, pvarReaders)
     end
-    def add_policy_administrator_name(this : IAzAuthorizationStore3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator_name(this : IAzAuthorizationStore3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator_name(this : IAzAuthorizationStore3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator_name(this : IAzAuthorizationStore3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader_name(this : IAzAuthorizationStore3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader_name(this : IAzAuthorizationStore3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader_name(this : IAzAuthorizationStore3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader_name(this : IAzAuthorizationStore3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def get_DelegatedPolicyUsersName(this : IAzAuthorizationStore3*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsersName(this : IAzAuthorizationStore3*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsersName.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user_name(this : IAzAuthorizationStore3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user_name(this : IAzAuthorizationStore3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user_name(this : IAzAuthorizationStore3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user_name(this : IAzAuthorizationStore3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
     def close_application(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, lFlag : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close_application.call(this, bstrApplicationName, lFlag)
     end
-    def open_application2(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def open_application2(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application2.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def create_application2(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
+    def create_application2(this : IAzAuthorizationStore3*, bstrApplicationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application2.call(this, bstrApplicationName, varReserved, ppApplication)
     end
-    def is_update_needed(this : IAzAuthorizationStore3*, pbIsUpdateNeeded : Int16*) : Win32cr::Foundation::HRESULT
+    def is_update_needed(this : IAzAuthorizationStore3*, pbIsUpdateNeeded : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_update_needed.call(this, pbIsUpdateNeeded)
     end
-    def bizrule_group_supported(this : IAzAuthorizationStore3*, pbSupported : Int16*) : Win32cr::Foundation::HRESULT
+    def bizrule_group_supported(this : IAzAuthorizationStore3*, pbSupported : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.bizrule_group_supported.call(this, pbSupported)
     end
     def upgrade_stores_functional_level(this : IAzAuthorizationStore3*, lFunctionalLevel : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.upgrade_stores_functional_level.call(this, lFunctionalLevel)
     end
-    def is_functional_level_upgrade_supported(this : IAzAuthorizationStore3*, lFunctionalLevel : Int32, pbSupported : Int16*) : Win32cr::Foundation::HRESULT
+    def is_functional_level_upgrade_supported(this : IAzAuthorizationStore3*, lFunctionalLevel : Int32, pbSupported : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_functional_level_upgrade_supported.call(this, lFunctionalLevel, pbSupported)
     end
     def get_schema_version(this : IAzAuthorizationStore3*, plMajorVersion : Int32*, plMinorVersion : Int32*) : Win32cr::Foundation::HRESULT
@@ -1809,14 +1809,15 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplicationVtbl,
+
+  record IAzApplicationVtable,
     query_interface : Proc(IAzApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplication*, UInt32),
     release : Proc(IAzApplication*, UInt32),
     get_type_info_count : Proc(IAzApplication*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzApplication*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzApplication*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzApplication*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzApplication*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzApplication*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzApplication*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1832,56 +1833,56 @@ module Win32cr::Security::Authorization
     get_ApplyStoreSacl : Proc(IAzApplication*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_ApplyStoreSacl : Proc(IAzApplication*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzApplication*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzApplication*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzApplication*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministrators : Proc(IAzApplication*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReaders : Proc(IAzApplication*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzApplication*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzApplication*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministrators : Proc(IAzApplication*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReaders : Proc(IAzApplication*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Scopes : Proc(IAzApplication*, Void**, Win32cr::Foundation::HRESULT),
-    open_scope : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_scope : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_scope : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_scope : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_scope : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_scope : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Operations : Proc(IAzApplication*, Void**, Win32cr::Foundation::HRESULT),
-    open_operation : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_operation : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_operation : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_operation : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_operation : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_operation : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Tasks : Proc(IAzApplication*, Void**, Win32cr::Foundation::HRESULT),
-    open_task : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_task : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_task : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_task : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ApplicationGroups : Proc(IAzApplication*, Void**, Win32cr::Foundation::HRESULT),
-    open_application_group : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application_group : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application_group : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_application_group : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application_group : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application_group : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Roles : Proc(IAzApplication*, Void**, Win32cr::Foundation::HRESULT),
-    open_role : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_role : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_role : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_token : Proc(IAzApplication*, UInt64, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzApplication*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzApplication*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzApplication*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsers : Proc(IAzApplication*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_string_sid : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministratorsName : Proc(IAzApplication*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReadersName : Proc(IAzApplication*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsersName : Proc(IAzApplication*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    open_role : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_role : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_role : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_token : Proc(IAzApplication*, UInt64, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzApplication*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzApplication*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzApplication*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsers : Proc(IAzApplication*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_string_sid : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministratorsName : Proc(IAzApplication*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReadersName : Proc(IAzApplication*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsersName : Proc(IAzApplication*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user_name : Proc(IAzApplication*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzApplication, lpVtbl : IAzApplicationVtbl* do
+  record IAzApplication, lpVtbl : IAzApplicationVtable* do
     GUID = LibC::GUID.new(0x987bc7c7_u32, 0xb813_u16, 0x4d27_u16, StaticArray[0xbe_u8, 0xde_u8, 0x6b_u8, 0xa5_u8, 0xae_u8, 0x86_u8, 0x7e_u8, 0x95_u8])
     def query_interface(this : IAzApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1901,8 +1902,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzApplication*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzApplication*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -1949,156 +1950,157 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzApplication*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzApplication*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzApplication*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzApplication*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzApplication*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def get_PolicyAdministrators(this : IAzApplication*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministrators(this : IAzApplication*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministrators.call(this, pvarAdmins)
     end
-    def get_PolicyReaders(this : IAzApplication*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReaders(this : IAzApplication*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReaders.call(this, pvarReaders)
     end
-    def add_policy_administrator(this : IAzApplication*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator(this : IAzApplication*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator(this : IAzApplication*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator(this : IAzApplication*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader(this : IAzApplication*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader(this : IAzApplication*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader(this : IAzApplication*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader(this : IAzApplication*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader.call(this, bstrReader, varReserved)
     end
     def get_Scopes(this : IAzApplication*, ppScopeCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Scopes.call(this, ppScopeCollection)
     end
-    def open_scope(this : IAzApplication*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
+    def open_scope(this : IAzApplication*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_scope.call(this, bstrScopeName, varReserved, ppScope)
     end
-    def create_scope(this : IAzApplication*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
+    def create_scope(this : IAzApplication*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_scope.call(this, bstrScopeName, varReserved, ppScope)
     end
-    def delete_scope(this : IAzApplication*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_scope(this : IAzApplication*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_scope.call(this, bstrScopeName, varReserved)
     end
     def get_Operations(this : IAzApplication*, ppOperationCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operations.call(this, ppOperationCollection)
     end
-    def open_operation(this : IAzApplication*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
+    def open_operation(this : IAzApplication*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_operation.call(this, bstrOperationName, varReserved, ppOperation)
     end
-    def create_operation(this : IAzApplication*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
+    def create_operation(this : IAzApplication*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_operation.call(this, bstrOperationName, varReserved, ppOperation)
     end
-    def delete_operation(this : IAzApplication*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_operation(this : IAzApplication*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_operation.call(this, bstrOperationName, varReserved)
     end
     def get_Tasks(this : IAzApplication*, ppTaskCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, ppTaskCollection)
     end
-    def open_task(this : IAzApplication*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def open_task(this : IAzApplication*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def create_task(this : IAzApplication*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def create_task(this : IAzApplication*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def delete_task(this : IAzApplication*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzApplication*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrTaskName, varReserved)
     end
     def get_ApplicationGroups(this : IAzApplication*, ppGroupCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ApplicationGroups.call(this, ppGroupCollection)
     end
-    def open_application_group(this : IAzApplication*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def open_application_group(this : IAzApplication*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def create_application_group(this : IAzApplication*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def create_application_group(this : IAzApplication*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def delete_application_group(this : IAzApplication*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application_group(this : IAzApplication*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application_group.call(this, bstrGroupName, varReserved)
     end
     def get_Roles(this : IAzApplication*, ppRoleCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Roles.call(this, ppRoleCollection)
     end
-    def open_role(this : IAzApplication*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def open_role(this : IAzApplication*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def create_role(this : IAzApplication*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def create_role(this : IAzApplication*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def delete_role(this : IAzApplication*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_role(this : IAzApplication*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_role.call(this, bstrRoleName, varReserved)
     end
-    def initialize_client_context_from_token(this : IAzApplication*, ullTokenHandle : UInt64, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_token(this : IAzApplication*, ullTokenHandle : UInt64, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_token.call(this, ullTokenHandle, varReserved, ppClientContext)
     end
-    def add_property_item(this : IAzApplication*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzApplication*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzApplication*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzApplication*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzApplication*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzApplication*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def initialize_client_context_from_name(this : IAzApplication*, client_name : Win32cr::Foundation::BSTR, domain_name : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_name(this : IAzApplication*, client_name : Win32cr::Foundation::BSTR, domain_name : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_name.call(this, client_name, domain_name, varReserved, ppClientContext)
     end
-    def get_DelegatedPolicyUsers(this : IAzApplication*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsers(this : IAzApplication*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsers.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user(this : IAzApplication*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user(this : IAzApplication*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user(this : IAzApplication*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user(this : IAzApplication*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def initialize_client_context_from_string_sid(this : IAzApplication*, sid_string : Win32cr::Foundation::BSTR, lOptions : Int32, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_string_sid(this : IAzApplication*, sid_string : Win32cr::Foundation::BSTR, lOptions : Int32, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_string_sid.call(this, sid_string, lOptions, varReserved, ppClientContext)
     end
-    def get_PolicyAdministratorsName(this : IAzApplication*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministratorsName(this : IAzApplication*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministratorsName.call(this, pvarAdmins)
     end
-    def get_PolicyReadersName(this : IAzApplication*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReadersName(this : IAzApplication*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReadersName.call(this, pvarReaders)
     end
-    def add_policy_administrator_name(this : IAzApplication*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator_name(this : IAzApplication*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator_name(this : IAzApplication*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator_name(this : IAzApplication*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader_name(this : IAzApplication*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader_name(this : IAzApplication*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader_name(this : IAzApplication*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader_name(this : IAzApplication*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def get_DelegatedPolicyUsersName(this : IAzApplication*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsersName(this : IAzApplication*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsersName.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user_name(this : IAzApplication*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user_name(this : IAzApplication*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user_name(this : IAzApplication*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user_name(this : IAzApplication*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
 
   end
 
   @[Extern]
-  record IAzApplication2Vtbl,
+
+  record IAzApplication2Vtable,
     query_interface : Proc(IAzApplication2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplication2*, UInt32),
     release : Proc(IAzApplication2*, UInt32),
     get_type_info_count : Proc(IAzApplication2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzApplication2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzApplication2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzApplication2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzApplication2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzApplication2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2114,58 +2116,58 @@ module Win32cr::Security::Authorization
     get_ApplyStoreSacl : Proc(IAzApplication2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_ApplyStoreSacl : Proc(IAzApplication2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzApplication2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzApplication2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzApplication2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministrators : Proc(IAzApplication2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReaders : Proc(IAzApplication2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzApplication2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzApplication2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministrators : Proc(IAzApplication2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReaders : Proc(IAzApplication2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Scopes : Proc(IAzApplication2*, Void**, Win32cr::Foundation::HRESULT),
-    open_scope : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_scope : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_scope : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_scope : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_scope : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_scope : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Operations : Proc(IAzApplication2*, Void**, Win32cr::Foundation::HRESULT),
-    open_operation : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_operation : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_operation : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_operation : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_operation : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_operation : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Tasks : Proc(IAzApplication2*, Void**, Win32cr::Foundation::HRESULT),
-    open_task : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_task : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_task : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_task : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ApplicationGroups : Proc(IAzApplication2*, Void**, Win32cr::Foundation::HRESULT),
-    open_application_group : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application_group : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application_group : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_application_group : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application_group : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application_group : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Roles : Proc(IAzApplication2*, Void**, Win32cr::Foundation::HRESULT),
-    open_role : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_role : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_role : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_token : Proc(IAzApplication2*, UInt64, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzApplication2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzApplication2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzApplication2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsers : Proc(IAzApplication2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_string_sid : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministratorsName : Proc(IAzApplication2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReadersName : Proc(IAzApplication2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsersName : Proc(IAzApplication2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_token2 : Proc(IAzApplication2*, UInt32, UInt32, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    initialize_client_context2 : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    open_role : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_role : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_role : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_token : Proc(IAzApplication2*, UInt64, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzApplication2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzApplication2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzApplication2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsers : Proc(IAzApplication2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_string_sid : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministratorsName : Proc(IAzApplication2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReadersName : Proc(IAzApplication2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsersName : Proc(IAzApplication2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user_name : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_token2 : Proc(IAzApplication2*, UInt32, UInt32, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    initialize_client_context2 : Proc(IAzApplication2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzApplication2, lpVtbl : IAzApplication2Vtbl* do
+  record IAzApplication2, lpVtbl : IAzApplication2Vtable* do
     GUID = LibC::GUID.new(0x86a68af_u32, 0xa249_u16, 0x437c_u16, StaticArray[0xb1_u8, 0x8d_u8, 0xd4_u8, 0xd8_u8, 0x6d_u8, 0x6a_u8, 0x96_u8, 0x60_u8])
     def query_interface(this : IAzApplication2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2185,8 +2187,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzApplication2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzApplication2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzApplication2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzApplication2*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -2233,169 +2235,170 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzApplication2*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzApplication2*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzApplication2*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzApplication2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzApplication2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def get_PolicyAdministrators(this : IAzApplication2*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministrators(this : IAzApplication2*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministrators.call(this, pvarAdmins)
     end
-    def get_PolicyReaders(this : IAzApplication2*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReaders(this : IAzApplication2*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReaders.call(this, pvarReaders)
     end
-    def add_policy_administrator(this : IAzApplication2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator(this : IAzApplication2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator(this : IAzApplication2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator(this : IAzApplication2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader(this : IAzApplication2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader(this : IAzApplication2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader(this : IAzApplication2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader(this : IAzApplication2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader.call(this, bstrReader, varReserved)
     end
     def get_Scopes(this : IAzApplication2*, ppScopeCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Scopes.call(this, ppScopeCollection)
     end
-    def open_scope(this : IAzApplication2*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
+    def open_scope(this : IAzApplication2*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_scope.call(this, bstrScopeName, varReserved, ppScope)
     end
-    def create_scope(this : IAzApplication2*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
+    def create_scope(this : IAzApplication2*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_scope.call(this, bstrScopeName, varReserved, ppScope)
     end
-    def delete_scope(this : IAzApplication2*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_scope(this : IAzApplication2*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_scope.call(this, bstrScopeName, varReserved)
     end
     def get_Operations(this : IAzApplication2*, ppOperationCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operations.call(this, ppOperationCollection)
     end
-    def open_operation(this : IAzApplication2*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
+    def open_operation(this : IAzApplication2*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_operation.call(this, bstrOperationName, varReserved, ppOperation)
     end
-    def create_operation(this : IAzApplication2*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
+    def create_operation(this : IAzApplication2*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_operation.call(this, bstrOperationName, varReserved, ppOperation)
     end
-    def delete_operation(this : IAzApplication2*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_operation(this : IAzApplication2*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_operation.call(this, bstrOperationName, varReserved)
     end
     def get_Tasks(this : IAzApplication2*, ppTaskCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, ppTaskCollection)
     end
-    def open_task(this : IAzApplication2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def open_task(this : IAzApplication2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def create_task(this : IAzApplication2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def create_task(this : IAzApplication2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def delete_task(this : IAzApplication2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzApplication2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrTaskName, varReserved)
     end
     def get_ApplicationGroups(this : IAzApplication2*, ppGroupCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ApplicationGroups.call(this, ppGroupCollection)
     end
-    def open_application_group(this : IAzApplication2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def open_application_group(this : IAzApplication2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def create_application_group(this : IAzApplication2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def create_application_group(this : IAzApplication2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def delete_application_group(this : IAzApplication2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application_group(this : IAzApplication2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application_group.call(this, bstrGroupName, varReserved)
     end
     def get_Roles(this : IAzApplication2*, ppRoleCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Roles.call(this, ppRoleCollection)
     end
-    def open_role(this : IAzApplication2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def open_role(this : IAzApplication2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def create_role(this : IAzApplication2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def create_role(this : IAzApplication2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def delete_role(this : IAzApplication2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_role(this : IAzApplication2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_role.call(this, bstrRoleName, varReserved)
     end
-    def initialize_client_context_from_token(this : IAzApplication2*, ullTokenHandle : UInt64, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_token(this : IAzApplication2*, ullTokenHandle : UInt64, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_token.call(this, ullTokenHandle, varReserved, ppClientContext)
     end
-    def add_property_item(this : IAzApplication2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzApplication2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzApplication2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzApplication2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzApplication2*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzApplication2*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def initialize_client_context_from_name(this : IAzApplication2*, client_name : Win32cr::Foundation::BSTR, domain_name : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_name(this : IAzApplication2*, client_name : Win32cr::Foundation::BSTR, domain_name : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_name.call(this, client_name, domain_name, varReserved, ppClientContext)
     end
-    def get_DelegatedPolicyUsers(this : IAzApplication2*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsers(this : IAzApplication2*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsers.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user(this : IAzApplication2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user(this : IAzApplication2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user(this : IAzApplication2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user(this : IAzApplication2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def initialize_client_context_from_string_sid(this : IAzApplication2*, sid_string : Win32cr::Foundation::BSTR, lOptions : Int32, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_string_sid(this : IAzApplication2*, sid_string : Win32cr::Foundation::BSTR, lOptions : Int32, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_string_sid.call(this, sid_string, lOptions, varReserved, ppClientContext)
     end
-    def get_PolicyAdministratorsName(this : IAzApplication2*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministratorsName(this : IAzApplication2*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministratorsName.call(this, pvarAdmins)
     end
-    def get_PolicyReadersName(this : IAzApplication2*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReadersName(this : IAzApplication2*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReadersName.call(this, pvarReaders)
     end
-    def add_policy_administrator_name(this : IAzApplication2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator_name(this : IAzApplication2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator_name(this : IAzApplication2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator_name(this : IAzApplication2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader_name(this : IAzApplication2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader_name(this : IAzApplication2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader_name(this : IAzApplication2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader_name(this : IAzApplication2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def get_DelegatedPolicyUsersName(this : IAzApplication2*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsersName(this : IAzApplication2*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsersName.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user_name(this : IAzApplication2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user_name(this : IAzApplication2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user_name(this : IAzApplication2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user_name(this : IAzApplication2*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def initialize_client_context_from_token2(this : IAzApplication2*, ulTokenHandleLowPart : UInt32, ulTokenHandleHighPart : UInt32, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_token2(this : IAzApplication2*, ulTokenHandleLowPart : UInt32, ulTokenHandleHighPart : UInt32, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_token2.call(this, ulTokenHandleLowPart, ulTokenHandleHighPart, varReserved, ppClientContext)
     end
-    def initialize_client_context2(this : IAzApplication2*, identifying_string : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context2(this : IAzApplication2*, identifying_string : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context2.call(this, identifying_string, varReserved, ppClientContext)
     end
 
   end
 
   @[Extern]
-  record IAzApplicationsVtbl,
+
+  record IAzApplicationsVtable,
     query_interface : Proc(IAzApplications*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplications*, UInt32),
     release : Proc(IAzApplications*, UInt32),
     get_type_info_count : Proc(IAzApplications*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzApplications*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzApplications*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzApplications*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IAzApplications*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzApplications*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IAzApplications*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzApplications*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAzApplications*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzApplications, lpVtbl : IAzApplicationsVtbl* do
+  record IAzApplications, lpVtbl : IAzApplicationsVtable* do
     GUID = LibC::GUID.new(0x929b11a9_u32, 0x95c5_u16, 0x4a84_u16, StaticArray[0xa2_u8, 0x9a_u8, 0x20_u8, 0xad_u8, 0x42_u8, 0xc2_u8, 0xf1_u8, 0x6c_u8])
     def query_interface(this : IAzApplications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2415,10 +2418,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzApplications*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzApplications*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzApplications*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Item(this : IAzApplications*, index : Int32, pvarObtPtr : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IAzApplications*, index : Int32, pvarObtPtr : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pvarObtPtr)
     end
     def get_Count(this : IAzApplications*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -2431,14 +2434,15 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzOperationVtbl,
+
+  record IAzOperationVtable,
     query_interface : Proc(IAzOperation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzOperation*, UInt32),
     release : Proc(IAzOperation*, UInt32),
     get_type_info_count : Proc(IAzOperation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzOperation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzOperation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzOperation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzOperation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzOperation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzOperation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzOperation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2448,13 +2452,13 @@ module Win32cr::Security::Authorization
     get_OperationID : Proc(IAzOperation*, Int32*, Win32cr::Foundation::HRESULT),
     put_OperationID : Proc(IAzOperation*, Int32, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzOperation*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzOperation*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzOperation*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzOperation*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_property : Proc(IAzOperation*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzOperation*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzOperation*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzOperation, lpVtbl : IAzOperationVtbl* do
+  record IAzOperation, lpVtbl : IAzOperationVtable* do
     GUID = LibC::GUID.new(0x5e56b24f_u32, 0xea01_u16, 0x4d61_u16, StaticArray[0xbe_u8, 0x44_u8, 0xc4_u8, 0x9b_u8, 0x5e_u8, 0x4e_u8, 0xaf_u8, 0x74_u8])
     def query_interface(this : IAzOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2474,8 +2478,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzOperation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzOperation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzOperation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzOperation*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -2504,34 +2508,35 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzOperation*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzOperation*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzOperation*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzOperation*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzOperation*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzOperation*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzOperation*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
 
   end
 
   @[Extern]
-  record IAzOperationsVtbl,
+
+  record IAzOperationsVtable,
     query_interface : Proc(IAzOperations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzOperations*, UInt32),
     release : Proc(IAzOperations*, UInt32),
     get_type_info_count : Proc(IAzOperations*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzOperations*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzOperations*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzOperations*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IAzOperations*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzOperations*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IAzOperations*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzOperations*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAzOperations*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzOperations, lpVtbl : IAzOperationsVtbl* do
+  record IAzOperations, lpVtbl : IAzOperationsVtable* do
     GUID = LibC::GUID.new(0x90ef9c07_u32, 0x9706_u16, 0x49d9_u16, StaticArray[0xaf_u8, 0x80_u8, 0x4_u8, 0x38_u8, 0xa5_u8, 0xf3_u8, 0xec_u8, 0x35_u8])
     def query_interface(this : IAzOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2551,10 +2556,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzOperations*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzOperations*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzOperations*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Item(this : IAzOperations*, index : Int32, pvarObtPtr : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IAzOperations*, index : Int32, pvarObtPtr : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pvarObtPtr)
     end
     def get_Count(this : IAzOperations*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -2567,14 +2572,15 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzTaskVtbl,
+
+  record IAzTaskVtable,
     query_interface : Proc(IAzTask*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzTask*, UInt32),
     release : Proc(IAzTask*, UInt32),
     get_type_info_count : Proc(IAzTask*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzTask*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzTask*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzTask*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzTask*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzTask*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzTask*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2589,22 +2595,22 @@ module Win32cr::Security::Authorization
     put_BizRuleImportedPath : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_IsRoleDefinition : Proc(IAzTask*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_IsRoleDefinition : Proc(IAzTask*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_Operations : Proc(IAzTask*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Tasks : Proc(IAzTask*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_operation : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_operation : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_task : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Operations : Proc(IAzTask*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Tasks : Proc(IAzTask*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_operation : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_operation : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_task : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzTask*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzTask*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzTask*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzTask*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzTask*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzTask*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzTask*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_property : Proc(IAzTask*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzTask*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzTask*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzTask*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzTask*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzTask, lpVtbl : IAzTaskVtbl* do
+  record IAzTask, lpVtbl : IAzTaskVtable* do
     GUID = LibC::GUID.new(0xcb94e592_u32, 0x2e0e_u16, 0x4a6c_u16, StaticArray[0xa3_u8, 0x36_u8, 0xb8_u8, 0x9a_u8, 0x6d_u8, 0xc1_u8, 0xe3_u8, 0x88_u8])
     def query_interface(this : IAzTask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2624,8 +2630,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzTask*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzTask*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzTask*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzTask*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -2669,61 +2675,62 @@ module Win32cr::Security::Authorization
     def put_IsRoleDefinition(this : IAzTask*, fProp : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsRoleDefinition.call(this, fProp)
     end
-    def get_Operations(this : IAzTask*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Operations(this : IAzTask*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operations.call(this, pvarProp)
     end
-    def get_Tasks(this : IAzTask*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Tasks(this : IAzTask*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, pvarProp)
     end
-    def add_operation(this : IAzTask*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_operation(this : IAzTask*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_operation.call(this, bstrOp, varReserved)
     end
-    def delete_operation(this : IAzTask*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_operation(this : IAzTask*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_operation.call(this, bstrOp, varReserved)
     end
-    def add_task(this : IAzTask*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_task(this : IAzTask*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_task.call(this, bstrTask, varReserved)
     end
-    def delete_task(this : IAzTask*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzTask*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrTask, varReserved)
     end
     def get_Writable(this : IAzTask*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzTask*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzTask*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzTask*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzTask*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzTask*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzTask*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzTask*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzTask*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzTask*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzTask*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
 
   end
 
   @[Extern]
-  record IAzTasksVtbl,
+
+  record IAzTasksVtable,
     query_interface : Proc(IAzTasks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzTasks*, UInt32),
     release : Proc(IAzTasks*, UInt32),
     get_type_info_count : Proc(IAzTasks*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzTasks*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzTasks*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzTasks*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IAzTasks*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzTasks*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IAzTasks*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzTasks*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAzTasks*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzTasks, lpVtbl : IAzTasksVtbl* do
+  record IAzTasks, lpVtbl : IAzTasksVtable* do
     GUID = LibC::GUID.new(0xb338ccab_u32, 0x4c85_u16, 0x4388_u16, StaticArray[0x8c_u8, 0xa_u8, 0xc5_u8, 0x85_u8, 0x92_u8, 0xba_u8, 0xd3_u8, 0x98_u8])
     def query_interface(this : IAzTasks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2743,10 +2750,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzTasks*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzTasks*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzTasks*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Item(this : IAzTasks*, index : Int32, pvarObtPtr : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IAzTasks*, index : Int32, pvarObtPtr : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pvarObtPtr)
     end
     def get_Count(this : IAzTasks*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -2759,14 +2766,15 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzScopeVtbl,
+
+  record IAzScopeVtable,
     query_interface : Proc(IAzScope*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzScope*, UInt32),
     release : Proc(IAzScope*, UInt32),
     get_type_info_count : Proc(IAzScope*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzScope*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzScope*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzScope*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzScope*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzScope*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzScope*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2774,41 +2782,41 @@ module Win32cr::Security::Authorization
     get_ApplicationData : Proc(IAzScope*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ApplicationData : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzScope*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzScope*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzScope*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzScope*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzScope*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministrators : Proc(IAzScope*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReaders : Proc(IAzScope*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzScope*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzScope*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzScope*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzScope*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministrators : Proc(IAzScope*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReaders : Proc(IAzScope*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ApplicationGroups : Proc(IAzScope*, Void**, Win32cr::Foundation::HRESULT),
-    open_application_group : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application_group : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application_group : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_application_group : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application_group : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application_group : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Roles : Proc(IAzScope*, Void**, Win32cr::Foundation::HRESULT),
-    open_role : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_role : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_role : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_role : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_role : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_role : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Tasks : Proc(IAzScope*, Void**, Win32cr::Foundation::HRESULT),
-    open_task : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_task : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzScope*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_task : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_task : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzScope*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_CanBeDelegated : Proc(IAzScope*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_BizrulesWritable : Proc(IAzScope*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministratorsName : Proc(IAzScope*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReadersName : Proc(IAzScope*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator_name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator_name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader_name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader_name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_PolicyAdministratorsName : Proc(IAzScope*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReadersName : Proc(IAzScope*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator_name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator_name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader_name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader_name : Proc(IAzScope*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzScope, lpVtbl : IAzScopeVtbl* do
+  record IAzScope, lpVtbl : IAzScopeVtable* do
     GUID = LibC::GUID.new(0xe52487_u32, 0xe08d_u16, 0x4514_u16, StaticArray[0xb6_u8, 0x2e_u8, 0x87_u8, 0x7d_u8, 0x56_u8, 0x45_u8, 0xf5_u8, 0xab_u8])
     def query_interface(this : IAzScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2828,8 +2836,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzScope*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzScope*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzScope*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzScope*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -2852,73 +2860,73 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzScope*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzScope*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzScope*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzScope*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzScope*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzScope*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzScope*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzScope*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzScope*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def get_PolicyAdministrators(this : IAzScope*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministrators(this : IAzScope*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministrators.call(this, pvarAdmins)
     end
-    def get_PolicyReaders(this : IAzScope*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReaders(this : IAzScope*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReaders.call(this, pvarReaders)
     end
-    def add_policy_administrator(this : IAzScope*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator(this : IAzScope*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator(this : IAzScope*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator(this : IAzScope*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader(this : IAzScope*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader(this : IAzScope*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader(this : IAzScope*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader(this : IAzScope*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader.call(this, bstrReader, varReserved)
     end
     def get_ApplicationGroups(this : IAzScope*, ppGroupCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ApplicationGroups.call(this, ppGroupCollection)
     end
-    def open_application_group(this : IAzScope*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def open_application_group(this : IAzScope*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def create_application_group(this : IAzScope*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def create_application_group(this : IAzScope*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def delete_application_group(this : IAzScope*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application_group(this : IAzScope*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application_group.call(this, bstrGroupName, varReserved)
     end
     def get_Roles(this : IAzScope*, ppRoleCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Roles.call(this, ppRoleCollection)
     end
-    def open_role(this : IAzScope*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def open_role(this : IAzScope*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def create_role(this : IAzScope*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def create_role(this : IAzScope*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def delete_role(this : IAzScope*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_role(this : IAzScope*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_role.call(this, bstrRoleName, varReserved)
     end
     def get_Tasks(this : IAzScope*, ppTaskCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, ppTaskCollection)
     end
-    def open_task(this : IAzScope*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def open_task(this : IAzScope*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def create_task(this : IAzScope*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def create_task(this : IAzScope*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def delete_task(this : IAzScope*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzScope*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrTaskName, varReserved)
     end
-    def submit(this : IAzScope*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzScope*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
     def get_CanBeDelegated(this : IAzScope*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -2927,43 +2935,44 @@ module Win32cr::Security::Authorization
     def get_BizrulesWritable(this : IAzScope*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BizrulesWritable.call(this, pfProp)
     end
-    def get_PolicyAdministratorsName(this : IAzScope*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministratorsName(this : IAzScope*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministratorsName.call(this, pvarAdmins)
     end
-    def get_PolicyReadersName(this : IAzScope*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReadersName(this : IAzScope*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReadersName.call(this, pvarReaders)
     end
-    def add_policy_administrator_name(this : IAzScope*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator_name(this : IAzScope*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator_name(this : IAzScope*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator_name(this : IAzScope*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader_name(this : IAzScope*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader_name(this : IAzScope*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader_name(this : IAzScope*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader_name(this : IAzScope*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader_name.call(this, bstrReader, varReserved)
     end
 
   end
 
   @[Extern]
-  record IAzScopesVtbl,
+
+  record IAzScopesVtable,
     query_interface : Proc(IAzScopes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzScopes*, UInt32),
     release : Proc(IAzScopes*, UInt32),
     get_type_info_count : Proc(IAzScopes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzScopes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzScopes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzScopes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IAzScopes*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzScopes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IAzScopes*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzScopes*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAzScopes*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzScopes, lpVtbl : IAzScopesVtbl* do
+  record IAzScopes, lpVtbl : IAzScopesVtable* do
     GUID = LibC::GUID.new(0x78e14853_u32, 0x9f5e_u16, 0x406d_u16, StaticArray[0x9b_u8, 0x91_u8, 0x6b_u8, 0xdb_u8, 0xa6_u8, 0x97_u8, 0x35_u8, 0x10_u8])
     def query_interface(this : IAzScopes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2983,10 +2992,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzScopes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzScopes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzScopes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Item(this : IAzScopes*, index : Int32, pvarObtPtr : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IAzScopes*, index : Int32, pvarObtPtr : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pvarObtPtr)
     end
     def get_Count(this : IAzScopes*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -2999,50 +3008,51 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplicationGroupVtbl,
+
+  record IAzApplicationGroupVtable,
     query_interface : Proc(IAzApplicationGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplicationGroup*, UInt32),
     release : Proc(IAzApplicationGroup*, UInt32),
     get_type_info_count : Proc(IAzApplicationGroup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzApplicationGroup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzApplicationGroup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzApplicationGroup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzApplicationGroup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IAzApplicationGroup*, Int32*, Win32cr::Foundation::HRESULT),
     put_Type : Proc(IAzApplicationGroup*, Int32, Win32cr::Foundation::HRESULT),
     get_LdapQuery : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_LdapQuery : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_AppMembers : Proc(IAzApplicationGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_AppNonMembers : Proc(IAzApplicationGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Members : Proc(IAzApplicationGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_NonMembers : Proc(IAzApplicationGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_AppMembers : Proc(IAzApplicationGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_AppNonMembers : Proc(IAzApplicationGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Members : Proc(IAzApplicationGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NonMembers : Proc(IAzApplicationGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    add_app_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_app_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_app_non_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_app_non_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_non_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_non_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    add_app_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_app_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_app_non_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_app_non_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_non_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_non_member : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzApplicationGroup*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_member_name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_member_name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_non_member_name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_non_member_name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_MembersName : Proc(IAzApplicationGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_NonMembersName : Proc(IAzApplicationGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_property : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzApplicationGroup*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_member_name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_member_name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_non_member_name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_non_member_name : Proc(IAzApplicationGroup*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_MembersName : Proc(IAzApplicationGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NonMembersName : Proc(IAzApplicationGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzApplicationGroup, lpVtbl : IAzApplicationGroupVtbl* do
+  record IAzApplicationGroup, lpVtbl : IAzApplicationGroupVtable* do
     GUID = LibC::GUID.new(0xf1b744cd_u32, 0x58a6_u16, 0x4e06_u16, StaticArray[0x9f_u8, 0xbf_u8, 0x36_u8, 0xf6_u8, 0xd7_u8, 0x79_u8, 0xe2_u8, 0x1e_u8])
     def query_interface(this : IAzApplicationGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3062,8 +3072,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzApplicationGroup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzApplicationGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzApplicationGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzApplicationGroup*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -3083,16 +3093,16 @@ module Win32cr::Security::Authorization
     def put_LdapQuery(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LdapQuery.call(this, bstrProp)
     end
-    def get_AppMembers(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AppMembers(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AppMembers.call(this, pvarProp)
     end
-    def get_AppNonMembers(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AppNonMembers(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AppNonMembers.call(this, pvarProp)
     end
-    def get_Members(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Members(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Members.call(this, pvarProp)
     end
-    def get_NonMembers(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_NonMembers(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NonMembers.call(this, pvarProp)
     end
     def get_Description(this : IAzApplicationGroup*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3101,85 +3111,86 @@ module Win32cr::Security::Authorization
     def put_Description(this : IAzApplicationGroup*, bstrDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Description.call(this, bstrDescription)
     end
-    def add_app_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_app_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_app_member.call(this, bstrProp, varReserved)
     end
-    def delete_app_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_app_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_app_member.call(this, bstrProp, varReserved)
     end
-    def add_app_non_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_app_non_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_app_non_member.call(this, bstrProp, varReserved)
     end
-    def delete_app_non_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_app_non_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_app_non_member.call(this, bstrProp, varReserved)
     end
-    def add_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_member.call(this, bstrProp, varReserved)
     end
-    def delete_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_member.call(this, bstrProp, varReserved)
     end
-    def add_non_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_non_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_non_member.call(this, bstrProp, varReserved)
     end
-    def delete_non_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_non_member(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_non_member.call(this, bstrProp, varReserved)
     end
     def get_Writable(this : IAzApplicationGroup*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzApplicationGroup*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzApplicationGroup*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzApplicationGroup*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzApplicationGroup*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzApplicationGroup*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzApplicationGroup*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzApplicationGroup*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzApplicationGroup*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzApplicationGroup*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzApplicationGroup*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def add_member_name(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_member_name(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_member_name.call(this, bstrProp, varReserved)
     end
-    def delete_member_name(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_member_name(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_member_name.call(this, bstrProp, varReserved)
     end
-    def add_non_member_name(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_non_member_name(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_non_member_name.call(this, bstrProp, varReserved)
     end
-    def delete_non_member_name(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_non_member_name(this : IAzApplicationGroup*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_non_member_name.call(this, bstrProp, varReserved)
     end
-    def get_MembersName(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_MembersName(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MembersName.call(this, pvarProp)
     end
-    def get_NonMembersName(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_NonMembersName(this : IAzApplicationGroup*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NonMembersName.call(this, pvarProp)
     end
 
   end
 
   @[Extern]
-  record IAzApplicationGroupsVtbl,
+
+  record IAzApplicationGroupsVtable,
     query_interface : Proc(IAzApplicationGroups*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplicationGroups*, UInt32),
     release : Proc(IAzApplicationGroups*, UInt32),
     get_type_info_count : Proc(IAzApplicationGroups*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzApplicationGroups*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzApplicationGroups*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzApplicationGroups*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IAzApplicationGroups*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzApplicationGroups*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IAzApplicationGroups*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzApplicationGroups*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAzApplicationGroups*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzApplicationGroups, lpVtbl : IAzApplicationGroupsVtbl* do
+  record IAzApplicationGroups, lpVtbl : IAzApplicationGroupsVtable* do
     GUID = LibC::GUID.new(0x4ce66ad5_u32, 0x9f3c_u16, 0x469d_u16, StaticArray[0xa9_u8, 0x11_u8, 0xb9_u8, 0x98_u8, 0x87_u8, 0xa7_u8, 0xe6_u8, 0x85_u8])
     def query_interface(this : IAzApplicationGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3199,10 +3210,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzApplicationGroups*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzApplicationGroups*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzApplicationGroups*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Item(this : IAzApplicationGroups*, index : Int32, pvarObtPtr : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IAzApplicationGroups*, index : Int32, pvarObtPtr : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pvarObtPtr)
     end
     def get_Count(this : IAzApplicationGroups*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -3215,45 +3226,46 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleVtbl,
+
+  record IAzRoleVtable,
     query_interface : Proc(IAzRole*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRole*, UInt32),
     release : Proc(IAzRole*, UInt32),
     get_type_info_count : Proc(IAzRole*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzRole*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzRole*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzRole*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzRole*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzRole*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzRole*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ApplicationData : Proc(IAzRole*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ApplicationData : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    add_app_member : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_app_member : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_task : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_operation : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_operation : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_member : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_member : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    add_app_member : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_app_member : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_task : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_operation : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_operation : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_member : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_member : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzRole*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzRole*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzRole*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_AppMembers : Proc(IAzRole*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Members : Proc(IAzRole*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Operations : Proc(IAzRole*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Tasks : Proc(IAzRole*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzRole*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzRole*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzRole*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_member_name : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_member_name : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_MembersName : Proc(IAzRole*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_property : Proc(IAzRole*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzRole*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_AppMembers : Proc(IAzRole*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Members : Proc(IAzRole*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Operations : Proc(IAzRole*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Tasks : Proc(IAzRole*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzRole*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzRole*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzRole*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_member_name : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_member_name : Proc(IAzRole*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_MembersName : Proc(IAzRole*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzRole, lpVtbl : IAzRoleVtbl* do
+  record IAzRole, lpVtbl : IAzRoleVtable* do
     GUID = LibC::GUID.new(0x859e0d8d_u32, 0x62d7_u16, 0x41d8_u16, StaticArray[0xa0_u8, 0x34_u8, 0xc0_u8, 0xcd_u8, 0x5d_u8, 0x43_u8, 0xfd_u8, 0xfa_u8])
     def query_interface(this : IAzRole*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3273,8 +3285,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzRole*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzRole*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzRole*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzRole*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -3294,88 +3306,89 @@ module Win32cr::Security::Authorization
     def put_ApplicationData(this : IAzRole*, bstrApplicationData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ApplicationData.call(this, bstrApplicationData)
     end
-    def add_app_member(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_app_member(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_app_member.call(this, bstrProp, varReserved)
     end
-    def delete_app_member(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_app_member(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_app_member.call(this, bstrProp, varReserved)
     end
-    def add_task(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_task(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_task.call(this, bstrProp, varReserved)
     end
-    def delete_task(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrProp, varReserved)
     end
-    def add_operation(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_operation(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_operation.call(this, bstrProp, varReserved)
     end
-    def delete_operation(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_operation(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_operation.call(this, bstrProp, varReserved)
     end
-    def add_member(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_member(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_member.call(this, bstrProp, varReserved)
     end
-    def delete_member(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_member(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_member.call(this, bstrProp, varReserved)
     end
     def get_Writable(this : IAzRole*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzRole*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzRole*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzRole*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzRole*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def get_AppMembers(this : IAzRole*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AppMembers(this : IAzRole*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AppMembers.call(this, pvarProp)
     end
-    def get_Members(this : IAzRole*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Members(this : IAzRole*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Members.call(this, pvarProp)
     end
-    def get_Operations(this : IAzRole*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Operations(this : IAzRole*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operations.call(this, pvarProp)
     end
-    def get_Tasks(this : IAzRole*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Tasks(this : IAzRole*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, pvarProp)
     end
-    def add_property_item(this : IAzRole*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzRole*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzRole*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzRole*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzRole*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzRole*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def add_member_name(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_member_name(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_member_name.call(this, bstrProp, varReserved)
     end
-    def delete_member_name(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_member_name(this : IAzRole*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_member_name.call(this, bstrProp, varReserved)
     end
-    def get_MembersName(this : IAzRole*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_MembersName(this : IAzRole*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MembersName.call(this, pvarProp)
     end
 
   end
 
   @[Extern]
-  record IAzRolesVtbl,
+
+  record IAzRolesVtable,
     query_interface : Proc(IAzRoles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoles*, UInt32),
     release : Proc(IAzRoles*, UInt32),
     get_type_info_count : Proc(IAzRoles*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzRoles*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzRoles*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzRoles*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IAzRoles*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzRoles*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IAzRoles*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzRoles*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAzRoles*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzRoles, lpVtbl : IAzRolesVtbl* do
+  record IAzRoles, lpVtbl : IAzRolesVtable* do
     GUID = LibC::GUID.new(0x95e0f119_u32, 0x13b4_u16, 0x4dae_u16, StaticArray[0xb6_u8, 0x5f_u8, 0x2f_u8, 0x7d_u8, 0x60_u8, 0xd8_u8, 0x22_u8, 0xe4_u8])
     def query_interface(this : IAzRoles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3395,10 +3408,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzRoles*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzRoles*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzRoles*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Item(this : IAzRoles*, index : Int32, pvarObtPtr : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IAzRoles*, index : Int32, pvarObtPtr : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pvarObtPtr)
     end
     def get_Count(this : IAzRoles*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -3411,15 +3424,16 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzClientContextVtbl,
+
+  record IAzClientContextVtable,
     query_interface : Proc(IAzClientContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzClientContext*, UInt32),
     release : Proc(IAzClientContext*, UInt32),
     get_type_info_count : Proc(IAzClientContext*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzClientContext*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzClientContext*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzClientContext*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    access_check : Proc(IAzClientContext*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzClientContext*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    access_check : Proc(IAzClientContext*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_business_rule_string : Proc(IAzClientContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserDn : Proc(IAzClientContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserSamCompat : Proc(IAzClientContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3428,14 +3442,14 @@ module Win32cr::Security::Authorization
     get_UserCanonical : Proc(IAzClientContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserUpn : Proc(IAzClientContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserDnsSamCompat : Proc(IAzClientContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzClientContext*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_roles : Proc(IAzClientContext*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzClientContext*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_roles : Proc(IAzClientContext*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_RoleForAccessCheck : Proc(IAzClientContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RoleForAccessCheck : Proc(IAzClientContext*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzClientContext, lpVtbl : IAzClientContextVtbl* do
+  record IAzClientContext, lpVtbl : IAzClientContextVtable* do
     GUID = LibC::GUID.new(0xeff1f00b_u32, 0x488a_u16, 0x466d_u16, StaticArray[0xaf_u8, 0xd9_u8, 0xa4_u8, 0x1_u8, 0xc5_u8, 0xf9_u8, 0xee_u8, 0xf5_u8])
     def query_interface(this : IAzClientContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3455,10 +3469,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzClientContext*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzClientContext*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzClientContext*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def access_check(this : IAzClientContext*, bstrObjectName : Win32cr::Foundation::BSTR, varScopeNames : Win32cr::System::Com::VARIANT, varOperations : Win32cr::System::Com::VARIANT, varParameterNames : Win32cr::System::Com::VARIANT, varParameterValues : Win32cr::System::Com::VARIANT, varInterfaceNames : Win32cr::System::Com::VARIANT, varInterfaceFlags : Win32cr::System::Com::VARIANT, varInterfaces : Win32cr::System::Com::VARIANT, pvarResults : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def access_check(this : IAzClientContext*, bstrObjectName : Win32cr::Foundation::BSTR, varScopeNames : Win32cr::System::Variant::VARIANT, varOperations : Win32cr::System::Variant::VARIANT, varParameterNames : Win32cr::System::Variant::VARIANT, varParameterValues : Win32cr::System::Variant::VARIANT, varInterfaceNames : Win32cr::System::Variant::VARIANT, varInterfaceFlags : Win32cr::System::Variant::VARIANT, varInterfaces : Win32cr::System::Variant::VARIANT, pvarResults : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.access_check.call(this, bstrObjectName, varScopeNames, varOperations, varParameterNames, varParameterValues, varInterfaceNames, varInterfaceFlags, varInterfaces, pvarResults)
     end
     def get_business_rule_string(this : IAzClientContext*, pbstrBusinessRuleString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3485,10 +3499,10 @@ module Win32cr::Security::Authorization
     def get_UserDnsSamCompat(this : IAzClientContext*, pbstrProp : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UserDnsSamCompat.call(this, pbstrProp)
     end
-    def get_property(this : IAzClientContext*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzClientContext*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def get_roles(this : IAzClientContext*, bstrScopeName : Win32cr::Foundation::BSTR, pvarRoleNames : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_roles(this : IAzClientContext*, bstrScopeName : Win32cr::Foundation::BSTR, pvarRoleNames : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_roles.call(this, bstrScopeName, pvarRoleNames)
     end
     def get_RoleForAccessCheck(this : IAzClientContext*, pbstrProp : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3501,15 +3515,16 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzClientContext2Vtbl,
+
+  record IAzClientContext2Vtable,
     query_interface : Proc(IAzClientContext2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzClientContext2*, UInt32),
     release : Proc(IAzClientContext2*, UInt32),
     get_type_info_count : Proc(IAzClientContext2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzClientContext2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzClientContext2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzClientContext2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    access_check : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzClientContext2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    access_check : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_business_rule_string : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserDn : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserSamCompat : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3518,20 +3533,20 @@ module Win32cr::Security::Authorization
     get_UserCanonical : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserUpn : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserDnsSamCompat : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzClientContext2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_roles : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzClientContext2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_roles : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_RoleForAccessCheck : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RoleForAccessCheck : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_assigned_scopes_page : Proc(IAzClientContext2*, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_roles : Proc(IAzClientContext2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    add_application_groups : Proc(IAzClientContext2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_string_sids : Proc(IAzClientContext2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_assigned_scopes_page : Proc(IAzClientContext2*, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_roles : Proc(IAzClientContext2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    add_application_groups : Proc(IAzClientContext2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_string_sids : Proc(IAzClientContext2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     put_LDAPQueryDN : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_LDAPQueryDN : Proc(IAzClientContext2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzClientContext2, lpVtbl : IAzClientContext2Vtbl* do
+  record IAzClientContext2, lpVtbl : IAzClientContext2Vtable* do
     GUID = LibC::GUID.new(0x2b0c92b8_u32, 0x208a_u16, 0x488a_u16, StaticArray[0x8f_u8, 0x81_u8, 0xe4_u8, 0xed_u8, 0xb2_u8, 0x21_u8, 0x11_u8, 0xcd_u8])
     def query_interface(this : IAzClientContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3551,10 +3566,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzClientContext2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzClientContext2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzClientContext2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def access_check(this : IAzClientContext2*, bstrObjectName : Win32cr::Foundation::BSTR, varScopeNames : Win32cr::System::Com::VARIANT, varOperations : Win32cr::System::Com::VARIANT, varParameterNames : Win32cr::System::Com::VARIANT, varParameterValues : Win32cr::System::Com::VARIANT, varInterfaceNames : Win32cr::System::Com::VARIANT, varInterfaceFlags : Win32cr::System::Com::VARIANT, varInterfaces : Win32cr::System::Com::VARIANT, pvarResults : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def access_check(this : IAzClientContext2*, bstrObjectName : Win32cr::Foundation::BSTR, varScopeNames : Win32cr::System::Variant::VARIANT, varOperations : Win32cr::System::Variant::VARIANT, varParameterNames : Win32cr::System::Variant::VARIANT, varParameterValues : Win32cr::System::Variant::VARIANT, varInterfaceNames : Win32cr::System::Variant::VARIANT, varInterfaceFlags : Win32cr::System::Variant::VARIANT, varInterfaces : Win32cr::System::Variant::VARIANT, pvarResults : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.access_check.call(this, bstrObjectName, varScopeNames, varOperations, varParameterNames, varParameterValues, varInterfaceNames, varInterfaceFlags, varInterfaces, pvarResults)
     end
     def get_business_rule_string(this : IAzClientContext2*, pbstrBusinessRuleString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3581,10 +3596,10 @@ module Win32cr::Security::Authorization
     def get_UserDnsSamCompat(this : IAzClientContext2*, pbstrProp : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UserDnsSamCompat.call(this, pbstrProp)
     end
-    def get_property(this : IAzClientContext2*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzClientContext2*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def get_roles(this : IAzClientContext2*, bstrScopeName : Win32cr::Foundation::BSTR, pvarRoleNames : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_roles(this : IAzClientContext2*, bstrScopeName : Win32cr::Foundation::BSTR, pvarRoleNames : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_roles.call(this, bstrScopeName, pvarRoleNames)
     end
     def get_RoleForAccessCheck(this : IAzClientContext2*, pbstrProp : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3593,16 +3608,16 @@ module Win32cr::Security::Authorization
     def put_RoleForAccessCheck(this : IAzClientContext2*, bstrProp : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RoleForAccessCheck.call(this, bstrProp)
     end
-    def get_assigned_scopes_page(this : IAzClientContext2*, lOptions : Int32, page_size : Int32, pvarCursor : Win32cr::System::Com::VARIANT*, pvarScopeNames : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_assigned_scopes_page(this : IAzClientContext2*, lOptions : Int32, page_size : Int32, pvarCursor : Win32cr::System::Variant::VARIANT*, pvarScopeNames : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_assigned_scopes_page.call(this, lOptions, page_size, pvarCursor, pvarScopeNames)
     end
-    def add_roles(this : IAzClientContext2*, varRoles : Win32cr::System::Com::VARIANT, bstrScopeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def add_roles(this : IAzClientContext2*, varRoles : Win32cr::System::Variant::VARIANT, bstrScopeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_roles.call(this, varRoles, bstrScopeName)
     end
-    def add_application_groups(this : IAzClientContext2*, varApplicationGroups : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_application_groups(this : IAzClientContext2*, varApplicationGroups : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_application_groups.call(this, varApplicationGroups)
     end
-    def add_string_sids(this : IAzClientContext2*, varStringSids : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_string_sids(this : IAzClientContext2*, varStringSids : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_string_sids.call(this, varStringSids)
     end
     def put_LDAPQueryDN(this : IAzClientContext2*, bstrLDAPQueryDN : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3615,22 +3630,23 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzBizRuleContextVtbl,
+
+  record IAzBizRuleContextVtable,
     query_interface : Proc(IAzBizRuleContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzBizRuleContext*, UInt32),
     release : Proc(IAzBizRuleContext*, UInt32),
     get_type_info_count : Proc(IAzBizRuleContext*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzBizRuleContext*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzBizRuleContext*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzBizRuleContext*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzBizRuleContext*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_BusinessRuleResult : Proc(IAzBizRuleContext*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     put_BusinessRuleString : Proc(IAzBizRuleContext*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_BusinessRuleString : Proc(IAzBizRuleContext*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_parameter : Proc(IAzBizRuleContext*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_parameter : Proc(IAzBizRuleContext*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzBizRuleContext, lpVtbl : IAzBizRuleContextVtbl* do
+  record IAzBizRuleContext, lpVtbl : IAzBizRuleContextVtable* do
     GUID = LibC::GUID.new(0xe192f17d_u32, 0xd59f_u16, 0x455e_u16, StaticArray[0xa1_u8, 0x52_u8, 0x94_u8, 0x3_u8, 0x16_u8, 0xcd_u8, 0x77_u8, 0xb2_u8])
     def query_interface(this : IAzBizRuleContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3650,8 +3666,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzBizRuleContext*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzBizRuleContext*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzBizRuleContext*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_BusinessRuleResult(this : IAzBizRuleContext*, bResult : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BusinessRuleResult.call(this, bResult)
@@ -3662,31 +3678,32 @@ module Win32cr::Security::Authorization
     def get_BusinessRuleString(this : IAzBizRuleContext*, pbstrBusinessRuleString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BusinessRuleString.call(this, pbstrBusinessRuleString)
     end
-    def get_parameter(this : IAzBizRuleContext*, bstrParameterName : Win32cr::Foundation::BSTR, pvarParameterValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_parameter(this : IAzBizRuleContext*, bstrParameterName : Win32cr::Foundation::BSTR, pvarParameterValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parameter.call(this, bstrParameterName, pvarParameterValue)
     end
 
   end
 
   @[Extern]
-  record IAzBizRuleParametersVtbl,
+
+  record IAzBizRuleParametersVtable,
     query_interface : Proc(IAzBizRuleParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzBizRuleParameters*, UInt32),
     release : Proc(IAzBizRuleParameters*, UInt32),
     get_type_info_count : Proc(IAzBizRuleParameters*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzBizRuleParameters*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzBizRuleParameters*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzBizRuleParameters*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    add_parameter : Proc(IAzBizRuleParameters*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_parameters : Proc(IAzBizRuleParameters*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_parameter_value : Proc(IAzBizRuleParameters*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzBizRuleParameters*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    add_parameter : Proc(IAzBizRuleParameters*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_parameters : Proc(IAzBizRuleParameters*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_parameter_value : Proc(IAzBizRuleParameters*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     remove : Proc(IAzBizRuleParameters*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     remove_all : Proc(IAzBizRuleParameters*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzBizRuleParameters*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzBizRuleParameters, lpVtbl : IAzBizRuleParametersVtbl* do
+  record IAzBizRuleParameters, lpVtbl : IAzBizRuleParametersVtable* do
     GUID = LibC::GUID.new(0xfc17685f_u32, 0xe25d_u16, 0x4dcd_u16, StaticArray[0xba_u8, 0xe1_u8, 0x27_u8, 0x6e_u8, 0xc9_u8, 0x53_u8, 0x3c_u8, 0xb5_u8])
     def query_interface(this : IAzBizRuleParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3706,16 +3723,16 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzBizRuleParameters*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzBizRuleParameters*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzBizRuleParameters*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def add_parameter(this : IAzBizRuleParameters*, bstrParameterName : Win32cr::Foundation::BSTR, varParameterValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_parameter(this : IAzBizRuleParameters*, bstrParameterName : Win32cr::Foundation::BSTR, varParameterValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_parameter.call(this, bstrParameterName, varParameterValue)
     end
-    def add_parameters(this : IAzBizRuleParameters*, varParameterNames : Win32cr::System::Com::VARIANT, varParameterValues : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_parameters(this : IAzBizRuleParameters*, varParameterNames : Win32cr::System::Variant::VARIANT, varParameterValues : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_parameters.call(this, varParameterNames, varParameterValues)
     end
-    def get_parameter_value(this : IAzBizRuleParameters*, bstrParameterName : Win32cr::Foundation::BSTR, pvarParameterValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_parameter_value(this : IAzBizRuleParameters*, bstrParameterName : Win32cr::Foundation::BSTR, pvarParameterValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parameter_value.call(this, bstrParameterName, pvarParameterValue)
     end
     def remove(this : IAzBizRuleParameters*, varParameterName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3731,24 +3748,25 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzBizRuleInterfacesVtbl,
+
+  record IAzBizRuleInterfacesVtable,
     query_interface : Proc(IAzBizRuleInterfaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzBizRuleInterfaces*, UInt32),
     release : Proc(IAzBizRuleInterfaces*, UInt32),
     get_type_info_count : Proc(IAzBizRuleInterfaces*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzBizRuleInterfaces*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzBizRuleInterfaces*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzBizRuleInterfaces*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    add_interface : Proc(IAzBizRuleInterfaces*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_interfaces : Proc(IAzBizRuleInterfaces*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_interface_value : Proc(IAzBizRuleInterfaces*, Win32cr::Foundation::BSTR, Int32*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzBizRuleInterfaces*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    add_interface : Proc(IAzBizRuleInterfaces*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_interfaces : Proc(IAzBizRuleInterfaces*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_interface_value : Proc(IAzBizRuleInterfaces*, Win32cr::Foundation::BSTR, Int32*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     remove : Proc(IAzBizRuleInterfaces*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     remove_all : Proc(IAzBizRuleInterfaces*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzBizRuleInterfaces*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzBizRuleInterfaces, lpVtbl : IAzBizRuleInterfacesVtbl* do
+  record IAzBizRuleInterfaces, lpVtbl : IAzBizRuleInterfacesVtable* do
     GUID = LibC::GUID.new(0xe94128c7_u32, 0xe9da_u16, 0x44cc_u16, StaticArray[0xb0_u8, 0xbd_u8, 0x53_u8, 0x3_u8, 0x6f_u8, 0x3a_u8, 0xab_u8, 0x3d_u8])
     def query_interface(this : IAzBizRuleInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3768,16 +3786,16 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzBizRuleInterfaces*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzBizRuleInterfaces*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzBizRuleInterfaces*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def add_interface(this : IAzBizRuleInterfaces*, bstrInterfaceName : Win32cr::Foundation::BSTR, lInterfaceFlag : Int32, varInterface : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_interface(this : IAzBizRuleInterfaces*, bstrInterfaceName : Win32cr::Foundation::BSTR, lInterfaceFlag : Int32, varInterface : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_interface.call(this, bstrInterfaceName, lInterfaceFlag, varInterface)
     end
-    def add_interfaces(this : IAzBizRuleInterfaces*, varInterfaceNames : Win32cr::System::Com::VARIANT, varInterfaceFlags : Win32cr::System::Com::VARIANT, varInterfaces : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_interfaces(this : IAzBizRuleInterfaces*, varInterfaceNames : Win32cr::System::Variant::VARIANT, varInterfaceFlags : Win32cr::System::Variant::VARIANT, varInterfaces : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_interfaces.call(this, varInterfaceNames, varInterfaceFlags, varInterfaces)
     end
-    def get_interface_value(this : IAzBizRuleInterfaces*, bstrInterfaceName : Win32cr::Foundation::BSTR, lInterfaceFlag : Int32*, varInterface : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_interface_value(this : IAzBizRuleInterfaces*, bstrInterfaceName : Win32cr::Foundation::BSTR, lInterfaceFlag : Int32*, varInterface : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_interface_value.call(this, bstrInterfaceName, lInterfaceFlag, varInterface)
     end
     def remove(this : IAzBizRuleInterfaces*, bstrInterfaceName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3793,15 +3811,16 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzClientContext3Vtbl,
+
+  record IAzClientContext3Vtable,
     query_interface : Proc(IAzClientContext3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzClientContext3*, UInt32),
     release : Proc(IAzClientContext3*, UInt32),
     get_type_info_count : Proc(IAzClientContext3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzClientContext3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzClientContext3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzClientContext3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    access_check : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzClientContext3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    access_check : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_business_rule_string : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserDn : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserSamCompat : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3810,28 +3829,28 @@ module Win32cr::Security::Authorization
     get_UserCanonical : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserUpn : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UserDnsSamCompat : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzClientContext3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_roles : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzClientContext3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_roles : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_RoleForAccessCheck : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_RoleForAccessCheck : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_assigned_scopes_page : Proc(IAzClientContext3*, Int32, Int32, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_roles : Proc(IAzClientContext3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    add_application_groups : Proc(IAzClientContext3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_string_sids : Proc(IAzClientContext3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_assigned_scopes_page : Proc(IAzClientContext3*, Int32, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_roles : Proc(IAzClientContext3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    add_application_groups : Proc(IAzClientContext3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_string_sids : Proc(IAzClientContext3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     put_LDAPQueryDN : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_LDAPQueryDN : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     access_check2 : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, UInt32*, Win32cr::Foundation::HRESULT),
-    is_in_role_assignment : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    is_in_role_assignment : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_operations : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_tasks : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_BizRuleParameters : Proc(IAzClientContext3*, Void**, Win32cr::Foundation::HRESULT),
     get_BizRuleInterfaces : Proc(IAzClientContext3*, Void**, Win32cr::Foundation::HRESULT),
-    get_groups : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Sids : Proc(IAzClientContext3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_groups : Proc(IAzClientContext3*, Win32cr::Foundation::BSTR, Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Sids : Proc(IAzClientContext3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzClientContext3, lpVtbl : IAzClientContext3Vtbl* do
+  record IAzClientContext3, lpVtbl : IAzClientContext3Vtable* do
     GUID = LibC::GUID.new(0x11894fde_u32, 0x1deb_u16, 0x4b4b_u16, StaticArray[0x89_u8, 0x7_u8, 0x6d_u8, 0x1c_u8, 0xda_u8, 0x1f_u8, 0x5d_u8, 0x4f_u8])
     def query_interface(this : IAzClientContext3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3851,10 +3870,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzClientContext3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzClientContext3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzClientContext3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def access_check(this : IAzClientContext3*, bstrObjectName : Win32cr::Foundation::BSTR, varScopeNames : Win32cr::System::Com::VARIANT, varOperations : Win32cr::System::Com::VARIANT, varParameterNames : Win32cr::System::Com::VARIANT, varParameterValues : Win32cr::System::Com::VARIANT, varInterfaceNames : Win32cr::System::Com::VARIANT, varInterfaceFlags : Win32cr::System::Com::VARIANT, varInterfaces : Win32cr::System::Com::VARIANT, pvarResults : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def access_check(this : IAzClientContext3*, bstrObjectName : Win32cr::Foundation::BSTR, varScopeNames : Win32cr::System::Variant::VARIANT, varOperations : Win32cr::System::Variant::VARIANT, varParameterNames : Win32cr::System::Variant::VARIANT, varParameterValues : Win32cr::System::Variant::VARIANT, varInterfaceNames : Win32cr::System::Variant::VARIANT, varInterfaceFlags : Win32cr::System::Variant::VARIANT, varInterfaces : Win32cr::System::Variant::VARIANT, pvarResults : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.access_check.call(this, bstrObjectName, varScopeNames, varOperations, varParameterNames, varParameterValues, varInterfaceNames, varInterfaceFlags, varInterfaces, pvarResults)
     end
     def get_business_rule_string(this : IAzClientContext3*, pbstrBusinessRuleString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3881,10 +3900,10 @@ module Win32cr::Security::Authorization
     def get_UserDnsSamCompat(this : IAzClientContext3*, pbstrProp : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UserDnsSamCompat.call(this, pbstrProp)
     end
-    def get_property(this : IAzClientContext3*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzClientContext3*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def get_roles(this : IAzClientContext3*, bstrScopeName : Win32cr::Foundation::BSTR, pvarRoleNames : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_roles(this : IAzClientContext3*, bstrScopeName : Win32cr::Foundation::BSTR, pvarRoleNames : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_roles.call(this, bstrScopeName, pvarRoleNames)
     end
     def get_RoleForAccessCheck(this : IAzClientContext3*, pbstrProp : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3893,16 +3912,16 @@ module Win32cr::Security::Authorization
     def put_RoleForAccessCheck(this : IAzClientContext3*, bstrProp : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_RoleForAccessCheck.call(this, bstrProp)
     end
-    def get_assigned_scopes_page(this : IAzClientContext3*, lOptions : Int32, page_size : Int32, pvarCursor : Win32cr::System::Com::VARIANT*, pvarScopeNames : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_assigned_scopes_page(this : IAzClientContext3*, lOptions : Int32, page_size : Int32, pvarCursor : Win32cr::System::Variant::VARIANT*, pvarScopeNames : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_assigned_scopes_page.call(this, lOptions, page_size, pvarCursor, pvarScopeNames)
     end
-    def add_roles(this : IAzClientContext3*, varRoles : Win32cr::System::Com::VARIANT, bstrScopeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def add_roles(this : IAzClientContext3*, varRoles : Win32cr::System::Variant::VARIANT, bstrScopeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_roles.call(this, varRoles, bstrScopeName)
     end
-    def add_application_groups(this : IAzClientContext3*, varApplicationGroups : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_application_groups(this : IAzClientContext3*, varApplicationGroups : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_application_groups.call(this, varApplicationGroups)
     end
-    def add_string_sids(this : IAzClientContext3*, varStringSids : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_string_sids(this : IAzClientContext3*, varStringSids : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_string_sids.call(this, varStringSids)
     end
     def put_LDAPQueryDN(this : IAzClientContext3*, bstrLDAPQueryDN : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3914,7 +3933,7 @@ module Win32cr::Security::Authorization
     def access_check2(this : IAzClientContext3*, bstrObjectName : Win32cr::Foundation::BSTR, bstrScopeName : Win32cr::Foundation::BSTR, lOperation : Int32, plResult : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.access_check2.call(this, bstrObjectName, bstrScopeName, lOperation, plResult)
     end
-    def is_in_role_assignment(this : IAzClientContext3*, bstrScopeName : Win32cr::Foundation::BSTR, bstrRoleName : Win32cr::Foundation::BSTR, pbIsInRole : Int16*) : Win32cr::Foundation::HRESULT
+    def is_in_role_assignment(this : IAzClientContext3*, bstrScopeName : Win32cr::Foundation::BSTR, bstrRoleName : Win32cr::Foundation::BSTR, pbIsInRole : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_in_role_assignment.call(this, bstrScopeName, bstrRoleName, pbIsInRole)
     end
     def get_operations(this : IAzClientContext3*, bstrScopeName : Win32cr::Foundation::BSTR, ppOperationCollection : Void**) : Win32cr::Foundation::HRESULT
@@ -3929,24 +3948,25 @@ module Win32cr::Security::Authorization
     def get_BizRuleInterfaces(this : IAzClientContext3*, ppBizRuleInterfaces : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BizRuleInterfaces.call(this, ppBizRuleInterfaces)
     end
-    def get_groups(this : IAzClientContext3*, bstrScopeName : Win32cr::Foundation::BSTR, ulOptions : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, pGroupArray : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_groups(this : IAzClientContext3*, bstrScopeName : Win32cr::Foundation::BSTR, ulOptions : Win32cr::Security::Authorization::AZ_PROP_CONSTANTS, pGroupArray : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_groups.call(this, bstrScopeName, ulOptions, pGroupArray)
     end
-    def get_Sids(this : IAzClientContext3*, pStringSidArray : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Sids(this : IAzClientContext3*, pStringSidArray : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Sids.call(this, pStringSidArray)
     end
 
   end
 
   @[Extern]
-  record IAzScope2Vtbl,
+
+  record IAzScope2Vtable,
     query_interface : Proc(IAzScope2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzScope2*, UInt32),
     release : Proc(IAzScope2*, UInt32),
     get_type_info_count : Proc(IAzScope2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzScope2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzScope2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzScope2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzScope2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzScope2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzScope2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3954,37 +3974,37 @@ module Win32cr::Security::Authorization
     get_ApplicationData : Proc(IAzScope2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ApplicationData : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzScope2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzScope2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzScope2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzScope2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzScope2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministrators : Proc(IAzScope2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReaders : Proc(IAzScope2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzScope2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzScope2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzScope2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzScope2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministrators : Proc(IAzScope2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReaders : Proc(IAzScope2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ApplicationGroups : Proc(IAzScope2*, Void**, Win32cr::Foundation::HRESULT),
-    open_application_group : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application_group : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application_group : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_application_group : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application_group : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application_group : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Roles : Proc(IAzScope2*, Void**, Win32cr::Foundation::HRESULT),
-    open_role : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_role : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_role : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_role : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_role : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_role : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Tasks : Proc(IAzScope2*, Void**, Win32cr::Foundation::HRESULT),
-    open_task : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_task : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzScope2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_task : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_task : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzScope2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_CanBeDelegated : Proc(IAzScope2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     get_BizrulesWritable : Proc(IAzScope2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministratorsName : Proc(IAzScope2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReadersName : Proc(IAzScope2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator_name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator_name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader_name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader_name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministratorsName : Proc(IAzScope2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReadersName : Proc(IAzScope2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator_name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator_name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader_name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader_name : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_RoleDefinitions : Proc(IAzScope2*, Void**, Win32cr::Foundation::HRESULT),
     create_role_definition : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     open_role_definition : Proc(IAzScope2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -3996,7 +4016,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzScope2, lpVtbl : IAzScope2Vtbl* do
+  record IAzScope2, lpVtbl : IAzScope2Vtable* do
     GUID = LibC::GUID.new(0xee9fe8c9_u32, 0xc9f3_u16, 0x40e2_u16, StaticArray[0xaa_u8, 0x12_u8, 0xd1_u8, 0xd8_u8, 0x59_u8, 0x97_u8, 0x27_u8, 0xfd_u8])
     def query_interface(this : IAzScope2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4016,8 +4036,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzScope2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzScope2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzScope2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzScope2*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -4040,73 +4060,73 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzScope2*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzScope2*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzScope2*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzScope2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzScope2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzScope2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzScope2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzScope2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzScope2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def get_PolicyAdministrators(this : IAzScope2*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministrators(this : IAzScope2*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministrators.call(this, pvarAdmins)
     end
-    def get_PolicyReaders(this : IAzScope2*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReaders(this : IAzScope2*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReaders.call(this, pvarReaders)
     end
-    def add_policy_administrator(this : IAzScope2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator(this : IAzScope2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator(this : IAzScope2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator(this : IAzScope2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader(this : IAzScope2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader(this : IAzScope2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader(this : IAzScope2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader(this : IAzScope2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader.call(this, bstrReader, varReserved)
     end
     def get_ApplicationGroups(this : IAzScope2*, ppGroupCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ApplicationGroups.call(this, ppGroupCollection)
     end
-    def open_application_group(this : IAzScope2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def open_application_group(this : IAzScope2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def create_application_group(this : IAzScope2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def create_application_group(this : IAzScope2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def delete_application_group(this : IAzScope2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application_group(this : IAzScope2*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application_group.call(this, bstrGroupName, varReserved)
     end
     def get_Roles(this : IAzScope2*, ppRoleCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Roles.call(this, ppRoleCollection)
     end
-    def open_role(this : IAzScope2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def open_role(this : IAzScope2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def create_role(this : IAzScope2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def create_role(this : IAzScope2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def delete_role(this : IAzScope2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_role(this : IAzScope2*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_role.call(this, bstrRoleName, varReserved)
     end
     def get_Tasks(this : IAzScope2*, ppTaskCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, ppTaskCollection)
     end
-    def open_task(this : IAzScope2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def open_task(this : IAzScope2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def create_task(this : IAzScope2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def create_task(this : IAzScope2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def delete_task(this : IAzScope2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzScope2*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrTaskName, varReserved)
     end
-    def submit(this : IAzScope2*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzScope2*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
     def get_CanBeDelegated(this : IAzScope2*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -4115,22 +4135,22 @@ module Win32cr::Security::Authorization
     def get_BizrulesWritable(this : IAzScope2*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BizrulesWritable.call(this, pfProp)
     end
-    def get_PolicyAdministratorsName(this : IAzScope2*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministratorsName(this : IAzScope2*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministratorsName.call(this, pvarAdmins)
     end
-    def get_PolicyReadersName(this : IAzScope2*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReadersName(this : IAzScope2*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReadersName.call(this, pvarReaders)
     end
-    def add_policy_administrator_name(this : IAzScope2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator_name(this : IAzScope2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator_name(this : IAzScope2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator_name(this : IAzScope2*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader_name(this : IAzScope2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader_name(this : IAzScope2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader_name(this : IAzScope2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader_name(this : IAzScope2*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader_name.call(this, bstrReader, varReserved)
     end
     def get_RoleDefinitions(this : IAzScope2*, ppRoleDefinitions : Void**) : Win32cr::Foundation::HRESULT
@@ -4161,14 +4181,15 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplication3Vtbl,
+
+  record IAzApplication3Vtable,
     query_interface : Proc(IAzApplication3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplication3*, UInt32),
     release : Proc(IAzApplication3*, UInt32),
     get_type_info_count : Proc(IAzApplication3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzApplication3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzApplication3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzApplication3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzApplication3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzApplication3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4184,55 +4205,55 @@ module Win32cr::Security::Authorization
     get_ApplyStoreSacl : Proc(IAzApplication3*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_ApplyStoreSacl : Proc(IAzApplication3*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzApplication3*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzApplication3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzApplication3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministrators : Proc(IAzApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReaders : Proc(IAzApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzApplication3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzApplication3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministrators : Proc(IAzApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReaders : Proc(IAzApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Scopes : Proc(IAzApplication3*, Void**, Win32cr::Foundation::HRESULT),
-    open_scope : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_scope : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_scope : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_scope : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_scope : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_scope : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Operations : Proc(IAzApplication3*, Void**, Win32cr::Foundation::HRESULT),
-    open_operation : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_operation : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_operation : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_operation : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_operation : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_operation : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Tasks : Proc(IAzApplication3*, Void**, Win32cr::Foundation::HRESULT),
-    open_task : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_task : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_task : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_task : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ApplicationGroups : Proc(IAzApplication3*, Void**, Win32cr::Foundation::HRESULT),
-    open_application_group : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_application_group : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_application_group : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    open_application_group : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_application_group : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_application_group : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Roles : Proc(IAzApplication3*, Void**, Win32cr::Foundation::HRESULT),
-    open_role : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    create_role : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    delete_role : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_token : Proc(IAzApplication3*, UInt64, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzApplication3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzApplication3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzApplication3*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsers : Proc(IAzApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_string_sid : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    get_PolicyAdministratorsName : Proc(IAzApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PolicyReadersName : Proc(IAzApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_policy_administrator_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_administrator_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_policy_reader_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_policy_reader_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_DelegatedPolicyUsersName : Proc(IAzApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_delegated_policy_user_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_delegated_policy_user_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    initialize_client_context_from_token2 : Proc(IAzApplication3*, UInt32, UInt32, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    initialize_client_context2 : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    scope_exists : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    open_role : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    create_role : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    delete_role : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_token : Proc(IAzApplication3*, UInt64, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzApplication3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzApplication3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzApplication3*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsers : Proc(IAzApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_string_sid : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Int32, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_PolicyAdministratorsName : Proc(IAzApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PolicyReadersName : Proc(IAzApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_policy_administrator_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_administrator_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_policy_reader_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_policy_reader_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DelegatedPolicyUsersName : Proc(IAzApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_delegated_policy_user_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_delegated_policy_user_name : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    initialize_client_context_from_token2 : Proc(IAzApplication3*, UInt32, UInt32, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    initialize_client_context2 : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    scope_exists : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     open_scope2 : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     create_scope2 : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     delete_scope2 : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -4244,12 +4265,12 @@ module Win32cr::Security::Authorization
     create_role_assignment : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     open_role_assignment : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     delete_role_assignment : Proc(IAzApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_BizRulesEnabled : Proc(IAzApplication3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_BizRulesEnabled : Proc(IAzApplication3*, Int16, Win32cr::Foundation::HRESULT)
+    get_BizRulesEnabled : Proc(IAzApplication3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_BizRulesEnabled : Proc(IAzApplication3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzApplication3, lpVtbl : IAzApplication3Vtbl* do
+  record IAzApplication3, lpVtbl : IAzApplication3Vtable* do
     GUID = LibC::GUID.new(0x181c845e_u32, 0x7196_u16, 0x4a7d_u16, StaticArray[0xac_u8, 0x2e_u8, 0x2_u8, 0xc_u8, 0xb_u8, 0xb7_u8, 0xa3_u8, 0x3_u8])
     def query_interface(this : IAzApplication3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4269,8 +4290,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzApplication3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzApplication3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzApplication3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzApplication3*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -4317,151 +4338,151 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzApplication3*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzApplication3*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzApplication3*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzApplication3*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzApplication3*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def get_PolicyAdministrators(this : IAzApplication3*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministrators(this : IAzApplication3*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministrators.call(this, pvarAdmins)
     end
-    def get_PolicyReaders(this : IAzApplication3*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReaders(this : IAzApplication3*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReaders.call(this, pvarReaders)
     end
-    def add_policy_administrator(this : IAzApplication3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator(this : IAzApplication3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator(this : IAzApplication3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator(this : IAzApplication3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader(this : IAzApplication3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader(this : IAzApplication3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader(this : IAzApplication3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader(this : IAzApplication3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader.call(this, bstrReader, varReserved)
     end
     def get_Scopes(this : IAzApplication3*, ppScopeCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Scopes.call(this, ppScopeCollection)
     end
-    def open_scope(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
+    def open_scope(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_scope.call(this, bstrScopeName, varReserved, ppScope)
     end
-    def create_scope(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
+    def create_scope(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppScope : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_scope.call(this, bstrScopeName, varReserved, ppScope)
     end
-    def delete_scope(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_scope(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_scope.call(this, bstrScopeName, varReserved)
     end
     def get_Operations(this : IAzApplication3*, ppOperationCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operations.call(this, ppOperationCollection)
     end
-    def open_operation(this : IAzApplication3*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
+    def open_operation(this : IAzApplication3*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_operation.call(this, bstrOperationName, varReserved, ppOperation)
     end
-    def create_operation(this : IAzApplication3*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
+    def create_operation(this : IAzApplication3*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppOperation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_operation.call(this, bstrOperationName, varReserved, ppOperation)
     end
-    def delete_operation(this : IAzApplication3*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_operation(this : IAzApplication3*, bstrOperationName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_operation.call(this, bstrOperationName, varReserved)
     end
     def get_Tasks(this : IAzApplication3*, ppTaskCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, ppTaskCollection)
     end
-    def open_task(this : IAzApplication3*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def open_task(this : IAzApplication3*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def create_task(this : IAzApplication3*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
+    def create_task(this : IAzApplication3*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppTask : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_task.call(this, bstrTaskName, varReserved, ppTask)
     end
-    def delete_task(this : IAzApplication3*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzApplication3*, bstrTaskName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrTaskName, varReserved)
     end
     def get_ApplicationGroups(this : IAzApplication3*, ppGroupCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ApplicationGroups.call(this, ppGroupCollection)
     end
-    def open_application_group(this : IAzApplication3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def open_application_group(this : IAzApplication3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def create_application_group(this : IAzApplication3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
+    def create_application_group(this : IAzApplication3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_application_group.call(this, bstrGroupName, varReserved, ppGroup)
     end
-    def delete_application_group(this : IAzApplication3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_application_group(this : IAzApplication3*, bstrGroupName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_application_group.call(this, bstrGroupName, varReserved)
     end
     def get_Roles(this : IAzApplication3*, ppRoleCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Roles.call(this, ppRoleCollection)
     end
-    def open_role(this : IAzApplication3*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def open_role(this : IAzApplication3*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def create_role(this : IAzApplication3*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
+    def create_role(this : IAzApplication3*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppRole : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create_role.call(this, bstrRoleName, varReserved, ppRole)
     end
-    def delete_role(this : IAzApplication3*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_role(this : IAzApplication3*, bstrRoleName : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_role.call(this, bstrRoleName, varReserved)
     end
-    def initialize_client_context_from_token(this : IAzApplication3*, ullTokenHandle : UInt64, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_token(this : IAzApplication3*, ullTokenHandle : UInt64, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_token.call(this, ullTokenHandle, varReserved, ppClientContext)
     end
-    def add_property_item(this : IAzApplication3*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzApplication3*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzApplication3*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzApplication3*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzApplication3*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzApplication3*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def initialize_client_context_from_name(this : IAzApplication3*, client_name : Win32cr::Foundation::BSTR, domain_name : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_name(this : IAzApplication3*, client_name : Win32cr::Foundation::BSTR, domain_name : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_name.call(this, client_name, domain_name, varReserved, ppClientContext)
     end
-    def get_DelegatedPolicyUsers(this : IAzApplication3*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsers(this : IAzApplication3*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsers.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user(this : IAzApplication3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user(this : IAzApplication3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user(this : IAzApplication3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user(this : IAzApplication3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def initialize_client_context_from_string_sid(this : IAzApplication3*, sid_string : Win32cr::Foundation::BSTR, lOptions : Int32, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_string_sid(this : IAzApplication3*, sid_string : Win32cr::Foundation::BSTR, lOptions : Int32, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_string_sid.call(this, sid_string, lOptions, varReserved, ppClientContext)
     end
-    def get_PolicyAdministratorsName(this : IAzApplication3*, pvarAdmins : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyAdministratorsName(this : IAzApplication3*, pvarAdmins : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyAdministratorsName.call(this, pvarAdmins)
     end
-    def get_PolicyReadersName(this : IAzApplication3*, pvarReaders : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PolicyReadersName(this : IAzApplication3*, pvarReaders : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PolicyReadersName.call(this, pvarReaders)
     end
-    def add_policy_administrator_name(this : IAzApplication3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_administrator_name(this : IAzApplication3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def delete_policy_administrator_name(this : IAzApplication3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_administrator_name(this : IAzApplication3*, bstrAdmin : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_administrator_name.call(this, bstrAdmin, varReserved)
     end
-    def add_policy_reader_name(this : IAzApplication3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_policy_reader_name(this : IAzApplication3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def delete_policy_reader_name(this : IAzApplication3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_policy_reader_name(this : IAzApplication3*, bstrReader : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_policy_reader_name.call(this, bstrReader, varReserved)
     end
-    def get_DelegatedPolicyUsersName(this : IAzApplication3*, pvarDelegatedPolicyUsers : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DelegatedPolicyUsersName(this : IAzApplication3*, pvarDelegatedPolicyUsers : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DelegatedPolicyUsersName.call(this, pvarDelegatedPolicyUsers)
     end
-    def add_delegated_policy_user_name(this : IAzApplication3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_delegated_policy_user_name(this : IAzApplication3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def delete_delegated_policy_user_name(this : IAzApplication3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_delegated_policy_user_name(this : IAzApplication3*, bstrDelegatedPolicyUser : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_delegated_policy_user_name.call(this, bstrDelegatedPolicyUser, varReserved)
     end
-    def initialize_client_context_from_token2(this : IAzApplication3*, ulTokenHandleLowPart : UInt32, ulTokenHandleHighPart : UInt32, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context_from_token2(this : IAzApplication3*, ulTokenHandleLowPart : UInt32, ulTokenHandleHighPart : UInt32, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context_from_token2.call(this, ulTokenHandleLowPart, ulTokenHandleHighPart, varReserved, ppClientContext)
     end
-    def initialize_client_context2(this : IAzApplication3*, identifying_string : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
+    def initialize_client_context2(this : IAzApplication3*, identifying_string : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT, ppClientContext : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.initialize_client_context2.call(this, identifying_string, varReserved, ppClientContext)
     end
-    def scope_exists(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, pbExist : Int16*) : Win32cr::Foundation::HRESULT
+    def scope_exists(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, pbExist : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.scope_exists.call(this, bstrScopeName, pbExist)
     end
     def open_scope2(this : IAzApplication3*, bstrScopeName : Win32cr::Foundation::BSTR, ppScope2 : Void**) : Win32cr::Foundation::HRESULT
@@ -4497,24 +4518,25 @@ module Win32cr::Security::Authorization
     def delete_role_assignment(this : IAzApplication3*, bstrRoleAssignmentName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_role_assignment.call(this, bstrRoleAssignmentName)
     end
-    def get_BizRulesEnabled(this : IAzApplication3*, pbEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_BizRulesEnabled(this : IAzApplication3*, pbEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BizRulesEnabled.call(this, pbEnabled)
     end
-    def put_BizRulesEnabled(this : IAzApplication3*, bEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_BizRulesEnabled(this : IAzApplication3*, bEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BizRulesEnabled.call(this, bEnabled)
     end
 
   end
 
   @[Extern]
-  record IAzOperation2Vtbl,
+
+  record IAzOperation2Vtable,
     query_interface : Proc(IAzOperation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzOperation2*, UInt32),
     release : Proc(IAzOperation2*, UInt32),
     get_type_info_count : Proc(IAzOperation2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzOperation2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzOperation2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzOperation2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzOperation2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzOperation2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzOperation2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzOperation2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4524,14 +4546,14 @@ module Win32cr::Security::Authorization
     get_OperationID : Proc(IAzOperation2*, Int32*, Win32cr::Foundation::HRESULT),
     put_OperationID : Proc(IAzOperation2*, Int32, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzOperation2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzOperation2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzOperation2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzOperation2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    role_assignments : Proc(IAzOperation2*, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT)
+    get_property : Proc(IAzOperation2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzOperation2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzOperation2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    role_assignments : Proc(IAzOperation2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzOperation2, lpVtbl : IAzOperation2Vtbl* do
+  record IAzOperation2, lpVtbl : IAzOperation2Vtable* do
     GUID = LibC::GUID.new(0x1f5ea01f_u32, 0x44a2_u16, 0x4184_u16, StaticArray[0x9c_u8, 0x48_u8, 0xa7_u8, 0x5b_u8, 0x4d_u8, 0xcc_u8, 0x8c_u8, 0xcc_u8])
     def query_interface(this : IAzOperation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4551,8 +4573,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzOperation2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzOperation2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzOperation2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzOperation2*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -4581,37 +4603,38 @@ module Win32cr::Security::Authorization
     def get_Writable(this : IAzOperation2*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzOperation2*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzOperation2*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzOperation2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzOperation2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzOperation2*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzOperation2*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def role_assignments(this : IAzOperation2*, bstrScopeName : Win32cr::Foundation::BSTR, bRecursive : Int16, ppRoleAssignments : Void**) : Win32cr::Foundation::HRESULT
+    def role_assignments(this : IAzOperation2*, bstrScopeName : Win32cr::Foundation::BSTR, bRecursive : Win32cr::Foundation::VARIANT_BOOL, ppRoleAssignments : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.role_assignments.call(this, bstrScopeName, bRecursive, ppRoleAssignments)
     end
 
   end
 
   @[Extern]
-  record IAzRoleDefinitionsVtbl,
+
+  record IAzRoleDefinitionsVtable,
     query_interface : Proc(IAzRoleDefinitions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoleDefinitions*, UInt32),
     release : Proc(IAzRoleDefinitions*, UInt32),
     get_type_info_count : Proc(IAzRoleDefinitions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzRoleDefinitions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzRoleDefinitions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzRoleDefinitions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IAzRoleDefinitions*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzRoleDefinitions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IAzRoleDefinitions*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzRoleDefinitions*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAzRoleDefinitions*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzRoleDefinitions, lpVtbl : IAzRoleDefinitionsVtbl* do
+  record IAzRoleDefinitions, lpVtbl : IAzRoleDefinitionsVtable* do
     GUID = LibC::GUID.new(0x881f25a5_u32, 0xd755_u16, 0x4550_u16, StaticArray[0x95_u8, 0x7a_u8, 0xd5_u8, 0x3_u8, 0xa3_u8, 0xb3_u8, 0x40_u8, 0x1_u8])
     def query_interface(this : IAzRoleDefinitions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4631,10 +4654,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzRoleDefinitions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzRoleDefinitions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzRoleDefinitions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Item(this : IAzRoleDefinitions*, index : Int32, pvarObtPtr : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IAzRoleDefinitions*, index : Int32, pvarObtPtr : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pvarObtPtr)
     end
     def get_Count(this : IAzRoleDefinitions*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -4647,14 +4670,15 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleDefinitionVtbl,
+
+  record IAzRoleDefinitionVtable,
     query_interface : Proc(IAzRoleDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoleDefinition*, UInt32),
     release : Proc(IAzRoleDefinition*, UInt32),
     get_type_info_count : Proc(IAzRoleDefinition*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzRoleDefinition*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzRoleDefinition*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzRoleDefinition*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzRoleDefinition*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4669,26 +4693,26 @@ module Win32cr::Security::Authorization
     put_BizRuleImportedPath : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_IsRoleDefinition : Proc(IAzRoleDefinition*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_IsRoleDefinition : Proc(IAzRoleDefinition*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_Operations : Proc(IAzRoleDefinition*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Tasks : Proc(IAzRoleDefinition*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_operation : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_operation : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_task : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Operations : Proc(IAzRoleDefinition*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Tasks : Proc(IAzRoleDefinition*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_operation : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_operation : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_task : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzRoleDefinition*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    role_assignments : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzRoleDefinition*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    role_assignments : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     add_role_definition : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete_role_definition : Proc(IAzRoleDefinition*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_RoleDefinitions : Proc(IAzRoleDefinition*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzRoleDefinition, lpVtbl : IAzRoleDefinitionVtbl* do
+  record IAzRoleDefinition, lpVtbl : IAzRoleDefinitionVtable* do
     GUID = LibC::GUID.new(0xd97fcea1_u32, 0x2599_u16, 0x44f1_u16, StaticArray[0x9f_u8, 0xc3_u8, 0x58_u8, 0xe9_u8, 0xfb_u8, 0xe0_u8, 0x94_u8, 0x66_u8])
     def query_interface(this : IAzRoleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4708,8 +4732,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzRoleDefinition*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzRoleDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzRoleDefinition*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzRoleDefinition*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -4753,43 +4777,43 @@ module Win32cr::Security::Authorization
     def put_IsRoleDefinition(this : IAzRoleDefinition*, fProp : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsRoleDefinition.call(this, fProp)
     end
-    def get_Operations(this : IAzRoleDefinition*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Operations(this : IAzRoleDefinition*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operations.call(this, pvarProp)
     end
-    def get_Tasks(this : IAzRoleDefinition*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Tasks(this : IAzRoleDefinition*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, pvarProp)
     end
-    def add_operation(this : IAzRoleDefinition*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_operation(this : IAzRoleDefinition*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_operation.call(this, bstrOp, varReserved)
     end
-    def delete_operation(this : IAzRoleDefinition*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_operation(this : IAzRoleDefinition*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_operation.call(this, bstrOp, varReserved)
     end
-    def add_task(this : IAzRoleDefinition*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_task(this : IAzRoleDefinition*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_task.call(this, bstrTask, varReserved)
     end
-    def delete_task(this : IAzRoleDefinition*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzRoleDefinition*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrTask, varReserved)
     end
     def get_Writable(this : IAzRoleDefinition*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzRoleDefinition*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzRoleDefinition*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzRoleDefinition*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzRoleDefinition*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzRoleDefinition*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzRoleDefinition*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzRoleDefinition*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzRoleDefinition*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzRoleDefinition*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzRoleDefinition*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def role_assignments(this : IAzRoleDefinition*, bstrScopeName : Win32cr::Foundation::BSTR, bRecursive : Int16, ppRoleAssignments : Void**) : Win32cr::Foundation::HRESULT
+    def role_assignments(this : IAzRoleDefinition*, bstrScopeName : Win32cr::Foundation::BSTR, bRecursive : Win32cr::Foundation::VARIANT_BOOL, ppRoleAssignments : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.role_assignments.call(this, bstrScopeName, bRecursive, ppRoleAssignments)
     end
     def add_role_definition(this : IAzRoleDefinition*, bstrRoleDefinition : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4805,41 +4829,42 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleAssignmentVtbl,
+
+  record IAzRoleAssignmentVtable,
     query_interface : Proc(IAzRoleAssignment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoleAssignment*, UInt32),
     release : Proc(IAzRoleAssignment*, UInt32),
     get_type_info_count : Proc(IAzRoleAssignment*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzRoleAssignment*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzRoleAssignment*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzRoleAssignment*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzRoleAssignment*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ApplicationData : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ApplicationData : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    add_app_member : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_app_member : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_task : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_operation : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_operation : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_member : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_member : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    add_app_member : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_app_member : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_task : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_operation : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_operation : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_member : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_member : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzRoleAssignment*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_AppMembers : Proc(IAzRoleAssignment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Members : Proc(IAzRoleAssignment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Operations : Proc(IAzRoleAssignment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Tasks : Proc(IAzRoleAssignment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_member_name : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_member_name : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_MembersName : Proc(IAzRoleAssignment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_AppMembers : Proc(IAzRoleAssignment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Members : Proc(IAzRoleAssignment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Operations : Proc(IAzRoleAssignment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Tasks : Proc(IAzRoleAssignment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzRoleAssignment*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_member_name : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_member_name : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_MembersName : Proc(IAzRoleAssignment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     add_role_definition : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete_role_definition : Proc(IAzRoleAssignment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_RoleDefinitions : Proc(IAzRoleAssignment*, Void**, Win32cr::Foundation::HRESULT),
@@ -4847,7 +4872,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzRoleAssignment, lpVtbl : IAzRoleAssignmentVtbl* do
+  record IAzRoleAssignment, lpVtbl : IAzRoleAssignmentVtable* do
     GUID = LibC::GUID.new(0x55647d31_u32, 0xd5a_u16, 0x4fa3_u16, StaticArray[0xb4_u8, 0xac_u8, 0x2b_u8, 0x5f_u8, 0x9a_u8, 0xd5_u8, 0xab_u8, 0x76_u8])
     def query_interface(this : IAzRoleAssignment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4867,8 +4892,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzRoleAssignment*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzRoleAssignment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzRoleAssignment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzRoleAssignment*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -4888,67 +4913,67 @@ module Win32cr::Security::Authorization
     def put_ApplicationData(this : IAzRoleAssignment*, bstrApplicationData : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ApplicationData.call(this, bstrApplicationData)
     end
-    def add_app_member(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_app_member(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_app_member.call(this, bstrProp, varReserved)
     end
-    def delete_app_member(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_app_member(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_app_member.call(this, bstrProp, varReserved)
     end
-    def add_task(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_task(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_task.call(this, bstrProp, varReserved)
     end
-    def delete_task(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrProp, varReserved)
     end
-    def add_operation(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_operation(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_operation.call(this, bstrProp, varReserved)
     end
-    def delete_operation(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_operation(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_operation.call(this, bstrProp, varReserved)
     end
-    def add_member(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_member(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_member.call(this, bstrProp, varReserved)
     end
-    def delete_member(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_member(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_member.call(this, bstrProp, varReserved)
     end
     def get_Writable(this : IAzRoleAssignment*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzRoleAssignment*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzRoleAssignment*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzRoleAssignment*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzRoleAssignment*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def get_AppMembers(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AppMembers(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AppMembers.call(this, pvarProp)
     end
-    def get_Members(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Members(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Members.call(this, pvarProp)
     end
-    def get_Operations(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Operations(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operations.call(this, pvarProp)
     end
-    def get_Tasks(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Tasks(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, pvarProp)
     end
-    def add_property_item(this : IAzRoleAssignment*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzRoleAssignment*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzRoleAssignment*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzRoleAssignment*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzRoleAssignment*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzRoleAssignment*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def add_member_name(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_member_name(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_member_name.call(this, bstrProp, varReserved)
     end
-    def delete_member_name(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_member_name(this : IAzRoleAssignment*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_member_name.call(this, bstrProp, varReserved)
     end
-    def get_MembersName(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_MembersName(this : IAzRoleAssignment*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MembersName.call(this, pvarProp)
     end
     def add_role_definition(this : IAzRoleAssignment*, bstrRoleDefinition : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4967,21 +4992,22 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleAssignmentsVtbl,
+
+  record IAzRoleAssignmentsVtable,
     query_interface : Proc(IAzRoleAssignments*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoleAssignments*, UInt32),
     release : Proc(IAzRoleAssignments*, UInt32),
     get_type_info_count : Proc(IAzRoleAssignments*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzRoleAssignments*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzRoleAssignments*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzRoleAssignments*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IAzRoleAssignments*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzRoleAssignments*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IAzRoleAssignments*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IAzRoleAssignments*, Int32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IAzRoleAssignments*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzRoleAssignments, lpVtbl : IAzRoleAssignmentsVtbl* do
+  record IAzRoleAssignments, lpVtbl : IAzRoleAssignmentsVtable* do
     GUID = LibC::GUID.new(0x9c80b900_u32, 0xfceb_u16, 0x4d73_u16, StaticArray[0xa0_u8, 0xf4_u8, 0xc8_u8, 0x3b_u8, 0xb_u8, 0xbf_u8, 0x24_u8, 0x81_u8])
     def query_interface(this : IAzRoleAssignments*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5001,10 +5027,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzRoleAssignments*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzRoleAssignments*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzRoleAssignments*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Item(this : IAzRoleAssignments*, index : Int32, pvarObtPtr : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IAzRoleAssignments*, index : Int32, pvarObtPtr : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, index, pvarObtPtr)
     end
     def get_Count(this : IAzRoleAssignments*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -5017,20 +5043,21 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzPrincipalLocatorVtbl,
+
+  record IAzPrincipalLocatorVtable,
     query_interface : Proc(IAzPrincipalLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzPrincipalLocator*, UInt32),
     release : Proc(IAzPrincipalLocator*, UInt32),
     get_type_info_count : Proc(IAzPrincipalLocator*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzPrincipalLocator*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzPrincipalLocator*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzPrincipalLocator*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzPrincipalLocator*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_NameResolver : Proc(IAzPrincipalLocator*, Void**, Win32cr::Foundation::HRESULT),
     get_ObjectPicker : Proc(IAzPrincipalLocator*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzPrincipalLocator, lpVtbl : IAzPrincipalLocatorVtbl* do
+  record IAzPrincipalLocator, lpVtbl : IAzPrincipalLocatorVtable* do
     GUID = LibC::GUID.new(0xe5c3507d_u32, 0xad6a_u16, 0x4992_u16, StaticArray[0x9c_u8, 0x7f_u8, 0x74_u8, 0xab_u8, 0x48_u8, 0xb_u8, 0x44_u8, 0xcc_u8])
     def query_interface(this : IAzPrincipalLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5050,8 +5077,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzPrincipalLocator*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzPrincipalLocator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzPrincipalLocator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_NameResolver(this : IAzPrincipalLocator*, ppNameResolver : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NameResolver.call(this, ppNameResolver)
@@ -5063,20 +5090,21 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzNameResolverVtbl,
+
+  record IAzNameResolverVtable,
     query_interface : Proc(IAzNameResolver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzNameResolver*, UInt32),
     release : Proc(IAzNameResolver*, UInt32),
     get_type_info_count : Proc(IAzNameResolver*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzNameResolver*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzNameResolver*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzNameResolver*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzNameResolver*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     name_from_sid : Proc(IAzNameResolver*, Win32cr::Foundation::BSTR, Int32*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    names_from_sids : Proc(IAzNameResolver*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    names_from_sids : Proc(IAzNameResolver*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzNameResolver, lpVtbl : IAzNameResolverVtbl* do
+  record IAzNameResolver, lpVtbl : IAzNameResolverVtable* do
     GUID = LibC::GUID.new(0x504d0f15_u32, 0x73e2_u16, 0x43df_u16, StaticArray[0xa8_u8, 0x70_u8, 0xa6_u8, 0x4f_u8, 0x40_u8, 0x71_u8, 0x4f_u8, 0x53_u8])
     def query_interface(this : IAzNameResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5096,33 +5124,34 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzNameResolver*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzNameResolver*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzNameResolver*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def name_from_sid(this : IAzNameResolver*, bstrSid : Win32cr::Foundation::BSTR, pSidType : Int32*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.name_from_sid.call(this, bstrSid, pSidType, pbstrName)
     end
-    def names_from_sids(this : IAzNameResolver*, vSids : Win32cr::System::Com::VARIANT, pvSidTypes : Win32cr::System::Com::VARIANT*, pvNames : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def names_from_sids(this : IAzNameResolver*, vSids : Win32cr::System::Variant::VARIANT, pvSidTypes : Win32cr::System::Variant::VARIANT*, pvNames : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.names_from_sids.call(this, vSids, pvSidTypes, pvNames)
     end
 
   end
 
   @[Extern]
-  record IAzObjectPickerVtbl,
+
+  record IAzObjectPickerVtable,
     query_interface : Proc(IAzObjectPicker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzObjectPicker*, UInt32),
     release : Proc(IAzObjectPicker*, UInt32),
     get_type_info_count : Proc(IAzObjectPicker*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzObjectPicker*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzObjectPicker*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzObjectPicker*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_principals : Proc(IAzObjectPicker*, Win32cr::Foundation::HWND, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzObjectPicker*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_principals : Proc(IAzObjectPicker*, Win32cr::Foundation::HWND, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzObjectPicker*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzObjectPicker, lpVtbl : IAzObjectPickerVtbl* do
+  record IAzObjectPicker, lpVtbl : IAzObjectPickerVtable* do
     GUID = LibC::GUID.new(0x63130a48_u32, 0x699a_u16, 0x42d8_u16, StaticArray[0xbf_u8, 0x1_u8, 0xc6_u8, 0x2a_u8, 0xc3_u8, 0xfb_u8, 0x79_u8, 0xf9_u8])
     def query_interface(this : IAzObjectPicker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5142,10 +5171,10 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzObjectPicker*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzObjectPicker*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzObjectPicker*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_principals(this : IAzObjectPicker*, hParentWnd : Win32cr::Foundation::HWND, bstrTitle : Win32cr::Foundation::BSTR, pvSidTypes : Win32cr::System::Com::VARIANT*, pvNames : Win32cr::System::Com::VARIANT*, pvSids : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_principals(this : IAzObjectPicker*, hParentWnd : Win32cr::Foundation::HWND, bstrTitle : Win32cr::Foundation::BSTR, pvSidTypes : Win32cr::System::Variant::VARIANT*, pvNames : Win32cr::System::Variant::VARIANT*, pvSids : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_principals.call(this, hParentWnd, bstrTitle, pvSidTypes, pvNames, pvSids)
     end
     def get_Name(this : IAzObjectPicker*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5155,57 +5184,58 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplicationGroup2Vtbl,
+
+  record IAzApplicationGroup2Vtable,
     query_interface : Proc(IAzApplicationGroup2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplicationGroup2*, UInt32),
     release : Proc(IAzApplicationGroup2*, UInt32),
     get_type_info_count : Proc(IAzApplicationGroup2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzApplicationGroup2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzApplicationGroup2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzApplicationGroup2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzApplicationGroup2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Type : Proc(IAzApplicationGroup2*, Int32*, Win32cr::Foundation::HRESULT),
     put_Type : Proc(IAzApplicationGroup2*, Int32, Win32cr::Foundation::HRESULT),
     get_LdapQuery : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_LdapQuery : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_AppMembers : Proc(IAzApplicationGroup2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_AppNonMembers : Proc(IAzApplicationGroup2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Members : Proc(IAzApplicationGroup2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_NonMembers : Proc(IAzApplicationGroup2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_AppMembers : Proc(IAzApplicationGroup2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_AppNonMembers : Proc(IAzApplicationGroup2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Members : Proc(IAzApplicationGroup2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NonMembers : Proc(IAzApplicationGroup2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    add_app_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_app_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_app_non_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_app_non_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_non_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_non_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    add_app_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_app_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_app_non_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_app_non_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_non_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_non_member : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_member_name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_member_name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_non_member_name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_non_member_name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_MembersName : Proc(IAzApplicationGroup2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_NonMembersName : Proc(IAzApplicationGroup2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzApplicationGroup2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_member_name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_member_name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_non_member_name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_non_member_name : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_MembersName : Proc(IAzApplicationGroup2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NonMembersName : Proc(IAzApplicationGroup2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_BizRule : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_BizRule : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_BizRuleLanguage : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_BizRuleLanguage : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_BizRuleImportedPath : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_BizRuleImportedPath : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    role_assignments : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT)
+    role_assignments : Proc(IAzApplicationGroup2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzApplicationGroup2, lpVtbl : IAzApplicationGroup2Vtbl* do
+  record IAzApplicationGroup2, lpVtbl : IAzApplicationGroup2Vtable* do
     GUID = LibC::GUID.new(0x3f0613fc_u32, 0xb71a_u16, 0x464e_u16, StaticArray[0xa1_u8, 0x1d_u8, 0x5b_u8, 0x88_u8, 0x1a_u8, 0x56_u8, 0xce_u8, 0xfa_u8])
     def query_interface(this : IAzApplicationGroup2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5225,8 +5255,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzApplicationGroup2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzApplicationGroup2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzApplicationGroup2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzApplicationGroup2*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -5246,16 +5276,16 @@ module Win32cr::Security::Authorization
     def put_LdapQuery(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LdapQuery.call(this, bstrProp)
     end
-    def get_AppMembers(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AppMembers(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AppMembers.call(this, pvarProp)
     end
-    def get_AppNonMembers(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_AppNonMembers(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AppNonMembers.call(this, pvarProp)
     end
-    def get_Members(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Members(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Members.call(this, pvarProp)
     end
-    def get_NonMembers(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_NonMembers(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NonMembers.call(this, pvarProp)
     end
     def get_Description(this : IAzApplicationGroup2*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5264,64 +5294,64 @@ module Win32cr::Security::Authorization
     def put_Description(this : IAzApplicationGroup2*, bstrDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Description.call(this, bstrDescription)
     end
-    def add_app_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_app_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_app_member.call(this, bstrProp, varReserved)
     end
-    def delete_app_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_app_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_app_member.call(this, bstrProp, varReserved)
     end
-    def add_app_non_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_app_non_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_app_non_member.call(this, bstrProp, varReserved)
     end
-    def delete_app_non_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_app_non_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_app_non_member.call(this, bstrProp, varReserved)
     end
-    def add_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_member.call(this, bstrProp, varReserved)
     end
-    def delete_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_member.call(this, bstrProp, varReserved)
     end
-    def add_non_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_non_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_non_member.call(this, bstrProp, varReserved)
     end
-    def delete_non_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_non_member(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_non_member.call(this, bstrProp, varReserved)
     end
     def get_Writable(this : IAzApplicationGroup2*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzApplicationGroup2*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzApplicationGroup2*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzApplicationGroup2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzApplicationGroup2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzApplicationGroup2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzApplicationGroup2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzApplicationGroup2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzApplicationGroup2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzApplicationGroup2*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzApplicationGroup2*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def add_member_name(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_member_name(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_member_name.call(this, bstrProp, varReserved)
     end
-    def delete_member_name(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_member_name(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_member_name.call(this, bstrProp, varReserved)
     end
-    def add_non_member_name(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_non_member_name(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_non_member_name.call(this, bstrProp, varReserved)
     end
-    def delete_non_member_name(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_non_member_name(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_non_member_name.call(this, bstrProp, varReserved)
     end
-    def get_MembersName(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_MembersName(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MembersName.call(this, pvarProp)
     end
-    def get_NonMembersName(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_NonMembersName(this : IAzApplicationGroup2*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NonMembersName.call(this, pvarProp)
     end
     def get_BizRule(this : IAzApplicationGroup2*, pbstrProp : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5342,21 +5372,22 @@ module Win32cr::Security::Authorization
     def put_BizRuleImportedPath(this : IAzApplicationGroup2*, bstrProp : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BizRuleImportedPath.call(this, bstrProp)
     end
-    def role_assignments(this : IAzApplicationGroup2*, bstrScopeName : Win32cr::Foundation::BSTR, bRecursive : Int16, ppRoleAssignments : Void**) : Win32cr::Foundation::HRESULT
+    def role_assignments(this : IAzApplicationGroup2*, bstrScopeName : Win32cr::Foundation::BSTR, bRecursive : Win32cr::Foundation::VARIANT_BOOL, ppRoleAssignments : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.role_assignments.call(this, bstrScopeName, bRecursive, ppRoleAssignments)
     end
 
   end
 
   @[Extern]
-  record IAzTask2Vtbl,
+
+  record IAzTask2Vtable,
     query_interface : Proc(IAzTask2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzTask2*, UInt32),
     release : Proc(IAzTask2*, UInt32),
     get_type_info_count : Proc(IAzTask2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IAzTask2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IAzTask2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IAzTask2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IAzTask2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IAzTask2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Name : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IAzTask2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -5371,23 +5402,23 @@ module Win32cr::Security::Authorization
     put_BizRuleImportedPath : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_IsRoleDefinition : Proc(IAzTask2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
     put_IsRoleDefinition : Proc(IAzTask2*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    get_Operations : Proc(IAzTask2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_Tasks : Proc(IAzTask2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    add_operation : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_operation : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_task : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_task : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Operations : Proc(IAzTask2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_Tasks : Proc(IAzTask2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    add_operation : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_operation : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_task : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_task : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Writable : Proc(IAzTask2*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
-    get_property : Proc(IAzTask2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_property : Proc(IAzTask2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    add_property_item : Proc(IAzTask2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    delete_property_item : Proc(IAzTask2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit : Proc(IAzTask2*, Int32, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    role_assignments : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Int16, Void**, Win32cr::Foundation::HRESULT)
+    get_property : Proc(IAzTask2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_property : Proc(IAzTask2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    add_property_item : Proc(IAzTask2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    delete_property_item : Proc(IAzTask2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit : Proc(IAzTask2*, Int32, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    role_assignments : Proc(IAzTask2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IAzTask2, lpVtbl : IAzTask2Vtbl* do
+  record IAzTask2, lpVtbl : IAzTask2Vtable* do
     GUID = LibC::GUID.new(0x3a9a5ee_u32, 0x48c8_u16, 0x4832_u16, StaticArray[0x90_u8, 0x25_u8, 0xaa_u8, 0xd5_u8, 0x3_u8, 0xc4_u8, 0x65_u8, 0x26_u8])
     def query_interface(this : IAzTask2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5407,8 +5438,8 @@ module Win32cr::Security::Authorization
     def get_i_ds_of_names(this : IAzTask2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IAzTask2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IAzTask2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IAzTask2*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -5452,413 +5483,590 @@ module Win32cr::Security::Authorization
     def put_IsRoleDefinition(this : IAzTask2*, fProp : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IsRoleDefinition.call(this, fProp)
     end
-    def get_Operations(this : IAzTask2*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Operations(this : IAzTask2*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Operations.call(this, pvarProp)
     end
-    def get_Tasks(this : IAzTask2*, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Tasks(this : IAzTask2*, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Tasks.call(this, pvarProp)
     end
-    def add_operation(this : IAzTask2*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_operation(this : IAzTask2*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_operation.call(this, bstrOp, varReserved)
     end
-    def delete_operation(this : IAzTask2*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_operation(this : IAzTask2*, bstrOp : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_operation.call(this, bstrOp, varReserved)
     end
-    def add_task(this : IAzTask2*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_task(this : IAzTask2*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_task.call(this, bstrTask, varReserved)
     end
-    def delete_task(this : IAzTask2*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_task(this : IAzTask2*, bstrTask : Win32cr::Foundation::BSTR, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_task.call(this, bstrTask, varReserved)
     end
     def get_Writable(this : IAzTask2*, pfProp : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Writable.call(this, pfProp)
     end
-    def get_property(this : IAzTask2*, lPropId : Int32, varReserved : Win32cr::System::Com::VARIANT, pvarProp : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : IAzTask2*, lPropId : Int32, varReserved : Win32cr::System::Variant::VARIANT, pvarProp : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, lPropId, varReserved, pvarProp)
     end
-    def set_property(this : IAzTask2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_property(this : IAzTask2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_property.call(this, lPropId, varProp, varReserved)
     end
-    def add_property_item(this : IAzTask2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add_property_item(this : IAzTask2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def delete_property_item(this : IAzTask2*, lPropId : Int32, varProp : Win32cr::System::Com::VARIANT, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def delete_property_item(this : IAzTask2*, lPropId : Int32, varProp : Win32cr::System::Variant::VARIANT, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete_property_item.call(this, lPropId, varProp, varReserved)
     end
-    def submit(this : IAzTask2*, lFlags : Int32, varReserved : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def submit(this : IAzTask2*, lFlags : Int32, varReserved : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, lFlags, varReserved)
     end
-    def role_assignments(this : IAzTask2*, bstrScopeName : Win32cr::Foundation::BSTR, bRecursive : Int16, ppRoleAssignments : Void**) : Win32cr::Foundation::HRESULT
+    def role_assignments(this : IAzTask2*, bstrScopeName : Win32cr::Foundation::BSTR, bRecursive : Win32cr::Foundation::VARIANT_BOOL, ppRoleAssignments : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.role_assignments.call(this, bstrScopeName, bRecursive, ppRoleAssignments)
     end
 
   end
 
-  def authzAccessCheck(flags : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*, phAccessCheckResults : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+  def authzAccessCheck(flags : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*, phAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzAccessCheck(flags, hAuthzClientContext, pRequest, hAuditEvent, pSecurityDescriptor, optional_security_descriptor_array, optional_security_descriptor_count, pReply, phAccessCheckResults)
+    {% end %}
   end
 
   def authzCachedAccessCheck(flags : UInt32, hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzCachedAccessCheck(flags, hAccessCheckResults, pRequest, hAuditEvent, pReply)
+    {% end %}
   end
 
   def authzOpenObjectAudit(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzOpenObjectAudit(flags, hAuthzClientContext, pRequest, hAuditEvent, pSecurityDescriptor, optional_security_descriptor_array, optional_security_descriptor_count, pReply)
+    {% end %}
   end
 
   def authzFreeHandle(hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeHandle(hAccessCheckResults)
+    {% end %}
   end
 
   def authzInitializeResourceManager(flags : UInt32, pfnDynamicAccessCheck : Win32cr::Security::Authorization::PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName : Win32cr::Foundation::PWSTR, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeResourceManager(flags, pfnDynamicAccessCheck, pfnComputeDynamicGroups, pfnFreeDynamicGroups, szResourceManagerName, phAuthzResourceManager)
+    {% end %}
   end
 
   def authzInitializeResourceManagerEx(flags : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_FLAGS, pAuthzInitInfo : Win32cr::Security::Authorization::AUTHZ_INIT_INFO*, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeResourceManagerEx(flags, pAuthzInitInfo, phAuthzResourceManager)
+    {% end %}
   end
 
   def authzInitializeRemoteResourceManager(pRpcInitInfo : Win32cr::Security::Authorization::AUTHZ_RPC_INIT_INFO_CLIENT*, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeRemoteResourceManager(pRpcInitInfo, phAuthzResourceManager)
+    {% end %}
   end
 
   def authzFreeResourceManager(hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeResourceManager(hAuthzResourceManager)
+    {% end %}
   end
 
-  def authzInitializeContextFromToken(flags : UInt32, token_handle : Win32cr::Foundation::HANDLE, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+  def authzInitializeContextFromToken(flags : UInt32, token_handle : Win32cr::Foundation::HANDLE, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Int64*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeContextFromToken(flags, token_handle, hAuthzResourceManager, pExpirationTime, identifier, dynamic_group_args, phAuthzClientContext)
+    {% end %}
   end
 
-  def authzInitializeContextFromSid(flags : UInt32, user_sid : Win32cr::Foundation::PSID, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+  def authzInitializeContextFromSid(flags : UInt32, user_sid : Win32cr::Security::PSID, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Int64*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeContextFromSid(flags, user_sid, hAuthzResourceManager, pExpirationTime, identifier, dynamic_group_args, phAuthzClientContext)
+    {% end %}
   end
 
-  def authzInitializeContextFromAuthzContext(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+  def authzInitializeContextFromAuthzContext(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime : Int64*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeContextFromAuthzContext(flags, hAuthzClientContext, pExpirationTime, identifier, dynamic_group_args, phNewAuthzClientContext)
+    {% end %}
   end
 
   def authzInitializeCompoundContext(user_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, device_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, phCompoundContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeCompoundContext(user_context, device_context, phCompoundContext)
+    {% end %}
   end
 
   def authzAddSidsToContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sids : Win32cr::Security::SID_AND_ATTRIBUTES*, sid_count : UInt32, restricted_sids : Win32cr::Security::SID_AND_ATTRIBUTES*, restricted_sid_count : UInt32, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzAddSidsToContext(hAuthzClientContext, sids, sid_count, restricted_sids, restricted_sid_count, phNewAuthzClientContext)
+    {% end %}
   end
 
   def authzModifySecurityAttributes(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pAttributes : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzModifySecurityAttributes(hAuthzClientContext, pOperations, pAttributes)
+    {% end %}
   end
 
   def authzModifyClaims(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, claim_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pClaimOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pClaims : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzModifyClaims(hAuthzClientContext, claim_class, pClaimOperations, pClaims)
+    {% end %}
   end
 
   def authzModifySids(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sid_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pSidOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pSids : Win32cr::Security::TOKEN_GROUPS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzModifySids(hAuthzClientContext, sid_class, pSidOperations, pSids)
+    {% end %}
   end
 
-  def authzSetAppContainerInformation(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid : Win32cr::Foundation::PSID, capability_count : UInt32, pCapabilitySids : Win32cr::Security::SID_AND_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+  def authzSetAppContainerInformation(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid : Win32cr::Security::PSID, capability_count : UInt32, pCapabilitySids : Win32cr::Security::SID_AND_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzSetAppContainerInformation(hAuthzClientContext, pAppContainerSid, capability_count, pCapabilitySids)
+    {% end %}
   end
 
   def authzGetInformationFromContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, info_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, buffer_size : UInt32, pSizeRequired : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzGetInformationFromContext(hAuthzClientContext, info_class, buffer_size, pSizeRequired, buffer)
+    {% end %}
   end
 
   def authzFreeContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeContext(hAuthzClientContext)
+    {% end %}
   end
 
-  def authzInitializeObjectAccessAuditEvent(flags : Win32cr::Security::Authorization::AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+  def authzInitializeObjectAccessAuditEvent(flags : Win32cr::Security::Authorization::AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, phAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeObjectAccessAuditEvent(flags, hAuditEventType, szOperationType, szObjectType, szObjectName, szAdditionalInfo, phAuditEvent, dwAdditionalParameterCount)
+    {% end %}
   end
 
-  def authzInitializeObjectAccessAuditEvent2(flags : UInt32, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, szAdditionalInfo2 : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+  def authzInitializeObjectAccessAuditEvent2(flags : UInt32, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, szAdditionalInfo2 : Win32cr::Foundation::PWSTR, phAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeObjectAccessAuditEvent2(flags, hAuditEventType, szOperationType, szObjectType, szObjectName, szAdditionalInfo, szAdditionalInfo2, phAuditEvent, dwAdditionalParameterCount)
+    {% end %}
   end
 
   def authzFreeAuditEvent(hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeAuditEvent(hAuditEvent)
+    {% end %}
   end
 
   def authzEvaluateSacl(authz_client_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, sacl : Win32cr::Security::ACL*, granted_access : UInt32, access_granted : Win32cr::Foundation::BOOL, pbGenerateAudit : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzEvaluateSacl(authz_client_context, pRequest, sacl, granted_access, access_granted, pbGenerateAudit)
+    {% end %}
   end
 
   def authzInstallSecurityEventSource(dwFlags : UInt32, pRegistration : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInstallSecurityEventSource(dwFlags, pRegistration)
+    {% end %}
   end
 
   def authzUninstallSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzUninstallSecurityEventSource(dwFlags, szEventSourceName)
+    {% end %}
   end
 
   def authzEnumerateSecurityEventSources(dwFlags : UInt32, buffer : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*, pdwCount : UInt32*, pdwLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzEnumerateSecurityEventSources(dwFlags, buffer, pdwCount, pdwLength)
+    {% end %}
   end
 
-  def authzRegisterSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+  def authzRegisterSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR, phEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzRegisterSecurityEventSource(dwFlags, szEventSourceName, phEventProvider)
+    {% end %}
   end
 
-  def authzUnregisterSecurityEventSource(dwFlags : UInt32, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+  def authzUnregisterSecurityEventSource(dwFlags : UInt32, phEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzUnregisterSecurityEventSource(dwFlags, phEventProvider)
+    {% end %}
   end
 
-  def authzReportSecurityEvent(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, dwCount : UInt32) : Win32cr::Foundation::BOOL
+  def authzReportSecurityEvent(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Security::PSID, dwCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzReportSecurityEvent(dwFlags, hEventProvider, dwAuditId, pUserSid, dwCount)
+    {% end %}
   end
 
-  def authzReportSecurityEventFromParams(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, pParams : Win32cr::Security::Authorization::AUDIT_PARAMS*) : Win32cr::Foundation::BOOL
+  def authzReportSecurityEventFromParams(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Security::PSID, pParams : Win32cr::Security::Authorization::AUDIT_PARAMS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzReportSecurityEventFromParams(dwFlags, hEventProvider, dwAuditId, pUserSid, pParams)
+    {% end %}
   end
 
-  def authzRegisterCapChangeNotification(phCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__**, pfnCapChangeCallback : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pCallbackContext : Void*) : Win32cr::Foundation::BOOL
+  def authzRegisterCapChangeNotification(phCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE*, pfnCapChangeCallback : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pCallbackContext : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzRegisterCapChangeNotification(phCapChangeSubscription, pfnCapChangeCallback, pCallbackContext)
+    {% end %}
   end
 
-  def authzUnregisterCapChangeNotification(hCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__*) : Win32cr::Foundation::BOOL
+  def authzUnregisterCapChangeNotification(hCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzUnregisterCapChangeNotification(hCapChangeSubscription)
+    {% end %}
   end
 
   def authzFreeCentralAccessPolicyCache : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeCentralAccessPolicyCache
+    {% end %}
   end
 
-  def setEntriesInAclA(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
+  def setEntriesInAclA(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetEntriesInAclA(cCountOfExplicitEntries, pListOfExplicitEntries, old_acl, new_acl)
+    {% end %}
   end
 
-  def setEntriesInAclW(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
+  def setEntriesInAclW(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetEntriesInAclW(cCountOfExplicitEntries, pListOfExplicitEntries, old_acl, new_acl)
+    {% end %}
   end
 
-  def getExplicitEntriesFromAclA(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**) : UInt32
+  def getExplicitEntriesFromAclA(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetExplicitEntriesFromAclA(pacl, pcCountOfExplicitEntries, pListOfExplicitEntries)
+    {% end %}
   end
 
-  def getExplicitEntriesFromAclW(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**) : UInt32
+  def getExplicitEntriesFromAclW(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetExplicitEntriesFromAclW(pacl, pcCountOfExplicitEntries, pListOfExplicitEntries)
+    {% end %}
   end
 
-  def getEffectiveRightsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pAccessRights : UInt32*) : UInt32
+  def getEffectiveRightsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pAccessRights : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetEffectiveRightsFromAclA(pacl, pTrustee, pAccessRights)
+    {% end %}
   end
 
-  def getEffectiveRightsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pAccessRights : UInt32*) : UInt32
+  def getEffectiveRightsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pAccessRights : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetEffectiveRightsFromAclW(pacl, pTrustee, pAccessRights)
+    {% end %}
   end
 
-  def getAuditedPermissionsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
+  def getAuditedPermissionsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetAuditedPermissionsFromAclA(pacl, pTrustee, pSuccessfulAuditedRights, pFailedAuditRights)
+    {% end %}
   end
 
-  def getAuditedPermissionsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
+  def getAuditedPermissionsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetAuditedPermissionsFromAclW(pacl, pTrustee, pSuccessfulAuditedRights, pFailedAuditRights)
+    {% end %}
   end
 
-  def getNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+  def getNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Security::PSID*, ppsidGroup : Win32cr::Security::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetNamedSecurityInfoA(pObjectName, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+    {% end %}
   end
 
-  def getNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+  def getNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Security::PSID*, ppsidGroup : Win32cr::Security::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetNamedSecurityInfoW(pObjectName, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+    {% end %}
   end
 
-  def getSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+  def getSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Security::PSID*, ppsidGroup : Win32cr::Security::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetSecurityInfo(handle, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+    {% end %}
   end
 
-  def setNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+  def setNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Security::PSID, psidGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetNamedSecurityInfoA(pObjectName, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+    {% end %}
   end
 
-  def setNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+  def setNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Security::PSID, psidGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetNamedSecurityInfoW(pObjectName, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+    {% end %}
   end
 
-  def setSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+  def setSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Security::PSID, psidGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetSecurityInfo(handle, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+    {% end %}
   end
 
-  def getInheritanceSourceA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMA*) : UInt32
+  def getInheritanceSourceA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMA*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetInheritanceSourceA(pObjectName, object_type, security_info, container, pObjectClassGuids, guid_count, pAcl, pfnArray, pGenericMapping, pInheritArray)
+    {% end %}
   end
 
-  def getInheritanceSourceW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*) : UInt32
+  def getInheritanceSourceW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetInheritanceSourceW(pObjectName, object_type, security_info, container, pObjectClassGuids, guid_count, pAcl, pfnArray, pGenericMapping, pInheritArray)
+    {% end %}
   end
 
-  def freeInheritedFromArray(pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*, ace_cnt : UInt16, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*) : UInt32
+  def freeInheritedFromArray(pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*, ace_cnt : UInt16, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTS*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.FreeInheritedFromArray(pInheritArray, ace_cnt, pfnArray)
+    {% end %}
   end
 
-  def treeResetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+  def treeResetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pOwner : Win32cr::Security::PSID, pGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TreeResetNamedSecurityInfoA(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, keep_explicit, fnProgress, progress_invoke_setting, args)
+    {% end %}
   end
 
-  def treeResetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+  def treeResetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pOwner : Win32cr::Security::PSID, pGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TreeResetNamedSecurityInfoW(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, keep_explicit, fnProgress, progress_invoke_setting, args)
+    {% end %}
   end
 
-  def treeSetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+  def treeSetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pOwner : Win32cr::Security::PSID, pGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TreeSetNamedSecurityInfoA(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, dwAction, fnProgress, progress_invoke_setting, args)
+    {% end %}
   end
 
-  def treeSetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+  def treeSetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pOwner : Win32cr::Security::PSID, pGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TreeSetNamedSecurityInfoW(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, dwAction, fnProgress, progress_invoke_setting, args)
+    {% end %}
   end
 
-  def buildSecurityDescriptorA(pOwner : Win32cr::Security::Authorization::TRUSTEE_A*, pGroup : Win32cr::Security::Authorization::TRUSTEE_A*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+  def buildSecurityDescriptorA(pOwner : Win32cr::Security::Authorization::TRUSTEE_A*, pGroup : Win32cr::Security::Authorization::TRUSTEE_A*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.BuildSecurityDescriptorA(pOwner, pGroup, cCountOfAccessEntries, pListOfAccessEntries, cCountOfAuditEntries, pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
+    {% end %}
   end
 
-  def buildSecurityDescriptorW(pOwner : Win32cr::Security::Authorization::TRUSTEE_W*, pGroup : Win32cr::Security::Authorization::TRUSTEE_W*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+  def buildSecurityDescriptorW(pOwner : Win32cr::Security::Authorization::TRUSTEE_W*, pGroup : Win32cr::Security::Authorization::TRUSTEE_W*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.BuildSecurityDescriptorW(pOwner, pGroup, cCountOfAccessEntries, pListOfAccessEntries, cCountOfAuditEntries, pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
+    {% end %}
   end
 
-  def lookupSecurityDescriptorPartsA(ppOwner : Win32cr::Security::Authorization::TRUSTEE_A**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_A**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+  def lookupSecurityDescriptorPartsA(ppOwner : Win32cr::Security::Authorization::TRUSTEE_A**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_A**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.LookupSecurityDescriptorPartsA(ppOwner, ppGroup, pcCountOfAccessEntries, ppListOfAccessEntries, pcCountOfAuditEntries, ppListOfAuditEntries, pSD)
+    {% end %}
   end
 
-  def lookupSecurityDescriptorPartsW(ppOwner : Win32cr::Security::Authorization::TRUSTEE_W**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_W**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+  def lookupSecurityDescriptorPartsW(ppOwner : Win32cr::Security::Authorization::TRUSTEE_W**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_W**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.LookupSecurityDescriptorPartsW(ppOwner, ppGroup, pcCountOfAccessEntries, ppListOfAccessEntries, pcCountOfAuditEntries, ppListOfAuditEntries, pSD)
+    {% end %}
   end
 
   def buildExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
+    {% if !flag?(:docs) %}
     C.BuildExplicitAccessWithNameA(pExplicitAccess, pTrusteeName, access_permissions, access_mode, inheritance)
+    {% end %}
   end
 
   def buildExplicitAccessWithNameW(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pTrusteeName : Win32cr::Foundation::PWSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
+    {% if !flag?(:docs) %}
     C.BuildExplicitAccessWithNameW(pExplicitAccess, pTrusteeName, access_permissions, access_mode, inheritance)
+    {% end %}
   end
 
   def buildImpersonateExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.BuildImpersonateExplicitAccessWithNameA(pExplicitAccess, pTrusteeName, pTrustee, access_permissions, access_mode, inheritance)
+    {% end %}
   end
 
   def buildImpersonateExplicitAccessWithNameW(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pTrusteeName : Win32cr::Foundation::PWSTR, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.BuildImpersonateExplicitAccessWithNameW(pExplicitAccess, pTrusteeName, pTrustee, access_permissions, access_mode, inheritance)
+    {% end %}
   end
 
   def buildTrusteeWithNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pName : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithNameA(pTrustee, pName)
+    {% end %}
   end
 
   def buildTrusteeWithNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pName : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithNameW(pTrustee, pName)
+    {% end %}
   end
 
   def buildImpersonateTrusteeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Void
+    {% if !flag?(:docs) %}
     C.BuildImpersonateTrusteeA(pTrustee, pImpersonateTrustee)
+    {% end %}
   end
 
   def buildImpersonateTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Void
+    {% if !flag?(:docs) %}
     C.BuildImpersonateTrusteeW(pTrustee, pImpersonateTrustee)
+    {% end %}
   end
 
-  def buildTrusteeWithSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSid : Win32cr::Foundation::PSID) : Void
+  def buildTrusteeWithSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSid : Win32cr::Security::PSID) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithSidA(pTrustee, pSid)
+    {% end %}
   end
 
-  def buildTrusteeWithSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSid : Win32cr::Foundation::PSID) : Void
+  def buildTrusteeWithSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSid : Win32cr::Security::PSID) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithSidW(pTrustee, pSid)
+    {% end %}
   end
 
-  def buildTrusteeWithObjectsAndSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
+  def buildTrusteeWithObjectsAndSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Security::PSID) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithObjectsAndSidA(pTrustee, pObjSid, pObjectGuid, pInheritedObjectGuid, pSid)
+    {% end %}
   end
 
-  def buildTrusteeWithObjectsAndSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
+  def buildTrusteeWithObjectsAndSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Security::PSID) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithObjectsAndSidW(pTrustee, pObjSid, pObjectGuid, pInheritedObjectGuid, pSid)
+    {% end %}
   end
 
   def buildTrusteeWithObjectsAndNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_A*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PSTR, inherited_object_type_name : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithObjectsAndNameA(pTrustee, pObjName, object_type, object_type_name, inherited_object_type_name, name)
+    {% end %}
   end
 
   def buildTrusteeWithObjectsAndNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_W*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PWSTR, inherited_object_type_name : Win32cr::Foundation::PWSTR, name : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithObjectsAndNameW(pTrustee, pObjName, object_type, object_type_name, inherited_object_type_name, name)
+    {% end %}
   end
 
   def getTrusteeNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.GetTrusteeNameA(pTrustee)
+    {% end %}
   end
 
   def getTrusteeNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.GetTrusteeNameW(pTrustee)
+    {% end %}
   end
 
   def getTrusteeTypeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_TYPE
+    {% if !flag?(:docs) %}
     C.GetTrusteeTypeA(pTrustee)
+    {% end %}
   end
 
   def getTrusteeTypeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_TYPE
+    {% if !flag?(:docs) %}
     C.GetTrusteeTypeW(pTrustee)
+    {% end %}
   end
 
   def getTrusteeFormA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_FORM
+    {% if !flag?(:docs) %}
     C.GetTrusteeFormA(pTrustee)
+    {% end %}
   end
 
   def getTrusteeFormW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_FORM
+    {% if !flag?(:docs) %}
     C.GetTrusteeFormW(pTrustee)
+    {% end %}
   end
 
   def getMultipleTrusteeOperationA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
+    {% if !flag?(:docs) %}
     C.GetMultipleTrusteeOperationA(pTrustee)
+    {% end %}
   end
 
   def getMultipleTrusteeOperationW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
+    {% if !flag?(:docs) %}
     C.GetMultipleTrusteeOperationW(pTrustee)
+    {% end %}
   end
 
   def getMultipleTrusteeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_A*
+    {% if !flag?(:docs) %}
     C.GetMultipleTrusteeA(pTrustee)
+    {% end %}
   end
 
   def getMultipleTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_W*
+    {% if !flag?(:docs) %}
     C.GetMultipleTrusteeW(pTrustee)
+    {% end %}
   end
 
-  def convertSidToStringSidA(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+  def convertSidToStringSidA(sid : Win32cr::Security::PSID, string_sid : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertSidToStringSidA(sid, string_sid)
+    {% end %}
   end
 
-  #def convertSidToStringSidW(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+  #def convertSidToStringSidW(sid : Win32cr::Security::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
     #C.ConvertSidToStringSidW(sid, string_sid)
   #end
 
-  def convertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
+  def convertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertStringSidToSidA(string_sid, sid)
+    {% end %}
   end
 
-  #def convertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
+  #def convertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
     #C.ConvertStringSidToSidW(string_sid, sid)
   #end
 
   def convertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor : Win32cr::Foundation::PSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor, string_sd_revision, security_descriptor, security_descriptor_size)
+    {% end %}
   end
 
   def convertStringSecurityDescriptorToSecurityDescriptorW(string_security_descriptor : Win32cr::Foundation::PWSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertStringSecurityDescriptorToSecurityDescriptorW(string_security_descriptor, string_sd_revision, security_descriptor, security_descriptor_size)
+    {% end %}
   end
 
-  def convertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+  def convertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, string_security_descriptor : Win32cr::Foundation::PSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor, requested_string_sd_revision, security_information, string_security_descriptor, string_security_descriptor_len)
+    {% end %}
   end
 
-  def convertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PWSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+  def convertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, string_security_descriptor : Win32cr::Foundation::PWSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor, requested_string_sd_revision, security_information, string_security_descriptor, string_security_descriptor_len)
+    {% end %}
   end
 
   @[Link("authz")]
   @[Link("advapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun AuthzAccessCheck(flags : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*, phAccessCheckResults : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    fun AuthzAccessCheck(flags : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*, phAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun AuthzCachedAccessCheck(flags : UInt32, hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
@@ -5882,13 +6090,13 @@ module Win32cr::Security::Authorization
     fun AuthzFreeResourceManager(hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzInitializeContextFromToken(flags : UInt32, token_handle : Win32cr::Foundation::HANDLE, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    fun AuthzInitializeContextFromToken(flags : UInt32, token_handle : Win32cr::Foundation::HANDLE, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Int64*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzInitializeContextFromSid(flags : UInt32, user_sid : Win32cr::Foundation::PSID, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    fun AuthzInitializeContextFromSid(flags : UInt32, user_sid : Win32cr::Security::PSID, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Int64*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzInitializeContextFromAuthzContext(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    fun AuthzInitializeContextFromAuthzContext(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime : Int64*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun AuthzInitializeCompoundContext(user_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, device_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, phCompoundContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
@@ -5906,7 +6114,7 @@ module Win32cr::Security::Authorization
     fun AuthzModifySids(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sid_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pSidOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pSids : Win32cr::Security::TOKEN_GROUPS*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzSetAppContainerInformation(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid : Win32cr::Foundation::PSID, capability_count : UInt32, pCapabilitySids : Win32cr::Security::SID_AND_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    fun AuthzSetAppContainerInformation(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid : Win32cr::Security::PSID, capability_count : UInt32, pCapabilitySids : Win32cr::Security::SID_AND_ATTRIBUTES*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun AuthzGetInformationFromContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, info_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, buffer_size : UInt32, pSizeRequired : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
@@ -5915,10 +6123,10 @@ module Win32cr::Security::Authorization
     fun AuthzFreeContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzInitializeObjectAccessAuditEvent(flags : Win32cr::Security::Authorization::AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+    fun AuthzInitializeObjectAccessAuditEvent(flags : Win32cr::Security::Authorization::AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, phAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzInitializeObjectAccessAuditEvent2(flags : UInt32, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, szAdditionalInfo2 : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+    fun AuthzInitializeObjectAccessAuditEvent2(flags : UInt32, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, szAdditionalInfo2 : Win32cr::Foundation::PWSTR, phAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun AuthzFreeAuditEvent(hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE) : Win32cr::Foundation::BOOL
@@ -5936,100 +6144,100 @@ module Win32cr::Security::Authorization
     fun AuthzEnumerateSecurityEventSources(dwFlags : UInt32, buffer : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*, pdwCount : UInt32*, pdwLength : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzRegisterSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    fun AuthzRegisterSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR, phEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzUnregisterSecurityEventSource(dwFlags : UInt32, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    fun AuthzUnregisterSecurityEventSource(dwFlags : UInt32, phEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzReportSecurityEvent(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, dwCount : UInt32) : Win32cr::Foundation::BOOL
+    fun AuthzReportSecurityEvent(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Security::PSID, dwCount : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzReportSecurityEventFromParams(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, pParams : Win32cr::Security::Authorization::AUDIT_PARAMS*) : Win32cr::Foundation::BOOL
+    fun AuthzReportSecurityEventFromParams(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Security::PSID, pParams : Win32cr::Security::Authorization::AUDIT_PARAMS*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzRegisterCapChangeNotification(phCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__**, pfnCapChangeCallback : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pCallbackContext : Void*) : Win32cr::Foundation::BOOL
+    fun AuthzRegisterCapChangeNotification(phCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE*, pfnCapChangeCallback : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pCallbackContext : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun AuthzUnregisterCapChangeNotification(hCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__*) : Win32cr::Foundation::BOOL
+    fun AuthzUnregisterCapChangeNotification(hCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun AuthzFreeCentralAccessPolicyCache : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun SetEntriesInAclA(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
+    fun SetEntriesInAclA(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun SetEntriesInAclW(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
+    fun SetEntriesInAclW(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetExplicitEntriesFromAclA(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**) : UInt32
+    fun GetExplicitEntriesFromAclA(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetExplicitEntriesFromAclW(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**) : UInt32
+    fun GetExplicitEntriesFromAclW(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetEffectiveRightsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pAccessRights : UInt32*) : UInt32
+    fun GetEffectiveRightsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pAccessRights : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetEffectiveRightsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pAccessRights : UInt32*) : UInt32
+    fun GetEffectiveRightsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pAccessRights : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetAuditedPermissionsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
+    fun GetAuditedPermissionsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetAuditedPermissionsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
+    fun GetAuditedPermissionsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Security::PSID*, ppsidGroup : Win32cr::Security::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Security::PSID*, ppsidGroup : Win32cr::Security::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    fun GetSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Security::PSID*, ppsidGroup : Win32cr::Security::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun SetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    fun SetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Security::PSID, psidGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun SetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    fun SetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Security::PSID, psidGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun SetSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    fun SetSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Security::PSID, psidGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetInheritanceSourceA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMA*) : UInt32
+    fun GetInheritanceSourceA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMA*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun GetInheritanceSourceW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*) : UInt32
+    fun GetInheritanceSourceW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun FreeInheritedFromArray(pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*, ace_cnt : UInt16, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*) : UInt32
+    fun FreeInheritedFromArray(pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*, ace_cnt : UInt16, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTS*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun TreeResetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    fun TreeResetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pOwner : Win32cr::Security::PSID, pGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun TreeResetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    fun TreeResetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pOwner : Win32cr::Security::PSID, pGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun TreeSetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    fun TreeSetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pOwner : Win32cr::Security::PSID, pGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun TreeSetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    fun TreeSetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pOwner : Win32cr::Security::PSID, pGroup : Win32cr::Security::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun BuildSecurityDescriptorA(pOwner : Win32cr::Security::Authorization::TRUSTEE_A*, pGroup : Win32cr::Security::Authorization::TRUSTEE_A*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    fun BuildSecurityDescriptorA(pOwner : Win32cr::Security::Authorization::TRUSTEE_A*, pGroup : Win32cr::Security::Authorization::TRUSTEE_A*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun BuildSecurityDescriptorW(pOwner : Win32cr::Security::Authorization::TRUSTEE_W*, pGroup : Win32cr::Security::Authorization::TRUSTEE_W*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    fun BuildSecurityDescriptorW(pOwner : Win32cr::Security::Authorization::TRUSTEE_W*, pGroup : Win32cr::Security::Authorization::TRUSTEE_W*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun LookupSecurityDescriptorPartsA(ppOwner : Win32cr::Security::Authorization::TRUSTEE_A**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_A**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    fun LookupSecurityDescriptorPartsA(ppOwner : Win32cr::Security::Authorization::TRUSTEE_A**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_A**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun LookupSecurityDescriptorPartsW(ppOwner : Win32cr::Security::Authorization::TRUSTEE_W**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_W**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    fun LookupSecurityDescriptorPartsW(ppOwner : Win32cr::Security::Authorization::TRUSTEE_W**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_W**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun BuildExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
@@ -6056,16 +6264,16 @@ module Win32cr::Security::Authorization
     fun BuildImpersonateTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Void
 
     # :nodoc:
-    fun BuildTrusteeWithSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSid : Win32cr::Foundation::PSID) : Void
+    fun BuildTrusteeWithSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSid : Win32cr::Security::PSID) : Void
 
     # :nodoc:
-    fun BuildTrusteeWithSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSid : Win32cr::Foundation::PSID) : Void
+    fun BuildTrusteeWithSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSid : Win32cr::Security::PSID) : Void
 
     # :nodoc:
-    fun BuildTrusteeWithObjectsAndSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
+    fun BuildTrusteeWithObjectsAndSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Security::PSID) : Void
 
     # :nodoc:
-    fun BuildTrusteeWithObjectsAndSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
+    fun BuildTrusteeWithObjectsAndSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Security::PSID) : Void
 
     # :nodoc:
     fun BuildTrusteeWithObjectsAndNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_A*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PSTR, inherited_object_type_name : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR) : Void
@@ -6104,18 +6312,18 @@ module Win32cr::Security::Authorization
     fun GetMultipleTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_W*
 
     # :nodoc:
-    fun ConvertSidToStringSidA(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    fun ConvertSidToStringSidA(sid : Win32cr::Security::PSID, string_sid : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun ConvertSidToStringSidW(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    #fun ConvertSidToStringSidW(sid : Win32cr::Security::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ConvertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
+    fun ConvertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun ConvertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
+    #fun ConvertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Security::PSID*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun ConvertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor : Win32cr::Foundation::PSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
@@ -6124,10 +6332,11 @@ module Win32cr::Security::Authorization
     fun ConvertStringSecurityDescriptorToSecurityDescriptorW(string_security_descriptor : Win32cr::Foundation::PWSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ConvertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+    fun ConvertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, string_security_descriptor : Win32cr::Foundation::PSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ConvertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PWSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+    fun ConvertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, string_security_descriptor : Win32cr::Foundation::PWSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

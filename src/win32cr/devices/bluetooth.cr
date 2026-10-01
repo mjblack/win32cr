@@ -2,6 +2,8 @@ require "./../foundation.cr"
 
 module Win32cr::Devices::Bluetooth
   extend self
+  alias HBLUETOOTH_DEVICE_FIND = Void*
+  alias HBLUETOOTH_RADIO_FIND = Void*
   alias HANDLE_SDP_TYPE = UInt64
   alias PFN_DEVICE_CALLBACK = Proc(Void*, Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, Win32cr::Foundation::BOOL)
 
@@ -15,16 +17,16 @@ module Win32cr::Devices::Bluetooth
 
   BTH_MAJORVERSION = 2_u32
   BTH_MINORVERSION = 1_u32
-  GUID_BTHPORT_DEVICE_INTERFACE = "0850302a-b344-4fda-9be9-90576b8d46f0"
-  GUID_BTH_RFCOMM_SERVICE_DEVICE_INTERFACE = "b142fc3e-fa4e-460b-8abc-072b628b3c70"
-  GUID_BLUETOOTH_RADIO_IN_RANGE = "ea3b5b82-26ee-450e-b0d8-d26fe30a3869"
-  GUID_BLUETOOTH_RADIO_OUT_OF_RANGE = "e28867c9-c2aa-4ced-b969-4570866037c4"
-  GUID_BLUETOOTH_L2CAP_EVENT = "7eae4030-b709-4aa8-ac55-e953829c9daa"
-  GUID_BLUETOOTH_HCI_EVENT = "fc240062-1541-49be-b463-84c4dcd7bf7f"
-  GUID_BLUETOOTH_AUTHENTICATION_REQUEST = "5dc9136d-996c-46db-84f5-32c0a3f47352"
-  GUID_BLUETOOTH_KEYPRESS_EVENT = "d668dfcd-0f4e-4efc-bfe0-392eeec5109c"
-  GUID_BLUETOOTH_HCI_VENDOR_EVENT = "547247e6-45bb-4c33-af8c-c00efe15a71d"
-  Bluetooth_Base_UUID = "00000000-0000-1000-8000-00805f9b34fb"
+  GUID_BTHPORT_DEVICE_INTERFACE = LibC::GUID.new(0x850302a_u32, 0xb344_u16, 0x4fda_u16, StaticArray[0x9b_u8, 0xe9_u8, 0x90_u8, 0x57_u8, 0x6b_u8, 0x8d_u8, 0x46_u8, 0xf0_u8])
+  GUID_BTH_RFCOMM_SERVICE_DEVICE_INTERFACE = LibC::GUID.new(0xb142fc3e_u32, 0xfa4e_u16, 0x460b_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x7_u8, 0x2b_u8, 0x62_u8, 0x8b_u8, 0x3c_u8, 0x70_u8])
+  GUID_BLUETOOTH_RADIO_IN_RANGE = LibC::GUID.new(0xea3b5b82_u32, 0x26ee_u16, 0x450e_u16, StaticArray[0xb0_u8, 0xd8_u8, 0xd2_u8, 0x6f_u8, 0xe3_u8, 0xa_u8, 0x38_u8, 0x69_u8])
+  GUID_BLUETOOTH_RADIO_OUT_OF_RANGE = LibC::GUID.new(0xe28867c9_u32, 0xc2aa_u16, 0x4ced_u16, StaticArray[0xb9_u8, 0x69_u8, 0x45_u8, 0x70_u8, 0x86_u8, 0x60_u8, 0x37_u8, 0xc4_u8])
+  GUID_BLUETOOTH_L2CAP_EVENT = LibC::GUID.new(0x7eae4030_u32, 0xb709_u16, 0x4aa8_u16, StaticArray[0xac_u8, 0x55_u8, 0xe9_u8, 0x53_u8, 0x82_u8, 0x9c_u8, 0x9d_u8, 0xaa_u8])
+  GUID_BLUETOOTH_HCI_EVENT = LibC::GUID.new(0xfc240062_u32, 0x1541_u16, 0x49be_u16, StaticArray[0xb4_u8, 0x63_u8, 0x84_u8, 0xc4_u8, 0xdc_u8, 0xd7_u8, 0xbf_u8, 0x7f_u8])
+  GUID_BLUETOOTH_AUTHENTICATION_REQUEST = LibC::GUID.new(0x5dc9136d_u32, 0x996c_u16, 0x46db_u16, StaticArray[0x84_u8, 0xf5_u8, 0x32_u8, 0xc0_u8, 0xa3_u8, 0xf4_u8, 0x73_u8, 0x52_u8])
+  GUID_BLUETOOTH_KEYPRESS_EVENT = LibC::GUID.new(0xd668dfcd_u32, 0xf4e_u16, 0x4efc_u16, StaticArray[0xbf_u8, 0xe0_u8, 0x39_u8, 0x2e_u8, 0xee_u8, 0xc5_u8, 0x10_u8, 0x9c_u8])
+  GUID_BLUETOOTH_HCI_VENDOR_EVENT = LibC::GUID.new(0x547247e6_u32, 0x45bb_u16, 0x4c33_u16, StaticArray[0xaf_u8, 0x8c_u8, 0xc0_u8, 0xe_u8, 0xfe_u8, 0x15_u8, 0xa7_u8, 0x1d_u8])
+  Bluetooth_Base_UUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x1000_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x9b_u8, 0x34_u8, 0xfb_u8])
   SDP_PROTOCOL_UUID16 = 1_u32
   UDP_PROTOCOL_UUID16 = 2_u32
   RFCOMM_PROTOCOL_UUID16 = 3_u32
@@ -203,6 +205,7 @@ module Win32cr::Devices::Bluetooth
   COD_SERVICE_MASK = 16769024_u32
   COD_VERSION = 0_u32
   COD_SERVICE_LIMITED = 1_u32
+  COD_SERVICE_LE_AUDIO = 2_u32
   COD_SERVICE_POSITIONING = 8_u32
   COD_SERVICE_NETWORKING = 16_u32
   COD_SERVICE_RENDERING = 32_u32
@@ -211,7 +214,7 @@ module Win32cr::Devices::Bluetooth
   COD_SERVICE_AUDIO = 256_u32
   COD_SERVICE_TELEPHONY = 512_u32
   COD_SERVICE_INFORMATION = 1024_u32
-  COD_SERVICE_MAX_COUNT = 9_u32
+  COD_SERVICE_MAX_COUNT = 10_u32
   COD_MAJOR_MISCELLANEOUS = 0_u32
   COD_MAJOR_COMPUTER = 1_u32
   COD_MAJOR_PHONE = 2_u32
@@ -415,7 +418,6 @@ module Win32cr::Devices::Bluetooth
   BDIF_LE_VISIBLE = 8388608_u32
   BDIF_LE_CONNECTED = 16777216_u32
   BDIF_LE_CONNECTABLE = 33554432_u32
-  BDIF_CONNECTION_INBOUND = 67108864_u32
   BDIF_BR_SECURE_CONNECTION_PAIRED = 134217728_u32
   BDIF_LE_SECURE_CONNECTION_PAIRED = 268435456_u32
   BDIF_DEBUGKEY = 536870912_u32
@@ -605,9 +607,9 @@ module Win32cr::Devices::Bluetooth
   BLUETOOTH_DEVICE_NAME_SIZE = 256_u32
   BLUETOOTH_SERVICE_DISABLE = 0_u32
   BLUETOOTH_SERVICE_ENABLE = 1_u32
-  GUID_BLUETOOTHLE_DEVICE_INTERFACE = "781aee18-7733-4ce4-add0-91f41c67b592"
-  GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE = "6e3bb679-4372-40c8-9eaa-4509df260cd8"
-  BTH_LE_ATT_BLUETOOTH_BASE_GUID = "00000000-0000-1000-8000-00805f9b34fb"
+  GUID_BLUETOOTHLE_DEVICE_INTERFACE = LibC::GUID.new(0x781aee18_u32, 0x7733_u16, 0x4ce4_u16, StaticArray[0xad_u8, 0xd0_u8, 0x91_u8, 0xf4_u8, 0x1c_u8, 0x67_u8, 0xb5_u8, 0x92_u8])
+  GUID_BLUETOOTH_GATT_SERVICE_DEVICE_INTERFACE = LibC::GUID.new(0x6e3bb679_u32, 0x4372_u16, 0x40c8_u16, StaticArray[0x9e_u8, 0xaa_u8, 0x45_u8, 0x9_u8, 0xdf_u8, 0x26_u8, 0xc_u8, 0xd8_u8])
+  BTH_LE_ATT_BLUETOOTH_BASE_GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x1000_u16, StaticArray[0x80_u8, 0x0_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x9b_u8, 0x34_u8, 0xfb_u8])
   BTH_LE_SERVICE_GAP = 6144_u32
   BTH_LE_SERVICE_GATT = 6145_u32
   BTH_LE_GATT_ATTRIBUTE_TYPE_PRIMARY_SERVICE = 10240_u32
@@ -648,8 +650,37 @@ module Win32cr::Devices::Bluetooth
   BTH_LE_GAP_APPEARANCE_CATEGORY_GLUCOSE_METER = 16_u32
   BTH_LE_GAP_APPEARANCE_CATEGORY_RUNNING_WALKING_SENSOR = 17_u32
   BTH_LE_GAP_APPEARANCE_CATEGORY_CYCLING = 18_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_CONTROL_DEVICE = 19_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_NETWORK_DEVICE = 20_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_SENSOR = 21_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_LIGHT_FIXTURES = 22_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_FAN = 23_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_HVAC = 24_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_AIR_CONDITIONING = 25_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_HUMIDIFIER = 26_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_HEATING = 27_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_ACCESS_CONTROL = 28_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_MOTORIZED_DEVICE = 29_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_POWER_DEVICE = 30_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_LIGHT_SOURCE = 31_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_WINDOW_COVERING = 32_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_AUDIO_SINK = 33_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_AUDIO_SOURCE = 34_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_MOTORIZED_VEHICLE = 35_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_DOMESTIC_APPLIANCE = 36_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_WEARABLE_AUDIO_DEVICE = 37_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_AIRCRAFT = 38_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_AV_EQUIPMENT = 39_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_DISPLAY_EQUIPMENT = 40_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_HEARING_AID = 41_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_GAMING = 42_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_SIGNAGE = 43_u32
   BTH_LE_GAP_APPEARANCE_CATEGORY_PLUSE_OXIMETER = 49_u32
   BTH_LE_GAP_APPEARANCE_CATEGORY_WEIGHT_SCALE = 50_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_PERSONAL_MOBILITY_DEVICE = 51_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_CONTINUOUS_GLUCOSE_MONITOR = 52_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_INSULIN_PUMP = 53_u32
+  BTH_LE_GAP_APPEARANCE_CATEGORY_MEDICATION_DELIVERY = 54_u32
   BTH_LE_GAP_APPEARANCE_CATEGORY_OUTDOOR_SPORTS_ACTIVITY = 81_u32
   BTH_LE_GAP_APPEARANCE_SUBCATEGORY_GENERIC = 0_u32
   BTH_LE_GAP_APPEARANCE_WATCH_SUBCATEGORY_SPORTS_WATCH = 1_u32
@@ -665,6 +696,8 @@ module Win32cr::Devices::Bluetooth
   BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_CARD_READER = 6_u32
   BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_DIGITAL_PEN = 7_u32
   BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_BARCODE_SCANNER = 8_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_TOUCHPAD = 9_u32
+  BTH_LE_GAP_APPEARANCE_HID_SUBCATEGORY_PRESENTATION_REMOTE = 10_u32
   BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_IN_SHOE = 1_u32
   BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_ON_SHOE = 2_u32
   BTH_LE_GAP_APPEARANCE_RUNNING_WALKING_SENSOR_SUBCATEGORY_ON_HIP = 3_u32
@@ -673,6 +706,27 @@ module Win32cr::Devices::Bluetooth
   BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_CADENCE_SENSOR = 3_u32
   BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_POWER_SENSOR = 4_u32
   BTH_LE_GAP_APPEARANCE_CYCLING_SUBCATEGORY_SPEED_AND_CADENCE_SENSOR = 5_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_STANDALONE_SPEAKER = 1_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_SOUNDBAR = 2_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_BOOKSHELF_SPEAKER = 3_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_STANDMOUNTED_SPEAKER = 4_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SINK_SUBCATEGORY_SPEAKERPHONE = 5_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_MICROPHONE = 1_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_ALARM = 2_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_BELL = 3_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_HORN = 4_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_BROADCASTING_DEVICE = 5_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_SERVICE_DESK = 6_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_KIOSK = 7_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_BROADCASTING_ROOM = 8_u32
+  BTH_LE_GAP_APPEARANCE_AUDIO_SOURCE_SUBCATEGORY_AUDITORIUM = 9_u32
+  BTH_LE_GAP_APPEARANCE_WEARABLE_AUDIO_DEVICE_SUBCATEGORY_EARBUD = 1_u32
+  BTH_LE_GAP_APPEARANCE_WEARABLE_AUDIO_DEVICE_SUBCATEGORY_HEADSET = 2_u32
+  BTH_LE_GAP_APPEARANCE_WEARABLE_AUDIO_DEVICE_SUBCATEGORY_HEADPHONES = 3_u32
+  BTH_LE_GAP_APPEARANCE_WEARABLE_AUDIO_DEVICE_SUBCATEGORY_NECKBAND = 4_u32
+  BTH_LE_GAP_APPEARANCE_HEARING_AID_SUBCATEGORY_IN_EAR_HEARING_AID = 1_u32
+  BTH_LE_GAP_APPEARANCE_HEARING_AID_SUBCATEGORY_BEHIND_EAR_HEARING_AID = 2_u32
+  BTH_LE_GAP_APPEARANCE_HEARING_AID_SUBCATEGORY_COCHLEAR_IMPLANT = 3_u32
   BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_FINGERTIP = 1_u32
   BTH_LE_GAP_APPEARANCE_PULSE_OXIMETER_SUBCATEGORY_WRIST_WORN = 2_u32
   BTH_LE_GAP_APPEARANCE_OUTDOOR_SPORTS_ACTIVITY_SUBCATEGORY_LOCATION_DISPLAY_DEVICE = 1_u32
@@ -719,7 +773,7 @@ module Win32cr::Devices::Bluetooth
   AF_BTH = 32_u16
   PF_BTH = 32_u16
   NS_BTH = 16_u32
-  SVCID_BTH_PROVIDER = "06aa63e0-7d60-41ff-afb2-3ee6d2d9392d"
+  SVCID_BTH_PROVIDER = LibC::GUID.new(0x6aa63e0_u32, 0x7d60_u16, 0x41ff_u16, StaticArray[0xaf_u8, 0xb2_u8, 0x3e_u8, 0xe6_u8, 0xd2_u8, 0xd9_u8, 0x39_u8, 0x2d_u8])
   BTH_ADDR_STRING_SIZE = 12_u32
   BTHPROTO_RFCOMM = 3_u32
   BTHPROTO_L2CAP = 256_u32
@@ -1160,9 +1214,9 @@ module Win32cr::Devices::Bluetooth
     property sequence : Sequence_e__struct_
     property alternative : Alternative_e__struct_
 
-      # Nested Type Alternative_e__struct_
+      # Nested Type String_e__struct_
       @[Extern]
-      struct Alternative_e__struct_
+      struct String_e__struct_
     property value : UInt8*
     property length : UInt32
     def initialize(@value : UInt8*, @length : UInt32)
@@ -1180,9 +1234,9 @@ module Win32cr::Devices::Bluetooth
       end
 
 
-      # Nested Type String_e__struct_
+      # Nested Type Sequence_e__struct_
       @[Extern]
-      struct String_e__struct_
+      struct Sequence_e__struct_
     property value : UInt8*
     property length : UInt32
     def initialize(@value : UInt8*, @length : UInt32)
@@ -1190,9 +1244,9 @@ module Win32cr::Devices::Bluetooth
       end
 
 
-      # Nested Type Sequence_e__struct_
+      # Nested Type Alternative_e__struct_
       @[Extern]
-      struct Sequence_e__struct_
+      struct Alternative_e__struct_
     property value : UInt8*
     property length : UInt32
     def initialize(@value : UInt8*, @length : UInt32)
@@ -1263,8 +1317,8 @@ module Win32cr::Devices::Bluetooth
   @[Extern]
   struct BTH_LE_GATT_CHARACTERISTIC_VALUE
     property data_size : UInt32
-    property data : UInt8*
-    def initialize(@data_size : UInt32, @data : UInt8*)
+    property data : UInt8[1]
+    def initialize(@data_size : UInt32, @data : UInt8[1])
     end
   end
 
@@ -1285,7 +1339,7 @@ module Win32cr::Devices::Bluetooth
     property descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID
     property anonymous : Anonymous_e__Union_
     property data_size : UInt32
-    property data : UInt8*
+    property data : UInt8[1]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
@@ -1295,21 +1349,31 @@ module Win32cr::Devices::Bluetooth
     property server_characteristic_configuration : ServerCharacteristicConfiguration_e__Struct_
     property characteristic_format : CharacteristicFormat_e__Struct_
 
-      # Nested Type ServerCharacteristicConfiguration_e__Struct_
-      @[Extern]
-      struct ServerCharacteristicConfiguration_e__Struct_
-    property is_broadcast : Win32cr::Foundation::BOOLEAN
-    def initialize(@is_broadcast : Win32cr::Foundation::BOOLEAN)
-    end
-      end
-
-
       # Nested Type CharacteristicExtendedProperties_e__Struct_
       @[Extern]
       struct CharacteristicExtendedProperties_e__Struct_
     property is_reliable_write_enabled : Win32cr::Foundation::BOOLEAN
     property is_auxiliaries_writable : Win32cr::Foundation::BOOLEAN
     def initialize(@is_reliable_write_enabled : Win32cr::Foundation::BOOLEAN, @is_auxiliaries_writable : Win32cr::Foundation::BOOLEAN)
+    end
+      end
+
+
+      # Nested Type ClientCharacteristicConfiguration_e__Struct_
+      @[Extern]
+      struct ClientCharacteristicConfiguration_e__Struct_
+    property is_subscribe_to_notification : Win32cr::Foundation::BOOLEAN
+    property is_subscribe_to_indication : Win32cr::Foundation::BOOLEAN
+    def initialize(@is_subscribe_to_notification : Win32cr::Foundation::BOOLEAN, @is_subscribe_to_indication : Win32cr::Foundation::BOOLEAN)
+    end
+      end
+
+
+      # Nested Type ServerCharacteristicConfiguration_e__Struct_
+      @[Extern]
+      struct ServerCharacteristicConfiguration_e__Struct_
+    property is_broadcast : Win32cr::Foundation::BOOLEAN
+    def initialize(@is_broadcast : Win32cr::Foundation::BOOLEAN)
     end
       end
 
@@ -1326,29 +1390,19 @@ module Win32cr::Devices::Bluetooth
     end
       end
 
-
-      # Nested Type ClientCharacteristicConfiguration_e__Struct_
-      @[Extern]
-      struct ClientCharacteristicConfiguration_e__Struct_
-    property is_subscribe_to_notification : Win32cr::Foundation::BOOLEAN
-    property is_subscribe_to_indication : Win32cr::Foundation::BOOLEAN
-    def initialize(@is_subscribe_to_notification : Win32cr::Foundation::BOOLEAN, @is_subscribe_to_indication : Win32cr::Foundation::BOOLEAN)
-    end
-      end
-
     def initialize(@characteristic_extended_properties : CharacteristicExtendedProperties_e__Struct_, @client_characteristic_configuration : ClientCharacteristicConfiguration_e__Struct_, @server_characteristic_configuration : ServerCharacteristicConfiguration_e__Struct_, @characteristic_format : CharacteristicFormat_e__Struct_)
     end
     end
 
-    def initialize(@descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE, @descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID, @anonymous : Anonymous_e__Union_, @data_size : UInt32, @data : UInt8*)
+    def initialize(@descriptor_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_TYPE, @descriptor_uuid : Win32cr::Devices::Bluetooth::BTH_LE_UUID, @anonymous : Anonymous_e__Union_, @data_size : UInt32, @data : UInt8[1])
     end
   end
 
   @[Extern]
   struct BLUETOOTH_GATT_VALUE_CHANGED_EVENT_REGISTRATION
     property num_characteristics : UInt16
-    property characteristics : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*
-    def initialize(@num_characteristics : UInt16, @characteristics : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*)
+    property characteristics : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC[1]
+    def initialize(@num_characteristics : UInt16, @characteristics : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC[1])
     end
   end
 
@@ -1378,8 +1432,8 @@ module Win32cr::Devices::Bluetooth
     property fCodService : UInt32
     property reserved : UInt32[5]
     property ulRecordLength : UInt32
-    property pRecord : UInt8*
-    def initialize(@pSdpVersion : UInt32*, @pRecordHandle : Win32cr::Foundation::HANDLE*, @fCodService : UInt32, @reserved : UInt32[5], @ulRecordLength : UInt32, @pRecord : UInt8*)
+    property pRecord : UInt8[1]
+    def initialize(@pSdpVersion : UInt32*, @pRecordHandle : Win32cr::Foundation::HANDLE*, @fCodService : UInt32, @reserved : UInt32[5], @ulRecordLength : UInt32, @pRecord : UInt8[1])
     end
   end
 
@@ -1397,8 +1451,8 @@ module Win32cr::Devices::Bluetooth
     property serviceHandle : UInt32
     property uuids : Win32cr::Devices::Bluetooth::SdpQueryUuid[12]
     property numRange : UInt32
-    property pRange : Win32cr::Devices::Bluetooth::SdpAttributeRange*
-    def initialize(@type__ : UInt32, @serviceHandle : UInt32, @uuids : Win32cr::Devices::Bluetooth::SdpQueryUuid[12], @numRange : UInt32, @pRange : Win32cr::Devices::Bluetooth::SdpAttributeRange*)
+    property pRange : Win32cr::Devices::Bluetooth::SdpAttributeRange[1]
+    def initialize(@type__ : UInt32, @serviceHandle : UInt32, @uuids : Win32cr::Devices::Bluetooth::SdpQueryUuid[12], @numRange : UInt32, @pRange : Win32cr::Devices::Bluetooth::SdpAttributeRange[1])
     end
   end
 
@@ -1493,217 +1547,312 @@ module Win32cr::Devices::Bluetooth
     end
   end
 
-  def bluetoothFindFirstRadio(pbtfrp : Win32cr::Devices::Bluetooth::BLUETOOTH_FIND_RADIO_PARAMS*, phRadio : Win32cr::Foundation::HANDLE*) : LibC::IntPtrT
+  def bluetoothFindFirstRadio(pbtfrp : Win32cr::Devices::Bluetooth::BLUETOOTH_FIND_RADIO_PARAMS*, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Devices::Bluetooth::HBLUETOOTH_RADIO_FIND
+    {% if !flag?(:docs) %}
     C.BluetoothFindFirstRadio(pbtfrp, phRadio)
+    {% end %}
   end
 
-  def bluetoothFindNextRadio(hFind : LibC::IntPtrT, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+  def bluetoothFindNextRadio(hFind : Win32cr::Devices::Bluetooth::HBLUETOOTH_RADIO_FIND, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothFindNextRadio(hFind, phRadio)
+    {% end %}
   end
 
-  def bluetoothFindRadioClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+  def bluetoothFindRadioClose(hFind : Win32cr::Devices::Bluetooth::HBLUETOOTH_RADIO_FIND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothFindRadioClose(hFind)
+    {% end %}
   end
 
   def bluetoothGetRadioInfo(hRadio : Win32cr::Foundation::HANDLE, pRadioInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_RADIO_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothGetRadioInfo(hRadio, pRadioInfo)
+    {% end %}
   end
 
-  def bluetoothFindFirstDevice(pbtsp : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_SEARCH_PARAMS*, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : LibC::IntPtrT
+  def bluetoothFindFirstDevice(pbtsp : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_SEARCH_PARAMS*, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Devices::Bluetooth::HBLUETOOTH_DEVICE_FIND
+    {% if !flag?(:docs) %}
     C.BluetoothFindFirstDevice(pbtsp, pbtdi)
+    {% end %}
   end
 
-  def bluetoothFindNextDevice(hFind : LibC::IntPtrT, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+  def bluetoothFindNextDevice(hFind : Win32cr::Devices::Bluetooth::HBLUETOOTH_DEVICE_FIND, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothFindNextDevice(hFind, pbtdi)
+    {% end %}
   end
 
-  def bluetoothFindDeviceClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+  def bluetoothFindDeviceClose(hFind : Win32cr::Devices::Bluetooth::HBLUETOOTH_DEVICE_FIND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothFindDeviceClose(hFind)
+    {% end %}
   end
 
   def bluetoothGetDeviceInfo(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothGetDeviceInfo(hRadio, pbtdi)
+    {% end %}
   end
 
   def bluetoothUpdateDeviceRecord(pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothUpdateDeviceRecord(pbtdi)
+    {% end %}
   end
 
   def bluetoothRemoveDevice(pAddress : Win32cr::Devices::Bluetooth::BLUETOOTH_ADDRESS*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothRemoveDevice(pAddress)
+    {% end %}
   end
 
   def bluetoothSelectDevices(pbtsdp : Win32cr::Devices::Bluetooth::BLUETOOTH_SELECT_DEVICE_PARAMS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothSelectDevices(pbtsdp)
+    {% end %}
   end
 
   def bluetoothSelectDevicesFree(pbtsdp : Win32cr::Devices::Bluetooth::BLUETOOTH_SELECT_DEVICE_PARAMS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothSelectDevicesFree(pbtsdp)
+    {% end %}
   end
 
   def bluetoothDisplayDeviceProperties(hwndParent : Win32cr::Foundation::HWND, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothDisplayDeviceProperties(hwndParent, pbtdi)
+    {% end %}
   end
 
-  def bluetoothAuthenticateDevice(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, pbtbi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : UInt16*, ulPasskeyLength : UInt32) : UInt32
+  def bluetoothAuthenticateDevice(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, pbtbi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : Win32cr::Foundation::PWSTR, ulPasskeyLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothAuthenticateDevice(hwndParent, hRadio, pbtbi, pszPasskey, ulPasskeyLength)
+    {% end %}
   end
 
   def bluetoothAuthenticateDeviceEx(hwndParentIn : Win32cr::Foundation::HWND, hRadioIn : Win32cr::Foundation::HANDLE, pbtdiInout : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pbtOobData : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO*, authenticationRequirement : Win32cr::Devices::Bluetooth::AUTHENTICATION_REQUIREMENTS) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothAuthenticateDeviceEx(hwndParentIn, hRadioIn, pbtdiInout, pbtOobData, authenticationRequirement)
+    {% end %}
   end
 
   def bluetoothAuthenticateMultipleDevices(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, cDevices : UInt32, rgbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothAuthenticateMultipleDevices(hwndParent, hRadio, cDevices, rgbtdi)
+    {% end %}
   end
 
   def bluetoothSetServiceState(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pGuidService : LibC::GUID*, dwServiceFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothSetServiceState(hRadio, pbtdi, pGuidService, dwServiceFlags)
+    {% end %}
   end
 
   def bluetoothEnumerateInstalledServices(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pcServiceInout : UInt32*, pGuidServices : LibC::GUID*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothEnumerateInstalledServices(hRadio, pbtdi, pcServiceInout, pGuidServices)
+    {% end %}
   end
 
   def bluetoothEnableDiscovery(hRadio : Win32cr::Foundation::HANDLE, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothEnableDiscovery(hRadio, fEnabled)
+    {% end %}
   end
 
   def bluetoothIsDiscoverable(hRadio : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothIsDiscoverable(hRadio)
+    {% end %}
   end
 
   def bluetoothEnableIncomingConnections(hRadio : Win32cr::Foundation::HANDLE, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothEnableIncomingConnections(hRadio, fEnabled)
+    {% end %}
   end
 
   def bluetoothIsConnectable(hRadio : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothIsConnectable(hRadio)
+    {% end %}
   end
 
   def bluetoothRegisterForAuthentication(pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, phRegHandle : LibC::IntPtrT*, pfnCallback : Win32cr::Devices::Bluetooth::PFN_AUTHENTICATION_CALLBACK, pvParam : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothRegisterForAuthentication(pbtdi, phRegHandle, pfnCallback, pvParam)
+    {% end %}
   end
 
   def bluetoothRegisterForAuthenticationEx(pbtdiIn : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, phRegHandleOut : LibC::IntPtrT*, pfnCallbackIn : Win32cr::Devices::Bluetooth::PFN_AUTHENTICATION_CALLBACK_EX, pvParam : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothRegisterForAuthenticationEx(pbtdiIn, phRegHandleOut, pfnCallbackIn, pvParam)
+    {% end %}
   end
 
   def bluetoothUnregisterAuthentication(hRegHandle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothUnregisterAuthentication(hRegHandle)
+    {% end %}
   end
 
   def bluetoothSendAuthenticationResponse(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothSendAuthenticationResponse(hRadio, pbtdi, pszPasskey)
+    {% end %}
   end
 
   def bluetoothSendAuthenticationResponseEx(hRadioIn : Win32cr::Foundation::HANDLE, pauthResponse : Win32cr::Devices::Bluetooth::BLUETOOTH_AUTHENTICATE_RESPONSE*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothSendAuthenticationResponseEx(hRadioIn, pauthResponse)
+    {% end %}
   end
 
   def bluetoothSdpGetElementData(pSdpStream : UInt8*, cbSdpStreamLength : UInt32, pData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothSdpGetElementData(pSdpStream, cbSdpStreamLength, pData)
+    {% end %}
   end
 
   def bluetoothSdpGetContainerElementData(pContainerStream : UInt8*, cbContainerLength : UInt32, pElement : LibC::IntPtrT*, pData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothSdpGetContainerElementData(pContainerStream, cbContainerLength, pElement, pData)
+    {% end %}
   end
 
   def bluetoothSdpGetAttributeValue(pRecordStream : UInt8*, cbRecordLength : UInt32, usAttributeId : UInt16, pAttributeData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothSdpGetAttributeValue(pRecordStream, cbRecordLength, usAttributeId, pAttributeData)
+    {% end %}
   end
 
-  def bluetoothSdpGetString(pRecordStream : UInt8*, cbRecordLength : UInt32, pStringData : Win32cr::Devices::Bluetooth::SDP_STRING_TYPE_DATA*, usStringOffset : UInt16, pszString : UInt16*, pcchStringLength : UInt32*) : UInt32
+  def bluetoothSdpGetString(pRecordStream : UInt8*, cbRecordLength : UInt32, pStringData : Win32cr::Devices::Bluetooth::SDP_STRING_TYPE_DATA*, usStringOffset : UInt16, pszString : Win32cr::Foundation::PWSTR, pcchStringLength : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothSdpGetString(pRecordStream, cbRecordLength, pStringData, usStringOffset, pszString, pcchStringLength)
+    {% end %}
   end
 
   def bluetoothSdpEnumAttributes(pSDPStream : UInt8*, cbStreamSize : UInt32, pfnCallback : Win32cr::Devices::Bluetooth::PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothSdpEnumAttributes(pSDPStream, cbStreamSize, pfnCallback, pvParam)
+    {% end %}
   end
 
   def bluetoothSetLocalServiceInfo(hRadioIn : Win32cr::Foundation::HANDLE, pClassGuid : LibC::GUID*, ulInstance : UInt32, pServiceInfoIn : Win32cr::Devices::Bluetooth::BLUETOOTH_LOCAL_SERVICE_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.BluetoothSetLocalServiceInfo(hRadioIn, pClassGuid, ulInstance, pServiceInfoIn)
+    {% end %}
   end
 
   def bluetoothIsVersionAvailable(major_version : UInt8, minor_version : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BluetoothIsVersionAvailable(major_version, minor_version)
+    {% end %}
   end
 
   def bluetoothGATTGetServices(hDevice : Win32cr::Foundation::HANDLE, services_buffer_count : UInt16, services_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, services_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTGetServices(hDevice, services_buffer_count, services_buffer, services_buffer_actual, flags)
+    {% end %}
   end
 
   def bluetoothGATTGetIncludedServices(hDevice : Win32cr::Foundation::HANDLE, parent_service : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, included_services_buffer_count : UInt16, included_services_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, included_services_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTGetIncludedServices(hDevice, parent_service, included_services_buffer_count, included_services_buffer, included_services_buffer_actual, flags)
+    {% end %}
   end
 
   def bluetoothGATTGetCharacteristics(hDevice : Win32cr::Foundation::HANDLE, service : Win32cr::Devices::Bluetooth::BTH_LE_GATT_SERVICE*, characteristics_buffer_count : UInt16, characteristics_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristics_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTGetCharacteristics(hDevice, service, characteristics_buffer_count, characteristics_buffer, characteristics_buffer_actual, flags)
+    {% end %}
   end
 
   def bluetoothGATTGetDescriptors(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, descriptors_buffer_count : UInt16, descriptors_buffer : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptors_buffer_actual : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTGetDescriptors(hDevice, characteristic, descriptors_buffer_count, descriptors_buffer, descriptors_buffer_actual, flags)
+    {% end %}
   end
 
   def bluetoothGATTGetCharacteristicValue(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristic_value_data_size : UInt32, characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*, characteristic_value_size_required : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTGetCharacteristicValue(hDevice, characteristic, characteristic_value_data_size, characteristic_value, characteristic_value_size_required, flags)
+    {% end %}
   end
 
   def bluetoothGATTGetDescriptorValue(hDevice : Win32cr::Foundation::HANDLE, descriptor : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptor_value_data_size : UInt32, descriptor_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_VALUE*, descriptor_value_size_required : UInt16*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTGetDescriptorValue(hDevice, descriptor, descriptor_value_data_size, descriptor_value, descriptor_value_size_required, flags)
+    {% end %}
   end
 
   def bluetoothGATTBeginReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTBeginReliableWrite(hDevice, reliable_write_context, flags)
+    {% end %}
   end
 
   def bluetoothGATTSetCharacteristicValue(hDevice : Win32cr::Foundation::HANDLE, characteristic : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC*, characteristic_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_CHARACTERISTIC_VALUE*, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTSetCharacteristicValue(hDevice, characteristic, characteristic_value, reliable_write_context, flags)
+    {% end %}
   end
 
   def bluetoothGATTEndReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTEndReliableWrite(hDevice, reliable_write_context, flags)
+    {% end %}
   end
 
   def bluetoothGATTAbortReliableWrite(hDevice : Win32cr::Foundation::HANDLE, reliable_write_context : UInt64, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTAbortReliableWrite(hDevice, reliable_write_context, flags)
+    {% end %}
   end
 
   def bluetoothGATTSetDescriptorValue(hDevice : Win32cr::Foundation::HANDLE, descriptor : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR*, descriptor_value : Win32cr::Devices::Bluetooth::BTH_LE_GATT_DESCRIPTOR_VALUE*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTSetDescriptorValue(hDevice, descriptor, descriptor_value, flags)
+    {% end %}
   end
 
   def bluetoothGATTRegisterEvent(hService : Win32cr::Foundation::HANDLE, event_type : Win32cr::Devices::Bluetooth::BTH_LE_GATT_EVENT_TYPE, event_parameter_in : Void*, callback : Win32cr::Devices::Bluetooth::PFNBLUETOOTH_GATT_EVENT_CALLBACK, callback_context : Void*, pEventHandle : LibC::IntPtrT*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTRegisterEvent(hService, event_type, event_parameter_in, callback, callback_context, pEventHandle, flags)
+    {% end %}
   end
 
   def bluetoothGATTUnregisterEvent(event_handle : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BluetoothGATTUnregisterEvent(event_handle, flags)
+    {% end %}
   end
 
   @[Link("bluetoothapis")]
   @[Link("bthprops.cpl")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun BluetoothFindFirstRadio(pbtfrp : Win32cr::Devices::Bluetooth::BLUETOOTH_FIND_RADIO_PARAMS*, phRadio : Win32cr::Foundation::HANDLE*) : LibC::IntPtrT
+    fun BluetoothFindFirstRadio(pbtfrp : Win32cr::Devices::Bluetooth::BLUETOOTH_FIND_RADIO_PARAMS*, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Devices::Bluetooth::HBLUETOOTH_RADIO_FIND
 
     # :nodoc:
-    fun BluetoothFindNextRadio(hFind : LibC::IntPtrT, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    fun BluetoothFindNextRadio(hFind : Win32cr::Devices::Bluetooth::HBLUETOOTH_RADIO_FIND, phRadio : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun BluetoothFindRadioClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    fun BluetoothFindRadioClose(hFind : Win32cr::Devices::Bluetooth::HBLUETOOTH_RADIO_FIND) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun BluetoothGetRadioInfo(hRadio : Win32cr::Foundation::HANDLE, pRadioInfo : Win32cr::Devices::Bluetooth::BLUETOOTH_RADIO_INFO*) : UInt32
 
     # :nodoc:
-    fun BluetoothFindFirstDevice(pbtsp : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_SEARCH_PARAMS*, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : LibC::IntPtrT
+    fun BluetoothFindFirstDevice(pbtsp : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_SEARCH_PARAMS*, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Devices::Bluetooth::HBLUETOOTH_DEVICE_FIND
 
     # :nodoc:
-    fun BluetoothFindNextDevice(hFind : LibC::IntPtrT, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
+    fun BluetoothFindNextDevice(hFind : Win32cr::Devices::Bluetooth::HBLUETOOTH_DEVICE_FIND, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun BluetoothFindDeviceClose(hFind : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    fun BluetoothFindDeviceClose(hFind : Win32cr::Devices::Bluetooth::HBLUETOOTH_DEVICE_FIND) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun BluetoothGetDeviceInfo(hRadio : Win32cr::Foundation::HANDLE, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : UInt32
@@ -1724,7 +1873,7 @@ module Win32cr::Devices::Bluetooth
     fun BluetoothDisplayDeviceProperties(hwndParent : Win32cr::Foundation::HWND, pbtdi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun BluetoothAuthenticateDevice(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, pbtbi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : UInt16*, ulPasskeyLength : UInt32) : UInt32
+    fun BluetoothAuthenticateDevice(hwndParent : Win32cr::Foundation::HWND, hRadio : Win32cr::Foundation::HANDLE, pbtbi : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pszPasskey : Win32cr::Foundation::PWSTR, ulPasskeyLength : UInt32) : UInt32
 
     # :nodoc:
     fun BluetoothAuthenticateDeviceEx(hwndParentIn : Win32cr::Foundation::HWND, hRadioIn : Win32cr::Foundation::HANDLE, pbtdiInout : Win32cr::Devices::Bluetooth::BLUETOOTH_DEVICE_INFO*, pbtOobData : Win32cr::Devices::Bluetooth::BLUETOOTH_OOB_DATA_INFO*, authenticationRequirement : Win32cr::Devices::Bluetooth::AUTHENTICATION_REQUIREMENTS) : UInt32
@@ -1775,7 +1924,7 @@ module Win32cr::Devices::Bluetooth
     fun BluetoothSdpGetAttributeValue(pRecordStream : UInt8*, cbRecordLength : UInt32, usAttributeId : UInt16, pAttributeData : Win32cr::Devices::Bluetooth::SDP_ELEMENT_DATA*) : UInt32
 
     # :nodoc:
-    fun BluetoothSdpGetString(pRecordStream : UInt8*, cbRecordLength : UInt32, pStringData : Win32cr::Devices::Bluetooth::SDP_STRING_TYPE_DATA*, usStringOffset : UInt16, pszString : UInt16*, pcchStringLength : UInt32*) : UInt32
+    fun BluetoothSdpGetString(pRecordStream : UInt8*, cbRecordLength : UInt32, pStringData : Win32cr::Devices::Bluetooth::SDP_STRING_TYPE_DATA*, usStringOffset : UInt16, pszString : Win32cr::Foundation::PWSTR, pcchStringLength : UInt32*) : UInt32
 
     # :nodoc:
     fun BluetoothSdpEnumAttributes(pSDPStream : UInt8*, cbStreamSize : UInt32, pfnCallback : Win32cr::Devices::Bluetooth::PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK, pvParam : Void*) : Win32cr::Foundation::BOOL
@@ -1826,4 +1975,5 @@ module Win32cr::Devices::Bluetooth
     fun BluetoothGATTUnregisterEvent(event_handle : LibC::IntPtrT, flags : UInt32) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -89,74 +89,112 @@ module Win32cr::System::Shutdown
     SHUTDOWN_CHECK_SAFE_FOR_SERVER = 16384_u32
     SHUTDOWN_VAIL_CONTAINER = 32768_u32
     SHUTDOWN_SYSTEM_INITIATED = 65536_u32
+    SHUTDOWN_UPDATE_POWEROFF = 131072_u32
   end
+  @[Flags]
   enum EXIT_WINDOWS_FLAGS : UInt32
-    EWX_HYBRID_SHUTDOWN = 4194304_u32
     EWX_LOGOFF = 0_u32
-    EWX_POWEROFF = 8_u32
-    EWX_REBOOT = 2_u32
-    EWX_RESTARTAPPS = 64_u32
     EWX_SHUTDOWN = 1_u32
+    EWX_REBOOT = 2_u32
+    EWX_FORCE = 4_u32
+    EWX_POWEROFF = 8_u32
+    EWX_FORCEIFHUNG = 16_u32
+    EWX_QUICKRESOLVE = 32_u32
+    EWX_RESTARTAPPS = 64_u32
+    EWX_HYBRID_SHUTDOWN = 4194304_u32
+    EWX_BOOTOPTIONS = 16777216_u32
+    EWX_ARSO = 67108864_u32
+    EWX_CHECK_SAFE_FOR_SERVER = 134217728_u32
+    EWX_SYSTEM_INITIATED = 268435456_u32
   end
 
   def initiateSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitiateSystemShutdownA(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown)
+    {% end %}
   end
 
   def initiateSystemShutdownW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitiateSystemShutdownW(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown)
+    {% end %}
   end
 
   def abortSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AbortSystemShutdownA(lpMachineName)
+    {% end %}
   end
 
   def abortSystemShutdownW(lpMachineName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AbortSystemShutdownW(lpMachineName)
+    {% end %}
   end
 
   def initiateSystemShutdownExA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitiateSystemShutdownExA(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown, dwReason)
+    {% end %}
   end
 
   def initiateSystemShutdownExW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitiateSystemShutdownExW(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown, dwReason)
+    {% end %}
   end
 
   def initiateShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwGracePeriod : UInt32, dwShutdownFlags : Win32cr::System::Shutdown::SHUTDOWN_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : UInt32
+    {% if !flag?(:docs) %}
     C.InitiateShutdownA(lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason)
+    {% end %}
   end
 
   def initiateShutdownW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwGracePeriod : UInt32, dwShutdownFlags : Win32cr::System::Shutdown::SHUTDOWN_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : UInt32
+    {% if !flag?(:docs) %}
     C.InitiateShutdownW(lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason)
+    {% end %}
   end
 
   def checkForHiberboot(pHiberboot : Win32cr::Foundation::BOOLEAN*, bClearFlag : Win32cr::Foundation::BOOLEAN) : UInt32
+    {% if !flag?(:docs) %}
     C.CheckForHiberboot(pHiberboot, bClearFlag)
+    {% end %}
   end
 
   def exitWindowsEx(uFlags : Win32cr::System::Shutdown::EXIT_WINDOWS_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExitWindowsEx(uFlags, dwReason)
+    {% end %}
   end
 
   def lockWorkStation : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LockWorkStation
+    {% end %}
   end
 
   def shutdownBlockReasonCreate(hWnd : Win32cr::Foundation::HWND, pwszReason : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShutdownBlockReasonCreate(hWnd, pwszReason)
+    {% end %}
   end
 
-  def shutdownBlockReasonQuery(hWnd : Win32cr::Foundation::HWND, pwszBuff : UInt16*, pcchBuff : UInt32*) : Win32cr::Foundation::BOOL
+  def shutdownBlockReasonQuery(hWnd : Win32cr::Foundation::HWND, pwszBuff : Win32cr::Foundation::PWSTR, pcchBuff : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShutdownBlockReasonQuery(hWnd, pwszBuff, pcchBuff)
+    {% end %}
   end
 
   def shutdownBlockReasonDestroy(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShutdownBlockReasonDestroy(hWnd)
+    {% end %}
   end
 
   @[Link("advapi32")]
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun InitiateSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -195,10 +233,11 @@ module Win32cr::System::Shutdown
     fun ShutdownBlockReasonCreate(hWnd : Win32cr::Foundation::HWND, pwszReason : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun ShutdownBlockReasonQuery(hWnd : Win32cr::Foundation::HWND, pwszBuff : UInt16*, pcchBuff : UInt32*) : Win32cr::Foundation::BOOL
+    fun ShutdownBlockReasonQuery(hWnd : Win32cr::Foundation::HWND, pwszBuff : Win32cr::Foundation::PWSTR, pcchBuff : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun ShutdownBlockReasonDestroy(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

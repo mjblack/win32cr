@@ -42,12 +42,14 @@ module Win32cr::Devices::Communication
   MDM_HDLCPPP_SPEED_64K = 1_u32
   MDM_HDLCPPP_SPEED_56K = 2_u32
   MDM_SHIFT_HDLCPPP_AUTH = 3_u32
+  MDM_MASK_HDLCPPP_AUTH = 56_u32
   MDM_HDLCPPP_AUTH_DEFAULT = 0_u32
   MDM_HDLCPPP_AUTH_NONE = 1_u32
   MDM_HDLCPPP_AUTH_PAP = 2_u32
   MDM_HDLCPPP_AUTH_CHAP = 3_u32
   MDM_HDLCPPP_AUTH_MSCHAP = 4_u32
   MDM_SHIFT_HDLCPPP_ML = 6_u32
+  MDM_MASK_HDLCPPP_ML = 192_u32
   MDM_HDLCPPP_ML_DEFAULT = 0_u32
   MDM_HDLCPPP_ML_NONE = 1_u32
   MDM_HDLCPPP_ML_2 = 2_u32
@@ -57,6 +59,7 @@ module Win32cr::Devices::Communication
   MDM_V120_SPEED_64K = 1_u32
   MDM_V120_SPEED_56K = 2_u32
   MDM_SHIFT_V120_ML = 6_u32
+  MDM_MASK_V120_ML = 192_u32
   MDM_V120_ML_DEFAULT = 0_u32
   MDM_V120_ML_NONE = 1_u32
   MDM_V120_ML_2 = 2_u32
@@ -84,6 +87,7 @@ module Win32cr::Devices::Communication
   MDM_MASK_AUTO_SPEED = 7_u32
   MDM_AUTO_SPEED_DEFAULT = 0_u32
   MDM_SHIFT_AUTO_ML = 6_u32
+  MDM_MASK_AUTO_ML = 192_u32
   MDM_AUTO_ML_DEFAULT = 0_u32
   MDM_AUTO_ML_NONE = 1_u32
   MDM_AUTO_ML_2 = 2_u32
@@ -92,7 +96,7 @@ module Win32cr::Devices::Communication
   MDM_ANALOG_V34 = 2_u32
   MDM_PIAFS_INCOMING = 0_u32
   MDM_PIAFS_OUTGOING = 1_u32
-  SID_3GPP_SUPSVCMODEL = "d7d08e07-d767-4478-b14a-eecc87ea12f7"
+  SID_3GPP_SUPSVCMODEL = LibC::GUID.new(0xd7d08e07_u32, 0xd767_u16, 0x4478_u16, StaticArray[0xb1_u8, 0x4a_u8, 0xee_u8, 0xcc_u8, 0x87_u8, 0xea_u8, 0x12_u8, 0xf7_u8])
   MAXLENGTH_NAI = 72_u32
   MAXLENGTH_UICCDATASTORE = 10_u32
 
@@ -219,8 +223,8 @@ module Win32cr::Devices::Communication
     property dwModemOptions : UInt32
     property dwMaxDTERate : UInt32
     property dwMaxDCERate : UInt32
-    property abVariablePortion : UInt8*
-    def initialize(@dwActualSize : UInt32, @dwRequiredSize : UInt32, @dwDevSpecificOffset : UInt32, @dwDevSpecificSize : UInt32, @dwModemProviderVersion : UInt32, @dwModemManufacturerOffset : UInt32, @dwModemManufacturerSize : UInt32, @dwModemModelOffset : UInt32, @dwModemModelSize : UInt32, @dwModemVersionOffset : UInt32, @dwModemVersionSize : UInt32, @dwDialOptions : Win32cr::Devices::Communication::MODEMDEVCAPS_DIAL_OPTIONS, @dwCallSetupFailTimer : UInt32, @dwInactivityTimeout : UInt32, @dwSpeakerVolume : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_VOLUME, @dwSpeakerMode : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_MODE, @dwModemOptions : UInt32, @dwMaxDTERate : UInt32, @dwMaxDCERate : UInt32, @abVariablePortion : UInt8*)
+    property abVariablePortion : UInt8[1]
+    def initialize(@dwActualSize : UInt32, @dwRequiredSize : UInt32, @dwDevSpecificOffset : UInt32, @dwDevSpecificSize : UInt32, @dwModemProviderVersion : UInt32, @dwModemManufacturerOffset : UInt32, @dwModemManufacturerSize : UInt32, @dwModemModelOffset : UInt32, @dwModemModelSize : UInt32, @dwModemVersionOffset : UInt32, @dwModemVersionSize : UInt32, @dwDialOptions : Win32cr::Devices::Communication::MODEMDEVCAPS_DIAL_OPTIONS, @dwCallSetupFailTimer : UInt32, @dwInactivityTimeout : UInt32, @dwSpeakerVolume : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_VOLUME, @dwSpeakerMode : Win32cr::Devices::Communication::MODEMDEVCAPS_SPEAKER_MODE, @dwModemOptions : UInt32, @dwMaxDTERate : UInt32, @dwMaxDCERate : UInt32, @abVariablePortion : UInt8[1])
     end
   end
 
@@ -237,8 +241,8 @@ module Win32cr::Devices::Communication
     property dwPreferredModemOptions : UInt32
     property dwNegotiatedModemOptions : UInt32
     property dwNegotiatedDCERate : UInt32
-    property abVariablePortion : UInt8*
-    def initialize(@dwActualSize : UInt32, @dwRequiredSize : UInt32, @dwDevSpecificOffset : UInt32, @dwDevSpecificSize : UInt32, @dwCallSetupFailTimer : UInt32, @dwInactivityTimeout : UInt32, @dwSpeakerVolume : Win32cr::Devices::Communication::MODEM_SPEAKER_VOLUME, @dwSpeakerMode : Win32cr::Devices::Communication::MODEMSETTINGS_SPEAKER_MODE, @dwPreferredModemOptions : UInt32, @dwNegotiatedModemOptions : UInt32, @dwNegotiatedDCERate : UInt32, @abVariablePortion : UInt8*)
+    property abVariablePortion : UInt8[1]
+    def initialize(@dwActualSize : UInt32, @dwRequiredSize : UInt32, @dwDevSpecificOffset : UInt32, @dwDevSpecificSize : UInt32, @dwCallSetupFailTimer : UInt32, @dwInactivityTimeout : UInt32, @dwSpeakerVolume : Win32cr::Devices::Communication::MODEM_SPEAKER_VOLUME, @dwSpeakerMode : Win32cr::Devices::Communication::MODEMSETTINGS_SPEAKER_MODE, @dwPreferredModemOptions : UInt32, @dwNegotiatedModemOptions : UInt32, @dwNegotiatedDCERate : UInt32, @abVariablePortion : UInt8[1])
     end
   end
 
@@ -261,8 +265,8 @@ module Win32cr::Devices::Communication
     property dwCurrentRxQueue : UInt32
     property dwProvSpec1 : UInt32
     property dwProvSpec2 : UInt32
-    property wcProvChar : UInt16*
-    def initialize(@wPacketLength : UInt16, @wPacketVersion : UInt16, @dwServiceMask : UInt32, @dwReserved1 : UInt32, @dwMaxTxQueue : UInt32, @dwMaxRxQueue : UInt32, @dwMaxBaud : UInt32, @dwProvSubType : UInt32, @dwProvCapabilities : UInt32, @dwSettableParams : UInt32, @dwSettableBaud : UInt32, @wSettableData : UInt16, @wSettableStopParity : Win32cr::Devices::Communication::COMMPROP_STOP_PARITY, @dwCurrentTxQueue : UInt32, @dwCurrentRxQueue : UInt32, @dwProvSpec1 : UInt32, @dwProvSpec2 : UInt32, @wcProvChar : UInt16*)
+    property wcProvChar : UInt16[1]
+    def initialize(@wPacketLength : UInt16, @wPacketVersion : UInt16, @dwServiceMask : UInt32, @dwReserved1 : UInt32, @dwMaxTxQueue : UInt32, @dwMaxRxQueue : UInt32, @dwMaxBaud : UInt32, @dwProvSubType : UInt32, @dwProvCapabilities : UInt32, @dwSettableParams : UInt32, @dwSettableBaud : UInt32, @wSettableData : UInt16, @wSettableStopParity : Win32cr::Devices::Communication::COMMPROP_STOP_PARITY, @dwCurrentTxQueue : UInt32, @dwCurrentRxQueue : UInt32, @dwProvSpec1 : UInt32, @dwProvSpec2 : UInt32, @wcProvChar : UInt16[1])
     end
   end
 
@@ -316,132 +320,193 @@ module Win32cr::Devices::Communication
     property dwProviderSubType : UInt32
     property dwProviderOffset : UInt32
     property dwProviderSize : UInt32
-    property wcProviderData : UInt16*
-    def initialize(@dwSize : UInt32, @wVersion : UInt16, @wReserved : UInt16, @dcb : Win32cr::Devices::Communication::DCB, @dwProviderSubType : UInt32, @dwProviderOffset : UInt32, @dwProviderSize : UInt32, @wcProviderData : UInt16*)
+    property wcProviderData : UInt16[1]
+    def initialize(@dwSize : UInt32, @wVersion : UInt16, @wReserved : UInt16, @dcb : Win32cr::Devices::Communication::DCB, @dwProviderSubType : UInt32, @dwProviderOffset : UInt32, @dwProviderSize : UInt32, @wcProviderData : UInt16[1])
     end
   end
 
   def clearCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClearCommBreak(hFile)
+    {% end %}
   end
 
   def clearCommError(hFile : Win32cr::Foundation::HANDLE, lpErrors : Win32cr::Devices::Communication::CLEAR_COMM_ERROR_FLAGS*, lpStat : Win32cr::Devices::Communication::COMSTAT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClearCommError(hFile, lpErrors, lpStat)
+    {% end %}
   end
 
   def setupComm(hFile : Win32cr::Foundation::HANDLE, dwInQueue : UInt32, dwOutQueue : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetupComm(hFile, dwInQueue, dwOutQueue)
+    {% end %}
   end
 
   def escapeCommFunction(hFile : Win32cr::Foundation::HANDLE, dwFunc : Win32cr::Devices::Communication::ESCAPE_COMM_FUNCTION) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EscapeCommFunction(hFile, dwFunc)
+    {% end %}
   end
 
   def getCommConfig(hCommDev : Win32cr::Foundation::HANDLE, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCommConfig(hCommDev, lpCC, lpdwSize)
+    {% end %}
   end
 
   def getCommMask(hFile : Win32cr::Foundation::HANDLE, lpEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCommMask(hFile, lpEvtMask)
+    {% end %}
   end
 
   def getCommProperties(hFile : Win32cr::Foundation::HANDLE, lpCommProp : Win32cr::Devices::Communication::COMMPROP*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCommProperties(hFile, lpCommProp)
+    {% end %}
   end
 
   def getCommModemStatus(hFile : Win32cr::Foundation::HANDLE, lpModemStat : Win32cr::Devices::Communication::MODEM_STATUS_FLAGS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCommModemStatus(hFile, lpModemStat)
+    {% end %}
   end
 
   def getCommState(hFile : Win32cr::Foundation::HANDLE, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCommState(hFile, lpDCB)
+    {% end %}
   end
 
   def getCommTimeouts(hFile : Win32cr::Foundation::HANDLE, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCommTimeouts(hFile, lpCommTimeouts)
+    {% end %}
   end
 
   def purgeComm(hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::Devices::Communication::PURGE_COMM_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PurgeComm(hFile, dwFlags)
+    {% end %}
   end
 
   def setCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCommBreak(hFile)
+    {% end %}
   end
 
   def setCommConfig(hCommDev : Win32cr::Foundation::HANDLE, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCommConfig(hCommDev, lpCC, dwSize)
+    {% end %}
   end
 
   def setCommMask(hFile : Win32cr::Foundation::HANDLE, dwEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCommMask(hFile, dwEvtMask)
+    {% end %}
   end
 
   def setCommState(hFile : Win32cr::Foundation::HANDLE, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCommState(hFile, lpDCB)
+    {% end %}
   end
 
   def setCommTimeouts(hFile : Win32cr::Foundation::HANDLE, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCommTimeouts(hFile, lpCommTimeouts)
+    {% end %}
   end
 
   def transmitCommChar(hFile : Win32cr::Foundation::HANDLE, cChar : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TransmitCommChar(hFile, cChar)
+    {% end %}
   end
 
   def waitCommEvent(hFile : Win32cr::Foundation::HANDLE, lpEvtMask : Win32cr::Devices::Communication::COMM_EVENT_MASK*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WaitCommEvent(hFile, lpEvtMask, lpOverlapped)
+    {% end %}
   end
 
   def openCommPort(uPortNumber : UInt32, dwDesiredAccess : UInt32, dwFlagsAndAttributes : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenCommPort(uPortNumber, dwDesiredAccess, dwFlagsAndAttributes)
+    {% end %}
   end
 
   def getCommPorts(lpPortNumbers : UInt32*, uPortNumbersCount : UInt32, puPortNumbersFound : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetCommPorts(lpPortNumbers, uPortNumbersCount, puPortNumbersFound)
+    {% end %}
   end
 
   def buildCommDCBA(lpDef : Win32cr::Foundation::PSTR, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BuildCommDCBA(lpDef, lpDCB)
+    {% end %}
   end
 
   def buildCommDCBW(lpDef : Win32cr::Foundation::PWSTR, lpDCB : Win32cr::Devices::Communication::DCB*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BuildCommDCBW(lpDef, lpDCB)
+    {% end %}
   end
 
   def buildCommDCBAndTimeoutsA(lpDef : Win32cr::Foundation::PSTR, lpDCB : Win32cr::Devices::Communication::DCB*, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BuildCommDCBAndTimeoutsA(lpDef, lpDCB, lpCommTimeouts)
+    {% end %}
   end
 
   def buildCommDCBAndTimeoutsW(lpDef : Win32cr::Foundation::PWSTR, lpDCB : Win32cr::Devices::Communication::DCB*, lpCommTimeouts : Win32cr::Devices::Communication::COMMTIMEOUTS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BuildCommDCBAndTimeoutsW(lpDef, lpDCB, lpCommTimeouts)
+    {% end %}
   end
 
   def commConfigDialogA(lpszName : Win32cr::Foundation::PSTR, hWnd : Win32cr::Foundation::HWND, lpCC : Win32cr::Devices::Communication::COMMCONFIG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CommConfigDialogA(lpszName, hWnd, lpCC)
+    {% end %}
   end
 
   def commConfigDialogW(lpszName : Win32cr::Foundation::PWSTR, hWnd : Win32cr::Foundation::HWND, lpCC : Win32cr::Devices::Communication::COMMCONFIG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CommConfigDialogW(lpszName, hWnd, lpCC)
+    {% end %}
   end
 
   def getDefaultCommConfigA(lpszName : Win32cr::Foundation::PSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDefaultCommConfigA(lpszName, lpCC, lpdwSize)
+    {% end %}
   end
 
   def getDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDefaultCommConfigW(lpszName, lpCC, lpdwSize)
+    {% end %}
   end
 
   def setDefaultCommConfigA(lpszName : Win32cr::Foundation::PSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDefaultCommConfigA(lpszName, lpCC, dwSize)
+    {% end %}
   end
 
   def setDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDefaultCommConfigW(lpszName, lpCC, dwSize)
+    {% end %}
   end
 
   @[Link("kernel32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun ClearCommBreak(hFile : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
@@ -534,4 +599,5 @@ module Win32cr::Devices::Communication
     fun SetDefaultCommConfigW(lpszName : Win32cr::Foundation::PWSTR, lpCC : Win32cr::Devices::Communication::COMMCONFIG*, dwSize : UInt32) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

@@ -1,5 +1,5 @@
-require "./../../system/com.cr"
 require "./../../foundation.cr"
+require "./../../system/com.cr"
 require "./../audio.cr"
 require "./../../ui/shell/properties_system.cr"
 
@@ -21,42 +21,60 @@ module Win32cr::Media::Audio::Apo
   APOERR_INVALID_COEFFICIENT = -2005073908_i32
   APOERR_INVALID_CURVE_PARAM = -2005073907_i32
   APOERR_INVALID_INPUTID = -2005073906_i32
-  AUDIO_MIN_FRAMERATE = 10
-  AUDIO_MAX_FRAMERATE = 384000
+  AUDIO_MIN_FRAMERATE = 10.0
+  AUDIO_MAX_FRAMERATE = 384000.0
   AUDIO_MIN_CHANNELS = 1_u32
   AUDIO_MAX_CHANNELS = 4096_u32
-  PKEY_FX_Association = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 0_u32)
-  PKEY_FX_PreMixEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 1_u32)
-  PKEY_FX_PostMixEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 2_u32)
-  PKEY_FX_UserInterfaceClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 3_u32)
-  PKEY_FX_FriendlyName = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 4_u32)
-  PKEY_FX_StreamEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 5_u32)
-  PKEY_FX_ModeEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 6_u32)
-  PKEY_FX_EndpointEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 7_u32)
-  PKEY_FX_KeywordDetector_StreamEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 8_u32)
-  PKEY_FX_KeywordDetector_ModeEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 9_u32)
-  PKEY_FX_KeywordDetector_EndpointEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 10_u32)
-  PKEY_FX_Offload_StreamEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 11_u32)
-  PKEY_FX_Offload_ModeEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 12_u32)
-  PKEY_CompositeFX_StreamEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 13_u32)
-  PKEY_CompositeFX_ModeEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 14_u32)
-  PKEY_CompositeFX_EndpointEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 15_u32)
-  PKEY_CompositeFX_KeywordDetector_StreamEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 16_u32)
-  PKEY_CompositeFX_KeywordDetector_ModeEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 17_u32)
-  PKEY_CompositeFX_KeywordDetector_EndpointEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 18_u32)
-  PKEY_CompositeFX_Offload_StreamEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 19_u32)
-  PKEY_CompositeFX_Offload_ModeEffectClsid = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 20_u32)
-  PKEY_SFX_ProcessingModes_Supported_For_Streaming = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 5_u32)
-  PKEY_MFX_ProcessingModes_Supported_For_Streaming = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 6_u32)
-  PKEY_EFX_ProcessingModes_Supported_For_Streaming = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 7_u32)
-  PKEY_SFX_KeywordDetector_ProcessingModes_Supported_For_Streaming = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 8_u32)
-  PKEY_MFX_KeywordDetector_ProcessingModes_Supported_For_Streaming = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 9_u32)
-  PKEY_EFX_KeywordDetector_ProcessingModes_Supported_For_Streaming = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 10_u32)
-  PKEY_SFX_Offload_ProcessingModes_Supported_For_Streaming = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 11_u32)
-  PKEY_MFX_Offload_ProcessingModes_Supported_For_Streaming = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 12_u32)
-  PKEY_APO_SWFallback_ProcessingModes = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 13_u32)
-  SID_AudioProcessingObjectRTQueue = "458c1a1f-6899-4c12-99ac-e2e6ac253104"
-  SID_AudioProcessingObjectLoggingService = "8b8008af-09f9-456e-a173-bdb58499bce7"
+  PKEY_FX_Association = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 0_u32)
+  PKEY_FX_PreMixEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 1_u32)
+  PKEY_FX_PostMixEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 2_u32)
+  PKEY_FX_UserInterfaceClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 3_u32)
+  PKEY_FX_FriendlyName = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 4_u32)
+  PKEY_FX_StreamEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 5_u32)
+  PKEY_FX_ModeEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 6_u32)
+  PKEY_FX_EndpointEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 7_u32)
+  PKEY_FX_KeywordDetector_StreamEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 8_u32)
+  PKEY_FX_KeywordDetector_ModeEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 9_u32)
+  PKEY_FX_KeywordDetector_EndpointEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 10_u32)
+  PKEY_FX_Offload_StreamEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 11_u32)
+  PKEY_FX_Offload_ModeEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 12_u32)
+  PKEY_CompositeFX_StreamEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 13_u32)
+  PKEY_CompositeFX_ModeEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 14_u32)
+  PKEY_CompositeFX_EndpointEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 15_u32)
+  PKEY_CompositeFX_KeywordDetector_StreamEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 16_u32)
+  PKEY_CompositeFX_KeywordDetector_ModeEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 17_u32)
+  PKEY_CompositeFX_KeywordDetector_EndpointEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 18_u32)
+  PKEY_CompositeFX_Offload_StreamEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 19_u32)
+  PKEY_CompositeFX_Offload_ModeEffectClsid = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 20_u32)
+  PKEY_FX_SupportAppLauncher = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 21_u32)
+  PKEY_FX_SupportedFormats = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 22_u32)
+  PKEY_FX_Enumerator = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 23_u32)
+  PKEY_FX_VersionMajor = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 24_u32)
+  PKEY_FX_VersionMinor = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 25_u32)
+  PKEY_FX_Author = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 26_u32)
+  PKEY_FX_ObjectId = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 27_u32)
+  PKEY_FX_State = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 28_u32)
+  PKEY_FX_EffectPackSchema_Version = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 29_u32)
+  PKEY_FX_ApplyToBluetooth = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 30_u32)
+  PKEY_FX_ApplyToUsb = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 31_u32)
+  PKEY_FX_ApplyToRender = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 32_u32)
+  PKEY_FX_ApplyToCapture = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 33_u32)
+  PKEY_FX_RequestSetAsDefault = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 34_u32)
+  PKEY_FX_RequestSetAsDefaultPriority = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 35_u32)
+  PKEY_FX_OEM_Preferred_EffectPack_Id = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd04e05a6_u32, 0x594b_u16, 0x4fb6_u16, StaticArray[0xa8_u8, 0xd_u8, 0x1_u8, 0xaf_u8, 0x5e_u8, 0xed_u8, 0x7d_u8, 0x1d_u8]), 36_u32)
+  PKEY_SFX_ProcessingModes_Supported_For_Streaming = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 5_u32)
+  PKEY_MFX_ProcessingModes_Supported_For_Streaming = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 6_u32)
+  PKEY_EFX_ProcessingModes_Supported_For_Streaming = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 7_u32)
+  PKEY_SFX_KeywordDetector_ProcessingModes_Supported_For_Streaming = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 8_u32)
+  PKEY_MFX_KeywordDetector_ProcessingModes_Supported_For_Streaming = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 9_u32)
+  PKEY_EFX_KeywordDetector_ProcessingModes_Supported_For_Streaming = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 10_u32)
+  PKEY_SFX_Offload_ProcessingModes_Supported_For_Streaming = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 11_u32)
+  PKEY_MFX_Offload_ProcessingModes_Supported_For_Streaming = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 12_u32)
+  PKEY_APO_SWFallback_ProcessingModes = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0xd3993a3f_u32, 0x99c2_u16, 0x4402_u16, StaticArray[0xb5_u8, 0xec_u8, 0xa9_u8, 0x2a_u8, 0x3_u8, 0x67_u8, 0x66_u8, 0x4b_u8]), 13_u32)
+  PKEY_FX_EffectPack_Schema_V1 = LibC::GUID.new(0x7abf23d9_u32, 0x727e_u16, 0x4d0b_u16, StaticArray[0x86_u8, 0xa3_u8, 0xdd_u8, 0x50_u8, 0x1d_u8, 0x26_u8, 0x0_u8, 0x1_u8])
+  SID_AudioProcessingObjectRTQueue = LibC::GUID.new(0x458c1a1f_u32, 0x6899_u16, 0x4c12_u16, StaticArray[0x99_u8, 0xac_u8, 0xe2_u8, 0xe6_u8, 0xac_u8, 0x25_u8, 0x31_u8, 0x4_u8])
+  SID_AudioProcessingObjectLoggingService = LibC::GUID.new(0x8b8008af_u32, 0x9f9_u16, 0x456e_u16, StaticArray[0xa1_u8, 0x73_u8, 0xbd_u8, 0xb5_u8, 0x84_u8, 0x99_u8, 0xbc_u8, 0xe7_u8])
+  PKEY_AudioEnvironment_SpatialAudioActive = Win32cr::Foundation::PROPERTYKEY.new(LibC::GUID.new(0x4afb7b88_u32, 0xa653_u16, 0x44a5_u16, StaticArray[0x99_u8, 0xdb_u8, 0x68_u8, 0x7f_u8, 0xd7_u8, 0x4a_u8, 0xf0_u8, 0xbb_u8]), 2_u32)
   AUDIOMEDIATYPE_EQUAL_FORMAT_TYPES = 2_u32
   AUDIOMEDIATYPE_EQUAL_FORMAT_DATA = 4_u32
   AUDIOMEDIATYPE_EQUAL_FORMAT_USER_DATA = 8_u32
@@ -91,6 +109,11 @@ module Win32cr::Media::Audio::Apo
     Eaudioconstriction14_14 = 3_i32
     Eaudioconstrictionmute = 4_i32
   end
+  @[Flags]
+  enum APO_REFERENCE_STREAM_PROPERTIES
+    APO_REFERENCE_STREAM_PROPERTIES_NONE = 0_i32
+    APO_REFERENCE_STREAM_PROPERTIES_POST_VOLUME_LOOPBACK = 1_i32
+  end
   enum AUDIO_SYSTEMEFFECT_STATE
     AUDIO_SYSTEMEFFECT_STATE_OFF = 0_i32
     AUDIO_SYSTEMEFFECT_STATE_ON = 1_i32
@@ -108,6 +131,16 @@ module Win32cr::Media::Audio::Apo
     APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME = 1_i32
     APO_NOTIFICATION_TYPE_ENDPOINT_PROPERTY_CHANGE = 2_i32
     APO_NOTIFICATION_TYPE_SYSTEM_EFFECTS_PROPERTY_CHANGE = 3_i32
+    APO_NOTIFICATION_TYPE_ENDPOINT_VOLUME2 = 4_i32
+    APO_NOTIFICATION_TYPE_DEVICE_ORIENTATION = 5_i32
+    APO_NOTIFICATION_TYPE_MICROPHONE_BOOST = 6_i32
+    APO_NOTIFICATION_TYPE_AUDIO_ENVIRONMENT_STATE_CHANGE = 7_i32
+  end
+  enum DEVICE_ORIENTATION_TYPE
+    DEVICE_NOT_ROTATED = 0_i32
+    DEVICE_ROTATED_90_DEGREES_CLOCKWISE = 1_i32
+    DEVICE_ROTATED_180_DEGREES_CLOCKWISE = 2_i32
+    DEVICE_ROTATED_270_DEGREES_CLOCKWISE = 3_i32
   end
 
   @[Extern]
@@ -165,8 +198,8 @@ module Win32cr::Media::Audio::Apo
     property u32MaxOutputConnections : UInt32
     property u32MaxInstances : UInt32
     property u32NumAPOInterfaces : UInt32
-    property iidAPOInterfaceList : LibC::GUID*
-    def initialize(@clsid : LibC::GUID, @flags : Win32cr::Media::Audio::Apo::APO_FLAG, @szFriendlyName : UInt16[256], @szCopyrightInfo : UInt16[256], @u32MajorVersion : UInt32, @u32MinorVersion : UInt32, @u32MinInputConnections : UInt32, @u32MaxInputConnections : UInt32, @u32MinOutputConnections : UInt32, @u32MaxOutputConnections : UInt32, @u32MaxInstances : UInt32, @u32NumAPOInterfaces : UInt32, @iidAPOInterfaceList : LibC::GUID*)
+    property iidAPOInterfaceList : LibC::GUID[1]
+    def initialize(@clsid : LibC::GUID, @flags : Win32cr::Media::Audio::Apo::APO_FLAG, @szFriendlyName : UInt16[256], @szCopyrightInfo : UInt16[256], @u32MajorVersion : UInt32, @u32MinorVersion : UInt32, @u32MinInputConnections : UInt32, @u32MaxInputConnections : UInt32, @u32MinOutputConnections : UInt32, @u32MaxOutputConnections : UInt32, @u32MaxInstances : UInt32, @u32NumAPOInterfaces : UInt32, @iidAPOInterfaceList : LibC::GUID[1])
     end
   end
 
@@ -237,6 +270,14 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
+  struct AcousticEchoCanceller_Reference_Input
+    property apoInitSystemEffects : Win32cr::Media::Audio::Apo::APOInitSystemEffects3
+    property streamProperties : Win32cr::Media::Audio::Apo::APO_REFERENCE_STREAM_PROPERTIES
+    def initialize(@apoInitSystemEffects : Win32cr::Media::Audio::Apo::APOInitSystemEffects3, @streamProperties : Win32cr::Media::Audio::Apo::APO_REFERENCE_STREAM_PROPERTIES)
+    end
+  end
+
+  @[Extern]
   struct AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION
     property endpoint : Void*
     property volume : Win32cr::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA*
@@ -248,8 +289,8 @@ module Win32cr::Media::Audio::Apo
   struct AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION
     property endpoint : Void*
     property propertyStore : Void*
-    property propertyKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY
-    def initialize(@endpoint : Void*, @propertyStore : Void*, @propertyKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY)
+    property propertyKey : Win32cr::Foundation::PROPERTYKEY
+    def initialize(@endpoint : Void*, @propertyStore : Void*, @propertyKey : Win32cr::Foundation::PROPERTYKEY)
     end
   end
 
@@ -259,8 +300,53 @@ module Win32cr::Media::Audio::Apo
     property propertyStoreContext : LibC::GUID
     property propertyStoreType : Win32cr::Media::Audio::AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE
     property propertyStore : Void*
-    property propertyKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY
-    def initialize(@endpoint : Void*, @propertyStoreContext : LibC::GUID, @propertyStoreType : Win32cr::Media::Audio::AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE, @propertyStore : Void*, @propertyKey : Win32cr::UI::Shell::PropertiesSystem::PROPERTYKEY)
+    property propertyKey : Win32cr::Foundation::PROPERTYKEY
+    def initialize(@endpoint : Void*, @propertyStoreContext : LibC::GUID, @propertyStoreType : Win32cr::Media::Audio::AUDIO_SYSTEMEFFECTS_PROPERTYSTORE_TYPE, @propertyStore : Void*, @propertyKey : Win32cr::Foundation::PROPERTYKEY)
+    end
+  end
+
+  @[Extern]
+  struct AUDIO_VOLUME_NOTIFICATION_DATA2
+    property notificationData : Win32cr::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA*
+    property masterVolumeInDb : Float32
+    property volumeMinInDb : Float32
+    property volumeMaxInDb : Float32
+    property volumeIncrementInDb : Float32
+    property step : UInt32
+    property stepCount : UInt32
+    property channelVolumesInDb : Float32[1]
+    def initialize(@notificationData : Win32cr::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA*, @masterVolumeInDb : Float32, @volumeMinInDb : Float32, @volumeMaxInDb : Float32, @volumeIncrementInDb : Float32, @step : UInt32, @stepCount : UInt32, @channelVolumesInDb : Float32[1])
+    end
+  end
+
+  @[Extern]
+  struct AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2
+    property endpoint : Void*
+    property volume : Win32cr::Media::Audio::Apo::AUDIO_VOLUME_NOTIFICATION_DATA2*
+    def initialize(@endpoint : Void*, @volume : Win32cr::Media::Audio::Apo::AUDIO_VOLUME_NOTIFICATION_DATA2*)
+    end
+  end
+
+  @[Extern]
+  struct AUDIO_MICROPHONE_BOOST_NOTIFICATION
+    property endpoint : Void*
+    property eventContext : LibC::GUID
+    property microphoneBoostEnabled : Win32cr::Foundation::BOOL
+    property levelInDb : Float32
+    property levelMinInDb : Float32
+    property levelMaxInDb : Float32
+    property levelStepInDb : Float32
+    property muteSupported : Win32cr::Foundation::BOOL
+    property mute : Win32cr::Foundation::BOOL
+    def initialize(@endpoint : Void*, @eventContext : LibC::GUID, @microphoneBoostEnabled : Win32cr::Foundation::BOOL, @levelInDb : Float32, @levelMinInDb : Float32, @levelMaxInDb : Float32, @levelStepInDb : Float32, @muteSupported : Win32cr::Foundation::BOOL, @mute : Win32cr::Foundation::BOOL)
+    end
+  end
+
+  @[Extern]
+  struct AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION
+    property propertyStore : Void*
+    property propertyKey : Win32cr::Foundation::PROPERTYKEY
+    def initialize(@propertyStore : Void*, @propertyKey : Win32cr::Foundation::PROPERTYKEY)
     end
   end
 
@@ -275,7 +361,11 @@ module Win32cr::Media::Audio::Apo
     property audioEndpointVolumeChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION
     property audioEndpointPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION
     property audioSystemEffectsPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION
-    def initialize(@audioEndpointVolumeChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION, @audioEndpointPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION, @audioSystemEffectsPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION)
+    property audioEndpointVolumeChange2 : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2
+    property deviceOrientation : Win32cr::Media::Audio::Apo::DEVICE_ORIENTATION_TYPE
+    property audioMicrophoneBoostChange : Win32cr::Media::Audio::Apo::AUDIO_MICROPHONE_BOOST_NOTIFICATION
+    property audioEnvironmentChange : Win32cr::Media::Audio::Apo::AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION
+    def initialize(@audioEndpointVolumeChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION, @audioEndpointPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_PROPERTY_CHANGE_NOTIFICATION, @audioSystemEffectsPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_NOTIFICATION, @audioEndpointVolumeChange2 : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_VOLUME_CHANGE_NOTIFICATION2, @deviceOrientation : Win32cr::Media::Audio::Apo::DEVICE_ORIENTATION_TYPE, @audioMicrophoneBoostChange : Win32cr::Media::Audio::Apo::AUDIO_MICROPHONE_BOOST_NOTIFICATION, @audioEnvironmentChange : Win32cr::Media::Audio::Apo::AUDIO_ENVIRONMENT_STATE_CHANGE_NOTIFICATION)
     end
     end
 
@@ -306,6 +396,13 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
+  struct AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR
+    property device : Void*
+    def initialize(@device : Void*)
+    end
+  end
+
+  @[Extern]
   struct APO_NOTIFICATION_DESCRIPTOR
     property type__ : Win32cr::Media::Audio::Apo::APO_NOTIFICATION_TYPE
     property anonymous : Anonymous_e__Union_
@@ -316,7 +413,8 @@ module Win32cr::Media::Audio::Apo
     property audioEndpointVolume : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR
     property audioEndpointPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR
     property audioSystemEffectsPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR
-    def initialize(@audioEndpointVolume : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR, @audioEndpointPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR, @audioSystemEffectsPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR)
+    property audioMicrophoneBoost : Win32cr::Media::Audio::Apo::AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR
+    def initialize(@audioEndpointVolume : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_VOLUME_APO_NOTIFICATION_DESCRIPTOR, @audioEndpointPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_ENDPOINT_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR, @audioSystemEffectsPropertyChange : Win32cr::Media::Audio::Apo::AUDIO_SYSTEMEFFECTS_PROPERTY_CHANGE_APO_NOTIFICATION_DESCRIPTOR, @audioMicrophoneBoost : Win32cr::Media::Audio::Apo::AUDIO_MICROPHONE_BOOST_APO_NOTIFICATION_DESCRIPTOR)
     end
     end
 
@@ -325,7 +423,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioMediaTypeVtbl,
+
+  record IAudioMediaTypeVtable,
     query_interface : Proc(IAudioMediaType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioMediaType*, UInt32),
     release : Proc(IAudioMediaType*, UInt32),
@@ -336,7 +435,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioMediaType, lpVtbl : IAudioMediaTypeVtbl* do
+  record IAudioMediaType, lpVtbl : IAudioMediaTypeVtable* do
     GUID = LibC::GUID.new(0x4e997f73_u32, 0xb71f_u16, 0x4798_u16, StaticArray[0x87_u8, 0x3b_u8, 0xed_u8, 0x7d_u8, 0xfc_u8, 0xf1_u8, 0x5b_u8, 0x4d_u8])
     def query_interface(this : IAudioMediaType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -363,7 +462,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectRTVtbl,
+
+  record IAudioProcessingObjectRTVtable,
     query_interface : Proc(IAudioProcessingObjectRT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectRT*, UInt32),
     release : Proc(IAudioProcessingObjectRT*, UInt32),
@@ -373,7 +473,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectRT, lpVtbl : IAudioProcessingObjectRTVtbl* do
+  record IAudioProcessingObjectRT, lpVtbl : IAudioProcessingObjectRTVtable* do
     GUID = LibC::GUID.new(0x9e1d6a6d_u32, 0xddbc_u16, 0x4e95_u16, StaticArray[0xa4_u8, 0xc7_u8, 0xad_u8, 0x64_u8, 0xba_u8, 0x37_u8, 0x84_u8, 0x6c_u8])
     def query_interface(this : IAudioProcessingObjectRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -397,7 +497,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectVBRVtbl,
+
+  record IAudioProcessingObjectVBRVtable,
     query_interface : Proc(IAudioProcessingObjectVBR*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectVBR*, UInt32),
     release : Proc(IAudioProcessingObjectVBR*, UInt32),
@@ -406,7 +507,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectVBR, lpVtbl : IAudioProcessingObjectVBRVtbl* do
+  record IAudioProcessingObjectVBR, lpVtbl : IAudioProcessingObjectVBRVtable* do
     GUID = LibC::GUID.new(0x7ba1db8f_u32, 0x78ad_u16, 0x49cd_u16, StaticArray[0x95_u8, 0x91_u8, 0xf7_u8, 0x9d_u8, 0x80_u8, 0xa1_u8, 0x7c_u8, 0x81_u8])
     def query_interface(this : IAudioProcessingObjectVBR*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -427,7 +528,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectConfigurationVtbl,
+
+  record IAudioProcessingObjectConfigurationVtable,
     query_interface : Proc(IAudioProcessingObjectConfiguration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectConfiguration*, UInt32),
     release : Proc(IAudioProcessingObjectConfiguration*, UInt32),
@@ -436,7 +538,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectConfiguration, lpVtbl : IAudioProcessingObjectConfigurationVtbl* do
+  record IAudioProcessingObjectConfiguration, lpVtbl : IAudioProcessingObjectConfigurationVtable* do
     GUID = LibC::GUID.new(0xe5ed805_u32, 0xaba6_u16, 0x49c3_u16, StaticArray[0x8f_u8, 0x9a_u8, 0x2b_u8, 0x8c_u8, 0x88_u8, 0x9c_u8, 0x4f_u8, 0xa8_u8])
     def query_interface(this : IAudioProcessingObjectConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -457,7 +559,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectVtbl,
+
+  record IAudioProcessingObjectVtable,
     query_interface : Proc(IAudioProcessingObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObject*, UInt32),
     release : Proc(IAudioProcessingObject*, UInt32),
@@ -471,7 +574,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObject, lpVtbl : IAudioProcessingObjectVtbl* do
+  record IAudioProcessingObject, lpVtbl : IAudioProcessingObjectVtable* do
     GUID = LibC::GUID.new(0xfd7f2b29_u32, 0x24d0_u16, 0x4b5c_u16, StaticArray[0xb1_u8, 0x77_u8, 0x59_u8, 0x2c_u8, 0x39_u8, 0xf9_u8, 0xca_u8, 0x10_u8])
     def query_interface(this : IAudioProcessingObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -507,7 +610,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioDeviceModulesClientVtbl,
+
+  record IAudioDeviceModulesClientVtable,
     query_interface : Proc(IAudioDeviceModulesClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioDeviceModulesClient*, UInt32),
     release : Proc(IAudioDeviceModulesClient*, UInt32),
@@ -515,7 +619,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioDeviceModulesClient, lpVtbl : IAudioDeviceModulesClientVtbl* do
+  record IAudioDeviceModulesClient, lpVtbl : IAudioDeviceModulesClientVtable* do
     GUID = LibC::GUID.new(0x98f37dac_u32, 0xd0b6_u16, 0x49f5_u16, StaticArray[0x89_u8, 0x6a_u8, 0xaa_u8, 0x4d_u8, 0x16_u8, 0x9a_u8, 0x4c_u8, 0x48_u8])
     def query_interface(this : IAudioDeviceModulesClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -533,14 +637,15 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioSystemEffectsVtbl,
+
+  record IAudioSystemEffectsVtable,
     query_interface : Proc(IAudioSystemEffects*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSystemEffects*, UInt32),
     release : Proc(IAudioSystemEffects*, UInt32)
 
 
   @[Extern]
-  record IAudioSystemEffects, lpVtbl : IAudioSystemEffectsVtbl* do
+  record IAudioSystemEffects, lpVtbl : IAudioSystemEffectsVtable* do
     GUID = LibC::GUID.new(0x5fa00f27_u32, 0xadd6_u16, 0x499a_u16, StaticArray[0x8a_u8, 0x9d_u8, 0x6b_u8, 0x98_u8, 0x52_u8, 0x1f_u8, 0xa7_u8, 0x5b_u8])
     def query_interface(this : IAudioSystemEffects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -555,7 +660,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioSystemEffects2Vtbl,
+
+  record IAudioSystemEffects2Vtable,
     query_interface : Proc(IAudioSystemEffects2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSystemEffects2*, UInt32),
     release : Proc(IAudioSystemEffects2*, UInt32),
@@ -563,7 +669,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioSystemEffects2, lpVtbl : IAudioSystemEffects2Vtbl* do
+  record IAudioSystemEffects2, lpVtbl : IAudioSystemEffects2Vtable* do
     GUID = LibC::GUID.new(0xbafe99d2_u32, 0x7436_u16, 0x44ce_u16, StaticArray[0x9e_u8, 0xe_u8, 0x4d_u8, 0x89_u8, 0xaf_u8, 0xbf_u8, 0xff_u8, 0x56_u8])
     def query_interface(this : IAudioSystemEffects2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -581,7 +687,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioSystemEffectsCustomFormatsVtbl,
+
+  record IAudioSystemEffectsCustomFormatsVtable,
     query_interface : Proc(IAudioSystemEffectsCustomFormats*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSystemEffectsCustomFormats*, UInt32),
     release : Proc(IAudioSystemEffectsCustomFormats*, UInt32),
@@ -591,7 +698,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioSystemEffectsCustomFormats, lpVtbl : IAudioSystemEffectsCustomFormatsVtbl* do
+  record IAudioSystemEffectsCustomFormats, lpVtbl : IAudioSystemEffectsCustomFormatsVtable* do
     GUID = LibC::GUID.new(0xb1176e34_u32, 0xbb7f_u16, 0x4f05_u16, StaticArray[0xbe_u8, 0xbd_u8, 0x1b_u8, 0x18_u8, 0xa5_u8, 0x34_u8, 0xe0_u8, 0x97_u8])
     def query_interface(this : IAudioSystemEffectsCustomFormats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -615,7 +722,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IApoAuxiliaryInputConfigurationVtbl,
+
+  record IApoAuxiliaryInputConfigurationVtable,
     query_interface : Proc(IApoAuxiliaryInputConfiguration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApoAuxiliaryInputConfiguration*, UInt32),
     release : Proc(IApoAuxiliaryInputConfiguration*, UInt32),
@@ -625,7 +733,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IApoAuxiliaryInputConfiguration, lpVtbl : IApoAuxiliaryInputConfigurationVtbl* do
+  record IApoAuxiliaryInputConfiguration, lpVtbl : IApoAuxiliaryInputConfigurationVtable* do
     GUID = LibC::GUID.new(0x4ceb0aab_u32, 0xfa19_u16, 0x48ed_u16, StaticArray[0xa8_u8, 0x57_u8, 0x87_u8, 0x77_u8, 0x1a_u8, 0xe1_u8, 0xb7_u8, 0x68_u8])
     def query_interface(this : IApoAuxiliaryInputConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -649,7 +757,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IApoAuxiliaryInputRTVtbl,
+
+  record IApoAuxiliaryInputRTVtable,
     query_interface : Proc(IApoAuxiliaryInputRT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApoAuxiliaryInputRT*, UInt32),
     release : Proc(IApoAuxiliaryInputRT*, UInt32),
@@ -657,7 +766,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IApoAuxiliaryInputRT, lpVtbl : IApoAuxiliaryInputRTVtbl* do
+  record IApoAuxiliaryInputRT, lpVtbl : IApoAuxiliaryInputRTVtable* do
     GUID = LibC::GUID.new(0xf851809c_u32, 0xc177_u16, 0x49a0_u16, StaticArray[0xb1_u8, 0xb2_u8, 0xb6_u8, 0x6f_u8, 0x1_u8, 0x79_u8, 0x43_u8, 0xab_u8])
     def query_interface(this : IApoAuxiliaryInputRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -675,14 +784,15 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IApoAcousticEchoCancellationVtbl,
+
+  record IApoAcousticEchoCancellationVtable,
     query_interface : Proc(IApoAcousticEchoCancellation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApoAcousticEchoCancellation*, UInt32),
     release : Proc(IApoAcousticEchoCancellation*, UInt32)
 
 
   @[Extern]
-  record IApoAcousticEchoCancellation, lpVtbl : IApoAcousticEchoCancellationVtbl* do
+  record IApoAcousticEchoCancellation, lpVtbl : IApoAcousticEchoCancellationVtable* do
     GUID = LibC::GUID.new(0x25385759_u32, 0x3236_u16, 0x4101_u16, StaticArray[0xa9_u8, 0x43_u8, 0x25_u8, 0x69_u8, 0x3d_u8, 0xfb_u8, 0x5d_u8, 0x2d_u8])
     def query_interface(this : IApoAcousticEchoCancellation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -697,7 +807,35 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioSystemEffects3Vtbl,
+
+  record IApoAcousticEchoCancellation2Vtable,
+    query_interface : Proc(IApoAcousticEchoCancellation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IApoAcousticEchoCancellation2*, UInt32),
+    release : Proc(IApoAcousticEchoCancellation2*, UInt32),
+    get_desired_reference_stream_properties : Proc(IApoAcousticEchoCancellation2*, Win32cr::Media::Audio::Apo::APO_REFERENCE_STREAM_PROPERTIES*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IApoAcousticEchoCancellation2, lpVtbl : IApoAcousticEchoCancellation2Vtable* do
+    GUID = LibC::GUID.new(0xf235855f_u32, 0xf06d_u16, 0x45b3_u16, StaticArray[0xa6_u8, 0x3f_u8, 0xee_u8, 0x4b_u8, 0x71_u8, 0x50_u8, 0x9d_u8, 0xc2_u8])
+    def query_interface(this : IApoAcousticEchoCancellation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IApoAcousticEchoCancellation2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IApoAcousticEchoCancellation2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_desired_reference_stream_properties(this : IApoAcousticEchoCancellation2*, pProperties : Win32cr::Media::Audio::Apo::APO_REFERENCE_STREAM_PROPERTIES*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_desired_reference_stream_properties.call(this, pProperties)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAudioSystemEffects3Vtable,
     query_interface : Proc(IAudioSystemEffects3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSystemEffects3*, UInt32),
     release : Proc(IAudioSystemEffects3*, UInt32),
@@ -707,7 +845,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioSystemEffects3, lpVtbl : IAudioSystemEffects3Vtbl* do
+  record IAudioSystemEffects3, lpVtbl : IAudioSystemEffects3Vtable* do
     GUID = LibC::GUID.new(0xc58b31cd_u32, 0xfc6a_u16, 0x4255_u16, StaticArray[0xbc_u8, 0x1f_u8, 0xad_u8, 0x29_u8, 0xbb_u8, 0xa_u8, 0x4a_u8, 0x17_u8])
     def query_interface(this : IAudioSystemEffects3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -731,7 +869,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectRTQueueServiceVtbl,
+
+  record IAudioProcessingObjectRTQueueServiceVtable,
     query_interface : Proc(IAudioProcessingObjectRTQueueService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectRTQueueService*, UInt32),
     release : Proc(IAudioProcessingObjectRTQueueService*, UInt32),
@@ -739,7 +878,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectRTQueueService, lpVtbl : IAudioProcessingObjectRTQueueServiceVtbl* do
+  record IAudioProcessingObjectRTQueueService, lpVtbl : IAudioProcessingObjectRTQueueServiceVtable* do
     GUID = LibC::GUID.new(0xacd65e2f_u32, 0x955b_u16, 0x4b57_u16, StaticArray[0xb9_u8, 0xbf_u8, 0xac_u8, 0x29_u8, 0x7b_u8, 0xb7_u8, 0x52_u8, 0xc9_u8])
     def query_interface(this : IAudioProcessingObjectRTQueueService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -757,7 +896,8 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectLoggingServiceVtbl,
+
+  record IAudioProcessingObjectLoggingServiceVtable,
     query_interface : Proc(IAudioProcessingObjectLoggingService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectLoggingService*, UInt32),
     release : Proc(IAudioProcessingObjectLoggingService*, UInt32),
@@ -765,7 +905,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectLoggingService, lpVtbl : IAudioProcessingObjectLoggingServiceVtbl* do
+  record IAudioProcessingObjectLoggingService, lpVtbl : IAudioProcessingObjectLoggingServiceVtable* do
     GUID = LibC::GUID.new(0x698f0107_u32, 0x1745_u16, 0x4708_u16, StaticArray[0x95_u8, 0xa5_u8, 0xd8_u8, 0x44_u8, 0x78_u8, 0xa6_u8, 0x2a_u8, 0x65_u8])
     def query_interface(this : IAudioProcessingObjectLoggingService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -783,7 +923,39 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectNotificationsVtbl,
+
+  record IAudioProcessingObjectPreferredFormatSupportVtable,
+    query_interface : Proc(IAudioProcessingObjectPreferredFormatSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioProcessingObjectPreferredFormatSupport*, UInt32),
+    release : Proc(IAudioProcessingObjectPreferredFormatSupport*, UInt32),
+    get_preferred_input_format : Proc(IAudioProcessingObjectPreferredFormatSupport*, Void*, Void**, Win32cr::Foundation::HRESULT),
+    get_preferred_output_format : Proc(IAudioProcessingObjectPreferredFormatSupport*, Void*, Void**, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAudioProcessingObjectPreferredFormatSupport, lpVtbl : IAudioProcessingObjectPreferredFormatSupportVtable* do
+    GUID = LibC::GUID.new(0x51cbd3c4_u32, 0xf1f3_u16, 0x4d2f_u16, StaticArray[0xa0_u8, 0xe1_u8, 0x7e_u8, 0x9c_u8, 0x4d_u8, 0xd0_u8, 0xfe_u8, 0xb3_u8])
+    def query_interface(this : IAudioProcessingObjectPreferredFormatSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioProcessingObjectPreferredFormatSupport*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioProcessingObjectPreferredFormatSupport*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_preferred_input_format(this : IAudioProcessingObjectPreferredFormatSupport*, outputFormat : Void*, preferredFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_preferred_input_format.call(this, outputFormat, preferredFormat)
+    end
+    def get_preferred_output_format(this : IAudioProcessingObjectPreferredFormatSupport*, inputFormat : Void*, preferredFormat : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_preferred_output_format.call(this, inputFormat, preferredFormat)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAudioProcessingObjectNotificationsVtable,
     query_interface : Proc(IAudioProcessingObjectNotifications*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectNotifications*, UInt32),
     release : Proc(IAudioProcessingObjectNotifications*, UInt32),
@@ -792,7 +964,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectNotifications, lpVtbl : IAudioProcessingObjectNotificationsVtbl* do
+  record IAudioProcessingObjectNotifications, lpVtbl : IAudioProcessingObjectNotificationsVtable* do
     GUID = LibC::GUID.new(0x56b0c76f_u32, 0x2fd_u16, 0x4b21_u16, StaticArray[0xa5_u8, 0x2e_u8, 0x9f_u8, 0x82_u8, 0x19_u8, 0xfc_u8, 0x86_u8, 0xe4_u8])
     def query_interface(this : IAudioProcessingObjectNotifications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -808,6 +980,41 @@ module Win32cr::Media::Audio::Apo
     end
     def handle_notification(this : IAudioProcessingObjectNotifications*, apoNotification : Win32cr::Media::Audio::Apo::APO_NOTIFICATION*) : Void
       @lpVtbl.try &.value.handle_notification.call(this, apoNotification)
+    end
+
+  end
+
+  @[Extern]
+
+  record IAudioProcessingObjectNotifications2Vtable,
+    query_interface : Proc(IAudioProcessingObjectNotifications2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IAudioProcessingObjectNotifications2*, UInt32),
+    release : Proc(IAudioProcessingObjectNotifications2*, UInt32),
+    get_apo_notification_registration_info : Proc(IAudioProcessingObjectNotifications2*, Win32cr::Media::Audio::Apo::APO_NOTIFICATION_DESCRIPTOR**, UInt32*, Win32cr::Foundation::HRESULT),
+    handle_notification : Proc(IAudioProcessingObjectNotifications2*, Win32cr::Media::Audio::Apo::APO_NOTIFICATION*, Void),
+    get_apo_notification_registration_info2 : Proc(IAudioProcessingObjectNotifications2*, Win32cr::Media::Audio::Apo::APO_NOTIFICATION_TYPE, Win32cr::Media::Audio::Apo::APO_NOTIFICATION_DESCRIPTOR**, UInt32*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IAudioProcessingObjectNotifications2, lpVtbl : IAudioProcessingObjectNotifications2Vtable* do
+    GUID = LibC::GUID.new(0xca2cfbde_u32, 0xa9d6_u16, 0x4eb0_u16, StaticArray[0xbc_u8, 0x95_u8, 0xc4_u8, 0xd0_u8, 0x26_u8, 0xb3_u8, 0x80_u8, 0xf0_u8])
+    def query_interface(this : IAudioProcessingObjectNotifications2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IAudioProcessingObjectNotifications2*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IAudioProcessingObjectNotifications2*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def get_apo_notification_registration_info(this : IAudioProcessingObjectNotifications2*, apoNotifications : Win32cr::Media::Audio::Apo::APO_NOTIFICATION_DESCRIPTOR**, count : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_apo_notification_registration_info.call(this, apoNotifications, count)
+    end
+    def handle_notification(this : IAudioProcessingObjectNotifications2*, apoNotification : Win32cr::Media::Audio::Apo::APO_NOTIFICATION*) : Void
+      @lpVtbl.try &.value.handle_notification.call(this, apoNotification)
+    end
+    def get_apo_notification_registration_info2(this : IAudioProcessingObjectNotifications2*, maxApoNotificationTypeSupported : Win32cr::Media::Audio::Apo::APO_NOTIFICATION_TYPE, apoNotifications : Win32cr::Media::Audio::Apo::APO_NOTIFICATION_DESCRIPTOR**, count : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_apo_notification_registration_info2.call(this, maxApoNotificationTypeSupported, apoNotifications, count)
     end
 
   end

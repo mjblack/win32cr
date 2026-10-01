@@ -2,6 +2,7 @@ require "./../foundation.cr"
 require "./../graphics/gdi.cr"
 require "./../ui/controls.cr"
 require "./../system/com.cr"
+require "./../system/variant.cr"
 require "./../system/io.cr"
 require "./../system/registry.cr"
 
@@ -133,7 +134,7 @@ module Win32cr::Devices::Fax
 
   alias PFAXDEVINITIALIZE = Proc(UInt32, Win32cr::Foundation::HANDLE, Win32cr::Devices::Fax::PFAX_LINECALLBACK*, Win32cr::Devices::Fax::PFAX_SERVICE_CALLBACK, Win32cr::Foundation::BOOL)
 
-  alias PFAXDEVVIRTUALDEVICECREATION = Proc(UInt32*, UInt16*, UInt32*, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
+  alias PFAXDEVVIRTUALDEVICECREATION = Proc(UInt32*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
   alias PFAXDEVSTARTJOB = Proc(UInt32, UInt32, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HANDLE, LibC::UIntPtrT, Win32cr::Foundation::BOOL)
 
@@ -314,26 +315,30 @@ module Win32cr::Devices::Fax
   FAX_PORT_QUERY = 16_u32
   FAX_PORT_SET = 32_u32
   FAX_JOB_MANAGE = 64_u32
+  FAXSRV_DEVICE_NODETYPE_GUID = LibC::GUID.new(0x3115a19a_u32, 0x6251_u16, 0x46ac_u16, StaticArray[0x94_u8, 0x25_u8, 0x14_u8, 0x78_u8, 0x28_u8, 0x58_u8, 0xb8_u8, 0xc9_u8])
+  FAXSRV_DEVICE_PROVIDER_NODETYPE_GUID = LibC::GUID.new(0xbd38e2ac_u32, 0xb926_u16, 0x4161_u16, StaticArray[0x86_u8, 0x40_u8, 0xf_u8, 0x69_u8, 0x56_u8, 0xee_u8, 0x2b_u8, 0xa3_u8])
+  FAXSRV_ROUTING_METHOD_NODETYPE_GUID = LibC::GUID.new(0x220d2cb0_u32, 0x85a9_u16, 0x4a43_u16, StaticArray[0xb6_u8, 0xe8_u8, 0x9d_u8, 0x66_u8, 0xb4_u8, 0x4f_u8, 0x1a_u8, 0xf5_u8])
   CF_MSFAXSRV_DEVICE_ID = "FAXSRV_DeviceID"
   CF_MSFAXSRV_FSP_GUID = "FAXSRV_FSPGuid"
   CF_MSFAXSRV_SERVER_NAME = "FAXSRV_ServerName"
   CF_MSFAXSRV_ROUTEEXT_NAME = "FAXSRV_RoutingExtName"
   CF_MSFAXSRV_ROUTING_METHOD_GUID = "FAXSRV_RoutingMethodGuid"
   STI_UNICODE = 1_u32
-  CLSID_Sti = "b323f8e0-2e68-11d0-90ea-00aa0060f86c"
-  GUID_DeviceArrivedLaunch = "740d9ee6-70f1-11d1-ad10-00a02438ad48"
-  GUID_ScanImage = "a6c5a715-8c6e-11d2-977a-0000f87a926f"
-  GUID_ScanPrintImage = "b441f425-8c6e-11d2-977a-0000f87a926f"
-  GUID_ScanFaxImage = "c00eb793-8c6e-11d2-977a-0000f87a926f"
-  GUID_STIUserDefined1 = "c00eb795-8c6e-11d2-977a-0000f87a926f"
-  GUID_STIUserDefined2 = "c77ae9c5-8c6e-11d2-977a-0000f87a926f"
-  GUID_STIUserDefined3 = "c77ae9c6-8c6e-11d2-977a-0000f87a926f"
+  CLSID_Sti = LibC::GUID.new(0xb323f8e0_u32, 0x2e68_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf8_u8, 0x6c_u8])
+  GUID_DeviceArrivedLaunch = LibC::GUID.new(0x740d9ee6_u32, 0x70f1_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x10_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x38_u8, 0xad_u8, 0x48_u8])
+  GUID_ScanImage = LibC::GUID.new(0xa6c5a715_u32, 0x8c6e_u16, 0x11d2_u16, StaticArray[0x97_u8, 0x7a_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x92_u8, 0x6f_u8])
+  GUID_ScanPrintImage = LibC::GUID.new(0xb441f425_u32, 0x8c6e_u16, 0x11d2_u16, StaticArray[0x97_u8, 0x7a_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x92_u8, 0x6f_u8])
+  GUID_ScanFaxImage = LibC::GUID.new(0xc00eb793_u32, 0x8c6e_u16, 0x11d2_u16, StaticArray[0x97_u8, 0x7a_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x92_u8, 0x6f_u8])
+  GUID_STIUserDefined1 = LibC::GUID.new(0xc00eb795_u32, 0x8c6e_u16, 0x11d2_u16, StaticArray[0x97_u8, 0x7a_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x92_u8, 0x6f_u8])
+  GUID_STIUserDefined2 = LibC::GUID.new(0xc77ae9c5_u32, 0x8c6e_u16, 0x11d2_u16, StaticArray[0x97_u8, 0x7a_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x92_u8, 0x6f_u8])
+  GUID_STIUserDefined3 = LibC::GUID.new(0xc77ae9c6_u32, 0x8c6e_u16, 0x11d2_u16, StaticArray[0x97_u8, 0x7a_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x92_u8, 0x6f_u8])
   STI_VERSION_FLAG_MASK = 4278190080_u32
   STI_VERSION_FLAG_UNICODE = 16777216_u32
   STI_VERSION_REAL = 2_u32
   STI_VERSION_MIN_ALLOWED = 2_u32
   STI_VERSION = 2_u32
   STI_MAX_INTERNAL_NAME_LENGTH = 128_u32
+  STI_GENCAP_COMMON_MASK = 255_u32
   STI_GENCAP_NOTIFICATIONS = 1_u32
   STI_GENCAP_POLLING_NEEDED = 2_u32
   STI_GENCAP_GENERATE_ARRIVALEVENT = 4_u32
@@ -447,8 +452,8 @@ module Win32cr::Devices::Fax
   STI_DEVICE_VALUE_TIMEOUT_A = "PollTimeout"
   STI_DEVICE_VALUE_DISABLE_NOTIFICATIONS_A = "DisableNotifications"
   REGSTR_VAL_BAUDRATE_A = "BaudRate"
-  DEVPKEY_WIA_DeviceType = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x6bdd1fc6_u32, 0x810f_u16, 0x11d0_u16, StaticArray[0xbe_u8, 0xc7_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0xe2_u8, 0x9_u8, 0x2f_u8]), 2_u32)
-  DEVPKEY_WIA_USDClassId = UI::Shell::PropertiesSystem::PROPERTYKEY.new(LibC::GUID.new(0x6bdd1fc6_u32, 0x810f_u16, 0x11d0_u16, StaticArray[0xbe_u8, 0xc7_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0xe2_u8, 0x9_u8, 0x2f_u8]), 3_u32)
+  DEVPKEY_WIA_DeviceType = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x6bdd1fc6_u32, 0x810f_u16, 0x11d0_u16, StaticArray[0xbe_u8, 0xc7_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0xe2_u8, 0x9_u8, 0x2f_u8]), 2_u32)
+  DEVPKEY_WIA_USDClassId = Win32cr::Foundation::DEVPROPKEY.new(LibC::GUID.new(0x6bdd1fc6_u32, 0x810f_u16, 0x11d0_u16, StaticArray[0xbe_u8, 0xc7_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0xe2_u8, 0x9_u8, 0x2f_u8]), 3_u32)
   STI_USD_GENCAP_NATIVE_PUSHSUPPORT = 1_u32
   STI_DEVICE_CREATE_FOR_MONITOR = 16777216_u32
   Ldefault_prefetch_size = 100_i32
@@ -1386,14 +1391,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxJobStatusVtbl,
+
+  record IFaxJobStatusVtable,
     query_interface : Proc(IFaxJobStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxJobStatus*, UInt32),
     release : Proc(IFaxJobStatus*, UInt32),
     get_type_info_count : Proc(IFaxJobStatus*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxJobStatus*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxJobStatus*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxJobStatus*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxJobStatus*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IFaxJobStatus*, Win32cr::Devices::Fax::FAX_JOB_STATUS_ENUM*, Win32cr::Foundation::HRESULT),
     get_Pages : Proc(IFaxJobStatus*, Int32*, Win32cr::Foundation::HRESULT),
     get_Size : Proc(IFaxJobStatus*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1414,7 +1420,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxJobStatus, lpVtbl : IFaxJobStatusVtbl* do
+  record IFaxJobStatus, lpVtbl : IFaxJobStatusVtable* do
     GUID = LibC::GUID.new(0x8b86f485_u32, 0xfd7f_u16, 0x4824_u16, StaticArray[0x88_u8, 0x6b_u8, 0x40_u8, 0xc5_u8, 0xca_u8, 0xa6_u8, 0x17_u8, 0xcc_u8])
     def query_interface(this : IFaxJobStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1434,8 +1440,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxJobStatus*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxJobStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxJobStatus*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Status(this : IFaxJobStatus*, pStatus : Win32cr::Devices::Fax::FAX_JOB_STATUS_ENUM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Status.call(this, pStatus)
@@ -1492,14 +1498,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxServerVtbl,
+
+  record IFaxServerVtable,
     query_interface : Proc(IFaxServer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxServer*, UInt32),
     release : Proc(IFaxServer*, UInt32),
     get_type_info_count : Proc(IFaxServer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxServer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxServer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxServer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxServer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     connect : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ServerName : Proc(IFaxServer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_device_providers : Proc(IFaxServer*, Void**, Win32cr::Foundation::HRESULT),
@@ -1511,25 +1518,25 @@ module Win32cr::Devices::Fax
     get_MinorVersion : Proc(IFaxServer*, Int32*, Win32cr::Foundation::HRESULT),
     get_MajorBuild : Proc(IFaxServer*, Int32*, Win32cr::Foundation::HRESULT),
     get_MinorBuild : Proc(IFaxServer*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Debug : Proc(IFaxServer*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Debug : Proc(IFaxServer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Activity : Proc(IFaxServer*, Void**, Win32cr::Foundation::HRESULT),
     get_OutboundRouting : Proc(IFaxServer*, Void**, Win32cr::Foundation::HRESULT),
     get_ReceiptOptions : Proc(IFaxServer*, Void**, Win32cr::Foundation::HRESULT),
     get_Security : Proc(IFaxServer*, Void**, Win32cr::Foundation::HRESULT),
     disconnect : Proc(IFaxServer*, Win32cr::Foundation::HRESULT),
-    get_extension_property : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_extension_property : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_extension_property : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_extension_property : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     listen_to_server_events : Proc(IFaxServer*, Win32cr::Devices::Fax::FAX_SERVER_EVENTS_TYPE_ENUM, Win32cr::Foundation::HRESULT),
     register_device_provider : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     unregister_device_provider : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    register_inbound_routing_extension : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    register_inbound_routing_extension : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     unregister_inbound_routing_extension : Proc(IFaxServer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_RegisteredEvents : Proc(IFaxServer*, Win32cr::Devices::Fax::FAX_SERVER_EVENTS_TYPE_ENUM*, Win32cr::Foundation::HRESULT),
     get_APIVersion : Proc(IFaxServer*, Win32cr::Devices::Fax::FAX_SERVER_APIVERSION_ENUM*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxServer, lpVtbl : IFaxServerVtbl* do
+  record IFaxServer, lpVtbl : IFaxServerVtable* do
     GUID = LibC::GUID.new(0x475b6469_u32, 0x90a5_u16, 0x4878_u16, StaticArray[0xa5_u8, 0x77_u8, 0x17_u8, 0xa8_u8, 0x6e_u8, 0x8e_u8, 0x34_u8, 0x62_u8])
     def query_interface(this : IFaxServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1549,8 +1556,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxServer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxServer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxServer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def connect(this : IFaxServer*, bstrServerName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connect.call(this, bstrServerName)
@@ -1585,7 +1592,7 @@ module Win32cr::Devices::Fax
     def get_MinorBuild(this : IFaxServer*, plMinorBuild : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MinorBuild.call(this, plMinorBuild)
     end
-    def get_Debug(this : IFaxServer*, pbDebug : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Debug(this : IFaxServer*, pbDebug : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Debug.call(this, pbDebug)
     end
     def get_Activity(this : IFaxServer*, ppFaxActivity : Void**) : Win32cr::Foundation::HRESULT
@@ -1603,10 +1610,10 @@ module Win32cr::Devices::Fax
     def disconnect(this : IFaxServer*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disconnect.call(this)
     end
-    def get_extension_property(this : IFaxServer*, bstrGUID : Win32cr::Foundation::BSTR, pvProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_extension_property(this : IFaxServer*, bstrGUID : Win32cr::Foundation::BSTR, pvProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_extension_property.call(this, bstrGUID, pvProperty)
     end
-    def set_extension_property(this : IFaxServer*, bstrGUID : Win32cr::Foundation::BSTR, vProperty : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_extension_property(this : IFaxServer*, bstrGUID : Win32cr::Foundation::BSTR, vProperty : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_extension_property.call(this, bstrGUID, vProperty)
     end
     def listen_to_server_events(this : IFaxServer*, event_types : Win32cr::Devices::Fax::FAX_SERVER_EVENTS_TYPE_ENUM) : Win32cr::Foundation::HRESULT
@@ -1618,7 +1625,7 @@ module Win32cr::Devices::Fax
     def unregister_device_provider(this : IFaxServer*, bstrUniqueName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_device_provider.call(this, bstrUniqueName)
     end
-    def register_inbound_routing_extension(this : IFaxServer*, bstrExtensionName : Win32cr::Foundation::BSTR, bstrFriendlyName : Win32cr::Foundation::BSTR, bstrImageName : Win32cr::Foundation::BSTR, vMethods : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def register_inbound_routing_extension(this : IFaxServer*, bstrExtensionName : Win32cr::Foundation::BSTR, bstrFriendlyName : Win32cr::Foundation::BSTR, bstrImageName : Win32cr::Foundation::BSTR, vMethods : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_inbound_routing_extension.call(this, bstrExtensionName, bstrFriendlyName, bstrImageName, vMethods)
     end
     def unregister_inbound_routing_extension(this : IFaxServer*, bstrExtensionUniqueName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1634,21 +1641,22 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxDeviceProvidersVtbl,
+
+  record IFaxDeviceProvidersVtable,
     query_interface : Proc(IFaxDeviceProviders*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxDeviceProviders*, UInt32),
     release : Proc(IFaxDeviceProviders*, UInt32),
     get_type_info_count : Proc(IFaxDeviceProviders*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxDeviceProviders*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxDeviceProviders*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxDeviceProviders*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxDeviceProviders*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxDeviceProviders*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFaxDeviceProviders*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFaxDeviceProviders*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxDeviceProviders*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxDeviceProviders, lpVtbl : IFaxDeviceProvidersVtbl* do
+  record IFaxDeviceProviders, lpVtbl : IFaxDeviceProvidersVtable* do
     GUID = LibC::GUID.new(0x9fb76f62_u32, 0x4c7e_u16, 0x43a5_u16, StaticArray[0xb6_u8, 0xfd_u8, 0x50_u8, 0x28_u8, 0x93_u8, 0xf7_u8, 0xe1_u8, 0x3e_u8])
     def query_interface(this : IFaxDeviceProviders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1668,13 +1676,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxDeviceProviders*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxDeviceProviders*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxDeviceProviders*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxDeviceProviders*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
     end
-    def get_Item(this : IFaxDeviceProviders*, vIndex : Win32cr::System::Com::VARIANT, pFaxDeviceProvider : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFaxDeviceProviders*, vIndex : Win32cr::System::Variant::VARIANT, pFaxDeviceProvider : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, vIndex, pFaxDeviceProvider)
     end
     def get_Count(this : IFaxDeviceProviders*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -1684,22 +1692,23 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxDevicesVtbl,
+
+  record IFaxDevicesVtable,
     query_interface : Proc(IFaxDevices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxDevices*, UInt32),
     release : Proc(IFaxDevices*, UInt32),
     get_type_info_count : Proc(IFaxDevices*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxDevices*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxDevices*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxDevices*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxDevices*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxDevices*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFaxDevices*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFaxDevices*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxDevices*, Int32*, Win32cr::Foundation::HRESULT),
     get_ItemById : Proc(IFaxDevices*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxDevices, lpVtbl : IFaxDevicesVtbl* do
+  record IFaxDevices, lpVtbl : IFaxDevicesVtable* do
     GUID = LibC::GUID.new(0x9e46783e_u32, 0xf34f_u16, 0x482e_u16, StaticArray[0xa3_u8, 0x60_u8, 0x4_u8, 0x16_u8, 0xbe_u8, 0xcb_u8, 0xbd_u8, 0x96_u8])
     def query_interface(this : IFaxDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1719,13 +1728,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxDevices*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxDevices*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxDevices*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxDevices*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
     end
-    def get_Item(this : IFaxDevices*, vIndex : Win32cr::System::Com::VARIANT, pFaxDevice : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFaxDevices*, vIndex : Win32cr::System::Variant::VARIANT, pFaxDevice : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, vIndex, pFaxDevice)
     end
     def get_Count(this : IFaxDevices*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -1738,20 +1747,21 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxInboundRoutingVtbl,
+
+  record IFaxInboundRoutingVtable,
     query_interface : Proc(IFaxInboundRouting*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxInboundRouting*, UInt32),
     release : Proc(IFaxInboundRouting*, UInt32),
     get_type_info_count : Proc(IFaxInboundRouting*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxInboundRouting*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxInboundRouting*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxInboundRouting*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxInboundRouting*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_extensions : Proc(IFaxInboundRouting*, Void**, Win32cr::Foundation::HRESULT),
     get_methods : Proc(IFaxInboundRouting*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxInboundRouting, lpVtbl : IFaxInboundRoutingVtbl* do
+  record IFaxInboundRouting, lpVtbl : IFaxInboundRoutingVtable* do
     GUID = LibC::GUID.new(0x8148c20f_u32, 0x9d52_u16, 0x45b1_u16, StaticArray[0xbf_u8, 0x96_u8, 0x38_u8, 0xfc_u8, 0x12_u8, 0x71_u8, 0x35_u8, 0x27_u8])
     def query_interface(this : IFaxInboundRouting*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1771,8 +1781,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxInboundRouting*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxInboundRouting*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxInboundRouting*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_extensions(this : IFaxInboundRouting*, pFaxInboundRoutingExtensions : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_extensions.call(this, pFaxInboundRoutingExtensions)
@@ -1784,14 +1794,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxFoldersVtbl,
+
+  record IFaxFoldersVtable,
     query_interface : Proc(IFaxFolders*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxFolders*, UInt32),
     release : Proc(IFaxFolders*, UInt32),
     get_type_info_count : Proc(IFaxFolders*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxFolders*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxFolders*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxFolders*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxFolders*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_OutgoingQueue : Proc(IFaxFolders*, Void**, Win32cr::Foundation::HRESULT),
     get_IncomingQueue : Proc(IFaxFolders*, Void**, Win32cr::Foundation::HRESULT),
     get_IncomingArchive : Proc(IFaxFolders*, Void**, Win32cr::Foundation::HRESULT),
@@ -1799,7 +1810,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxFolders, lpVtbl : IFaxFoldersVtbl* do
+  record IFaxFolders, lpVtbl : IFaxFoldersVtable* do
     GUID = LibC::GUID.new(0xdce3b2a8_u32, 0xa7ab_u16, 0x42bc_u16, StaticArray[0x9d_u8, 0xa_u8, 0x31_u8, 0x49_u8, 0x45_u8, 0x72_u8, 0x61_u8, 0xa0_u8])
     def query_interface(this : IFaxFolders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1819,8 +1830,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxFolders*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxFolders*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxFolders*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_OutgoingQueue(this : IFaxFolders*, pFaxOutgoingQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OutgoingQueue.call(this, pFaxOutgoingQueue)
@@ -1838,20 +1849,21 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxLoggingOptionsVtbl,
+
+  record IFaxLoggingOptionsVtable,
     query_interface : Proc(IFaxLoggingOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxLoggingOptions*, UInt32),
     release : Proc(IFaxLoggingOptions*, UInt32),
     get_type_info_count : Proc(IFaxLoggingOptions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxLoggingOptions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxLoggingOptions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxLoggingOptions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxLoggingOptions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_EventLogging : Proc(IFaxLoggingOptions*, Void**, Win32cr::Foundation::HRESULT),
     get_ActivityLogging : Proc(IFaxLoggingOptions*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxLoggingOptions, lpVtbl : IFaxLoggingOptionsVtbl* do
+  record IFaxLoggingOptions, lpVtbl : IFaxLoggingOptionsVtable* do
     GUID = LibC::GUID.new(0x34e64fb9_u32, 0x6b31_u16, 0x4d32_u16, StaticArray[0x8b_u8, 0x27_u8, 0xd2_u8, 0x86_u8, 0xc0_u8, 0xc3_u8, 0x36_u8, 0x6_u8])
     def query_interface(this : IFaxLoggingOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1871,8 +1883,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxLoggingOptions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxLoggingOptions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxLoggingOptions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_EventLogging(this : IFaxLoggingOptions*, pFaxEventLogging : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_EventLogging.call(this, pFaxEventLogging)
@@ -1884,14 +1896,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxActivityVtbl,
+
+  record IFaxActivityVtable,
     query_interface : Proc(IFaxActivity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxActivity*, UInt32),
     release : Proc(IFaxActivity*, UInt32),
     get_type_info_count : Proc(IFaxActivity*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxActivity*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxActivity*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxActivity*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxActivity*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_IncomingMessages : Proc(IFaxActivity*, Int32*, Win32cr::Foundation::HRESULT),
     get_RoutingMessages : Proc(IFaxActivity*, Int32*, Win32cr::Foundation::HRESULT),
     get_OutgoingMessages : Proc(IFaxActivity*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1900,7 +1913,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxActivity, lpVtbl : IFaxActivityVtbl* do
+  record IFaxActivity, lpVtbl : IFaxActivityVtable* do
     GUID = LibC::GUID.new(0x4b106f97_u32, 0x3df5_u16, 0x40f2_u16, StaticArray[0xbc_u8, 0x3c_u8, 0x44_u8, 0xcb_u8, 0x81_u8, 0x15_u8, 0xeb_u8, 0xdf_u8])
     def query_interface(this : IFaxActivity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1920,8 +1933,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxActivity*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxActivity*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxActivity*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_IncomingMessages(this : IFaxActivity*, plIncomingMessages : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IncomingMessages.call(this, plIncomingMessages)
@@ -1942,20 +1955,21 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutboundRoutingVtbl,
+
+  record IFaxOutboundRoutingVtable,
     query_interface : Proc(IFaxOutboundRouting*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutboundRouting*, UInt32),
     release : Proc(IFaxOutboundRouting*, UInt32),
     get_type_info_count : Proc(IFaxOutboundRouting*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutboundRouting*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutboundRouting*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutboundRouting*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutboundRouting*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_groups : Proc(IFaxOutboundRouting*, Void**, Win32cr::Foundation::HRESULT),
     get_rules : Proc(IFaxOutboundRouting*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxOutboundRouting, lpVtbl : IFaxOutboundRoutingVtbl* do
+  record IFaxOutboundRouting, lpVtbl : IFaxOutboundRoutingVtable* do
     GUID = LibC::GUID.new(0x25dc05a4_u32, 0x9909_u16, 0x41bd_u16, StaticArray[0xa9_u8, 0x5b_u8, 0x7e_u8, 0x5d_u8, 0x1d_u8, 0xec_u8, 0x1d_u8, 0x43_u8])
     def query_interface(this : IFaxOutboundRouting*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1975,8 +1989,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutboundRouting*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutboundRouting*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutboundRouting*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_groups(this : IFaxOutboundRouting*, pFaxOutboundRoutingGroups : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_groups.call(this, pFaxOutboundRoutingGroups)
@@ -1988,14 +2002,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxReceiptOptionsVtbl,
+
+  record IFaxReceiptOptionsVtable,
     query_interface : Proc(IFaxReceiptOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxReceiptOptions*, UInt32),
     release : Proc(IFaxReceiptOptions*, UInt32),
     get_type_info_count : Proc(IFaxReceiptOptions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxReceiptOptions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxReceiptOptions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxReceiptOptions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxReceiptOptions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_AuthenticationType : Proc(IFaxReceiptOptions*, Win32cr::Devices::Fax::FAX_SMTP_AUTHENTICATION_TYPE_ENUM*, Win32cr::Foundation::HRESULT),
     put_AuthenticationType : Proc(IFaxReceiptOptions*, Win32cr::Devices::Fax::FAX_SMTP_AUTHENTICATION_TYPE_ENUM, Win32cr::Foundation::HRESULT),
     get_SMTPServer : Proc(IFaxReceiptOptions*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2012,12 +2027,12 @@ module Win32cr::Devices::Fax
     put_SMTPPassword : Proc(IFaxReceiptOptions*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxReceiptOptions*, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxReceiptOptions*, Win32cr::Foundation::HRESULT),
-    get_UseForInboundRouting : Proc(IFaxReceiptOptions*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseForInboundRouting : Proc(IFaxReceiptOptions*, Int16, Win32cr::Foundation::HRESULT)
+    get_UseForInboundRouting : Proc(IFaxReceiptOptions*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseForInboundRouting : Proc(IFaxReceiptOptions*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxReceiptOptions, lpVtbl : IFaxReceiptOptionsVtbl* do
+  record IFaxReceiptOptions, lpVtbl : IFaxReceiptOptionsVtable* do
     GUID = LibC::GUID.new(0x378efaeb_u32, 0x5fcb_u16, 0x4afb_u16, StaticArray[0xb2_u8, 0xee_u8, 0xe1_u8, 0x6e_u8, 0x80_u8, 0x61_u8, 0x44_u8, 0x87_u8])
     def query_interface(this : IFaxReceiptOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2037,8 +2052,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxReceiptOptions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxReceiptOptions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxReceiptOptions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_AuthenticationType(this : IFaxReceiptOptions*, pType : Win32cr::Devices::Fax::FAX_SMTP_AUTHENTICATION_TYPE_ENUM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AuthenticationType.call(this, pType)
@@ -2088,26 +2103,27 @@ module Win32cr::Devices::Fax
     def save(this : IFaxReceiptOptions*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this)
     end
-    def get_UseForInboundRouting(this : IFaxReceiptOptions*, pbUseForInboundRouting : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseForInboundRouting(this : IFaxReceiptOptions*, pbUseForInboundRouting : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseForInboundRouting.call(this, pbUseForInboundRouting)
     end
-    def put_UseForInboundRouting(this : IFaxReceiptOptions*, bUseForInboundRouting : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseForInboundRouting(this : IFaxReceiptOptions*, bUseForInboundRouting : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseForInboundRouting.call(this, bUseForInboundRouting)
     end
 
   end
 
   @[Extern]
-  record IFaxSecurityVtbl,
+
+  record IFaxSecurityVtable,
     query_interface : Proc(IFaxSecurity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxSecurity*, UInt32),
     release : Proc(IFaxSecurity*, UInt32),
     get_type_info_count : Proc(IFaxSecurity*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxSecurity*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxSecurity*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxSecurity*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Descriptor : Proc(IFaxSecurity*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Descriptor : Proc(IFaxSecurity*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxSecurity*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Descriptor : Proc(IFaxSecurity*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Descriptor : Proc(IFaxSecurity*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_GrantedRights : Proc(IFaxSecurity*, Win32cr::Devices::Fax::FAX_ACCESS_RIGHTS_ENUM*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxSecurity*, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxSecurity*, Win32cr::Foundation::HRESULT),
@@ -2116,7 +2132,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxSecurity, lpVtbl : IFaxSecurityVtbl* do
+  record IFaxSecurity, lpVtbl : IFaxSecurityVtable* do
     GUID = LibC::GUID.new(0x77b508c1_u32, 0x9c0_u16, 0x47a2_u16, StaticArray[0x91_u8, 0xeb_u8, 0xfc_u8, 0xe7_u8, 0xfd_u8, 0xf2_u8, 0x69_u8, 0xe_u8])
     def query_interface(this : IFaxSecurity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2136,13 +2152,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxSecurity*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxSecurity*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxSecurity*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Descriptor(this : IFaxSecurity*, pvDescriptor : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Descriptor(this : IFaxSecurity*, pvDescriptor : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Descriptor.call(this, pvDescriptor)
     end
-    def put_Descriptor(this : IFaxSecurity*, vDescriptor : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Descriptor(this : IFaxSecurity*, vDescriptor : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Descriptor.call(this, vDescriptor)
     end
     def get_GrantedRights(this : IFaxSecurity*, pGrantedRights : Win32cr::Devices::Fax::FAX_ACCESS_RIGHTS_ENUM*) : Win32cr::Foundation::HRESULT
@@ -2164,14 +2180,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxDocumentVtbl,
+
+  record IFaxDocumentVtable,
     query_interface : Proc(IFaxDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxDocument*, UInt32),
     release : Proc(IFaxDocument*, UInt32),
     get_type_info_count : Proc(IFaxDocument*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxDocument*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxDocument*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxDocument*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxDocument*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Body : Proc(IFaxDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Body : Proc(IFaxDocument*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Sender : Proc(IFaxDocument*, Void**, Win32cr::Foundation::HRESULT),
@@ -2196,20 +2213,20 @@ module Win32cr::Devices::Fax
     put_ScheduleType : Proc(IFaxDocument*, Win32cr::Devices::Fax::FAX_SCHEDULE_TYPE_ENUM, Win32cr::Foundation::HRESULT),
     get_ReceiptType : Proc(IFaxDocument*, Win32cr::Devices::Fax::FAX_RECEIPT_TYPE_ENUM*, Win32cr::Foundation::HRESULT),
     put_ReceiptType : Proc(IFaxDocument*, Win32cr::Devices::Fax::FAX_RECEIPT_TYPE_ENUM, Win32cr::Foundation::HRESULT),
-    get_GroupBroadcastReceipts : Proc(IFaxDocument*, Int16*, Win32cr::Foundation::HRESULT),
-    put_GroupBroadcastReceipts : Proc(IFaxDocument*, Int16, Win32cr::Foundation::HRESULT),
+    get_GroupBroadcastReceipts : Proc(IFaxDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_GroupBroadcastReceipts : Proc(IFaxDocument*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Priority : Proc(IFaxDocument*, Win32cr::Devices::Fax::FAX_PRIORITY_TYPE_ENUM*, Win32cr::Foundation::HRESULT),
     put_Priority : Proc(IFaxDocument*, Win32cr::Devices::Fax::FAX_PRIORITY_TYPE_ENUM, Win32cr::Foundation::HRESULT),
     get_TapiConnection : Proc(IFaxDocument*, Void**, Win32cr::Foundation::HRESULT),
     putref_TapiConnection : Proc(IFaxDocument*, Void*, Win32cr::Foundation::HRESULT),
-    submit : Proc(IFaxDocument*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    connected_submit : Proc(IFaxDocument*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_AttachFaxToReceipt : Proc(IFaxDocument*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AttachFaxToReceipt : Proc(IFaxDocument*, Int16, Win32cr::Foundation::HRESULT)
+    submit : Proc(IFaxDocument*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    connected_submit : Proc(IFaxDocument*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_AttachFaxToReceipt : Proc(IFaxDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AttachFaxToReceipt : Proc(IFaxDocument*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxDocument, lpVtbl : IFaxDocumentVtbl* do
+  record IFaxDocument, lpVtbl : IFaxDocumentVtable* do
     GUID = LibC::GUID.new(0xb207a246_u32, 0x9e3_u16, 0x4a4e_u16, StaticArray[0xa7_u8, 0xdc_u8, 0xfe_u8, 0xa3_u8, 0x1d_u8, 0x29_u8, 0x45_u8, 0x8f_u8])
     def query_interface(this : IFaxDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2229,8 +2246,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxDocument*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxDocument*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxDocument*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Body(this : IFaxDocument*, pbstrBody : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Body.call(this, pbstrBody)
@@ -2304,10 +2321,10 @@ module Win32cr::Devices::Fax
     def put_ReceiptType(this : IFaxDocument*, receipt_type : Win32cr::Devices::Fax::FAX_RECEIPT_TYPE_ENUM) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ReceiptType.call(this, receipt_type)
     end
-    def get_GroupBroadcastReceipts(this : IFaxDocument*, pbUseGrouping : Int16*) : Win32cr::Foundation::HRESULT
+    def get_GroupBroadcastReceipts(this : IFaxDocument*, pbUseGrouping : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_GroupBroadcastReceipts.call(this, pbUseGrouping)
     end
-    def put_GroupBroadcastReceipts(this : IFaxDocument*, bUseGrouping : Int16) : Win32cr::Foundation::HRESULT
+    def put_GroupBroadcastReceipts(this : IFaxDocument*, bUseGrouping : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_GroupBroadcastReceipts.call(this, bUseGrouping)
     end
     def get_Priority(this : IFaxDocument*, pPriority : Win32cr::Devices::Fax::FAX_PRIORITY_TYPE_ENUM*) : Win32cr::Foundation::HRESULT
@@ -2322,30 +2339,31 @@ module Win32cr::Devices::Fax
     def putref_TapiConnection(this : IFaxDocument*, pTapiConnection : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_TapiConnection.call(this, pTapiConnection)
     end
-    def submit(this : IFaxDocument*, bstrFaxServerName : Win32cr::Foundation::BSTR, pvFaxOutgoingJobIDs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def submit(this : IFaxDocument*, bstrFaxServerName : Win32cr::Foundation::BSTR, pvFaxOutgoingJobIDs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, bstrFaxServerName, pvFaxOutgoingJobIDs)
     end
-    def connected_submit(this : IFaxDocument*, pFaxServer : Void*, pvFaxOutgoingJobIDs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def connected_submit(this : IFaxDocument*, pFaxServer : Void*, pvFaxOutgoingJobIDs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connected_submit.call(this, pFaxServer, pvFaxOutgoingJobIDs)
     end
-    def get_AttachFaxToReceipt(this : IFaxDocument*, pbAttachFax : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AttachFaxToReceipt(this : IFaxDocument*, pbAttachFax : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AttachFaxToReceipt.call(this, pbAttachFax)
     end
-    def put_AttachFaxToReceipt(this : IFaxDocument*, bAttachFax : Int16) : Win32cr::Foundation::HRESULT
+    def put_AttachFaxToReceipt(this : IFaxDocument*, bAttachFax : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AttachFaxToReceipt.call(this, bAttachFax)
     end
 
   end
 
   @[Extern]
-  record IFaxSenderVtbl,
+
+  record IFaxSenderVtable,
     query_interface : Proc(IFaxSender*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxSender*, UInt32),
     release : Proc(IFaxSender*, UInt32),
     get_type_info_count : Proc(IFaxSender*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxSender*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxSender*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxSender*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxSender*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_BillingCode : Proc(IFaxSender*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_BillingCode : Proc(IFaxSender*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_City : Proc(IFaxSender*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2383,7 +2401,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxSender, lpVtbl : IFaxSenderVtbl* do
+  record IFaxSender, lpVtbl : IFaxSenderVtable* do
     GUID = LibC::GUID.new(0xd879d7d_u32, 0xf57a_u16, 0x4cc6_u16, StaticArray[0xa6_u8, 0xf9_u8, 0x3e_u8, 0xe5_u8, 0xd5_u8, 0x27_u8, 0xb4_u8, 0x6a_u8])
     def query_interface(this : IFaxSender*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2403,8 +2421,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxSender*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxSender*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxSender*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_BillingCode(this : IFaxSender*, pbstrBillingCode : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BillingCode.call(this, pbstrBillingCode)
@@ -2512,14 +2530,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxRecipientVtbl,
+
+  record IFaxRecipientVtable,
     query_interface : Proc(IFaxRecipient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxRecipient*, UInt32),
     release : Proc(IFaxRecipient*, UInt32),
     get_type_info_count : Proc(IFaxRecipient*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxRecipient*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxRecipient*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxRecipient*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxRecipient*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_FaxNumber : Proc(IFaxRecipient*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_FaxNumber : Proc(IFaxRecipient*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFaxRecipient*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2527,7 +2546,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxRecipient, lpVtbl : IFaxRecipientVtbl* do
+  record IFaxRecipient, lpVtbl : IFaxRecipientVtable* do
     GUID = LibC::GUID.new(0x9a3da3a0_u32, 0x538d_u16, 0x42b6_u16, StaticArray[0x94_u8, 0x44_u8, 0xaa_u8, 0xa5_u8, 0x7d_u8, 0xc_u8, 0xe2_u8, 0xbc_u8])
     def query_interface(this : IFaxRecipient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2547,8 +2566,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxRecipient*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxRecipient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxRecipient*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_FaxNumber(this : IFaxRecipient*, pbstrFaxNumber : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FaxNumber.call(this, pbstrFaxNumber)
@@ -2566,14 +2585,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxRecipientsVtbl,
+
+  record IFaxRecipientsVtable,
     query_interface : Proc(IFaxRecipients*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxRecipients*, UInt32),
     release : Proc(IFaxRecipients*, UInt32),
     get_type_info_count : Proc(IFaxRecipients*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxRecipients*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxRecipients*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxRecipients*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxRecipients*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxRecipients*, Void**, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IFaxRecipients*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxRecipients*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2582,7 +2602,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxRecipients, lpVtbl : IFaxRecipientsVtbl* do
+  record IFaxRecipients, lpVtbl : IFaxRecipientsVtable* do
     GUID = LibC::GUID.new(0xb9c9de5a_u32, 0x894e_u16, 0x4492_u16, StaticArray[0x9f_u8, 0xa3_u8, 0x8_u8, 0xc6_u8, 0x27_u8, 0xc1_u8, 0x1d_u8, 0x5d_u8])
     def query_interface(this : IFaxRecipients*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2602,8 +2622,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxRecipients*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxRecipients*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxRecipients*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxRecipients*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
@@ -2624,20 +2644,21 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxIncomingArchiveVtbl,
+
+  record IFaxIncomingArchiveVtable,
     query_interface : Proc(IFaxIncomingArchive*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxIncomingArchive*, UInt32),
     release : Proc(IFaxIncomingArchive*, UInt32),
     get_type_info_count : Proc(IFaxIncomingArchive*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxIncomingArchive*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxIncomingArchive*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxIncomingArchive*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_UseArchive : Proc(IFaxIncomingArchive*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseArchive : Proc(IFaxIncomingArchive*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxIncomingArchive*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_UseArchive : Proc(IFaxIncomingArchive*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseArchive : Proc(IFaxIncomingArchive*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ArchiveFolder : Proc(IFaxIncomingArchive*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ArchiveFolder : Proc(IFaxIncomingArchive*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SizeQuotaWarning : Proc(IFaxIncomingArchive*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SizeQuotaWarning : Proc(IFaxIncomingArchive*, Int16, Win32cr::Foundation::HRESULT),
+    get_SizeQuotaWarning : Proc(IFaxIncomingArchive*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SizeQuotaWarning : Proc(IFaxIncomingArchive*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_HighQuotaWaterMark : Proc(IFaxIncomingArchive*, Int32*, Win32cr::Foundation::HRESULT),
     put_HighQuotaWaterMark : Proc(IFaxIncomingArchive*, Int32, Win32cr::Foundation::HRESULT),
     get_LowQuotaWaterMark : Proc(IFaxIncomingArchive*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2653,7 +2674,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxIncomingArchive, lpVtbl : IFaxIncomingArchiveVtbl* do
+  record IFaxIncomingArchive, lpVtbl : IFaxIncomingArchiveVtable* do
     GUID = LibC::GUID.new(0x76062cc7_u32, 0xf714_u16, 0x4fbd_u16, StaticArray[0xaa_u8, 0x6_u8, 0xed_u8, 0x6e_u8, 0x4a_u8, 0x4b_u8, 0x70_u8, 0xf3_u8])
     def query_interface(this : IFaxIncomingArchive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2673,13 +2694,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxIncomingArchive*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxIncomingArchive*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxIncomingArchive*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_UseArchive(this : IFaxIncomingArchive*, pbUseArchive : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseArchive(this : IFaxIncomingArchive*, pbUseArchive : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseArchive.call(this, pbUseArchive)
     end
-    def put_UseArchive(this : IFaxIncomingArchive*, bUseArchive : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseArchive(this : IFaxIncomingArchive*, bUseArchive : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseArchive.call(this, bUseArchive)
     end
     def get_ArchiveFolder(this : IFaxIncomingArchive*, pbstrArchiveFolder : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2688,10 +2709,10 @@ module Win32cr::Devices::Fax
     def put_ArchiveFolder(this : IFaxIncomingArchive*, bstrArchiveFolder : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ArchiveFolder.call(this, bstrArchiveFolder)
     end
-    def get_SizeQuotaWarning(this : IFaxIncomingArchive*, pbSizeQuotaWarning : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SizeQuotaWarning(this : IFaxIncomingArchive*, pbSizeQuotaWarning : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SizeQuotaWarning.call(this, pbSizeQuotaWarning)
     end
-    def put_SizeQuotaWarning(this : IFaxIncomingArchive*, bSizeQuotaWarning : Int16) : Win32cr::Foundation::HRESULT
+    def put_SizeQuotaWarning(this : IFaxIncomingArchive*, bSizeQuotaWarning : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SizeQuotaWarning.call(this, bSizeQuotaWarning)
     end
     def get_HighQuotaWaterMark(this : IFaxIncomingArchive*, plHighQuotaWaterMark : Int32*) : Win32cr::Foundation::HRESULT
@@ -2734,16 +2755,17 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxIncomingQueueVtbl,
+
+  record IFaxIncomingQueueVtable,
     query_interface : Proc(IFaxIncomingQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxIncomingQueue*, UInt32),
     release : Proc(IFaxIncomingQueue*, UInt32),
     get_type_info_count : Proc(IFaxIncomingQueue*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxIncomingQueue*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxIncomingQueue*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxIncomingQueue*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Blocked : Proc(IFaxIncomingQueue*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Blocked : Proc(IFaxIncomingQueue*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxIncomingQueue*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Blocked : Proc(IFaxIncomingQueue*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Blocked : Proc(IFaxIncomingQueue*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxIncomingQueue*, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxIncomingQueue*, Win32cr::Foundation::HRESULT),
     get_jobs : Proc(IFaxIncomingQueue*, Void**, Win32cr::Foundation::HRESULT),
@@ -2751,7 +2773,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxIncomingQueue, lpVtbl : IFaxIncomingQueueVtbl* do
+  record IFaxIncomingQueue, lpVtbl : IFaxIncomingQueueVtable* do
     GUID = LibC::GUID.new(0x902e64ef_u32, 0x8fd8_u16, 0x4b75_u16, StaticArray[0x97_u8, 0x25_u8, 0x60_u8, 0x14_u8, 0xdf_u8, 0x16_u8, 0x15_u8, 0x45_u8])
     def query_interface(this : IFaxIncomingQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2771,13 +2793,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxIncomingQueue*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxIncomingQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxIncomingQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Blocked(this : IFaxIncomingQueue*, pbBlocked : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Blocked(this : IFaxIncomingQueue*, pbBlocked : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Blocked.call(this, pbBlocked)
     end
-    def put_Blocked(this : IFaxIncomingQueue*, bBlocked : Int16) : Win32cr::Foundation::HRESULT
+    def put_Blocked(this : IFaxIncomingQueue*, bBlocked : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Blocked.call(this, bBlocked)
     end
     def refresh(this : IFaxIncomingQueue*) : Win32cr::Foundation::HRESULT
@@ -2796,20 +2818,21 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutgoingArchiveVtbl,
+
+  record IFaxOutgoingArchiveVtable,
     query_interface : Proc(IFaxOutgoingArchive*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutgoingArchive*, UInt32),
     release : Proc(IFaxOutgoingArchive*, UInt32),
     get_type_info_count : Proc(IFaxOutgoingArchive*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutgoingArchive*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutgoingArchive*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutgoingArchive*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_UseArchive : Proc(IFaxOutgoingArchive*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseArchive : Proc(IFaxOutgoingArchive*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutgoingArchive*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_UseArchive : Proc(IFaxOutgoingArchive*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseArchive : Proc(IFaxOutgoingArchive*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ArchiveFolder : Proc(IFaxOutgoingArchive*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ArchiveFolder : Proc(IFaxOutgoingArchive*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SizeQuotaWarning : Proc(IFaxOutgoingArchive*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SizeQuotaWarning : Proc(IFaxOutgoingArchive*, Int16, Win32cr::Foundation::HRESULT),
+    get_SizeQuotaWarning : Proc(IFaxOutgoingArchive*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SizeQuotaWarning : Proc(IFaxOutgoingArchive*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_HighQuotaWaterMark : Proc(IFaxOutgoingArchive*, Int32*, Win32cr::Foundation::HRESULT),
     put_HighQuotaWaterMark : Proc(IFaxOutgoingArchive*, Int32, Win32cr::Foundation::HRESULT),
     get_LowQuotaWaterMark : Proc(IFaxOutgoingArchive*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2825,7 +2848,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxOutgoingArchive, lpVtbl : IFaxOutgoingArchiveVtbl* do
+  record IFaxOutgoingArchive, lpVtbl : IFaxOutgoingArchiveVtable* do
     GUID = LibC::GUID.new(0xc9c28f40_u32, 0x8d80_u16, 0x4e53_u16, StaticArray[0x81_u8, 0xf_u8, 0x9a_u8, 0x79_u8, 0x91_u8, 0x9b_u8, 0x49_u8, 0xfd_u8])
     def query_interface(this : IFaxOutgoingArchive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2845,13 +2868,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutgoingArchive*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutgoingArchive*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutgoingArchive*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_UseArchive(this : IFaxOutgoingArchive*, pbUseArchive : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseArchive(this : IFaxOutgoingArchive*, pbUseArchive : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseArchive.call(this, pbUseArchive)
     end
-    def put_UseArchive(this : IFaxOutgoingArchive*, bUseArchive : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseArchive(this : IFaxOutgoingArchive*, bUseArchive : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseArchive.call(this, bUseArchive)
     end
     def get_ArchiveFolder(this : IFaxOutgoingArchive*, pbstrArchiveFolder : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2860,10 +2883,10 @@ module Win32cr::Devices::Fax
     def put_ArchiveFolder(this : IFaxOutgoingArchive*, bstrArchiveFolder : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ArchiveFolder.call(this, bstrArchiveFolder)
     end
-    def get_SizeQuotaWarning(this : IFaxOutgoingArchive*, pbSizeQuotaWarning : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SizeQuotaWarning(this : IFaxOutgoingArchive*, pbSizeQuotaWarning : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SizeQuotaWarning.call(this, pbSizeQuotaWarning)
     end
-    def put_SizeQuotaWarning(this : IFaxOutgoingArchive*, bSizeQuotaWarning : Int16) : Win32cr::Foundation::HRESULT
+    def put_SizeQuotaWarning(this : IFaxOutgoingArchive*, bSizeQuotaWarning : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SizeQuotaWarning.call(this, bSizeQuotaWarning)
     end
     def get_HighQuotaWaterMark(this : IFaxOutgoingArchive*, plHighQuotaWaterMark : Int32*) : Win32cr::Foundation::HRESULT
@@ -2906,22 +2929,23 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutgoingQueueVtbl,
+
+  record IFaxOutgoingQueueVtable,
     query_interface : Proc(IFaxOutgoingQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutgoingQueue*, UInt32),
     release : Proc(IFaxOutgoingQueue*, UInt32),
     get_type_info_count : Proc(IFaxOutgoingQueue*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutgoingQueue*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutgoingQueue*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutgoingQueue*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Blocked : Proc(IFaxOutgoingQueue*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Blocked : Proc(IFaxOutgoingQueue*, Int16, Win32cr::Foundation::HRESULT),
-    get_Paused : Proc(IFaxOutgoingQueue*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Paused : Proc(IFaxOutgoingQueue*, Int16, Win32cr::Foundation::HRESULT),
-    get_AllowPersonalCoverPages : Proc(IFaxOutgoingQueue*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowPersonalCoverPages : Proc(IFaxOutgoingQueue*, Int16, Win32cr::Foundation::HRESULT),
-    get_UseDeviceTSID : Proc(IFaxOutgoingQueue*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseDeviceTSID : Proc(IFaxOutgoingQueue*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutgoingQueue*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Blocked : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Blocked : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_Paused : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Paused : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AllowPersonalCoverPages : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowPersonalCoverPages : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_UseDeviceTSID : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseDeviceTSID : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Retries : Proc(IFaxOutgoingQueue*, Int32*, Win32cr::Foundation::HRESULT),
     put_Retries : Proc(IFaxOutgoingQueue*, Int32, Win32cr::Foundation::HRESULT),
     get_RetryDelay : Proc(IFaxOutgoingQueue*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2932,8 +2956,8 @@ module Win32cr::Devices::Fax
     put_DiscountRateEnd : Proc(IFaxOutgoingQueue*, Float64, Win32cr::Foundation::HRESULT),
     get_AgeLimit : Proc(IFaxOutgoingQueue*, Int32*, Win32cr::Foundation::HRESULT),
     put_AgeLimit : Proc(IFaxOutgoingQueue*, Int32, Win32cr::Foundation::HRESULT),
-    get_Branding : Proc(IFaxOutgoingQueue*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Branding : Proc(IFaxOutgoingQueue*, Int16, Win32cr::Foundation::HRESULT),
+    get_Branding : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Branding : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxOutgoingQueue*, Win32cr::Foundation::HRESULT),
     get_jobs : Proc(IFaxOutgoingQueue*, Void**, Win32cr::Foundation::HRESULT),
@@ -2941,7 +2965,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxOutgoingQueue, lpVtbl : IFaxOutgoingQueueVtbl* do
+  record IFaxOutgoingQueue, lpVtbl : IFaxOutgoingQueueVtable* do
     GUID = LibC::GUID.new(0x80b1df24_u32, 0xd9ac_u16, 0x4333_u16, StaticArray[0xb3_u8, 0x73_u8, 0x48_u8, 0x7c_u8, 0xed_u8, 0xc8_u8, 0xc_u8, 0xe5_u8])
     def query_interface(this : IFaxOutgoingQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2961,31 +2985,31 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutgoingQueue*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutgoingQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutgoingQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Blocked(this : IFaxOutgoingQueue*, pbBlocked : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Blocked(this : IFaxOutgoingQueue*, pbBlocked : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Blocked.call(this, pbBlocked)
     end
-    def put_Blocked(this : IFaxOutgoingQueue*, bBlocked : Int16) : Win32cr::Foundation::HRESULT
+    def put_Blocked(this : IFaxOutgoingQueue*, bBlocked : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Blocked.call(this, bBlocked)
     end
-    def get_Paused(this : IFaxOutgoingQueue*, pbPaused : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Paused(this : IFaxOutgoingQueue*, pbPaused : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Paused.call(this, pbPaused)
     end
-    def put_Paused(this : IFaxOutgoingQueue*, bPaused : Int16) : Win32cr::Foundation::HRESULT
+    def put_Paused(this : IFaxOutgoingQueue*, bPaused : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Paused.call(this, bPaused)
     end
-    def get_AllowPersonalCoverPages(this : IFaxOutgoingQueue*, pbAllowPersonalCoverPages : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowPersonalCoverPages(this : IFaxOutgoingQueue*, pbAllowPersonalCoverPages : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowPersonalCoverPages.call(this, pbAllowPersonalCoverPages)
     end
-    def put_AllowPersonalCoverPages(this : IFaxOutgoingQueue*, bAllowPersonalCoverPages : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowPersonalCoverPages(this : IFaxOutgoingQueue*, bAllowPersonalCoverPages : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowPersonalCoverPages.call(this, bAllowPersonalCoverPages)
     end
-    def get_UseDeviceTSID(this : IFaxOutgoingQueue*, pbUseDeviceTSID : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseDeviceTSID(this : IFaxOutgoingQueue*, pbUseDeviceTSID : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseDeviceTSID.call(this, pbUseDeviceTSID)
     end
-    def put_UseDeviceTSID(this : IFaxOutgoingQueue*, bUseDeviceTSID : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseDeviceTSID(this : IFaxOutgoingQueue*, bUseDeviceTSID : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseDeviceTSID.call(this, bUseDeviceTSID)
     end
     def get_Retries(this : IFaxOutgoingQueue*, plRetries : Int32*) : Win32cr::Foundation::HRESULT
@@ -3018,10 +3042,10 @@ module Win32cr::Devices::Fax
     def put_AgeLimit(this : IFaxOutgoingQueue*, lAgeLimit : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AgeLimit.call(this, lAgeLimit)
     end
-    def get_Branding(this : IFaxOutgoingQueue*, pbBranding : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Branding(this : IFaxOutgoingQueue*, pbBranding : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Branding.call(this, pbBranding)
     end
-    def put_Branding(this : IFaxOutgoingQueue*, bBranding : Int16) : Win32cr::Foundation::HRESULT
+    def put_Branding(this : IFaxOutgoingQueue*, bBranding : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Branding.call(this, bBranding)
     end
     def refresh(this : IFaxOutgoingQueue*) : Win32cr::Foundation::HRESULT
@@ -3040,24 +3064,25 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxIncomingMessageIteratorVtbl,
+
+  record IFaxIncomingMessageIteratorVtable,
     query_interface : Proc(IFaxIncomingMessageIterator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxIncomingMessageIterator*, UInt32),
     release : Proc(IFaxIncomingMessageIterator*, UInt32),
     get_type_info_count : Proc(IFaxIncomingMessageIterator*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxIncomingMessageIterator*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxIncomingMessageIterator*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxIncomingMessageIterator*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxIncomingMessageIterator*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Message : Proc(IFaxIncomingMessageIterator*, Void**, Win32cr::Foundation::HRESULT),
     get_PrefetchSize : Proc(IFaxIncomingMessageIterator*, Int32*, Win32cr::Foundation::HRESULT),
     put_PrefetchSize : Proc(IFaxIncomingMessageIterator*, Int32, Win32cr::Foundation::HRESULT),
-    get_AtEOF : Proc(IFaxIncomingMessageIterator*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AtEOF : Proc(IFaxIncomingMessageIterator*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     move_first : Proc(IFaxIncomingMessageIterator*, Win32cr::Foundation::HRESULT),
     move_next : Proc(IFaxIncomingMessageIterator*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxIncomingMessageIterator, lpVtbl : IFaxIncomingMessageIteratorVtbl* do
+  record IFaxIncomingMessageIterator, lpVtbl : IFaxIncomingMessageIteratorVtable* do
     GUID = LibC::GUID.new(0xfd73ecc4_u32, 0x6f06_u16, 0x4f52_u16, StaticArray[0x82_u8, 0xa8_u8, 0xf7_u8, 0xba_u8, 0x6_u8, 0xae_u8, 0x31_u8, 0x8_u8])
     def query_interface(this : IFaxIncomingMessageIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3077,8 +3102,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxIncomingMessageIterator*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxIncomingMessageIterator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxIncomingMessageIterator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Message(this : IFaxIncomingMessageIterator*, pFaxIncomingMessage : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Message.call(this, pFaxIncomingMessage)
@@ -3089,7 +3114,7 @@ module Win32cr::Devices::Fax
     def put_PrefetchSize(this : IFaxIncomingMessageIterator*, lPrefetchSize : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_PrefetchSize.call(this, lPrefetchSize)
     end
-    def get_AtEOF(this : IFaxIncomingMessageIterator*, pbEOF : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AtEOF(this : IFaxIncomingMessageIterator*, pbEOF : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AtEOF.call(this, pbEOF)
     end
     def move_first(this : IFaxIncomingMessageIterator*) : Win32cr::Foundation::HRESULT
@@ -3102,14 +3127,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxIncomingMessageVtbl,
+
+  record IFaxIncomingMessageVtable,
     query_interface : Proc(IFaxIncomingMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxIncomingMessage*, UInt32),
     release : Proc(IFaxIncomingMessage*, UInt32),
     get_type_info_count : Proc(IFaxIncomingMessage*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxIncomingMessage*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxIncomingMessage*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxIncomingMessage*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxIncomingMessage*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFaxIncomingMessage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Pages : Proc(IFaxIncomingMessage*, Int32*, Win32cr::Foundation::HRESULT),
     get_Size : Proc(IFaxIncomingMessage*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3126,7 +3152,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxIncomingMessage, lpVtbl : IFaxIncomingMessageVtbl* do
+  record IFaxIncomingMessage, lpVtbl : IFaxIncomingMessageVtable* do
     GUID = LibC::GUID.new(0x7cab88fa_u32, 0x2ef9_u16, 0x4851_u16, StaticArray[0xb2_u8, 0xf3_u8, 0x1d_u8, 0x14_u8, 0x8f_u8, 0xed_u8, 0x84_u8, 0x47_u8])
     def query_interface(this : IFaxIncomingMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3146,8 +3172,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxIncomingMessage*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxIncomingMessage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxIncomingMessage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFaxIncomingMessage*, pbstrId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pbstrId)
@@ -3192,21 +3218,22 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutgoingJobsVtbl,
+
+  record IFaxOutgoingJobsVtable,
     query_interface : Proc(IFaxOutgoingJobs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutgoingJobs*, UInt32),
     release : Proc(IFaxOutgoingJobs*, UInt32),
     get_type_info_count : Proc(IFaxOutgoingJobs*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutgoingJobs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutgoingJobs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutgoingJobs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutgoingJobs*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxOutgoingJobs*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFaxOutgoingJobs*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFaxOutgoingJobs*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxOutgoingJobs*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxOutgoingJobs, lpVtbl : IFaxOutgoingJobsVtbl* do
+  record IFaxOutgoingJobs, lpVtbl : IFaxOutgoingJobsVtable* do
     GUID = LibC::GUID.new(0x2c56d8e6_u32, 0x8c2f_u16, 0x4573_u16, StaticArray[0x94_u8, 0x4c_u8, 0xe5_u8, 0x5_u8, 0xf8_u8, 0xf5_u8, 0xae_u8, 0xed_u8])
     def query_interface(this : IFaxOutgoingJobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3226,13 +3253,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutgoingJobs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutgoingJobs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutgoingJobs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxOutgoingJobs*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
     end
-    def get_Item(this : IFaxOutgoingJobs*, vIndex : Win32cr::System::Com::VARIANT, pFaxOutgoingJob : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFaxOutgoingJobs*, vIndex : Win32cr::System::Variant::VARIANT, pFaxOutgoingJob : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, vIndex, pFaxOutgoingJob)
     end
     def get_Count(this : IFaxOutgoingJobs*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -3242,14 +3269,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutgoingJobVtbl,
+
+  record IFaxOutgoingJobVtable,
     query_interface : Proc(IFaxOutgoingJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutgoingJob*, UInt32),
     release : Proc(IFaxOutgoingJob*, UInt32),
     get_type_info_count : Proc(IFaxOutgoingJob*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutgoingJob*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutgoingJob*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutgoingJob*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutgoingJob*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IFaxOutgoingJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DocumentName : Proc(IFaxOutgoingJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Pages : Proc(IFaxOutgoingJob*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3274,7 +3302,7 @@ module Win32cr::Devices::Fax
     get_TransmissionEnd : Proc(IFaxOutgoingJob*, Float64*, Win32cr::Foundation::HRESULT),
     get_CSID : Proc(IFaxOutgoingJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_TSID : Proc(IFaxOutgoingJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_GroupBroadcastReceipts : Proc(IFaxOutgoingJob*, Int16*, Win32cr::Foundation::HRESULT),
+    get_GroupBroadcastReceipts : Proc(IFaxOutgoingJob*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     pause : Proc(IFaxOutgoingJob*, Win32cr::Foundation::HRESULT),
     resume : Proc(IFaxOutgoingJob*, Win32cr::Foundation::HRESULT),
     restart : Proc(IFaxOutgoingJob*, Win32cr::Foundation::HRESULT),
@@ -3284,7 +3312,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxOutgoingJob, lpVtbl : IFaxOutgoingJobVtbl* do
+  record IFaxOutgoingJob, lpVtbl : IFaxOutgoingJobVtable* do
     GUID = LibC::GUID.new(0x6356daad_u32, 0x6614_u16, 0x4583_u16, StaticArray[0xbf_u8, 0x7a_u8, 0x3a_u8, 0xd6_u8, 0x7b_u8, 0xbf_u8, 0xc7_u8, 0x1c_u8])
     def query_interface(this : IFaxOutgoingJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3304,8 +3332,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutgoingJob*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutgoingJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutgoingJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Subject(this : IFaxOutgoingJob*, pbstrSubject : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Subject.call(this, pbstrSubject)
@@ -3379,7 +3407,7 @@ module Win32cr::Devices::Fax
     def get_TSID(this : IFaxOutgoingJob*, pbstrTSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TSID.call(this, pbstrTSID)
     end
-    def get_GroupBroadcastReceipts(this : IFaxOutgoingJob*, pbGroupBroadcastReceipts : Int16*) : Win32cr::Foundation::HRESULT
+    def get_GroupBroadcastReceipts(this : IFaxOutgoingJob*, pbGroupBroadcastReceipts : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_GroupBroadcastReceipts.call(this, pbGroupBroadcastReceipts)
     end
     def pause(this : IFaxOutgoingJob*) : Win32cr::Foundation::HRESULT
@@ -3404,16 +3432,17 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutgoingMessageIteratorVtbl,
+
+  record IFaxOutgoingMessageIteratorVtable,
     query_interface : Proc(IFaxOutgoingMessageIterator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutgoingMessageIterator*, UInt32),
     release : Proc(IFaxOutgoingMessageIterator*, UInt32),
     get_type_info_count : Proc(IFaxOutgoingMessageIterator*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutgoingMessageIterator*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutgoingMessageIterator*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutgoingMessageIterator*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutgoingMessageIterator*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Message : Proc(IFaxOutgoingMessageIterator*, Void**, Win32cr::Foundation::HRESULT),
-    get_AtEOF : Proc(IFaxOutgoingMessageIterator*, Int16*, Win32cr::Foundation::HRESULT),
+    get_AtEOF : Proc(IFaxOutgoingMessageIterator*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_PrefetchSize : Proc(IFaxOutgoingMessageIterator*, Int32*, Win32cr::Foundation::HRESULT),
     put_PrefetchSize : Proc(IFaxOutgoingMessageIterator*, Int32, Win32cr::Foundation::HRESULT),
     move_first : Proc(IFaxOutgoingMessageIterator*, Win32cr::Foundation::HRESULT),
@@ -3421,7 +3450,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxOutgoingMessageIterator, lpVtbl : IFaxOutgoingMessageIteratorVtbl* do
+  record IFaxOutgoingMessageIterator, lpVtbl : IFaxOutgoingMessageIteratorVtable* do
     GUID = LibC::GUID.new(0xf5ec5d4f_u32, 0xb840_u16, 0x432f_u16, StaticArray[0x99_u8, 0x80_u8, 0x11_u8, 0x2f_u8, 0xe4_u8, 0x2a_u8, 0x9b_u8, 0x7a_u8])
     def query_interface(this : IFaxOutgoingMessageIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3441,13 +3470,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutgoingMessageIterator*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutgoingMessageIterator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutgoingMessageIterator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Message(this : IFaxOutgoingMessageIterator*, pFaxOutgoingMessage : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Message.call(this, pFaxOutgoingMessage)
     end
-    def get_AtEOF(this : IFaxOutgoingMessageIterator*, pbEOF : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AtEOF(this : IFaxOutgoingMessageIterator*, pbEOF : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AtEOF.call(this, pbEOF)
     end
     def get_PrefetchSize(this : IFaxOutgoingMessageIterator*, plPrefetchSize : Int32*) : Win32cr::Foundation::HRESULT
@@ -3466,14 +3495,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutgoingMessageVtbl,
+
+  record IFaxOutgoingMessageVtable,
     query_interface : Proc(IFaxOutgoingMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutgoingMessage*, UInt32),
     release : Proc(IFaxOutgoingMessage*, UInt32),
     get_type_info_count : Proc(IFaxOutgoingMessage*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutgoingMessage*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutgoingMessage*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutgoingMessage*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutgoingMessage*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_SubmissionId : Proc(IFaxOutgoingMessage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFaxOutgoingMessage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IFaxOutgoingMessage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3496,7 +3526,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxOutgoingMessage, lpVtbl : IFaxOutgoingMessageVtbl* do
+  record IFaxOutgoingMessage, lpVtbl : IFaxOutgoingMessageVtable* do
     GUID = LibC::GUID.new(0xf0ea35de_u32, 0xcaa5_u16, 0x4a7c_u16, StaticArray[0x82_u8, 0xc7_u8, 0x2b_u8, 0x60_u8, 0xba_u8, 0x5f_u8, 0x2b_u8, 0xe2_u8])
     def query_interface(this : IFaxOutgoingMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3516,8 +3546,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutgoingMessage*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutgoingMessage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutgoingMessage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_SubmissionId(this : IFaxOutgoingMessage*, pbstrSubmissionId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SubmissionId.call(this, pbstrSubmissionId)
@@ -3580,21 +3610,22 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxIncomingJobsVtbl,
+
+  record IFaxIncomingJobsVtable,
     query_interface : Proc(IFaxIncomingJobs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxIncomingJobs*, UInt32),
     release : Proc(IFaxIncomingJobs*, UInt32),
     get_type_info_count : Proc(IFaxIncomingJobs*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxIncomingJobs*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxIncomingJobs*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxIncomingJobs*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxIncomingJobs*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxIncomingJobs*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFaxIncomingJobs*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFaxIncomingJobs*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxIncomingJobs*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxIncomingJobs, lpVtbl : IFaxIncomingJobsVtbl* do
+  record IFaxIncomingJobs, lpVtbl : IFaxIncomingJobsVtable* do
     GUID = LibC::GUID.new(0x11f04e9_u32, 0x4fd6_u16, 0x4c23_u16, StaticArray[0x95_u8, 0x13_u8, 0xb6_u8, 0xb6_u8, 0x6b_u8, 0xb2_u8, 0x6b_u8, 0xe9_u8])
     def query_interface(this : IFaxIncomingJobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3614,13 +3645,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxIncomingJobs*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxIncomingJobs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxIncomingJobs*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxIncomingJobs*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
     end
-    def get_Item(this : IFaxIncomingJobs*, vIndex : Win32cr::System::Com::VARIANT, pFaxIncomingJob : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFaxIncomingJobs*, vIndex : Win32cr::System::Variant::VARIANT, pFaxIncomingJob : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, vIndex, pFaxIncomingJob)
     end
     def get_Count(this : IFaxIncomingJobs*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -3630,14 +3661,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxIncomingJobVtbl,
+
+  record IFaxIncomingJobVtable,
     query_interface : Proc(IFaxIncomingJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxIncomingJob*, UInt32),
     release : Proc(IFaxIncomingJob*, UInt32),
     get_type_info_count : Proc(IFaxIncomingJob*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxIncomingJob*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxIncomingJob*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxIncomingJob*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxIncomingJob*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Size : Proc(IFaxIncomingJob*, Int32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFaxIncomingJob*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_CurrentPage : Proc(IFaxIncomingJob*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3660,7 +3692,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxIncomingJob, lpVtbl : IFaxIncomingJobVtbl* do
+  record IFaxIncomingJob, lpVtbl : IFaxIncomingJobVtable* do
     GUID = LibC::GUID.new(0x207529e6_u32, 0x654a_u16, 0x4916_u16, StaticArray[0x9f_u8, 0x88_u8, 0x4d_u8, 0x23_u8, 0x2e_u8, 0xe8_u8, 0xa1_u8, 0x7_u8])
     def query_interface(this : IFaxIncomingJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3680,8 +3712,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxIncomingJob*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxIncomingJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxIncomingJob*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Size(this : IFaxIncomingJob*, plSize : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Size.call(this, plSize)
@@ -3744,14 +3776,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxDeviceProviderVtbl,
+
+  record IFaxDeviceProviderVtable,
     query_interface : Proc(IFaxDeviceProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxDeviceProvider*, UInt32),
     release : Proc(IFaxDeviceProvider*, UInt32),
     get_type_info_count : Proc(IFaxDeviceProvider*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxDeviceProvider*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxDeviceProvider*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxDeviceProvider*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxDeviceProvider*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_FriendlyName : Proc(IFaxDeviceProvider*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ImageName : Proc(IFaxDeviceProvider*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UniqueName : Proc(IFaxDeviceProvider*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3760,14 +3793,14 @@ module Win32cr::Devices::Fax
     get_MinorVersion : Proc(IFaxDeviceProvider*, Int32*, Win32cr::Foundation::HRESULT),
     get_MajorBuild : Proc(IFaxDeviceProvider*, Int32*, Win32cr::Foundation::HRESULT),
     get_MinorBuild : Proc(IFaxDeviceProvider*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Debug : Proc(IFaxDeviceProvider*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Debug : Proc(IFaxDeviceProvider*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IFaxDeviceProvider*, Win32cr::Devices::Fax::FAX_PROVIDER_STATUS_ENUM*, Win32cr::Foundation::HRESULT),
     get_InitErrorCode : Proc(IFaxDeviceProvider*, Int32*, Win32cr::Foundation::HRESULT),
-    get_DeviceIds : Proc(IFaxDeviceProvider*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_DeviceIds : Proc(IFaxDeviceProvider*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxDeviceProvider, lpVtbl : IFaxDeviceProviderVtbl* do
+  record IFaxDeviceProvider, lpVtbl : IFaxDeviceProviderVtable* do
     GUID = LibC::GUID.new(0x290eac63_u32, 0x83ec_u16, 0x449c_u16, StaticArray[0x84_u8, 0x17_u8, 0xf1_u8, 0x48_u8, 0xdf_u8, 0x8c_u8, 0x68_u8, 0x2a_u8])
     def query_interface(this : IFaxDeviceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3787,8 +3820,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxDeviceProvider*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxDeviceProvider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxDeviceProvider*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_FriendlyName(this : IFaxDeviceProvider*, pbstrFriendlyName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FriendlyName.call(this, pbstrFriendlyName)
@@ -3814,7 +3847,7 @@ module Win32cr::Devices::Fax
     def get_MinorBuild(this : IFaxDeviceProvider*, plMinorBuild : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MinorBuild.call(this, plMinorBuild)
     end
-    def get_Debug(this : IFaxDeviceProvider*, pbDebug : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Debug(this : IFaxDeviceProvider*, pbDebug : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Debug.call(this, pbDebug)
     end
     def get_Status(this : IFaxDeviceProvider*, pStatus : Win32cr::Devices::Fax::FAX_PROVIDER_STATUS_ENUM*) : Win32cr::Foundation::HRESULT
@@ -3823,32 +3856,33 @@ module Win32cr::Devices::Fax
     def get_InitErrorCode(this : IFaxDeviceProvider*, plInitErrorCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InitErrorCode.call(this, plInitErrorCode)
     end
-    def get_DeviceIds(this : IFaxDeviceProvider*, pvDeviceIds : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DeviceIds(this : IFaxDeviceProvider*, pvDeviceIds : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DeviceIds.call(this, pvDeviceIds)
     end
 
   end
 
   @[Extern]
-  record IFaxDeviceVtbl,
+
+  record IFaxDeviceVtable,
     query_interface : Proc(IFaxDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxDevice*, UInt32),
     release : Proc(IFaxDevice*, UInt32),
     get_type_info_count : Proc(IFaxDevice*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxDevice*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxDevice*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxDevice*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxDevice*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFaxDevice*, Int32*, Win32cr::Foundation::HRESULT),
     get_DeviceName : Proc(IFaxDevice*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ProviderUniqueName : Proc(IFaxDevice*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_PoweredOff : Proc(IFaxDevice*, Int16*, Win32cr::Foundation::HRESULT),
-    get_ReceivingNow : Proc(IFaxDevice*, Int16*, Win32cr::Foundation::HRESULT),
-    get_SendingNow : Proc(IFaxDevice*, Int16*, Win32cr::Foundation::HRESULT),
-    get_UsedRoutingMethods : Proc(IFaxDevice*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PoweredOff : Proc(IFaxDevice*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_ReceivingNow : Proc(IFaxDevice*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_SendingNow : Proc(IFaxDevice*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_UsedRoutingMethods : Proc(IFaxDevice*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Description : Proc(IFaxDevice*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Description : Proc(IFaxDevice*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SendEnabled : Proc(IFaxDevice*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SendEnabled : Proc(IFaxDevice*, Int16, Win32cr::Foundation::HRESULT),
+    get_SendEnabled : Proc(IFaxDevice*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SendEnabled : Proc(IFaxDevice*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ReceiveMode : Proc(IFaxDevice*, Win32cr::Devices::Fax::FAX_DEVICE_RECEIVE_MODE_ENUM*, Win32cr::Foundation::HRESULT),
     put_ReceiveMode : Proc(IFaxDevice*, Win32cr::Devices::Fax::FAX_DEVICE_RECEIVE_MODE_ENUM, Win32cr::Foundation::HRESULT),
     get_RingsBeforeAnswer : Proc(IFaxDevice*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3859,15 +3893,15 @@ module Win32cr::Devices::Fax
     put_TSID : Proc(IFaxDevice*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxDevice*, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxDevice*, Win32cr::Foundation::HRESULT),
-    get_extension_property : Proc(IFaxDevice*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_extension_property : Proc(IFaxDevice*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    use_routing_method : Proc(IFaxDevice*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    get_RingingNow : Proc(IFaxDevice*, Int16*, Win32cr::Foundation::HRESULT),
+    get_extension_property : Proc(IFaxDevice*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_extension_property : Proc(IFaxDevice*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    use_routing_method : Proc(IFaxDevice*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_RingingNow : Proc(IFaxDevice*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     answer_call : Proc(IFaxDevice*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxDevice, lpVtbl : IFaxDeviceVtbl* do
+  record IFaxDevice, lpVtbl : IFaxDeviceVtable* do
     GUID = LibC::GUID.new(0x49306c59_u32, 0xb52e_u16, 0x4867_u16, StaticArray[0x9d_u8, 0xf4_u8, 0xca_u8, 0x58_u8, 0x41_u8, 0xc9_u8, 0x56_u8, 0xd0_u8])
     def query_interface(this : IFaxDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3887,8 +3921,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxDevice*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxDevice*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxDevice*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFaxDevice*, plId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, plId)
@@ -3899,16 +3933,16 @@ module Win32cr::Devices::Fax
     def get_ProviderUniqueName(this : IFaxDevice*, pbstrProviderUniqueName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ProviderUniqueName.call(this, pbstrProviderUniqueName)
     end
-    def get_PoweredOff(this : IFaxDevice*, pbPoweredOff : Int16*) : Win32cr::Foundation::HRESULT
+    def get_PoweredOff(this : IFaxDevice*, pbPoweredOff : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PoweredOff.call(this, pbPoweredOff)
     end
-    def get_ReceivingNow(this : IFaxDevice*, pbReceivingNow : Int16*) : Win32cr::Foundation::HRESULT
+    def get_ReceivingNow(this : IFaxDevice*, pbReceivingNow : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReceivingNow.call(this, pbReceivingNow)
     end
-    def get_SendingNow(this : IFaxDevice*, pbSendingNow : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SendingNow(this : IFaxDevice*, pbSendingNow : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SendingNow.call(this, pbSendingNow)
     end
-    def get_UsedRoutingMethods(this : IFaxDevice*, pvUsedRoutingMethods : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_UsedRoutingMethods(this : IFaxDevice*, pvUsedRoutingMethods : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UsedRoutingMethods.call(this, pvUsedRoutingMethods)
     end
     def get_Description(this : IFaxDevice*, pbstrDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3917,10 +3951,10 @@ module Win32cr::Devices::Fax
     def put_Description(this : IFaxDevice*, bstrDescription : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Description.call(this, bstrDescription)
     end
-    def get_SendEnabled(this : IFaxDevice*, pbSendEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SendEnabled(this : IFaxDevice*, pbSendEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SendEnabled.call(this, pbSendEnabled)
     end
-    def put_SendEnabled(this : IFaxDevice*, bSendEnabled : Int16) : Win32cr::Foundation::HRESULT
+    def put_SendEnabled(this : IFaxDevice*, bSendEnabled : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SendEnabled.call(this, bSendEnabled)
     end
     def get_ReceiveMode(this : IFaxDevice*, pReceiveMode : Win32cr::Devices::Fax::FAX_DEVICE_RECEIVE_MODE_ENUM*) : Win32cr::Foundation::HRESULT
@@ -3953,16 +3987,16 @@ module Win32cr::Devices::Fax
     def save(this : IFaxDevice*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this)
     end
-    def get_extension_property(this : IFaxDevice*, bstrGUID : Win32cr::Foundation::BSTR, pvProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_extension_property(this : IFaxDevice*, bstrGUID : Win32cr::Foundation::BSTR, pvProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_extension_property.call(this, bstrGUID, pvProperty)
     end
-    def set_extension_property(this : IFaxDevice*, bstrGUID : Win32cr::Foundation::BSTR, vProperty : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_extension_property(this : IFaxDevice*, bstrGUID : Win32cr::Foundation::BSTR, vProperty : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_extension_property.call(this, bstrGUID, vProperty)
     end
-    def use_routing_method(this : IFaxDevice*, bstrMethodGUID : Win32cr::Foundation::BSTR, bUse : Int16) : Win32cr::Foundation::HRESULT
+    def use_routing_method(this : IFaxDevice*, bstrMethodGUID : Win32cr::Foundation::BSTR, bUse : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.use_routing_method.call(this, bstrMethodGUID, bUse)
     end
-    def get_RingingNow(this : IFaxDevice*, pbRingingNow : Int16*) : Win32cr::Foundation::HRESULT
+    def get_RingingNow(this : IFaxDevice*, pbRingingNow : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_RingingNow.call(this, pbRingingNow)
     end
     def answer_call(this : IFaxDevice*) : Win32cr::Foundation::HRESULT
@@ -3972,18 +4006,19 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxActivityLoggingVtbl,
+
+  record IFaxActivityLoggingVtable,
     query_interface : Proc(IFaxActivityLogging*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxActivityLogging*, UInt32),
     release : Proc(IFaxActivityLogging*, UInt32),
     get_type_info_count : Proc(IFaxActivityLogging*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxActivityLogging*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxActivityLogging*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxActivityLogging*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_LogIncoming : Proc(IFaxActivityLogging*, Int16*, Win32cr::Foundation::HRESULT),
-    put_LogIncoming : Proc(IFaxActivityLogging*, Int16, Win32cr::Foundation::HRESULT),
-    get_LogOutgoing : Proc(IFaxActivityLogging*, Int16*, Win32cr::Foundation::HRESULT),
-    put_LogOutgoing : Proc(IFaxActivityLogging*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxActivityLogging*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_LogIncoming : Proc(IFaxActivityLogging*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_LogIncoming : Proc(IFaxActivityLogging*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_LogOutgoing : Proc(IFaxActivityLogging*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_LogOutgoing : Proc(IFaxActivityLogging*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DatabasePath : Proc(IFaxActivityLogging*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_DatabasePath : Proc(IFaxActivityLogging*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxActivityLogging*, Win32cr::Foundation::HRESULT),
@@ -3991,7 +4026,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxActivityLogging, lpVtbl : IFaxActivityLoggingVtbl* do
+  record IFaxActivityLogging, lpVtbl : IFaxActivityLoggingVtable* do
     GUID = LibC::GUID.new(0x1e29078b_u32, 0x5a69_u16, 0x497b_u16, StaticArray[0x95_u8, 0x92_u8, 0x49_u8, 0xb7_u8, 0xe7_u8, 0xfa_u8, 0xdd_u8, 0xb5_u8])
     def query_interface(this : IFaxActivityLogging*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4011,19 +4046,19 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxActivityLogging*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxActivityLogging*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxActivityLogging*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_LogIncoming(this : IFaxActivityLogging*, pbLogIncoming : Int16*) : Win32cr::Foundation::HRESULT
+    def get_LogIncoming(this : IFaxActivityLogging*, pbLogIncoming : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LogIncoming.call(this, pbLogIncoming)
     end
-    def put_LogIncoming(this : IFaxActivityLogging*, bLogIncoming : Int16) : Win32cr::Foundation::HRESULT
+    def put_LogIncoming(this : IFaxActivityLogging*, bLogIncoming : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LogIncoming.call(this, bLogIncoming)
     end
-    def get_LogOutgoing(this : IFaxActivityLogging*, pbLogOutgoing : Int16*) : Win32cr::Foundation::HRESULT
+    def get_LogOutgoing(this : IFaxActivityLogging*, pbLogOutgoing : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LogOutgoing.call(this, pbLogOutgoing)
     end
-    def put_LogOutgoing(this : IFaxActivityLogging*, bLogOutgoing : Int16) : Win32cr::Foundation::HRESULT
+    def put_LogOutgoing(this : IFaxActivityLogging*, bLogOutgoing : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_LogOutgoing.call(this, bLogOutgoing)
     end
     def get_DatabasePath(this : IFaxActivityLogging*, pbstrDatabasePath : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4042,14 +4077,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxEventLoggingVtbl,
+
+  record IFaxEventLoggingVtable,
     query_interface : Proc(IFaxEventLogging*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxEventLogging*, UInt32),
     release : Proc(IFaxEventLogging*, UInt32),
     get_type_info_count : Proc(IFaxEventLogging*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxEventLogging*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxEventLogging*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxEventLogging*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxEventLogging*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_InitEventsLevel : Proc(IFaxEventLogging*, Win32cr::Devices::Fax::FAX_LOG_LEVEL_ENUM*, Win32cr::Foundation::HRESULT),
     put_InitEventsLevel : Proc(IFaxEventLogging*, Win32cr::Devices::Fax::FAX_LOG_LEVEL_ENUM, Win32cr::Foundation::HRESULT),
     get_InboundEventsLevel : Proc(IFaxEventLogging*, Win32cr::Devices::Fax::FAX_LOG_LEVEL_ENUM*, Win32cr::Foundation::HRESULT),
@@ -4063,7 +4099,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxEventLogging, lpVtbl : IFaxEventLoggingVtbl* do
+  record IFaxEventLogging, lpVtbl : IFaxEventLoggingVtable* do
     GUID = LibC::GUID.new(0x880d965_u32, 0x20e8_u16, 0x42e4_u16, StaticArray[0x8e_u8, 0x17_u8, 0x94_u8, 0x4f_u8, 0x19_u8, 0x2c_u8, 0xaa_u8, 0xd4_u8])
     def query_interface(this : IFaxEventLogging*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4083,8 +4119,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxEventLogging*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxEventLogging*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxEventLogging*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_InitEventsLevel(this : IFaxEventLogging*, pInitEventLevel : Win32cr::Devices::Fax::FAX_LOG_LEVEL_ENUM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InitEventsLevel.call(this, pInitEventLevel)
@@ -4120,23 +4156,24 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutboundRoutingGroupsVtbl,
+
+  record IFaxOutboundRoutingGroupsVtable,
     query_interface : Proc(IFaxOutboundRoutingGroups*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutboundRoutingGroups*, UInt32),
     release : Proc(IFaxOutboundRoutingGroups*, UInt32),
     get_type_info_count : Proc(IFaxOutboundRoutingGroups*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutboundRoutingGroups*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutboundRoutingGroups*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutboundRoutingGroups*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutboundRoutingGroups*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxOutboundRoutingGroups*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFaxOutboundRoutingGroups*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFaxOutboundRoutingGroups*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxOutboundRoutingGroups*, Int32*, Win32cr::Foundation::HRESULT),
     add : Proc(IFaxOutboundRoutingGroups*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    remove : Proc(IFaxOutboundRoutingGroups*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    remove : Proc(IFaxOutboundRoutingGroups*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxOutboundRoutingGroups, lpVtbl : IFaxOutboundRoutingGroupsVtbl* do
+  record IFaxOutboundRoutingGroups, lpVtbl : IFaxOutboundRoutingGroupsVtable* do
     GUID = LibC::GUID.new(0x235cbef7_u32, 0xc2de_u16, 0x4bfd_u16, StaticArray[0xb8_u8, 0xda_u8, 0x75_u8, 0x9_u8, 0x7c_u8, 0x82_u8, 0xc8_u8, 0x7f_u8])
     def query_interface(this : IFaxOutboundRoutingGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4156,13 +4193,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutboundRoutingGroups*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutboundRoutingGroups*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutboundRoutingGroups*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxOutboundRoutingGroups*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
     end
-    def get_Item(this : IFaxOutboundRoutingGroups*, vIndex : Win32cr::System::Com::VARIANT, pFaxOutboundRoutingGroup : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFaxOutboundRoutingGroups*, vIndex : Win32cr::System::Variant::VARIANT, pFaxOutboundRoutingGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, vIndex, pFaxOutboundRoutingGroup)
     end
     def get_Count(this : IFaxOutboundRoutingGroups*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -4171,28 +4208,29 @@ module Win32cr::Devices::Fax
     def add(this : IFaxOutboundRoutingGroups*, bstrName : Win32cr::Foundation::BSTR, pFaxOutboundRoutingGroup : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, bstrName, pFaxOutboundRoutingGroup)
     end
-    def remove(this : IFaxOutboundRoutingGroups*, vIndex : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def remove(this : IFaxOutboundRoutingGroups*, vIndex : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, vIndex)
     end
 
   end
 
   @[Extern]
-  record IFaxOutboundRoutingGroupVtbl,
+
+  record IFaxOutboundRoutingGroupVtable,
     query_interface : Proc(IFaxOutboundRoutingGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutboundRoutingGroup*, UInt32),
     release : Proc(IFaxOutboundRoutingGroup*, UInt32),
     get_type_info_count : Proc(IFaxOutboundRoutingGroup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutboundRoutingGroup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutboundRoutingGroup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutboundRoutingGroup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutboundRoutingGroup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFaxOutboundRoutingGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IFaxOutboundRoutingGroup*, Win32cr::Devices::Fax::FAX_GROUP_STATUS_ENUM*, Win32cr::Foundation::HRESULT),
     get_DeviceIds : Proc(IFaxOutboundRoutingGroup*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxOutboundRoutingGroup, lpVtbl : IFaxOutboundRoutingGroupVtbl* do
+  record IFaxOutboundRoutingGroup, lpVtbl : IFaxOutboundRoutingGroupVtable* do
     GUID = LibC::GUID.new(0xca6289a1_u32, 0x7e25_u16, 0x4f87_u16, StaticArray[0x9a_u8, 0xb_u8, 0x93_u8, 0x36_u8, 0x57_u8, 0x34_u8, 0x96_u8, 0x2c_u8])
     def query_interface(this : IFaxOutboundRoutingGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4212,8 +4250,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutboundRoutingGroup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutboundRoutingGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutboundRoutingGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IFaxOutboundRoutingGroup*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -4228,14 +4266,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxDeviceIdsVtbl,
+
+  record IFaxDeviceIdsVtable,
     query_interface : Proc(IFaxDeviceIds*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxDeviceIds*, UInt32),
     release : Proc(IFaxDeviceIds*, UInt32),
     get_type_info_count : Proc(IFaxDeviceIds*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxDeviceIds*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxDeviceIds*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxDeviceIds*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxDeviceIds*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxDeviceIds*, Void**, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IFaxDeviceIds*, Int32, Int32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxDeviceIds*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4245,7 +4284,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxDeviceIds, lpVtbl : IFaxDeviceIdsVtbl* do
+  record IFaxDeviceIds, lpVtbl : IFaxDeviceIdsVtable* do
     GUID = LibC::GUID.new(0x2f0f813f_u32, 0x4ce9_u16, 0x443e_u16, StaticArray[0x8c_u8, 0xa1_u8, 0x73_u8, 0x8c_u8, 0xfa_u8, 0xee_u8, 0xe1_u8, 0x49_u8])
     def query_interface(this : IFaxDeviceIds*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4265,8 +4304,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxDeviceIds*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxDeviceIds*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxDeviceIds*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxDeviceIds*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
@@ -4290,25 +4329,26 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutboundRoutingRulesVtbl,
+
+  record IFaxOutboundRoutingRulesVtable,
     query_interface : Proc(IFaxOutboundRoutingRules*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutboundRoutingRules*, UInt32),
     release : Proc(IFaxOutboundRoutingRules*, UInt32),
     get_type_info_count : Proc(IFaxOutboundRoutingRules*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutboundRoutingRules*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutboundRoutingRules*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutboundRoutingRules*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutboundRoutingRules*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxOutboundRoutingRules*, Void**, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IFaxOutboundRoutingRules*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxOutboundRoutingRules*, Int32*, Win32cr::Foundation::HRESULT),
     item_by_country_and_area : Proc(IFaxOutboundRoutingRules*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     remove_by_country_and_area : Proc(IFaxOutboundRoutingRules*, Int32, Int32, Win32cr::Foundation::HRESULT),
     remove : Proc(IFaxOutboundRoutingRules*, Int32, Win32cr::Foundation::HRESULT),
-    add : Proc(IFaxOutboundRoutingRules*, Int32, Int32, Int16, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT)
+    add : Proc(IFaxOutboundRoutingRules*, Int32, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxOutboundRoutingRules, lpVtbl : IFaxOutboundRoutingRulesVtbl* do
+  record IFaxOutboundRoutingRules, lpVtbl : IFaxOutboundRoutingRulesVtable* do
     GUID = LibC::GUID.new(0xdcefa1e7_u32, 0xae7d_u16, 0x4ed6_u16, StaticArray[0x85_u8, 0x21_u8, 0x36_u8, 0x9e_u8, 0xdc_u8, 0xca_u8, 0x51_u8, 0x20_u8])
     def query_interface(this : IFaxOutboundRoutingRules*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4328,8 +4368,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutboundRoutingRules*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutboundRoutingRules*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutboundRoutingRules*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxOutboundRoutingRules*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
@@ -4349,26 +4389,27 @@ module Win32cr::Devices::Fax
     def remove(this : IFaxOutboundRoutingRules*, lIndex : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.remove.call(this, lIndex)
     end
-    def add(this : IFaxOutboundRoutingRules*, lCountryCode : Int32, lAreaCode : Int32, bUseDevice : Int16, bstrGroupName : Win32cr::Foundation::BSTR, lDeviceId : Int32, pFaxOutboundRoutingRule : Void**) : Win32cr::Foundation::HRESULT
+    def add(this : IFaxOutboundRoutingRules*, lCountryCode : Int32, lAreaCode : Int32, bUseDevice : Win32cr::Foundation::VARIANT_BOOL, bstrGroupName : Win32cr::Foundation::BSTR, lDeviceId : Int32, pFaxOutboundRoutingRule : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, lCountryCode, lAreaCode, bUseDevice, bstrGroupName, lDeviceId, pFaxOutboundRoutingRule)
     end
 
   end
 
   @[Extern]
-  record IFaxOutboundRoutingRuleVtbl,
+
+  record IFaxOutboundRoutingRuleVtable,
     query_interface : Proc(IFaxOutboundRoutingRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutboundRoutingRule*, UInt32),
     release : Proc(IFaxOutboundRoutingRule*, UInt32),
     get_type_info_count : Proc(IFaxOutboundRoutingRule*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutboundRoutingRule*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutboundRoutingRule*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutboundRoutingRule*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutboundRoutingRule*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_CountryCode : Proc(IFaxOutboundRoutingRule*, Int32*, Win32cr::Foundation::HRESULT),
     get_AreaCode : Proc(IFaxOutboundRoutingRule*, Int32*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IFaxOutboundRoutingRule*, Win32cr::Devices::Fax::FAX_RULE_STATUS_ENUM*, Win32cr::Foundation::HRESULT),
-    get_UseDevice : Proc(IFaxOutboundRoutingRule*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseDevice : Proc(IFaxOutboundRoutingRule*, Int16, Win32cr::Foundation::HRESULT),
+    get_UseDevice : Proc(IFaxOutboundRoutingRule*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseDevice : Proc(IFaxOutboundRoutingRule*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_DeviceId : Proc(IFaxOutboundRoutingRule*, Int32*, Win32cr::Foundation::HRESULT),
     put_DeviceId : Proc(IFaxOutboundRoutingRule*, Int32, Win32cr::Foundation::HRESULT),
     get_GroupName : Proc(IFaxOutboundRoutingRule*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4378,7 +4419,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxOutboundRoutingRule, lpVtbl : IFaxOutboundRoutingRuleVtbl* do
+  record IFaxOutboundRoutingRule, lpVtbl : IFaxOutboundRoutingRuleVtable* do
     GUID = LibC::GUID.new(0xe1f795d5_u32, 0x7c2_u16, 0x469f_u16, StaticArray[0xb0_u8, 0x27_u8, 0xac_u8, 0xac_u8, 0xc2_u8, 0x32_u8, 0x19_u8, 0xda_u8])
     def query_interface(this : IFaxOutboundRoutingRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4398,8 +4439,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutboundRoutingRule*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutboundRoutingRule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutboundRoutingRule*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_CountryCode(this : IFaxOutboundRoutingRule*, plCountryCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CountryCode.call(this, plCountryCode)
@@ -4410,10 +4451,10 @@ module Win32cr::Devices::Fax
     def get_Status(this : IFaxOutboundRoutingRule*, pStatus : Win32cr::Devices::Fax::FAX_RULE_STATUS_ENUM*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Status.call(this, pStatus)
     end
-    def get_UseDevice(this : IFaxOutboundRoutingRule*, pbUseDevice : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseDevice(this : IFaxOutboundRoutingRule*, pbUseDevice : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseDevice.call(this, pbUseDevice)
     end
-    def put_UseDevice(this : IFaxOutboundRoutingRule*, bUseDevice : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseDevice(this : IFaxOutboundRoutingRule*, bUseDevice : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseDevice.call(this, bUseDevice)
     end
     def get_DeviceId(this : IFaxOutboundRoutingRule*, plDeviceId : Int32*) : Win32cr::Foundation::HRESULT
@@ -4438,21 +4479,22 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxInboundRoutingExtensionsVtbl,
+
+  record IFaxInboundRoutingExtensionsVtable,
     query_interface : Proc(IFaxInboundRoutingExtensions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxInboundRoutingExtensions*, UInt32),
     release : Proc(IFaxInboundRoutingExtensions*, UInt32),
     get_type_info_count : Proc(IFaxInboundRoutingExtensions*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxInboundRoutingExtensions*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxInboundRoutingExtensions*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxInboundRoutingExtensions*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxInboundRoutingExtensions*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxInboundRoutingExtensions*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFaxInboundRoutingExtensions*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFaxInboundRoutingExtensions*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxInboundRoutingExtensions*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxInboundRoutingExtensions, lpVtbl : IFaxInboundRoutingExtensionsVtbl* do
+  record IFaxInboundRoutingExtensions, lpVtbl : IFaxInboundRoutingExtensionsVtable* do
     GUID = LibC::GUID.new(0x2f6c9673_u32, 0x7b26_u16, 0x42de_u16, StaticArray[0x8e_u8, 0xb0_u8, 0x91_u8, 0x5d_u8, 0xcd_u8, 0x2a_u8, 0x4f_u8, 0x4c_u8])
     def query_interface(this : IFaxInboundRoutingExtensions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4472,13 +4514,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxInboundRoutingExtensions*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxInboundRoutingExtensions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxInboundRoutingExtensions*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxInboundRoutingExtensions*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
     end
-    def get_Item(this : IFaxInboundRoutingExtensions*, vIndex : Win32cr::System::Com::VARIANT, pFaxInboundRoutingExtension : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFaxInboundRoutingExtensions*, vIndex : Win32cr::System::Variant::VARIANT, pFaxInboundRoutingExtension : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, vIndex, pFaxInboundRoutingExtension)
     end
     def get_Count(this : IFaxInboundRoutingExtensions*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -4488,14 +4530,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxInboundRoutingExtensionVtbl,
+
+  record IFaxInboundRoutingExtensionVtable,
     query_interface : Proc(IFaxInboundRoutingExtension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxInboundRoutingExtension*, UInt32),
     release : Proc(IFaxInboundRoutingExtension*, UInt32),
     get_type_info_count : Proc(IFaxInboundRoutingExtension*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxInboundRoutingExtension*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxInboundRoutingExtension*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxInboundRoutingExtension*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxInboundRoutingExtension*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_FriendlyName : Proc(IFaxInboundRoutingExtension*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ImageName : Proc(IFaxInboundRoutingExtension*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_UniqueName : Proc(IFaxInboundRoutingExtension*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4503,14 +4546,14 @@ module Win32cr::Devices::Fax
     get_MinorVersion : Proc(IFaxInboundRoutingExtension*, Int32*, Win32cr::Foundation::HRESULT),
     get_MajorBuild : Proc(IFaxInboundRoutingExtension*, Int32*, Win32cr::Foundation::HRESULT),
     get_MinorBuild : Proc(IFaxInboundRoutingExtension*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Debug : Proc(IFaxInboundRoutingExtension*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Debug : Proc(IFaxInboundRoutingExtension*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Status : Proc(IFaxInboundRoutingExtension*, Win32cr::Devices::Fax::FAX_PROVIDER_STATUS_ENUM*, Win32cr::Foundation::HRESULT),
     get_InitErrorCode : Proc(IFaxInboundRoutingExtension*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Methods : Proc(IFaxInboundRoutingExtension*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_Methods : Proc(IFaxInboundRoutingExtension*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxInboundRoutingExtension, lpVtbl : IFaxInboundRoutingExtensionVtbl* do
+  record IFaxInboundRoutingExtension, lpVtbl : IFaxInboundRoutingExtensionVtable* do
     GUID = LibC::GUID.new(0x885b5e08_u32, 0xc26c_u16, 0x4ef9_u16, StaticArray[0xaf_u8, 0x83_u8, 0x51_u8, 0x58_u8, 0xa_u8, 0x75_u8, 0xb_u8, 0xe1_u8])
     def query_interface(this : IFaxInboundRoutingExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4530,8 +4573,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxInboundRoutingExtension*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxInboundRoutingExtension*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxInboundRoutingExtension*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_FriendlyName(this : IFaxInboundRoutingExtension*, pbstrFriendlyName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_FriendlyName.call(this, pbstrFriendlyName)
@@ -4554,7 +4597,7 @@ module Win32cr::Devices::Fax
     def get_MinorBuild(this : IFaxInboundRoutingExtension*, plMinorBuild : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MinorBuild.call(this, plMinorBuild)
     end
-    def get_Debug(this : IFaxInboundRoutingExtension*, pbDebug : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Debug(this : IFaxInboundRoutingExtension*, pbDebug : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Debug.call(this, pbDebug)
     end
     def get_Status(this : IFaxInboundRoutingExtension*, pStatus : Win32cr::Devices::Fax::FAX_PROVIDER_STATUS_ENUM*) : Win32cr::Foundation::HRESULT
@@ -4563,28 +4606,29 @@ module Win32cr::Devices::Fax
     def get_InitErrorCode(this : IFaxInboundRoutingExtension*, plInitErrorCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_InitErrorCode.call(this, plInitErrorCode)
     end
-    def get_Methods(this : IFaxInboundRoutingExtension*, pvMethods : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Methods(this : IFaxInboundRoutingExtension*, pvMethods : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Methods.call(this, pvMethods)
     end
 
   end
 
   @[Extern]
-  record IFaxInboundRoutingMethodsVtbl,
+
+  record IFaxInboundRoutingMethodsVtable,
     query_interface : Proc(IFaxInboundRoutingMethods*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxInboundRoutingMethods*, UInt32),
     release : Proc(IFaxInboundRoutingMethods*, UInt32),
     get_type_info_count : Proc(IFaxInboundRoutingMethods*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxInboundRoutingMethods*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxInboundRoutingMethods*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxInboundRoutingMethods*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxInboundRoutingMethods*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxInboundRoutingMethods*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFaxInboundRoutingMethods*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFaxInboundRoutingMethods*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxInboundRoutingMethods*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxInboundRoutingMethods, lpVtbl : IFaxInboundRoutingMethodsVtbl* do
+  record IFaxInboundRoutingMethods, lpVtbl : IFaxInboundRoutingMethodsVtable* do
     GUID = LibC::GUID.new(0x783fca10_u32, 0x8908_u16, 0x4473_u16, StaticArray[0x9d_u8, 0x69_u8, 0xf6_u8, 0x7f_u8, 0xbe_u8, 0xa0_u8, 0xc6_u8, 0xb9_u8])
     def query_interface(this : IFaxInboundRoutingMethods*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4604,13 +4648,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxInboundRoutingMethods*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxInboundRoutingMethods*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxInboundRoutingMethods*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxInboundRoutingMethods*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
     end
-    def get_Item(this : IFaxInboundRoutingMethods*, vIndex : Win32cr::System::Com::VARIANT, pFaxInboundRoutingMethod : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFaxInboundRoutingMethods*, vIndex : Win32cr::System::Variant::VARIANT, pFaxInboundRoutingMethod : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, vIndex, pFaxInboundRoutingMethod)
     end
     def get_Count(this : IFaxInboundRoutingMethods*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -4620,14 +4664,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxInboundRoutingMethodVtbl,
+
+  record IFaxInboundRoutingMethodVtable,
     query_interface : Proc(IFaxInboundRoutingMethod*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxInboundRoutingMethod*, UInt32),
     release : Proc(IFaxInboundRoutingMethod*, UInt32),
     get_type_info_count : Proc(IFaxInboundRoutingMethod*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxInboundRoutingMethod*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxInboundRoutingMethod*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxInboundRoutingMethod*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxInboundRoutingMethod*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IFaxInboundRoutingMethod*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_GUID : Proc(IFaxInboundRoutingMethod*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_FunctionName : Proc(IFaxInboundRoutingMethod*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4640,7 +4685,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxInboundRoutingMethod, lpVtbl : IFaxInboundRoutingMethodVtbl* do
+  record IFaxInboundRoutingMethod, lpVtbl : IFaxInboundRoutingMethodVtable* do
     GUID = LibC::GUID.new(0x45700061_u32, 0xad9d_u16, 0x4776_u16, StaticArray[0xa8_u8, 0xc4_u8, 0x64_u8, 0x6_u8, 0x54_u8, 0x92_u8, 0xcf_u8, 0x4b_u8])
     def query_interface(this : IFaxInboundRoutingMethod*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4660,8 +4705,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxInboundRoutingMethod*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxInboundRoutingMethod*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxInboundRoutingMethod*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Name(this : IFaxInboundRoutingMethod*, pbstrName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Name.call(this, pbstrName)
@@ -4694,14 +4739,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxDocument2Vtbl,
+
+  record IFaxDocument2Vtable,
     query_interface : Proc(IFaxDocument2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxDocument2*, UInt32),
     release : Proc(IFaxDocument2*, UInt32),
     get_type_info_count : Proc(IFaxDocument2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxDocument2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxDocument2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxDocument2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxDocument2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Body : Proc(IFaxDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Body : Proc(IFaxDocument2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Sender : Proc(IFaxDocument2*, Void**, Win32cr::Foundation::HRESULT),
@@ -4726,25 +4772,25 @@ module Win32cr::Devices::Fax
     put_ScheduleType : Proc(IFaxDocument2*, Win32cr::Devices::Fax::FAX_SCHEDULE_TYPE_ENUM, Win32cr::Foundation::HRESULT),
     get_ReceiptType : Proc(IFaxDocument2*, Win32cr::Devices::Fax::FAX_RECEIPT_TYPE_ENUM*, Win32cr::Foundation::HRESULT),
     put_ReceiptType : Proc(IFaxDocument2*, Win32cr::Devices::Fax::FAX_RECEIPT_TYPE_ENUM, Win32cr::Foundation::HRESULT),
-    get_GroupBroadcastReceipts : Proc(IFaxDocument2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_GroupBroadcastReceipts : Proc(IFaxDocument2*, Int16, Win32cr::Foundation::HRESULT),
+    get_GroupBroadcastReceipts : Proc(IFaxDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_GroupBroadcastReceipts : Proc(IFaxDocument2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Priority : Proc(IFaxDocument2*, Win32cr::Devices::Fax::FAX_PRIORITY_TYPE_ENUM*, Win32cr::Foundation::HRESULT),
     put_Priority : Proc(IFaxDocument2*, Win32cr::Devices::Fax::FAX_PRIORITY_TYPE_ENUM, Win32cr::Foundation::HRESULT),
     get_TapiConnection : Proc(IFaxDocument2*, Void**, Win32cr::Foundation::HRESULT),
     putref_TapiConnection : Proc(IFaxDocument2*, Void*, Win32cr::Foundation::HRESULT),
-    submit : Proc(IFaxDocument2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    connected_submit : Proc(IFaxDocument2*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_AttachFaxToReceipt : Proc(IFaxDocument2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AttachFaxToReceipt : Proc(IFaxDocument2*, Int16, Win32cr::Foundation::HRESULT),
+    submit : Proc(IFaxDocument2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    connected_submit : Proc(IFaxDocument2*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_AttachFaxToReceipt : Proc(IFaxDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AttachFaxToReceipt : Proc(IFaxDocument2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_SubmissionId : Proc(IFaxDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Bodies : Proc(IFaxDocument2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Bodies : Proc(IFaxDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    submit2 : Proc(IFaxDocument2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Int32*, Win32cr::Foundation::HRESULT),
-    connected_submit2 : Proc(IFaxDocument2*, Void*, Win32cr::System::Com::VARIANT*, Int32*, Win32cr::Foundation::HRESULT)
+    get_Bodies : Proc(IFaxDocument2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Bodies : Proc(IFaxDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    submit2 : Proc(IFaxDocument2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Int32*, Win32cr::Foundation::HRESULT),
+    connected_submit2 : Proc(IFaxDocument2*, Void*, Win32cr::System::Variant::VARIANT*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxDocument2, lpVtbl : IFaxDocument2Vtbl* do
+  record IFaxDocument2, lpVtbl : IFaxDocument2Vtable* do
     GUID = LibC::GUID.new(0xe1347661_u32, 0xf9ef_u16, 0x4d6d_u16, StaticArray[0xb4_u8, 0xa5_u8, 0xc0_u8, 0xa0_u8, 0x68_u8, 0xb6_u8, 0x5c_u8, 0xff_u8])
     def query_interface(this : IFaxDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4764,8 +4810,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxDocument2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxDocument2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxDocument2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Body(this : IFaxDocument2*, pbstrBody : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Body.call(this, pbstrBody)
@@ -4839,10 +4885,10 @@ module Win32cr::Devices::Fax
     def put_ReceiptType(this : IFaxDocument2*, receipt_type : Win32cr::Devices::Fax::FAX_RECEIPT_TYPE_ENUM) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ReceiptType.call(this, receipt_type)
     end
-    def get_GroupBroadcastReceipts(this : IFaxDocument2*, pbUseGrouping : Int16*) : Win32cr::Foundation::HRESULT
+    def get_GroupBroadcastReceipts(this : IFaxDocument2*, pbUseGrouping : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_GroupBroadcastReceipts.call(this, pbUseGrouping)
     end
-    def put_GroupBroadcastReceipts(this : IFaxDocument2*, bUseGrouping : Int16) : Win32cr::Foundation::HRESULT
+    def put_GroupBroadcastReceipts(this : IFaxDocument2*, bUseGrouping : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_GroupBroadcastReceipts.call(this, bUseGrouping)
     end
     def get_Priority(this : IFaxDocument2*, pPriority : Win32cr::Devices::Fax::FAX_PRIORITY_TYPE_ENUM*) : Win32cr::Foundation::HRESULT
@@ -4857,51 +4903,52 @@ module Win32cr::Devices::Fax
     def putref_TapiConnection(this : IFaxDocument2*, pTapiConnection : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_TapiConnection.call(this, pTapiConnection)
     end
-    def submit(this : IFaxDocument2*, bstrFaxServerName : Win32cr::Foundation::BSTR, pvFaxOutgoingJobIDs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def submit(this : IFaxDocument2*, bstrFaxServerName : Win32cr::Foundation::BSTR, pvFaxOutgoingJobIDs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit.call(this, bstrFaxServerName, pvFaxOutgoingJobIDs)
     end
-    def connected_submit(this : IFaxDocument2*, pFaxServer : Void*, pvFaxOutgoingJobIDs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def connected_submit(this : IFaxDocument2*, pFaxServer : Void*, pvFaxOutgoingJobIDs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connected_submit.call(this, pFaxServer, pvFaxOutgoingJobIDs)
     end
-    def get_AttachFaxToReceipt(this : IFaxDocument2*, pbAttachFax : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AttachFaxToReceipt(this : IFaxDocument2*, pbAttachFax : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AttachFaxToReceipt.call(this, pbAttachFax)
     end
-    def put_AttachFaxToReceipt(this : IFaxDocument2*, bAttachFax : Int16) : Win32cr::Foundation::HRESULT
+    def put_AttachFaxToReceipt(this : IFaxDocument2*, bAttachFax : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AttachFaxToReceipt.call(this, bAttachFax)
     end
     def get_SubmissionId(this : IFaxDocument2*, pbstrSubmissionId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SubmissionId.call(this, pbstrSubmissionId)
     end
-    def get_Bodies(this : IFaxDocument2*, pvBodies : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Bodies(this : IFaxDocument2*, pvBodies : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Bodies.call(this, pvBodies)
     end
-    def put_Bodies(this : IFaxDocument2*, vBodies : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Bodies(this : IFaxDocument2*, vBodies : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Bodies.call(this, vBodies)
     end
-    def submit2(this : IFaxDocument2*, bstrFaxServerName : Win32cr::Foundation::BSTR, pvFaxOutgoingJobIDs : Win32cr::System::Com::VARIANT*, plErrorBodyFile : Int32*) : Win32cr::Foundation::HRESULT
+    def submit2(this : IFaxDocument2*, bstrFaxServerName : Win32cr::Foundation::BSTR, pvFaxOutgoingJobIDs : Win32cr::System::Variant::VARIANT*, plErrorBodyFile : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.submit2.call(this, bstrFaxServerName, pvFaxOutgoingJobIDs, plErrorBodyFile)
     end
-    def connected_submit2(this : IFaxDocument2*, pFaxServer : Void*, pvFaxOutgoingJobIDs : Win32cr::System::Com::VARIANT*, plErrorBodyFile : Int32*) : Win32cr::Foundation::HRESULT
+    def connected_submit2(this : IFaxDocument2*, pFaxServer : Void*, pvFaxOutgoingJobIDs : Win32cr::System::Variant::VARIANT*, plErrorBodyFile : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connected_submit2.call(this, pFaxServer, pvFaxOutgoingJobIDs, plErrorBodyFile)
     end
 
   end
 
   @[Extern]
-  record IFaxConfigurationVtbl,
+
+  record IFaxConfigurationVtable,
     query_interface : Proc(IFaxConfiguration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxConfiguration*, UInt32),
     release : Proc(IFaxConfiguration*, UInt32),
     get_type_info_count : Proc(IFaxConfiguration*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxConfiguration*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxConfiguration*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxConfiguration*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_UseArchive : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseArchive : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxConfiguration*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_UseArchive : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseArchive : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_ArchiveLocation : Proc(IFaxConfiguration*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ArchiveLocation : Proc(IFaxConfiguration*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_SizeQuotaWarning : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_SizeQuotaWarning : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
+    get_SizeQuotaWarning : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_SizeQuotaWarning : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_HighQuotaWaterMark : Proc(IFaxConfiguration*, Int32*, Win32cr::Foundation::HRESULT),
     put_HighQuotaWaterMark : Proc(IFaxConfiguration*, Int32, Win32cr::Foundation::HRESULT),
     get_LowQuotaWaterMark : Proc(IFaxConfiguration*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4910,14 +4957,14 @@ module Win32cr::Devices::Fax
     put_ArchiveAgeLimit : Proc(IFaxConfiguration*, Int32, Win32cr::Foundation::HRESULT),
     get_ArchiveSizeLow : Proc(IFaxConfiguration*, Int32*, Win32cr::Foundation::HRESULT),
     get_ArchiveSizeHigh : Proc(IFaxConfiguration*, Int32*, Win32cr::Foundation::HRESULT),
-    get_OutgoingQueueBlocked : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_OutgoingQueueBlocked : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
-    get_OutgoingQueuePaused : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_OutgoingQueuePaused : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
-    get_AllowPersonalCoverPages : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AllowPersonalCoverPages : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
-    get_UseDeviceTSID : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_UseDeviceTSID : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
+    get_OutgoingQueueBlocked : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_OutgoingQueueBlocked : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_OutgoingQueuePaused : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_OutgoingQueuePaused : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AllowPersonalCoverPages : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AllowPersonalCoverPages : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_UseDeviceTSID : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_UseDeviceTSID : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Retries : Proc(IFaxConfiguration*, Int32*, Win32cr::Foundation::HRESULT),
     put_Retries : Proc(IFaxConfiguration*, Int32, Win32cr::Foundation::HRESULT),
     get_RetryDelay : Proc(IFaxConfiguration*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4928,20 +4975,20 @@ module Win32cr::Devices::Fax
     put_DiscountRateEnd : Proc(IFaxConfiguration*, Float64, Win32cr::Foundation::HRESULT),
     get_OutgoingQueueAgeLimit : Proc(IFaxConfiguration*, Int32*, Win32cr::Foundation::HRESULT),
     put_OutgoingQueueAgeLimit : Proc(IFaxConfiguration*, Int32, Win32cr::Foundation::HRESULT),
-    get_Branding : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Branding : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
-    get_IncomingQueueBlocked : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IncomingQueueBlocked : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
-    get_AutoCreateAccountOnConnect : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_AutoCreateAccountOnConnect : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
-    get_IncomingFaxesArePublic : Proc(IFaxConfiguration*, Int16*, Win32cr::Foundation::HRESULT),
-    put_IncomingFaxesArePublic : Proc(IFaxConfiguration*, Int16, Win32cr::Foundation::HRESULT),
+    get_Branding : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Branding : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IncomingQueueBlocked : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IncomingQueueBlocked : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_AutoCreateAccountOnConnect : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_AutoCreateAccountOnConnect : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_IncomingFaxesArePublic : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_IncomingFaxesArePublic : Proc(IFaxConfiguration*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxConfiguration*, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxConfiguration*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxConfiguration, lpVtbl : IFaxConfigurationVtbl* do
+  record IFaxConfiguration, lpVtbl : IFaxConfigurationVtable* do
     GUID = LibC::GUID.new(0x10f4d0f7_u32, 0x994_u16, 0x4543_u16, StaticArray[0xab_u8, 0x6e_u8, 0x50_u8, 0x69_u8, 0x49_u8, 0x12_u8, 0x8c_u8, 0x40_u8])
     def query_interface(this : IFaxConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4961,13 +5008,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxConfiguration*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxConfiguration*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxConfiguration*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_UseArchive(this : IFaxConfiguration*, pbUseArchive : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseArchive(this : IFaxConfiguration*, pbUseArchive : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseArchive.call(this, pbUseArchive)
     end
-    def put_UseArchive(this : IFaxConfiguration*, bUseArchive : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseArchive(this : IFaxConfiguration*, bUseArchive : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseArchive.call(this, bUseArchive)
     end
     def get_ArchiveLocation(this : IFaxConfiguration*, pbstrArchiveLocation : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4976,10 +5023,10 @@ module Win32cr::Devices::Fax
     def put_ArchiveLocation(this : IFaxConfiguration*, bstrArchiveLocation : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ArchiveLocation.call(this, bstrArchiveLocation)
     end
-    def get_SizeQuotaWarning(this : IFaxConfiguration*, pbSizeQuotaWarning : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SizeQuotaWarning(this : IFaxConfiguration*, pbSizeQuotaWarning : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SizeQuotaWarning.call(this, pbSizeQuotaWarning)
     end
-    def put_SizeQuotaWarning(this : IFaxConfiguration*, bSizeQuotaWarning : Int16) : Win32cr::Foundation::HRESULT
+    def put_SizeQuotaWarning(this : IFaxConfiguration*, bSizeQuotaWarning : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SizeQuotaWarning.call(this, bSizeQuotaWarning)
     end
     def get_HighQuotaWaterMark(this : IFaxConfiguration*, plHighQuotaWaterMark : Int32*) : Win32cr::Foundation::HRESULT
@@ -5006,28 +5053,28 @@ module Win32cr::Devices::Fax
     def get_ArchiveSizeHigh(this : IFaxConfiguration*, plSizeHigh : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ArchiveSizeHigh.call(this, plSizeHigh)
     end
-    def get_OutgoingQueueBlocked(this : IFaxConfiguration*, pbOutgoingBlocked : Int16*) : Win32cr::Foundation::HRESULT
+    def get_OutgoingQueueBlocked(this : IFaxConfiguration*, pbOutgoingBlocked : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OutgoingQueueBlocked.call(this, pbOutgoingBlocked)
     end
-    def put_OutgoingQueueBlocked(this : IFaxConfiguration*, bOutgoingBlocked : Int16) : Win32cr::Foundation::HRESULT
+    def put_OutgoingQueueBlocked(this : IFaxConfiguration*, bOutgoingBlocked : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_OutgoingQueueBlocked.call(this, bOutgoingBlocked)
     end
-    def get_OutgoingQueuePaused(this : IFaxConfiguration*, pbOutgoingPaused : Int16*) : Win32cr::Foundation::HRESULT
+    def get_OutgoingQueuePaused(this : IFaxConfiguration*, pbOutgoingPaused : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OutgoingQueuePaused.call(this, pbOutgoingPaused)
     end
-    def put_OutgoingQueuePaused(this : IFaxConfiguration*, bOutgoingPaused : Int16) : Win32cr::Foundation::HRESULT
+    def put_OutgoingQueuePaused(this : IFaxConfiguration*, bOutgoingPaused : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_OutgoingQueuePaused.call(this, bOutgoingPaused)
     end
-    def get_AllowPersonalCoverPages(this : IFaxConfiguration*, pbAllowPersonalCoverPages : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AllowPersonalCoverPages(this : IFaxConfiguration*, pbAllowPersonalCoverPages : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AllowPersonalCoverPages.call(this, pbAllowPersonalCoverPages)
     end
-    def put_AllowPersonalCoverPages(this : IFaxConfiguration*, bAllowPersonalCoverPages : Int16) : Win32cr::Foundation::HRESULT
+    def put_AllowPersonalCoverPages(this : IFaxConfiguration*, bAllowPersonalCoverPages : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AllowPersonalCoverPages.call(this, bAllowPersonalCoverPages)
     end
-    def get_UseDeviceTSID(this : IFaxConfiguration*, pbUseDeviceTSID : Int16*) : Win32cr::Foundation::HRESULT
+    def get_UseDeviceTSID(this : IFaxConfiguration*, pbUseDeviceTSID : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_UseDeviceTSID.call(this, pbUseDeviceTSID)
     end
-    def put_UseDeviceTSID(this : IFaxConfiguration*, bUseDeviceTSID : Int16) : Win32cr::Foundation::HRESULT
+    def put_UseDeviceTSID(this : IFaxConfiguration*, bUseDeviceTSID : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_UseDeviceTSID.call(this, bUseDeviceTSID)
     end
     def get_Retries(this : IFaxConfiguration*, plRetries : Int32*) : Win32cr::Foundation::HRESULT
@@ -5060,28 +5107,28 @@ module Win32cr::Devices::Fax
     def put_OutgoingQueueAgeLimit(this : IFaxConfiguration*, lOutgoingQueueAgeLimit : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_OutgoingQueueAgeLimit.call(this, lOutgoingQueueAgeLimit)
     end
-    def get_Branding(this : IFaxConfiguration*, pbBranding : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Branding(this : IFaxConfiguration*, pbBranding : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Branding.call(this, pbBranding)
     end
-    def put_Branding(this : IFaxConfiguration*, bBranding : Int16) : Win32cr::Foundation::HRESULT
+    def put_Branding(this : IFaxConfiguration*, bBranding : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Branding.call(this, bBranding)
     end
-    def get_IncomingQueueBlocked(this : IFaxConfiguration*, pbIncomingBlocked : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IncomingQueueBlocked(this : IFaxConfiguration*, pbIncomingBlocked : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IncomingQueueBlocked.call(this, pbIncomingBlocked)
     end
-    def put_IncomingQueueBlocked(this : IFaxConfiguration*, bIncomingBlocked : Int16) : Win32cr::Foundation::HRESULT
+    def put_IncomingQueueBlocked(this : IFaxConfiguration*, bIncomingBlocked : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IncomingQueueBlocked.call(this, bIncomingBlocked)
     end
-    def get_AutoCreateAccountOnConnect(this : IFaxConfiguration*, pbAutoCreateAccountOnConnect : Int16*) : Win32cr::Foundation::HRESULT
+    def get_AutoCreateAccountOnConnect(this : IFaxConfiguration*, pbAutoCreateAccountOnConnect : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AutoCreateAccountOnConnect.call(this, pbAutoCreateAccountOnConnect)
     end
-    def put_AutoCreateAccountOnConnect(this : IFaxConfiguration*, bAutoCreateAccountOnConnect : Int16) : Win32cr::Foundation::HRESULT
+    def put_AutoCreateAccountOnConnect(this : IFaxConfiguration*, bAutoCreateAccountOnConnect : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AutoCreateAccountOnConnect.call(this, bAutoCreateAccountOnConnect)
     end
-    def get_IncomingFaxesArePublic(this : IFaxConfiguration*, pbIncomingFaxesArePublic : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IncomingFaxesArePublic(this : IFaxConfiguration*, pbIncomingFaxesArePublic : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IncomingFaxesArePublic.call(this, pbIncomingFaxesArePublic)
     end
-    def put_IncomingFaxesArePublic(this : IFaxConfiguration*, bIncomingFaxesArePublic : Int16) : Win32cr::Foundation::HRESULT
+    def put_IncomingFaxesArePublic(this : IFaxConfiguration*, bIncomingFaxesArePublic : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_IncomingFaxesArePublic.call(this, bIncomingFaxesArePublic)
     end
     def refresh(this : IFaxConfiguration*) : Win32cr::Foundation::HRESULT
@@ -5094,14 +5141,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxServer2Vtbl,
+
+  record IFaxServer2Vtable,
     query_interface : Proc(IFaxServer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxServer2*, UInt32),
     release : Proc(IFaxServer2*, UInt32),
     get_type_info_count : Proc(IFaxServer2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxServer2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxServer2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxServer2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxServer2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     connect : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ServerName : Proc(IFaxServer2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_device_providers : Proc(IFaxServer2*, Void**, Win32cr::Foundation::HRESULT),
@@ -5113,18 +5161,18 @@ module Win32cr::Devices::Fax
     get_MinorVersion : Proc(IFaxServer2*, Int32*, Win32cr::Foundation::HRESULT),
     get_MajorBuild : Proc(IFaxServer2*, Int32*, Win32cr::Foundation::HRESULT),
     get_MinorBuild : Proc(IFaxServer2*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Debug : Proc(IFaxServer2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Debug : Proc(IFaxServer2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Activity : Proc(IFaxServer2*, Void**, Win32cr::Foundation::HRESULT),
     get_OutboundRouting : Proc(IFaxServer2*, Void**, Win32cr::Foundation::HRESULT),
     get_ReceiptOptions : Proc(IFaxServer2*, Void**, Win32cr::Foundation::HRESULT),
     get_Security : Proc(IFaxServer2*, Void**, Win32cr::Foundation::HRESULT),
     disconnect : Proc(IFaxServer2*, Win32cr::Foundation::HRESULT),
-    get_extension_property : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    set_extension_property : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_extension_property : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_extension_property : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     listen_to_server_events : Proc(IFaxServer2*, Win32cr::Devices::Fax::FAX_SERVER_EVENTS_TYPE_ENUM, Win32cr::Foundation::HRESULT),
     register_device_provider : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Win32cr::Foundation::HRESULT),
     unregister_device_provider : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    register_inbound_routing_extension : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    register_inbound_routing_extension : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     unregister_inbound_routing_extension : Proc(IFaxServer2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_RegisteredEvents : Proc(IFaxServer2*, Win32cr::Devices::Fax::FAX_SERVER_EVENTS_TYPE_ENUM*, Win32cr::Foundation::HRESULT),
     get_APIVersion : Proc(IFaxServer2*, Win32cr::Devices::Fax::FAX_SERVER_APIVERSION_ENUM*, Win32cr::Foundation::HRESULT),
@@ -5135,7 +5183,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxServer2, lpVtbl : IFaxServer2Vtbl* do
+  record IFaxServer2, lpVtbl : IFaxServer2Vtable* do
     GUID = LibC::GUID.new(0x571ced0f_u32, 0x5609_u16, 0x4f40_u16, StaticArray[0x91_u8, 0x76_u8, 0x54_u8, 0x7e_u8, 0x3a_u8, 0x72_u8, 0xca_u8, 0x7c_u8])
     def query_interface(this : IFaxServer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5155,8 +5203,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxServer2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxServer2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxServer2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def connect(this : IFaxServer2*, bstrServerName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connect.call(this, bstrServerName)
@@ -5191,7 +5239,7 @@ module Win32cr::Devices::Fax
     def get_MinorBuild(this : IFaxServer2*, plMinorBuild : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MinorBuild.call(this, plMinorBuild)
     end
-    def get_Debug(this : IFaxServer2*, pbDebug : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Debug(this : IFaxServer2*, pbDebug : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Debug.call(this, pbDebug)
     end
     def get_Activity(this : IFaxServer2*, ppFaxActivity : Void**) : Win32cr::Foundation::HRESULT
@@ -5209,10 +5257,10 @@ module Win32cr::Devices::Fax
     def disconnect(this : IFaxServer2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.disconnect.call(this)
     end
-    def get_extension_property(this : IFaxServer2*, bstrGUID : Win32cr::Foundation::BSTR, pvProperty : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_extension_property(this : IFaxServer2*, bstrGUID : Win32cr::Foundation::BSTR, pvProperty : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_extension_property.call(this, bstrGUID, pvProperty)
     end
-    def set_extension_property(this : IFaxServer2*, bstrGUID : Win32cr::Foundation::BSTR, vProperty : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def set_extension_property(this : IFaxServer2*, bstrGUID : Win32cr::Foundation::BSTR, vProperty : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_extension_property.call(this, bstrGUID, vProperty)
     end
     def listen_to_server_events(this : IFaxServer2*, event_types : Win32cr::Devices::Fax::FAX_SERVER_EVENTS_TYPE_ENUM) : Win32cr::Foundation::HRESULT
@@ -5224,7 +5272,7 @@ module Win32cr::Devices::Fax
     def unregister_device_provider(this : IFaxServer2*, bstrUniqueName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.unregister_device_provider.call(this, bstrUniqueName)
     end
-    def register_inbound_routing_extension(this : IFaxServer2*, bstrExtensionName : Win32cr::Foundation::BSTR, bstrFriendlyName : Win32cr::Foundation::BSTR, bstrImageName : Win32cr::Foundation::BSTR, vMethods : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def register_inbound_routing_extension(this : IFaxServer2*, bstrExtensionName : Win32cr::Foundation::BSTR, bstrFriendlyName : Win32cr::Foundation::BSTR, bstrImageName : Win32cr::Foundation::BSTR, vMethods : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_inbound_routing_extension.call(this, bstrExtensionName, bstrFriendlyName, bstrImageName, vMethods)
     end
     def unregister_inbound_routing_extension(this : IFaxServer2*, bstrExtensionUniqueName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -5252,14 +5300,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxAccountSetVtbl,
+
+  record IFaxAccountSetVtable,
     query_interface : Proc(IFaxAccountSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccountSet*, UInt32),
     release : Proc(IFaxAccountSet*, UInt32),
     get_type_info_count : Proc(IFaxAccountSet*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccountSet*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccountSet*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccountSet*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxAccountSet*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_accounts : Proc(IFaxAccountSet*, Void**, Win32cr::Foundation::HRESULT),
     get_account : Proc(IFaxAccountSet*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     add_account : Proc(IFaxAccountSet*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -5267,7 +5316,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxAccountSet, lpVtbl : IFaxAccountSetVtbl* do
+  record IFaxAccountSet, lpVtbl : IFaxAccountSetVtable* do
     GUID = LibC::GUID.new(0x7428fbae_u32, 0x841e_u16, 0x47b8_u16, StaticArray[0x86_u8, 0xf4_u8, 0x22_u8, 0x88_u8, 0x94_u8, 0x6d_u8, 0xca_u8, 0x1b_u8])
     def query_interface(this : IFaxAccountSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5287,8 +5336,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccountSet*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccountSet*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccountSet*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_accounts(this : IFaxAccountSet*, ppFaxAccounts : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_accounts.call(this, ppFaxAccounts)
@@ -5306,21 +5355,22 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxAccountsVtbl,
+
+  record IFaxAccountsVtable,
     query_interface : Proc(IFaxAccounts*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccounts*, UInt32),
     release : Proc(IFaxAccounts*, UInt32),
     get_type_info_count : Proc(IFaxAccounts*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccounts*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccounts*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccounts*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxAccounts*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IFaxAccounts*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IFaxAccounts*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IFaxAccounts*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IFaxAccounts*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxAccounts, lpVtbl : IFaxAccountsVtbl* do
+  record IFaxAccounts, lpVtbl : IFaxAccountsVtable* do
     GUID = LibC::GUID.new(0x93ea8162_u32, 0x8be7_u16, 0x42d1_u16, StaticArray[0xae_u8, 0x7b_u8, 0xec_u8, 0x74_u8, 0xe2_u8, 0xd9_u8, 0x89_u8, 0xda_u8])
     def query_interface(this : IFaxAccounts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5340,13 +5390,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccounts*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccounts*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccounts*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IFaxAccounts*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, ppUnk)
     end
-    def get_Item(this : IFaxAccounts*, vIndex : Win32cr::System::Com::VARIANT, pFaxAccount : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IFaxAccounts*, vIndex : Win32cr::System::Variant::VARIANT, pFaxAccount : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, vIndex, pFaxAccount)
     end
     def get_Count(this : IFaxAccounts*, plCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -5356,14 +5406,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxAccountVtbl,
+
+  record IFaxAccountVtable,
     query_interface : Proc(IFaxAccount*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccount*, UInt32),
     release : Proc(IFaxAccount*, UInt32),
     get_type_info_count : Proc(IFaxAccount*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccount*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccount*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccount*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxAccount*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_AccountName : Proc(IFaxAccount*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Folders : Proc(IFaxAccount*, Void**, Win32cr::Foundation::HRESULT),
     listen_to_account_events : Proc(IFaxAccount*, Win32cr::Devices::Fax::FAX_ACCOUNT_EVENTS_TYPE_ENUM, Win32cr::Foundation::HRESULT),
@@ -5371,7 +5422,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxAccount, lpVtbl : IFaxAccountVtbl* do
+  record IFaxAccount, lpVtbl : IFaxAccountVtable* do
     GUID = LibC::GUID.new(0x68535b33_u32, 0x5dc4_u16, 0x4086_u16, StaticArray[0xbe_u8, 0x26_u8, 0xb7_u8, 0x6f_u8, 0x9b_u8, 0x71_u8, 0x10_u8, 0x6_u8])
     def query_interface(this : IFaxAccount*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5391,8 +5442,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccount*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccount*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccount*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_AccountName(this : IFaxAccount*, pbstrAccountName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_AccountName.call(this, pbstrAccountName)
@@ -5410,14 +5461,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutgoingJob2Vtbl,
+
+  record IFaxOutgoingJob2Vtable,
     query_interface : Proc(IFaxOutgoingJob2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutgoingJob2*, UInt32),
     release : Proc(IFaxOutgoingJob2*, UInt32),
     get_type_info_count : Proc(IFaxOutgoingJob2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutgoingJob2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutgoingJob2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutgoingJob2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutgoingJob2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_DocumentName : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Pages : Proc(IFaxOutgoingJob2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5442,20 +5494,20 @@ module Win32cr::Devices::Fax
     get_TransmissionEnd : Proc(IFaxOutgoingJob2*, Float64*, Win32cr::Foundation::HRESULT),
     get_CSID : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_TSID : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_GroupBroadcastReceipts : Proc(IFaxOutgoingJob2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_GroupBroadcastReceipts : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     pause : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::HRESULT),
     resume : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::HRESULT),
     restart : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::HRESULT),
     copy_tiff : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::HRESULT),
     cancel : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::HRESULT),
-    get_HasCoverPage : Proc(IFaxOutgoingJob2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_HasCoverPage : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ReceiptAddress : Proc(IFaxOutgoingJob2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ScheduleType : Proc(IFaxOutgoingJob2*, Win32cr::Devices::Fax::FAX_SCHEDULE_TYPE_ENUM*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxOutgoingJob2, lpVtbl : IFaxOutgoingJob2Vtbl* do
+  record IFaxOutgoingJob2, lpVtbl : IFaxOutgoingJob2Vtable* do
     GUID = LibC::GUID.new(0x418a8d96_u32, 0x59a0_u16, 0x4789_u16, StaticArray[0xb1_u8, 0x76_u8, 0xed_u8, 0xf3_u8, 0xdc_u8, 0x8f_u8, 0xa8_u8, 0xf7_u8])
     def query_interface(this : IFaxOutgoingJob2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5475,8 +5527,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutgoingJob2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutgoingJob2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutgoingJob2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Subject(this : IFaxOutgoingJob2*, pbstrSubject : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Subject.call(this, pbstrSubject)
@@ -5550,7 +5602,7 @@ module Win32cr::Devices::Fax
     def get_TSID(this : IFaxOutgoingJob2*, pbstrTSID : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TSID.call(this, pbstrTSID)
     end
-    def get_GroupBroadcastReceipts(this : IFaxOutgoingJob2*, pbGroupBroadcastReceipts : Int16*) : Win32cr::Foundation::HRESULT
+    def get_GroupBroadcastReceipts(this : IFaxOutgoingJob2*, pbGroupBroadcastReceipts : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_GroupBroadcastReceipts.call(this, pbGroupBroadcastReceipts)
     end
     def pause(this : IFaxOutgoingJob2*) : Win32cr::Foundation::HRESULT
@@ -5571,7 +5623,7 @@ module Win32cr::Devices::Fax
     def cancel(this : IFaxOutgoingJob2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cancel.call(this)
     end
-    def get_HasCoverPage(this : IFaxOutgoingJob2*, pbHasCoverPage : Int16*) : Win32cr::Foundation::HRESULT
+    def get_HasCoverPage(this : IFaxOutgoingJob2*, pbHasCoverPage : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HasCoverPage.call(this, pbHasCoverPage)
     end
     def get_ReceiptAddress(this : IFaxOutgoingJob2*, pbstrReceiptAddress : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5584,14 +5636,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxAccountFoldersVtbl,
+
+  record IFaxAccountFoldersVtable,
     query_interface : Proc(IFaxAccountFolders*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccountFolders*, UInt32),
     release : Proc(IFaxAccountFolders*, UInt32),
     get_type_info_count : Proc(IFaxAccountFolders*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccountFolders*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccountFolders*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccountFolders*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxAccountFolders*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_OutgoingQueue : Proc(IFaxAccountFolders*, Void**, Win32cr::Foundation::HRESULT),
     get_IncomingQueue : Proc(IFaxAccountFolders*, Void**, Win32cr::Foundation::HRESULT),
     get_IncomingArchive : Proc(IFaxAccountFolders*, Void**, Win32cr::Foundation::HRESULT),
@@ -5599,7 +5652,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxAccountFolders, lpVtbl : IFaxAccountFoldersVtbl* do
+  record IFaxAccountFolders, lpVtbl : IFaxAccountFoldersVtable* do
     GUID = LibC::GUID.new(0x6463f89d_u32, 0x23d8_u16, 0x46a9_u16, StaticArray[0x8f_u8, 0x86_u8, 0xc4_u8, 0x7b_u8, 0x77_u8, 0xca_u8, 0x79_u8, 0x26_u8])
     def query_interface(this : IFaxAccountFolders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5619,8 +5672,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccountFolders*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccountFolders*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccountFolders*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_OutgoingQueue(this : IFaxAccountFolders*, pFaxOutgoingQueue : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_OutgoingQueue.call(this, pFaxOutgoingQueue)
@@ -5638,20 +5691,21 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxAccountIncomingQueueVtbl,
+
+  record IFaxAccountIncomingQueueVtable,
     query_interface : Proc(IFaxAccountIncomingQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccountIncomingQueue*, UInt32),
     release : Proc(IFaxAccountIncomingQueue*, UInt32),
     get_type_info_count : Proc(IFaxAccountIncomingQueue*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccountIncomingQueue*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccountIncomingQueue*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccountIncomingQueue*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxAccountIncomingQueue*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_jobs : Proc(IFaxAccountIncomingQueue*, Void**, Win32cr::Foundation::HRESULT),
     get_job : Proc(IFaxAccountIncomingQueue*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxAccountIncomingQueue, lpVtbl : IFaxAccountIncomingQueueVtbl* do
+  record IFaxAccountIncomingQueue, lpVtbl : IFaxAccountIncomingQueueVtable* do
     GUID = LibC::GUID.new(0xdd142d92_u32, 0x186_u16, 0x4a95_u16, StaticArray[0xa0_u8, 0x90_u8, 0xcb_u8, 0xc3_u8, 0xea_u8, 0xdb_u8, 0xa6_u8, 0xb4_u8])
     def query_interface(this : IFaxAccountIncomingQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5671,8 +5725,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccountIncomingQueue*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccountIncomingQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccountIncomingQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_jobs(this : IFaxAccountIncomingQueue*, pFaxIncomingJobs : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_jobs.call(this, pFaxIncomingJobs)
@@ -5684,20 +5738,21 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxAccountOutgoingQueueVtbl,
+
+  record IFaxAccountOutgoingQueueVtable,
     query_interface : Proc(IFaxAccountOutgoingQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccountOutgoingQueue*, UInt32),
     release : Proc(IFaxAccountOutgoingQueue*, UInt32),
     get_type_info_count : Proc(IFaxAccountOutgoingQueue*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccountOutgoingQueue*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccountOutgoingQueue*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccountOutgoingQueue*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxAccountOutgoingQueue*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_jobs : Proc(IFaxAccountOutgoingQueue*, Void**, Win32cr::Foundation::HRESULT),
     get_job : Proc(IFaxAccountOutgoingQueue*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxAccountOutgoingQueue, lpVtbl : IFaxAccountOutgoingQueueVtbl* do
+  record IFaxAccountOutgoingQueue, lpVtbl : IFaxAccountOutgoingQueueVtable* do
     GUID = LibC::GUID.new(0xf1424e9_u32, 0xf22d_u16, 0x4553_u16, StaticArray[0xb7_u8, 0xa5_u8, 0xd_u8, 0x24_u8, 0xbd_u8, 0xd_u8, 0x7e_u8, 0x46_u8])
     def query_interface(this : IFaxAccountOutgoingQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5717,8 +5772,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccountOutgoingQueue*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccountOutgoingQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccountOutgoingQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_jobs(this : IFaxAccountOutgoingQueue*, pFaxOutgoingJobs : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_jobs.call(this, pFaxOutgoingJobs)
@@ -5730,14 +5785,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxOutgoingMessage2Vtbl,
+
+  record IFaxOutgoingMessage2Vtable,
     query_interface : Proc(IFaxOutgoingMessage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxOutgoingMessage2*, UInt32),
     release : Proc(IFaxOutgoingMessage2*, UInt32),
     get_type_info_count : Proc(IFaxOutgoingMessage2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxOutgoingMessage2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxOutgoingMessage2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxOutgoingMessage2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxOutgoingMessage2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_SubmissionId : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Subject : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -5757,17 +5813,17 @@ module Win32cr::Devices::Fax
     get_TSID : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     copy_tiff : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     delete : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::HRESULT),
-    get_HasCoverPage : Proc(IFaxOutgoingMessage2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_HasCoverPage : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ReceiptType : Proc(IFaxOutgoingMessage2*, Win32cr::Devices::Fax::FAX_RECEIPT_TYPE_ENUM*, Win32cr::Foundation::HRESULT),
     get_ReceiptAddress : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_Read : Proc(IFaxOutgoingMessage2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Read : Proc(IFaxOutgoingMessage2*, Int16, Win32cr::Foundation::HRESULT),
+    get_Read : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Read : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxOutgoingMessage2*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxOutgoingMessage2, lpVtbl : IFaxOutgoingMessage2Vtbl* do
+  record IFaxOutgoingMessage2, lpVtbl : IFaxOutgoingMessage2Vtable* do
     GUID = LibC::GUID.new(0xb37df687_u32, 0xbc88_u16, 0x4b46_u16, StaticArray[0xb3_u8, 0xbe_u8, 0xb4_u8, 0x58_u8, 0xb3_u8, 0xea_u8, 0x9e_u8, 0x7f_u8])
     def query_interface(this : IFaxOutgoingMessage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5787,8 +5843,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxOutgoingMessage2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxOutgoingMessage2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxOutgoingMessage2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_SubmissionId(this : IFaxOutgoingMessage2*, pbstrSubmissionId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SubmissionId.call(this, pbstrSubmissionId)
@@ -5847,7 +5903,7 @@ module Win32cr::Devices::Fax
     def delete(this : IFaxOutgoingMessage2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.delete.call(this)
     end
-    def get_HasCoverPage(this : IFaxOutgoingMessage2*, pbHasCoverPage : Int16*) : Win32cr::Foundation::HRESULT
+    def get_HasCoverPage(this : IFaxOutgoingMessage2*, pbHasCoverPage : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HasCoverPage.call(this, pbHasCoverPage)
     end
     def get_ReceiptType(this : IFaxOutgoingMessage2*, pReceiptType : Win32cr::Devices::Fax::FAX_RECEIPT_TYPE_ENUM*) : Win32cr::Foundation::HRESULT
@@ -5856,10 +5912,10 @@ module Win32cr::Devices::Fax
     def get_ReceiptAddress(this : IFaxOutgoingMessage2*, pbstrReceiptAddress : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ReceiptAddress.call(this, pbstrReceiptAddress)
     end
-    def get_Read(this : IFaxOutgoingMessage2*, pbRead : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Read(this : IFaxOutgoingMessage2*, pbRead : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Read.call(this, pbRead)
     end
-    def put_Read(this : IFaxOutgoingMessage2*, bRead : Int16) : Win32cr::Foundation::HRESULT
+    def put_Read(this : IFaxOutgoingMessage2*, bRead : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Read.call(this, bRead)
     end
     def save(this : IFaxOutgoingMessage2*) : Win32cr::Foundation::HRESULT
@@ -5872,14 +5928,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxAccountIncomingArchiveVtbl,
+
+  record IFaxAccountIncomingArchiveVtable,
     query_interface : Proc(IFaxAccountIncomingArchive*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccountIncomingArchive*, UInt32),
     release : Proc(IFaxAccountIncomingArchive*, UInt32),
     get_type_info_count : Proc(IFaxAccountIncomingArchive*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccountIncomingArchive*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccountIncomingArchive*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccountIncomingArchive*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxAccountIncomingArchive*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_SizeLow : Proc(IFaxAccountIncomingArchive*, Int32*, Win32cr::Foundation::HRESULT),
     get_SizeHigh : Proc(IFaxAccountIncomingArchive*, Int32*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxAccountIncomingArchive*, Win32cr::Foundation::HRESULT),
@@ -5888,7 +5945,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxAccountIncomingArchive, lpVtbl : IFaxAccountIncomingArchiveVtbl* do
+  record IFaxAccountIncomingArchive, lpVtbl : IFaxAccountIncomingArchiveVtable* do
     GUID = LibC::GUID.new(0xa8a5b6ef_u32, 0xe0d6_u16, 0x4aee_u16, StaticArray[0x95_u8, 0x5c_u8, 0x91_u8, 0x62_u8, 0x5b_u8, 0xec_u8, 0x9d_u8, 0xb4_u8])
     def query_interface(this : IFaxAccountIncomingArchive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5908,8 +5965,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccountIncomingArchive*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccountIncomingArchive*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccountIncomingArchive*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_SizeLow(this : IFaxAccountIncomingArchive*, plSizeLow : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SizeLow.call(this, plSizeLow)
@@ -5930,14 +5987,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxAccountOutgoingArchiveVtbl,
+
+  record IFaxAccountOutgoingArchiveVtable,
     query_interface : Proc(IFaxAccountOutgoingArchive*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccountOutgoingArchive*, UInt32),
     release : Proc(IFaxAccountOutgoingArchive*, UInt32),
     get_type_info_count : Proc(IFaxAccountOutgoingArchive*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccountOutgoingArchive*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccountOutgoingArchive*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccountOutgoingArchive*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxAccountOutgoingArchive*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_SizeLow : Proc(IFaxAccountOutgoingArchive*, Int32*, Win32cr::Foundation::HRESULT),
     get_SizeHigh : Proc(IFaxAccountOutgoingArchive*, Int32*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxAccountOutgoingArchive*, Win32cr::Foundation::HRESULT),
@@ -5946,7 +6004,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxAccountOutgoingArchive, lpVtbl : IFaxAccountOutgoingArchiveVtbl* do
+  record IFaxAccountOutgoingArchive, lpVtbl : IFaxAccountOutgoingArchiveVtable* do
     GUID = LibC::GUID.new(0x5463076d_u32, 0xec14_u16, 0x491f_u16, StaticArray[0x92_u8, 0x6e_u8, 0xb3_u8, 0xce_u8, 0xda_u8, 0x5e_u8, 0x56_u8, 0x62_u8])
     def query_interface(this : IFaxAccountOutgoingArchive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5966,8 +6024,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccountOutgoingArchive*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccountOutgoingArchive*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccountOutgoingArchive*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_SizeLow(this : IFaxAccountOutgoingArchive*, plSizeLow : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SizeLow.call(this, plSizeLow)
@@ -5988,16 +6046,17 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxSecurity2Vtbl,
+
+  record IFaxSecurity2Vtable,
     query_interface : Proc(IFaxSecurity2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxSecurity2*, UInt32),
     release : Proc(IFaxSecurity2*, UInt32),
     get_type_info_count : Proc(IFaxSecurity2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxSecurity2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxSecurity2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxSecurity2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Descriptor : Proc(IFaxSecurity2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Descriptor : Proc(IFaxSecurity2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxSecurity2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Descriptor : Proc(IFaxSecurity2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Descriptor : Proc(IFaxSecurity2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_GrantedRights : Proc(IFaxSecurity2*, Win32cr::Devices::Fax::FAX_ACCESS_RIGHTS_ENUM_2*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxSecurity2*, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxSecurity2*, Win32cr::Foundation::HRESULT),
@@ -6006,7 +6065,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IFaxSecurity2, lpVtbl : IFaxSecurity2Vtbl* do
+  record IFaxSecurity2, lpVtbl : IFaxSecurity2Vtable* do
     GUID = LibC::GUID.new(0x17d851f4_u32, 0xd09b_u16, 0x48fc_u16, StaticArray[0x99_u8, 0xc9_u8, 0x8f_u8, 0x24_u8, 0xc4_u8, 0xdb_u8, 0x9a_u8, 0xb1_u8])
     def query_interface(this : IFaxSecurity2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6026,13 +6085,13 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxSecurity2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxSecurity2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxSecurity2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Descriptor(this : IFaxSecurity2*, pvDescriptor : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Descriptor(this : IFaxSecurity2*, pvDescriptor : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Descriptor.call(this, pvDescriptor)
     end
-    def put_Descriptor(this : IFaxSecurity2*, vDescriptor : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Descriptor(this : IFaxSecurity2*, vDescriptor : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Descriptor.call(this, vDescriptor)
     end
     def get_GrantedRights(this : IFaxSecurity2*, pGrantedRights : Win32cr::Devices::Fax::FAX_ACCESS_RIGHTS_ENUM_2*) : Win32cr::Foundation::HRESULT
@@ -6054,14 +6113,15 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxIncomingMessage2Vtbl,
+
+  record IFaxIncomingMessage2Vtable,
     query_interface : Proc(IFaxIncomingMessage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxIncomingMessage2*, UInt32),
     release : Proc(IFaxIncomingMessage2*, UInt32),
     get_type_info_count : Proc(IFaxIncomingMessage2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxIncomingMessage2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxIncomingMessage2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxIncomingMessage2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IFaxIncomingMessage2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Pages : Proc(IFaxIncomingMessage2*, Int32*, Win32cr::Foundation::HRESULT),
     get_Size : Proc(IFaxIncomingMessage2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -6081,20 +6141,20 @@ module Win32cr::Devices::Fax
     put_SenderName : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_SenderFaxNumber : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_SenderFaxNumber : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_HasCoverPage : Proc(IFaxIncomingMessage2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_HasCoverPage : Proc(IFaxIncomingMessage2*, Int16, Win32cr::Foundation::HRESULT),
+    get_HasCoverPage : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_HasCoverPage : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Recipients : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_Recipients : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_WasReAssigned : Proc(IFaxIncomingMessage2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_Read : Proc(IFaxIncomingMessage2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Read : Proc(IFaxIncomingMessage2*, Int16, Win32cr::Foundation::HRESULT),
+    get_WasReAssigned : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_Read : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Read : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     re_assign : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::HRESULT),
     save : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::HRESULT),
     refresh : Proc(IFaxIncomingMessage2*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxIncomingMessage2, lpVtbl : IFaxIncomingMessage2Vtbl* do
+  record IFaxIncomingMessage2, lpVtbl : IFaxIncomingMessage2Vtable* do
     GUID = LibC::GUID.new(0xf9208503_u32, 0xe2bc_u16, 0x48f3_u16, StaticArray[0x9e_u8, 0xc0_u8, 0xe6_u8, 0x23_u8, 0x6f_u8, 0x9b_u8, 0x50_u8, 0x9a_u8])
     def query_interface(this : IFaxIncomingMessage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6114,8 +6174,8 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxIncomingMessage2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxIncomingMessage2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxIncomingMessage2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IFaxIncomingMessage2*, pbstrId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pbstrId)
@@ -6174,10 +6234,10 @@ module Win32cr::Devices::Fax
     def put_SenderFaxNumber(this : IFaxIncomingMessage2*, bstrSenderFaxNumber : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderFaxNumber.call(this, bstrSenderFaxNumber)
     end
-    def get_HasCoverPage(this : IFaxIncomingMessage2*, pbHasCoverPage : Int16*) : Win32cr::Foundation::HRESULT
+    def get_HasCoverPage(this : IFaxIncomingMessage2*, pbHasCoverPage : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_HasCoverPage.call(this, pbHasCoverPage)
     end
-    def put_HasCoverPage(this : IFaxIncomingMessage2*, bHasCoverPage : Int16) : Win32cr::Foundation::HRESULT
+    def put_HasCoverPage(this : IFaxIncomingMessage2*, bHasCoverPage : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_HasCoverPage.call(this, bHasCoverPage)
     end
     def get_Recipients(this : IFaxIncomingMessage2*, pbstrRecipients : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -6186,13 +6246,13 @@ module Win32cr::Devices::Fax
     def put_Recipients(this : IFaxIncomingMessage2*, bstrRecipients : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Recipients.call(this, bstrRecipients)
     end
-    def get_WasReAssigned(this : IFaxIncomingMessage2*, pbWasReAssigned : Int16*) : Win32cr::Foundation::HRESULT
+    def get_WasReAssigned(this : IFaxIncomingMessage2*, pbWasReAssigned : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_WasReAssigned.call(this, pbWasReAssigned)
     end
-    def get_Read(this : IFaxIncomingMessage2*, pbRead : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Read(this : IFaxIncomingMessage2*, pbRead : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Read.call(this, pbRead)
     end
-    def put_Read(this : IFaxIncomingMessage2*, bRead : Int16) : Win32cr::Foundation::HRESULT
+    def put_Read(this : IFaxIncomingMessage2*, bRead : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Read.call(this, bRead)
     end
     def re_assign(this : IFaxIncomingMessage2*) : Win32cr::Foundation::HRESULT
@@ -6208,18 +6268,19 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IFaxServerNotifyVtbl,
+
+  record IFaxServerNotifyVtable,
     query_interface : Proc(IFaxServerNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxServerNotify*, UInt32),
     release : Proc(IFaxServerNotify*, UInt32),
     get_type_info_count : Proc(IFaxServerNotify*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxServerNotify*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxServerNotify*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxServerNotify*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IFaxServerNotify*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxServerNotify, lpVtbl : IFaxServerNotifyVtbl* do
+  record IFaxServerNotify, lpVtbl : IFaxServerNotifyVtable* do
     GUID = LibC::GUID.new(0x2e037b27_u32, 0xcf8a_u16, 0x4abd_u16, StaticArray[0xb1_u8, 0xe0_u8, 0x57_u8, 0x4_u8, 0x94_u8, 0x3b_u8, 0xea_u8, 0x6f_u8])
     def query_interface(this : IFaxServerNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6239,168 +6300,53 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxServerNotify*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxServerNotify*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxServerNotify*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IFaxServerNotify2_Vtbl,
-    query_interface : Proc(IFaxServerNotify2_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IFaxServerNotify2_*, UInt32),
-    release : Proc(IFaxServerNotify2_*, UInt32),
-    get_type_info_count : Proc(IFaxServerNotify2_*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_type_info : Proc(IFaxServerNotify2_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_i_ds_of_names : Proc(IFaxServerNotify2_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxServerNotify2_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    on_incoming_job_added : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_incoming_job_removed : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_incoming_job_changed : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
-    on_outgoing_job_added : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_outgoing_job_removed : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_outgoing_job_changed : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
-    on_incoming_message_added : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_incoming_message_removed : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_outgoing_message_added : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_outgoing_message_removed : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_receipt_options_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_activity_logging_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_security_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_event_logging_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_outgoing_queue_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_outgoing_archive_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_incoming_archive_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_devices_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_outbound_routing_groups_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_outbound_routing_rules_config_change : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_server_activity_change : Proc(IFaxServerNotify2_*, Void*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
-    on_queues_status_change : Proc(IFaxServerNotify2_*, Void*, Int16, Int16, Int16, Win32cr::Foundation::HRESULT),
-    on_new_call : Proc(IFaxServerNotify2_*, Void*, Int32, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_server_shut_down : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT),
-    on_device_status_change : Proc(IFaxServerNotify2_*, Void*, Int32, Int16, Int16, Int16, Int16, Win32cr::Foundation::HRESULT),
-    on_general_server_config_changed : Proc(IFaxServerNotify2_*, Void*, Win32cr::Foundation::HRESULT)
 
-
-  @[Extern]
-  record IFaxServerNotify2_, lpVtbl : IFaxServerNotify2_Vtbl* do
-    GUID = LibC::GUID.new(0xec9c69b9_u32, 0x5fe7_u16, 0x4805_u16, StaticArray[0x94_u8, 0x67_u8, 0x82_u8, 0xfc_u8, 0xd9_u8, 0x6a_u8, 0xf9_u8, 0x3_u8])
-    def query_interface(this : IFaxServerNotify2_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : IFaxServerNotify2_*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : IFaxServerNotify2_*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_type_info_count(this : IFaxServerNotify2_*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
-    end
-    def get_type_info(this : IFaxServerNotify2_*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
-    end
-    def get_i_ds_of_names(this : IFaxServerNotify2_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
-    end
-    def invoke_1(this : IFaxServerNotify2_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
-    end
-    def on_incoming_job_added(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_job_added.call(this, pFaxServer, bstrJobId)
-    end
-    def on_incoming_job_removed(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_job_removed.call(this, pFaxServer, bstrJobId)
-    end
-    def on_incoming_job_changed(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR, pJobStatus : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_job_changed.call(this, pFaxServer, bstrJobId, pJobStatus)
-    end
-    def on_outgoing_job_added(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_job_added.call(this, pFaxServer, bstrJobId)
-    end
-    def on_outgoing_job_removed(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_job_removed.call(this, pFaxServer, bstrJobId)
-    end
-    def on_outgoing_job_changed(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR, pJobStatus : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_job_changed.call(this, pFaxServer, bstrJobId, pJobStatus)
-    end
-    def on_incoming_message_added(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_message_added.call(this, pFaxServer, bstrMessageId)
-    end
-    def on_incoming_message_removed(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_message_removed.call(this, pFaxServer, bstrMessageId)
-    end
-    def on_outgoing_message_added(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_message_added.call(this, pFaxServer, bstrMessageId)
-    end
-    def on_outgoing_message_removed(this : IFaxServerNotify2_*, pFaxServer : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_message_removed.call(this, pFaxServer, bstrMessageId)
-    end
-    def on_receipt_options_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_receipt_options_change.call(this, pFaxServer)
-    end
-    def on_activity_logging_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_activity_logging_config_change.call(this, pFaxServer)
-    end
-    def on_security_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_security_config_change.call(this, pFaxServer)
-    end
-    def on_event_logging_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_event_logging_config_change.call(this, pFaxServer)
-    end
-    def on_outgoing_queue_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_queue_config_change.call(this, pFaxServer)
-    end
-    def on_outgoing_archive_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_archive_config_change.call(this, pFaxServer)
-    end
-    def on_incoming_archive_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_archive_config_change.call(this, pFaxServer)
-    end
-    def on_devices_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_devices_config_change.call(this, pFaxServer)
-    end
-    def on_outbound_routing_groups_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outbound_routing_groups_config_change.call(this, pFaxServer)
-    end
-    def on_outbound_routing_rules_config_change(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outbound_routing_rules_config_change.call(this, pFaxServer)
-    end
-    def on_server_activity_change(this : IFaxServerNotify2_*, pFaxServer : Void*, lIncomingMessages : Int32, lRoutingMessages : Int32, lOutgoingMessages : Int32, lQueuedMessages : Int32) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_server_activity_change.call(this, pFaxServer, lIncomingMessages, lRoutingMessages, lOutgoingMessages, lQueuedMessages)
-    end
-    def on_queues_status_change(this : IFaxServerNotify2_*, pFaxServer : Void*, bOutgoingQueueBlocked : Int16, bOutgoingQueuePaused : Int16, bIncomingQueueBlocked : Int16) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_queues_status_change.call(this, pFaxServer, bOutgoingQueueBlocked, bOutgoingQueuePaused, bIncomingQueueBlocked)
-    end
-    def on_new_call(this : IFaxServerNotify2_*, pFaxServer : Void*, lCallId : Int32, lDeviceId : Int32, bstrCallerId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_new_call.call(this, pFaxServer, lCallId, lDeviceId, bstrCallerId)
-    end
-    def on_server_shut_down(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_server_shut_down.call(this, pFaxServer)
-    end
-    def on_device_status_change(this : IFaxServerNotify2_*, pFaxServer : Void*, lDeviceId : Int32, bPoweredOff : Int16, bSending : Int16, bReceiving : Int16, bRinging : Int16) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_device_status_change.call(this, pFaxServer, lDeviceId, bPoweredOff, bSending, bReceiving, bRinging)
-    end
-    def on_general_server_config_changed(this : IFaxServerNotify2_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_general_server_config_changed.call(this, pFaxServer)
-    end
-
-  end
-
-  @[Extern]
-  record IFaxServerNotify2Vtbl,
+  record IFaxServerNotify2Vtable,
     query_interface : Proc(IFaxServerNotify2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxServerNotify2*, UInt32),
     release : Proc(IFaxServerNotify2*, UInt32),
     get_type_info_count : Proc(IFaxServerNotify2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxServerNotify2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxServerNotify2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxServerNotify2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IFaxServerNotify2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    on_incoming_job_added : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_incoming_job_removed : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_incoming_job_changed : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    on_outgoing_job_added : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_outgoing_job_removed : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_outgoing_job_changed : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    on_incoming_message_added : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_incoming_message_removed : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_outgoing_message_added : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_outgoing_message_removed : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_receipt_options_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_activity_logging_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_security_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_event_logging_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_outgoing_queue_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_outgoing_archive_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_incoming_archive_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_devices_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_outbound_routing_groups_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_outbound_routing_rules_config_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_server_activity_change : Proc(IFaxServerNotify2*, Void*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
+    on_queues_status_change : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    on_new_call : Proc(IFaxServerNotify2*, Void*, Int32, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_server_shut_down : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT),
+    on_device_status_change : Proc(IFaxServerNotify2*, Void*, Int32, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    on_general_server_config_changed : Proc(IFaxServerNotify2*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxServerNotify2, lpVtbl : IFaxServerNotify2Vtbl* do
-    GUID = LibC::GUID.new(0x616ca8d6_u32, 0xa77a_u16, 0x4062_u16, StaticArray[0xab_u8, 0xfd_u8, 0xe_u8, 0x47_u8, 0x12_u8, 0x41_u8, 0xc7_u8, 0xaa_u8])
+  record IFaxServerNotify2, lpVtbl : IFaxServerNotify2Vtable* do
+    GUID = LibC::GUID.new(0xec9c69b9_u32, 0x5fe7_u16, 0x4805_u16, StaticArray[0x94_u8, 0x67_u8, 0x82_u8, 0xfc_u8, 0xd9_u8, 0x6a_u8, 0xf9_u8, 0x3_u8])
     def query_interface(this : IFaxServerNotify2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
     end
@@ -6419,108 +6365,116 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxServerNotify2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxServerNotify2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxServerNotify2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-
-  end
-
-  @[Extern]
-  record IFaxAccountNotify_Vtbl,
-    query_interface : Proc(IFaxAccountNotify_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IFaxAccountNotify_*, UInt32),
-    release : Proc(IFaxAccountNotify_*, UInt32),
-    get_type_info_count : Proc(IFaxAccountNotify_*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_type_info : Proc(IFaxAccountNotify_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_i_ds_of_names : Proc(IFaxAccountNotify_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccountNotify_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    on_incoming_job_added : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_incoming_job_removed : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_incoming_job_changed : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
-    on_outgoing_job_added : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_outgoing_job_removed : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_outgoing_job_changed : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
-    on_incoming_message_added : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    on_incoming_message_removed : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    on_outgoing_message_added : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_outgoing_message_removed : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    on_server_shut_down : Proc(IFaxAccountNotify_*, Void*, Win32cr::Foundation::HRESULT)
-
-
-  @[Extern]
-  record IFaxAccountNotify_, lpVtbl : IFaxAccountNotify_Vtbl* do
-    GUID = LibC::GUID.new(0xb9b3bc81_u32, 0xac1b_u16, 0x46f3_u16, StaticArray[0xb3_u8, 0x9d_u8, 0xa_u8, 0xdc_u8, 0x30_u8, 0xe1_u8, 0xb7_u8, 0x88_u8])
-    def query_interface(this : IFaxAccountNotify_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    def on_incoming_job_added(this : IFaxServerNotify2*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_job_added.call(this, pFaxServer, bstrJobId)
     end
-    def add_ref(this : IFaxAccountNotify_*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
+    def on_incoming_job_removed(this : IFaxServerNotify2*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_job_removed.call(this, pFaxServer, bstrJobId)
     end
-    def release(this : IFaxAccountNotify_*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
+    def on_incoming_job_changed(this : IFaxServerNotify2*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR, pJobStatus : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_job_changed.call(this, pFaxServer, bstrJobId, pJobStatus)
     end
-    def get_type_info_count(this : IFaxAccountNotify_*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
+    def on_outgoing_job_added(this : IFaxServerNotify2*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_job_added.call(this, pFaxServer, bstrJobId)
     end
-    def get_type_info(this : IFaxAccountNotify_*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
+    def on_outgoing_job_removed(this : IFaxServerNotify2*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_job_removed.call(this, pFaxServer, bstrJobId)
     end
-    def get_i_ds_of_names(this : IFaxAccountNotify_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
+    def on_outgoing_job_changed(this : IFaxServerNotify2*, pFaxServer : Void*, bstrJobId : Win32cr::Foundation::BSTR, pJobStatus : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_job_changed.call(this, pFaxServer, bstrJobId, pJobStatus)
     end
-    def invoke_1(this : IFaxAccountNotify_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def on_incoming_message_added(this : IFaxServerNotify2*, pFaxServer : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_message_added.call(this, pFaxServer, bstrMessageId)
     end
-    def on_incoming_job_added(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_job_added.call(this, pFaxAccount, bstrJobId)
+    def on_incoming_message_removed(this : IFaxServerNotify2*, pFaxServer : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_message_removed.call(this, pFaxServer, bstrMessageId)
     end
-    def on_incoming_job_removed(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_job_removed.call(this, pFaxAccount, bstrJobId)
+    def on_outgoing_message_added(this : IFaxServerNotify2*, pFaxServer : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_message_added.call(this, pFaxServer, bstrMessageId)
     end
-    def on_incoming_job_changed(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR, pJobStatus : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_job_changed.call(this, pFaxAccount, bstrJobId, pJobStatus)
+    def on_outgoing_message_removed(this : IFaxServerNotify2*, pFaxServer : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_message_removed.call(this, pFaxServer, bstrMessageId)
     end
-    def on_outgoing_job_added(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_job_added.call(this, pFaxAccount, bstrJobId)
+    def on_receipt_options_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_receipt_options_change.call(this, pFaxServer)
     end
-    def on_outgoing_job_removed(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_job_removed.call(this, pFaxAccount, bstrJobId)
+    def on_activity_logging_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_activity_logging_config_change.call(this, pFaxServer)
     end
-    def on_outgoing_job_changed(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR, pJobStatus : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_job_changed.call(this, pFaxAccount, bstrJobId, pJobStatus)
+    def on_security_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_security_config_change.call(this, pFaxServer)
     end
-    def on_incoming_message_added(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrMessageId : Win32cr::Foundation::BSTR, fAddedToReceiveFolder : Int16) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_message_added.call(this, pFaxAccount, bstrMessageId, fAddedToReceiveFolder)
+    def on_event_logging_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_event_logging_config_change.call(this, pFaxServer)
     end
-    def on_incoming_message_removed(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrMessageId : Win32cr::Foundation::BSTR, fRemovedFromReceiveFolder : Int16) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_incoming_message_removed.call(this, pFaxAccount, bstrMessageId, fRemovedFromReceiveFolder)
+    def on_outgoing_queue_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_queue_config_change.call(this, pFaxServer)
     end
-    def on_outgoing_message_added(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_message_added.call(this, pFaxAccount, bstrMessageId)
+    def on_outgoing_archive_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_archive_config_change.call(this, pFaxServer)
     end
-    def on_outgoing_message_removed(this : IFaxAccountNotify_*, pFaxAccount : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.on_outgoing_message_removed.call(this, pFaxAccount, bstrMessageId)
+    def on_incoming_archive_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_archive_config_change.call(this, pFaxServer)
     end
-    def on_server_shut_down(this : IFaxAccountNotify_*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+    def on_devices_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_devices_config_change.call(this, pFaxServer)
+    end
+    def on_outbound_routing_groups_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outbound_routing_groups_config_change.call(this, pFaxServer)
+    end
+    def on_outbound_routing_rules_config_change(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outbound_routing_rules_config_change.call(this, pFaxServer)
+    end
+    def on_server_activity_change(this : IFaxServerNotify2*, pFaxServer : Void*, lIncomingMessages : Int32, lRoutingMessages : Int32, lOutgoingMessages : Int32, lQueuedMessages : Int32) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_server_activity_change.call(this, pFaxServer, lIncomingMessages, lRoutingMessages, lOutgoingMessages, lQueuedMessages)
+    end
+    def on_queues_status_change(this : IFaxServerNotify2*, pFaxServer : Void*, bOutgoingQueueBlocked : Win32cr::Foundation::VARIANT_BOOL, bOutgoingQueuePaused : Win32cr::Foundation::VARIANT_BOOL, bIncomingQueueBlocked : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_queues_status_change.call(this, pFaxServer, bOutgoingQueueBlocked, bOutgoingQueuePaused, bIncomingQueueBlocked)
+    end
+    def on_new_call(this : IFaxServerNotify2*, pFaxServer : Void*, lCallId : Int32, lDeviceId : Int32, bstrCallerId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_new_call.call(this, pFaxServer, lCallId, lDeviceId, bstrCallerId)
+    end
+    def on_server_shut_down(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.on_server_shut_down.call(this, pFaxServer)
     end
+    def on_device_status_change(this : IFaxServerNotify2*, pFaxServer : Void*, lDeviceId : Int32, bPoweredOff : Win32cr::Foundation::VARIANT_BOOL, bSending : Win32cr::Foundation::VARIANT_BOOL, bReceiving : Win32cr::Foundation::VARIANT_BOOL, bRinging : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_device_status_change.call(this, pFaxServer, lDeviceId, bPoweredOff, bSending, bReceiving, bRinging)
+    end
+    def on_general_server_config_changed(this : IFaxServerNotify2*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_general_server_config_changed.call(this, pFaxServer)
+    end
 
   end
 
   @[Extern]
-  record IFaxAccountNotifyVtbl,
+
+  record IFaxAccountNotifyVtable,
     query_interface : Proc(IFaxAccountNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFaxAccountNotify*, UInt32),
     release : Proc(IFaxAccountNotify*, UInt32),
     get_type_info_count : Proc(IFaxAccountNotify*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IFaxAccountNotify*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IFaxAccountNotify*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IFaxAccountNotify*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IFaxAccountNotify*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    on_incoming_job_added : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_incoming_job_removed : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_incoming_job_changed : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    on_outgoing_job_added : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_outgoing_job_removed : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_outgoing_job_changed : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Void*, Win32cr::Foundation::HRESULT),
+    on_incoming_message_added : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    on_incoming_message_removed : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    on_outgoing_message_added : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_outgoing_message_removed : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    on_server_shut_down : Proc(IFaxAccountNotify*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IFaxAccountNotify, lpVtbl : IFaxAccountNotifyVtbl* do
-    GUID = LibC::GUID.new(0xb5e5bd1_u32, 0xb8a9_u16, 0x47a0_u16, StaticArray[0xa3_u8, 0x23_u8, 0xef_u8, 0x4a_u8, 0x29_u8, 0x3b_u8, 0xa0_u8, 0x6a_u8])
+  record IFaxAccountNotify, lpVtbl : IFaxAccountNotifyVtable* do
+    GUID = LibC::GUID.new(0xb9b3bc81_u32, 0xac1b_u16, 0x46f3_u16, StaticArray[0xb3_u8, 0x9d_u8, 0xa_u8, 0xdc_u8, 0x30_u8, 0xe1_u8, 0xb7_u8, 0x88_u8])
     def query_interface(this : IFaxAccountNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
     end
@@ -6539,14 +6493,48 @@ module Win32cr::Devices::Fax
     def get_i_ds_of_names(this : IFaxAccountNotify*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IFaxAccountNotify*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IFaxAccountNotify*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    end
+    def on_incoming_job_added(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_job_added.call(this, pFaxAccount, bstrJobId)
+    end
+    def on_incoming_job_removed(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_job_removed.call(this, pFaxAccount, bstrJobId)
+    end
+    def on_incoming_job_changed(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR, pJobStatus : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_job_changed.call(this, pFaxAccount, bstrJobId, pJobStatus)
+    end
+    def on_outgoing_job_added(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_job_added.call(this, pFaxAccount, bstrJobId)
+    end
+    def on_outgoing_job_removed(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_job_removed.call(this, pFaxAccount, bstrJobId)
+    end
+    def on_outgoing_job_changed(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrJobId : Win32cr::Foundation::BSTR, pJobStatus : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_job_changed.call(this, pFaxAccount, bstrJobId, pJobStatus)
+    end
+    def on_incoming_message_added(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrMessageId : Win32cr::Foundation::BSTR, fAddedToReceiveFolder : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_message_added.call(this, pFaxAccount, bstrMessageId, fAddedToReceiveFolder)
+    end
+    def on_incoming_message_removed(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrMessageId : Win32cr::Foundation::BSTR, fRemovedFromReceiveFolder : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_incoming_message_removed.call(this, pFaxAccount, bstrMessageId, fRemovedFromReceiveFolder)
+    end
+    def on_outgoing_message_added(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_message_added.call(this, pFaxAccount, bstrMessageId)
+    end
+    def on_outgoing_message_removed(this : IFaxAccountNotify*, pFaxAccount : Void*, bstrMessageId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_outgoing_message_removed.call(this, pFaxAccount, bstrMessageId)
+    end
+    def on_server_shut_down(this : IFaxAccountNotify*, pFaxServer : Void*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.on_server_shut_down.call(this, pFaxServer)
     end
 
   end
 
   @[Extern]
-  record IStillImageWVtbl,
+
+  record IStillImageWVtable,
     query_interface : Proc(IStillImageW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStillImageW*, UInt32),
     release : Proc(IStillImageW*, UInt32),
@@ -6556,7 +6544,7 @@ module Win32cr::Devices::Fax
     create_device : Proc(IStillImageW*, Win32cr::Foundation::PWSTR, UInt32, Void**, Void*, Win32cr::Foundation::HRESULT),
     get_device_value : Proc(IStillImageW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32*, UInt8*, UInt32*, Win32cr::Foundation::HRESULT),
     set_device_value : Proc(IStillImageW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt32, UInt8*, UInt32, Win32cr::Foundation::HRESULT),
-    get_sti_launch_information : Proc(IStillImageW*, UInt16*, UInt32*, UInt16*, Win32cr::Foundation::HRESULT),
+    get_sti_launch_information : Proc(IStillImageW*, Win32cr::Foundation::PWSTR, UInt32*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     register_launch_application : Proc(IStillImageW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     unregister_launch_application : Proc(IStillImageW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     enable_hw_notifications : Proc(IStillImageW*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
@@ -6568,7 +6556,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IStillImageW, lpVtbl : IStillImageWVtbl* do
+  record IStillImageW, lpVtbl : IStillImageWVtable* do
     GUID = LibC::GUID.new(0x641bd880_u32, 0x2dc8_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf8_u8, 0x6c_u8])
     def query_interface(this : IStillImageW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6597,7 +6585,7 @@ module Win32cr::Devices::Fax
     def set_device_value(this : IStillImageW*, pwszDeviceName : Win32cr::Foundation::PWSTR, pValueName : Win32cr::Foundation::PWSTR, type__ : UInt32, pData : UInt8*, cbData : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_device_value.call(this, pwszDeviceName, pValueName, type__, pData, cbData)
     end
-    def get_sti_launch_information(this : IStillImageW*, pwszDeviceName : UInt16*, pdwEventCode : UInt32*, pwszEventName : UInt16*) : Win32cr::Foundation::HRESULT
+    def get_sti_launch_information(this : IStillImageW*, pwszDeviceName : Win32cr::Foundation::PWSTR, pdwEventCode : UInt32*, pwszEventName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_sti_launch_information.call(this, pwszDeviceName, pdwEventCode, pwszEventName)
     end
     def register_launch_application(this : IStillImageW*, pwszAppName : Win32cr::Foundation::PWSTR, pwszCommandLine : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -6628,7 +6616,8 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IStiDeviceVtbl,
+
+  record IStiDeviceVtable,
     query_interface : Proc(IStiDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStiDevice*, UInt32),
     release : Proc(IStiDevice*, UInt32),
@@ -6652,7 +6641,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IStiDevice, lpVtbl : IStiDeviceVtbl* do
+  record IStiDevice, lpVtbl : IStiDeviceVtable* do
     GUID = LibC::GUID.new(0x6cfa5a80_u32, 0x2dc8_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf8_u8, 0x6c_u8])
     def query_interface(this : IStiDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6718,7 +6707,8 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IStiDeviceControlVtbl,
+
+  record IStiDeviceControlVtable,
     query_interface : Proc(IStiDeviceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStiDeviceControl*, UInt32),
     release : Proc(IStiDeviceControl*, UInt32),
@@ -6729,14 +6719,14 @@ module Win32cr::Devices::Fax
     raw_write_command : Proc(IStiDeviceControl*, Void*, UInt32, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::HRESULT),
     raw_device_control : Proc(IStiDeviceControl*, UInt32, Void*, UInt32, Void*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     get_last_error : Proc(IStiDeviceControl*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_my_device_port_name : Proc(IStiDeviceControl*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    get_my_device_port_name : Proc(IStiDeviceControl*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     get_my_device_handle : Proc(IStiDeviceControl*, Win32cr::Foundation::HANDLE*, Win32cr::Foundation::HRESULT),
     get_my_device_open_mode : Proc(IStiDeviceControl*, UInt32*, Win32cr::Foundation::HRESULT),
     write_to_error_log : Proc(IStiDeviceControl*, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IStiDeviceControl, lpVtbl : IStiDeviceControlVtbl* do
+  record IStiDeviceControl, lpVtbl : IStiDeviceControlVtable* do
     GUID = LibC::GUID.new(0x128a9860_u32, 0x52dc_u16, 0x11d0_u16, StaticArray[0x9e_u8, 0xdf_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IStiDeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6768,7 +6758,7 @@ module Win32cr::Devices::Fax
     def get_last_error(this : IStiDeviceControl*, lpdwLastError : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_last_error.call(this, lpdwLastError)
     end
-    def get_my_device_port_name(this : IStiDeviceControl*, lpszDevicePath : UInt16*, cwDevicePathSize : UInt32) : Win32cr::Foundation::HRESULT
+    def get_my_device_port_name(this : IStiDeviceControl*, lpszDevicePath : Win32cr::Foundation::PWSTR, cwDevicePathSize : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_my_device_port_name.call(this, lpszDevicePath, cwDevicePathSize)
     end
     def get_my_device_handle(this : IStiDeviceControl*, lph : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
@@ -6784,7 +6774,8 @@ module Win32cr::Devices::Fax
   end
 
   @[Extern]
-  record IStiUSDVtbl,
+
+  record IStiUSDVtable,
     query_interface : Proc(IStiUSD*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStiUSD*, UInt32),
     release : Proc(IStiUSD*, UInt32),
@@ -6807,7 +6798,7 @@ module Win32cr::Devices::Fax
 
 
   @[Extern]
-  record IStiUSD, lpVtbl : IStiUSDVtbl* do
+  record IStiUSD, lpVtbl : IStiUSDVtable* do
     GUID = LibC::GUID.new(0xc9bb460_u32, 0x51ac_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0xf8_u8, 0x6c_u8])
     def query_interface(this : IStiUSD*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6870,244 +6861,363 @@ module Win32cr::Devices::Fax
   end
 
   def faxConnectFaxServerA(machine_name : Win32cr::Foundation::PSTR, fax_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxConnectFaxServerA(machine_name, fax_handle)
+    {% end %}
   end
 
   def faxConnectFaxServerW(machine_name : Win32cr::Foundation::PWSTR, fax_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxConnectFaxServerW(machine_name, fax_handle)
+    {% end %}
   end
 
   def faxClose(fax_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxClose(fax_handle)
+    {% end %}
   end
 
   def faxOpenPort(fax_handle : Win32cr::Foundation::HANDLE, device_id : UInt32, flags : UInt32, fax_port_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxOpenPort(fax_handle, device_id, flags, fax_port_handle)
+    {% end %}
   end
 
   def faxCompleteJobParamsA(job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMA**, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxCompleteJobParamsA(job_params, coverpage_info)
+    {% end %}
   end
 
   def faxCompleteJobParamsW(job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMW**, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxCompleteJobParamsW(job_params, coverpage_info)
+    {% end %}
   end
 
   def faxSendDocumentA(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMA*, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*, fax_job_id : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSendDocumentA(fax_handle, file_name, job_params, coverpage_info, fax_job_id)
+    {% end %}
   end
 
   def faxSendDocumentW(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, job_params : Win32cr::Devices::Fax::FAX_JOB_PARAMW*, coverpage_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*, fax_job_id : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSendDocumentW(fax_handle, file_name, job_params, coverpage_info, fax_job_id)
+    {% end %}
   end
 
   def faxSendDocumentForBroadcastA(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, fax_job_id : UInt32*, fax_recipient_callback : Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKA, context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSendDocumentForBroadcastA(fax_handle, file_name, fax_job_id, fax_recipient_callback, context)
+    {% end %}
   end
 
   def faxSendDocumentForBroadcastW(fax_handle : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, fax_job_id : UInt32*, fax_recipient_callback : Win32cr::Devices::Fax::PFAX_RECIPIENT_CALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSendDocumentForBroadcastW(fax_handle, file_name, fax_job_id, fax_recipient_callback, context)
+    {% end %}
   end
 
   def faxEnumJobsA(fax_handle : Win32cr::Foundation::HANDLE, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA**, jobs_returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnumJobsA(fax_handle, job_entry, jobs_returned)
+    {% end %}
   end
 
   def faxEnumJobsW(fax_handle : Win32cr::Foundation::HANDLE, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW**, jobs_returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnumJobsW(fax_handle, job_entry, jobs_returned)
+    {% end %}
   end
 
   def faxGetJobA(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetJobA(fax_handle, job_id, job_entry)
+    {% end %}
   end
 
   def faxGetJobW(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetJobW(fax_handle, job_id, job_entry)
+    {% end %}
   end
 
   def faxSetJobA(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, command : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetJobA(fax_handle, job_id, command, job_entry)
+    {% end %}
   end
 
   def faxSetJobW(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, command : UInt32, job_entry : Win32cr::Devices::Fax::FAX_JOB_ENTRYW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetJobW(fax_handle, job_id, command, job_entry)
+    {% end %}
   end
 
   def faxGetPageData(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32, buffer : UInt8**, buffer_size : UInt32*, image_width : UInt32*, image_height : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetPageData(fax_handle, job_id, buffer, buffer_size, image_width, image_height)
+    {% end %}
   end
 
   def faxGetDeviceStatusA(fax_port_handle : Win32cr::Foundation::HANDLE, device_status : Win32cr::Devices::Fax::FAX_DEVICE_STATUSA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetDeviceStatusA(fax_port_handle, device_status)
+    {% end %}
   end
 
   def faxGetDeviceStatusW(fax_port_handle : Win32cr::Foundation::HANDLE, device_status : Win32cr::Devices::Fax::FAX_DEVICE_STATUSW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetDeviceStatusW(fax_port_handle, device_status)
+    {% end %}
   end
 
   def faxAbort(fax_handle : Win32cr::Foundation::HANDLE, job_id : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxAbort(fax_handle, job_id)
+    {% end %}
   end
 
   def faxGetConfigurationA(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetConfigurationA(fax_handle, fax_config)
+    {% end %}
   end
 
   def faxGetConfigurationW(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetConfigurationW(fax_handle, fax_config)
+    {% end %}
   end
 
   def faxSetConfigurationA(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetConfigurationA(fax_handle, fax_config)
+    {% end %}
   end
 
   def faxSetConfigurationW(fax_handle : Win32cr::Foundation::HANDLE, fax_config : Win32cr::Devices::Fax::FAX_CONFIGURATIONW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetConfigurationW(fax_handle, fax_config)
+    {% end %}
   end
 
   def faxGetLoggingCategoriesA(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYA**, number_categories : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetLoggingCategoriesA(fax_handle, categories, number_categories)
+    {% end %}
   end
 
   def faxGetLoggingCategoriesW(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYW**, number_categories : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetLoggingCategoriesW(fax_handle, categories, number_categories)
+    {% end %}
   end
 
   def faxSetLoggingCategoriesA(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYA*, number_categories : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetLoggingCategoriesA(fax_handle, categories, number_categories)
+    {% end %}
   end
 
   def faxSetLoggingCategoriesW(fax_handle : Win32cr::Foundation::HANDLE, categories : Win32cr::Devices::Fax::FAX_LOG_CATEGORYW*, number_categories : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetLoggingCategoriesW(fax_handle, categories, number_categories)
+    {% end %}
   end
 
   def faxEnumPortsA(fax_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA**, ports_returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnumPortsA(fax_handle, port_info, ports_returned)
+    {% end %}
   end
 
   def faxEnumPortsW(fax_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW**, ports_returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnumPortsW(fax_handle, port_info, ports_returned)
+    {% end %}
   end
 
   def faxGetPortA(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetPortA(fax_port_handle, port_info)
+    {% end %}
   end
 
   def faxGetPortW(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetPortW(fax_port_handle, port_info)
+    {% end %}
   end
 
   def faxSetPortA(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetPortA(fax_port_handle, port_info)
+    {% end %}
   end
 
   def faxSetPortW(fax_port_handle : Win32cr::Foundation::HANDLE, port_info : Win32cr::Devices::Fax::FAX_PORT_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetPortW(fax_port_handle, port_info)
+    {% end %}
   end
 
   def faxEnumRoutingMethodsA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_method : Win32cr::Devices::Fax::FAX_ROUTING_METHODA**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnumRoutingMethodsA(fax_port_handle, routing_method, methods_returned)
+    {% end %}
   end
 
   def faxEnumRoutingMethodsW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_method : Win32cr::Devices::Fax::FAX_ROUTING_METHODW**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnumRoutingMethodsW(fax_port_handle, routing_method, methods_returned)
+    {% end %}
   end
 
   def faxEnableRoutingMethodA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, enabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnableRoutingMethodA(fax_port_handle, routing_guid, enabled)
+    {% end %}
   end
 
   def faxEnableRoutingMethodW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, enabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnableRoutingMethodW(fax_port_handle, routing_guid, enabled)
+    {% end %}
   end
 
   def faxEnumGlobalRoutingInfoA(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnumGlobalRoutingInfoA(fax_handle, routing_info, methods_returned)
+    {% end %}
   end
 
   def faxEnumGlobalRoutingInfoW(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW**, methods_returned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxEnumGlobalRoutingInfoW(fax_handle, routing_info, methods_returned)
+    {% end %}
   end
 
   def faxSetGlobalRoutingInfoA(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetGlobalRoutingInfoA(fax_handle, routing_info)
+    {% end %}
   end
 
   def faxSetGlobalRoutingInfoW(fax_handle : Win32cr::Foundation::HANDLE, routing_info : Win32cr::Devices::Fax::FAX_GLOBAL_ROUTING_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetGlobalRoutingInfoW(fax_handle, routing_info)
+    {% end %}
   end
 
   def faxGetRoutingInfoA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, routing_info_buffer : UInt8**, routing_info_buffer_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetRoutingInfoA(fax_port_handle, routing_guid, routing_info_buffer, routing_info_buffer_size)
+    {% end %}
   end
 
   def faxGetRoutingInfoW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, routing_info_buffer : UInt8**, routing_info_buffer_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxGetRoutingInfoW(fax_port_handle, routing_guid, routing_info_buffer, routing_info_buffer_size)
+    {% end %}
   end
 
   def faxSetRoutingInfoA(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PSTR, routing_info_buffer : UInt8*, routing_info_buffer_size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetRoutingInfoA(fax_port_handle, routing_guid, routing_info_buffer, routing_info_buffer_size)
+    {% end %}
   end
 
   def faxSetRoutingInfoW(fax_port_handle : Win32cr::Foundation::HANDLE, routing_guid : Win32cr::Foundation::PWSTR, routing_info_buffer : UInt8*, routing_info_buffer_size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxSetRoutingInfoW(fax_port_handle, routing_guid, routing_info_buffer, routing_info_buffer_size)
+    {% end %}
   end
 
   def faxInitializeEventQueue(fax_handle : Win32cr::Foundation::HANDLE, completion_port : Win32cr::Foundation::HANDLE, completion_key : LibC::UIntPtrT, hWnd : Win32cr::Foundation::HWND, message_start : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxInitializeEventQueue(fax_handle, completion_port, completion_key, hWnd, message_start)
+    {% end %}
   end
 
   def faxFreeBuffer(buffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.FaxFreeBuffer(buffer)
+    {% end %}
   end
 
   def faxStartPrintJobA(printer_name : Win32cr::Foundation::PSTR, print_info : Win32cr::Devices::Fax::FAX_PRINT_INFOA*, fax_job_id : UInt32*, fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxStartPrintJobA(printer_name, print_info, fax_job_id, fax_context_info)
+    {% end %}
   end
 
   def faxStartPrintJobW(printer_name : Win32cr::Foundation::PWSTR, print_info : Win32cr::Devices::Fax::FAX_PRINT_INFOW*, fax_job_id : UInt32*, fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxStartPrintJobW(printer_name, print_info, fax_job_id, fax_context_info)
+    {% end %}
   end
 
   def faxPrintCoverPageA(fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOA*, cover_page_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxPrintCoverPageA(fax_context_info, cover_page_info)
+    {% end %}
   end
 
   def faxPrintCoverPageW(fax_context_info : Win32cr::Devices::Fax::FAX_CONTEXT_INFOW*, cover_page_info : Win32cr::Devices::Fax::FAX_COVERPAGE_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxPrintCoverPageW(fax_context_info, cover_page_info)
+    {% end %}
   end
 
   def faxRegisterServiceProviderW(device_provider : Win32cr::Foundation::PWSTR, friendly_name : Win32cr::Foundation::PWSTR, image_name : Win32cr::Foundation::PWSTR, tsp_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxRegisterServiceProviderW(device_provider, friendly_name, image_name, tsp_name)
+    {% end %}
   end
 
   def faxUnregisterServiceProviderW(device_provider : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxUnregisterServiceProviderW(device_provider)
+    {% end %}
   end
 
   def faxRegisterRoutingExtensionW(fax_handle : Win32cr::Foundation::HANDLE, extension_name : Win32cr::Foundation::PWSTR, friendly_name : Win32cr::Foundation::PWSTR, image_name : Win32cr::Foundation::PWSTR, call_back : Win32cr::Devices::Fax::PFAX_ROUTING_INSTALLATION_CALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxRegisterRoutingExtensionW(fax_handle, extension_name, friendly_name, image_name, call_back, context)
+    {% end %}
   end
 
   def faxAccessCheck(fax_handle : Win32cr::Foundation::HANDLE, access_mask : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FaxAccessCheck(fax_handle, access_mask)
+    {% end %}
   end
 
   def canSendToFaxRecipient : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CanSendToFaxRecipient
+    {% end %}
   end
 
   def sendToFaxRecipient(sndMode : Win32cr::Devices::Fax::SendToMode, lpFileName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SendToFaxRecipient(sndMode, lpFileName)
+    {% end %}
   end
 
   def stiCreateInstanceW(hinst : Win32cr::Foundation::HINSTANCE, dwVer : UInt32, ppSti : Void**, punkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StiCreateInstanceW(hinst, dwVer, ppSti, punkOuter)
+    {% end %}
   end
 
   @[Link("winfax")]
   @[Link("fxsutility")]
   @[Link("sti")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun FaxConnectFaxServerA(machine_name : Win32cr::Foundation::PSTR, fax_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
@@ -7287,4 +7397,5 @@ module Win32cr::Devices::Fax
     fun StiCreateInstanceW(hinst : Win32cr::Foundation::HINSTANCE, dwVer : UInt32, ppSti : Void**, punkOuter : Void*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

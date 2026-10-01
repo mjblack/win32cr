@@ -3,9 +3,6 @@ require "./../../foundation.cr"
 
 module Win32cr::Data::Xml::XmlLite
   extend self
-  IID_IXmlReader_ = "7279fc81-709d-4095-b63d-69fe4b0d9030"
-  IID_IXmlWriter_ = "7279fc88-709d-4095-b63d-69fe4b0d9030"
-  IID_IXmlResolver_ = "7279fc82-709d-4095-b63d-69fe4b0d9030"
 
   enum XmlNodeType
     XmlNodeType_None = 0_i32
@@ -154,7 +151,8 @@ module Win32cr::Data::Xml::XmlLite
   end
 
   @[Extern]
-  record IXmlReaderVtbl,
+
+  record IXmlReaderVtable,
     query_interface : Proc(IXmlReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXmlReader*, UInt32),
     release : Proc(IXmlReader*, UInt32),
@@ -172,7 +170,7 @@ module Win32cr::Data::Xml::XmlLite
     get_local_name : Proc(IXmlReader*, Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXmlReader*, Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Foundation::HRESULT),
     get_value : Proc(IXmlReader*, Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Foundation::HRESULT),
-    read_value_chunk : Proc(IXmlReader*, UInt16*, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
+    read_value_chunk : Proc(IXmlReader*, Win32cr::Foundation::PWSTR, UInt32, UInt32*, Win32cr::Foundation::HRESULT),
     get_base_uri : Proc(IXmlReader*, Win32cr::Foundation::PWSTR*, UInt32*, Win32cr::Foundation::HRESULT),
     is_default : Proc(IXmlReader*, Win32cr::Foundation::BOOL),
     is_empty_element : Proc(IXmlReader*, Win32cr::Foundation::BOOL),
@@ -184,7 +182,7 @@ module Win32cr::Data::Xml::XmlLite
 
 
   @[Extern]
-  record IXmlReader, lpVtbl : IXmlReaderVtbl* do
+  record IXmlReader, lpVtbl : IXmlReaderVtable* do
     GUID = LibC::GUID.new(0x7279fc81_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
     def query_interface(this : IXmlReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -237,7 +235,7 @@ module Win32cr::Data::Xml::XmlLite
     def get_value(this : IXmlReader*, ppwszValue : Win32cr::Foundation::PWSTR*, pcwchValue : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, ppwszValue, pcwchValue)
     end
-    def read_value_chunk(this : IXmlReader*, pwchBuffer : UInt16*, cwchChunkSize : UInt32, pcwchRead : UInt32*) : Win32cr::Foundation::HRESULT
+    def read_value_chunk(this : IXmlReader*, pwchBuffer : Win32cr::Foundation::PWSTR, cwchChunkSize : UInt32, pcwchRead : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.read_value_chunk.call(this, pwchBuffer, cwchChunkSize, pcwchRead)
     end
     def get_base_uri(this : IXmlReader*, ppwszBaseUri : Win32cr::Foundation::PWSTR*, pcwchBaseUri : UInt32*) : Win32cr::Foundation::HRESULT
@@ -268,7 +266,8 @@ module Win32cr::Data::Xml::XmlLite
   end
 
   @[Extern]
-  record IXmlResolverVtbl,
+
+  record IXmlResolverVtable,
     query_interface : Proc(IXmlResolver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXmlResolver*, UInt32),
     release : Proc(IXmlResolver*, UInt32),
@@ -276,7 +275,7 @@ module Win32cr::Data::Xml::XmlLite
 
 
   @[Extern]
-  record IXmlResolver, lpVtbl : IXmlResolverVtbl* do
+  record IXmlResolver, lpVtbl : IXmlResolverVtable* do
     GUID = LibC::GUID.new(0x7279fc82_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
     def query_interface(this : IXmlResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -294,7 +293,8 @@ module Win32cr::Data::Xml::XmlLite
   end
 
   @[Extern]
-  record IXmlWriterVtbl,
+
+  record IXmlWriterVtable,
     query_interface : Proc(IXmlWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXmlWriter*, UInt32),
     release : Proc(IXmlWriter*, UInt32),
@@ -305,7 +305,7 @@ module Win32cr::Data::Xml::XmlLite
     write_attribute_string : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_c_data : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_char_entity : Proc(IXmlWriter*, UInt16, Win32cr::Foundation::HRESULT),
-    write_chars : Proc(IXmlWriter*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    write_chars : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     write_comment : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_doc_type : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_element_string : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
@@ -320,7 +320,7 @@ module Win32cr::Data::Xml::XmlLite
     write_processing_instruction : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_qualified_name : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_raw : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    write_raw_chars : Proc(IXmlWriter*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    write_raw_chars : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     write_start_document : Proc(IXmlWriter*, Win32cr::Data::Xml::XmlLite::XmlStandalone, Win32cr::Foundation::HRESULT),
     write_start_element : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_string : Proc(IXmlWriter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
@@ -330,7 +330,7 @@ module Win32cr::Data::Xml::XmlLite
 
 
   @[Extern]
-  record IXmlWriter, lpVtbl : IXmlWriterVtbl* do
+  record IXmlWriter, lpVtbl : IXmlWriterVtable* do
     GUID = LibC::GUID.new(0x7279fc88_u32, 0x709d_u16, 0x4095_u16, StaticArray[0xb6_u8, 0x3d_u8, 0x69_u8, 0xfe_u8, 0x4b_u8, 0xd_u8, 0x90_u8, 0x30_u8])
     def query_interface(this : IXmlWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -362,7 +362,7 @@ module Win32cr::Data::Xml::XmlLite
     def write_char_entity(this : IXmlWriter*, wch : UInt16) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_char_entity.call(this, wch)
     end
-    def write_chars(this : IXmlWriter*, pwch : UInt16*, cwch : UInt32) : Win32cr::Foundation::HRESULT
+    def write_chars(this : IXmlWriter*, pwch : Win32cr::Foundation::PWSTR, cwch : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_chars.call(this, pwch, cwch)
     end
     def write_comment(this : IXmlWriter*, pwszComment : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -407,7 +407,7 @@ module Win32cr::Data::Xml::XmlLite
     def write_raw(this : IXmlWriter*, pwszData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_raw.call(this, pwszData)
     end
-    def write_raw_chars(this : IXmlWriter*, pwch : UInt16*, cwch : UInt32) : Win32cr::Foundation::HRESULT
+    def write_raw_chars(this : IXmlWriter*, pwch : Win32cr::Foundation::PWSTR, cwch : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_raw_chars.call(this, pwch, cwch)
     end
     def write_start_document(this : IXmlWriter*, standalone : Win32cr::Data::Xml::XmlLite::XmlStandalone) : Win32cr::Foundation::HRESULT
@@ -432,7 +432,8 @@ module Win32cr::Data::Xml::XmlLite
   end
 
   @[Extern]
-  record IXmlWriterLiteVtbl,
+
+  record IXmlWriterLiteVtable,
     query_interface : Proc(IXmlWriterLite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXmlWriterLite*, UInt32),
     release : Proc(IXmlWriterLite*, UInt32),
@@ -440,26 +441,26 @@ module Win32cr::Data::Xml::XmlLite
     get_property : Proc(IXmlWriterLite*, UInt32, LibC::IntPtrT*, Win32cr::Foundation::HRESULT),
     set_property : Proc(IXmlWriterLite*, UInt32, LibC::IntPtrT, Win32cr::Foundation::HRESULT),
     write_attributes : Proc(IXmlWriterLite*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
-    write_attribute_string : Proc(IXmlWriterLite*, UInt16*, UInt32, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    write_attribute_string : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     write_c_data : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_char_entity : Proc(IXmlWriterLite*, UInt16, Win32cr::Foundation::HRESULT),
-    write_chars : Proc(IXmlWriterLite*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    write_chars : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     write_comment : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_doc_type : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    write_element_string : Proc(IXmlWriterLite*, UInt16*, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
+    write_element_string : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_end_document : Proc(IXmlWriterLite*, Win32cr::Foundation::HRESULT),
-    write_end_element : Proc(IXmlWriterLite*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    write_end_element : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     write_entity_ref : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    write_full_end_element : Proc(IXmlWriterLite*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    write_full_end_element : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     write_name : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_nm_token : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_node : Proc(IXmlWriterLite*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     write_node_shallow : Proc(IXmlWriterLite*, Void*, Win32cr::Foundation::BOOL, Win32cr::Foundation::HRESULT),
     write_processing_instruction : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_raw : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    write_raw_chars : Proc(IXmlWriterLite*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    write_raw_chars : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     write_start_document : Proc(IXmlWriterLite*, Win32cr::Data::Xml::XmlLite::XmlStandalone, Win32cr::Foundation::HRESULT),
-    write_start_element : Proc(IXmlWriterLite*, UInt16*, UInt32, Win32cr::Foundation::HRESULT),
+    write_start_element : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, UInt32, Win32cr::Foundation::HRESULT),
     write_string : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     write_surrogate_char_entity : Proc(IXmlWriterLite*, UInt16, UInt16, Win32cr::Foundation::HRESULT),
     write_whitespace : Proc(IXmlWriterLite*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
@@ -467,7 +468,7 @@ module Win32cr::Data::Xml::XmlLite
 
 
   @[Extern]
-  record IXmlWriterLite, lpVtbl : IXmlWriterLiteVtbl* do
+  record IXmlWriterLite, lpVtbl : IXmlWriterLiteVtable* do
     GUID = LibC::GUID.new(0x862494c6_u32, 0x1310_u16, 0x4aad_u16, StaticArray[0xb3_u8, 0xcd_u8, 0x2d_u8, 0xbe_u8, 0xeb_u8, 0xf6_u8, 0x70_u8, 0xd3_u8])
     def query_interface(this : IXmlWriterLite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -490,7 +491,7 @@ module Win32cr::Data::Xml::XmlLite
     def write_attributes(this : IXmlWriterLite*, pReader : Void*, fWriteDefaultAttributes : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_attributes.call(this, pReader, fWriteDefaultAttributes)
     end
-    def write_attribute_string(this : IXmlWriterLite*, pwszQName : UInt16*, cwszQName : UInt32, pwszValue : UInt16*, cwszValue : UInt32) : Win32cr::Foundation::HRESULT
+    def write_attribute_string(this : IXmlWriterLite*, pwszQName : Win32cr::Foundation::PWSTR, cwszQName : UInt32, pwszValue : Win32cr::Foundation::PWSTR, cwszValue : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_attribute_string.call(this, pwszQName, cwszQName, pwszValue, cwszValue)
     end
     def write_c_data(this : IXmlWriterLite*, pwszText : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -499,7 +500,7 @@ module Win32cr::Data::Xml::XmlLite
     def write_char_entity(this : IXmlWriterLite*, wch : UInt16) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_char_entity.call(this, wch)
     end
-    def write_chars(this : IXmlWriterLite*, pwch : UInt16*, cwch : UInt32) : Win32cr::Foundation::HRESULT
+    def write_chars(this : IXmlWriterLite*, pwch : Win32cr::Foundation::PWSTR, cwch : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_chars.call(this, pwch, cwch)
     end
     def write_comment(this : IXmlWriterLite*, pwszComment : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -508,19 +509,19 @@ module Win32cr::Data::Xml::XmlLite
     def write_doc_type(this : IXmlWriterLite*, pwszName : Win32cr::Foundation::PWSTR, pwszPublicId : Win32cr::Foundation::PWSTR, pwszSystemId : Win32cr::Foundation::PWSTR, pwszSubset : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_doc_type.call(this, pwszName, pwszPublicId, pwszSystemId, pwszSubset)
     end
-    def write_element_string(this : IXmlWriterLite*, pwszQName : UInt16*, cwszQName : UInt32, pwszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    def write_element_string(this : IXmlWriterLite*, pwszQName : Win32cr::Foundation::PWSTR, cwszQName : UInt32, pwszValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_element_string.call(this, pwszQName, cwszQName, pwszValue)
     end
     def write_end_document(this : IXmlWriterLite*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_end_document.call(this)
     end
-    def write_end_element(this : IXmlWriterLite*, pwszQName : UInt16*, cwszQName : UInt32) : Win32cr::Foundation::HRESULT
+    def write_end_element(this : IXmlWriterLite*, pwszQName : Win32cr::Foundation::PWSTR, cwszQName : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_end_element.call(this, pwszQName, cwszQName)
     end
     def write_entity_ref(this : IXmlWriterLite*, pwszName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_entity_ref.call(this, pwszName)
     end
-    def write_full_end_element(this : IXmlWriterLite*, pwszQName : UInt16*, cwszQName : UInt32) : Win32cr::Foundation::HRESULT
+    def write_full_end_element(this : IXmlWriterLite*, pwszQName : Win32cr::Foundation::PWSTR, cwszQName : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_full_end_element.call(this, pwszQName, cwszQName)
     end
     def write_name(this : IXmlWriterLite*, pwszName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -541,13 +542,13 @@ module Win32cr::Data::Xml::XmlLite
     def write_raw(this : IXmlWriterLite*, pwszData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_raw.call(this, pwszData)
     end
-    def write_raw_chars(this : IXmlWriterLite*, pwch : UInt16*, cwch : UInt32) : Win32cr::Foundation::HRESULT
+    def write_raw_chars(this : IXmlWriterLite*, pwch : Win32cr::Foundation::PWSTR, cwch : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_raw_chars.call(this, pwch, cwch)
     end
     def write_start_document(this : IXmlWriterLite*, standalone : Win32cr::Data::Xml::XmlLite::XmlStandalone) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_start_document.call(this, standalone)
     end
-    def write_start_element(this : IXmlWriterLite*, pwszQName : UInt16*, cwszQName : UInt32) : Win32cr::Foundation::HRESULT
+    def write_start_element(this : IXmlWriterLite*, pwszQName : Win32cr::Foundation::PWSTR, cwszQName : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.write_start_element.call(this, pwszQName, cwszQName)
     end
     def write_string(this : IXmlWriterLite*, pwszText : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -566,30 +567,43 @@ module Win32cr::Data::Xml::XmlLite
   end
 
   def createXmlReader(riid : LibC::GUID*, ppvObject : Void**, pMalloc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateXmlReader(riid, ppvObject, pMalloc)
+    {% end %}
   end
 
   def createXmlReaderInputWithEncodingCodePage(pInputStream : Void*, pMalloc : Void*, nEncodingCodePage : UInt32, fEncodingHint : Win32cr::Foundation::BOOL, pwszBaseUri : Win32cr::Foundation::PWSTR, ppInput : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateXmlReaderInputWithEncodingCodePage(pInputStream, pMalloc, nEncodingCodePage, fEncodingHint, pwszBaseUri, ppInput)
+    {% end %}
   end
 
   def createXmlReaderInputWithEncodingName(pInputStream : Void*, pMalloc : Void*, pwszEncodingName : Win32cr::Foundation::PWSTR, fEncodingHint : Win32cr::Foundation::BOOL, pwszBaseUri : Win32cr::Foundation::PWSTR, ppInput : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateXmlReaderInputWithEncodingName(pInputStream, pMalloc, pwszEncodingName, fEncodingHint, pwszBaseUri, ppInput)
+    {% end %}
   end
 
   def createXmlWriter(riid : LibC::GUID*, ppvObject : Void**, pMalloc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateXmlWriter(riid, ppvObject, pMalloc)
+    {% end %}
   end
 
   def createXmlWriterOutputWithEncodingCodePage(pOutputStream : Void*, pMalloc : Void*, nEncodingCodePage : UInt32, ppOutput : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateXmlWriterOutputWithEncodingCodePage(pOutputStream, pMalloc, nEncodingCodePage, ppOutput)
+    {% end %}
   end
 
   def createXmlWriterOutputWithEncodingName(pOutputStream : Void*, pMalloc : Void*, pwszEncodingName : Win32cr::Foundation::PWSTR, ppOutput : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateXmlWriterOutputWithEncodingName(pOutputStream, pMalloc, pwszEncodingName, ppOutput)
+    {% end %}
   end
 
   @[Link("xmllite")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateXmlReader(riid : LibC::GUID*, ppvObject : Void**, pMalloc : Void*) : Win32cr::Foundation::HRESULT
@@ -610,4 +624,5 @@ module Win32cr::Data::Xml::XmlLite
     fun CreateXmlWriterOutputWithEncodingName(pOutputStream : Void*, pMalloc : Void*, pwszEncodingName : Win32cr::Foundation::PWSTR, ppOutput : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -3,7 +3,8 @@ require "./../security.cr"
 
 module Win32cr::System::Memory
   extend self
-  alias HeapHandle = LibC::IntPtrT
+  alias MEMORY_MAPPED_VIEW_ADDRESS = Void*
+  alias AtlThunkData_t = LibC::IntPtrT
   alias PBAD_MEMORY_CALLBACK_ROUTINE = Proc(Void)
 
   alias PSECURE_MEMORY_CACHE_CALLBACK = Proc(Void*, LibC::UIntPtrT, Win32cr::Foundation::BOOLEAN)
@@ -13,7 +14,22 @@ module Win32cr::System::Memory
   FILE_CACHE_MIN_HARD_ENABLE = 4_u32
   FILE_CACHE_MIN_HARD_DISABLE = 8_u32
   MEHC_PATROL_SCRUBBER_PRESENT = 1_u32
+  WIN32_MEMORY_NUMA_PERFORMANCE_ALL_TARGET_NODE = 4294967295_u32
+  WIN32_MEMORY_NUMA_PERFORMANCE_READ_LATENCY = 1_u32
+  WIN32_MEMORY_NUMA_PERFORMANCE_READ_BANDWIDTH = 2_u32
+  WIN32_MEMORY_NUMA_PERFORMANCE_WRITE_LATENCY = 4_u32
+  WIN32_MEMORY_NUMA_PERFORMANCE_WRITE_BANDWIDTH = 8_u32
 
+  @[Flags]
+  enum SECTION_FLAGS : UInt32
+    SECTION_ALL_ACCESS = 983071_u32
+    SECTION_QUERY = 1_u32
+    SECTION_MAP_WRITE = 2_u32
+    SECTION_MAP_READ = 4_u32
+    SECTION_MAP_EXECUTE = 8_u32
+    SECTION_EXTEND_SIZE = 16_u32
+    SECTION_MAP_EXECUTE_EXPLICIT = 32_u32
+  end
   @[Flags]
   enum FILE_MAP : UInt32
     FILE_MAP_WRITE = 2_u32
@@ -131,6 +147,13 @@ module Win32cr::System::Memory
     MEM_MAPPED = 262144_u32
     MEM_IMAGE = 16777216_u32
   end
+  @[Flags]
+  enum SETPROCESSWORKINGSETSIZEEX_FLAGS : UInt32
+    QUOTA_LIMITS_HARDWS_MIN_ENABLE = 1_u32
+    QUOTA_LIMITS_HARDWS_MIN_DISABLE = 2_u32
+    QUOTA_LIMITS_HARDWS_MAX_ENABLE = 4_u32
+    QUOTA_LIMITS_HARDWS_MAX_DISABLE = 8_u32
+  end
   enum MEMORY_RESOURCE_NOTIFICATION_TYPE
     LowMemoryResourceNotification = 0_i32
     HighMemoryResourceNotification = 1_i32
@@ -158,6 +181,20 @@ module Win32cr::System::Memory
     MemExtendedParameterImageMachine = 6_i32
     MemExtendedParameterMax = 7_i32
   end
+  enum MEM_DEDICATED_ATTRIBUTE_TYPE
+    MemDedicatedAttributeReadBandwidth = 0_i32
+    MemDedicatedAttributeReadLatency = 1_i32
+    MemDedicatedAttributeWriteBandwidth = 2_i32
+    MemDedicatedAttributeWriteLatency = 3_i32
+    MemDedicatedAttributeMax = 4_i32
+  end
+  enum MEM_SECTION_EXTENDED_PARAMETER_TYPE
+    MemSectionExtendedParameterInvalidType = 0_i32
+    MemSectionExtendedParameterUserPhysicalFlags = 1_i32
+    MemSectionExtendedParameterNumaNode = 2_i32
+    MemSectionExtendedParameterSigningLevel = 3_i32
+    MemSectionExtendedParameterMax = 4_i32
+  end
   enum HEAP_INFORMATION_CLASS
     HeapCompatibilityInformation = 0_i32
     HeapEnableTerminationOnCorruption = 1_i32
@@ -180,6 +217,16 @@ module Win32cr::System::Memory
     property block : Block_e__Struct_
     property region : Region_e__Struct_
 
+      # Nested Type Block_e__Struct_
+      @[Extern]
+      struct Block_e__Struct_
+    property hMem : Win32cr::Foundation::HANDLE
+    property dwReserved : UInt32[3]
+    def initialize(@hMem : Win32cr::Foundation::HANDLE, @dwReserved : UInt32[3])
+    end
+      end
+
+
       # Nested Type Region_e__Struct_
       @[Extern]
       struct Region_e__Struct_
@@ -188,16 +235,6 @@ module Win32cr::System::Memory
     property lpFirstBlock : Void*
     property lpLastBlock : Void*
     def initialize(@dwCommittedSize : UInt32, @dwUnCommittedSize : UInt32, @lpFirstBlock : Void*, @lpLastBlock : Void*)
-    end
-      end
-
-
-      # Nested Type Block_e__Struct_
-      @[Extern]
-      struct Block_e__Struct_
-    property hMem : Win32cr::Foundation::HANDLE
-    property dwReserved : UInt32[3]
-    def initialize(@hMem : Win32cr::Foundation::HANDLE, @dwReserved : UInt32[3])
     end
       end
 
@@ -281,6 +318,35 @@ module Win32cr::System::Memory
     end
   end
 
+  @[Extern]
+  struct WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY
+    property initiator_node_number : UInt32
+    property target_node_number : UInt32
+    property data_type : UInt8
+    property flags : Flags_e__Struct_
+    property min_transfer_size_in_bytes : UInt64
+    property entry_value : UInt64
+
+    # Nested Type Flags_e__Struct_
+    @[Extern]
+    struct Flags_e__Struct_
+    property _bitfield : UInt8
+    def initialize(@_bitfield : UInt8)
+    end
+    end
+
+    def initialize(@initiator_node_number : UInt32, @target_node_number : UInt32, @data_type : UInt8, @flags : Flags_e__Struct_, @min_transfer_size_in_bytes : UInt64, @entry_value : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT
+    property entry_count : UInt32
+    property performance_entries : Win32cr::System::Memory::WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY[1]
+    def initialize(@entry_count : UInt32, @performance_entries : Win32cr::System::Memory::WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY[1])
+    end
+  end
+
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
   struct MEMORY_BASIC_INFORMATION
@@ -293,6 +359,21 @@ module Win32cr::System::Memory
     property protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
     property type__ : Win32cr::System::Memory::PAGE_TYPE
     def initialize(@base_address : Void*, @allocation_base : Void*, @allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @partition_id : UInt16, @region_size : LibC::UIntPtrT, @state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, @protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @type__ : Win32cr::System::Memory::PAGE_TYPE)
+    end
+  end
+  {% end %}
+
+  {% if flag?(:i386) %}
+  @[Extern]
+  struct MEMORY_BASIC_INFORMATION
+    property base_address : Void*
+    property allocation_base : Void*
+    property allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property region_size : LibC::UIntPtrT
+    property state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE
+    property protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
+    property type__ : Win32cr::System::Memory::PAGE_TYPE
+    def initialize(@base_address : Void*, @allocation_base : Void*, @allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @region_size : LibC::UIntPtrT, @state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, @protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @type__ : Win32cr::System::Memory::PAGE_TYPE)
     end
   end
   {% end %}
@@ -334,18 +415,18 @@ module Win32cr::System::Memory
   end
 
   @[Extern]
-  struct MEM_ADDRESS_REQUIREMENTS
-    property lowest_starting_address : Void*
-    property highest_ending_address : Void*
-    property alignment : LibC::UIntPtrT
-    def initialize(@lowest_starting_address : Void*, @highest_ending_address : Void*, @alignment : LibC::UIntPtrT)
-    end
-  end
-
-  @[Extern]
   struct MEM_EXTENDED_PARAMETER
     property anonymous1 : Anonymous1_e__Struct_
     property anonymous2 : Anonymous2_e__Union_
+
+    # Nested Type Anonymous1_e__Struct_
+    @[Extern]
+    struct Anonymous1_e__Struct_
+    property _bitfield : UInt64
+    def initialize(@_bitfield : UInt64)
+    end
+    end
+
 
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
@@ -359,96 +440,127 @@ module Win32cr::System::Memory
     end
     end
 
-
-    # Nested Type Anonymous1_e__Struct_
-    @[Extern]
-    struct Anonymous1_e__Struct_
-    property _bitfield : UInt64
-    def initialize(@_bitfield : UInt64)
-    end
-    end
-
     def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Union_)
     end
   end
 
-  {% if flag?(:i386) %}
   @[Extern]
-  struct MEMORY_BASIC_INFORMATION
-    property base_address : Void*
-    property allocation_base : Void*
-    property allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
-    property region_size : LibC::UIntPtrT
-    property state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE
-    property protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS
-    property type__ : Win32cr::System::Memory::PAGE_TYPE
-    def initialize(@base_address : Void*, @allocation_base : Void*, @allocation_protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @region_size : LibC::UIntPtrT, @state : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, @protect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, @type__ : Win32cr::System::Memory::PAGE_TYPE)
+  struct MEM_ADDRESS_REQUIREMENTS
+    property lowest_starting_address : Void*
+    property highest_ending_address : Void*
+    property alignment : LibC::UIntPtrT
+    def initialize(@lowest_starting_address : Void*, @highest_ending_address : Void*, @alignment : LibC::UIntPtrT)
     end
   end
-  {% end %}
 
-  def heapCreate(flOptions : Win32cr::System::Memory::HEAP_FLAGS, dwInitialSize : LibC::UIntPtrT, dwMaximumSize : LibC::UIntPtrT) : Win32cr::System::Memory::HeapHandle
+  @[Extern]
+  struct MEMORY_PARTITION_DEDICATED_MEMORY_ATTRIBUTE
+    property type__ : Win32cr::System::Memory::MEM_DEDICATED_ATTRIBUTE_TYPE
+    property reserved : UInt32
+    property value : UInt64
+    def initialize(@type__ : Win32cr::System::Memory::MEM_DEDICATED_ATTRIBUTE_TYPE, @reserved : UInt32, @value : UInt64)
+    end
+  end
+
+  @[Extern]
+  struct MEMORY_PARTITION_DEDICATED_MEMORY_INFORMATION
+    property next_entry_offset : UInt32
+    property size_of_information : UInt32
+    property flags : UInt32
+    property attributes_offset : UInt32
+    property attribute_count : UInt32
+    property reserved : UInt32
+    property type_id : UInt64
+    def initialize(@next_entry_offset : UInt32, @size_of_information : UInt32, @flags : UInt32, @attributes_offset : UInt32, @attribute_count : UInt32, @reserved : UInt32, @type_id : UInt64)
+    end
+  end
+
+  def heapCreate(flOptions : Win32cr::System::Memory::HEAP_FLAGS, dwInitialSize : LibC::UIntPtrT, dwMaximumSize : LibC::UIntPtrT) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.HeapCreate(flOptions, dwInitialSize, dwMaximumSize)
+    {% end %}
   end
 
-  def heapDestroy(hHeap : Win32cr::System::Memory::HeapHandle) : Win32cr::Foundation::BOOL
+  def heapDestroy(hHeap : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HeapDestroy(hHeap)
+    {% end %}
   end
 
-  #def heapAlloc(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, dwBytes : LibC::UIntPtrT) : Void*
+  #def heapAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, dwBytes : LibC::UIntPtrT) : Void*
     #C.HeapAlloc(hHeap, dwFlags, dwBytes)
   #end
 
-  #def heapReAlloc(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*, dwBytes : LibC::UIntPtrT) : Void*
+  #def heapReAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*, dwBytes : LibC::UIntPtrT) : Void*
     #C.HeapReAlloc(hHeap, dwFlags, lpMem, dwBytes)
   #end
 
-  #def heapFree(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
+  #def heapFree(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
     #C.HeapFree(hHeap, dwFlags, lpMem)
   #end
 
-  def heapSize(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : LibC::UIntPtrT
+  def heapSize(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.HeapSize(hHeap, dwFlags, lpMem)
+    {% end %}
   end
 
-  #def getProcessHeap : Win32cr::System::Memory::HeapHandle
+  #def getProcessHeap : Win32cr::Foundation::HANDLE
     #C.GetProcessHeap
   #end
 
-  def heapCompact(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS) : LibC::UIntPtrT
+  def heapCompact(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.HeapCompact(hHeap, dwFlags)
+    {% end %}
   end
 
-  def heapSetInformation(heap_handle : Win32cr::System::Memory::HeapHandle, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+  def heapSetInformation(heap_handle : Win32cr::Foundation::HANDLE, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HeapSetInformation(heap_handle, heap_information_class, heap_information, heap_information_length)
+    {% end %}
   end
 
-  def heapValidate(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
+  def heapValidate(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HeapValidate(hHeap, dwFlags, lpMem)
+    {% end %}
   end
 
   def heapSummary(hHeap : Win32cr::Foundation::HANDLE, dwFlags : UInt32, lpSummary : Win32cr::System::Memory::HEAP_SUMMARY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HeapSummary(hHeap, dwFlags, lpSummary)
+    {% end %}
   end
 
-  def getProcessHeaps(number_of_heaps : UInt32, process_heaps : Win32cr::System::Memory::HeapHandle*) : UInt32
+  def getProcessHeaps(number_of_heaps : UInt32, process_heaps : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProcessHeaps(number_of_heaps, process_heaps)
+    {% end %}
   end
 
-  def heapLock(hHeap : Win32cr::System::Memory::HeapHandle) : Win32cr::Foundation::BOOL
+  def heapLock(hHeap : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HeapLock(hHeap)
+    {% end %}
   end
 
-  def heapUnlock(hHeap : Win32cr::System::Memory::HeapHandle) : Win32cr::Foundation::BOOL
+  def heapUnlock(hHeap : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HeapUnlock(hHeap)
+    {% end %}
   end
 
-  def heapWalk(hHeap : Win32cr::System::Memory::HeapHandle, lpEntry : Win32cr::System::Memory::PROCESS_HEAP_ENTRY*) : Win32cr::Foundation::BOOL
+  def heapWalk(hHeap : Win32cr::Foundation::HANDLE, lpEntry : Win32cr::System::Memory::PROCESS_HEAP_ENTRY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HeapWalk(hHeap, lpEntry)
+    {% end %}
   end
 
-  def heapQueryInformation(heap_handle : Win32cr::System::Memory::HeapHandle, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT, return_length : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+  def heapQueryInformation(heap_handle : Win32cr::Foundation::HANDLE, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT, return_length : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HeapQueryInformation(heap_handle, heap_information_class, heap_information, heap_information_length, return_length)
+    {% end %}
   end
 
   #def virtualAlloc(lpAddress : Void*, dwSize : LibC::UIntPtrT, flAllocationType : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS) : Void*
@@ -468,403 +580,576 @@ module Win32cr::System::Memory
   #end
 
   def virtualAllocEx(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, dwSize : LibC::UIntPtrT, flAllocationType : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS) : Void*
+    {% if !flag?(:docs) %}
     C.VirtualAllocEx(hProcess, lpAddress, dwSize, flAllocationType, flProtect)
+    {% end %}
   end
 
   def virtualProtectEx(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, dwSize : LibC::UIntPtrT, flNewProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, lpflOldProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VirtualProtectEx(hProcess, lpAddress, dwSize, flNewProtect, lpflOldProtect)
+    {% end %}
   end
 
   def virtualQueryEx(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, lpBuffer : Win32cr::System::Memory::MEMORY_BASIC_INFORMATION*, dwLength : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.VirtualQueryEx(hProcess, lpAddress, lpBuffer, dwLength)
+    {% end %}
   end
 
   def createFileMappingW(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateFileMappingW(hFile, lpFileMappingAttributes, flProtect, dwMaximumSizeHigh, dwMaximumSizeLow, lpName)
+    {% end %}
   end
 
   def openFileMappingW(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenFileMappingW(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
-  def mapViewOfFile(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT) : Void*
+  def mapViewOfFile(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
+    {% if !flag?(:docs) %}
     C.MapViewOfFile(hFileMappingObject, dwDesiredAccess, dwFileOffsetHigh, dwFileOffsetLow, dwNumberOfBytesToMap)
+    {% end %}
   end
 
-  def mapViewOfFileEx(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*) : Void*
+  def mapViewOfFileEx(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
+    {% if !flag?(:docs) %}
     C.MapViewOfFileEx(hFileMappingObject, dwDesiredAccess, dwFileOffsetHigh, dwFileOffsetLow, dwNumberOfBytesToMap, lpBaseAddress)
+    {% end %}
   end
 
   def virtualFreeEx(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, dwSize : LibC::UIntPtrT, dwFreeType : Win32cr::System::Memory::VIRTUAL_FREE_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VirtualFreeEx(hProcess, lpAddress, dwSize, dwFreeType)
+    {% end %}
   end
 
   def flushViewOfFile(lpBaseAddress : Void*, dwNumberOfBytesToFlush : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FlushViewOfFile(lpBaseAddress, dwNumberOfBytesToFlush)
+    {% end %}
   end
 
-  def unmapViewOfFile(lpBaseAddress : Void*) : Win32cr::Foundation::BOOL
+  def unmapViewOfFile(lpBaseAddress : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnmapViewOfFile(lpBaseAddress)
+    {% end %}
   end
 
   def getLargePageMinimum : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.GetLargePageMinimum
+    {% end %}
   end
 
   def getProcessWorkingSetSizeEx(hProcess : Win32cr::Foundation::HANDLE, lpMinimumWorkingSetSize : LibC::UIntPtrT*, lpMaximumWorkingSetSize : LibC::UIntPtrT*, flags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessWorkingSetSizeEx(hProcess, lpMinimumWorkingSetSize, lpMaximumWorkingSetSize, flags)
+    {% end %}
   end
 
-  def setProcessWorkingSetSizeEx(hProcess : Win32cr::Foundation::HANDLE, dwMinimumWorkingSetSize : LibC::UIntPtrT, dwMaximumWorkingSetSize : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+  def setProcessWorkingSetSizeEx(hProcess : Win32cr::Foundation::HANDLE, dwMinimumWorkingSetSize : LibC::UIntPtrT, dwMaximumWorkingSetSize : LibC::UIntPtrT, flags : Win32cr::System::Memory::SETPROCESSWORKINGSETSIZEEX_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessWorkingSetSizeEx(hProcess, dwMinimumWorkingSetSize, dwMaximumWorkingSetSize, flags)
+    {% end %}
   end
 
   def virtualLock(lpAddress : Void*, dwSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VirtualLock(lpAddress, dwSize)
+    {% end %}
   end
 
   def virtualUnlock(lpAddress : Void*, dwSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VirtualUnlock(lpAddress, dwSize)
+    {% end %}
   end
 
   def getWriteWatch(dwFlags : UInt32, lpBaseAddress : Void*, dwRegionSize : LibC::UIntPtrT, lpAddresses : Void**, lpdwCount : LibC::UIntPtrT*, lpdwGranularity : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWriteWatch(dwFlags, lpBaseAddress, dwRegionSize, lpAddresses, lpdwCount, lpdwGranularity)
+    {% end %}
   end
 
   def resetWriteWatch(lpBaseAddress : Void*, dwRegionSize : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.ResetWriteWatch(lpBaseAddress, dwRegionSize)
+    {% end %}
   end
 
   def createMemoryResourceNotification(notification_type : Win32cr::System::Memory::MEMORY_RESOURCE_NOTIFICATION_TYPE) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateMemoryResourceNotification(notification_type)
+    {% end %}
   end
 
   def queryMemoryResourceNotification(resource_notification_handle : Win32cr::Foundation::HANDLE, resource_state : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryMemoryResourceNotification(resource_notification_handle, resource_state)
+    {% end %}
   end
 
   def getSystemFileCacheSize(lpMinimumFileCacheSize : LibC::UIntPtrT*, lpMaximumFileCacheSize : LibC::UIntPtrT*, lpFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemFileCacheSize(lpMinimumFileCacheSize, lpMaximumFileCacheSize, lpFlags)
+    {% end %}
   end
 
   def setSystemFileCacheSize(minimum_file_cache_size : LibC::UIntPtrT, maximum_file_cache_size : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSystemFileCacheSize(minimum_file_cache_size, maximum_file_cache_size, flags)
+    {% end %}
   end
 
   def createFileMappingNumaW(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PWSTR, nndPreferred : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateFileMappingNumaW(hFile, lpFileMappingAttributes, flProtect, dwMaximumSizeHigh, dwMaximumSizeLow, lpName, nndPreferred)
+    {% end %}
   end
 
   def prefetchVirtualMemory(hProcess : Win32cr::Foundation::HANDLE, number_of_entries : LibC::UIntPtrT, virtual_addresses : Win32cr::System::Memory::WIN32_MEMORY_RANGE_ENTRY*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PrefetchVirtualMemory(hProcess, number_of_entries, virtual_addresses, flags)
+    {% end %}
   end
 
   def createFileMappingFromApp(hFile : Win32cr::Foundation::HANDLE, security_attributes : Win32cr::Security::SECURITY_ATTRIBUTES*, page_protection : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, maximum_size : UInt64, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateFileMappingFromApp(hFile, security_attributes, page_protection, maximum_size, name)
+    {% end %}
   end
 
-  def mapViewOfFileFromApp(hFileMappingObject : Win32cr::Foundation::HANDLE, desired_access : Win32cr::System::Memory::FILE_MAP, file_offset : UInt64, number_of_bytes_to_map : LibC::UIntPtrT) : Void*
+  def mapViewOfFileFromApp(hFileMappingObject : Win32cr::Foundation::HANDLE, desired_access : Win32cr::System::Memory::FILE_MAP, file_offset : UInt64, number_of_bytes_to_map : LibC::UIntPtrT) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
+    {% if !flag?(:docs) %}
     C.MapViewOfFileFromApp(hFileMappingObject, desired_access, file_offset, number_of_bytes_to_map)
+    {% end %}
   end
 
-  def unmapViewOfFileEx(base_address : Void*, unmap_flags : Win32cr::System::Memory::UNMAP_VIEW_OF_FILE_FLAGS) : Win32cr::Foundation::BOOL
+  def unmapViewOfFileEx(base_address : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS, unmap_flags : Win32cr::System::Memory::UNMAP_VIEW_OF_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnmapViewOfFileEx(base_address, unmap_flags)
+    {% end %}
   end
 
   def allocateUserPhysicalPages(hProcess : Win32cr::Foundation::HANDLE, number_of_pages : LibC::UIntPtrT*, page_array : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllocateUserPhysicalPages(hProcess, number_of_pages, page_array)
+    {% end %}
   end
 
   def freeUserPhysicalPages(hProcess : Win32cr::Foundation::HANDLE, number_of_pages : LibC::UIntPtrT*, page_array : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeUserPhysicalPages(hProcess, number_of_pages, page_array)
+    {% end %}
   end
 
   def mapUserPhysicalPages(virtual_address : Void*, number_of_pages : LibC::UIntPtrT, page_array : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MapUserPhysicalPages(virtual_address, number_of_pages, page_array)
+    {% end %}
   end
 
   def allocateUserPhysicalPagesNuma(hProcess : Win32cr::Foundation::HANDLE, number_of_pages : LibC::UIntPtrT*, page_array : LibC::UIntPtrT*, nndPreferred : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllocateUserPhysicalPagesNuma(hProcess, number_of_pages, page_array, nndPreferred)
+    {% end %}
   end
 
   def virtualAllocExNuma(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, dwSize : LibC::UIntPtrT, flAllocationType : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, flProtect : UInt32, nndPreferred : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.VirtualAllocExNuma(hProcess, lpAddress, dwSize, flAllocationType, flProtect, nndPreferred)
+    {% end %}
   end
 
   def getMemoryErrorHandlingCapabilities(capabilities : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMemoryErrorHandlingCapabilities(capabilities)
+    {% end %}
   end
 
   def registerBadMemoryNotification(callback : Win32cr::System::Memory::PBAD_MEMORY_CALLBACK_ROUTINE) : Void*
+    {% if !flag?(:docs) %}
     C.RegisterBadMemoryNotification(callback)
+    {% end %}
   end
 
   def unregisterBadMemoryNotification(registration_handle : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterBadMemoryNotification(registration_handle)
+    {% end %}
   end
 
   def offerVirtualMemory(virtual_address : Void*, size : LibC::UIntPtrT, priority : Win32cr::System::Memory::OFFER_PRIORITY) : UInt32
+    {% if !flag?(:docs) %}
     C.OfferVirtualMemory(virtual_address, size, priority)
+    {% end %}
   end
 
   def reclaimVirtualMemory(virtual_address : Void*, size : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.ReclaimVirtualMemory(virtual_address, size)
+    {% end %}
   end
 
   def discardVirtualMemory(virtual_address : Void*, size : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.DiscardVirtualMemory(virtual_address, size)
+    {% end %}
   end
 
   def setProcessValidCallTargets(hProcess : Win32cr::Foundation::HANDLE, virtual_address : Void*, region_size : LibC::UIntPtrT, number_of_offsets : UInt32, offset_information : Win32cr::System::Memory::CFG_CALL_TARGET_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessValidCallTargets(hProcess, virtual_address, region_size, number_of_offsets, offset_information)
+    {% end %}
   end
 
   def setProcessValidCallTargetsForMappedView(process : Win32cr::Foundation::HANDLE, virtual_address : Void*, region_size : LibC::UIntPtrT, number_of_offsets : UInt32, offset_information : Win32cr::System::Memory::CFG_CALL_TARGET_INFO*, section : Win32cr::Foundation::HANDLE, expected_file_offset : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessValidCallTargetsForMappedView(process, virtual_address, region_size, number_of_offsets, offset_information, section, expected_file_offset)
+    {% end %}
   end
 
   def virtualAllocFromApp(base_address : Void*, size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, protection : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.VirtualAllocFromApp(base_address, size, allocation_type, protection)
+    {% end %}
   end
 
   def virtualProtectFromApp(address : Void*, size : LibC::UIntPtrT, new_protection : UInt32, old_protection : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VirtualProtectFromApp(address, size, new_protection, old_protection)
+    {% end %}
   end
 
   def openFileMappingFromApp(desired_access : UInt32, inherit_handle : Win32cr::Foundation::BOOL, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenFileMappingFromApp(desired_access, inherit_handle, name)
+    {% end %}
   end
 
   def queryVirtualMemoryInformation(process : Win32cr::Foundation::HANDLE, virtual_address : Void*, memory_information_class : Win32cr::System::Memory::WIN32_MEMORY_INFORMATION_CLASS, memory_information : Void*, memory_information_size : LibC::UIntPtrT, return_size : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryVirtualMemoryInformation(process, virtual_address, memory_information_class, memory_information, memory_information_size, return_size)
+    {% end %}
   end
 
-  def mapViewOfFileNuma2(file_mapping_handle : Win32cr::Foundation::HANDLE, process_handle : Win32cr::Foundation::HANDLE, offset : UInt64, base_address : Void*, view_size : LibC::UIntPtrT, allocation_type : UInt32, page_protection : UInt32, preferred_node : UInt32) : Void*
+  def mapViewOfFileNuma2(file_mapping_handle : Win32cr::Foundation::HANDLE, process_handle : Win32cr::Foundation::HANDLE, offset : UInt64, base_address : Void*, view_size : LibC::UIntPtrT, allocation_type : UInt32, page_protection : UInt32, preferred_node : UInt32) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
+    {% if !flag?(:docs) %}
     C.MapViewOfFileNuma2(file_mapping_handle, process_handle, offset, base_address, view_size, allocation_type, page_protection, preferred_node)
+    {% end %}
   end
 
-  def unmapViewOfFile2(process : Win32cr::Foundation::HANDLE, base_address : Void*, unmap_flags : Win32cr::System::Memory::UNMAP_VIEW_OF_FILE_FLAGS) : Win32cr::Foundation::BOOL
+  def unmapViewOfFile2(process : Win32cr::Foundation::HANDLE, base_address : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS, unmap_flags : Win32cr::System::Memory::UNMAP_VIEW_OF_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnmapViewOfFile2(process, base_address, unmap_flags)
+    {% end %}
   end
 
   def virtualUnlockEx(process : Win32cr::Foundation::HANDLE, address : Void*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VirtualUnlockEx(process, address, size)
+    {% end %}
   end
 
   def virtualAlloc2(process : Win32cr::Foundation::HANDLE, base_address : Void*, size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.VirtualAlloc2(process, base_address, size, allocation_type, page_protection, extended_parameters, parameter_count)
+    {% end %}
   end
 
-  def mapViewOfFile3(file_mapping : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE, base_address : Void*, offset : UInt64, view_size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Void*
+  def mapViewOfFile3(file_mapping : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE, base_address : Void*, offset : UInt64, view_size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
+    {% if !flag?(:docs) %}
     C.MapViewOfFile3(file_mapping, process, base_address, offset, view_size, allocation_type, page_protection, extended_parameters, parameter_count)
+    {% end %}
   end
 
   def virtualAlloc2FromApp(process : Win32cr::Foundation::HANDLE, base_address : Void*, size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.VirtualAlloc2FromApp(process, base_address, size, allocation_type, page_protection, extended_parameters, parameter_count)
+    {% end %}
   end
 
-  def mapViewOfFile3FromApp(file_mapping : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE, base_address : Void*, offset : UInt64, view_size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Void*
+  def mapViewOfFile3FromApp(file_mapping : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE, base_address : Void*, offset : UInt64, view_size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
+    {% if !flag?(:docs) %}
     C.MapViewOfFile3FromApp(file_mapping, process, base_address, offset, view_size, allocation_type, page_protection, extended_parameters, parameter_count)
+    {% end %}
   end
 
   def createFileMapping2(file : Win32cr::Foundation::HANDLE, security_attributes : Win32cr::Security::SECURITY_ATTRIBUTES*, desired_access : UInt32, page_protection : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, allocation_attributes : UInt32, maximum_size : UInt64, name : Win32cr::Foundation::PWSTR, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateFileMapping2(file, security_attributes, desired_access, page_protection, allocation_attributes, maximum_size, name, extended_parameters, parameter_count)
+    {% end %}
   end
 
   def allocateUserPhysicalPages2(object_handle : Win32cr::Foundation::HANDLE, number_of_pages : LibC::UIntPtrT*, page_array : LibC::UIntPtrT*, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, extended_parameter_count : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllocateUserPhysicalPages2(object_handle, number_of_pages, page_array, extended_parameters, extended_parameter_count)
+    {% end %}
   end
 
   def openDedicatedMemoryPartition(partition : Win32cr::Foundation::HANDLE, dedicated_memory_type_id : UInt64, desired_access : UInt32, inherit_handle : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenDedicatedMemoryPartition(partition, dedicated_memory_type_id, desired_access, inherit_handle)
+    {% end %}
   end
 
   def queryPartitionInformation(partition : Win32cr::Foundation::HANDLE, partition_information_class : Win32cr::System::Memory::WIN32_MEMORY_PARTITION_INFORMATION_CLASS, partition_information : Void*, partition_information_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryPartitionInformation(partition, partition_information_class, partition_information, partition_information_length)
+    {% end %}
+  end
+
+  def getMemoryNumaClosestInitiatorNode(target_node_number : UInt32, initiator_node_number : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetMemoryNumaClosestInitiatorNode(target_node_number, initiator_node_number)
+    {% end %}
+  end
+
+  def getMemoryNumaPerformanceInformation(node_number : UInt32, data_type : UInt8, perf_info : Win32cr::System::Memory::WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
+    C.GetMemoryNumaPerformanceInformation(node_number, data_type, perf_info)
+    {% end %}
   end
 
   def rtlCompareMemory(source1 : Void*, source2 : Void*, length : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.RtlCompareMemory(source1, source2, length)
+    {% end %}
   end
 
   def rtlCrc32(buffer : Void*, size : LibC::UIntPtrT, initial_crc : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlCrc32(buffer, size, initial_crc)
+    {% end %}
   end
 
   def rtlCrc64(buffer : Void*, size : LibC::UIntPtrT, initial_crc : UInt64) : UInt64
+    {% if !flag?(:docs) %}
     C.RtlCrc64(buffer, size, initial_crc)
+    {% end %}
   end
 
   def rtlIsZeroMemory(buffer : Void*, length : LibC::UIntPtrT) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlIsZeroMemory(buffer, length)
+    {% end %}
   end
 
-  def globalAlloc(uFlags : Win32cr::System::Memory::GLOBAL_ALLOC_FLAGS, dwBytes : LibC::UIntPtrT) : LibC::IntPtrT
+  def globalAlloc(uFlags : Win32cr::System::Memory::GLOBAL_ALLOC_FLAGS, dwBytes : LibC::UIntPtrT) : Win32cr::Foundation::HGLOBAL
+    {% if !flag?(:docs) %}
     C.GlobalAlloc(uFlags, dwBytes)
+    {% end %}
   end
 
-  def globalReAlloc(hMem : LibC::IntPtrT, dwBytes : LibC::UIntPtrT, uFlags : UInt32) : LibC::IntPtrT
+  def globalReAlloc(hMem : Win32cr::Foundation::HGLOBAL, dwBytes : LibC::UIntPtrT, uFlags : UInt32) : Win32cr::Foundation::HGLOBAL
+    {% if !flag?(:docs) %}
     C.GlobalReAlloc(hMem, dwBytes, uFlags)
+    {% end %}
   end
 
-  def globalSize(hMem : LibC::IntPtrT) : LibC::UIntPtrT
+  def globalSize(hMem : Win32cr::Foundation::HGLOBAL) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.GlobalSize(hMem)
+    {% end %}
   end
 
-  def globalUnlock(hMem : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+  def globalUnlock(hMem : Win32cr::Foundation::HGLOBAL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GlobalUnlock(hMem)
+    {% end %}
   end
 
-  def globalLock(hMem : LibC::IntPtrT) : Void*
+  def globalLock(hMem : Win32cr::Foundation::HGLOBAL) : Void*
+    {% if !flag?(:docs) %}
     C.GlobalLock(hMem)
+    {% end %}
   end
 
-  def globalFlags(hMem : LibC::IntPtrT) : UInt32
+  def globalFlags(hMem : Win32cr::Foundation::HGLOBAL) : UInt32
+    {% if !flag?(:docs) %}
     C.GlobalFlags(hMem)
+    {% end %}
   end
 
-  def globalHandle(pMem : Void*) : LibC::IntPtrT
+  def globalHandle(pMem : Void*) : Win32cr::Foundation::HGLOBAL
+    {% if !flag?(:docs) %}
     C.GlobalHandle(pMem)
+    {% end %}
   end
 
-  def globalFree(hMem : LibC::IntPtrT) : LibC::IntPtrT
-    C.GlobalFree(hMem)
-  end
-
-  def localAlloc(uFlags : Win32cr::System::Memory::LOCAL_ALLOC_FLAGS, uBytes : LibC::UIntPtrT) : LibC::IntPtrT
+  def localAlloc(uFlags : Win32cr::System::Memory::LOCAL_ALLOC_FLAGS, uBytes : LibC::UIntPtrT) : Win32cr::Foundation::HLOCAL
+    {% if !flag?(:docs) %}
     C.LocalAlloc(uFlags, uBytes)
+    {% end %}
   end
 
-  def localReAlloc(hMem : LibC::IntPtrT, uBytes : LibC::UIntPtrT, uFlags : UInt32) : LibC::IntPtrT
+  def localReAlloc(hMem : Win32cr::Foundation::HLOCAL, uBytes : LibC::UIntPtrT, uFlags : UInt32) : Win32cr::Foundation::HLOCAL
+    {% if !flag?(:docs) %}
     C.LocalReAlloc(hMem, uBytes, uFlags)
+    {% end %}
   end
 
-  def localLock(hMem : LibC::IntPtrT) : Void*
+  def localLock(hMem : Win32cr::Foundation::HLOCAL) : Void*
+    {% if !flag?(:docs) %}
     C.LocalLock(hMem)
+    {% end %}
   end
 
-  def localHandle(pMem : Void*) : LibC::IntPtrT
+  def localHandle(pMem : Void*) : Win32cr::Foundation::HLOCAL
+    {% if !flag?(:docs) %}
     C.LocalHandle(pMem)
+    {% end %}
   end
 
-  def localUnlock(hMem : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+  def localUnlock(hMem : Win32cr::Foundation::HLOCAL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LocalUnlock(hMem)
+    {% end %}
   end
 
-  def localSize(hMem : LibC::IntPtrT) : LibC::UIntPtrT
+  def localSize(hMem : Win32cr::Foundation::HLOCAL) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.LocalSize(hMem)
+    {% end %}
   end
 
-  def localFlags(hMem : LibC::IntPtrT) : UInt32
+  def localFlags(hMem : Win32cr::Foundation::HLOCAL) : UInt32
+    {% if !flag?(:docs) %}
     C.LocalFlags(hMem)
+    {% end %}
   end
-
-  #def localFree(hMem : LibC::IntPtrT) : LibC::IntPtrT
-    #C.LocalFree(hMem)
-  #end
 
   def createFileMappingA(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateFileMappingA(hFile, lpFileMappingAttributes, flProtect, dwMaximumSizeHigh, dwMaximumSizeLow, lpName)
+    {% end %}
   end
 
   def createFileMappingNumaA(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PSTR, nndPreferred : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateFileMappingNumaA(hFile, lpFileMappingAttributes, flProtect, dwMaximumSizeHigh, dwMaximumSizeLow, lpName, nndPreferred)
+    {% end %}
   end
 
   def openFileMappingA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenFileMappingA(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
-  def mapViewOfFileExNuma(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*, nndPreferred : UInt32) : Void*
+  def mapViewOfFileExNuma(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*, nndPreferred : UInt32) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
+    {% if !flag?(:docs) %}
     C.MapViewOfFileExNuma(hFileMappingObject, dwDesiredAccess, dwFileOffsetHigh, dwFileOffsetLow, dwNumberOfBytesToMap, lpBaseAddress, nndPreferred)
+    {% end %}
   end
 
   def isBadReadPtr(lp : Void*, ucb : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsBadReadPtr(lp, ucb)
+    {% end %}
   end
 
   def isBadWritePtr(lp : Void*, ucb : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsBadWritePtr(lp, ucb)
+    {% end %}
   end
 
   def isBadCodePtr(lpfn : Win32cr::Foundation::FARPROC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsBadCodePtr(lpfn)
+    {% end %}
   end
 
   def isBadStringPtrA(lpsz : Win32cr::Foundation::PSTR, ucchMax : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsBadStringPtrA(lpsz, ucchMax)
+    {% end %}
   end
 
   def isBadStringPtrW(lpsz : Win32cr::Foundation::PWSTR, ucchMax : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsBadStringPtrW(lpsz, ucchMax)
+    {% end %}
   end
 
   def mapUserPhysicalPagesScatter(virtual_addresses : Void**, number_of_pages : LibC::UIntPtrT, page_array : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MapUserPhysicalPagesScatter(virtual_addresses, number_of_pages, page_array)
+    {% end %}
   end
 
   def addSecureMemoryCacheCallback(pfnCallBack : Win32cr::System::Memory::PSECURE_MEMORY_CACHE_CALLBACK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddSecureMemoryCacheCallback(pfnCallBack)
+    {% end %}
   end
 
   def removeSecureMemoryCacheCallback(pfnCallBack : Win32cr::System::Memory::PSECURE_MEMORY_CACHE_CALLBACK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RemoveSecureMemoryCacheCallback(pfnCallBack)
+    {% end %}
   end
 
   @[Link("kernel32")]
   @[Link("ntdll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun HeapCreate(flOptions : Win32cr::System::Memory::HEAP_FLAGS, dwInitialSize : LibC::UIntPtrT, dwMaximumSize : LibC::UIntPtrT) : Win32cr::System::Memory::HeapHandle
+    fun HeapCreate(flOptions : Win32cr::System::Memory::HEAP_FLAGS, dwInitialSize : LibC::UIntPtrT, dwMaximumSize : LibC::UIntPtrT) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun HeapDestroy(hHeap : Win32cr::System::Memory::HeapHandle) : Win32cr::Foundation::BOOL
-
-    # Commented out due to being part of LibC
-    # :nodoc:
-    #fun HeapAlloc(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, dwBytes : LibC::UIntPtrT) : Void*
+    fun HeapDestroy(hHeap : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun HeapReAlloc(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*, dwBytes : LibC::UIntPtrT) : Void*
+    #fun HeapAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, dwBytes : LibC::UIntPtrT) : Void*
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun HeapFree(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
-
-    # :nodoc:
-    fun HeapSize(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : LibC::UIntPtrT
+    #fun HeapReAlloc(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*, dwBytes : LibC::UIntPtrT) : Void*
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun GetProcessHeap : Win32cr::System::Memory::HeapHandle
+    #fun HeapFree(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun HeapCompact(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS) : LibC::UIntPtrT
+    fun HeapSize(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : LibC::UIntPtrT
+
+    # Commented out due to being part of LibC
+    # :nodoc:
+    #fun GetProcessHeap : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun HeapSetInformation(heap_handle : Win32cr::System::Memory::HeapHandle, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    fun HeapCompact(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS) : LibC::UIntPtrT
 
     # :nodoc:
-    fun HeapValidate(hHeap : Win32cr::System::Memory::HeapHandle, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
+    fun HeapSetInformation(heap_handle : Win32cr::Foundation::HANDLE, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun HeapValidate(hHeap : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Memory::HEAP_FLAGS, lpMem : Void*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun HeapSummary(hHeap : Win32cr::Foundation::HANDLE, dwFlags : UInt32, lpSummary : Win32cr::System::Memory::HEAP_SUMMARY*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetProcessHeaps(number_of_heaps : UInt32, process_heaps : Win32cr::System::Memory::HeapHandle*) : UInt32
+    fun GetProcessHeaps(number_of_heaps : UInt32, process_heaps : Win32cr::Foundation::HANDLE*) : UInt32
 
     # :nodoc:
-    fun HeapLock(hHeap : Win32cr::System::Memory::HeapHandle) : Win32cr::Foundation::BOOL
+    fun HeapLock(hHeap : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun HeapUnlock(hHeap : Win32cr::System::Memory::HeapHandle) : Win32cr::Foundation::BOOL
+    fun HeapUnlock(hHeap : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun HeapWalk(hHeap : Win32cr::System::Memory::HeapHandle, lpEntry : Win32cr::System::Memory::PROCESS_HEAP_ENTRY*) : Win32cr::Foundation::BOOL
+    fun HeapWalk(hHeap : Win32cr::Foundation::HANDLE, lpEntry : Win32cr::System::Memory::PROCESS_HEAP_ENTRY*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun HeapQueryInformation(heap_handle : Win32cr::System::Memory::HeapHandle, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT, return_length : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    fun HeapQueryInformation(heap_handle : Win32cr::Foundation::HANDLE, heap_information_class : Win32cr::System::Memory::HEAP_INFORMATION_CLASS, heap_information : Void*, heap_information_length : LibC::UIntPtrT, return_length : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # Commented out due to being part of LibC
     # :nodoc:
@@ -898,10 +1183,10 @@ module Win32cr::System::Memory
     fun OpenFileMappingW(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun MapViewOfFile(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT) : Void*
+    fun MapViewOfFile(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
 
     # :nodoc:
-    fun MapViewOfFileEx(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*) : Void*
+    fun MapViewOfFileEx(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
 
     # :nodoc:
     fun VirtualFreeEx(hProcess : Win32cr::Foundation::HANDLE, lpAddress : Void*, dwSize : LibC::UIntPtrT, dwFreeType : Win32cr::System::Memory::VIRTUAL_FREE_TYPE) : Win32cr::Foundation::BOOL
@@ -910,7 +1195,7 @@ module Win32cr::System::Memory
     fun FlushViewOfFile(lpBaseAddress : Void*, dwNumberOfBytesToFlush : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun UnmapViewOfFile(lpBaseAddress : Void*) : Win32cr::Foundation::BOOL
+    fun UnmapViewOfFile(lpBaseAddress : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetLargePageMinimum : LibC::UIntPtrT
@@ -919,7 +1204,7 @@ module Win32cr::System::Memory
     fun GetProcessWorkingSetSizeEx(hProcess : Win32cr::Foundation::HANDLE, lpMinimumWorkingSetSize : LibC::UIntPtrT*, lpMaximumWorkingSetSize : LibC::UIntPtrT*, flags : UInt32*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun SetProcessWorkingSetSizeEx(hProcess : Win32cr::Foundation::HANDLE, dwMinimumWorkingSetSize : LibC::UIntPtrT, dwMaximumWorkingSetSize : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+    fun SetProcessWorkingSetSizeEx(hProcess : Win32cr::Foundation::HANDLE, dwMinimumWorkingSetSize : LibC::UIntPtrT, dwMaximumWorkingSetSize : LibC::UIntPtrT, flags : Win32cr::System::Memory::SETPROCESSWORKINGSETSIZEEX_FLAGS) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun VirtualLock(lpAddress : Void*, dwSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
@@ -955,10 +1240,10 @@ module Win32cr::System::Memory
     fun CreateFileMappingFromApp(hFile : Win32cr::Foundation::HANDLE, security_attributes : Win32cr::Security::SECURITY_ATTRIBUTES*, page_protection : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, maximum_size : UInt64, name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun MapViewOfFileFromApp(hFileMappingObject : Win32cr::Foundation::HANDLE, desired_access : Win32cr::System::Memory::FILE_MAP, file_offset : UInt64, number_of_bytes_to_map : LibC::UIntPtrT) : Void*
+    fun MapViewOfFileFromApp(hFileMappingObject : Win32cr::Foundation::HANDLE, desired_access : Win32cr::System::Memory::FILE_MAP, file_offset : UInt64, number_of_bytes_to_map : LibC::UIntPtrT) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
 
     # :nodoc:
-    fun UnmapViewOfFileEx(base_address : Void*, unmap_flags : Win32cr::System::Memory::UNMAP_VIEW_OF_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    fun UnmapViewOfFileEx(base_address : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS, unmap_flags : Win32cr::System::Memory::UNMAP_VIEW_OF_FILE_FLAGS) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun AllocateUserPhysicalPages(hProcess : Win32cr::Foundation::HANDLE, number_of_pages : LibC::UIntPtrT*, page_array : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
@@ -1012,10 +1297,10 @@ module Win32cr::System::Memory
     fun QueryVirtualMemoryInformation(process : Win32cr::Foundation::HANDLE, virtual_address : Void*, memory_information_class : Win32cr::System::Memory::WIN32_MEMORY_INFORMATION_CLASS, memory_information : Void*, memory_information_size : LibC::UIntPtrT, return_size : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun MapViewOfFileNuma2(file_mapping_handle : Win32cr::Foundation::HANDLE, process_handle : Win32cr::Foundation::HANDLE, offset : UInt64, base_address : Void*, view_size : LibC::UIntPtrT, allocation_type : UInt32, page_protection : UInt32, preferred_node : UInt32) : Void*
+    fun MapViewOfFileNuma2(file_mapping_handle : Win32cr::Foundation::HANDLE, process_handle : Win32cr::Foundation::HANDLE, offset : UInt64, base_address : Void*, view_size : LibC::UIntPtrT, allocation_type : UInt32, page_protection : UInt32, preferred_node : UInt32) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
 
     # :nodoc:
-    fun UnmapViewOfFile2(process : Win32cr::Foundation::HANDLE, base_address : Void*, unmap_flags : Win32cr::System::Memory::UNMAP_VIEW_OF_FILE_FLAGS) : Win32cr::Foundation::BOOL
+    fun UnmapViewOfFile2(process : Win32cr::Foundation::HANDLE, base_address : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS, unmap_flags : Win32cr::System::Memory::UNMAP_VIEW_OF_FILE_FLAGS) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun VirtualUnlockEx(process : Win32cr::Foundation::HANDLE, address : Void*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
@@ -1024,13 +1309,13 @@ module Win32cr::System::Memory
     fun VirtualAlloc2(process : Win32cr::Foundation::HANDLE, base_address : Void*, size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Void*
 
     # :nodoc:
-    fun MapViewOfFile3(file_mapping : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE, base_address : Void*, offset : UInt64, view_size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Void*
+    fun MapViewOfFile3(file_mapping : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE, base_address : Void*, offset : UInt64, view_size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
 
     # :nodoc:
     fun VirtualAlloc2FromApp(process : Win32cr::Foundation::HANDLE, base_address : Void*, size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Void*
 
     # :nodoc:
-    fun MapViewOfFile3FromApp(file_mapping : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE, base_address : Void*, offset : UInt64, view_size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Void*
+    fun MapViewOfFile3FromApp(file_mapping : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE, base_address : Void*, offset : UInt64, view_size : LibC::UIntPtrT, allocation_type : Win32cr::System::Memory::VIRTUAL_ALLOCATION_TYPE, page_protection : UInt32, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
 
     # :nodoc:
     fun CreateFileMapping2(file : Win32cr::Foundation::HANDLE, security_attributes : Win32cr::Security::SECURITY_ATTRIBUTES*, desired_access : UInt32, page_protection : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, allocation_attributes : UInt32, maximum_size : UInt64, name : Win32cr::Foundation::PWSTR, extended_parameters : Win32cr::System::Memory::MEM_EXTENDED_PARAMETER*, parameter_count : UInt32) : Win32cr::Foundation::HANDLE
@@ -1045,6 +1330,12 @@ module Win32cr::System::Memory
     fun QueryPartitionInformation(partition : Win32cr::Foundation::HANDLE, partition_information_class : Win32cr::System::Memory::WIN32_MEMORY_PARTITION_INFORMATION_CLASS, partition_information : Void*, partition_information_length : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
+    fun GetMemoryNumaClosestInitiatorNode(target_node_number : UInt32, initiator_node_number : UInt32*) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
+    fun GetMemoryNumaPerformanceInformation(node_number : UInt32, data_type : UInt8, perf_info : Win32cr::System::Memory::WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT**) : Win32cr::Foundation::BOOL
+
+    # :nodoc:
     fun RtlCompareMemory(source1 : Void*, source2 : Void*, length : LibC::UIntPtrT) : LibC::UIntPtrT
 
     # :nodoc:
@@ -1057,53 +1348,46 @@ module Win32cr::System::Memory
     fun RtlIsZeroMemory(buffer : Void*, length : LibC::UIntPtrT) : Win32cr::Foundation::BOOLEAN
 
     # :nodoc:
-    fun GlobalAlloc(uFlags : Win32cr::System::Memory::GLOBAL_ALLOC_FLAGS, dwBytes : LibC::UIntPtrT) : LibC::IntPtrT
+    fun GlobalAlloc(uFlags : Win32cr::System::Memory::GLOBAL_ALLOC_FLAGS, dwBytes : LibC::UIntPtrT) : Win32cr::Foundation::HGLOBAL
 
     # :nodoc:
-    fun GlobalReAlloc(hMem : LibC::IntPtrT, dwBytes : LibC::UIntPtrT, uFlags : UInt32) : LibC::IntPtrT
+    fun GlobalReAlloc(hMem : Win32cr::Foundation::HGLOBAL, dwBytes : LibC::UIntPtrT, uFlags : UInt32) : Win32cr::Foundation::HGLOBAL
 
     # :nodoc:
-    fun GlobalSize(hMem : LibC::IntPtrT) : LibC::UIntPtrT
+    fun GlobalSize(hMem : Win32cr::Foundation::HGLOBAL) : LibC::UIntPtrT
 
     # :nodoc:
-    fun GlobalUnlock(hMem : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    fun GlobalUnlock(hMem : Win32cr::Foundation::HGLOBAL) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GlobalLock(hMem : LibC::IntPtrT) : Void*
+    fun GlobalLock(hMem : Win32cr::Foundation::HGLOBAL) : Void*
 
     # :nodoc:
-    fun GlobalFlags(hMem : LibC::IntPtrT) : UInt32
+    fun GlobalFlags(hMem : Win32cr::Foundation::HGLOBAL) : UInt32
 
     # :nodoc:
-    fun GlobalHandle(pMem : Void*) : LibC::IntPtrT
+    fun GlobalHandle(pMem : Void*) : Win32cr::Foundation::HGLOBAL
 
     # :nodoc:
-    fun GlobalFree(hMem : LibC::IntPtrT) : LibC::IntPtrT
+    fun LocalAlloc(uFlags : Win32cr::System::Memory::LOCAL_ALLOC_FLAGS, uBytes : LibC::UIntPtrT) : Win32cr::Foundation::HLOCAL
 
     # :nodoc:
-    fun LocalAlloc(uFlags : Win32cr::System::Memory::LOCAL_ALLOC_FLAGS, uBytes : LibC::UIntPtrT) : LibC::IntPtrT
+    fun LocalReAlloc(hMem : Win32cr::Foundation::HLOCAL, uBytes : LibC::UIntPtrT, uFlags : UInt32) : Win32cr::Foundation::HLOCAL
 
     # :nodoc:
-    fun LocalReAlloc(hMem : LibC::IntPtrT, uBytes : LibC::UIntPtrT, uFlags : UInt32) : LibC::IntPtrT
+    fun LocalLock(hMem : Win32cr::Foundation::HLOCAL) : Void*
 
     # :nodoc:
-    fun LocalLock(hMem : LibC::IntPtrT) : Void*
+    fun LocalHandle(pMem : Void*) : Win32cr::Foundation::HLOCAL
 
     # :nodoc:
-    fun LocalHandle(pMem : Void*) : LibC::IntPtrT
+    fun LocalUnlock(hMem : Win32cr::Foundation::HLOCAL) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun LocalUnlock(hMem : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    fun LocalSize(hMem : Win32cr::Foundation::HLOCAL) : LibC::UIntPtrT
 
     # :nodoc:
-    fun LocalSize(hMem : LibC::IntPtrT) : LibC::UIntPtrT
-
-    # :nodoc:
-    fun LocalFlags(hMem : LibC::IntPtrT) : UInt32
-
-    # Commented out due to being part of LibC
-    # :nodoc:
-    #fun LocalFree(hMem : LibC::IntPtrT) : LibC::IntPtrT
+    fun LocalFlags(hMem : Win32cr::Foundation::HLOCAL) : UInt32
 
     # :nodoc:
     fun CreateFileMappingA(hFile : Win32cr::Foundation::HANDLE, lpFileMappingAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, flProtect : Win32cr::System::Memory::PAGE_PROTECTION_FLAGS, dwMaximumSizeHigh : UInt32, dwMaximumSizeLow : UInt32, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
@@ -1115,7 +1399,7 @@ module Win32cr::System::Memory
     fun OpenFileMappingA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
 
     # :nodoc:
-    fun MapViewOfFileExNuma(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*, nndPreferred : UInt32) : Void*
+    fun MapViewOfFileExNuma(hFileMappingObject : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::System::Memory::FILE_MAP, dwFileOffsetHigh : UInt32, dwFileOffsetLow : UInt32, dwNumberOfBytesToMap : LibC::UIntPtrT, lpBaseAddress : Void*, nndPreferred : UInt32) : Win32cr::System::Memory::MEMORY_MAPPED_VIEW_ADDRESS
 
     # :nodoc:
     fun IsBadReadPtr(lp : Void*, ucb : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
@@ -1142,4 +1426,5 @@ module Win32cr::System::Memory
     fun RemoveSecureMemoryCacheCallback(pfnCallBack : Win32cr::System::Memory::PSECURE_MEMORY_CACHE_CALLBACK) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

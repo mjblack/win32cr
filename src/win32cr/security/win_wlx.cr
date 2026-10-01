@@ -207,18 +207,18 @@ module Win32cr::Security::WinWlx
     property quotas : Win32cr::Security::QUOTA_LIMITS
     property user_name : Win32cr::Foundation::PWSTR
     property domain : Win32cr::Foundation::PWSTR
-    property logon_time : Win32cr::Foundation::LARGE_INTEGER
+    property logon_time : Int64
     property smart_card_logon : Win32cr::Foundation::BOOL
     property profile_length : UInt32
     property message_type : UInt32
     property logon_count : UInt16
     property bad_password_count : UInt16
-    property profile_logon_time : Win32cr::Foundation::LARGE_INTEGER
-    property logoff_time : Win32cr::Foundation::LARGE_INTEGER
-    property kick_off_time : Win32cr::Foundation::LARGE_INTEGER
-    property password_last_set : Win32cr::Foundation::LARGE_INTEGER
-    property password_can_change : Win32cr::Foundation::LARGE_INTEGER
-    property password_must_change : Win32cr::Foundation::LARGE_INTEGER
+    property profile_logon_time : Int64
+    property logoff_time : Int64
+    property kick_off_time : Int64
+    property password_last_set : Int64
+    property password_can_change : Int64
+    property password_must_change : Int64
     property logon_script : Win32cr::Foundation::PWSTR
     property home_directory : Win32cr::Foundation::PWSTR
     property full_name : Win32cr::Foundation::PWSTR
@@ -228,7 +228,7 @@ module Win32cr::Security::WinWlx
     property user_flags : UInt32
     property private_data_len : UInt32
     property private_data : UInt8*
-    def initialize(@dwType : UInt32, @user_token : Win32cr::Foundation::HANDLE, @logon_id : Win32cr::Foundation::LUID, @quotas : Win32cr::Security::QUOTA_LIMITS, @user_name : Win32cr::Foundation::PWSTR, @domain : Win32cr::Foundation::PWSTR, @logon_time : Win32cr::Foundation::LARGE_INTEGER, @smart_card_logon : Win32cr::Foundation::BOOL, @profile_length : UInt32, @message_type : UInt32, @logon_count : UInt16, @bad_password_count : UInt16, @profile_logon_time : Win32cr::Foundation::LARGE_INTEGER, @logoff_time : Win32cr::Foundation::LARGE_INTEGER, @kick_off_time : Win32cr::Foundation::LARGE_INTEGER, @password_last_set : Win32cr::Foundation::LARGE_INTEGER, @password_can_change : Win32cr::Foundation::LARGE_INTEGER, @password_must_change : Win32cr::Foundation::LARGE_INTEGER, @logon_script : Win32cr::Foundation::PWSTR, @home_directory : Win32cr::Foundation::PWSTR, @full_name : Win32cr::Foundation::PWSTR, @profile_path : Win32cr::Foundation::PWSTR, @home_directory_drive : Win32cr::Foundation::PWSTR, @logon_server : Win32cr::Foundation::PWSTR, @user_flags : UInt32, @private_data_len : UInt32, @private_data : UInt8*)
+    def initialize(@dwType : UInt32, @user_token : Win32cr::Foundation::HANDLE, @logon_id : Win32cr::Foundation::LUID, @quotas : Win32cr::Security::QUOTA_LIMITS, @user_name : Win32cr::Foundation::PWSTR, @domain : Win32cr::Foundation::PWSTR, @logon_time : Int64, @smart_card_logon : Win32cr::Foundation::BOOL, @profile_length : UInt32, @message_type : UInt32, @logon_count : UInt16, @bad_password_count : UInt16, @profile_logon_time : Int64, @logoff_time : Int64, @kick_off_time : Int64, @password_last_set : Int64, @password_can_change : Int64, @password_must_change : Int64, @logon_script : Win32cr::Foundation::PWSTR, @home_directory : Win32cr::Foundation::PWSTR, @full_name : Win32cr::Foundation::PWSTR, @profile_path : Win32cr::Foundation::PWSTR, @home_directory_drive : Win32cr::Foundation::PWSTR, @logon_server : Win32cr::Foundation::PWSTR, @user_flags : UInt32, @private_data_len : UInt32, @private_data : UInt8*)
     end
   end
 

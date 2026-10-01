@@ -1,6 +1,6 @@
+require "./../foundation.cr"
 require "./../system/com/structured_storage.cr"
 require "./../system/com.cr"
-require "./../foundation.cr"
 
 module Win32cr::Storage::IndexServer
   extend self
@@ -12,7 +12,10 @@ module Win32cr::Storage::IndexServer
   LIFF_LOAD_DEFINED_FILTER = 1_u32
   LIFF_IMPLEMENT_TEXT_FILTER_FALLBACK_POLICY = 2_u32
   LIFF_FORCE_TEXT_FILTER_FALLBACK = 3_u32
+  CLSID_INDEX_SERVER_DSO = LibC::GUID.new(0xf9ae8980_u32, 0x7e52_u16, 0x11d0_u16, StaticArray[0x89_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x11_u8, 0xd7_u8])
+  PSGUID_FILENAME = LibC::GUID.new(0x41cf5ae0_u32, 0xf75a_u16, 0x4806_u16, StaticArray[0xbd_u8, 0x87_u8, 0x59_u8, 0xc7_u8, 0xd9_u8, 0x24_u8, 0x8e_u8, 0xb9_u8])
   PID_FILENAME = 100_u32
+  DBPROPSET_FSCIFRMWRK_EXT = LibC::GUID.new(0xa9bd1526_u32, 0x6a80_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x9d_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0x1d_u8, 0x74_u8, 0xe_u8])
   DBPROP_CI_CATALOG_NAME = 2_u32
   DBPROP_CI_INCLUDE_SCOPES = 3_u32
   DBPROP_CI_DEPTHS = 4_u32
@@ -24,7 +27,9 @@ module Win32cr::Storage::IndexServer
   CI_PROVIDER_MSSEARCH = 1_u32
   CI_PROVIDER_INDEXING_SERVICE = 2_u32
   CI_PROVIDER_ALL = 4294967295_u32
+  DBPROPSET_SESS_QUERYEXT = LibC::GUID.new(0x63623309_u32, 0x2d8b_u16, 0x4d17_u16, StaticArray[0xb1_u8, 0x52_u8, 0x6e_u8, 0x29_u8, 0x56_u8, 0xc2_u8, 0x6a_u8, 0x70_u8])
   DBPROP_DEFAULT_EQUALS_BEHAVIOR = 2_u32
+  DBPROPSET_QUERYEXT = LibC::GUID.new(0xa7ac77ed_u32, 0xf8d7_u16, 0x11ce_u16, StaticArray[0xa7_u8, 0x98_u8, 0x0_u8, 0x20_u8, 0xf8_u8, 0x0_u8, 0x80_u8, 0x25_u8])
   DBPROP_USECONTENTINDEX = 2_u32
   DBPROP_DEFERNONINDEXEDTRIMMING = 3_u32
   DBPROP_USEEXTENDEDDBTYPES = 4_u32
@@ -40,8 +45,12 @@ module Win32cr::Storage::IndexServer
   DBPROP_IGNORESBRI = 14_u32
   DBPROP_DONOTCOMPUTEEXPENSIVEPROPS = 15_u32
   DBPROP_ENABLEROWSETEVENTS = 16_u32
+  DBPROP_SESSION_ID = 17_u32
+  DBPROP_QUERY_ID = 18_u32
+  DBPROPSET_CIFRMWRKCORE_EXT = LibC::GUID.new(0xafafaca5_u32, 0xb5d1_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x62_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xdb_u8, 0x8d_u8])
   DBPROP_MACHINE = 2_u32
   DBPROP_CLIENT_CLSID = 3_u32
+  DBPROPSET_MSIDXS_ROWSETEXT = LibC::GUID.new(0xaa6ee6b0_u32, 0xe828_u16, 0x11d0_u16, StaticArray[0xb2_u8, 0x3e_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xfc_u8, 0x1_u8])
   MSIDXSPROP_ROWSETQUERYSTATUS = 2_u32
   MSIDXSPROP_COMMAND_LOCALE_STRING = 3_u32
   MSIDXSPROP_QUERY_RESTRICTION = 4_u32
@@ -166,6 +175,7 @@ module Win32cr::Storage::IndexServer
     CHUNK_TEXT = 1_i32
     CHUNK_VALUE = 2_i32
     CHUNK_FILTER_OWNED_VALUE = 4_i32
+    CHUNK_IMAGE = 8_i32
   end
   enum CHUNK_BREAKTYPE
     CHUNK_NO_BREAK = 0_i32
@@ -173,6 +183,11 @@ module Win32cr::Storage::IndexServer
     CHUNK_EOS = 2_i32
     CHUNK_EOP = 3_i32
     CHUNK_EOC = 4_i32
+  end
+  enum IMAGE_PIXELFORMAT
+    FILTER_PIXELFORMAT_BGRA8 = 0_i32
+    FILTER_PIXELFORMAT_PBGRA8 = 1_i32
+    FILTER_PIXELFORMAT_BGR8 = 2_i32
   end
   enum WORDREP_BREAK_TYPE
     WORDREP_BREAK_EOW = 0_i32
@@ -242,6 +257,15 @@ module Win32cr::Storage::IndexServer
     end
   end
 
+  @[Extern]
+  struct IMAGE_INFO
+    property width : UInt32
+    property height : UInt32
+    property format : Win32cr::Storage::IndexServer::IMAGE_PIXELFORMAT
+    def initialize(@width : UInt32, @height : UInt32, @format : Win32cr::Storage::IndexServer::IMAGE_PIXELFORMAT)
+    end
+  end
+
   {% if flag?(:x86_64) || flag?(:arm) %}
   @[Extern]
   struct DBID
@@ -249,22 +273,22 @@ module Win32cr::Storage::IndexServer
     property eKind : UInt32
     property uName : Uname_e__union_
 
-    # Nested Type Uname_e__union_
-    @[Extern(union: true)]
-    struct Uname_e__union_
-    property pwszName : Win32cr::Foundation::PWSTR
-    property ulPropid : UInt32
-    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @ulPropid : UInt32)
-    end
-    end
-
-
     # Nested Type Uguid_e__union_
     @[Extern(union: true)]
     struct Uguid_e__union_
     property guid : LibC::GUID
     property pguid : LibC::GUID*
     def initialize(@guid : LibC::GUID, @pguid : LibC::GUID*)
+    end
+    end
+
+
+    # Nested Type Uname_e__union_
+    @[Extern(union: true)]
+    struct Uname_e__union_
+    property pwszName : Win32cr::Foundation::PWSTR
+    property ulPropid : UInt32
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @ulPropid : UInt32)
     end
     end
 
@@ -280,16 +304,6 @@ module Win32cr::Storage::IndexServer
     property eKind : UInt32
     property uName : Uname_e__union_
 
-    # Nested Type Uname_e__union_
-    @[Extern(union: true)]
-    struct Uname_e__union_
-    property pwszName : Win32cr::Foundation::PWSTR
-    property ulPropid : UInt32
-    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @ulPropid : UInt32)
-    end
-    end
-
-
     # Nested Type Uguid_e__union_
     @[Extern(union: true)]
     struct Uguid_e__union_
@@ -299,25 +313,36 @@ module Win32cr::Storage::IndexServer
     end
     end
 
+
+    # Nested Type Uname_e__union_
+    @[Extern(union: true)]
+    struct Uname_e__union_
+    property pwszName : Win32cr::Foundation::PWSTR
+    property ulPropid : UInt32
+    def initialize(@pwszName : Win32cr::Foundation::PWSTR, @ulPropid : UInt32)
+    end
+    end
+
     def initialize(@uGuid : Uguid_e__union_, @eKind : UInt32, @uName : Uname_e__union_)
     end
   end
   {% end %}
 
   @[Extern]
-  record IFilterVtbl,
+
+  record IFilterVtable,
     query_interface : Proc(IFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilter*, UInt32),
     release : Proc(IFilter*, UInt32),
     init : Proc(IFilter*, UInt32, UInt32, Win32cr::Storage::IndexServer::FULLPROPSPEC*, UInt32*, Int32),
     get_chunk : Proc(IFilter*, Win32cr::Storage::IndexServer::STAT_CHUNK*, Int32),
-    get_text : Proc(IFilter*, UInt32*, UInt16*, Int32),
+    get_text : Proc(IFilter*, UInt32*, Win32cr::Foundation::PWSTR, Int32),
     get_value : Proc(IFilter*, Win32cr::System::Com::StructuredStorage::PROPVARIANT**, Int32),
     bind_region : Proc(IFilter*, Win32cr::Storage::IndexServer::FILTERREGION, LibC::GUID*, Void**, Int32)
 
 
   @[Extern]
-  record IFilter, lpVtbl : IFilterVtbl* do
+  record IFilter, lpVtbl : IFilterVtable* do
     GUID = LibC::GUID.new(0x89bcb740_u32, 0x6119_u16, 0x101a_u16, StaticArray[0xbc_u8, 0xb7_u8, 0x0_u8, 0xdd_u8, 0x1_u8, 0x6_u8, 0x55_u8, 0xaf_u8])
     def query_interface(this : IFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -334,7 +359,7 @@ module Win32cr::Storage::IndexServer
     def get_chunk(this : IFilter*, pStat : Win32cr::Storage::IndexServer::STAT_CHUNK*) : Int32
       @lpVtbl.try &.value.get_chunk.call(this, pStat)
     end
-    def get_text(this : IFilter*, pcwcBuffer : UInt32*, awcBuffer : UInt16*) : Int32
+    def get_text(this : IFilter*, pcwcBuffer : UInt32*, awcBuffer : Win32cr::Foundation::PWSTR) : Int32
       @lpVtbl.try &.value.get_text.call(this, pcwcBuffer, awcBuffer)
     end
     def get_value(this : IFilter*, ppPropValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT**) : Int32
@@ -347,7 +372,59 @@ module Win32cr::Storage::IndexServer
   end
 
   @[Extern]
-  record IPhraseSinkVtbl,
+
+  record IPixelFilterVtable,
+    query_interface : Proc(IPixelFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
+    add_ref : Proc(IPixelFilter*, UInt32),
+    release : Proc(IPixelFilter*, UInt32),
+    init : Proc(IPixelFilter*, UInt32, UInt32, Win32cr::Storage::IndexServer::FULLPROPSPEC*, UInt32*, Int32),
+    get_chunk : Proc(IPixelFilter*, Win32cr::Storage::IndexServer::STAT_CHUNK*, Int32),
+    get_text : Proc(IPixelFilter*, UInt32*, Win32cr::Foundation::PWSTR, Int32),
+    get_value : Proc(IPixelFilter*, Win32cr::System::Com::StructuredStorage::PROPVARIANT**, Int32),
+    bind_region : Proc(IPixelFilter*, Win32cr::Storage::IndexServer::FILTERREGION, LibC::GUID*, Void**, Int32),
+    get_image_info : Proc(IPixelFilter*, Win32cr::Storage::IndexServer::IMAGE_INFO*, Win32cr::Foundation::HRESULT),
+    get_pixels_for_image : Proc(IPixelFilter*, Float32, Win32cr::Foundation::RECT*, UInt32, UInt8*, Win32cr::Foundation::HRESULT)
+
+
+  @[Extern]
+  record IPixelFilter, lpVtbl : IPixelFilterVtable* do
+    GUID = LibC::GUID.new(0x3d7df9a7_u32, 0x8da6_u16, 0x4fbf_u16, StaticArray[0xa4_u8, 0x5b_u8, 0x75_u8, 0x92_u8, 0xf0_u8, 0x6d_u8, 0x93_u8, 0xa9_u8])
+    def query_interface(this : IPixelFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
+    end
+    def add_ref(this : IPixelFilter*) : UInt32
+      @lpVtbl.try &.value.add_ref.call(this)
+    end
+    def release(this : IPixelFilter*) : UInt32
+      @lpVtbl.try &.value.release.call(this)
+    end
+    def init(this : IPixelFilter*, grfFlags : UInt32, cAttributes : UInt32, aAttributes : Win32cr::Storage::IndexServer::FULLPROPSPEC*, pFlags : UInt32*) : Int32
+      @lpVtbl.try &.value.init.call(this, grfFlags, cAttributes, aAttributes, pFlags)
+    end
+    def get_chunk(this : IPixelFilter*, pStat : Win32cr::Storage::IndexServer::STAT_CHUNK*) : Int32
+      @lpVtbl.try &.value.get_chunk.call(this, pStat)
+    end
+    def get_text(this : IPixelFilter*, pcwcBuffer : UInt32*, awcBuffer : Win32cr::Foundation::PWSTR) : Int32
+      @lpVtbl.try &.value.get_text.call(this, pcwcBuffer, awcBuffer)
+    end
+    def get_value(this : IPixelFilter*, ppPropValue : Win32cr::System::Com::StructuredStorage::PROPVARIANT**) : Int32
+      @lpVtbl.try &.value.get_value.call(this, ppPropValue)
+    end
+    def bind_region(this : IPixelFilter*, origPos : Win32cr::Storage::IndexServer::FILTERREGION, riid : LibC::GUID*, ppunk : Void**) : Int32
+      @lpVtbl.try &.value.bind_region.call(this, origPos, riid, ppunk)
+    end
+    def get_image_info(this : IPixelFilter*, imageInfo : Win32cr::Storage::IndexServer::IMAGE_INFO*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_image_info.call(this, imageInfo)
+    end
+    def get_pixels_for_image(this : IPixelFilter*, scalingFactor : Float32, sourceRect : Win32cr::Foundation::RECT*, pixelBufferSize : UInt32, pixelBuffer : UInt8*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.get_pixels_for_image.call(this, scalingFactor, sourceRect, pixelBufferSize, pixelBuffer)
+    end
+
+  end
+
+  @[Extern]
+
+  record IPhraseSinkVtable,
     query_interface : Proc(IPhraseSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhraseSink*, UInt32),
     release : Proc(IPhraseSink*, UInt32),
@@ -356,7 +433,7 @@ module Win32cr::Storage::IndexServer
 
 
   @[Extern]
-  record IPhraseSink, lpVtbl : IPhraseSinkVtbl* do
+  record IPhraseSink, lpVtbl : IPhraseSinkVtable* do
     GUID = LibC::GUID.new(0xcc906ff0_u32, 0xc058_u16, 0x101a_u16, StaticArray[0xb5_u8, 0x54_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x33_u8, 0xb0_u8, 0xe6_u8])
     def query_interface(this : IPhraseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -377,22 +454,31 @@ module Win32cr::Storage::IndexServer
   end
 
   def loadIFilter(pwcsPath : Win32cr::Foundation::PWSTR, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadIFilter(pwcsPath, pUnkOuter, ppIUnk)
+    {% end %}
   end
 
   def loadIFilterEx(pwcsPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, riid : LibC::GUID*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadIFilterEx(pwcsPath, dwFlags, riid, ppIUnk)
+    {% end %}
   end
 
   def bindIFilterFromStorage(pStg : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BindIFilterFromStorage(pStg, pUnkOuter, ppIUnk)
+    {% end %}
   end
 
   def bindIFilterFromStream(pStm : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BindIFilterFromStream(pStm, pUnkOuter, ppIUnk)
+    {% end %}
   end
 
   @[Link("query")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun LoadIFilter(pwcsPath : Win32cr::Foundation::PWSTR, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
@@ -407,4 +493,5 @@ module Win32cr::Storage::IndexServer
     fun BindIFilterFromStream(pStm : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

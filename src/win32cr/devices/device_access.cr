@@ -47,11 +47,12 @@ module Win32cr::Devices::DeviceAccess
   ED_AUDIO_23 = 4194304_i32
   ED_AUDIO_24 = 8388608_i32
   ED_VIDEO = 33554432_i32
-  CLSID_DeviceIoControl = "12d3e372-874b-457d-9fdf-73977778686c"
+  CLSID_DeviceIoControl = LibC::GUID.new(0x12d3e372_u32, 0x874b_u16, 0x457d_u16, StaticArray[0x9f_u8, 0xdf_u8, 0x73_u8, 0x97_u8, 0x77_u8, 0x78_u8, 0x68_u8, 0x6c_u8])
 
 
   @[Extern]
-  record IDeviceRequestCompletionCallbackVtbl,
+
+  record IDeviceRequestCompletionCallbackVtable,
     query_interface : Proc(IDeviceRequestCompletionCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDeviceRequestCompletionCallback*, UInt32),
     release : Proc(IDeviceRequestCompletionCallback*, UInt32),
@@ -59,7 +60,7 @@ module Win32cr::Devices::DeviceAccess
 
 
   @[Extern]
-  record IDeviceRequestCompletionCallback, lpVtbl : IDeviceRequestCompletionCallbackVtbl* do
+  record IDeviceRequestCompletionCallback, lpVtbl : IDeviceRequestCompletionCallbackVtable* do
     GUID = LibC::GUID.new(0x999bad24_u32, 0x9acd_u16, 0x45bb_u16, StaticArray[0x86_u8, 0x69_u8, 0x2a_u8, 0x2f_u8, 0xc0_u8, 0x28_u8, 0x8b_u8, 0x4_u8])
     def query_interface(this : IDeviceRequestCompletionCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -77,7 +78,8 @@ module Win32cr::Devices::DeviceAccess
   end
 
   @[Extern]
-  record IDeviceIoControlVtbl,
+
+  record IDeviceIoControlVtable,
     query_interface : Proc(IDeviceIoControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDeviceIoControl*, UInt32),
     release : Proc(IDeviceIoControl*, UInt32),
@@ -87,7 +89,7 @@ module Win32cr::Devices::DeviceAccess
 
 
   @[Extern]
-  record IDeviceIoControl, lpVtbl : IDeviceIoControlVtbl* do
+  record IDeviceIoControl, lpVtbl : IDeviceIoControlVtable* do
     GUID = LibC::GUID.new(0x9eefe161_u32, 0x23ab_u16, 0x4f18_u16, StaticArray[0x9b_u8, 0x49_u8, 0x99_u8, 0x1b_u8, 0x58_u8, 0x6a_u8, 0xe9_u8, 0x70_u8])
     def query_interface(this : IDeviceIoControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -111,7 +113,8 @@ module Win32cr::Devices::DeviceAccess
   end
 
   @[Extern]
-  record ICreateDeviceAccessAsyncVtbl,
+
+  record ICreateDeviceAccessAsyncVtable,
     query_interface : Proc(ICreateDeviceAccessAsync*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICreateDeviceAccessAsync*, UInt32),
     release : Proc(ICreateDeviceAccessAsync*, UInt32),
@@ -122,7 +125,7 @@ module Win32cr::Devices::DeviceAccess
 
 
   @[Extern]
-  record ICreateDeviceAccessAsync, lpVtbl : ICreateDeviceAccessAsyncVtbl* do
+  record ICreateDeviceAccessAsync, lpVtbl : ICreateDeviceAccessAsyncVtable* do
     GUID = LibC::GUID.new(0x3474628f_u32, 0x683d_u16, 0x42d2_u16, StaticArray[0xab_u8, 0xcb_u8, 0xdb_u8, 0x1_u8, 0x8c_u8, 0x65_u8, 0x3_u8, 0xbc_u8])
     def query_interface(this : ICreateDeviceAccessAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -149,13 +152,17 @@ module Win32cr::Devices::DeviceAccess
   end
 
   def createDeviceAccessInstance(deviceInterfacePath : Win32cr::Foundation::PWSTR, desiredAccess : UInt32, createAsync : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDeviceAccessInstance(deviceInterfacePath, desiredAccess, createAsync)
+    {% end %}
   end
 
   @[Link("deviceaccess")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateDeviceAccessInstance(deviceInterfacePath : Win32cr::Foundation::PWSTR, desiredAccess : UInt32, createAsync : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

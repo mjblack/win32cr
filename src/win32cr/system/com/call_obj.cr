@@ -1,5 +1,6 @@
 require "./../../foundation.cr"
 require "./../com.cr"
+require "./../variant.cr"
 
 module Win32cr::System::Com::CallObj
   extend self
@@ -69,7 +70,8 @@ module Win32cr::System::Com::CallObj
   end
 
   @[Extern]
-  record ICallFrameVtbl,
+
+  record ICallFrameVtable,
     query_interface : Proc(ICallFrame*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICallFrame*, UInt32),
     release : Proc(ICallFrame*, UInt32),
@@ -81,8 +83,8 @@ module Win32cr::System::Com::CallObj
     set_return_value : Proc(ICallFrame*, Win32cr::Foundation::HRESULT, Void),
     get_return_value : Proc(ICallFrame*, Win32cr::Foundation::HRESULT),
     get_param_info : Proc(ICallFrame*, UInt32, Win32cr::System::Com::CallObj::CALLFRAMEPARAMINFO*, Win32cr::Foundation::HRESULT),
-    set_param : Proc(ICallFrame*, UInt32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_param : Proc(ICallFrame*, UInt32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    set_param : Proc(ICallFrame*, UInt32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_param : Proc(ICallFrame*, UInt32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     copy : Proc(ICallFrame*, Win32cr::System::Com::CallObj::CALLFRAME_COPY, Void*, Void**, Win32cr::Foundation::HRESULT),
     free : Proc(ICallFrame*, Void*, Void*, Void*, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
     free_param : Proc(ICallFrame*, UInt32, UInt32, Void*, UInt32, Win32cr::Foundation::HRESULT),
@@ -95,7 +97,7 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  record ICallFrame, lpVtbl : ICallFrameVtbl* do
+  record ICallFrame, lpVtbl : ICallFrameVtable* do
     GUID = LibC::GUID.new(0xd573b4b0_u32, 0x894e_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -130,10 +132,10 @@ module Win32cr::System::Com::CallObj
     def get_param_info(this : ICallFrame*, iparam : UInt32, pInfo : Win32cr::System::Com::CallObj::CALLFRAMEPARAMINFO*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_param_info.call(this, iparam, pInfo)
     end
-    def set_param(this : ICallFrame*, iparam : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def set_param(this : ICallFrame*, iparam : UInt32, pvar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_param.call(this, iparam, pvar)
     end
-    def get_param(this : ICallFrame*, iparam : UInt32, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_param(this : ICallFrame*, iparam : UInt32, pvar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_param.call(this, iparam, pvar)
     end
     def copy(this : ICallFrame*, copyControl : Win32cr::System::Com::CallObj::CALLFRAME_COPY, pWalker : Void*, ppFrame : Void**) : Win32cr::Foundation::HRESULT
@@ -167,7 +169,8 @@ module Win32cr::System::Com::CallObj
   end
 
   @[Extern]
-  record ICallIndirectVtbl,
+
+  record ICallIndirectVtable,
     query_interface : Proc(ICallIndirect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICallIndirect*, UInt32),
     release : Proc(ICallIndirect*, UInt32),
@@ -178,7 +181,7 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  record ICallIndirect, lpVtbl : ICallIndirectVtbl* do
+  record ICallIndirect, lpVtbl : ICallIndirectVtable* do
     GUID = LibC::GUID.new(0xd573b4b1_u32, 0x894e_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallIndirect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -205,7 +208,8 @@ module Win32cr::System::Com::CallObj
   end
 
   @[Extern]
-  record ICallInterceptorVtbl,
+
+  record ICallInterceptorVtable,
     query_interface : Proc(ICallInterceptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICallInterceptor*, UInt32),
     release : Proc(ICallInterceptor*, UInt32),
@@ -218,7 +222,7 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  record ICallInterceptor, lpVtbl : ICallInterceptorVtbl* do
+  record ICallInterceptor, lpVtbl : ICallInterceptorVtable* do
     GUID = LibC::GUID.new(0x60c7ca75_u32, 0x896d_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xb6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallInterceptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -251,7 +255,8 @@ module Win32cr::System::Com::CallObj
   end
 
   @[Extern]
-  record ICallFrameEventsVtbl,
+
+  record ICallFrameEventsVtable,
     query_interface : Proc(ICallFrameEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICallFrameEvents*, UInt32),
     release : Proc(ICallFrameEvents*, UInt32),
@@ -259,7 +264,7 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  record ICallFrameEvents, lpVtbl : ICallFrameEventsVtbl* do
+  record ICallFrameEvents, lpVtbl : ICallFrameEventsVtable* do
     GUID = LibC::GUID.new(0xfd5e0843_u32, 0xfc91_u16, 0x11d0_u16, StaticArray[0x97_u8, 0xd7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallFrameEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -277,7 +282,8 @@ module Win32cr::System::Com::CallObj
   end
 
   @[Extern]
-  record ICallUnmarshalVtbl,
+
+  record ICallUnmarshalVtable,
     query_interface : Proc(ICallUnmarshal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICallUnmarshal*, UInt32),
     release : Proc(ICallUnmarshal*, UInt32),
@@ -286,7 +292,7 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  record ICallUnmarshal, lpVtbl : ICallUnmarshalVtbl* do
+  record ICallUnmarshal, lpVtbl : ICallUnmarshalVtable* do
     GUID = LibC::GUID.new(0x5333b003_u32, 0x2e42_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallUnmarshal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -307,7 +313,8 @@ module Win32cr::System::Com::CallObj
   end
 
   @[Extern]
-  record ICallFrameWalkerVtbl,
+
+  record ICallFrameWalkerVtable,
     query_interface : Proc(ICallFrameWalker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICallFrameWalker*, UInt32),
     release : Proc(ICallFrameWalker*, UInt32),
@@ -315,7 +322,7 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  record ICallFrameWalker, lpVtbl : ICallFrameWalkerVtbl* do
+  record ICallFrameWalker, lpVtbl : ICallFrameWalkerVtable* do
     GUID = LibC::GUID.new(0x8b23919_u32, 0x392d_u16, 0x11d2_u16, StaticArray[0xb8_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x61_u8, 0x8a_u8])
     def query_interface(this : ICallFrameWalker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -333,7 +340,8 @@ module Win32cr::System::Com::CallObj
   end
 
   @[Extern]
-  record IInterfaceRelatedVtbl,
+
+  record IInterfaceRelatedVtable,
     query_interface : Proc(IInterfaceRelated*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInterfaceRelated*, UInt32),
     release : Proc(IInterfaceRelated*, UInt32),
@@ -342,7 +350,7 @@ module Win32cr::System::Com::CallObj
 
 
   @[Extern]
-  record IInterfaceRelated, lpVtbl : IInterfaceRelatedVtbl* do
+  record IInterfaceRelated, lpVtbl : IInterfaceRelatedVtable* do
     GUID = LibC::GUID.new(0xd1fb5a79_u32, 0x7706_u16, 0x11d1_u16, StaticArray[0xad_u8, 0xba_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xad_u8, 0xc0_u8])
     def query_interface(this : IInterfaceRelated*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -363,14 +371,19 @@ module Win32cr::System::Com::CallObj
   end
 
   def coGetInterceptor(iidIntercepted : LibC::GUID*, punkOuter : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoGetInterceptor(iidIntercepted, punkOuter, iid, ppv)
+    {% end %}
   end
 
   def coGetInterceptorFromTypeInfo(iidIntercepted : LibC::GUID*, punkOuter : Void*, typeInfo : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoGetInterceptorFromTypeInfo(iidIntercepted, punkOuter, typeInfo, iid, ppv)
+    {% end %}
   end
 
   @[Link("ole32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CoGetInterceptor(iidIntercepted : LibC::GUID*, punkOuter : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
@@ -379,4 +392,5 @@ module Win32cr::System::Com::CallObj
     fun CoGetInterceptorFromTypeInfo(iidIntercepted : LibC::GUID*, punkOuter : Void*, typeInfo : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

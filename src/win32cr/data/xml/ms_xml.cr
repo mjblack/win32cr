@@ -1,5 +1,6 @@
 require "./../../foundation.cr"
 require "./../../system/com.cr"
+require "./../../system/variant.cr"
 
 module Win32cr::Data::Xml::MsXml
   extend self
@@ -605,7 +606,7 @@ module Win32cr::Data::Xml::MsXml
     NODE_DOCUMENT_FRAGMENT = 11_i32
     NODE_NOTATION = 12_i32
   end
-  enum XMLEMEM_TYPE
+  enum XMLELEM_TYPE
     XMLELEMTYPE_ELEMENT = 0_i32
     XMLELEMTYPE_TEXT = 1_i32
     XMLELEMTYPE_COMMENT = 2_i32
@@ -872,19 +873,20 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMImplementationVtbl,
+
+  record IXMLDOMImplementationVtable,
     query_interface : Proc(IXMLDOMImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMImplementation*, UInt32),
     release : Proc(IXMLDOMImplementation*, UInt32),
     get_type_info_count : Proc(IXMLDOMImplementation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMImplementation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMImplementation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMImplementation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    hasFeature : Proc(IXMLDOMImplementation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IXMLDOMImplementation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    hasFeature : Proc(IXMLDOMImplementation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMImplementation, lpVtbl : IXMLDOMImplementationVtbl* do
+  record IXMLDOMImplementation, lpVtbl : IXMLDOMImplementationVtable* do
     GUID = LibC::GUID.new(0x2933bf8f_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -904,27 +906,28 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMImplementation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMImplementation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMImplementation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def hasFeature(this : IXMLDOMImplementation*, feature : Win32cr::Foundation::BSTR, version : Win32cr::Foundation::BSTR, hasFeature : Int16*) : Win32cr::Foundation::HRESULT
+    def hasFeature(this : IXMLDOMImplementation*, feature : Win32cr::Foundation::BSTR, version : Win32cr::Foundation::BSTR, hasFeature : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasFeature.call(this, feature, version, hasFeature)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMNodeVtbl,
+
+  record IXMLDOMNodeVtable,
     query_interface : Proc(IXMLDOMNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMNode*, UInt32),
     release : Proc(IXMLDOMNode*, UInt32),
     get_type_info_count : Proc(IXMLDOMNode*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMNode*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMNode*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMNode*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMNode*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMNode*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMNode*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMNode*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMNode*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMNode*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMNode*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMNode*, Void**, Win32cr::Foundation::HRESULT),
@@ -933,35 +936,35 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMNode*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMNode*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMNode*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMNode*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMNode*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMNode*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMNode*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMNode*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMNode*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMNode*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMNode*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMNode*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMNode*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMNode*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMNode*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMNode*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMNode*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMNode*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMNode*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMNode*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMNode*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMNode*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMNode*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMNode*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMNode*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMNode*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMNode*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    transformNodeToObject : Proc(IXMLDOMNode*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMNode, lpVtbl : IXMLDOMNodeVtbl* do
+  record IXMLDOMNode, lpVtbl : IXMLDOMNodeVtable* do
     GUID = LibC::GUID.new(0x2933bf80_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -981,16 +984,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMNode*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMNode*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMNode*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMNode*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMNode*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMNode*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMNode*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMNode*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMNode*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -1017,7 +1020,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMNode*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMNode*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMNode*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMNode*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -1029,13 +1032,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMNode*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMNode*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMNode*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMNode*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMNode*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMNode*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMNode*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1047,19 +1050,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMNode*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMNode*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMNode*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMNode*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMNode*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMNode*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMNode*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMNode*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMNode*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMNode*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMNode*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1077,7 +1080,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMNode*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMNode*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMNode*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMNode*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1089,24 +1092,25 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMNode*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMNode*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMNode*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMDocumentFragmentVtbl,
+
+  record IXMLDOMDocumentFragmentVtable,
     query_interface : Proc(IXMLDOMDocumentFragment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocumentFragment*, UInt32),
     release : Proc(IXMLDOMDocumentFragment*, UInt32),
     get_type_info_count : Proc(IXMLDOMDocumentFragment*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMDocumentFragment*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMDocumentFragment*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMDocumentFragment*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMDocumentFragment*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMDocumentFragment*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMDocumentFragment*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMDocumentFragment*, Void**, Win32cr::Foundation::HRESULT),
@@ -1115,35 +1119,35 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMDocumentFragment*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMDocumentFragment*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMDocumentFragment*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMDocumentFragment*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMDocumentFragment*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMDocumentFragment*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMDocumentFragment*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMDocumentFragment*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMDocumentFragment*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMDocumentFragment*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMDocumentFragment*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMDocumentFragment*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMDocumentFragment*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMDocumentFragment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMDocumentFragment*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMDocumentFragment*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMDocumentFragment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMDocumentFragment*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    transformNodeToObject : Proc(IXMLDOMDocumentFragment*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMDocumentFragment, lpVtbl : IXMLDOMDocumentFragmentVtbl* do
+  record IXMLDOMDocumentFragment, lpVtbl : IXMLDOMDocumentFragmentVtable* do
     GUID = LibC::GUID.new(0x3efaa413_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMDocumentFragment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1163,16 +1167,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMDocumentFragment*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMDocumentFragment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMDocumentFragment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMDocumentFragment*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMDocumentFragment*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMDocumentFragment*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMDocumentFragment*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMDocumentFragment*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMDocumentFragment*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -1199,7 +1203,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMDocumentFragment*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMDocumentFragment*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMDocumentFragment*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMDocumentFragment*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -1211,13 +1215,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMDocumentFragment*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMDocumentFragment*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMDocumentFragment*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMDocumentFragment*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMDocumentFragment*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMDocumentFragment*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMDocumentFragment*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1229,19 +1233,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMDocumentFragment*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMDocumentFragment*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMDocumentFragment*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMDocumentFragment*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMDocumentFragment*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMDocumentFragment*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMDocumentFragment*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMDocumentFragment*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMDocumentFragment*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMDocumentFragment*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMDocumentFragment*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1259,7 +1263,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMDocumentFragment*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMDocumentFragment*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMDocumentFragment*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMDocumentFragment*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1271,24 +1275,25 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMDocumentFragment*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMDocumentFragment*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMDocumentFragment*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMDocumentVtbl,
+
+  record IXMLDOMDocumentVtable,
     query_interface : Proc(IXMLDOMDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocument*, UInt32),
     release : Proc(IXMLDOMDocument*, UInt32),
     get_type_info_count : Proc(IXMLDOMDocument*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMDocument*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMDocument*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMDocument*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMDocument*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMDocument*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
@@ -1297,31 +1302,31 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMDocument*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMDocument*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMDocument*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMDocument*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMDocument*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMDocument*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMDocument*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMDocument*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMDocument*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMDocument*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMDocument*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMDocument*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_doctype : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
     get_implementation : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
     get_documentElement : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
@@ -1335,30 +1340,30 @@ module Win32cr::Data::Xml::MsXml
     createAttribute : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     createEntityReference : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getElementsByTagName : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    createNode : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    createNode : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     nodeFromID : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    load : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT, Int16*, Win32cr::Foundation::HRESULT),
+    load : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_readyState : Proc(IXMLDOMDocument*, Int32*, Win32cr::Foundation::HRESULT),
     get_parseError : Proc(IXMLDOMDocument*, Void**, Win32cr::Foundation::HRESULT),
     get_url : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_async : Proc(IXMLDOMDocument*, Int16*, Win32cr::Foundation::HRESULT),
-    put_async : Proc(IXMLDOMDocument*, Int16, Win32cr::Foundation::HRESULT),
+    get_async : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_async : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     abort : Proc(IXMLDOMDocument*, Win32cr::Foundation::HRESULT),
-    loadXML : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    save : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_validateOnParse : Proc(IXMLDOMDocument*, Int16*, Win32cr::Foundation::HRESULT),
-    put_validateOnParse : Proc(IXMLDOMDocument*, Int16, Win32cr::Foundation::HRESULT),
-    get_resolveExternals : Proc(IXMLDOMDocument*, Int16*, Win32cr::Foundation::HRESULT),
-    put_resolveExternals : Proc(IXMLDOMDocument*, Int16, Win32cr::Foundation::HRESULT),
-    get_preserveWhiteSpace : Proc(IXMLDOMDocument*, Int16*, Win32cr::Foundation::HRESULT),
-    put_preserveWhiteSpace : Proc(IXMLDOMDocument*, Int16, Win32cr::Foundation::HRESULT),
-    put_onreadystatechange : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    put_ondataavailable : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    put_ontransformnode : Proc(IXMLDOMDocument*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    loadXML : Proc(IXMLDOMDocument*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    save : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_validateOnParse : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_validateOnParse : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_resolveExternals : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_resolveExternals : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_preserveWhiteSpace : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_preserveWhiteSpace : Proc(IXMLDOMDocument*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    put_onreadystatechange : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    put_ondataavailable : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    put_ontransformnode : Proc(IXMLDOMDocument*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMDocument, lpVtbl : IXMLDOMDocumentVtbl* do
+  record IXMLDOMDocument, lpVtbl : IXMLDOMDocumentVtable* do
     GUID = LibC::GUID.new(0x2933bf81_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1378,16 +1383,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMDocument*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMDocument*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMDocument*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMDocument*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMDocument*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMDocument*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMDocument*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMDocument*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMDocument*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -1414,7 +1419,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMDocument*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMDocument*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMDocument*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMDocument*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -1426,13 +1431,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMDocument*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMDocument*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMDocument*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMDocument*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMDocument*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMDocument*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMDocument*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1444,19 +1449,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMDocument*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMDocument*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMDocument*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMDocument*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMDocument*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMDocument*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMDocument*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMDocument*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMDocument*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMDocument*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMDocument*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1474,7 +1479,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMDocument*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMDocument*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMDocument*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMDocument*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1486,7 +1491,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMDocument*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMDocument*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMDocument*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_doctype(this : IXMLDOMDocument*, documentType : Void**) : Win32cr::Foundation::HRESULT
@@ -1528,13 +1533,13 @@ module Win32cr::Data::Xml::MsXml
     def getElementsByTagName(this : IXMLDOMDocument*, tagName : Win32cr::Foundation::BSTR, resultList : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getElementsByTagName.call(this, tagName, resultList)
     end
-    def createNode(this : IXMLDOMDocument*, type__ : Win32cr::System::Com::VARIANT, name : Win32cr::Foundation::BSTR, namespaceURI : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
+    def createNode(this : IXMLDOMDocument*, type__ : Win32cr::System::Variant::VARIANT, name : Win32cr::Foundation::BSTR, namespaceURI : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createNode.call(this, type__, name, namespaceURI, node)
     end
     def nodeFromID(this : IXMLDOMDocument*, idString : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.nodeFromID.call(this, idString, node)
     end
-    def load(this : IXMLDOMDocument*, xmlSource : Win32cr::System::Com::VARIANT, isSuccessful : Int16*) : Win32cr::Foundation::HRESULT
+    def load(this : IXMLDOMDocument*, xmlSource : Win32cr::System::Variant::VARIANT, isSuccessful : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.load.call(this, xmlSource, isSuccessful)
     end
     def get_readyState(this : IXMLDOMDocument*, value : Int32*) : Win32cr::Foundation::HRESULT
@@ -1546,60 +1551,61 @@ module Win32cr::Data::Xml::MsXml
     def get_url(this : IXMLDOMDocument*, urlString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_url.call(this, urlString)
     end
-    def get_async(this : IXMLDOMDocument*, isAsync : Int16*) : Win32cr::Foundation::HRESULT
+    def get_async(this : IXMLDOMDocument*, isAsync : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_async.call(this, isAsync)
     end
-    def put_async(this : IXMLDOMDocument*, isAsync : Int16) : Win32cr::Foundation::HRESULT
+    def put_async(this : IXMLDOMDocument*, isAsync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_async.call(this, isAsync)
     end
     def abort(this : IXMLDOMDocument*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.abort.call(this)
     end
-    def loadXML(this : IXMLDOMDocument*, bstrXML : Win32cr::Foundation::BSTR, isSuccessful : Int16*) : Win32cr::Foundation::HRESULT
+    def loadXML(this : IXMLDOMDocument*, bstrXML : Win32cr::Foundation::BSTR, isSuccessful : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.loadXML.call(this, bstrXML, isSuccessful)
     end
-    def save(this : IXMLDOMDocument*, destination : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def save(this : IXMLDOMDocument*, destination : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, destination)
     end
-    def get_validateOnParse(this : IXMLDOMDocument*, isValidating : Int16*) : Win32cr::Foundation::HRESULT
+    def get_validateOnParse(this : IXMLDOMDocument*, isValidating : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_validateOnParse.call(this, isValidating)
     end
-    def put_validateOnParse(this : IXMLDOMDocument*, isValidating : Int16) : Win32cr::Foundation::HRESULT
+    def put_validateOnParse(this : IXMLDOMDocument*, isValidating : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_validateOnParse.call(this, isValidating)
     end
-    def get_resolveExternals(this : IXMLDOMDocument*, isResolving : Int16*) : Win32cr::Foundation::HRESULT
+    def get_resolveExternals(this : IXMLDOMDocument*, isResolving : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_resolveExternals.call(this, isResolving)
     end
-    def put_resolveExternals(this : IXMLDOMDocument*, isResolving : Int16) : Win32cr::Foundation::HRESULT
+    def put_resolveExternals(this : IXMLDOMDocument*, isResolving : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_resolveExternals.call(this, isResolving)
     end
-    def get_preserveWhiteSpace(this : IXMLDOMDocument*, isPreserving : Int16*) : Win32cr::Foundation::HRESULT
+    def get_preserveWhiteSpace(this : IXMLDOMDocument*, isPreserving : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_preserveWhiteSpace.call(this, isPreserving)
     end
-    def put_preserveWhiteSpace(this : IXMLDOMDocument*, isPreserving : Int16) : Win32cr::Foundation::HRESULT
+    def put_preserveWhiteSpace(this : IXMLDOMDocument*, isPreserving : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_preserveWhiteSpace.call(this, isPreserving)
     end
-    def put_onreadystatechange(this : IXMLDOMDocument*, readystatechangeSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_onreadystatechange(this : IXMLDOMDocument*, readystatechangeSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_onreadystatechange.call(this, readystatechangeSink)
     end
-    def put_ondataavailable(this : IXMLDOMDocument*, ondataavailableSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_ondataavailable(this : IXMLDOMDocument*, ondataavailableSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ondataavailable.call(this, ondataavailableSink)
     end
-    def put_ontransformnode(this : IXMLDOMDocument*, ontransformnodeSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_ontransformnode(this : IXMLDOMDocument*, ontransformnodeSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ontransformnode.call(this, ontransformnodeSink)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMNodeListVtbl,
+
+  record IXMLDOMNodeListVtable,
     query_interface : Proc(IXMLDOMNodeList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMNodeList*, UInt32),
     release : Proc(IXMLDOMNodeList*, UInt32),
     get_type_info_count : Proc(IXMLDOMNodeList*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMNodeList*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMNodeList*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMNodeList*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMNodeList*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_item : Proc(IXMLDOMNodeList*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMNodeList*, Int32*, Win32cr::Foundation::HRESULT),
     nextNode : Proc(IXMLDOMNodeList*, Void**, Win32cr::Foundation::HRESULT),
@@ -1608,7 +1614,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMNodeList, lpVtbl : IXMLDOMNodeListVtbl* do
+  record IXMLDOMNodeList, lpVtbl : IXMLDOMNodeListVtable* do
     GUID = LibC::GUID.new(0x2933bf82_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNodeList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1628,8 +1634,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMNodeList*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMNodeList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMNodeList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_item(this : IXMLDOMNodeList*, index : Int32, listItem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_item.call(this, index, listItem)
@@ -1650,14 +1656,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMNamedNodeMapVtbl,
+
+  record IXMLDOMNamedNodeMapVtable,
     query_interface : Proc(IXMLDOMNamedNodeMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMNamedNodeMap*, UInt32),
     release : Proc(IXMLDOMNamedNodeMap*, UInt32),
     get_type_info_count : Proc(IXMLDOMNamedNodeMap*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMNamedNodeMap*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMNamedNodeMap*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMNamedNodeMap*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMNamedNodeMap*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     getNamedItem : Proc(IXMLDOMNamedNodeMap*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     setNamedItem : Proc(IXMLDOMNamedNodeMap*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeNamedItem : Proc(IXMLDOMNamedNodeMap*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -1671,7 +1678,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMNamedNodeMap, lpVtbl : IXMLDOMNamedNodeMapVtbl* do
+  record IXMLDOMNamedNodeMap, lpVtbl : IXMLDOMNamedNodeMapVtable* do
     GUID = LibC::GUID.new(0x2933bf83_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNamedNodeMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1691,8 +1698,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMNamedNodeMap*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMNamedNodeMap*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMNamedNodeMap*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def getNamedItem(this : IXMLDOMNamedNodeMap*, name : Win32cr::Foundation::BSTR, namedItem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getNamedItem.call(this, name, namedItem)
@@ -1728,17 +1735,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMCharacterDataVtbl,
+
+  record IXMLDOMCharacterDataVtable,
     query_interface : Proc(IXMLDOMCharacterData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMCharacterData*, UInt32),
     release : Proc(IXMLDOMCharacterData*, UInt32),
     get_type_info_count : Proc(IXMLDOMCharacterData*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMCharacterData*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMCharacterData*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMCharacterData*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMCharacterData*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMCharacterData*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMCharacterData*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMCharacterData*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMCharacterData*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMCharacterData*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMCharacterData*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMCharacterData*, Void**, Win32cr::Foundation::HRESULT),
@@ -1747,31 +1755,31 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMCharacterData*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMCharacterData*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMCharacterData*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMCharacterData*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMCharacterData*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMCharacterData*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMCharacterData*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMCharacterData*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMCharacterData*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMCharacterData*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMCharacterData*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMCharacterData*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMCharacterData*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMCharacterData*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMCharacterData*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMCharacterData*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMCharacterData*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMCharacterData*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMCharacterData*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMCharacterData*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMCharacterData*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMCharacterData*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMCharacterData*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_data : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_data : Proc(IXMLDOMCharacterData*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMCharacterData*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1783,7 +1791,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMCharacterData, lpVtbl : IXMLDOMCharacterDataVtbl* do
+  record IXMLDOMCharacterData, lpVtbl : IXMLDOMCharacterDataVtable* do
     GUID = LibC::GUID.new(0x2933bf84_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMCharacterData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1803,16 +1811,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMCharacterData*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMCharacterData*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMCharacterData*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMCharacterData*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMCharacterData*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMCharacterData*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMCharacterData*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMCharacterData*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMCharacterData*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -1839,7 +1847,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMCharacterData*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMCharacterData*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMCharacterData*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMCharacterData*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -1851,13 +1859,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMCharacterData*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMCharacterData*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMCharacterData*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMCharacterData*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMCharacterData*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMCharacterData*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMCharacterData*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1869,19 +1877,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMCharacterData*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMCharacterData*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMCharacterData*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMCharacterData*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMCharacterData*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMCharacterData*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMCharacterData*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMCharacterData*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMCharacterData*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMCharacterData*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMCharacterData*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -1899,7 +1907,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMCharacterData*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMCharacterData*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMCharacterData*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMCharacterData*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1911,7 +1919,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMCharacterData*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMCharacterData*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMCharacterData*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_data(this : IXMLDOMCharacterData*, data : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1942,17 +1950,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMAttributeVtbl,
+
+  record IXMLDOMAttributeVtable,
     query_interface : Proc(IXMLDOMAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMAttribute*, UInt32),
     release : Proc(IXMLDOMAttribute*, UInt32),
     get_type_info_count : Proc(IXMLDOMAttribute*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMAttribute*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMAttribute*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMAttribute*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMAttribute*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMAttribute*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMAttribute*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMAttribute*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMAttribute*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMAttribute*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMAttribute*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMAttribute*, Void**, Win32cr::Foundation::HRESULT),
@@ -1961,38 +1970,38 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMAttribute*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMAttribute*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMAttribute*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMAttribute*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMAttribute*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMAttribute*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMAttribute*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMAttribute*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMAttribute*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMAttribute*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMAttribute*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMAttribute*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMAttribute*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMAttribute*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMAttribute*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMAttribute*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMAttribute*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMAttribute*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMAttribute*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMAttribute*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMAttribute*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMAttribute*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMAttribute*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMAttribute*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMAttribute*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMAttribute*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMAttribute*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_name : Proc(IXMLDOMAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_value : Proc(IXMLDOMAttribute*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_value : Proc(IXMLDOMAttribute*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_value : Proc(IXMLDOMAttribute*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_value : Proc(IXMLDOMAttribute*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMAttribute, lpVtbl : IXMLDOMAttributeVtbl* do
+  record IXMLDOMAttribute, lpVtbl : IXMLDOMAttributeVtable* do
     GUID = LibC::GUID.new(0x2933bf85_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2012,16 +2021,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMAttribute*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMAttribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMAttribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMAttribute*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMAttribute*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMAttribute*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMAttribute*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMAttribute*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMAttribute*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -2048,7 +2057,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMAttribute*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMAttribute*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMAttribute*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMAttribute*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -2060,13 +2069,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMAttribute*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMAttribute*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMAttribute*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMAttribute*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMAttribute*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMAttribute*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMAttribute*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2078,19 +2087,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMAttribute*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMAttribute*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMAttribute*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMAttribute*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMAttribute*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMAttribute*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMAttribute*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMAttribute*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMAttribute*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMAttribute*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMAttribute*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2108,7 +2117,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMAttribute*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMAttribute*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMAttribute*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMAttribute*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2120,33 +2129,34 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMAttribute*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMAttribute*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMAttribute*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_name(this : IXMLDOMAttribute*, attributeName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, attributeName)
     end
-    def get_value(this : IXMLDOMAttribute*, attributeValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_value(this : IXMLDOMAttribute*, attributeValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_value.call(this, attributeValue)
     end
-    def put_value(this : IXMLDOMAttribute*, attributeValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_value(this : IXMLDOMAttribute*, attributeValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_value.call(this, attributeValue)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMElementVtbl,
+
+  record IXMLDOMElementVtable,
     query_interface : Proc(IXMLDOMElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMElement*, UInt32),
     release : Proc(IXMLDOMElement*, UInt32),
     get_type_info_count : Proc(IXMLDOMElement*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMElement*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMElement*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMElement*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMElement*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMElement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMElement*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMElement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMElement*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMElement*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMElement*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMElement*, Void**, Win32cr::Foundation::HRESULT),
@@ -2155,34 +2165,34 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMElement*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMElement*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMElement*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMElement*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMElement*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMElement*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMElement*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMElement*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMElement*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMElement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMElement*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMElement*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMElement*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMElement*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMElement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMElement*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMElement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMElement*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMElement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMElement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMElement*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMElement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMElement*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMElement*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMElement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMElement*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMElement*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_tagName : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    getAttribute : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    setAttribute : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    getAttribute : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    setAttribute : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     removeAttribute : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     getAttributeNode : Proc(IXMLDOMElement*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     setAttributeNode : Proc(IXMLDOMElement*, Void*, Void**, Win32cr::Foundation::HRESULT),
@@ -2192,7 +2202,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMElement, lpVtbl : IXMLDOMElementVtbl* do
+  record IXMLDOMElement, lpVtbl : IXMLDOMElementVtable* do
     GUID = LibC::GUID.new(0x2933bf86_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2212,16 +2222,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMElement*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMElement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMElement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMElement*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMElement*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMElement*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMElement*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMElement*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMElement*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -2248,7 +2258,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMElement*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMElement*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMElement*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMElement*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -2260,13 +2270,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMElement*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMElement*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMElement*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMElement*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMElement*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMElement*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMElement*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2278,19 +2288,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMElement*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMElement*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMElement*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMElement*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMElement*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMElement*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMElement*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMElement*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMElement*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMElement*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMElement*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2308,7 +2318,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMElement*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMElement*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMElement*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMElement*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2320,16 +2330,16 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMElement*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMElement*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMElement*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_tagName(this : IXMLDOMElement*, tagName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_tagName.call(this, tagName)
     end
-    def getAttribute(this : IXMLDOMElement*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getAttribute(this : IXMLDOMElement*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAttribute.call(this, name, value)
     end
-    def setAttribute(this : IXMLDOMElement*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setAttribute(this : IXMLDOMElement*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setAttribute.call(this, name, value)
     end
     def removeAttribute(this : IXMLDOMElement*, name : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2354,17 +2364,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMTextVtbl,
+
+  record IXMLDOMTextVtable,
     query_interface : Proc(IXMLDOMText*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMText*, UInt32),
     release : Proc(IXMLDOMText*, UInt32),
     get_type_info_count : Proc(IXMLDOMText*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMText*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMText*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMText*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMText*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMText*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMText*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMText*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMText*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMText*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMText*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMText*, Void**, Win32cr::Foundation::HRESULT),
@@ -2373,31 +2384,31 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMText*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMText*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMText*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMText*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMText*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMText*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMText*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMText*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMText*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMText*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMText*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMText*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMText*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMText*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMText*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMText*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMText*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMText*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMText*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMText*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMText*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMText*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMText*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMText*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMText*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMText*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMText*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_data : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_data : Proc(IXMLDOMText*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMText*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2410,7 +2421,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMText, lpVtbl : IXMLDOMTextVtbl* do
+  record IXMLDOMText, lpVtbl : IXMLDOMTextVtable* do
     GUID = LibC::GUID.new(0x2933bf87_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2430,16 +2441,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMText*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMText*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMText*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMText*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMText*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMText*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMText*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMText*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMText*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -2466,7 +2477,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMText*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMText*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMText*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMText*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -2478,13 +2489,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMText*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMText*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMText*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMText*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMText*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMText*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMText*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2496,19 +2507,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMText*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMText*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMText*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMText*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMText*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMText*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMText*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMText*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMText*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMText*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMText*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2526,7 +2537,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMText*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMText*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMText*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMText*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2538,7 +2549,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMText*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMText*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMText*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_data(this : IXMLDOMText*, data : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2572,17 +2583,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMCommentVtbl,
+
+  record IXMLDOMCommentVtable,
     query_interface : Proc(IXMLDOMComment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMComment*, UInt32),
     release : Proc(IXMLDOMComment*, UInt32),
     get_type_info_count : Proc(IXMLDOMComment*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMComment*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMComment*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMComment*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMComment*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMComment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMComment*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMComment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMComment*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMComment*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMComment*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMComment*, Void**, Win32cr::Foundation::HRESULT),
@@ -2591,31 +2603,31 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMComment*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMComment*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMComment*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMComment*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMComment*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMComment*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMComment*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMComment*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMComment*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMComment*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMComment*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMComment*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMComment*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMComment*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMComment*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMComment*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMComment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMComment*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMComment*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMComment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMComment*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMComment*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMComment*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMComment*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMComment*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMComment*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMComment*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_data : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_data : Proc(IXMLDOMComment*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMComment*, Int32*, Win32cr::Foundation::HRESULT),
@@ -2627,7 +2639,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMComment, lpVtbl : IXMLDOMCommentVtbl* do
+  record IXMLDOMComment, lpVtbl : IXMLDOMCommentVtable* do
     GUID = LibC::GUID.new(0x2933bf88_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMComment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2647,16 +2659,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMComment*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMComment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMComment*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMComment*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMComment*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMComment*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMComment*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMComment*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMComment*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -2683,7 +2695,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMComment*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMComment*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMComment*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMComment*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -2695,13 +2707,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMComment*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMComment*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMComment*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMComment*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMComment*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMComment*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMComment*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2713,19 +2725,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMComment*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMComment*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMComment*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMComment*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMComment*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMComment*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMComment*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMComment*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMComment*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMComment*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMComment*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2743,7 +2755,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMComment*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMComment*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMComment*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMComment*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2755,7 +2767,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMComment*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMComment*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMComment*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_data(this : IXMLDOMComment*, data : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2786,17 +2798,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMProcessingInstructionVtbl,
+
+  record IXMLDOMProcessingInstructionVtable,
     query_interface : Proc(IXMLDOMProcessingInstruction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMProcessingInstruction*, UInt32),
     release : Proc(IXMLDOMProcessingInstruction*, UInt32),
     get_type_info_count : Proc(IXMLDOMProcessingInstruction*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMProcessingInstruction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMProcessingInstruction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMProcessingInstruction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMProcessingInstruction*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMProcessingInstruction*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMProcessingInstruction*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMProcessingInstruction*, Void**, Win32cr::Foundation::HRESULT),
@@ -2805,38 +2818,38 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMProcessingInstruction*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMProcessingInstruction*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMProcessingInstruction*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMProcessingInstruction*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMProcessingInstruction*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMProcessingInstruction*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMProcessingInstruction*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMProcessingInstruction*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMProcessingInstruction*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMProcessingInstruction*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMProcessingInstruction*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMProcessingInstruction*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMProcessingInstruction*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMProcessingInstruction*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMProcessingInstruction*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMProcessingInstruction*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMProcessingInstruction*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMProcessingInstruction*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_target : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_data : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_data : Proc(IXMLDOMProcessingInstruction*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMProcessingInstruction, lpVtbl : IXMLDOMProcessingInstructionVtbl* do
+  record IXMLDOMProcessingInstruction, lpVtbl : IXMLDOMProcessingInstructionVtable* do
     GUID = LibC::GUID.new(0x2933bf89_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMProcessingInstruction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2856,16 +2869,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMProcessingInstruction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMProcessingInstruction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMProcessingInstruction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMProcessingInstruction*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMProcessingInstruction*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMProcessingInstruction*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMProcessingInstruction*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMProcessingInstruction*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMProcessingInstruction*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -2892,7 +2905,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMProcessingInstruction*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMProcessingInstruction*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMProcessingInstruction*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMProcessingInstruction*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -2904,13 +2917,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMProcessingInstruction*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMProcessingInstruction*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMProcessingInstruction*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMProcessingInstruction*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMProcessingInstruction*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMProcessingInstruction*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMProcessingInstruction*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2922,19 +2935,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMProcessingInstruction*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMProcessingInstruction*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMProcessingInstruction*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMProcessingInstruction*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMProcessingInstruction*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMProcessingInstruction*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMProcessingInstruction*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMProcessingInstruction*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMProcessingInstruction*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMProcessingInstruction*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMProcessingInstruction*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -2952,7 +2965,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMProcessingInstruction*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMProcessingInstruction*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMProcessingInstruction*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMProcessingInstruction*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2964,7 +2977,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMProcessingInstruction*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMProcessingInstruction*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMProcessingInstruction*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_target(this : IXMLDOMProcessingInstruction*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -2980,17 +2993,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMCDATASectionVtbl,
+
+  record IXMLDOMCDATASectionVtable,
     query_interface : Proc(IXMLDOMCDATASection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMCDATASection*, UInt32),
     release : Proc(IXMLDOMCDATASection*, UInt32),
     get_type_info_count : Proc(IXMLDOMCDATASection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMCDATASection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMCDATASection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMCDATASection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMCDATASection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMCDATASection*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMCDATASection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMCDATASection*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMCDATASection*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMCDATASection*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMCDATASection*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMCDATASection*, Void**, Win32cr::Foundation::HRESULT),
@@ -2999,31 +3013,31 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMCDATASection*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMCDATASection*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMCDATASection*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMCDATASection*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMCDATASection*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMCDATASection*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMCDATASection*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMCDATASection*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMCDATASection*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMCDATASection*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMCDATASection*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMCDATASection*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMCDATASection*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMCDATASection*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMCDATASection*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMCDATASection*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMCDATASection*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMCDATASection*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMCDATASection*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMCDATASection*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMCDATASection*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMCDATASection*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMCDATASection*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_data : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_data : Proc(IXMLDOMCDATASection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMCDATASection*, Int32*, Win32cr::Foundation::HRESULT),
@@ -3036,7 +3050,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMCDATASection, lpVtbl : IXMLDOMCDATASectionVtbl* do
+  record IXMLDOMCDATASection, lpVtbl : IXMLDOMCDATASectionVtable* do
     GUID = LibC::GUID.new(0x2933bf8a_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMCDATASection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3056,16 +3070,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMCDATASection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMCDATASection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMCDATASection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMCDATASection*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMCDATASection*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMCDATASection*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMCDATASection*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMCDATASection*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMCDATASection*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -3092,7 +3106,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMCDATASection*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMCDATASection*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMCDATASection*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMCDATASection*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -3104,13 +3118,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMCDATASection*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMCDATASection*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMCDATASection*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMCDATASection*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMCDATASection*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMCDATASection*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMCDATASection*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3122,19 +3136,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMCDATASection*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMCDATASection*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMCDATASection*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMCDATASection*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMCDATASection*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMCDATASection*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMCDATASection*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMCDATASection*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMCDATASection*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMCDATASection*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMCDATASection*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3152,7 +3166,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMCDATASection*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMCDATASection*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMCDATASection*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMCDATASection*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3164,7 +3178,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMCDATASection*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMCDATASection*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMCDATASection*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_data(this : IXMLDOMCDATASection*, data : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3198,17 +3212,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMDocumentTypeVtbl,
+
+  record IXMLDOMDocumentTypeVtable,
     query_interface : Proc(IXMLDOMDocumentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocumentType*, UInt32),
     release : Proc(IXMLDOMDocumentType*, UInt32),
     get_type_info_count : Proc(IXMLDOMDocumentType*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMDocumentType*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMDocumentType*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMDocumentType*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMDocumentType*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMDocumentType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMDocumentType*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMDocumentType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMDocumentType*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMDocumentType*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT),
@@ -3217,38 +3232,38 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMDocumentType*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMDocumentType*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMDocumentType*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMDocumentType*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMDocumentType*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMDocumentType*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMDocumentType*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMDocumentType*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMDocumentType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMDocumentType*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMDocumentType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMDocumentType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMDocumentType*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMDocumentType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMDocumentType*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMDocumentType*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMDocumentType*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMDocumentType*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_name : Proc(IXMLDOMDocumentType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_entities : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT),
     get_notations : Proc(IXMLDOMDocumentType*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMDocumentType, lpVtbl : IXMLDOMDocumentTypeVtbl* do
+  record IXMLDOMDocumentType, lpVtbl : IXMLDOMDocumentTypeVtable* do
     GUID = LibC::GUID.new(0x2933bf8b_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocumentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3268,16 +3283,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMDocumentType*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMDocumentType*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMDocumentType*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMDocumentType*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMDocumentType*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMDocumentType*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMDocumentType*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMDocumentType*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMDocumentType*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -3304,7 +3319,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMDocumentType*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMDocumentType*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMDocumentType*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMDocumentType*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -3316,13 +3331,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMDocumentType*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMDocumentType*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMDocumentType*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMDocumentType*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMDocumentType*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMDocumentType*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMDocumentType*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3334,19 +3349,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMDocumentType*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMDocumentType*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMDocumentType*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMDocumentType*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMDocumentType*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMDocumentType*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMDocumentType*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMDocumentType*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMDocumentType*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMDocumentType*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMDocumentType*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3364,7 +3379,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMDocumentType*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMDocumentType*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMDocumentType*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMDocumentType*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3376,7 +3391,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMDocumentType*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMDocumentType*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMDocumentType*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_name(this : IXMLDOMDocumentType*, rootName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3392,17 +3407,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMNotationVtbl,
+
+  record IXMLDOMNotationVtable,
     query_interface : Proc(IXMLDOMNotation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMNotation*, UInt32),
     release : Proc(IXMLDOMNotation*, UInt32),
     get_type_info_count : Proc(IXMLDOMNotation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMNotation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMNotation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMNotation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMNotation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMNotation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMNotation*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMNotation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMNotation*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMNotation*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMNotation*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMNotation*, Void**, Win32cr::Foundation::HRESULT),
@@ -3411,37 +3427,37 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMNotation*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMNotation*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMNotation*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMNotation*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMNotation*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMNotation*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMNotation*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMNotation*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMNotation*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMNotation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMNotation*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMNotation*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMNotation*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMNotation*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMNotation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMNotation*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMNotation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMNotation*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMNotation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMNotation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMNotation*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMNotation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMNotation*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMNotation*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMNotation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMNotation*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_publicId : Proc(IXMLDOMNotation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_systemId : Proc(IXMLDOMNotation*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    transformNodeToObject : Proc(IXMLDOMNotation*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_publicId : Proc(IXMLDOMNotation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_systemId : Proc(IXMLDOMNotation*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMNotation, lpVtbl : IXMLDOMNotationVtbl* do
+  record IXMLDOMNotation, lpVtbl : IXMLDOMNotationVtable* do
     GUID = LibC::GUID.new(0x2933bf8c_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNotation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3461,16 +3477,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMNotation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMNotation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMNotation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMNotation*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMNotation*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMNotation*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMNotation*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMNotation*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMNotation*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -3497,7 +3513,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMNotation*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMNotation*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMNotation*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMNotation*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -3509,13 +3525,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMNotation*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMNotation*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMNotation*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMNotation*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMNotation*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMNotation*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMNotation*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3527,19 +3543,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMNotation*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMNotation*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMNotation*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMNotation*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMNotation*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMNotation*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMNotation*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMNotation*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMNotation*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMNotation*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMNotation*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3557,7 +3573,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMNotation*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMNotation*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMNotation*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMNotation*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3569,30 +3585,31 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMNotation*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMNotation*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMNotation*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
-    def get_publicId(this : IXMLDOMNotation*, publicID : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_publicId(this : IXMLDOMNotation*, publicID : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_publicId.call(this, publicID)
     end
-    def get_systemId(this : IXMLDOMNotation*, systemID : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_systemId(this : IXMLDOMNotation*, systemID : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_systemId.call(this, systemID)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMEntityVtbl,
+
+  record IXMLDOMEntityVtable,
     query_interface : Proc(IXMLDOMEntity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMEntity*, UInt32),
     release : Proc(IXMLDOMEntity*, UInt32),
     get_type_info_count : Proc(IXMLDOMEntity*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMEntity*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMEntity*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMEntity*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMEntity*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMEntity*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMEntity*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMEntity*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMEntity*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMEntity*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMEntity*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMEntity*, Void**, Win32cr::Foundation::HRESULT),
@@ -3601,38 +3618,38 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMEntity*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMEntity*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMEntity*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMEntity*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMEntity*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMEntity*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMEntity*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMEntity*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMEntity*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMEntity*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMEntity*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMEntity*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMEntity*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMEntity*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMEntity*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMEntity*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMEntity*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMEntity*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMEntity*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMEntity*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMEntity*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMEntity*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMEntity*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMEntity*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMEntity*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMEntity*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_publicId : Proc(IXMLDOMEntity*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_systemId : Proc(IXMLDOMEntity*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMEntity*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_publicId : Proc(IXMLDOMEntity*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_systemId : Proc(IXMLDOMEntity*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_notationName : Proc(IXMLDOMEntity*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMEntity, lpVtbl : IXMLDOMEntityVtbl* do
+  record IXMLDOMEntity, lpVtbl : IXMLDOMEntityVtable* do
     GUID = LibC::GUID.new(0x2933bf8d_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMEntity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3652,16 +3669,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMEntity*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMEntity*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMEntity*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMEntity*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMEntity*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMEntity*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMEntity*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMEntity*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMEntity*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -3688,7 +3705,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMEntity*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMEntity*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMEntity*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMEntity*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -3700,13 +3717,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMEntity*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMEntity*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMEntity*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMEntity*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMEntity*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMEntity*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMEntity*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3718,19 +3735,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMEntity*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMEntity*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMEntity*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMEntity*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMEntity*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMEntity*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMEntity*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMEntity*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMEntity*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMEntity*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMEntity*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3748,7 +3765,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMEntity*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMEntity*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMEntity*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMEntity*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3760,13 +3777,13 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMEntity*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMEntity*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMEntity*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
-    def get_publicId(this : IXMLDOMEntity*, publicID : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_publicId(this : IXMLDOMEntity*, publicID : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_publicId.call(this, publicID)
     end
-    def get_systemId(this : IXMLDOMEntity*, systemID : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_systemId(this : IXMLDOMEntity*, systemID : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_systemId.call(this, systemID)
     end
     def get_notationName(this : IXMLDOMEntity*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3776,17 +3793,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMEntityReferenceVtbl,
+
+  record IXMLDOMEntityReferenceVtable,
     query_interface : Proc(IXMLDOMEntityReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMEntityReference*, UInt32),
     release : Proc(IXMLDOMEntityReference*, UInt32),
     get_type_info_count : Proc(IXMLDOMEntityReference*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMEntityReference*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMEntityReference*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMEntityReference*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMEntityReference*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMEntityReference*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMEntityReference*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMEntityReference*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMEntityReference*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMEntityReference*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMEntityReference*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMEntityReference*, Void**, Win32cr::Foundation::HRESULT),
@@ -3795,35 +3813,35 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMEntityReference*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMEntityReference*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMEntityReference*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMEntityReference*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMEntityReference*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMEntityReference*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMEntityReference*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMEntityReference*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMEntityReference*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMEntityReference*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMEntityReference*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMEntityReference*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMEntityReference*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMEntityReference*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMEntityReference*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMEntityReference*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMEntityReference*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMEntityReference*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMEntityReference*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMEntityReference*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMEntityReference*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMEntityReference*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMEntityReference*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    transformNodeToObject : Proc(IXMLDOMEntityReference*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMEntityReference, lpVtbl : IXMLDOMEntityReferenceVtbl* do
+  record IXMLDOMEntityReference, lpVtbl : IXMLDOMEntityReferenceVtable* do
     GUID = LibC::GUID.new(0x2933bf8e_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMEntityReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3843,16 +3861,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMEntityReference*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMEntityReference*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMEntityReference*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMEntityReference*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMEntityReference*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMEntityReference*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMEntityReference*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMEntityReference*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMEntityReference*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -3879,7 +3897,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMEntityReference*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMEntityReference*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMEntityReference*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMEntityReference*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -3891,13 +3909,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMEntityReference*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMEntityReference*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMEntityReference*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMEntityReference*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMEntityReference*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMEntityReference*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMEntityReference*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3909,19 +3927,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMEntityReference*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMEntityReference*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMEntityReference*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMEntityReference*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMEntityReference*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMEntityReference*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMEntityReference*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMEntityReference*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMEntityReference*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMEntityReference*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMEntityReference*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3939,7 +3957,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMEntityReference*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMEntityReference*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMEntityReference*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMEntityReference*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3951,21 +3969,22 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMEntityReference*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMEntityReference*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMEntityReference*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMParseErrorVtbl,
+
+  record IXMLDOMParseErrorVtable,
     query_interface : Proc(IXMLDOMParseError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMParseError*, UInt32),
     release : Proc(IXMLDOMParseError*, UInt32),
     get_type_info_count : Proc(IXMLDOMParseError*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMParseError*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMParseError*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMParseError*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMParseError*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_errorCode : Proc(IXMLDOMParseError*, Int32*, Win32cr::Foundation::HRESULT),
     get_url : Proc(IXMLDOMParseError*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_reason : Proc(IXMLDOMParseError*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3976,7 +3995,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMParseError, lpVtbl : IXMLDOMParseErrorVtbl* do
+  record IXMLDOMParseError, lpVtbl : IXMLDOMParseErrorVtable* do
     GUID = LibC::GUID.new(0x3efaa426_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3996,8 +4015,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMParseError*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMParseError*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMParseError*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_errorCode(this : IXMLDOMParseError*, errorCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_errorCode.call(this, errorCode)
@@ -4024,17 +4043,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXTLRuntimeVtbl,
+
+  record IXTLRuntimeVtable,
     query_interface : Proc(IXTLRuntime*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXTLRuntime*, UInt32),
     release : Proc(IXTLRuntime*, UInt32),
     get_type_info_count : Proc(IXTLRuntime*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXTLRuntime*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXTLRuntime*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXTLRuntime*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXTLRuntime*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXTLRuntime*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXTLRuntime*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXTLRuntime*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXTLRuntime*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXTLRuntime*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXTLRuntime*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXTLRuntime*, Void**, Win32cr::Foundation::HRESULT),
@@ -4043,31 +4063,31 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXTLRuntime*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXTLRuntime*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXTLRuntime*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXTLRuntime*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXTLRuntime*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXTLRuntime*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXTLRuntime*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXTLRuntime*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXTLRuntime*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXTLRuntime*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXTLRuntime*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXTLRuntime*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXTLRuntime*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXTLRuntime*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXTLRuntime*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXTLRuntime*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXTLRuntime*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXTLRuntime*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXTLRuntime*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXTLRuntime*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXTLRuntime*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXTLRuntime*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXTLRuntime*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXTLRuntime*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXTLRuntime*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXTLRuntime*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXTLRuntime*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXTLRuntime*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     uniqueID : Proc(IXTLRuntime*, Void*, Int32*, Win32cr::Foundation::HRESULT),
     depth : Proc(IXTLRuntime*, Void*, Int32*, Win32cr::Foundation::HRESULT),
     childNumber : Proc(IXTLRuntime*, Void*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4075,12 +4095,12 @@ module Win32cr::Data::Xml::MsXml
     absoluteChildNumber : Proc(IXTLRuntime*, Void*, Int32*, Win32cr::Foundation::HRESULT),
     formatIndex : Proc(IXTLRuntime*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     formatNumber : Proc(IXTLRuntime*, Float64, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    formatDate : Proc(IXTLRuntime*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    formatTime : Proc(IXTLRuntime*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+    formatDate : Proc(IXTLRuntime*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
+    formatTime : Proc(IXTLRuntime*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXTLRuntime, lpVtbl : IXTLRuntimeVtbl* do
+  record IXTLRuntime, lpVtbl : IXTLRuntimeVtable* do
     GUID = LibC::GUID.new(0x3efaa425_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXTLRuntime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4100,16 +4120,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXTLRuntime*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXTLRuntime*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXTLRuntime*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXTLRuntime*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXTLRuntime*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXTLRuntime*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXTLRuntime*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXTLRuntime*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXTLRuntime*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -4136,7 +4156,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXTLRuntime*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXTLRuntime*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXTLRuntime*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXTLRuntime*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -4148,13 +4168,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXTLRuntime*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXTLRuntime*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXTLRuntime*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXTLRuntime*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXTLRuntime*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXTLRuntime*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXTLRuntime*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4166,19 +4186,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXTLRuntime*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXTLRuntime*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXTLRuntime*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXTLRuntime*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXTLRuntime*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXTLRuntime*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXTLRuntime*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXTLRuntime*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXTLRuntime*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXTLRuntime*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXTLRuntime*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4196,7 +4216,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXTLRuntime*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXTLRuntime*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXTLRuntime*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXTLRuntime*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4208,7 +4228,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXTLRuntime*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXTLRuntime*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXTLRuntime*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def uniqueID(this : IXTLRuntime*, pNode : Void*, pID : Int32*) : Win32cr::Foundation::HRESULT
@@ -4232,28 +4252,29 @@ module Win32cr::Data::Xml::MsXml
     def formatNumber(this : IXTLRuntime*, dblNumber : Float64, bstrFormat : Win32cr::Foundation::BSTR, pbstrFormattedString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.formatNumber.call(this, dblNumber, bstrFormat, pbstrFormattedString)
     end
-    def formatDate(this : IXTLRuntime*, varDate : Win32cr::System::Com::VARIANT, bstrFormat : Win32cr::Foundation::BSTR, varDestLocale : Win32cr::System::Com::VARIANT, pbstrFormattedString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def formatDate(this : IXTLRuntime*, varDate : Win32cr::System::Variant::VARIANT, bstrFormat : Win32cr::Foundation::BSTR, varDestLocale : Win32cr::System::Variant::VARIANT, pbstrFormattedString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.formatDate.call(this, varDate, bstrFormat, varDestLocale, pbstrFormattedString)
     end
-    def formatTime(this : IXTLRuntime*, varTime : Win32cr::System::Com::VARIANT, bstrFormat : Win32cr::Foundation::BSTR, varDestLocale : Win32cr::System::Com::VARIANT, pbstrFormattedString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def formatTime(this : IXTLRuntime*, varTime : Win32cr::System::Variant::VARIANT, bstrFormat : Win32cr::Foundation::BSTR, varDestLocale : Win32cr::System::Variant::VARIANT, pbstrFormattedString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.formatTime.call(this, varTime, bstrFormat, varDestLocale, pbstrFormattedString)
     end
 
   end
 
   @[Extern]
-  record XMLDOMDocumentEventsVtbl,
+
+  record XMLDOMDocumentEventsVtable,
     query_interface : Proc(XMLDOMDocumentEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(XMLDOMDocumentEvents*, UInt32),
     release : Proc(XMLDOMDocumentEvents*, UInt32),
     get_type_info_count : Proc(XMLDOMDocumentEvents*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(XMLDOMDocumentEvents*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(XMLDOMDocumentEvents*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(XMLDOMDocumentEvents*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(XMLDOMDocumentEvents*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record XMLDOMDocumentEvents, lpVtbl : XMLDOMDocumentEventsVtbl* do
+  record XMLDOMDocumentEvents, lpVtbl : XMLDOMDocumentEventsVtable* do
     GUID = LibC::GUID.new(0x3efaa427_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : XMLDOMDocumentEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4273,115 +4294,22 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : XMLDOMDocumentEvents*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : XMLDOMDocumentEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : XMLDOMDocumentEvents*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IXMLHttpRequestVtbl,
-    query_interface : Proc(IXMLHttpRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
-    add_ref : Proc(IXMLHttpRequest*, UInt32),
-    release : Proc(IXMLHttpRequest*, UInt32),
-    get_type_info_count : Proc(IXMLHttpRequest*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_type_info : Proc(IXMLHttpRequest*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
-    get_i_ds_of_names : Proc(IXMLHttpRequest*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLHttpRequest*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    open : Proc(IXMLHttpRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    setRequestHeader : Proc(IXMLHttpRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    getResponseHeader : Proc(IXMLHttpRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    getAllResponseHeaders : Proc(IXMLHttpRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    send : Proc(IXMLHttpRequest*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    abort : Proc(IXMLHttpRequest*, Win32cr::Foundation::HRESULT),
-    get_status : Proc(IXMLHttpRequest*, Int32*, Win32cr::Foundation::HRESULT),
-    get_statusText : Proc(IXMLHttpRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_responseXML : Proc(IXMLHttpRequest*, Void**, Win32cr::Foundation::HRESULT),
-    get_responseText : Proc(IXMLHttpRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_responseBody : Proc(IXMLHttpRequest*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_responseStream : Proc(IXMLHttpRequest*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_readyState : Proc(IXMLHttpRequest*, Int32*, Win32cr::Foundation::HRESULT),
-    put_onreadystatechange : Proc(IXMLHttpRequest*, Void*, Win32cr::Foundation::HRESULT)
 
-
-  @[Extern]
-  record IXMLHttpRequest, lpVtbl : IXMLHttpRequestVtbl* do
-    GUID = LibC::GUID.new(0xed8c108d_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
-    def query_interface(this : IXMLHttpRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
-    end
-    def add_ref(this : IXMLHttpRequest*) : UInt32
-      @lpVtbl.try &.value.add_ref.call(this)
-    end
-    def release(this : IXMLHttpRequest*) : UInt32
-      @lpVtbl.try &.value.release.call(this)
-    end
-    def get_type_info_count(this : IXMLHttpRequest*, pctinfo : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_type_info_count.call(this, pctinfo)
-    end
-    def get_type_info(this : IXMLHttpRequest*, iTInfo : UInt32, lcid : UInt32, ppTInfo : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_type_info.call(this, iTInfo, lcid, ppTInfo)
-    end
-    def get_i_ds_of_names(this : IXMLHttpRequest*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
-    end
-    def invoke_1(this : IXMLHttpRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
-    end
-    def open(this : IXMLHttpRequest*, bstrMethod : Win32cr::Foundation::BSTR, bstrUrl : Win32cr::Foundation::BSTR, varAsync : Win32cr::System::Com::VARIANT, bstrUser : Win32cr::System::Com::VARIANT, bstrPassword : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.open.call(this, bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword)
-    end
-    def setRequestHeader(this : IXMLHttpRequest*, bstrHeader : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.setRequestHeader.call(this, bstrHeader, bstrValue)
-    end
-    def getResponseHeader(this : IXMLHttpRequest*, bstrHeader : Win32cr::Foundation::BSTR, pbstrValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.getResponseHeader.call(this, bstrHeader, pbstrValue)
-    end
-    def getAllResponseHeaders(this : IXMLHttpRequest*, pbstrHeaders : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.getAllResponseHeaders.call(this, pbstrHeaders)
-    end
-    def send(this : IXMLHttpRequest*, varBody : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.send.call(this, varBody)
-    end
-    def abort(this : IXMLHttpRequest*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.abort.call(this)
-    end
-    def get_status(this : IXMLHttpRequest*, plStatus : Int32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_status.call(this, plStatus)
-    end
-    def get_statusText(this : IXMLHttpRequest*, pbstrStatus : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_statusText.call(this, pbstrStatus)
-    end
-    def get_responseXML(this : IXMLHttpRequest*, ppBody : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_responseXML.call(this, ppBody)
-    end
-    def get_responseText(this : IXMLHttpRequest*, pbstrBody : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_responseText.call(this, pbstrBody)
-    end
-    def get_responseBody(this : IXMLHttpRequest*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_responseBody.call(this, pvarBody)
-    end
-    def get_responseStream(this : IXMLHttpRequest*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_responseStream.call(this, pvarBody)
-    end
-    def get_readyState(this : IXMLHttpRequest*, plState : Int32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.get_readyState.call(this, plState)
-    end
-    def put_onreadystatechange(this : IXMLHttpRequest*, pReadyStateSink : Void*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.put_onreadystatechange.call(this, pReadyStateSink)
-    end
-
-  end
-
-  @[Extern]
-  record IXMLDSOControlVtbl,
+  record IXMLDSOControlVtable,
     query_interface : Proc(IXMLDSOControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDSOControl*, UInt32),
     release : Proc(IXMLDSOControl*, UInt32),
     get_type_info_count : Proc(IXMLDSOControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDSOControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDSOControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDSOControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDSOControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_XMLDocument : Proc(IXMLDSOControl*, Void**, Win32cr::Foundation::HRESULT),
     put_XMLDocument : Proc(IXMLDSOControl*, Void*, Win32cr::Foundation::HRESULT),
     get_JavaDSOCompatible : Proc(IXMLDSOControl*, Win32cr::Foundation::BOOL*, Win32cr::Foundation::HRESULT),
@@ -4390,7 +4318,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDSOControl, lpVtbl : IXMLDSOControlVtbl* do
+  record IXMLDSOControl, lpVtbl : IXMLDSOControlVtable* do
     GUID = LibC::GUID.new(0x310afa62_u32, 0x575_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa9_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0xec_u8, 0x3d_u8, 0x39_u8])
     def query_interface(this : IXMLDSOControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4410,8 +4338,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDSOControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDSOControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDSOControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_XMLDocument(this : IXMLDSOControl*, ppDoc : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_XMLDocument.call(this, ppDoc)
@@ -4432,22 +4360,23 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLElementCollectionVtbl,
+
+  record IXMLElementCollectionVtable,
     query_interface : Proc(IXMLElementCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLElementCollection*, UInt32),
     release : Proc(IXMLElementCollection*, UInt32),
     get_type_info_count : Proc(IXMLElementCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLElementCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLElementCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLElementCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLElementCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     put_length : Proc(IXMLElementCollection*, Int32, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLElementCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get__newEnum : Proc(IXMLElementCollection*, Void**, Win32cr::Foundation::HRESULT),
-    item : Proc(IXMLElementCollection*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    item : Proc(IXMLElementCollection*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLElementCollection, lpVtbl : IXMLElementCollectionVtbl* do
+  record IXMLElementCollection, lpVtbl : IXMLElementCollectionVtable* do
     GUID = LibC::GUID.new(0x65725580_u32, 0x9b5d_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0xfe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLElementCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4467,8 +4396,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLElementCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLElementCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLElementCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def put_length(this : IXMLElementCollection*, v : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_length.call(this, v)
@@ -4479,21 +4408,22 @@ module Win32cr::Data::Xml::MsXml
     def get__newEnum(this : IXMLElementCollection*, ppUnk : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__newEnum.call(this, ppUnk)
     end
-    def item(this : IXMLElementCollection*, var1 : Win32cr::System::Com::VARIANT, var2 : Win32cr::System::Com::VARIANT, ppDisp : Void**) : Win32cr::Foundation::HRESULT
+    def item(this : IXMLElementCollection*, var1 : Win32cr::System::Variant::VARIANT, var2 : Win32cr::System::Variant::VARIANT, ppDisp : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, var1, var2, ppDisp)
     end
 
   end
 
   @[Extern]
-  record IXMLDocumentVtbl,
+
+  record IXMLDocumentVtable,
     query_interface : Proc(IXMLDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDocument*, UInt32),
     release : Proc(IXMLDocument*, UInt32),
     get_type_info_count : Proc(IXMLDocument*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDocument*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDocument*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDocument*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDocument*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_root : Proc(IXMLDocument*, Void**, Win32cr::Foundation::HRESULT),
     get_fileSize : Proc(IXMLDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_fileModifiedDate : Proc(IXMLDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4507,11 +4437,11 @@ module Win32cr::Data::Xml::MsXml
     get_version : Proc(IXMLDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_doctype : Proc(IXMLDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_dtdURL : Proc(IXMLDocument*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    createElement : Proc(IXMLDocument*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT)
+    createElement : Proc(IXMLDocument*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDocument, lpVtbl : IXMLDocumentVtbl* do
+  record IXMLDocument, lpVtbl : IXMLDocumentVtable* do
     GUID = LibC::GUID.new(0xf52e2b61_u32, 0x18a1_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0x5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x49_u8, 0x91_u8, 0x6b_u8])
     def query_interface(this : IXMLDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4531,8 +4461,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDocument*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDocument*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDocument*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_root(this : IXMLDocument*, p : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_root.call(this, p)
@@ -4573,21 +4503,22 @@ module Win32cr::Data::Xml::MsXml
     def get_dtdURL(this : IXMLDocument*, p : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dtdURL.call(this, p)
     end
-    def createElement(this : IXMLDocument*, vType : Win32cr::System::Com::VARIANT, var1 : Win32cr::System::Com::VARIANT, ppElem : Void**) : Win32cr::Foundation::HRESULT
+    def createElement(this : IXMLDocument*, vType : Win32cr::System::Variant::VARIANT, var1 : Win32cr::System::Variant::VARIANT, ppElem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createElement.call(this, vType, var1, ppElem)
     end
 
   end
 
   @[Extern]
-  record IXMLDocument2Vtbl,
+
+  record IXMLDocument2Vtable,
     query_interface : Proc(IXMLDocument2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDocument2*, UInt32),
     release : Proc(IXMLDocument2*, UInt32),
     get_type_info_count : Proc(IXMLDocument2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDocument2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDocument2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDocument2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDocument2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_root : Proc(IXMLDocument2*, Void**, Win32cr::Foundation::HRESULT),
     get_fileSize : Proc(IXMLDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_fileModifiedDate : Proc(IXMLDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4601,13 +4532,13 @@ module Win32cr::Data::Xml::MsXml
     get_version : Proc(IXMLDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_doctype : Proc(IXMLDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_dtdURL : Proc(IXMLDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    createElement : Proc(IXMLDocument2*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
-    get_async : Proc(IXMLDocument2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_async : Proc(IXMLDocument2*, Int16, Win32cr::Foundation::HRESULT)
+    createElement : Proc(IXMLDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_async : Proc(IXMLDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_async : Proc(IXMLDocument2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDocument2, lpVtbl : IXMLDocument2Vtbl* do
+  record IXMLDocument2, lpVtbl : IXMLDocument2Vtable* do
     GUID = LibC::GUID.new(0x2b8de2fe_u32, 0x8d2d_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x15_u8, 0xa9_u8])
     def query_interface(this : IXMLDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4627,8 +4558,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDocument2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDocument2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDocument2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_root(this : IXMLDocument2*, p : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_root.call(this, p)
@@ -4669,32 +4600,33 @@ module Win32cr::Data::Xml::MsXml
     def get_dtdURL(this : IXMLDocument2*, p : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dtdURL.call(this, p)
     end
-    def createElement(this : IXMLDocument2*, vType : Win32cr::System::Com::VARIANT, var1 : Win32cr::System::Com::VARIANT, ppElem : Void**) : Win32cr::Foundation::HRESULT
+    def createElement(this : IXMLDocument2*, vType : Win32cr::System::Variant::VARIANT, var1 : Win32cr::System::Variant::VARIANT, ppElem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createElement.call(this, vType, var1, ppElem)
     end
-    def get_async(this : IXMLDocument2*, pf : Int16*) : Win32cr::Foundation::HRESULT
+    def get_async(this : IXMLDocument2*, pf : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_async.call(this, pf)
     end
-    def put_async(this : IXMLDocument2*, f : Int16) : Win32cr::Foundation::HRESULT
+    def put_async(this : IXMLDocument2*, f : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_async.call(this, f)
     end
 
   end
 
   @[Extern]
-  record IXMLElementVtbl,
+
+  record IXMLElementVtable,
     query_interface : Proc(IXMLElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLElement*, UInt32),
     release : Proc(IXMLElement*, UInt32),
     get_type_info_count : Proc(IXMLElement*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLElement*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLElement*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLElement*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLElement*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_tagName : Proc(IXMLElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_tagName : Proc(IXMLElement*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_parent : Proc(IXMLElement*, Void**, Win32cr::Foundation::HRESULT),
-    setAttribute : Proc(IXMLElement*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    getAttribute : Proc(IXMLElement*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    setAttribute : Proc(IXMLElement*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    getAttribute : Proc(IXMLElement*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     removeAttribute : Proc(IXMLElement*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_children : Proc(IXMLElement*, Void**, Win32cr::Foundation::HRESULT),
     get_type : Proc(IXMLElement*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4705,7 +4637,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLElement, lpVtbl : IXMLElementVtbl* do
+  record IXMLElement, lpVtbl : IXMLElementVtable* do
     GUID = LibC::GUID.new(0x3f7f31ac_u32, 0xe15f_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0x25_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4725,8 +4657,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLElement*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLElement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLElement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_tagName(this : IXMLElement*, p : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_tagName.call(this, p)
@@ -4737,10 +4669,10 @@ module Win32cr::Data::Xml::MsXml
     def get_parent(this : IXMLElement*, ppParent : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parent.call(this, ppParent)
     end
-    def setAttribute(this : IXMLElement*, strPropertyName : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setAttribute(this : IXMLElement*, strPropertyName : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setAttribute.call(this, strPropertyName, property_value)
     end
-    def getAttribute(this : IXMLElement*, strPropertyName : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getAttribute(this : IXMLElement*, strPropertyName : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAttribute.call(this, strPropertyName, property_value)
     end
     def removeAttribute(this : IXMLElement*, strPropertyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4768,19 +4700,20 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLElement2Vtbl,
+
+  record IXMLElement2Vtable,
     query_interface : Proc(IXMLElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLElement2*, UInt32),
     release : Proc(IXMLElement2*, UInt32),
     get_type_info_count : Proc(IXMLElement2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLElement2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLElement2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLElement2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLElement2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_tagName : Proc(IXMLElement2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_tagName : Proc(IXMLElement2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_parent : Proc(IXMLElement2*, Void**, Win32cr::Foundation::HRESULT),
-    setAttribute : Proc(IXMLElement2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    getAttribute : Proc(IXMLElement2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    setAttribute : Proc(IXMLElement2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    getAttribute : Proc(IXMLElement2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     removeAttribute : Proc(IXMLElement2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_children : Proc(IXMLElement2*, Void**, Win32cr::Foundation::HRESULT),
     get_type : Proc(IXMLElement2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -4792,7 +4725,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLElement2, lpVtbl : IXMLElement2Vtbl* do
+  record IXMLElement2, lpVtbl : IXMLElement2Vtable* do
     GUID = LibC::GUID.new(0x2b8de2ff_u32, 0x8d2d_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x15_u8, 0xa9_u8])
     def query_interface(this : IXMLElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4812,8 +4745,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLElement2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLElement2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLElement2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_tagName(this : IXMLElement2*, p : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_tagName.call(this, p)
@@ -4824,10 +4757,10 @@ module Win32cr::Data::Xml::MsXml
     def get_parent(this : IXMLElement2*, ppParent : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parent.call(this, ppParent)
     end
-    def setAttribute(this : IXMLElement2*, strPropertyName : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setAttribute(this : IXMLElement2*, strPropertyName : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setAttribute.call(this, strPropertyName, property_value)
     end
-    def getAttribute(this : IXMLElement2*, strPropertyName : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getAttribute(this : IXMLElement2*, strPropertyName : Win32cr::Foundation::BSTR, property_value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAttribute.call(this, strPropertyName, property_value)
     end
     def removeAttribute(this : IXMLElement2*, strPropertyName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4858,20 +4791,21 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLAttributeVtbl,
+
+  record IXMLAttributeVtable,
     query_interface : Proc(IXMLAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLAttribute*, UInt32),
     release : Proc(IXMLAttribute*, UInt32),
     get_type_info_count : Proc(IXMLAttribute*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLAttribute*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLAttribute*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLAttribute*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLAttribute*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(IXMLAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_value : Proc(IXMLAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLAttribute, lpVtbl : IXMLAttributeVtbl* do
+  record IXMLAttribute, lpVtbl : IXMLAttributeVtable* do
     GUID = LibC::GUID.new(0xd4d4a0fc_u32, 0x3b73_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x25_u8, 0x96_u8])
     def query_interface(this : IXMLAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4891,8 +4825,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLAttribute*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLAttribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLAttribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : IXMLAttribute*, n : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, n)
@@ -4904,7 +4838,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLErrorVtbl,
+
+  record IXMLErrorVtable,
     query_interface : Proc(IXMLError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLError*, UInt32),
     release : Proc(IXMLError*, UInt32),
@@ -4912,7 +4847,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLError, lpVtbl : IXMLErrorVtbl* do
+  record IXMLError, lpVtbl : IXMLErrorVtable* do
     GUID = LibC::GUID.new(0x948c5ad3_u32, 0xc58d_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0xb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4930,17 +4865,18 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMDocument2Vtbl,
+
+  record IXMLDOMDocument2Vtable,
     query_interface : Proc(IXMLDOMDocument2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocument2*, UInt32),
     release : Proc(IXMLDOMDocument2*, UInt32),
     get_type_info_count : Proc(IXMLDOMDocument2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMDocument2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMDocument2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMDocument2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMDocument2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMDocument2*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
@@ -4949,31 +4885,31 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMDocument2*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMDocument2*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMDocument2*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMDocument2*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMDocument2*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMDocument2*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMDocument2*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMDocument2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMDocument2*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMDocument2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMDocument2*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMDocument2*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_doctype : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
     get_implementation : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
     get_documentElement : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
@@ -4987,36 +4923,36 @@ module Win32cr::Data::Xml::MsXml
     createAttribute : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     createEntityReference : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getElementsByTagName : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    createNode : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    createNode : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     nodeFromID : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    load : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Int16*, Win32cr::Foundation::HRESULT),
+    load : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_readyState : Proc(IXMLDOMDocument2*, Int32*, Win32cr::Foundation::HRESULT),
     get_parseError : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
     get_url : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_async : Proc(IXMLDOMDocument2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_async : Proc(IXMLDOMDocument2*, Int16, Win32cr::Foundation::HRESULT),
+    get_async : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_async : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     abort : Proc(IXMLDOMDocument2*, Win32cr::Foundation::HRESULT),
-    loadXML : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    save : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_validateOnParse : Proc(IXMLDOMDocument2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_validateOnParse : Proc(IXMLDOMDocument2*, Int16, Win32cr::Foundation::HRESULT),
-    get_resolveExternals : Proc(IXMLDOMDocument2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_resolveExternals : Proc(IXMLDOMDocument2*, Int16, Win32cr::Foundation::HRESULT),
-    get_preserveWhiteSpace : Proc(IXMLDOMDocument2*, Int16*, Win32cr::Foundation::HRESULT),
-    put_preserveWhiteSpace : Proc(IXMLDOMDocument2*, Int16, Win32cr::Foundation::HRESULT),
-    put_onreadystatechange : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    put_ondataavailable : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    put_ontransformnode : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    loadXML : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    save : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_validateOnParse : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_validateOnParse : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_resolveExternals : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_resolveExternals : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_preserveWhiteSpace : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_preserveWhiteSpace : Proc(IXMLDOMDocument2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    put_onreadystatechange : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    put_ondataavailable : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    put_ontransformnode : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_namespaces : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
-    get_schemas : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    putref_schemas : Proc(IXMLDOMDocument2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_schemas : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    putref_schemas : Proc(IXMLDOMDocument2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     validate : Proc(IXMLDOMDocument2*, Void**, Win32cr::Foundation::HRESULT),
-    setProperty : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    getProperty : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    setProperty : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    getProperty : Proc(IXMLDOMDocument2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMDocument2, lpVtbl : IXMLDOMDocument2Vtbl* do
+  record IXMLDOMDocument2, lpVtbl : IXMLDOMDocument2Vtable* do
     GUID = LibC::GUID.new(0x2933bf95_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5036,16 +4972,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMDocument2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMDocument2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMDocument2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMDocument2*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMDocument2*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMDocument2*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMDocument2*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMDocument2*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMDocument2*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -5072,7 +5008,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMDocument2*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMDocument2*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMDocument2*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMDocument2*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -5084,13 +5020,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMDocument2*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMDocument2*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMDocument2*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMDocument2*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMDocument2*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMDocument2*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMDocument2*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5102,19 +5038,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMDocument2*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMDocument2*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMDocument2*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMDocument2*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMDocument2*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMDocument2*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMDocument2*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMDocument2*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMDocument2*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMDocument2*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMDocument2*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -5132,7 +5068,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMDocument2*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMDocument2*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMDocument2*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMDocument2*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5144,7 +5080,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMDocument2*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMDocument2*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMDocument2*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_doctype(this : IXMLDOMDocument2*, documentType : Void**) : Win32cr::Foundation::HRESULT
@@ -5186,13 +5122,13 @@ module Win32cr::Data::Xml::MsXml
     def getElementsByTagName(this : IXMLDOMDocument2*, tagName : Win32cr::Foundation::BSTR, resultList : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getElementsByTagName.call(this, tagName, resultList)
     end
-    def createNode(this : IXMLDOMDocument2*, type__ : Win32cr::System::Com::VARIANT, name : Win32cr::Foundation::BSTR, namespaceURI : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
+    def createNode(this : IXMLDOMDocument2*, type__ : Win32cr::System::Variant::VARIANT, name : Win32cr::Foundation::BSTR, namespaceURI : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createNode.call(this, type__, name, namespaceURI, node)
     end
     def nodeFromID(this : IXMLDOMDocument2*, idString : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.nodeFromID.call(this, idString, node)
     end
-    def load(this : IXMLDOMDocument2*, xmlSource : Win32cr::System::Com::VARIANT, isSuccessful : Int16*) : Win32cr::Foundation::HRESULT
+    def load(this : IXMLDOMDocument2*, xmlSource : Win32cr::System::Variant::VARIANT, isSuccessful : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.load.call(this, xmlSource, isSuccessful)
     end
     def get_readyState(this : IXMLDOMDocument2*, value : Int32*) : Win32cr::Foundation::HRESULT
@@ -5204,81 +5140,82 @@ module Win32cr::Data::Xml::MsXml
     def get_url(this : IXMLDOMDocument2*, urlString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_url.call(this, urlString)
     end
-    def get_async(this : IXMLDOMDocument2*, isAsync : Int16*) : Win32cr::Foundation::HRESULT
+    def get_async(this : IXMLDOMDocument2*, isAsync : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_async.call(this, isAsync)
     end
-    def put_async(this : IXMLDOMDocument2*, isAsync : Int16) : Win32cr::Foundation::HRESULT
+    def put_async(this : IXMLDOMDocument2*, isAsync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_async.call(this, isAsync)
     end
     def abort(this : IXMLDOMDocument2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.abort.call(this)
     end
-    def loadXML(this : IXMLDOMDocument2*, bstrXML : Win32cr::Foundation::BSTR, isSuccessful : Int16*) : Win32cr::Foundation::HRESULT
+    def loadXML(this : IXMLDOMDocument2*, bstrXML : Win32cr::Foundation::BSTR, isSuccessful : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.loadXML.call(this, bstrXML, isSuccessful)
     end
-    def save(this : IXMLDOMDocument2*, destination : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def save(this : IXMLDOMDocument2*, destination : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, destination)
     end
-    def get_validateOnParse(this : IXMLDOMDocument2*, isValidating : Int16*) : Win32cr::Foundation::HRESULT
+    def get_validateOnParse(this : IXMLDOMDocument2*, isValidating : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_validateOnParse.call(this, isValidating)
     end
-    def put_validateOnParse(this : IXMLDOMDocument2*, isValidating : Int16) : Win32cr::Foundation::HRESULT
+    def put_validateOnParse(this : IXMLDOMDocument2*, isValidating : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_validateOnParse.call(this, isValidating)
     end
-    def get_resolveExternals(this : IXMLDOMDocument2*, isResolving : Int16*) : Win32cr::Foundation::HRESULT
+    def get_resolveExternals(this : IXMLDOMDocument2*, isResolving : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_resolveExternals.call(this, isResolving)
     end
-    def put_resolveExternals(this : IXMLDOMDocument2*, isResolving : Int16) : Win32cr::Foundation::HRESULT
+    def put_resolveExternals(this : IXMLDOMDocument2*, isResolving : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_resolveExternals.call(this, isResolving)
     end
-    def get_preserveWhiteSpace(this : IXMLDOMDocument2*, isPreserving : Int16*) : Win32cr::Foundation::HRESULT
+    def get_preserveWhiteSpace(this : IXMLDOMDocument2*, isPreserving : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_preserveWhiteSpace.call(this, isPreserving)
     end
-    def put_preserveWhiteSpace(this : IXMLDOMDocument2*, isPreserving : Int16) : Win32cr::Foundation::HRESULT
+    def put_preserveWhiteSpace(this : IXMLDOMDocument2*, isPreserving : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_preserveWhiteSpace.call(this, isPreserving)
     end
-    def put_onreadystatechange(this : IXMLDOMDocument2*, readystatechangeSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_onreadystatechange(this : IXMLDOMDocument2*, readystatechangeSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_onreadystatechange.call(this, readystatechangeSink)
     end
-    def put_ondataavailable(this : IXMLDOMDocument2*, ondataavailableSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_ondataavailable(this : IXMLDOMDocument2*, ondataavailableSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ondataavailable.call(this, ondataavailableSink)
     end
-    def put_ontransformnode(this : IXMLDOMDocument2*, ontransformnodeSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_ontransformnode(this : IXMLDOMDocument2*, ontransformnodeSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ontransformnode.call(this, ontransformnodeSink)
     end
     def get_namespaces(this : IXMLDOMDocument2*, namespaceCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_namespaces.call(this, namespaceCollection)
     end
-    def get_schemas(this : IXMLDOMDocument2*, otherCollection : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_schemas(this : IXMLDOMDocument2*, otherCollection : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_schemas.call(this, otherCollection)
     end
-    def putref_schemas(this : IXMLDOMDocument2*, otherCollection : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def putref_schemas(this : IXMLDOMDocument2*, otherCollection : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_schemas.call(this, otherCollection)
     end
     def validate(this : IXMLDOMDocument2*, errorObj : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.validate.call(this, errorObj)
     end
-    def setProperty(this : IXMLDOMDocument2*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setProperty(this : IXMLDOMDocument2*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setProperty.call(this, name, value)
     end
-    def getProperty(this : IXMLDOMDocument2*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getProperty(this : IXMLDOMDocument2*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProperty.call(this, name, value)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMDocument3Vtbl,
+
+  record IXMLDOMDocument3Vtable,
     query_interface : Proc(IXMLDOMDocument3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocument3*, UInt32),
     release : Proc(IXMLDOMDocument3*, UInt32),
     get_type_info_count : Proc(IXMLDOMDocument3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMDocument3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMDocument3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMDocument3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMDocument3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_nodeName : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_nodeValue : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeValue : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_nodeValue : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeValue : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_nodeType : Proc(IXMLDOMDocument3*, Win32cr::Data::Xml::MsXml::DOMNodeType*, Win32cr::Foundation::HRESULT),
     get_parentNode : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
     get_childNodes : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
@@ -5287,31 +5224,31 @@ module Win32cr::Data::Xml::MsXml
     get_previousSibling : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
     get_nextSibling : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
-    insertBefore : Proc(IXMLDOMDocument3*, Void*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    insertBefore : Proc(IXMLDOMDocument3*, Void*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     replaceChild : Proc(IXMLDOMDocument3*, Void*, Void*, Void**, Win32cr::Foundation::HRESULT),
     removeChild : Proc(IXMLDOMDocument3*, Void*, Void**, Win32cr::Foundation::HRESULT),
     appendChild : Proc(IXMLDOMDocument3*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    hasChildNodes : Proc(IXMLDOMDocument3*, Int16*, Win32cr::Foundation::HRESULT),
+    hasChildNodes : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_ownerDocument : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
-    cloneNode : Proc(IXMLDOMDocument3*, Int16, Void**, Win32cr::Foundation::HRESULT),
+    cloneNode : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT),
     get_nodeTypeString : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_text : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_text : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    get_specified : Proc(IXMLDOMDocument3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_specified : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_definition : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
-    get_nodeTypedValue : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_nodeTypedValue : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_dataType : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_nodeTypedValue : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_nodeTypedValue : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_dataType : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_dataType : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_xml : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     transformNode : Proc(IXMLDOMDocument3*, Void*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     selectNodes : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     selectSingleNode : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    get_parsed : Proc(IXMLDOMDocument3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_parsed : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_prefix : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_baseName : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    transformNodeToObject : Proc(IXMLDOMDocument3*, Void*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    transformNodeToObject : Proc(IXMLDOMDocument3*, Void*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_doctype : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
     get_implementation : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
     get_documentElement : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
@@ -5325,38 +5262,38 @@ module Win32cr::Data::Xml::MsXml
     createAttribute : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     createEntityReference : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getElementsByTagName : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    createNode : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
+    createNode : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     nodeFromID : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    load : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Int16*, Win32cr::Foundation::HRESULT),
+    load : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_readyState : Proc(IXMLDOMDocument3*, Int32*, Win32cr::Foundation::HRESULT),
     get_parseError : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
     get_url : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_async : Proc(IXMLDOMDocument3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_async : Proc(IXMLDOMDocument3*, Int16, Win32cr::Foundation::HRESULT),
+    get_async : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_async : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     abort : Proc(IXMLDOMDocument3*, Win32cr::Foundation::HRESULT),
-    loadXML : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    save : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_validateOnParse : Proc(IXMLDOMDocument3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_validateOnParse : Proc(IXMLDOMDocument3*, Int16, Win32cr::Foundation::HRESULT),
-    get_resolveExternals : Proc(IXMLDOMDocument3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_resolveExternals : Proc(IXMLDOMDocument3*, Int16, Win32cr::Foundation::HRESULT),
-    get_preserveWhiteSpace : Proc(IXMLDOMDocument3*, Int16*, Win32cr::Foundation::HRESULT),
-    put_preserveWhiteSpace : Proc(IXMLDOMDocument3*, Int16, Win32cr::Foundation::HRESULT),
-    put_onreadystatechange : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    put_ondataavailable : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    put_ontransformnode : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    loadXML : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    save : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_validateOnParse : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_validateOnParse : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_resolveExternals : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_resolveExternals : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_preserveWhiteSpace : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_preserveWhiteSpace : Proc(IXMLDOMDocument3*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    put_onreadystatechange : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    put_ondataavailable : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    put_ontransformnode : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_namespaces : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
-    get_schemas : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    putref_schemas : Proc(IXMLDOMDocument3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_schemas : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    putref_schemas : Proc(IXMLDOMDocument3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     validate : Proc(IXMLDOMDocument3*, Void**, Win32cr::Foundation::HRESULT),
-    setProperty : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    getProperty : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    setProperty : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    getProperty : Proc(IXMLDOMDocument3*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     validateNode : Proc(IXMLDOMDocument3*, Void*, Void**, Win32cr::Foundation::HRESULT),
-    importNode : Proc(IXMLDOMDocument3*, Void*, Int16, Void**, Win32cr::Foundation::HRESULT)
+    importNode : Proc(IXMLDOMDocument3*, Void*, Win32cr::Foundation::VARIANT_BOOL, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMDocument3, lpVtbl : IXMLDOMDocument3Vtbl* do
+  record IXMLDOMDocument3, lpVtbl : IXMLDOMDocument3Vtable* do
     GUID = LibC::GUID.new(0x2933bf96_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5376,16 +5313,16 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMDocument3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMDocument3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMDocument3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_nodeName(this : IXMLDOMDocument3*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeName.call(this, name)
     end
-    def get_nodeValue(this : IXMLDOMDocument3*, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeValue(this : IXMLDOMDocument3*, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeValue.call(this, value)
     end
-    def put_nodeValue(this : IXMLDOMDocument3*, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeValue(this : IXMLDOMDocument3*, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeValue.call(this, value)
     end
     def get_nodeType(this : IXMLDOMDocument3*, type__ : Win32cr::Data::Xml::MsXml::DOMNodeType*) : Win32cr::Foundation::HRESULT
@@ -5412,7 +5349,7 @@ module Win32cr::Data::Xml::MsXml
     def get_attributes(this : IXMLDOMDocument3*, attributeMap : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attributes.call(this, attributeMap)
     end
-    def insertBefore(this : IXMLDOMDocument3*, newChild : Void*, refChild : Win32cr::System::Com::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
+    def insertBefore(this : IXMLDOMDocument3*, newChild : Void*, refChild : Win32cr::System::Variant::VARIANT, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.insertBefore.call(this, newChild, refChild, outNewChild)
     end
     def replaceChild(this : IXMLDOMDocument3*, newChild : Void*, oldChild : Void*, outOldChild : Void**) : Win32cr::Foundation::HRESULT
@@ -5424,13 +5361,13 @@ module Win32cr::Data::Xml::MsXml
     def appendChild(this : IXMLDOMDocument3*, newChild : Void*, outNewChild : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.appendChild.call(this, newChild, outNewChild)
     end
-    def hasChildNodes(this : IXMLDOMDocument3*, hasChild : Int16*) : Win32cr::Foundation::HRESULT
+    def hasChildNodes(this : IXMLDOMDocument3*, hasChild : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.hasChildNodes.call(this, hasChild)
     end
     def get_ownerDocument(this : IXMLDOMDocument3*, xmldom_document : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ownerDocument.call(this, xmldom_document)
     end
-    def cloneNode(this : IXMLDOMDocument3*, deep : Int16, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
+    def cloneNode(this : IXMLDOMDocument3*, deep : Win32cr::Foundation::VARIANT_BOOL, cloneRoot : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.cloneNode.call(this, deep, cloneRoot)
     end
     def get_nodeTypeString(this : IXMLDOMDocument3*, nodeType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5442,19 +5379,19 @@ module Win32cr::Data::Xml::MsXml
     def put_text(this : IXMLDOMDocument3*, text : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_text.call(this, text)
     end
-    def get_specified(this : IXMLDOMDocument3*, isSpecified : Int16*) : Win32cr::Foundation::HRESULT
+    def get_specified(this : IXMLDOMDocument3*, isSpecified : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_specified.call(this, isSpecified)
     end
     def get_definition(this : IXMLDOMDocument3*, definitionNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_definition.call(this, definitionNode)
     end
-    def get_nodeTypedValue(this : IXMLDOMDocument3*, typedValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_nodeTypedValue(this : IXMLDOMDocument3*, typedValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_nodeTypedValue.call(this, typedValue)
     end
-    def put_nodeTypedValue(this : IXMLDOMDocument3*, typedValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_nodeTypedValue(this : IXMLDOMDocument3*, typedValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_nodeTypedValue.call(this, typedValue)
     end
-    def get_dataType(this : IXMLDOMDocument3*, dataTypeName : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_dataType(this : IXMLDOMDocument3*, dataTypeName : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_dataType.call(this, dataTypeName)
     end
     def put_dataType(this : IXMLDOMDocument3*, dataTypeName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -5472,7 +5409,7 @@ module Win32cr::Data::Xml::MsXml
     def selectSingleNode(this : IXMLDOMDocument3*, queryString : Win32cr::Foundation::BSTR, resultNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.selectSingleNode.call(this, queryString, resultNode)
     end
-    def get_parsed(this : IXMLDOMDocument3*, isParsed : Int16*) : Win32cr::Foundation::HRESULT
+    def get_parsed(this : IXMLDOMDocument3*, isParsed : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parsed.call(this, isParsed)
     end
     def get_namespaceURI(this : IXMLDOMDocument3*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -5484,7 +5421,7 @@ module Win32cr::Data::Xml::MsXml
     def get_baseName(this : IXMLDOMDocument3*, nameString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_baseName.call(this, nameString)
     end
-    def transformNodeToObject(this : IXMLDOMDocument3*, stylesheet : Void*, outputObject : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def transformNodeToObject(this : IXMLDOMDocument3*, stylesheet : Void*, outputObject : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transformNodeToObject.call(this, stylesheet, outputObject)
     end
     def get_doctype(this : IXMLDOMDocument3*, documentType : Void**) : Win32cr::Foundation::HRESULT
@@ -5526,13 +5463,13 @@ module Win32cr::Data::Xml::MsXml
     def getElementsByTagName(this : IXMLDOMDocument3*, tagName : Win32cr::Foundation::BSTR, resultList : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getElementsByTagName.call(this, tagName, resultList)
     end
-    def createNode(this : IXMLDOMDocument3*, type__ : Win32cr::System::Com::VARIANT, name : Win32cr::Foundation::BSTR, namespaceURI : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
+    def createNode(this : IXMLDOMDocument3*, type__ : Win32cr::System::Variant::VARIANT, name : Win32cr::Foundation::BSTR, namespaceURI : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.createNode.call(this, type__, name, namespaceURI, node)
     end
     def nodeFromID(this : IXMLDOMDocument3*, idString : Win32cr::Foundation::BSTR, node : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.nodeFromID.call(this, idString, node)
     end
-    def load(this : IXMLDOMDocument3*, xmlSource : Win32cr::System::Com::VARIANT, isSuccessful : Int16*) : Win32cr::Foundation::HRESULT
+    def load(this : IXMLDOMDocument3*, xmlSource : Win32cr::System::Variant::VARIANT, isSuccessful : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.load.call(this, xmlSource, isSuccessful)
     end
     def get_readyState(this : IXMLDOMDocument3*, value : Int32*) : Win32cr::Foundation::HRESULT
@@ -5544,85 +5481,86 @@ module Win32cr::Data::Xml::MsXml
     def get_url(this : IXMLDOMDocument3*, urlString : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_url.call(this, urlString)
     end
-    def get_async(this : IXMLDOMDocument3*, isAsync : Int16*) : Win32cr::Foundation::HRESULT
+    def get_async(this : IXMLDOMDocument3*, isAsync : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_async.call(this, isAsync)
     end
-    def put_async(this : IXMLDOMDocument3*, isAsync : Int16) : Win32cr::Foundation::HRESULT
+    def put_async(this : IXMLDOMDocument3*, isAsync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_async.call(this, isAsync)
     end
     def abort(this : IXMLDOMDocument3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.abort.call(this)
     end
-    def loadXML(this : IXMLDOMDocument3*, bstrXML : Win32cr::Foundation::BSTR, isSuccessful : Int16*) : Win32cr::Foundation::HRESULT
+    def loadXML(this : IXMLDOMDocument3*, bstrXML : Win32cr::Foundation::BSTR, isSuccessful : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.loadXML.call(this, bstrXML, isSuccessful)
     end
-    def save(this : IXMLDOMDocument3*, destination : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def save(this : IXMLDOMDocument3*, destination : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.save.call(this, destination)
     end
-    def get_validateOnParse(this : IXMLDOMDocument3*, isValidating : Int16*) : Win32cr::Foundation::HRESULT
+    def get_validateOnParse(this : IXMLDOMDocument3*, isValidating : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_validateOnParse.call(this, isValidating)
     end
-    def put_validateOnParse(this : IXMLDOMDocument3*, isValidating : Int16) : Win32cr::Foundation::HRESULT
+    def put_validateOnParse(this : IXMLDOMDocument3*, isValidating : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_validateOnParse.call(this, isValidating)
     end
-    def get_resolveExternals(this : IXMLDOMDocument3*, isResolving : Int16*) : Win32cr::Foundation::HRESULT
+    def get_resolveExternals(this : IXMLDOMDocument3*, isResolving : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_resolveExternals.call(this, isResolving)
     end
-    def put_resolveExternals(this : IXMLDOMDocument3*, isResolving : Int16) : Win32cr::Foundation::HRESULT
+    def put_resolveExternals(this : IXMLDOMDocument3*, isResolving : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_resolveExternals.call(this, isResolving)
     end
-    def get_preserveWhiteSpace(this : IXMLDOMDocument3*, isPreserving : Int16*) : Win32cr::Foundation::HRESULT
+    def get_preserveWhiteSpace(this : IXMLDOMDocument3*, isPreserving : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_preserveWhiteSpace.call(this, isPreserving)
     end
-    def put_preserveWhiteSpace(this : IXMLDOMDocument3*, isPreserving : Int16) : Win32cr::Foundation::HRESULT
+    def put_preserveWhiteSpace(this : IXMLDOMDocument3*, isPreserving : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_preserveWhiteSpace.call(this, isPreserving)
     end
-    def put_onreadystatechange(this : IXMLDOMDocument3*, readystatechangeSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_onreadystatechange(this : IXMLDOMDocument3*, readystatechangeSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_onreadystatechange.call(this, readystatechangeSink)
     end
-    def put_ondataavailable(this : IXMLDOMDocument3*, ondataavailableSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_ondataavailable(this : IXMLDOMDocument3*, ondataavailableSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ondataavailable.call(this, ondataavailableSink)
     end
-    def put_ontransformnode(this : IXMLDOMDocument3*, ontransformnodeSink : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_ontransformnode(this : IXMLDOMDocument3*, ontransformnodeSink : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_ontransformnode.call(this, ontransformnodeSink)
     end
     def get_namespaces(this : IXMLDOMDocument3*, namespaceCollection : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_namespaces.call(this, namespaceCollection)
     end
-    def get_schemas(this : IXMLDOMDocument3*, otherCollection : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_schemas(this : IXMLDOMDocument3*, otherCollection : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_schemas.call(this, otherCollection)
     end
-    def putref_schemas(this : IXMLDOMDocument3*, otherCollection : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def putref_schemas(this : IXMLDOMDocument3*, otherCollection : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_schemas.call(this, otherCollection)
     end
     def validate(this : IXMLDOMDocument3*, errorObj : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.validate.call(this, errorObj)
     end
-    def setProperty(this : IXMLDOMDocument3*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setProperty(this : IXMLDOMDocument3*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setProperty.call(this, name, value)
     end
-    def getProperty(this : IXMLDOMDocument3*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getProperty(this : IXMLDOMDocument3*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProperty.call(this, name, value)
     end
     def validateNode(this : IXMLDOMDocument3*, node : Void*, errorObj : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.validateNode.call(this, node, errorObj)
     end
-    def importNode(this : IXMLDOMDocument3*, node : Void*, deep : Int16, clone : Void**) : Win32cr::Foundation::HRESULT
+    def importNode(this : IXMLDOMDocument3*, node : Void*, deep : Win32cr::Foundation::VARIANT_BOOL, clone : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.importNode.call(this, node, deep, clone)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMSchemaCollectionVtbl,
+
+  record IXMLDOMSchemaCollectionVtable,
     query_interface : Proc(IXMLDOMSchemaCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMSchemaCollection*, UInt32),
     release : Proc(IXMLDOMSchemaCollection*, UInt32),
     get_type_info_count : Proc(IXMLDOMSchemaCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMSchemaCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMSchemaCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMSchemaCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    add : Proc(IXMLDOMSchemaCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMSchemaCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    add : Proc(IXMLDOMSchemaCollection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get : Proc(IXMLDOMSchemaCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     remove : Proc(IXMLDOMSchemaCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMSchemaCollection*, Int32*, Win32cr::Foundation::HRESULT),
@@ -5632,7 +5570,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMSchemaCollection, lpVtbl : IXMLDOMSchemaCollectionVtbl* do
+  record IXMLDOMSchemaCollection, lpVtbl : IXMLDOMSchemaCollectionVtable* do
     GUID = LibC::GUID.new(0x373984c8_u32, 0xb845_u16, 0x449b_u16, StaticArray[0x91_u8, 0xe7_u8, 0x45_u8, 0xac_u8, 0x83_u8, 0x3_u8, 0x6a_u8, 0xde_u8])
     def query_interface(this : IXMLDOMSchemaCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5652,10 +5590,10 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMSchemaCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMSchemaCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMSchemaCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def add(this : IXMLDOMSchemaCollection*, namespaceURI : Win32cr::Foundation::BSTR, var : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add(this : IXMLDOMSchemaCollection*, namespaceURI : Win32cr::Foundation::BSTR, var : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, namespaceURI, var)
     end
     def get(this : IXMLDOMSchemaCollection*, namespaceURI : Win32cr::Foundation::BSTR, schemaNode : Void**) : Win32cr::Foundation::HRESULT
@@ -5680,14 +5618,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMSelectionVtbl,
+
+  record IXMLDOMSelectionVtable,
     query_interface : Proc(IXMLDOMSelection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMSelection*, UInt32),
     release : Proc(IXMLDOMSelection*, UInt32),
     get_type_info_count : Proc(IXMLDOMSelection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMSelection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMSelection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMSelection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMSelection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_item : Proc(IXMLDOMSelection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMSelection*, Int32*, Win32cr::Foundation::HRESULT),
     nextNode : Proc(IXMLDOMSelection*, Void**, Win32cr::Foundation::HRESULT),
@@ -5702,12 +5641,12 @@ module Win32cr::Data::Xml::MsXml
     removeNext : Proc(IXMLDOMSelection*, Void**, Win32cr::Foundation::HRESULT),
     removeAll : Proc(IXMLDOMSelection*, Win32cr::Foundation::HRESULT),
     clone : Proc(IXMLDOMSelection*, Void**, Win32cr::Foundation::HRESULT),
-    getProperty : Proc(IXMLDOMSelection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    setProperty : Proc(IXMLDOMSelection*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    getProperty : Proc(IXMLDOMSelection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    setProperty : Proc(IXMLDOMSelection*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMSelection, lpVtbl : IXMLDOMSelectionVtbl* do
+  record IXMLDOMSelection, lpVtbl : IXMLDOMSelectionVtable* do
     GUID = LibC::GUID.new(0xaa634fc7_u32, 0x5888_u16, 0x44a7_u16, StaticArray[0xa2_u8, 0x57_u8, 0x3a_u8, 0x47_u8, 0x15_u8, 0xd_u8, 0x3a_u8, 0xe_u8])
     def query_interface(this : IXMLDOMSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5727,8 +5666,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMSelection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMSelection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMSelection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_item(this : IXMLDOMSelection*, index : Int32, listItem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_item.call(this, index, listItem)
@@ -5772,24 +5711,25 @@ module Win32cr::Data::Xml::MsXml
     def clone(this : IXMLDOMSelection*, ppNode : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.clone.call(this, ppNode)
     end
-    def getProperty(this : IXMLDOMSelection*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getProperty(this : IXMLDOMSelection*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProperty.call(this, name, value)
     end
-    def setProperty(this : IXMLDOMSelection*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setProperty(this : IXMLDOMSelection*, name : Win32cr::Foundation::BSTR, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setProperty.call(this, name, value)
     end
 
   end
 
   @[Extern]
-  record IXMLDOMParseError2Vtbl,
+
+  record IXMLDOMParseError2Vtable,
     query_interface : Proc(IXMLDOMParseError2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMParseError2*, UInt32),
     release : Proc(IXMLDOMParseError2*, UInt32),
     get_type_info_count : Proc(IXMLDOMParseError2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMParseError2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMParseError2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMParseError2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMParseError2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_errorCode : Proc(IXMLDOMParseError2*, Int32*, Win32cr::Foundation::HRESULT),
     get_url : Proc(IXMLDOMParseError2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_reason : Proc(IXMLDOMParseError2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -5804,7 +5744,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMParseError2, lpVtbl : IXMLDOMParseError2Vtbl* do
+  record IXMLDOMParseError2, lpVtbl : IXMLDOMParseError2Vtable* do
     GUID = LibC::GUID.new(0x3efaa428_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseError2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5824,8 +5764,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMParseError2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMParseError2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMParseError2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_errorCode(this : IXMLDOMParseError2*, errorCode : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_errorCode.call(this, errorCode)
@@ -5864,14 +5804,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMParseErrorCollectionVtbl,
+
+  record IXMLDOMParseErrorCollectionVtable,
     query_interface : Proc(IXMLDOMParseErrorCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMParseErrorCollection*, UInt32),
     release : Proc(IXMLDOMParseErrorCollection*, UInt32),
     get_type_info_count : Proc(IXMLDOMParseErrorCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMParseErrorCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMParseErrorCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMParseErrorCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMParseErrorCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_item : Proc(IXMLDOMParseErrorCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMParseErrorCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get_next : Proc(IXMLDOMParseErrorCollection*, Void**, Win32cr::Foundation::HRESULT),
@@ -5880,7 +5821,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMParseErrorCollection, lpVtbl : IXMLDOMParseErrorCollectionVtbl* do
+  record IXMLDOMParseErrorCollection, lpVtbl : IXMLDOMParseErrorCollectionVtable* do
     GUID = LibC::GUID.new(0x3efaa429_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseErrorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5900,8 +5841,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMParseErrorCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMParseErrorCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMParseErrorCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_item(this : IXMLDOMParseErrorCollection*, index : Int32, error : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_item.call(this, index, error)
@@ -5922,32 +5863,33 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXSLProcessorVtbl,
+
+  record IXSLProcessorVtable,
     query_interface : Proc(IXSLProcessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXSLProcessor*, UInt32),
     release : Proc(IXSLProcessor*, UInt32),
     get_type_info_count : Proc(IXSLProcessor*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXSLProcessor*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXSLProcessor*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXSLProcessor*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    put_input : Proc(IXSLProcessor*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_input : Proc(IXSLProcessor*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXSLProcessor*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_input : Proc(IXSLProcessor*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_input : Proc(IXSLProcessor*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_ownerTemplate : Proc(IXSLProcessor*, Void**, Win32cr::Foundation::HRESULT),
     setStartMode : Proc(IXSLProcessor*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_startMode : Proc(IXSLProcessor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_startModeURI : Proc(IXSLProcessor*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    put_output : Proc(IXSLProcessor*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_output : Proc(IXSLProcessor*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    transform : Proc(IXSLProcessor*, Int16*, Win32cr::Foundation::HRESULT),
+    put_output : Proc(IXSLProcessor*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_output : Proc(IXSLProcessor*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    transform : Proc(IXSLProcessor*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     reset : Proc(IXSLProcessor*, Win32cr::Foundation::HRESULT),
     get_readyState : Proc(IXSLProcessor*, Int32*, Win32cr::Foundation::HRESULT),
-    addParameter : Proc(IXSLProcessor*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
+    addParameter : Proc(IXSLProcessor*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     addObject : Proc(IXSLProcessor*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_stylesheet : Proc(IXSLProcessor*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXSLProcessor, lpVtbl : IXSLProcessorVtbl* do
+  record IXSLProcessor, lpVtbl : IXSLProcessorVtable* do
     GUID = LibC::GUID.new(0x2933bf92_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXSLProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5967,13 +5909,13 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXSLProcessor*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXSLProcessor*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXSLProcessor*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def put_input(this : IXSLProcessor*, var : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_input(this : IXSLProcessor*, var : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_input.call(this, var)
     end
-    def get_input(this : IXSLProcessor*, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_input(this : IXSLProcessor*, pVar : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_input.call(this, pVar)
     end
     def get_ownerTemplate(this : IXSLProcessor*, ppTemplate : Void**) : Win32cr::Foundation::HRESULT
@@ -5988,13 +5930,13 @@ module Win32cr::Data::Xml::MsXml
     def get_startModeURI(this : IXSLProcessor*, namespaceURI : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_startModeURI.call(this, namespaceURI)
     end
-    def put_output(this : IXSLProcessor*, output : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_output(this : IXSLProcessor*, output : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_output.call(this, output)
     end
-    def get_output(this : IXSLProcessor*, pOutput : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_output(this : IXSLProcessor*, pOutput : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_output.call(this, pOutput)
     end
-    def transform(this : IXSLProcessor*, pDone : Int16*) : Win32cr::Foundation::HRESULT
+    def transform(this : IXSLProcessor*, pDone : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.transform.call(this, pDone)
     end
     def reset(this : IXSLProcessor*) : Win32cr::Foundation::HRESULT
@@ -6003,7 +5945,7 @@ module Win32cr::Data::Xml::MsXml
     def get_readyState(this : IXSLProcessor*, pReadyState : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_readyState.call(this, pReadyState)
     end
-    def addParameter(this : IXSLProcessor*, baseName : Win32cr::Foundation::BSTR, parameter : Win32cr::System::Com::VARIANT, namespaceURI : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    def addParameter(this : IXSLProcessor*, baseName : Win32cr::Foundation::BSTR, parameter : Win32cr::System::Variant::VARIANT, namespaceURI : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.addParameter.call(this, baseName, parameter, namespaceURI)
     end
     def addObject(this : IXSLProcessor*, obj : Void*, namespaceURI : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6016,21 +5958,22 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXSLTemplateVtbl,
+
+  record IXSLTemplateVtable,
     query_interface : Proc(IXSLTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXSLTemplate*, UInt32),
     release : Proc(IXSLTemplate*, UInt32),
     get_type_info_count : Proc(IXSLTemplate*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXSLTemplate*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXSLTemplate*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXSLTemplate*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXSLTemplate*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     putref_stylesheet : Proc(IXSLTemplate*, Void*, Win32cr::Foundation::HRESULT),
     get_stylesheet : Proc(IXSLTemplate*, Void**, Win32cr::Foundation::HRESULT),
     createProcessor : Proc(IXSLTemplate*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXSLTemplate, lpVtbl : IXSLTemplateVtbl* do
+  record IXSLTemplate, lpVtbl : IXSLTemplateVtable* do
     GUID = LibC::GUID.new(0x2933bf93_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXSLTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6050,8 +5993,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXSLTemplate*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXSLTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXSLTemplate*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def putref_stylesheet(this : IXSLTemplate*, stylesheet : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_stylesheet.call(this, stylesheet)
@@ -6066,32 +6009,33 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequestVtbl,
+
+  record IXMLHTTPRequestVtable,
     query_interface : Proc(IXMLHTTPRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest*, UInt32),
     release : Proc(IXMLHTTPRequest*, UInt32),
     get_type_info_count : Proc(IXMLHTTPRequest*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLHTTPRequest*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLHTTPRequest*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLHTTPRequest*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    open : Proc(IXMLHTTPRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLHTTPRequest*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    open : Proc(IXMLHTTPRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     setRequestHeader : Proc(IXMLHTTPRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     getResponseHeader : Proc(IXMLHTTPRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     getAllResponseHeaders : Proc(IXMLHTTPRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    send : Proc(IXMLHTTPRequest*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    send : Proc(IXMLHTTPRequest*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     abort : Proc(IXMLHTTPRequest*, Win32cr::Foundation::HRESULT),
     get_status : Proc(IXMLHTTPRequest*, Int32*, Win32cr::Foundation::HRESULT),
     get_statusText : Proc(IXMLHTTPRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_responseXML : Proc(IXMLHTTPRequest*, Void**, Win32cr::Foundation::HRESULT),
     get_responseText : Proc(IXMLHTTPRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_responseBody : Proc(IXMLHTTPRequest*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_responseStream : Proc(IXMLHTTPRequest*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_responseBody : Proc(IXMLHTTPRequest*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_responseStream : Proc(IXMLHTTPRequest*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_readyState : Proc(IXMLHTTPRequest*, Int32*, Win32cr::Foundation::HRESULT),
     put_onreadystatechange : Proc(IXMLHTTPRequest*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLHTTPRequest, lpVtbl : IXMLHTTPRequestVtbl* do
+  record IXMLHTTPRequest, lpVtbl : IXMLHTTPRequestVtable* do
     GUID = LibC::GUID.new(0xed8c108d_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
     def query_interface(this : IXMLHTTPRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6111,10 +6055,10 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLHTTPRequest*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLHTTPRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLHTTPRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def open(this : IXMLHTTPRequest*, bstrMethod : Win32cr::Foundation::BSTR, bstrUrl : Win32cr::Foundation::BSTR, varAsync : Win32cr::System::Com::VARIANT, bstrUser : Win32cr::System::Com::VARIANT, bstrPassword : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def open(this : IXMLHTTPRequest*, bstrMethod : Win32cr::Foundation::BSTR, bstrUrl : Win32cr::Foundation::BSTR, varAsync : Win32cr::System::Variant::VARIANT, bstrUser : Win32cr::System::Variant::VARIANT, bstrPassword : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword)
     end
     def setRequestHeader(this : IXMLHTTPRequest*, bstrHeader : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6126,7 +6070,7 @@ module Win32cr::Data::Xml::MsXml
     def getAllResponseHeaders(this : IXMLHTTPRequest*, pbstrHeaders : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAllResponseHeaders.call(this, pbstrHeaders)
     end
-    def send(this : IXMLHTTPRequest*, varBody : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def send(this : IXMLHTTPRequest*, varBody : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send.call(this, varBody)
     end
     def abort(this : IXMLHTTPRequest*) : Win32cr::Foundation::HRESULT
@@ -6144,10 +6088,10 @@ module Win32cr::Data::Xml::MsXml
     def get_responseText(this : IXMLHTTPRequest*, pbstrBody : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseText.call(this, pbstrBody)
     end
-    def get_responseBody(this : IXMLHTTPRequest*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_responseBody(this : IXMLHTTPRequest*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseBody.call(this, pvarBody)
     end
-    def get_responseStream(this : IXMLHTTPRequest*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_responseStream(this : IXMLHTTPRequest*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseStream.call(this, pvarBody)
     end
     def get_readyState(this : IXMLHTTPRequest*, plState : Int32*) : Win32cr::Foundation::HRESULT
@@ -6160,36 +6104,37 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IServerXMLHTTPRequestVtbl,
+
+  record IServerXMLHTTPRequestVtable,
     query_interface : Proc(IServerXMLHTTPRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IServerXMLHTTPRequest*, UInt32),
     release : Proc(IServerXMLHTTPRequest*, UInt32),
     get_type_info_count : Proc(IServerXMLHTTPRequest*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IServerXMLHTTPRequest*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IServerXMLHTTPRequest*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IServerXMLHTTPRequest*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    open : Proc(IServerXMLHTTPRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IServerXMLHTTPRequest*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    open : Proc(IServerXMLHTTPRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     setRequestHeader : Proc(IServerXMLHTTPRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     getResponseHeader : Proc(IServerXMLHTTPRequest*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     getAllResponseHeaders : Proc(IServerXMLHTTPRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    send : Proc(IServerXMLHTTPRequest*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    send : Proc(IServerXMLHTTPRequest*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     abort : Proc(IServerXMLHTTPRequest*, Win32cr::Foundation::HRESULT),
     get_status : Proc(IServerXMLHTTPRequest*, Int32*, Win32cr::Foundation::HRESULT),
     get_statusText : Proc(IServerXMLHTTPRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_responseXML : Proc(IServerXMLHTTPRequest*, Void**, Win32cr::Foundation::HRESULT),
     get_responseText : Proc(IServerXMLHTTPRequest*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_responseBody : Proc(IServerXMLHTTPRequest*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_responseStream : Proc(IServerXMLHTTPRequest*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_responseBody : Proc(IServerXMLHTTPRequest*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_responseStream : Proc(IServerXMLHTTPRequest*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_readyState : Proc(IServerXMLHTTPRequest*, Int32*, Win32cr::Foundation::HRESULT),
     put_onreadystatechange : Proc(IServerXMLHTTPRequest*, Void*, Win32cr::Foundation::HRESULT),
     setTimeouts : Proc(IServerXMLHTTPRequest*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
-    waitForResponse : Proc(IServerXMLHTTPRequest*, Win32cr::System::Com::VARIANT, Int16*, Win32cr::Foundation::HRESULT),
-    getOption : Proc(IServerXMLHTTPRequest*, Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    setOption : Proc(IServerXMLHTTPRequest*, Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    waitForResponse : Proc(IServerXMLHTTPRequest*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    getOption : Proc(IServerXMLHTTPRequest*, Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    setOption : Proc(IServerXMLHTTPRequest*, Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IServerXMLHTTPRequest, lpVtbl : IServerXMLHTTPRequestVtbl* do
+  record IServerXMLHTTPRequest, lpVtbl : IServerXMLHTTPRequestVtable* do
     GUID = LibC::GUID.new(0x2e9196bf_u32, 0x13ba_u16, 0x4dd4_u16, StaticArray[0x91_u8, 0xca_u8, 0x6c_u8, 0x57_u8, 0x1f_u8, 0x28_u8, 0x14_u8, 0x95_u8])
     def query_interface(this : IServerXMLHTTPRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6209,10 +6154,10 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IServerXMLHTTPRequest*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IServerXMLHTTPRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IServerXMLHTTPRequest*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def open(this : IServerXMLHTTPRequest*, bstrMethod : Win32cr::Foundation::BSTR, bstrUrl : Win32cr::Foundation::BSTR, varAsync : Win32cr::System::Com::VARIANT, bstrUser : Win32cr::System::Com::VARIANT, bstrPassword : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def open(this : IServerXMLHTTPRequest*, bstrMethod : Win32cr::Foundation::BSTR, bstrUrl : Win32cr::Foundation::BSTR, varAsync : Win32cr::System::Variant::VARIANT, bstrUser : Win32cr::System::Variant::VARIANT, bstrPassword : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword)
     end
     def setRequestHeader(this : IServerXMLHTTPRequest*, bstrHeader : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6224,7 +6169,7 @@ module Win32cr::Data::Xml::MsXml
     def getAllResponseHeaders(this : IServerXMLHTTPRequest*, pbstrHeaders : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAllResponseHeaders.call(this, pbstrHeaders)
     end
-    def send(this : IServerXMLHTTPRequest*, varBody : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def send(this : IServerXMLHTTPRequest*, varBody : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send.call(this, varBody)
     end
     def abort(this : IServerXMLHTTPRequest*) : Win32cr::Foundation::HRESULT
@@ -6242,10 +6187,10 @@ module Win32cr::Data::Xml::MsXml
     def get_responseText(this : IServerXMLHTTPRequest*, pbstrBody : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseText.call(this, pbstrBody)
     end
-    def get_responseBody(this : IServerXMLHTTPRequest*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_responseBody(this : IServerXMLHTTPRequest*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseBody.call(this, pvarBody)
     end
-    def get_responseStream(this : IServerXMLHTTPRequest*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_responseStream(this : IServerXMLHTTPRequest*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseStream.call(this, pvarBody)
     end
     def get_readyState(this : IServerXMLHTTPRequest*, plState : Int32*) : Win32cr::Foundation::HRESULT
@@ -6257,51 +6202,52 @@ module Win32cr::Data::Xml::MsXml
     def setTimeouts(this : IServerXMLHTTPRequest*, resolveTimeout : Int32, connectTimeout : Int32, sendTimeout : Int32, receiveTimeout : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setTimeouts.call(this, resolveTimeout, connectTimeout, sendTimeout, receiveTimeout)
     end
-    def waitForResponse(this : IServerXMLHTTPRequest*, timeoutInSeconds : Win32cr::System::Com::VARIANT, isSuccessful : Int16*) : Win32cr::Foundation::HRESULT
+    def waitForResponse(this : IServerXMLHTTPRequest*, timeoutInSeconds : Win32cr::System::Variant::VARIANT, isSuccessful : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.waitForResponse.call(this, timeoutInSeconds, isSuccessful)
     end
-    def getOption(this : IServerXMLHTTPRequest*, option : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getOption(this : IServerXMLHTTPRequest*, option : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getOption.call(this, option, value)
     end
-    def setOption(this : IServerXMLHTTPRequest*, option : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setOption(this : IServerXMLHTTPRequest*, option : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setOption.call(this, option, value)
     end
 
   end
 
   @[Extern]
-  record IServerXMLHTTPRequest2Vtbl,
+
+  record IServerXMLHTTPRequest2Vtable,
     query_interface : Proc(IServerXMLHTTPRequest2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IServerXMLHTTPRequest2*, UInt32),
     release : Proc(IServerXMLHTTPRequest2*, UInt32),
     get_type_info_count : Proc(IServerXMLHTTPRequest2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IServerXMLHTTPRequest2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IServerXMLHTTPRequest2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IServerXMLHTTPRequest2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    open : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IServerXMLHTTPRequest2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    open : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     setRequestHeader : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     getResponseHeader : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     getAllResponseHeaders : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    send : Proc(IServerXMLHTTPRequest2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    send : Proc(IServerXMLHTTPRequest2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     abort : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::HRESULT),
     get_status : Proc(IServerXMLHTTPRequest2*, Int32*, Win32cr::Foundation::HRESULT),
     get_statusText : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_responseXML : Proc(IServerXMLHTTPRequest2*, Void**, Win32cr::Foundation::HRESULT),
     get_responseText : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_responseBody : Proc(IServerXMLHTTPRequest2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_responseStream : Proc(IServerXMLHTTPRequest2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_responseBody : Proc(IServerXMLHTTPRequest2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_responseStream : Proc(IServerXMLHTTPRequest2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_readyState : Proc(IServerXMLHTTPRequest2*, Int32*, Win32cr::Foundation::HRESULT),
     put_onreadystatechange : Proc(IServerXMLHTTPRequest2*, Void*, Win32cr::Foundation::HRESULT),
     setTimeouts : Proc(IServerXMLHTTPRequest2*, Int32, Int32, Int32, Int32, Win32cr::Foundation::HRESULT),
-    waitForResponse : Proc(IServerXMLHTTPRequest2*, Win32cr::System::Com::VARIANT, Int16*, Win32cr::Foundation::HRESULT),
-    getOption : Proc(IServerXMLHTTPRequest2*, Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    setOption : Proc(IServerXMLHTTPRequest2*, Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    setProxy : Proc(IServerXMLHTTPRequest2*, Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    waitForResponse : Proc(IServerXMLHTTPRequest2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    getOption : Proc(IServerXMLHTTPRequest2*, Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    setOption : Proc(IServerXMLHTTPRequest2*, Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    setProxy : Proc(IServerXMLHTTPRequest2*, Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     setProxyCredentials : Proc(IServerXMLHTTPRequest2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IServerXMLHTTPRequest2, lpVtbl : IServerXMLHTTPRequest2Vtbl* do
+  record IServerXMLHTTPRequest2, lpVtbl : IServerXMLHTTPRequest2Vtable* do
     GUID = LibC::GUID.new(0x2e01311b_u32, 0xc322_u16, 0x4b0a_u16, StaticArray[0xbd_u8, 0x77_u8, 0xb9_u8, 0xc_u8, 0xfd_u8, 0xc8_u8, 0xdc_u8, 0xe7_u8])
     def query_interface(this : IServerXMLHTTPRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6321,10 +6267,10 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IServerXMLHTTPRequest2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IServerXMLHTTPRequest2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IServerXMLHTTPRequest2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def open(this : IServerXMLHTTPRequest2*, bstrMethod : Win32cr::Foundation::BSTR, bstrUrl : Win32cr::Foundation::BSTR, varAsync : Win32cr::System::Com::VARIANT, bstrUser : Win32cr::System::Com::VARIANT, bstrPassword : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def open(this : IServerXMLHTTPRequest2*, bstrMethod : Win32cr::Foundation::BSTR, bstrUrl : Win32cr::Foundation::BSTR, varAsync : Win32cr::System::Variant::VARIANT, bstrUser : Win32cr::System::Variant::VARIANT, bstrPassword : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, bstrMethod, bstrUrl, varAsync, bstrUser, bstrPassword)
     end
     def setRequestHeader(this : IServerXMLHTTPRequest2*, bstrHeader : Win32cr::Foundation::BSTR, bstrValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6336,7 +6282,7 @@ module Win32cr::Data::Xml::MsXml
     def getAllResponseHeaders(this : IServerXMLHTTPRequest2*, pbstrHeaders : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAllResponseHeaders.call(this, pbstrHeaders)
     end
-    def send(this : IServerXMLHTTPRequest2*, varBody : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def send(this : IServerXMLHTTPRequest2*, varBody : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send.call(this, varBody)
     end
     def abort(this : IServerXMLHTTPRequest2*) : Win32cr::Foundation::HRESULT
@@ -6354,10 +6300,10 @@ module Win32cr::Data::Xml::MsXml
     def get_responseText(this : IServerXMLHTTPRequest2*, pbstrBody : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseText.call(this, pbstrBody)
     end
-    def get_responseBody(this : IServerXMLHTTPRequest2*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_responseBody(this : IServerXMLHTTPRequest2*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseBody.call(this, pvarBody)
     end
-    def get_responseStream(this : IServerXMLHTTPRequest2*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_responseStream(this : IServerXMLHTTPRequest2*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_responseStream.call(this, pvarBody)
     end
     def get_readyState(this : IServerXMLHTTPRequest2*, plState : Int32*) : Win32cr::Foundation::HRESULT
@@ -6369,16 +6315,16 @@ module Win32cr::Data::Xml::MsXml
     def setTimeouts(this : IServerXMLHTTPRequest2*, resolveTimeout : Int32, connectTimeout : Int32, sendTimeout : Int32, receiveTimeout : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setTimeouts.call(this, resolveTimeout, connectTimeout, sendTimeout, receiveTimeout)
     end
-    def waitForResponse(this : IServerXMLHTTPRequest2*, timeoutInSeconds : Win32cr::System::Com::VARIANT, isSuccessful : Int16*) : Win32cr::Foundation::HRESULT
+    def waitForResponse(this : IServerXMLHTTPRequest2*, timeoutInSeconds : Win32cr::System::Variant::VARIANT, isSuccessful : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.waitForResponse.call(this, timeoutInSeconds, isSuccessful)
     end
-    def getOption(this : IServerXMLHTTPRequest2*, option : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, value : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getOption(this : IServerXMLHTTPRequest2*, option : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, value : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getOption.call(this, option, value)
     end
-    def setOption(this : IServerXMLHTTPRequest2*, option : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, value : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setOption(this : IServerXMLHTTPRequest2*, option : Win32cr::Data::Xml::MsXml::SERVERXMLHTTP_OPTION, value : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setOption.call(this, option, value)
     end
-    def setProxy(this : IServerXMLHTTPRequest2*, proxySetting : Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING, varProxyServer : Win32cr::System::Com::VARIANT, varBypassList : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setProxy(this : IServerXMLHTTPRequest2*, proxySetting : Win32cr::Data::Xml::MsXml::SXH_PROXY_SETTING, varProxyServer : Win32cr::System::Variant::VARIANT, varBypassList : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setProxy.call(this, proxySetting, varProxyServer, varBypassList)
     end
     def setProxyCredentials(this : IServerXMLHTTPRequest2*, bstrUserName : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -6388,14 +6334,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXXMLReaderVtbl,
+
+  record ISAXXMLReaderVtable,
     query_interface : Proc(ISAXXMLReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXXMLReader*, UInt32),
     release : Proc(ISAXXMLReader*, UInt32),
-    getFeature : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Int16*, Win32cr::Foundation::HRESULT),
-    putFeature : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Int16, Win32cr::Foundation::HRESULT),
-    getProperty : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    putProperty : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    getFeature : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    putFeature : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    getProperty : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    putProperty : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     getEntityResolver : Proc(ISAXXMLReader*, Void**, Win32cr::Foundation::HRESULT),
     putEntityResolver : Proc(ISAXXMLReader*, Void*, Win32cr::Foundation::HRESULT),
     getContentHandler : Proc(ISAXXMLReader*, Void**, Win32cr::Foundation::HRESULT),
@@ -6408,12 +6355,12 @@ module Win32cr::Data::Xml::MsXml
     putBaseURL : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     getSecureBaseURL : Proc(ISAXXMLReader*, UInt16**, Win32cr::Foundation::HRESULT),
     putSecureBaseURL : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    parse : Proc(ISAXXMLReader*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    parse : Proc(ISAXXMLReader*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     parseURL : Proc(ISAXXMLReader*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISAXXMLReader, lpVtbl : ISAXXMLReaderVtbl* do
+  record ISAXXMLReader, lpVtbl : ISAXXMLReaderVtable* do
     GUID = LibC::GUID.new(0xa4f96ed0_u32, 0xf829_u16, 0x476e_u16, StaticArray[0x81_u8, 0xc0_u8, 0xcd_u8, 0xc7_u8, 0xbd_u8, 0x2a_u8, 0x8_u8, 0x2_u8])
     def query_interface(this : ISAXXMLReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6424,16 +6371,16 @@ module Win32cr::Data::Xml::MsXml
     def release(this : ISAXXMLReader*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def getFeature(this : ISAXXMLReader*, pwchName : Win32cr::Foundation::PWSTR, pvfValue : Int16*) : Win32cr::Foundation::HRESULT
+    def getFeature(this : ISAXXMLReader*, pwchName : Win32cr::Foundation::PWSTR, pvfValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getFeature.call(this, pwchName, pvfValue)
     end
-    def putFeature(this : ISAXXMLReader*, pwchName : Win32cr::Foundation::PWSTR, vfValue : Int16) : Win32cr::Foundation::HRESULT
+    def putFeature(this : ISAXXMLReader*, pwchName : Win32cr::Foundation::PWSTR, vfValue : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putFeature.call(this, pwchName, vfValue)
     end
-    def getProperty(this : ISAXXMLReader*, pwchName : Win32cr::Foundation::PWSTR, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getProperty(this : ISAXXMLReader*, pwchName : Win32cr::Foundation::PWSTR, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProperty.call(this, pwchName, pvarValue)
     end
-    def putProperty(this : ISAXXMLReader*, pwchName : Win32cr::Foundation::PWSTR, varValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def putProperty(this : ISAXXMLReader*, pwchName : Win32cr::Foundation::PWSTR, varValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putProperty.call(this, pwchName, varValue)
     end
     def getEntityResolver(this : ISAXXMLReader*, ppResolver : Void**) : Win32cr::Foundation::HRESULT
@@ -6472,7 +6419,7 @@ module Win32cr::Data::Xml::MsXml
     def putSecureBaseURL(this : ISAXXMLReader*, pwchSecureBaseUrl : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putSecureBaseURL.call(this, pwchSecureBaseUrl)
     end
-    def parse(this : ISAXXMLReader*, varInput : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def parse(this : ISAXXMLReader*, varInput : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.parse.call(this, varInput)
     end
     def parseURL(this : ISAXXMLReader*, pwchUrl : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -6482,14 +6429,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXXMLFilterVtbl,
+
+  record ISAXXMLFilterVtable,
     query_interface : Proc(ISAXXMLFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXXMLFilter*, UInt32),
     release : Proc(ISAXXMLFilter*, UInt32),
-    getFeature : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Int16*, Win32cr::Foundation::HRESULT),
-    putFeature : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Int16, Win32cr::Foundation::HRESULT),
-    getProperty : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    putProperty : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    getFeature : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    putFeature : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    getProperty : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    putProperty : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     getEntityResolver : Proc(ISAXXMLFilter*, Void**, Win32cr::Foundation::HRESULT),
     putEntityResolver : Proc(ISAXXMLFilter*, Void*, Win32cr::Foundation::HRESULT),
     getContentHandler : Proc(ISAXXMLFilter*, Void**, Win32cr::Foundation::HRESULT),
@@ -6502,14 +6450,14 @@ module Win32cr::Data::Xml::MsXml
     putBaseURL : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     getSecureBaseURL : Proc(ISAXXMLFilter*, UInt16**, Win32cr::Foundation::HRESULT),
     putSecureBaseURL : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    parse : Proc(ISAXXMLFilter*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    parse : Proc(ISAXXMLFilter*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     parseURL : Proc(ISAXXMLFilter*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     getParent : Proc(ISAXXMLFilter*, Void**, Win32cr::Foundation::HRESULT),
     putParent : Proc(ISAXXMLFilter*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISAXXMLFilter, lpVtbl : ISAXXMLFilterVtbl* do
+  record ISAXXMLFilter, lpVtbl : ISAXXMLFilterVtable* do
     GUID = LibC::GUID.new(0x70409222_u32, 0xca09_u16, 0x4475_u16, StaticArray[0xac_u8, 0xb8_u8, 0x40_u8, 0x31_u8, 0x2f_u8, 0xe8_u8, 0xd1_u8, 0x45_u8])
     def query_interface(this : ISAXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6520,16 +6468,16 @@ module Win32cr::Data::Xml::MsXml
     def release(this : ISAXXMLFilter*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def getFeature(this : ISAXXMLFilter*, pwchName : Win32cr::Foundation::PWSTR, pvfValue : Int16*) : Win32cr::Foundation::HRESULT
+    def getFeature(this : ISAXXMLFilter*, pwchName : Win32cr::Foundation::PWSTR, pvfValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getFeature.call(this, pwchName, pvfValue)
     end
-    def putFeature(this : ISAXXMLFilter*, pwchName : Win32cr::Foundation::PWSTR, vfValue : Int16) : Win32cr::Foundation::HRESULT
+    def putFeature(this : ISAXXMLFilter*, pwchName : Win32cr::Foundation::PWSTR, vfValue : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putFeature.call(this, pwchName, vfValue)
     end
-    def getProperty(this : ISAXXMLFilter*, pwchName : Win32cr::Foundation::PWSTR, pvarValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getProperty(this : ISAXXMLFilter*, pwchName : Win32cr::Foundation::PWSTR, pvarValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProperty.call(this, pwchName, pvarValue)
     end
-    def putProperty(this : ISAXXMLFilter*, pwchName : Win32cr::Foundation::PWSTR, varValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def putProperty(this : ISAXXMLFilter*, pwchName : Win32cr::Foundation::PWSTR, varValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putProperty.call(this, pwchName, varValue)
     end
     def getEntityResolver(this : ISAXXMLFilter*, ppResolver : Void**) : Win32cr::Foundation::HRESULT
@@ -6568,7 +6516,7 @@ module Win32cr::Data::Xml::MsXml
     def putSecureBaseURL(this : ISAXXMLFilter*, pwchSecureBaseUrl : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putSecureBaseURL.call(this, pwchSecureBaseUrl)
     end
-    def parse(this : ISAXXMLFilter*, varInput : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def parse(this : ISAXXMLFilter*, varInput : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.parse.call(this, varInput)
     end
     def parseURL(this : ISAXXMLFilter*, pwchUrl : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -6584,7 +6532,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXLocatorVtbl,
+
+  record ISAXLocatorVtable,
     query_interface : Proc(ISAXLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXLocator*, UInt32),
     release : Proc(ISAXLocator*, UInt32),
@@ -6595,7 +6544,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXLocator, lpVtbl : ISAXLocatorVtbl* do
+  record ISAXLocator, lpVtbl : ISAXLocatorVtable* do
     GUID = LibC::GUID.new(0x9b7e472a_u32, 0xde4_u16, 0x4640_u16, StaticArray[0xbf_u8, 0xf3_u8, 0x84_u8, 0xd3_u8, 0x8a_u8, 0x5_u8, 0x1c_u8, 0x31_u8])
     def query_interface(this : ISAXLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6622,15 +6571,16 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXEntityResolverVtbl,
+
+  record ISAXEntityResolverVtable,
     query_interface : Proc(ISAXEntityResolver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXEntityResolver*, UInt32),
     release : Proc(ISAXEntityResolver*, UInt32),
-    resolveEntity : Proc(ISAXEntityResolver*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    resolveEntity : Proc(ISAXEntityResolver*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISAXEntityResolver, lpVtbl : ISAXEntityResolverVtbl* do
+  record ISAXEntityResolver, lpVtbl : ISAXEntityResolverVtable* do
     GUID = LibC::GUID.new(0x99bca7bd_u32, 0xe8c4_u16, 0x4d5f_u16, StaticArray[0xa0_u8, 0xcf_u8, 0x6d_u8, 0x90_u8, 0x79_u8, 0x1_u8, 0xff_u8, 0x7_u8])
     def query_interface(this : ISAXEntityResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6641,14 +6591,15 @@ module Win32cr::Data::Xml::MsXml
     def release(this : ISAXEntityResolver*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def resolveEntity(this : ISAXEntityResolver*, pwchPublicId : Win32cr::Foundation::PWSTR, pwchSystemId : Win32cr::Foundation::PWSTR, pvarInput : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def resolveEntity(this : ISAXEntityResolver*, pwchPublicId : Win32cr::Foundation::PWSTR, pwchSystemId : Win32cr::Foundation::PWSTR, pvarInput : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.resolveEntity.call(this, pwchPublicId, pwchSystemId, pvarInput)
     end
 
   end
 
   @[Extern]
-  record ISAXContentHandlerVtbl,
+
+  record ISAXContentHandlerVtable,
     query_interface : Proc(ISAXContentHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXContentHandler*, UInt32),
     release : Proc(ISAXContentHandler*, UInt32),
@@ -6666,7 +6617,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXContentHandler, lpVtbl : ISAXContentHandlerVtbl* do
+  record ISAXContentHandler, lpVtbl : ISAXContentHandlerVtable* do
     GUID = LibC::GUID.new(0x1545cdfa_u32, 0x9e4e_u16, 0x4497_u16, StaticArray[0xa8_u8, 0xa4_u8, 0x2b_u8, 0xf7_u8, 0xd0_u8, 0x11_u8, 0x2c_u8, 0x44_u8])
     def query_interface(this : ISAXContentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6714,7 +6665,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXDTDHandlerVtbl,
+
+  record ISAXDTDHandlerVtable,
     query_interface : Proc(ISAXDTDHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXDTDHandler*, UInt32),
     release : Proc(ISAXDTDHandler*, UInt32),
@@ -6723,7 +6675,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXDTDHandler, lpVtbl : ISAXDTDHandlerVtbl* do
+  record ISAXDTDHandler, lpVtbl : ISAXDTDHandlerVtable* do
     GUID = LibC::GUID.new(0xe15c1baf_u32, 0xafb3_u16, 0x4d60_u16, StaticArray[0x8c_u8, 0x36_u8, 0x19_u8, 0xa8_u8, 0xc4_u8, 0x5d_u8, 0xef_u8, 0xed_u8])
     def query_interface(this : ISAXDTDHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6744,7 +6696,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXErrorHandlerVtbl,
+
+  record ISAXErrorHandlerVtable,
     query_interface : Proc(ISAXErrorHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXErrorHandler*, UInt32),
     release : Proc(ISAXErrorHandler*, UInt32),
@@ -6754,7 +6707,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXErrorHandler, lpVtbl : ISAXErrorHandlerVtbl* do
+  record ISAXErrorHandler, lpVtbl : ISAXErrorHandlerVtable* do
     GUID = LibC::GUID.new(0xa60511c4_u32, 0xccf5_u16, 0x479e_u16, StaticArray[0x98_u8, 0xa3_u8, 0xdc_u8, 0x8d_u8, 0xc5_u8, 0x45_u8, 0xb7_u8, 0xd0_u8])
     def query_interface(this : ISAXErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6778,7 +6731,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXLexicalHandlerVtbl,
+
+  record ISAXLexicalHandlerVtable,
     query_interface : Proc(ISAXLexicalHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXLexicalHandler*, UInt32),
     release : Proc(ISAXLexicalHandler*, UInt32),
@@ -6792,7 +6746,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXLexicalHandler, lpVtbl : ISAXLexicalHandlerVtbl* do
+  record ISAXLexicalHandler, lpVtbl : ISAXLexicalHandlerVtable* do
     GUID = LibC::GUID.new(0x7f85d5f5_u32, 0x47a8_u16, 0x4497_u16, StaticArray[0xbd_u8, 0xa5_u8, 0x84_u8, 0xba_u8, 0x4_u8, 0x81_u8, 0x9e_u8, 0xa6_u8])
     def query_interface(this : ISAXLexicalHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6828,7 +6782,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXDeclHandlerVtbl,
+
+  record ISAXDeclHandlerVtable,
     query_interface : Proc(ISAXDeclHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXDeclHandler*, UInt32),
     release : Proc(ISAXDeclHandler*, UInt32),
@@ -6839,7 +6794,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXDeclHandler, lpVtbl : ISAXDeclHandlerVtbl* do
+  record ISAXDeclHandler, lpVtbl : ISAXDeclHandlerVtable* do
     GUID = LibC::GUID.new(0x862629ac_u32, 0x771a_u16, 0x47b2_u16, StaticArray[0x83_u8, 0x37_u8, 0x4e_u8, 0x68_u8, 0x43_u8, 0xc1_u8, 0xbe_u8, 0x90_u8])
     def query_interface(this : ISAXDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6866,7 +6821,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXAttributesVtbl,
+
+  record ISAXAttributesVtable,
     query_interface : Proc(ISAXAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXAttributes*, UInt32),
     release : Proc(ISAXAttributes*, UInt32),
@@ -6886,7 +6842,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXAttributes, lpVtbl : ISAXAttributesVtbl* do
+  record ISAXAttributes, lpVtbl : ISAXAttributesVtable* do
     GUID = LibC::GUID.new(0xf078abe1_u32, 0x45d2_u16, 0x4832_u16, StaticArray[0x91_u8, 0xea_u8, 0x44_u8, 0x66_u8, 0xce_u8, 0x2f_u8, 0x25_u8, 0xc9_u8])
     def query_interface(this : ISAXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6940,18 +6896,19 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXXMLReaderVtbl,
+
+  record IVBSAXXMLReaderVtable,
     query_interface : Proc(IVBSAXXMLReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXXMLReader*, UInt32),
     release : Proc(IVBSAXXMLReader*, UInt32),
     get_type_info_count : Proc(IVBSAXXMLReader*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXXMLReader*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXXMLReader*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXXMLReader*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    getFeature : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    putFeature : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    getProperty : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    putProperty : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXXMLReader*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    getFeature : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    putFeature : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    getProperty : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    putProperty : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_entityResolver : Proc(IVBSAXXMLReader*, Void**, Win32cr::Foundation::HRESULT),
     putref_entityResolver : Proc(IVBSAXXMLReader*, Void*, Win32cr::Foundation::HRESULT),
     get_contentHandler : Proc(IVBSAXXMLReader*, Void**, Win32cr::Foundation::HRESULT),
@@ -6964,12 +6921,12 @@ module Win32cr::Data::Xml::MsXml
     put_baseURL : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_secureBaseURL : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_secureBaseURL : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    parse : Proc(IVBSAXXMLReader*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    parse : Proc(IVBSAXXMLReader*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     parseURL : Proc(IVBSAXXMLReader*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVBSAXXMLReader, lpVtbl : IVBSAXXMLReaderVtbl* do
+  record IVBSAXXMLReader, lpVtbl : IVBSAXXMLReaderVtable* do
     GUID = LibC::GUID.new(0x8c033caa_u32, 0x6cd6_u16, 0x4f73_u16, StaticArray[0xb7_u8, 0x28_u8, 0x45_u8, 0x31_u8, 0xaf_u8, 0x74_u8, 0x94_u8, 0x5f_u8])
     def query_interface(this : IVBSAXXMLReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6989,19 +6946,19 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXXMLReader*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXXMLReader*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXXMLReader*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def getFeature(this : IVBSAXXMLReader*, strName : Win32cr::Foundation::BSTR, fValue : Int16*) : Win32cr::Foundation::HRESULT
+    def getFeature(this : IVBSAXXMLReader*, strName : Win32cr::Foundation::BSTR, fValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getFeature.call(this, strName, fValue)
     end
-    def putFeature(this : IVBSAXXMLReader*, strName : Win32cr::Foundation::BSTR, fValue : Int16) : Win32cr::Foundation::HRESULT
+    def putFeature(this : IVBSAXXMLReader*, strName : Win32cr::Foundation::BSTR, fValue : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putFeature.call(this, strName, fValue)
     end
-    def getProperty(this : IVBSAXXMLReader*, strName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getProperty(this : IVBSAXXMLReader*, strName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProperty.call(this, strName, varValue)
     end
-    def putProperty(this : IVBSAXXMLReader*, strName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def putProperty(this : IVBSAXXMLReader*, strName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putProperty.call(this, strName, varValue)
     end
     def get_entityResolver(this : IVBSAXXMLReader*, oResolver : Void**) : Win32cr::Foundation::HRESULT
@@ -7040,7 +6997,7 @@ module Win32cr::Data::Xml::MsXml
     def put_secureBaseURL(this : IVBSAXXMLReader*, strSecureBaseURL : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_secureBaseURL.call(this, strSecureBaseURL)
     end
-    def parse(this : IVBSAXXMLReader*, varInput : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def parse(this : IVBSAXXMLReader*, varInput : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.parse.call(this, varInput)
     end
     def parseURL(this : IVBSAXXMLReader*, strURL : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -7050,20 +7007,21 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXXMLFilterVtbl,
+
+  record IVBSAXXMLFilterVtable,
     query_interface : Proc(IVBSAXXMLFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXXMLFilter*, UInt32),
     release : Proc(IVBSAXXMLFilter*, UInt32),
     get_type_info_count : Proc(IVBSAXXMLFilter*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXXMLFilter*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXXMLFilter*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXXMLFilter*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXXMLFilter*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_parent : Proc(IVBSAXXMLFilter*, Void**, Win32cr::Foundation::HRESULT),
     putref_parent : Proc(IVBSAXXMLFilter*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVBSAXXMLFilter, lpVtbl : IVBSAXXMLFilterVtbl* do
+  record IVBSAXXMLFilter, lpVtbl : IVBSAXXMLFilterVtable* do
     GUID = LibC::GUID.new(0x1299eb1b_u32, 0x5b88_u16, 0x433e_u16, StaticArray[0x82_u8, 0xde_u8, 0x82_u8, 0xca_u8, 0x75_u8, 0xad_u8, 0x4e_u8, 0x4_u8])
     def query_interface(this : IVBSAXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7083,8 +7041,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXXMLFilter*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXXMLFilter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXXMLFilter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_parent(this : IVBSAXXMLFilter*, oReader : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_parent.call(this, oReader)
@@ -7096,14 +7054,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXLocatorVtbl,
+
+  record IVBSAXLocatorVtable,
     query_interface : Proc(IVBSAXLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXLocator*, UInt32),
     release : Proc(IVBSAXLocator*, UInt32),
     get_type_info_count : Proc(IVBSAXLocator*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXLocator*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXLocator*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXLocator*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXLocator*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_columnNumber : Proc(IVBSAXLocator*, Int32*, Win32cr::Foundation::HRESULT),
     get_lineNumber : Proc(IVBSAXLocator*, Int32*, Win32cr::Foundation::HRESULT),
     get_publicId : Proc(IVBSAXLocator*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7111,7 +7070,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXLocator, lpVtbl : IVBSAXLocatorVtbl* do
+  record IVBSAXLocator, lpVtbl : IVBSAXLocatorVtable* do
     GUID = LibC::GUID.new(0x796e7ac5_u32, 0x5aa2_u16, 0x4eff_u16, StaticArray[0xac_u8, 0xad_u8, 0x3f_u8, 0xaa_u8, 0xf0_u8, 0x1a_u8, 0x32_u8, 0x88_u8])
     def query_interface(this : IVBSAXLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7131,8 +7090,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXLocator*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXLocator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXLocator*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_columnNumber(this : IVBSAXLocator*, nColumn : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_columnNumber.call(this, nColumn)
@@ -7150,19 +7109,20 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXEntityResolverVtbl,
+
+  record IVBSAXEntityResolverVtable,
     query_interface : Proc(IVBSAXEntityResolver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXEntityResolver*, UInt32),
     release : Proc(IVBSAXEntityResolver*, UInt32),
     get_type_info_count : Proc(IVBSAXEntityResolver*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXEntityResolver*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXEntityResolver*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXEntityResolver*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    resolveEntity : Proc(IVBSAXEntityResolver*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IVBSAXEntityResolver*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    resolveEntity : Proc(IVBSAXEntityResolver*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVBSAXEntityResolver, lpVtbl : IVBSAXEntityResolverVtbl* do
+  record IVBSAXEntityResolver, lpVtbl : IVBSAXEntityResolverVtable* do
     GUID = LibC::GUID.new(0xc05d096_u32, 0xf45b_u16, 0x4aca_u16, StaticArray[0xad_u8, 0x1a_u8, 0xaa_u8, 0xb_u8, 0xc2_u8, 0x55_u8, 0x18_u8, 0xdc_u8])
     def query_interface(this : IVBSAXEntityResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7182,24 +7142,25 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXEntityResolver*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXEntityResolver*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXEntityResolver*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def resolveEntity(this : IVBSAXEntityResolver*, strPublicId : Win32cr::Foundation::BSTR*, strSystemId : Win32cr::Foundation::BSTR*, varInput : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def resolveEntity(this : IVBSAXEntityResolver*, strPublicId : Win32cr::Foundation::BSTR*, strSystemId : Win32cr::Foundation::BSTR*, varInput : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.resolveEntity.call(this, strPublicId, strSystemId, varInput)
     end
 
   end
 
   @[Extern]
-  record IVBSAXContentHandlerVtbl,
+
+  record IVBSAXContentHandlerVtable,
     query_interface : Proc(IVBSAXContentHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXContentHandler*, UInt32),
     release : Proc(IVBSAXContentHandler*, UInt32),
     get_type_info_count : Proc(IVBSAXContentHandler*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXContentHandler*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXContentHandler*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXContentHandler*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXContentHandler*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     putref_documentLocator : Proc(IVBSAXContentHandler*, Void*, Win32cr::Foundation::HRESULT),
     startDocument : Proc(IVBSAXContentHandler*, Win32cr::Foundation::HRESULT),
     endDocument : Proc(IVBSAXContentHandler*, Win32cr::Foundation::HRESULT),
@@ -7214,7 +7175,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXContentHandler, lpVtbl : IVBSAXContentHandlerVtbl* do
+  record IVBSAXContentHandler, lpVtbl : IVBSAXContentHandlerVtable* do
     GUID = LibC::GUID.new(0x2ed7290a_u32, 0x4dd5_u16, 0x4b46_u16, StaticArray[0xbb_u8, 0x26_u8, 0x4e_u8, 0x41_u8, 0x55_u8, 0xe7_u8, 0x7f_u8, 0xaa_u8])
     def query_interface(this : IVBSAXContentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7234,8 +7195,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXContentHandler*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXContentHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXContentHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def putref_documentLocator(this : IVBSAXContentHandler*, oLocator : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_documentLocator.call(this, oLocator)
@@ -7274,20 +7235,21 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXDTDHandlerVtbl,
+
+  record IVBSAXDTDHandlerVtable,
     query_interface : Proc(IVBSAXDTDHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXDTDHandler*, UInt32),
     release : Proc(IVBSAXDTDHandler*, UInt32),
     get_type_info_count : Proc(IVBSAXDTDHandler*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXDTDHandler*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXDTDHandler*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXDTDHandler*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXDTDHandler*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     notationDecl : Proc(IVBSAXDTDHandler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     unparsedEntityDecl : Proc(IVBSAXDTDHandler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVBSAXDTDHandler, lpVtbl : IVBSAXDTDHandlerVtbl* do
+  record IVBSAXDTDHandler, lpVtbl : IVBSAXDTDHandlerVtable* do
     GUID = LibC::GUID.new(0x24fb3297_u32, 0x302d_u16, 0x4620_u16, StaticArray[0xba_u8, 0x39_u8, 0x3a_u8, 0x73_u8, 0x2d_u8, 0x85_u8, 0x5_u8, 0x58_u8])
     def query_interface(this : IVBSAXDTDHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7307,8 +7269,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXDTDHandler*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXDTDHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXDTDHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def notationDecl(this : IVBSAXDTDHandler*, strName : Win32cr::Foundation::BSTR*, strPublicId : Win32cr::Foundation::BSTR*, strSystemId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.notationDecl.call(this, strName, strPublicId, strSystemId)
@@ -7320,21 +7282,22 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXErrorHandlerVtbl,
+
+  record IVBSAXErrorHandlerVtable,
     query_interface : Proc(IVBSAXErrorHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXErrorHandler*, UInt32),
     release : Proc(IVBSAXErrorHandler*, UInt32),
     get_type_info_count : Proc(IVBSAXErrorHandler*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXErrorHandler*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXErrorHandler*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXErrorHandler*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXErrorHandler*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     error : Proc(IVBSAXErrorHandler*, Void*, Win32cr::Foundation::BSTR*, Int32, Win32cr::Foundation::HRESULT),
     fatalError : Proc(IVBSAXErrorHandler*, Void*, Win32cr::Foundation::BSTR*, Int32, Win32cr::Foundation::HRESULT),
     ignorableWarning : Proc(IVBSAXErrorHandler*, Void*, Win32cr::Foundation::BSTR*, Int32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVBSAXErrorHandler, lpVtbl : IVBSAXErrorHandlerVtbl* do
+  record IVBSAXErrorHandler, lpVtbl : IVBSAXErrorHandlerVtable* do
     GUID = LibC::GUID.new(0xd963d3fe_u32, 0x173c_u16, 0x4862_u16, StaticArray[0x90_u8, 0x95_u8, 0xb9_u8, 0x2f_u8, 0x66_u8, 0x99_u8, 0x5f_u8, 0x52_u8])
     def query_interface(this : IVBSAXErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7354,8 +7317,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXErrorHandler*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXErrorHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXErrorHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def error(this : IVBSAXErrorHandler*, oLocator : Void*, strErrorMessage : Win32cr::Foundation::BSTR*, nErrorCode : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.error.call(this, oLocator, strErrorMessage, nErrorCode)
@@ -7370,14 +7333,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXLexicalHandlerVtbl,
+
+  record IVBSAXLexicalHandlerVtable,
     query_interface : Proc(IVBSAXLexicalHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXLexicalHandler*, UInt32),
     release : Proc(IVBSAXLexicalHandler*, UInt32),
     get_type_info_count : Proc(IVBSAXLexicalHandler*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXLexicalHandler*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXLexicalHandler*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXLexicalHandler*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXLexicalHandler*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     startDTD : Proc(IVBSAXLexicalHandler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     endDTD : Proc(IVBSAXLexicalHandler*, Win32cr::Foundation::HRESULT),
     startEntity : Proc(IVBSAXLexicalHandler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7388,7 +7352,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXLexicalHandler, lpVtbl : IVBSAXLexicalHandlerVtbl* do
+  record IVBSAXLexicalHandler, lpVtbl : IVBSAXLexicalHandlerVtable* do
     GUID = LibC::GUID.new(0x32aac35_u32, 0x8c0e_u16, 0x4d9d_u16, StaticArray[0x97_u8, 0x9f_u8, 0xe3_u8, 0xb7_u8, 0x2_u8, 0x93_u8, 0x55_u8, 0x76_u8])
     def query_interface(this : IVBSAXLexicalHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7408,8 +7372,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXLexicalHandler*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXLexicalHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXLexicalHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def startDTD(this : IVBSAXLexicalHandler*, strName : Win32cr::Foundation::BSTR*, strPublicId : Win32cr::Foundation::BSTR*, strSystemId : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.startDTD.call(this, strName, strPublicId, strSystemId)
@@ -7436,14 +7400,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXDeclHandlerVtbl,
+
+  record IVBSAXDeclHandlerVtable,
     query_interface : Proc(IVBSAXDeclHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXDeclHandler*, UInt32),
     release : Proc(IVBSAXDeclHandler*, UInt32),
     get_type_info_count : Proc(IVBSAXDeclHandler*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXDeclHandler*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXDeclHandler*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXDeclHandler*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXDeclHandler*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     elementDecl : Proc(IVBSAXDeclHandler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     attributeDecl : Proc(IVBSAXDeclHandler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     internalEntityDecl : Proc(IVBSAXDeclHandler*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7451,7 +7416,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXDeclHandler, lpVtbl : IVBSAXDeclHandlerVtbl* do
+  record IVBSAXDeclHandler, lpVtbl : IVBSAXDeclHandlerVtable* do
     GUID = LibC::GUID.new(0xe8917260_u32, 0x7579_u16, 0x4be1_u16, StaticArray[0xb5_u8, 0xdd_u8, 0x7a_u8, 0xfb_u8, 0xfa_u8, 0x6f_u8, 0x7_u8, 0x7b_u8])
     def query_interface(this : IVBSAXDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7471,8 +7436,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXDeclHandler*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXDeclHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXDeclHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def elementDecl(this : IVBSAXDeclHandler*, strName : Win32cr::Foundation::BSTR*, strModel : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.elementDecl.call(this, strName, strModel)
@@ -7490,14 +7455,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXAttributesVtbl,
+
+  record IVBSAXAttributesVtable,
     query_interface : Proc(IVBSAXAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXAttributes*, UInt32),
     release : Proc(IVBSAXAttributes*, UInt32),
     get_type_info_count : Proc(IVBSAXAttributes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBSAXAttributes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBSAXAttributes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBSAXAttributes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBSAXAttributes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_length : Proc(IVBSAXAttributes*, Int32*, Win32cr::Foundation::HRESULT),
     getURI : Proc(IVBSAXAttributes*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     getLocalName : Proc(IVBSAXAttributes*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -7513,7 +7479,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXAttributes, lpVtbl : IVBSAXAttributesVtbl* do
+  record IVBSAXAttributes, lpVtbl : IVBSAXAttributesVtable* do
     GUID = LibC::GUID.new(0x10dc0586_u32, 0x132b_u16, 0x4cac_u16, StaticArray[0x8b_u8, 0xb3_u8, 0xdb_u8, 0x0_u8, 0xac_u8, 0x8b_u8, 0x7e_u8, 0xe0_u8])
     def query_interface(this : IVBSAXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7533,8 +7499,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBSAXAttributes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBSAXAttributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBSAXAttributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_length(this : IVBSAXAttributes*, nLength : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_length.call(this, nLength)
@@ -7576,35 +7542,36 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXWriterVtbl,
+
+  record IMXWriterVtable,
     query_interface : Proc(IMXWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXWriter*, UInt32),
     release : Proc(IMXWriter*, UInt32),
     get_type_info_count : Proc(IMXWriter*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMXWriter*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMXWriter*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMXWriter*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    put_output : Proc(IMXWriter*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_output : Proc(IMXWriter*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMXWriter*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_output : Proc(IMXWriter*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_output : Proc(IMXWriter*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_encoding : Proc(IMXWriter*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_encoding : Proc(IMXWriter*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    put_byteOrderMark : Proc(IMXWriter*, Int16, Win32cr::Foundation::HRESULT),
-    get_byteOrderMark : Proc(IMXWriter*, Int16*, Win32cr::Foundation::HRESULT),
-    put_indent : Proc(IMXWriter*, Int16, Win32cr::Foundation::HRESULT),
-    get_indent : Proc(IMXWriter*, Int16*, Win32cr::Foundation::HRESULT),
-    put_standalone : Proc(IMXWriter*, Int16, Win32cr::Foundation::HRESULT),
-    get_standalone : Proc(IMXWriter*, Int16*, Win32cr::Foundation::HRESULT),
-    put_omitXMLDeclaration : Proc(IMXWriter*, Int16, Win32cr::Foundation::HRESULT),
-    get_omitXMLDeclaration : Proc(IMXWriter*, Int16*, Win32cr::Foundation::HRESULT),
+    put_byteOrderMark : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_byteOrderMark : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_indent : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_indent : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_standalone : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_standalone : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_omitXMLDeclaration : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_omitXMLDeclaration : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     put_version : Proc(IMXWriter*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_version : Proc(IMXWriter*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    put_disableOutputEscaping : Proc(IMXWriter*, Int16, Win32cr::Foundation::HRESULT),
-    get_disableOutputEscaping : Proc(IMXWriter*, Int16*, Win32cr::Foundation::HRESULT),
+    put_disableOutputEscaping : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_disableOutputEscaping : Proc(IMXWriter*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     flush : Proc(IMXWriter*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMXWriter, lpVtbl : IMXWriterVtbl* do
+  record IMXWriter, lpVtbl : IMXWriterVtable* do
     GUID = LibC::GUID.new(0x4d7ff4ba_u32, 0x1565_u16, 0x4ea8_u16, StaticArray[0x94_u8, 0xe1_u8, 0x6e_u8, 0x72_u8, 0x4a_u8, 0x46_u8, 0xf9_u8, 0x8d_u8])
     def query_interface(this : IMXWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7624,13 +7591,13 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IMXWriter*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMXWriter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMXWriter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def put_output(this : IMXWriter*, varDestination : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_output(this : IMXWriter*, varDestination : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_output.call(this, varDestination)
     end
-    def get_output(this : IMXWriter*, varDestination : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_output(this : IMXWriter*, varDestination : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_output.call(this, varDestination)
     end
     def put_encoding(this : IMXWriter*, strEncoding : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -7639,28 +7606,28 @@ module Win32cr::Data::Xml::MsXml
     def get_encoding(this : IMXWriter*, strEncoding : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_encoding.call(this, strEncoding)
     end
-    def put_byteOrderMark(this : IMXWriter*, fWriteByteOrderMark : Int16) : Win32cr::Foundation::HRESULT
+    def put_byteOrderMark(this : IMXWriter*, fWriteByteOrderMark : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_byteOrderMark.call(this, fWriteByteOrderMark)
     end
-    def get_byteOrderMark(this : IMXWriter*, fWriteByteOrderMark : Int16*) : Win32cr::Foundation::HRESULT
+    def get_byteOrderMark(this : IMXWriter*, fWriteByteOrderMark : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_byteOrderMark.call(this, fWriteByteOrderMark)
     end
-    def put_indent(this : IMXWriter*, fIndentMode : Int16) : Win32cr::Foundation::HRESULT
+    def put_indent(this : IMXWriter*, fIndentMode : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_indent.call(this, fIndentMode)
     end
-    def get_indent(this : IMXWriter*, fIndentMode : Int16*) : Win32cr::Foundation::HRESULT
+    def get_indent(this : IMXWriter*, fIndentMode : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_indent.call(this, fIndentMode)
     end
-    def put_standalone(this : IMXWriter*, fValue : Int16) : Win32cr::Foundation::HRESULT
+    def put_standalone(this : IMXWriter*, fValue : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_standalone.call(this, fValue)
     end
-    def get_standalone(this : IMXWriter*, fValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_standalone(this : IMXWriter*, fValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_standalone.call(this, fValue)
     end
-    def put_omitXMLDeclaration(this : IMXWriter*, fValue : Int16) : Win32cr::Foundation::HRESULT
+    def put_omitXMLDeclaration(this : IMXWriter*, fValue : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_omitXMLDeclaration.call(this, fValue)
     end
-    def get_omitXMLDeclaration(this : IMXWriter*, fValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_omitXMLDeclaration(this : IMXWriter*, fValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_omitXMLDeclaration.call(this, fValue)
     end
     def put_version(this : IMXWriter*, strVersion : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -7669,10 +7636,10 @@ module Win32cr::Data::Xml::MsXml
     def get_version(this : IMXWriter*, strVersion : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_version.call(this, strVersion)
     end
-    def put_disableOutputEscaping(this : IMXWriter*, fValue : Int16) : Win32cr::Foundation::HRESULT
+    def put_disableOutputEscaping(this : IMXWriter*, fValue : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_disableOutputEscaping.call(this, fValue)
     end
-    def get_disableOutputEscaping(this : IMXWriter*, fValue : Int16*) : Win32cr::Foundation::HRESULT
+    def get_disableOutputEscaping(this : IMXWriter*, fValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_disableOutputEscaping.call(this, fValue)
     end
     def flush(this : IMXWriter*) : Win32cr::Foundation::HRESULT
@@ -7682,20 +7649,21 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXAttributesVtbl,
+
+  record IMXAttributesVtable,
     query_interface : Proc(IMXAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXAttributes*, UInt32),
     release : Proc(IMXAttributes*, UInt32),
     get_type_info_count : Proc(IMXAttributes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMXAttributes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMXAttributes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMXAttributes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMXAttributes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     addAttribute : Proc(IMXAttributes*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    addAttributeFromIndex : Proc(IMXAttributes*, Win32cr::System::Com::VARIANT, Int32, Win32cr::Foundation::HRESULT),
+    addAttributeFromIndex : Proc(IMXAttributes*, Win32cr::System::Variant::VARIANT, Int32, Win32cr::Foundation::HRESULT),
     clear : Proc(IMXAttributes*, Win32cr::Foundation::HRESULT),
     removeAttribute : Proc(IMXAttributes*, Int32, Win32cr::Foundation::HRESULT),
     setAttribute : Proc(IMXAttributes*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    setAttributes : Proc(IMXAttributes*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    setAttributes : Proc(IMXAttributes*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     setLocalName : Proc(IMXAttributes*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     setQName : Proc(IMXAttributes*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     setType : Proc(IMXAttributes*, Int32, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -7704,7 +7672,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXAttributes, lpVtbl : IMXAttributesVtbl* do
+  record IMXAttributes, lpVtbl : IMXAttributesVtable* do
     GUID = LibC::GUID.new(0xf10d27cc_u32, 0x3ec0_u16, 0x415c_u16, StaticArray[0x8e_u8, 0xd8_u8, 0x77_u8, 0xab_u8, 0x1c_u8, 0x5e_u8, 0x72_u8, 0x62_u8])
     def query_interface(this : IMXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7724,13 +7692,13 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IMXAttributes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMXAttributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMXAttributes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def addAttribute(this : IMXAttributes*, strURI : Win32cr::Foundation::BSTR, strLocalName : Win32cr::Foundation::BSTR, strQName : Win32cr::Foundation::BSTR, strType : Win32cr::Foundation::BSTR, strValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.addAttribute.call(this, strURI, strLocalName, strQName, strType, strValue)
     end
-    def addAttributeFromIndex(this : IMXAttributes*, varAtts : Win32cr::System::Com::VARIANT, nIndex : Int32) : Win32cr::Foundation::HRESULT
+    def addAttributeFromIndex(this : IMXAttributes*, varAtts : Win32cr::System::Variant::VARIANT, nIndex : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.addAttributeFromIndex.call(this, varAtts, nIndex)
     end
     def clear(this : IMXAttributes*) : Win32cr::Foundation::HRESULT
@@ -7742,7 +7710,7 @@ module Win32cr::Data::Xml::MsXml
     def setAttribute(this : IMXAttributes*, nIndex : Int32, strURI : Win32cr::Foundation::BSTR, strLocalName : Win32cr::Foundation::BSTR, strQName : Win32cr::Foundation::BSTR, strType : Win32cr::Foundation::BSTR, strValue : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setAttribute.call(this, nIndex, strURI, strLocalName, strQName, strType, strValue)
     end
-    def setAttributes(this : IMXAttributes*, varAtts : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def setAttributes(this : IMXAttributes*, varAtts : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.setAttributes.call(this, varAtts)
     end
     def setLocalName(this : IMXAttributes*, nIndex : Int32, strLocalName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -7764,21 +7732,22 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXReaderControlVtbl,
+
+  record IMXReaderControlVtable,
     query_interface : Proc(IMXReaderControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXReaderControl*, UInt32),
     release : Proc(IMXReaderControl*, UInt32),
     get_type_info_count : Proc(IMXReaderControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMXReaderControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMXReaderControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMXReaderControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMXReaderControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     abort : Proc(IMXReaderControl*, Win32cr::Foundation::HRESULT),
     resume : Proc(IMXReaderControl*, Win32cr::Foundation::HRESULT),
     suspend : Proc(IMXReaderControl*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMXReaderControl, lpVtbl : IMXReaderControlVtbl* do
+  record IMXReaderControl, lpVtbl : IMXReaderControlVtable* do
     GUID = LibC::GUID.new(0x808f4e35_u32, 0x8d5a_u16, 0x4fbe_u16, StaticArray[0x84_u8, 0x66_u8, 0x33_u8, 0xa4_u8, 0x12_u8, 0x79_u8, 0xed_u8, 0x30_u8])
     def query_interface(this : IMXReaderControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7798,8 +7767,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IMXReaderControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMXReaderControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMXReaderControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def abort(this : IMXReaderControl*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.abort.call(this)
@@ -7814,19 +7783,20 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXSchemaDeclHandlerVtbl,
+
+  record IMXSchemaDeclHandlerVtable,
     query_interface : Proc(IMXSchemaDeclHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXSchemaDeclHandler*, UInt32),
     release : Proc(IMXSchemaDeclHandler*, UInt32),
     get_type_info_count : Proc(IMXSchemaDeclHandler*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMXSchemaDeclHandler*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMXSchemaDeclHandler*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMXSchemaDeclHandler*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMXSchemaDeclHandler*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     schemaElementDecl : Proc(IMXSchemaDeclHandler*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMXSchemaDeclHandler, lpVtbl : IMXSchemaDeclHandlerVtbl* do
+  record IMXSchemaDeclHandler, lpVtbl : IMXSchemaDeclHandlerVtable* do
     GUID = LibC::GUID.new(0xfa4bb38c_u32, 0xfaf9_u16, 0x4cca_u16, StaticArray[0x93_u8, 0x2_u8, 0xd1_u8, 0xdd_u8, 0xf_u8, 0xe5_u8, 0x20_u8, 0xdb_u8])
     def query_interface(this : IMXSchemaDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7846,8 +7816,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IMXSchemaDeclHandler*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMXSchemaDeclHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMXSchemaDeclHandler*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def schemaElementDecl(this : IMXSchemaDeclHandler*, oSchemaElement : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.schemaElementDecl.call(this, oSchemaElement)
@@ -7856,21 +7826,22 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXNamespacePrefixesVtbl,
+
+  record IMXNamespacePrefixesVtable,
     query_interface : Proc(IMXNamespacePrefixes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXNamespacePrefixes*, UInt32),
     release : Proc(IMXNamespacePrefixes*, UInt32),
     get_type_info_count : Proc(IMXNamespacePrefixes*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMXNamespacePrefixes*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMXNamespacePrefixes*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMXNamespacePrefixes*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMXNamespacePrefixes*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_item : Proc(IMXNamespacePrefixes*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_length : Proc(IMXNamespacePrefixes*, Int32*, Win32cr::Foundation::HRESULT),
     get__newEnum : Proc(IMXNamespacePrefixes*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMXNamespacePrefixes, lpVtbl : IMXNamespacePrefixesVtbl* do
+  record IMXNamespacePrefixes, lpVtbl : IMXNamespacePrefixesVtable* do
     GUID = LibC::GUID.new(0xc90352f4_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXNamespacePrefixes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7890,8 +7861,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IMXNamespacePrefixes*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMXNamespacePrefixes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMXNamespacePrefixes*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_item(this : IMXNamespacePrefixes*, index : Int32, prefix : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_item.call(this, index, prefix)
@@ -7906,29 +7877,30 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBMXNamespaceManagerVtbl,
+
+  record IVBMXNamespaceManagerVtable,
     query_interface : Proc(IVBMXNamespaceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBMXNamespaceManager*, UInt32),
     release : Proc(IVBMXNamespaceManager*, UInt32),
     get_type_info_count : Proc(IVBMXNamespaceManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IVBMXNamespaceManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IVBMXNamespaceManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IVBMXNamespaceManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    put_allowOverride : Proc(IVBMXNamespaceManager*, Int16, Win32cr::Foundation::HRESULT),
-    get_allowOverride : Proc(IVBMXNamespaceManager*, Int16*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IVBMXNamespaceManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    put_allowOverride : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_allowOverride : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     reset : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::HRESULT),
     pushContext : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::HRESULT),
-    pushNodeContext : Proc(IVBMXNamespaceManager*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    pushNodeContext : Proc(IVBMXNamespaceManager*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     popContext : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::HRESULT),
     declarePrefix : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     getDeclaredPrefixes : Proc(IVBMXNamespaceManager*, Void**, Win32cr::Foundation::HRESULT),
     getPrefixes : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
-    getURI : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    getURIFromNode : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    getURI : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    getURIFromNode : Proc(IVBMXNamespaceManager*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVBMXNamespaceManager, lpVtbl : IVBMXNamespaceManagerVtbl* do
+  record IVBMXNamespaceManager, lpVtbl : IVBMXNamespaceManagerVtable* do
     GUID = LibC::GUID.new(0xc90352f5_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IVBMXNamespaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7948,13 +7920,13 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IVBMXNamespaceManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IVBMXNamespaceManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IVBMXNamespaceManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def put_allowOverride(this : IVBMXNamespaceManager*, fOverride : Int16) : Win32cr::Foundation::HRESULT
+    def put_allowOverride(this : IVBMXNamespaceManager*, fOverride : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_allowOverride.call(this, fOverride)
     end
-    def get_allowOverride(this : IVBMXNamespaceManager*, fOverride : Int16*) : Win32cr::Foundation::HRESULT
+    def get_allowOverride(this : IVBMXNamespaceManager*, fOverride : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_allowOverride.call(this, fOverride)
     end
     def reset(this : IVBMXNamespaceManager*) : Win32cr::Foundation::HRESULT
@@ -7963,7 +7935,7 @@ module Win32cr::Data::Xml::MsXml
     def pushContext(this : IVBMXNamespaceManager*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.pushContext.call(this)
     end
-    def pushNodeContext(this : IVBMXNamespaceManager*, contextNode : Void*, fDeep : Int16) : Win32cr::Foundation::HRESULT
+    def pushNodeContext(this : IVBMXNamespaceManager*, contextNode : Void*, fDeep : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.pushNodeContext.call(this, contextNode, fDeep)
     end
     def popContext(this : IVBMXNamespaceManager*) : Win32cr::Foundation::HRESULT
@@ -7978,34 +7950,35 @@ module Win32cr::Data::Xml::MsXml
     def getPrefixes(this : IVBMXNamespaceManager*, namespaceURI : Win32cr::Foundation::BSTR, prefixes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getPrefixes.call(this, namespaceURI, prefixes)
     end
-    def getURI(this : IVBMXNamespaceManager*, prefix : Win32cr::Foundation::BSTR, uri : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getURI(this : IVBMXNamespaceManager*, prefix : Win32cr::Foundation::BSTR, uri : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getURI.call(this, prefix, uri)
     end
-    def getURIFromNode(this : IVBMXNamespaceManager*, strPrefix : Win32cr::Foundation::BSTR, contextNode : Void*, uri : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getURIFromNode(this : IVBMXNamespaceManager*, strPrefix : Win32cr::Foundation::BSTR, contextNode : Void*, uri : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getURIFromNode.call(this, strPrefix, contextNode, uri)
     end
 
   end
 
   @[Extern]
-  record IMXNamespaceManagerVtbl,
+
+  record IMXNamespaceManagerVtable,
     query_interface : Proc(IMXNamespaceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXNamespaceManager*, UInt32),
     release : Proc(IMXNamespaceManager*, UInt32),
-    putAllowOverride : Proc(IMXNamespaceManager*, Int16, Win32cr::Foundation::HRESULT),
-    getAllowOverride : Proc(IMXNamespaceManager*, Int16*, Win32cr::Foundation::HRESULT),
+    putAllowOverride : Proc(IMXNamespaceManager*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    getAllowOverride : Proc(IMXNamespaceManager*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMXNamespaceManager*, Win32cr::Foundation::HRESULT),
     pushContext : Proc(IMXNamespaceManager*, Win32cr::Foundation::HRESULT),
-    pushNodeContext : Proc(IMXNamespaceManager*, Void*, Int16, Win32cr::Foundation::HRESULT),
+    pushNodeContext : Proc(IMXNamespaceManager*, Void*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     popContext : Proc(IMXNamespaceManager*, Win32cr::Foundation::HRESULT),
     declarePrefix : Proc(IMXNamespaceManager*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
-    getDeclaredPrefix : Proc(IMXNamespaceManager*, Int32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
-    getPrefix : Proc(IMXNamespaceManager*, Win32cr::Foundation::PWSTR, Int32, UInt16*, Int32*, Win32cr::Foundation::HRESULT),
-    getURI : Proc(IMXNamespaceManager*, Win32cr::Foundation::PWSTR, Void*, UInt16*, Int32*, Win32cr::Foundation::HRESULT)
+    getDeclaredPrefix : Proc(IMXNamespaceManager*, Int32, Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::HRESULT),
+    getPrefix : Proc(IMXNamespaceManager*, Win32cr::Foundation::PWSTR, Int32, Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::HRESULT),
+    getURI : Proc(IMXNamespaceManager*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::PWSTR, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMXNamespaceManager, lpVtbl : IMXNamespaceManagerVtbl* do
+  record IMXNamespaceManager, lpVtbl : IMXNamespaceManagerVtable* do
     GUID = LibC::GUID.new(0xc90352f6_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXNamespaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8016,10 +7989,10 @@ module Win32cr::Data::Xml::MsXml
     def release(this : IMXNamespaceManager*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def putAllowOverride(this : IMXNamespaceManager*, fOverride : Int16) : Win32cr::Foundation::HRESULT
+    def putAllowOverride(this : IMXNamespaceManager*, fOverride : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putAllowOverride.call(this, fOverride)
     end
-    def getAllowOverride(this : IMXNamespaceManager*, fOverride : Int16*) : Win32cr::Foundation::HRESULT
+    def getAllowOverride(this : IMXNamespaceManager*, fOverride : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getAllowOverride.call(this, fOverride)
     end
     def reset(this : IMXNamespaceManager*) : Win32cr::Foundation::HRESULT
@@ -8028,7 +8001,7 @@ module Win32cr::Data::Xml::MsXml
     def pushContext(this : IMXNamespaceManager*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.pushContext.call(this)
     end
-    def pushNodeContext(this : IMXNamespaceManager*, contextNode : Void*, fDeep : Int16) : Win32cr::Foundation::HRESULT
+    def pushNodeContext(this : IMXNamespaceManager*, contextNode : Void*, fDeep : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.pushNodeContext.call(this, contextNode, fDeep)
     end
     def popContext(this : IMXNamespaceManager*) : Win32cr::Foundation::HRESULT
@@ -8037,31 +8010,32 @@ module Win32cr::Data::Xml::MsXml
     def declarePrefix(this : IMXNamespaceManager*, prefix : Win32cr::Foundation::PWSTR, namespaceURI : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.declarePrefix.call(this, prefix, namespaceURI)
     end
-    def getDeclaredPrefix(this : IMXNamespaceManager*, nIndex : Int32, pwchPrefix : UInt16*, pcchPrefix : Int32*) : Win32cr::Foundation::HRESULT
+    def getDeclaredPrefix(this : IMXNamespaceManager*, nIndex : Int32, pwchPrefix : Win32cr::Foundation::PWSTR, pcchPrefix : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getDeclaredPrefix.call(this, nIndex, pwchPrefix, pcchPrefix)
     end
-    def getPrefix(this : IMXNamespaceManager*, pwszNamespaceURI : Win32cr::Foundation::PWSTR, nIndex : Int32, pwchPrefix : UInt16*, pcchPrefix : Int32*) : Win32cr::Foundation::HRESULT
+    def getPrefix(this : IMXNamespaceManager*, pwszNamespaceURI : Win32cr::Foundation::PWSTR, nIndex : Int32, pwchPrefix : Win32cr::Foundation::PWSTR, pcchPrefix : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getPrefix.call(this, pwszNamespaceURI, nIndex, pwchPrefix, pcchPrefix)
     end
-    def getURI(this : IMXNamespaceManager*, pwchPrefix : Win32cr::Foundation::PWSTR, pContextNode : Void*, pwchUri : UInt16*, pcchUri : Int32*) : Win32cr::Foundation::HRESULT
+    def getURI(this : IMXNamespaceManager*, pwchPrefix : Win32cr::Foundation::PWSTR, pContextNode : Void*, pwchUri : Win32cr::Foundation::PWSTR, pcchUri : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getURI.call(this, pwchPrefix, pContextNode, pwchUri, pcchUri)
     end
 
   end
 
   @[Extern]
-  record IMXXMLFilterVtbl,
+
+  record IMXXMLFilterVtable,
     query_interface : Proc(IMXXMLFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXXMLFilter*, UInt32),
     release : Proc(IMXXMLFilter*, UInt32),
     get_type_info_count : Proc(IMXXMLFilter*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMXXMLFilter*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMXXMLFilter*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMXXMLFilter*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    getFeature : Proc(IMXXMLFilter*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    putFeature : Proc(IMXXMLFilter*, Win32cr::Foundation::BSTR, Int16, Win32cr::Foundation::HRESULT),
-    getProperty : Proc(IMXXMLFilter*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    putProperty : Proc(IMXXMLFilter*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMXXMLFilter*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    getFeature : Proc(IMXXMLFilter*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    putFeature : Proc(IMXXMLFilter*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    getProperty : Proc(IMXXMLFilter*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    putProperty : Proc(IMXXMLFilter*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_entityResolver : Proc(IMXXMLFilter*, Void**, Win32cr::Foundation::HRESULT),
     putref_entityResolver : Proc(IMXXMLFilter*, Void*, Win32cr::Foundation::HRESULT),
     get_contentHandler : Proc(IMXXMLFilter*, Void**, Win32cr::Foundation::HRESULT),
@@ -8073,7 +8047,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXXMLFilter, lpVtbl : IMXXMLFilterVtbl* do
+  record IMXXMLFilter, lpVtbl : IMXXMLFilterVtable* do
     GUID = LibC::GUID.new(0xc90352f7_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8093,19 +8067,19 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IMXXMLFilter*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMXXMLFilter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMXXMLFilter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def getFeature(this : IMXXMLFilter*, strName : Win32cr::Foundation::BSTR, fValue : Int16*) : Win32cr::Foundation::HRESULT
+    def getFeature(this : IMXXMLFilter*, strName : Win32cr::Foundation::BSTR, fValue : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getFeature.call(this, strName, fValue)
     end
-    def putFeature(this : IMXXMLFilter*, strName : Win32cr::Foundation::BSTR, fValue : Int16) : Win32cr::Foundation::HRESULT
+    def putFeature(this : IMXXMLFilter*, strName : Win32cr::Foundation::BSTR, fValue : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putFeature.call(this, strName, fValue)
     end
-    def getProperty(this : IMXXMLFilter*, strName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def getProperty(this : IMXXMLFilter*, strName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.getProperty.call(this, strName, varValue)
     end
-    def putProperty(this : IMXXMLFilter*, strName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def putProperty(this : IMXXMLFilter*, strName : Win32cr::Foundation::BSTR, varValue : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putProperty.call(this, strName, varValue)
     end
     def get_entityResolver(this : IMXXMLFilter*, oResolver : Void**) : Win32cr::Foundation::HRESULT
@@ -8136,15 +8110,16 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMSchemaCollection2Vtbl,
+
+  record IXMLDOMSchemaCollection2Vtable,
     query_interface : Proc(IXMLDOMSchemaCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMSchemaCollection2*, UInt32),
     release : Proc(IXMLDOMSchemaCollection2*, UInt32),
     get_type_info_count : Proc(IXMLDOMSchemaCollection2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IXMLDOMSchemaCollection2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IXMLDOMSchemaCollection2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IXMLDOMSchemaCollection2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    add : Proc(IXMLDOMSchemaCollection2*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IXMLDOMSchemaCollection2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    add : Proc(IXMLDOMSchemaCollection2*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get : Proc(IXMLDOMSchemaCollection2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     remove : Proc(IXMLDOMSchemaCollection2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_length : Proc(IXMLDOMSchemaCollection2*, Int32*, Win32cr::Foundation::HRESULT),
@@ -8152,14 +8127,14 @@ module Win32cr::Data::Xml::MsXml
     addCollection : Proc(IXMLDOMSchemaCollection2*, Void*, Win32cr::Foundation::HRESULT),
     get__newEnum : Proc(IXMLDOMSchemaCollection2*, Void**, Win32cr::Foundation::HRESULT),
     validate : Proc(IXMLDOMSchemaCollection2*, Win32cr::Foundation::HRESULT),
-    put_validateOnLoad : Proc(IXMLDOMSchemaCollection2*, Int16, Win32cr::Foundation::HRESULT),
-    get_validateOnLoad : Proc(IXMLDOMSchemaCollection2*, Int16*, Win32cr::Foundation::HRESULT),
+    put_validateOnLoad : Proc(IXMLDOMSchemaCollection2*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_validateOnLoad : Proc(IXMLDOMSchemaCollection2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     getSchema : Proc(IXMLDOMSchemaCollection2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     getDeclaration : Proc(IXMLDOMSchemaCollection2*, Void*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IXMLDOMSchemaCollection2, lpVtbl : IXMLDOMSchemaCollection2Vtbl* do
+  record IXMLDOMSchemaCollection2, lpVtbl : IXMLDOMSchemaCollection2Vtable* do
     GUID = LibC::GUID.new(0x50ea08b0_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : IXMLDOMSchemaCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8179,10 +8154,10 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : IXMLDOMSchemaCollection2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IXMLDOMSchemaCollection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IXMLDOMSchemaCollection2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def add(this : IXMLDOMSchemaCollection2*, namespaceURI : Win32cr::Foundation::BSTR, var : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def add(this : IXMLDOMSchemaCollection2*, namespaceURI : Win32cr::Foundation::BSTR, var : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add.call(this, namespaceURI, var)
     end
     def get(this : IXMLDOMSchemaCollection2*, namespaceURI : Win32cr::Foundation::BSTR, schemaNode : Void**) : Win32cr::Foundation::HRESULT
@@ -8206,10 +8181,10 @@ module Win32cr::Data::Xml::MsXml
     def validate(this : IXMLDOMSchemaCollection2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.validate.call(this)
     end
-    def put_validateOnLoad(this : IXMLDOMSchemaCollection2*, validateOnLoad : Int16) : Win32cr::Foundation::HRESULT
+    def put_validateOnLoad(this : IXMLDOMSchemaCollection2*, validateOnLoad : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_validateOnLoad.call(this, validateOnLoad)
     end
-    def get_validateOnLoad(this : IXMLDOMSchemaCollection2*, validateOnLoad : Int16*) : Win32cr::Foundation::HRESULT
+    def get_validateOnLoad(this : IXMLDOMSchemaCollection2*, validateOnLoad : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_validateOnLoad.call(this, validateOnLoad)
     end
     def getSchema(this : IXMLDOMSchemaCollection2*, namespaceURI : Win32cr::Foundation::BSTR, schema : Void**) : Win32cr::Foundation::HRESULT
@@ -8222,21 +8197,22 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaStringCollectionVtbl,
+
+  record ISchemaStringCollectionVtable,
     query_interface : Proc(ISchemaStringCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaStringCollection*, UInt32),
     release : Proc(ISchemaStringCollection*, UInt32),
     get_type_info_count : Proc(ISchemaStringCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaStringCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaStringCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaStringCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaStringCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_item : Proc(ISchemaStringCollection*, Int32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_length : Proc(ISchemaStringCollection*, Int32*, Win32cr::Foundation::HRESULT),
     get__newEnum : Proc(ISchemaStringCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaStringCollection, lpVtbl : ISchemaStringCollectionVtbl* do
+  record ISchemaStringCollection, lpVtbl : ISchemaStringCollectionVtable* do
     GUID = LibC::GUID.new(0x50ea08b1_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaStringCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8256,8 +8232,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaStringCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaStringCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaStringCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_item(this : ISchemaStringCollection*, index : Int32, bstr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_item.call(this, index, bstr)
@@ -8272,14 +8248,15 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaItemCollectionVtbl,
+
+  record ISchemaItemCollectionVtable,
     query_interface : Proc(ISchemaItemCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaItemCollection*, UInt32),
     release : Proc(ISchemaItemCollection*, UInt32),
     get_type_info_count : Proc(ISchemaItemCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaItemCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaItemCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaItemCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaItemCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_item : Proc(ISchemaItemCollection*, Int32, Void**, Win32cr::Foundation::HRESULT),
     itemByName : Proc(ISchemaItemCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     itemByQName : Proc(ISchemaItemCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
@@ -8288,7 +8265,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaItemCollection, lpVtbl : ISchemaItemCollectionVtbl* do
+  record ISchemaItemCollection, lpVtbl : ISchemaItemCollectionVtable* do
     GUID = LibC::GUID.new(0x50ea08b2_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaItemCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8308,8 +8285,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaItemCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaItemCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaItemCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_item(this : ISchemaItemCollection*, index : Int32, item : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_item.call(this, index, item)
@@ -8330,25 +8307,26 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaItemVtbl,
+
+  record ISchemaItemVtable,
     query_interface : Proc(ISchemaItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaItem*, UInt32),
     release : Proc(ISchemaItem*, UInt32),
     get_type_info_count : Proc(ISchemaItem*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaItem*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaItem*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaItem*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaItem*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaItem*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaItem*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaItem*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaItem*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaItem*, Void*, Int16*, Win32cr::Foundation::HRESULT)
+    writeAnnotation : Proc(ISchemaItem*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaItem, lpVtbl : ISchemaItemVtbl* do
+  record ISchemaItem, lpVtbl : ISchemaItemVtable* do
     GUID = LibC::GUID.new(0x50ea08b3_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8368,8 +8346,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaItem*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaItem*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaItem*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -8389,28 +8367,29 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaItem*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaItem*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaItem*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
 
   end
 
   @[Extern]
-  record ISchemaVtbl,
+
+  record ISchemaVtable,
     query_interface : Proc(ISchema*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchema*, UInt32),
     release : Proc(ISchema*, UInt32),
     get_type_info_count : Proc(ISchema*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchema*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchema*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchema*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchema*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchema*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchema*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchema*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchema*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchema*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchema*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchema*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchema*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_targetNamespace : Proc(ISchema*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_version : Proc(ISchema*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_types : Proc(ISchema*, Void**, Win32cr::Foundation::HRESULT),
@@ -8423,7 +8402,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchema, lpVtbl : ISchemaVtbl* do
+  record ISchema, lpVtbl : ISchemaVtable* do
     GUID = LibC::GUID.new(0x50ea08b4_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchema*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8443,8 +8422,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchema*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchema*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchema*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchema*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -8464,7 +8443,7 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchema*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchema*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchema*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
     def get_targetNamespace(this : ISchema*, targetNamespace : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -8498,27 +8477,28 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaParticleVtbl,
+
+  record ISchemaParticleVtable,
     query_interface : Proc(ISchemaParticle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaParticle*, UInt32),
     release : Proc(ISchemaParticle*, UInt32),
     get_type_info_count : Proc(ISchemaParticle*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaParticle*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaParticle*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaParticle*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaParticle*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaParticle*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaParticle*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaParticle*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaParticle*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaParticle*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaParticle*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaParticle*, Void*, Int16*, Win32cr::Foundation::HRESULT),
-    get_minOccurs : Proc(ISchemaParticle*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_maxOccurs : Proc(ISchemaParticle*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    writeAnnotation : Proc(ISchemaParticle*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_minOccurs : Proc(ISchemaParticle*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_maxOccurs : Proc(ISchemaParticle*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaParticle, lpVtbl : ISchemaParticleVtbl* do
+  record ISchemaParticle, lpVtbl : ISchemaParticleVtable* do
     GUID = LibC::GUID.new(0x50ea08b5_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaParticle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8538,8 +8518,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaParticle*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaParticle*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaParticle*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaParticle*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -8559,44 +8539,45 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaParticle*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaParticle*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaParticle*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
-    def get_minOccurs(this : ISchemaParticle*, minOccurs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_minOccurs(this : ISchemaParticle*, minOccurs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_minOccurs.call(this, minOccurs)
     end
-    def get_maxOccurs(this : ISchemaParticle*, maxOccurs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_maxOccurs(this : ISchemaParticle*, maxOccurs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_maxOccurs.call(this, maxOccurs)
     end
 
   end
 
   @[Extern]
-  record ISchemaAttributeVtbl,
+
+  record ISchemaAttributeVtable,
     query_interface : Proc(ISchemaAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaAttribute*, UInt32),
     release : Proc(ISchemaAttribute*, UInt32),
     get_type_info_count : Proc(ISchemaAttribute*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaAttribute*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaAttribute*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaAttribute*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaAttribute*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaAttribute*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaAttribute*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaAttribute*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaAttribute*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaAttribute*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_type : Proc(ISchemaAttribute*, Void**, Win32cr::Foundation::HRESULT),
     get_scope : Proc(ISchemaAttribute*, Void**, Win32cr::Foundation::HRESULT),
     get_defaultValue : Proc(ISchemaAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_fixedValue : Proc(ISchemaAttribute*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_use : Proc(ISchemaAttribute*, Win32cr::Data::Xml::MsXml::SCHEMAUSE*, Win32cr::Foundation::HRESULT),
-    get_isReference : Proc(ISchemaAttribute*, Int16*, Win32cr::Foundation::HRESULT)
+    get_isReference : Proc(ISchemaAttribute*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaAttribute, lpVtbl : ISchemaAttributeVtbl* do
+  record ISchemaAttribute, lpVtbl : ISchemaAttributeVtable* do
     GUID = LibC::GUID.new(0x50ea08b6_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8616,8 +8597,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaAttribute*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaAttribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaAttribute*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaAttribute*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -8637,7 +8618,7 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaAttribute*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaAttribute*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaAttribute*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
     def get_type(this : ISchemaAttribute*, type__ : Void**) : Win32cr::Foundation::HRESULT
@@ -8655,45 +8636,46 @@ module Win32cr::Data::Xml::MsXml
     def get_use(this : ISchemaAttribute*, use : Win32cr::Data::Xml::MsXml::SCHEMAUSE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_use.call(this, use)
     end
-    def get_isReference(this : ISchemaAttribute*, reference : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isReference(this : ISchemaAttribute*, reference : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isReference.call(this, reference)
     end
 
   end
 
   @[Extern]
-  record ISchemaElementVtbl,
+
+  record ISchemaElementVtable,
     query_interface : Proc(ISchemaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaElement*, UInt32),
     release : Proc(ISchemaElement*, UInt32),
     get_type_info_count : Proc(ISchemaElement*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaElement*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaElement*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaElement*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaElement*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaElement*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaElement*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaElement*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaElement*, Void*, Int16*, Win32cr::Foundation::HRESULT),
-    get_minOccurs : Proc(ISchemaElement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_maxOccurs : Proc(ISchemaElement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaElement*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_minOccurs : Proc(ISchemaElement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_maxOccurs : Proc(ISchemaElement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_type : Proc(ISchemaElement*, Void**, Win32cr::Foundation::HRESULT),
     get_scope : Proc(ISchemaElement*, Void**, Win32cr::Foundation::HRESULT),
     get_defaultValue : Proc(ISchemaElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_fixedValue : Proc(ISchemaElement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_isNillable : Proc(ISchemaElement*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isNillable : Proc(ISchemaElement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_identityConstraints : Proc(ISchemaElement*, Void**, Win32cr::Foundation::HRESULT),
     get_substitutionGroup : Proc(ISchemaElement*, Void**, Win32cr::Foundation::HRESULT),
     get_substitutionGroupExclusions : Proc(ISchemaElement*, Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*, Win32cr::Foundation::HRESULT),
     get_disallowedSubstitutions : Proc(ISchemaElement*, Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*, Win32cr::Foundation::HRESULT),
-    get_isAbstract : Proc(ISchemaElement*, Int16*, Win32cr::Foundation::HRESULT),
-    get_isReference : Proc(ISchemaElement*, Int16*, Win32cr::Foundation::HRESULT)
+    get_isAbstract : Proc(ISchemaElement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_isReference : Proc(ISchemaElement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaElement, lpVtbl : ISchemaElementVtbl* do
+  record ISchemaElement, lpVtbl : ISchemaElementVtable* do
     GUID = LibC::GUID.new(0x50ea08b7_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8713,8 +8695,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaElement*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaElement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaElement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaElement*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -8734,13 +8716,13 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaElement*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaElement*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaElement*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
-    def get_minOccurs(this : ISchemaElement*, minOccurs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_minOccurs(this : ISchemaElement*, minOccurs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_minOccurs.call(this, minOccurs)
     end
-    def get_maxOccurs(this : ISchemaElement*, maxOccurs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_maxOccurs(this : ISchemaElement*, maxOccurs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_maxOccurs.call(this, maxOccurs)
     end
     def get_type(this : ISchemaElement*, type__ : Void**) : Win32cr::Foundation::HRESULT
@@ -8755,7 +8737,7 @@ module Win32cr::Data::Xml::MsXml
     def get_fixedValue(this : ISchemaElement*, fixedValue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_fixedValue.call(this, fixedValue)
     end
-    def get_isNillable(this : ISchemaElement*, nillable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isNillable(this : ISchemaElement*, nillable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isNillable.call(this, nillable)
     end
     def get_identityConstraints(this : ISchemaElement*, constraints : Void**) : Win32cr::Foundation::HRESULT
@@ -8770,52 +8752,53 @@ module Win32cr::Data::Xml::MsXml
     def get_disallowedSubstitutions(this : ISchemaElement*, disallowed : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_disallowedSubstitutions.call(this, disallowed)
     end
-    def get_isAbstract(this : ISchemaElement*, abstract__ : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isAbstract(this : ISchemaElement*, abstract__ : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isAbstract.call(this, abstract__)
     end
-    def get_isReference(this : ISchemaElement*, reference : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isReference(this : ISchemaElement*, reference : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isReference.call(this, reference)
     end
 
   end
 
   @[Extern]
-  record ISchemaTypeVtbl,
+
+  record ISchemaTypeVtable,
     query_interface : Proc(ISchemaType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaType*, UInt32),
     release : Proc(ISchemaType*, UInt32),
     get_type_info_count : Proc(ISchemaType*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaType*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaType*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaType*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaType*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaType*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaType*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaType*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaType*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaType*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_baseTypes : Proc(ISchemaType*, Void**, Win32cr::Foundation::HRESULT),
     get_final : Proc(ISchemaType*, Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*, Win32cr::Foundation::HRESULT),
     get_variety : Proc(ISchemaType*, Win32cr::Data::Xml::MsXml::SCHEMATYPEVARIETY*, Win32cr::Foundation::HRESULT),
     get_derivedBy : Proc(ISchemaType*, Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*, Win32cr::Foundation::HRESULT),
-    isValid : Proc(ISchemaType*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    isValid : Proc(ISchemaType*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_minExclusive : Proc(ISchemaType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_minInclusive : Proc(ISchemaType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_maxExclusive : Proc(ISchemaType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_maxInclusive : Proc(ISchemaType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_totalDigits : Proc(ISchemaType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_fractionDigits : Proc(ISchemaType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_length : Proc(ISchemaType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_minLength : Proc(ISchemaType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_maxLength : Proc(ISchemaType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_totalDigits : Proc(ISchemaType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_fractionDigits : Proc(ISchemaType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_length : Proc(ISchemaType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_minLength : Proc(ISchemaType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_maxLength : Proc(ISchemaType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_enumeration : Proc(ISchemaType*, Void**, Win32cr::Foundation::HRESULT),
     get_whitespace : Proc(ISchemaType*, Win32cr::Data::Xml::MsXml::SCHEMAWHITESPACE*, Win32cr::Foundation::HRESULT),
     get_patterns : Proc(ISchemaType*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaType, lpVtbl : ISchemaTypeVtbl* do
+  record ISchemaType, lpVtbl : ISchemaTypeVtable* do
     GUID = LibC::GUID.new(0x50ea08b8_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8835,8 +8818,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaType*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaType*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaType*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaType*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -8856,7 +8839,7 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaType*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaType*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaType*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
     def get_baseTypes(this : ISchemaType*, baseTypes : Void**) : Win32cr::Foundation::HRESULT
@@ -8871,7 +8854,7 @@ module Win32cr::Data::Xml::MsXml
     def get_derivedBy(this : ISchemaType*, derivedBy : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_derivedBy.call(this, derivedBy)
     end
-    def isValid(this : ISchemaType*, data : Win32cr::Foundation::BSTR, valid : Int16*) : Win32cr::Foundation::HRESULT
+    def isValid(this : ISchemaType*, data : Win32cr::Foundation::BSTR, valid : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isValid.call(this, data, valid)
     end
     def get_minExclusive(this : ISchemaType*, minExclusive : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -8886,19 +8869,19 @@ module Win32cr::Data::Xml::MsXml
     def get_maxInclusive(this : ISchemaType*, maxInclusive : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_maxInclusive.call(this, maxInclusive)
     end
-    def get_totalDigits(this : ISchemaType*, totalDigits : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_totalDigits(this : ISchemaType*, totalDigits : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_totalDigits.call(this, totalDigits)
     end
-    def get_fractionDigits(this : ISchemaType*, fractionDigits : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_fractionDigits(this : ISchemaType*, fractionDigits : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_fractionDigits.call(this, fractionDigits)
     end
-    def get_length(this : ISchemaType*, length : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_length(this : ISchemaType*, length : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_length.call(this, length)
     end
-    def get_minLength(this : ISchemaType*, minLength : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_minLength(this : ISchemaType*, minLength : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_minLength.call(this, minLength)
     end
-    def get_maxLength(this : ISchemaType*, maxLength : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_maxLength(this : ISchemaType*, maxLength : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_maxLength.call(this, maxLength)
     end
     def get_enumeration(this : ISchemaType*, enumeration : Void**) : Win32cr::Foundation::HRESULT
@@ -8914,39 +8897,40 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaComplexTypeVtbl,
+
+  record ISchemaComplexTypeVtable,
     query_interface : Proc(ISchemaComplexType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaComplexType*, UInt32),
     release : Proc(ISchemaComplexType*, UInt32),
     get_type_info_count : Proc(ISchemaComplexType*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaComplexType*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaComplexType*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaComplexType*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaComplexType*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaComplexType*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaComplexType*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaComplexType*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaComplexType*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaComplexType*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_baseTypes : Proc(ISchemaComplexType*, Void**, Win32cr::Foundation::HRESULT),
     get_final : Proc(ISchemaComplexType*, Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*, Win32cr::Foundation::HRESULT),
     get_variety : Proc(ISchemaComplexType*, Win32cr::Data::Xml::MsXml::SCHEMATYPEVARIETY*, Win32cr::Foundation::HRESULT),
     get_derivedBy : Proc(ISchemaComplexType*, Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*, Win32cr::Foundation::HRESULT),
-    isValid : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
+    isValid : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_minExclusive : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_minInclusive : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_maxExclusive : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_maxInclusive : Proc(ISchemaComplexType*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_totalDigits : Proc(ISchemaComplexType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_fractionDigits : Proc(ISchemaComplexType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_length : Proc(ISchemaComplexType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_minLength : Proc(ISchemaComplexType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_maxLength : Proc(ISchemaComplexType*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_totalDigits : Proc(ISchemaComplexType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_fractionDigits : Proc(ISchemaComplexType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_length : Proc(ISchemaComplexType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_minLength : Proc(ISchemaComplexType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_maxLength : Proc(ISchemaComplexType*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_enumeration : Proc(ISchemaComplexType*, Void**, Win32cr::Foundation::HRESULT),
     get_whitespace : Proc(ISchemaComplexType*, Win32cr::Data::Xml::MsXml::SCHEMAWHITESPACE*, Win32cr::Foundation::HRESULT),
     get_patterns : Proc(ISchemaComplexType*, Void**, Win32cr::Foundation::HRESULT),
-    get_isAbstract : Proc(ISchemaComplexType*, Int16*, Win32cr::Foundation::HRESULT),
+    get_isAbstract : Proc(ISchemaComplexType*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_anyAttribute : Proc(ISchemaComplexType*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(ISchemaComplexType*, Void**, Win32cr::Foundation::HRESULT),
     get_contentType : Proc(ISchemaComplexType*, Win32cr::Data::Xml::MsXml::SCHEMACONTENTTYPE*, Win32cr::Foundation::HRESULT),
@@ -8955,7 +8939,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaComplexType, lpVtbl : ISchemaComplexTypeVtbl* do
+  record ISchemaComplexType, lpVtbl : ISchemaComplexTypeVtable* do
     GUID = LibC::GUID.new(0x50ea08b9_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaComplexType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8975,8 +8959,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaComplexType*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaComplexType*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaComplexType*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaComplexType*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -8996,7 +8980,7 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaComplexType*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaComplexType*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaComplexType*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
     def get_baseTypes(this : ISchemaComplexType*, baseTypes : Void**) : Win32cr::Foundation::HRESULT
@@ -9011,7 +8995,7 @@ module Win32cr::Data::Xml::MsXml
     def get_derivedBy(this : ISchemaComplexType*, derivedBy : Win32cr::Data::Xml::MsXml::SCHEMADERIVATIONMETHOD*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_derivedBy.call(this, derivedBy)
     end
-    def isValid(this : ISchemaComplexType*, data : Win32cr::Foundation::BSTR, valid : Int16*) : Win32cr::Foundation::HRESULT
+    def isValid(this : ISchemaComplexType*, data : Win32cr::Foundation::BSTR, valid : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.isValid.call(this, data, valid)
     end
     def get_minExclusive(this : ISchemaComplexType*, minExclusive : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -9026,19 +9010,19 @@ module Win32cr::Data::Xml::MsXml
     def get_maxInclusive(this : ISchemaComplexType*, maxInclusive : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_maxInclusive.call(this, maxInclusive)
     end
-    def get_totalDigits(this : ISchemaComplexType*, totalDigits : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_totalDigits(this : ISchemaComplexType*, totalDigits : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_totalDigits.call(this, totalDigits)
     end
-    def get_fractionDigits(this : ISchemaComplexType*, fractionDigits : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_fractionDigits(this : ISchemaComplexType*, fractionDigits : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_fractionDigits.call(this, fractionDigits)
     end
-    def get_length(this : ISchemaComplexType*, length : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_length(this : ISchemaComplexType*, length : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_length.call(this, length)
     end
-    def get_minLength(this : ISchemaComplexType*, minLength : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_minLength(this : ISchemaComplexType*, minLength : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_minLength.call(this, minLength)
     end
-    def get_maxLength(this : ISchemaComplexType*, maxLength : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_maxLength(this : ISchemaComplexType*, maxLength : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_maxLength.call(this, maxLength)
     end
     def get_enumeration(this : ISchemaComplexType*, enumeration : Void**) : Win32cr::Foundation::HRESULT
@@ -9050,7 +9034,7 @@ module Win32cr::Data::Xml::MsXml
     def get_patterns(this : ISchemaComplexType*, patterns : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_patterns.call(this, patterns)
     end
-    def get_isAbstract(this : ISchemaComplexType*, abstract__ : Int16*) : Win32cr::Foundation::HRESULT
+    def get_isAbstract(this : ISchemaComplexType*, abstract__ : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_isAbstract.call(this, abstract__)
     end
     def get_anyAttribute(this : ISchemaComplexType*, anyAttribute : Void**) : Win32cr::Foundation::HRESULT
@@ -9072,27 +9056,28 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaAttributeGroupVtbl,
+
+  record ISchemaAttributeGroupVtable,
     query_interface : Proc(ISchemaAttributeGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaAttributeGroup*, UInt32),
     release : Proc(ISchemaAttributeGroup*, UInt32),
     get_type_info_count : Proc(ISchemaAttributeGroup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaAttributeGroup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaAttributeGroup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaAttributeGroup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaAttributeGroup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaAttributeGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaAttributeGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaAttributeGroup*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaAttributeGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaAttributeGroup*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaAttributeGroup*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaAttributeGroup*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaAttributeGroup*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_anyAttribute : Proc(ISchemaAttributeGroup*, Void**, Win32cr::Foundation::HRESULT),
     get_attributes : Proc(ISchemaAttributeGroup*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaAttributeGroup, lpVtbl : ISchemaAttributeGroupVtbl* do
+  record ISchemaAttributeGroup, lpVtbl : ISchemaAttributeGroupVtable* do
     GUID = LibC::GUID.new(0x50ea08ba_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAttributeGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9112,8 +9097,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaAttributeGroup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaAttributeGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaAttributeGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaAttributeGroup*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -9133,7 +9118,7 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaAttributeGroup*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaAttributeGroup*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaAttributeGroup*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
     def get_anyAttribute(this : ISchemaAttributeGroup*, anyAttribute : Void**) : Win32cr::Foundation::HRESULT
@@ -9146,28 +9131,29 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaModelGroupVtbl,
+
+  record ISchemaModelGroupVtable,
     query_interface : Proc(ISchemaModelGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaModelGroup*, UInt32),
     release : Proc(ISchemaModelGroup*, UInt32),
     get_type_info_count : Proc(ISchemaModelGroup*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaModelGroup*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaModelGroup*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaModelGroup*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaModelGroup*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaModelGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaModelGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaModelGroup*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaModelGroup*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaModelGroup*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaModelGroup*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaModelGroup*, Void*, Int16*, Win32cr::Foundation::HRESULT),
-    get_minOccurs : Proc(ISchemaModelGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_maxOccurs : Proc(ISchemaModelGroup*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaModelGroup*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_minOccurs : Proc(ISchemaModelGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_maxOccurs : Proc(ISchemaModelGroup*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_particles : Proc(ISchemaModelGroup*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaModelGroup, lpVtbl : ISchemaModelGroupVtbl* do
+  record ISchemaModelGroup, lpVtbl : ISchemaModelGroupVtable* do
     GUID = LibC::GUID.new(0x50ea08bb_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaModelGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9187,8 +9173,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaModelGroup*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaModelGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaModelGroup*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaModelGroup*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -9208,13 +9194,13 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaModelGroup*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaModelGroup*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaModelGroup*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
-    def get_minOccurs(this : ISchemaModelGroup*, minOccurs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_minOccurs(this : ISchemaModelGroup*, minOccurs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_minOccurs.call(this, minOccurs)
     end
-    def get_maxOccurs(this : ISchemaModelGroup*, maxOccurs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_maxOccurs(this : ISchemaModelGroup*, maxOccurs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_maxOccurs.call(this, maxOccurs)
     end
     def get_particles(this : ISchemaModelGroup*, particles : Void**) : Win32cr::Foundation::HRESULT
@@ -9224,29 +9210,30 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaAnyVtbl,
+
+  record ISchemaAnyVtable,
     query_interface : Proc(ISchemaAny*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaAny*, UInt32),
     release : Proc(ISchemaAny*, UInt32),
     get_type_info_count : Proc(ISchemaAny*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaAny*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaAny*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaAny*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaAny*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaAny*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaAny*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaAny*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaAny*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaAny*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaAny*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaAny*, Void*, Int16*, Win32cr::Foundation::HRESULT),
-    get_minOccurs : Proc(ISchemaAny*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_maxOccurs : Proc(ISchemaAny*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaAny*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_minOccurs : Proc(ISchemaAny*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_maxOccurs : Proc(ISchemaAny*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_namespaces : Proc(ISchemaAny*, Void**, Win32cr::Foundation::HRESULT),
     get_processContents : Proc(ISchemaAny*, Win32cr::Data::Xml::MsXml::SCHEMAPROCESSCONTENTS*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaAny, lpVtbl : ISchemaAnyVtbl* do
+  record ISchemaAny, lpVtbl : ISchemaAnyVtable* do
     GUID = LibC::GUID.new(0x50ea08bc_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAny*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9266,8 +9253,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaAny*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaAny*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaAny*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaAny*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -9287,13 +9274,13 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaAny*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaAny*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaAny*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
-    def get_minOccurs(this : ISchemaAny*, minOccurs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_minOccurs(this : ISchemaAny*, minOccurs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_minOccurs.call(this, minOccurs)
     end
-    def get_maxOccurs(this : ISchemaAny*, maxOccurs : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_maxOccurs(this : ISchemaAny*, maxOccurs : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_maxOccurs.call(this, maxOccurs)
     end
     def get_namespaces(this : ISchemaAny*, namespaces : Void**) : Win32cr::Foundation::HRESULT
@@ -9306,28 +9293,29 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaIdentityConstraintVtbl,
+
+  record ISchemaIdentityConstraintVtable,
     query_interface : Proc(ISchemaIdentityConstraint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaIdentityConstraint*, UInt32),
     release : Proc(ISchemaIdentityConstraint*, UInt32),
     get_type_info_count : Proc(ISchemaIdentityConstraint*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaIdentityConstraint*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaIdentityConstraint*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaIdentityConstraint*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaIdentityConstraint*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaIdentityConstraint*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaIdentityConstraint*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaIdentityConstraint*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaIdentityConstraint*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaIdentityConstraint*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaIdentityConstraint*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaIdentityConstraint*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaIdentityConstraint*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_selector : Proc(ISchemaIdentityConstraint*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_fields : Proc(ISchemaIdentityConstraint*, Void**, Win32cr::Foundation::HRESULT),
     get_referencedKey : Proc(ISchemaIdentityConstraint*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaIdentityConstraint, lpVtbl : ISchemaIdentityConstraintVtbl* do
+  record ISchemaIdentityConstraint, lpVtbl : ISchemaIdentityConstraintVtable* do
     GUID = LibC::GUID.new(0x50ea08bd_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaIdentityConstraint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9347,8 +9335,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaIdentityConstraint*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaIdentityConstraint*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaIdentityConstraint*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaIdentityConstraint*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -9368,7 +9356,7 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaIdentityConstraint*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaIdentityConstraint*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaIdentityConstraint*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
     def get_selector(this : ISchemaIdentityConstraint*, selector : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -9384,27 +9372,28 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaNotationVtbl,
+
+  record ISchemaNotationVtable,
     query_interface : Proc(ISchemaNotation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaNotation*, UInt32),
     release : Proc(ISchemaNotation*, UInt32),
     get_type_info_count : Proc(ISchemaNotation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISchemaNotation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISchemaNotation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISchemaNotation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISchemaNotation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_name : Proc(ISchemaNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_namespaceURI : Proc(ISchemaNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_schema : Proc(ISchemaNotation*, Void**, Win32cr::Foundation::HRESULT),
     get_id : Proc(ISchemaNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_itemType : Proc(ISchemaNotation*, Win32cr::Data::Xml::MsXml::SOMITEMTYPE*, Win32cr::Foundation::HRESULT),
     get_unhandledAttributes : Proc(ISchemaNotation*, Void**, Win32cr::Foundation::HRESULT),
-    writeAnnotation : Proc(ISchemaNotation*, Void*, Int16*, Win32cr::Foundation::HRESULT),
+    writeAnnotation : Proc(ISchemaNotation*, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_systemIdentifier : Proc(ISchemaNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_publicIdentifier : Proc(ISchemaNotation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISchemaNotation, lpVtbl : ISchemaNotationVtbl* do
+  record ISchemaNotation, lpVtbl : ISchemaNotationVtable* do
     GUID = LibC::GUID.new(0x50ea08be_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaNotation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9424,8 +9413,8 @@ module Win32cr::Data::Xml::MsXml
     def get_i_ds_of_names(this : ISchemaNotation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISchemaNotation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISchemaNotation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_name(this : ISchemaNotation*, name : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_name.call(this, name)
@@ -9445,7 +9434,7 @@ module Win32cr::Data::Xml::MsXml
     def get_unhandledAttributes(this : ISchemaNotation*, attributes : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_unhandledAttributes.call(this, attributes)
     end
-    def writeAnnotation(this : ISchemaNotation*, annotationSink : Void*, isWritten : Int16*) : Win32cr::Foundation::HRESULT
+    def writeAnnotation(this : ISchemaNotation*, annotationSink : Void*, isWritten : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.writeAnnotation.call(this, annotationSink, isWritten)
     end
     def get_systemIdentifier(this : ISchemaNotation*, uri : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -9458,7 +9447,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequest2CallbackVtbl,
+
+  record IXMLHTTPRequest2CallbackVtable,
     query_interface : Proc(IXMLHTTPRequest2Callback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest2Callback*, UInt32),
     release : Proc(IXMLHTTPRequest2Callback*, UInt32),
@@ -9470,7 +9460,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest2Callback, lpVtbl : IXMLHTTPRequest2CallbackVtbl* do
+  record IXMLHTTPRequest2Callback, lpVtbl : IXMLHTTPRequest2CallbackVtable* do
     GUID = LibC::GUID.new(0xa44a9299_u32, 0xe321_u16, 0x40de_u16, StaticArray[0x88_u8, 0x66_u8, 0x34_u8, 0x1b_u8, 0x41_u8, 0x66_u8, 0x91_u8, 0x62_u8])
     def query_interface(this : IXMLHTTPRequest2Callback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9500,7 +9490,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequest2Vtbl,
+
+  record IXMLHTTPRequest2Vtable,
     query_interface : Proc(IXMLHTTPRequest2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest2*, UInt32),
     release : Proc(IXMLHTTPRequest2*, UInt32),
@@ -9517,7 +9508,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest2, lpVtbl : IXMLHTTPRequest2Vtbl* do
+  record IXMLHTTPRequest2, lpVtbl : IXMLHTTPRequest2Vtable* do
     GUID = LibC::GUID.new(0xe5d37dc0_u32, 0x552a_u16, 0x4d52_u16, StaticArray[0x9c_u8, 0xc0_u8, 0xa1_u8, 0x4d_u8, 0x54_u8, 0x6f_u8, 0xbd_u8, 0x4_u8])
     def query_interface(this : IXMLHTTPRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9562,7 +9553,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequest3CallbackVtbl,
+
+  record IXMLHTTPRequest3CallbackVtable,
     query_interface : Proc(IXMLHTTPRequest3Callback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest3Callback*, UInt32),
     release : Proc(IXMLHTTPRequest3Callback*, UInt32),
@@ -9576,7 +9568,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest3Callback, lpVtbl : IXMLHTTPRequest3CallbackVtbl* do
+  record IXMLHTTPRequest3Callback, lpVtbl : IXMLHTTPRequest3CallbackVtable* do
     GUID = LibC::GUID.new(0xb9e57830_u32, 0x8c6c_u16, 0x4a6f_u16, StaticArray[0x9c_u8, 0x13_u8, 0x47_u8, 0x77_u8, 0x2b_u8, 0xb0_u8, 0x47_u8, 0xbb_u8])
     def query_interface(this : IXMLHTTPRequest3Callback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9612,7 +9604,8 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequest3Vtbl,
+
+  record IXMLHTTPRequest3Vtable,
     query_interface : Proc(IXMLHTTPRequest3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest3*, UInt32),
     release : Proc(IXMLHTTPRequest3*, UInt32),
@@ -9630,7 +9623,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest3, lpVtbl : IXMLHTTPRequest3Vtbl* do
+  record IXMLHTTPRequest3, lpVtbl : IXMLHTTPRequest3Vtable* do
     GUID = LibC::GUID.new(0xa1c9feee_u32, 0x617_u16, 0x4f23_u16, StaticArray[0x9d_u8, 0x58_u8, 0x89_u8, 0x61_u8, 0xea_u8, 0x43_u8, 0x56_u8, 0x7c_u8])
     def query_interface(this : IXMLHTTPRequest3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

@@ -13,47 +13,62 @@ module Win32cr::System::Memory::NonVolatile
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlGetNonVolatileToken(nv_buffer : Void*, size : LibC::UIntPtrT, nv_token : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlGetNonVolatileToken(nv_buffer, size, nv_token)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlFreeNonVolatileToken(nv_token : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlFreeNonVolatileToken(nv_token)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlFlushNonVolatileMemory(nv_token : Void*, nv_buffer : Void*, size : LibC::UIntPtrT, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlFlushNonVolatileMemory(nv_token, nv_buffer, size, flags)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlDrainNonVolatileFlush(nv_token : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlDrainNonVolatileFlush(nv_token)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlWriteNonVolatileMemory(nv_token : Void*, nv_destination : Void*, source : Void*, size : LibC::UIntPtrT, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlWriteNonVolatileMemory(nv_token, nv_destination, source, size, flags)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlFillNonVolatileMemory(nv_token : Void*, nv_destination : Void*, size : LibC::UIntPtrT, value : UInt8, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlFillNonVolatileMemory(nv_token, nv_destination, size, value, flags)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlFlushNonVolatileMemoryRanges(nv_token : Void*, nv_ranges : Win32cr::System::Memory::NonVolatile::NV_MEMORY_RANGE*, num_ranges : LibC::UIntPtrT, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlFlushNonVolatileMemoryRanges(nv_token, nv_ranges, num_ranges, flags)
+    {% end %}
   end
 {% end %}
 
   @[Link("ntdll")]
+  {% if !flag?(:docs) %}
   lib C
     {% if flag?(:x86_64) || flag?(:arm) %}
     # :nodoc:
@@ -91,4 +106,5 @@ module Win32cr::System::Memory::NonVolatile
     {% end %}
 
   end
+  {% end %}
 end

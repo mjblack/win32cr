@@ -1,5 +1,6 @@
 require "./com.cr"
 require "./../foundation.cr"
+require "./variant.cr"
 
 module Win32cr::System::DesktopSharing
   extend self
@@ -245,7 +246,8 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIDebugVtbl,
+
+  record IRDPSRAPIDebugVtable,
     query_interface : Proc(IRDPSRAPIDebug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIDebug*, UInt32),
     release : Proc(IRDPSRAPIDebug*, UInt32),
@@ -254,7 +256,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPIDebug, lpVtbl : IRDPSRAPIDebugVtbl* do
+  record IRDPSRAPIDebug, lpVtbl : IRDPSRAPIDebugVtable* do
     GUID = LibC::GUID.new(0xaa1e42b5_u32, 0x496d_u16, 0x4ca4_u16, StaticArray[0xa6_u8, 0x90_u8, 0x34_u8, 0x8d_u8, 0xcb_u8, 0x2e_u8, 0xc4_u8, 0xad_u8])
     def query_interface(this : IRDPSRAPIDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -275,7 +277,8 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIPerfCounterLoggerVtbl,
+
+  record IRDPSRAPIPerfCounterLoggerVtable,
     query_interface : Proc(IRDPSRAPIPerfCounterLogger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIPerfCounterLogger*, UInt32),
     release : Proc(IRDPSRAPIPerfCounterLogger*, UInt32),
@@ -283,7 +286,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPIPerfCounterLogger, lpVtbl : IRDPSRAPIPerfCounterLoggerVtbl* do
+  record IRDPSRAPIPerfCounterLogger, lpVtbl : IRDPSRAPIPerfCounterLoggerVtable* do
     GUID = LibC::GUID.new(0x71c2533_u32, 0xfa4_u16, 0x4e8f_u16, StaticArray[0xae_u8, 0x83_u8, 0x9c_u8, 0x10_u8, 0xb4_u8, 0x30_u8, 0x5a_u8, 0xb5_u8])
     def query_interface(this : IRDPSRAPIPerfCounterLogger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -301,7 +304,8 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIPerfCounterLoggingManagerVtbl,
+
+  record IRDPSRAPIPerfCounterLoggingManagerVtable,
     query_interface : Proc(IRDPSRAPIPerfCounterLoggingManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIPerfCounterLoggingManager*, UInt32),
     release : Proc(IRDPSRAPIPerfCounterLoggingManager*, UInt32),
@@ -309,7 +313,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPIPerfCounterLoggingManager, lpVtbl : IRDPSRAPIPerfCounterLoggingManagerVtbl* do
+  record IRDPSRAPIPerfCounterLoggingManager, lpVtbl : IRDPSRAPIPerfCounterLoggingManagerVtable* do
     GUID = LibC::GUID.new(0x9a512c86_u32, 0xac6e_u16, 0x4a8e_u16, StaticArray[0xb1_u8, 0xa4_u8, 0xfc_u8, 0xef_u8, 0x36_u8, 0x3f_u8, 0x6e_u8, 0x64_u8])
     def query_interface(this : IRDPSRAPIPerfCounterLoggingManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -327,7 +331,8 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIAudioStreamVtbl,
+
+  record IRDPSRAPIAudioStreamVtable,
     query_interface : Proc(IRDPSRAPIAudioStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIAudioStream*, UInt32),
     release : Proc(IRDPSRAPIAudioStream*, UInt32),
@@ -339,7 +344,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPIAudioStream, lpVtbl : IRDPSRAPIAudioStreamVtbl* do
+  record IRDPSRAPIAudioStream, lpVtbl : IRDPSRAPIAudioStreamVtable* do
     GUID = LibC::GUID.new(0xe3e30ef9_u32, 0x89c6_u16, 0x4541_u16, StaticArray[0xba_u8, 0x3b_u8, 0x19_u8, 0x33_u8, 0x6a_u8, 0xc6_u8, 0xd3_u8, 0x1c_u8])
     def query_interface(this : IRDPSRAPIAudioStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -369,15 +374,16 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIClipboardUseEventsVtbl,
+
+  record IRDPSRAPIClipboardUseEventsVtable,
     query_interface : Proc(IRDPSRAPIClipboardUseEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIClipboardUseEvents*, UInt32),
     release : Proc(IRDPSRAPIClipboardUseEvents*, UInt32),
-    on_paste_from_clipboard : Proc(IRDPSRAPIClipboardUseEvents*, UInt32, Void*, Int16*, Win32cr::Foundation::HRESULT)
+    on_paste_from_clipboard : Proc(IRDPSRAPIClipboardUseEvents*, UInt32, Void*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIClipboardUseEvents, lpVtbl : IRDPSRAPIClipboardUseEventsVtbl* do
+  record IRDPSRAPIClipboardUseEvents, lpVtbl : IRDPSRAPIClipboardUseEventsVtable* do
     GUID = LibC::GUID.new(0xd559f59a_u32, 0x7a27_u16, 0x4138_u16, StaticArray[0x87_u8, 0x63_u8, 0x24_u8, 0x7c_u8, 0xe5_u8, 0xf6_u8, 0x59_u8, 0xa8_u8])
     def query_interface(this : IRDPSRAPIClipboardUseEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -388,32 +394,33 @@ module Win32cr::System::DesktopSharing
     def release(this : IRDPSRAPIClipboardUseEvents*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def on_paste_from_clipboard(this : IRDPSRAPIClipboardUseEvents*, clipboardFormat : UInt32, pAttendee : Void*, pRetVal : Int16*) : Win32cr::Foundation::HRESULT
+    def on_paste_from_clipboard(this : IRDPSRAPIClipboardUseEvents*, clipboardFormat : UInt32, pAttendee : Void*, pRetVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.on_paste_from_clipboard.call(this, clipboardFormat, pAttendee, pRetVal)
     end
 
   end
 
   @[Extern]
-  record IRDPSRAPIWindowVtbl,
+
+  record IRDPSRAPIWindowVtable,
     query_interface : Proc(IRDPSRAPIWindow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIWindow*, UInt32),
     release : Proc(IRDPSRAPIWindow*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIWindow*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIWindow*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIWindow*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIWindow*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIWindow*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IRDPSRAPIWindow*, Int32*, Win32cr::Foundation::HRESULT),
     get_Application : Proc(IRDPSRAPIWindow*, Void**, Win32cr::Foundation::HRESULT),
-    get_Shared : Proc(IRDPSRAPIWindow*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Shared : Proc(IRDPSRAPIWindow*, Int16, Win32cr::Foundation::HRESULT),
+    get_Shared : Proc(IRDPSRAPIWindow*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Shared : Proc(IRDPSRAPIWindow*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IRDPSRAPIWindow*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     show : Proc(IRDPSRAPIWindow*, Win32cr::Foundation::HRESULT),
     get_Flags : Proc(IRDPSRAPIWindow*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIWindow, lpVtbl : IRDPSRAPIWindowVtbl* do
+  record IRDPSRAPIWindow, lpVtbl : IRDPSRAPIWindowVtable* do
     GUID = LibC::GUID.new(0xbeafe0f9_u32, 0xc77b_u16, 0x4933_u16, StaticArray[0xba_u8, 0x9f_u8, 0xa2_u8, 0x4c_u8, 0xdd_u8, 0xcc_u8, 0x27_u8, 0xcf_u8])
     def query_interface(this : IRDPSRAPIWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -433,8 +440,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIWindow*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIWindow*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIWindow*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IRDPSRAPIWindow*, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pRetVal)
@@ -442,10 +449,10 @@ module Win32cr::System::DesktopSharing
     def get_Application(this : IRDPSRAPIWindow*, pApplication : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Application.call(this, pApplication)
     end
-    def get_Shared(this : IRDPSRAPIWindow*, pRetVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Shared(this : IRDPSRAPIWindow*, pRetVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Shared.call(this, pRetVal)
     end
-    def put_Shared(this : IRDPSRAPIWindow*, new_val : Int16) : Win32cr::Foundation::HRESULT
+    def put_Shared(this : IRDPSRAPIWindow*, new_val : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Shared.call(this, new_val)
     end
     def get_Name(this : IRDPSRAPIWindow*, pRetVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -461,20 +468,21 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIWindowListVtbl,
+
+  record IRDPSRAPIWindowListVtable,
     query_interface : Proc(IRDPSRAPIWindowList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIWindowList*, UInt32),
     release : Proc(IRDPSRAPIWindowList*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIWindowList*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIWindowList*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIWindowList*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIWindowList*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIWindowList*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IRDPSRAPIWindowList*, Void**, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IRDPSRAPIWindowList*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIWindowList, lpVtbl : IRDPSRAPIWindowListVtbl* do
+  record IRDPSRAPIWindowList, lpVtbl : IRDPSRAPIWindowListVtable* do
     GUID = LibC::GUID.new(0x8a05ce44_u32, 0x715a_u16, 0x4116_u16, StaticArray[0xa1_u8, 0x89_u8, 0xa1_u8, 0x18_u8, 0xf3_u8, 0xa_u8, 0x7_u8, 0xbd_u8])
     def query_interface(this : IRDPSRAPIWindowList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -494,8 +502,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIWindowList*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIWindowList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIWindowList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IRDPSRAPIWindowList*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
@@ -507,24 +515,25 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIApplicationVtbl,
+
+  record IRDPSRAPIApplicationVtable,
     query_interface : Proc(IRDPSRAPIApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIApplication*, UInt32),
     release : Proc(IRDPSRAPIApplication*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIApplication*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIApplication*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIApplication*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIApplication*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIApplication*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Windows : Proc(IRDPSRAPIApplication*, Void**, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IRDPSRAPIApplication*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Shared : Proc(IRDPSRAPIApplication*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Shared : Proc(IRDPSRAPIApplication*, Int16, Win32cr::Foundation::HRESULT),
+    get_Shared : Proc(IRDPSRAPIApplication*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Shared : Proc(IRDPSRAPIApplication*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IRDPSRAPIApplication*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Flags : Proc(IRDPSRAPIApplication*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIApplication, lpVtbl : IRDPSRAPIApplicationVtbl* do
+  record IRDPSRAPIApplication, lpVtbl : IRDPSRAPIApplicationVtable* do
     GUID = LibC::GUID.new(0x41e7a09d_u32, 0xeb7a_u16, 0x436e_u16, StaticArray[0x93_u8, 0x5d_u8, 0x78_u8, 0xc_u8, 0xa2_u8, 0x62_u8, 0x83_u8, 0x24_u8])
     def query_interface(this : IRDPSRAPIApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -544,8 +553,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIApplication*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Windows(this : IRDPSRAPIApplication*, pWindowList : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Windows.call(this, pWindowList)
@@ -553,10 +562,10 @@ module Win32cr::System::DesktopSharing
     def get_Id(this : IRDPSRAPIApplication*, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pRetVal)
     end
-    def get_Shared(this : IRDPSRAPIApplication*, pRetVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Shared(this : IRDPSRAPIApplication*, pRetVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Shared.call(this, pRetVal)
     end
-    def put_Shared(this : IRDPSRAPIApplication*, new_val : Int16) : Win32cr::Foundation::HRESULT
+    def put_Shared(this : IRDPSRAPIApplication*, new_val : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Shared.call(this, new_val)
     end
     def get_Name(this : IRDPSRAPIApplication*, pRetVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -569,20 +578,21 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIApplicationListVtbl,
+
+  record IRDPSRAPIApplicationListVtable,
     query_interface : Proc(IRDPSRAPIApplicationList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIApplicationList*, UInt32),
     release : Proc(IRDPSRAPIApplicationList*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIApplicationList*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIApplicationList*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIApplicationList*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIApplicationList*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIApplicationList*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IRDPSRAPIApplicationList*, Void**, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IRDPSRAPIApplicationList*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIApplicationList, lpVtbl : IRDPSRAPIApplicationListVtbl* do
+  record IRDPSRAPIApplicationList, lpVtbl : IRDPSRAPIApplicationListVtable* do
     GUID = LibC::GUID.new(0xd4b4aeb3_u32, 0x22dc_u16, 0x4837_u16, StaticArray[0xb3_u8, 0xb6_u8, 0x42_u8, 0xea_u8, 0x25_u8, 0x17_u8, 0x84_u8, 0x9a_u8])
     def query_interface(this : IRDPSRAPIApplicationList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -602,8 +612,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIApplicationList*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIApplicationList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIApplicationList*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IRDPSRAPIApplicationList*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
@@ -615,22 +625,23 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIApplicationFilterVtbl,
+
+  record IRDPSRAPIApplicationFilterVtable,
     query_interface : Proc(IRDPSRAPIApplicationFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIApplicationFilter*, UInt32),
     release : Proc(IRDPSRAPIApplicationFilter*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIApplicationFilter*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIApplicationFilter*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIApplicationFilter*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIApplicationFilter*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIApplicationFilter*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Applications : Proc(IRDPSRAPIApplicationFilter*, Void**, Win32cr::Foundation::HRESULT),
     get_Windows : Proc(IRDPSRAPIApplicationFilter*, Void**, Win32cr::Foundation::HRESULT),
-    get_Enabled : Proc(IRDPSRAPIApplicationFilter*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Enabled : Proc(IRDPSRAPIApplicationFilter*, Int16, Win32cr::Foundation::HRESULT)
+    get_Enabled : Proc(IRDPSRAPIApplicationFilter*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Enabled : Proc(IRDPSRAPIApplicationFilter*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIApplicationFilter, lpVtbl : IRDPSRAPIApplicationFilterVtbl* do
+  record IRDPSRAPIApplicationFilter, lpVtbl : IRDPSRAPIApplicationFilterVtable* do
     GUID = LibC::GUID.new(0xd20f10ca_u32, 0x6637_u16, 0x4f06_u16, StaticArray[0xb1_u8, 0xd5_u8, 0x27_u8, 0x7e_u8, 0xa7_u8, 0xe5_u8, 0x16_u8, 0xd_u8])
     def query_interface(this : IRDPSRAPIApplicationFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -650,8 +661,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIApplicationFilter*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIApplicationFilter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIApplicationFilter*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Applications(this : IRDPSRAPIApplicationFilter*, pApplications : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Applications.call(this, pApplications)
@@ -659,30 +670,31 @@ module Win32cr::System::DesktopSharing
     def get_Windows(this : IRDPSRAPIApplicationFilter*, pWindows : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Windows.call(this, pWindows)
     end
-    def get_Enabled(this : IRDPSRAPIApplicationFilter*, pRetVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Enabled(this : IRDPSRAPIApplicationFilter*, pRetVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Enabled.call(this, pRetVal)
     end
-    def put_Enabled(this : IRDPSRAPIApplicationFilter*, new_val : Int16) : Win32cr::Foundation::HRESULT
+    def put_Enabled(this : IRDPSRAPIApplicationFilter*, new_val : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Enabled.call(this, new_val)
     end
 
   end
 
   @[Extern]
-  record IRDPSRAPISessionPropertiesVtbl,
+
+  record IRDPSRAPISessionPropertiesVtable,
     query_interface : Proc(IRDPSRAPISessionProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPISessionProperties*, UInt32),
     release : Proc(IRDPSRAPISessionProperties*, UInt32),
     get_type_info_count : Proc(IRDPSRAPISessionProperties*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPISessionProperties*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPISessionProperties*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPISessionProperties*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Property : Proc(IRDPSRAPISessionProperties*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Property : Proc(IRDPSRAPISessionProperties*, Win32cr::Foundation::BSTR, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IRDPSRAPISessionProperties*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Property : Proc(IRDPSRAPISessionProperties*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Property : Proc(IRDPSRAPISessionProperties*, Win32cr::Foundation::BSTR, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPISessionProperties, lpVtbl : IRDPSRAPISessionPropertiesVtbl* do
+  record IRDPSRAPISessionProperties, lpVtbl : IRDPSRAPISessionPropertiesVtable* do
     GUID = LibC::GUID.new(0x339b24f2_u32, 0x9bc0_u16, 0x4f16_u16, StaticArray[0x9a_u8, 0xac_u8, 0xf1_u8, 0x65_u8, 0x43_u8, 0x3d_u8, 0x13_u8, 0xd4_u8])
     def query_interface(this : IRDPSRAPISessionProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -702,38 +714,39 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPISessionProperties*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPISessionProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPISessionProperties*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Property(this : IRDPSRAPISessionProperties*, property_name : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Property(this : IRDPSRAPISessionProperties*, property_name : Win32cr::Foundation::BSTR, pVal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Property.call(this, property_name, pVal)
     end
-    def put_Property(this : IRDPSRAPISessionProperties*, property_name : Win32cr::Foundation::BSTR, newVal : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Property(this : IRDPSRAPISessionProperties*, property_name : Win32cr::Foundation::BSTR, newVal : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Property.call(this, property_name, newVal)
     end
 
   end
 
   @[Extern]
-  record IRDPSRAPIInvitationVtbl,
+
+  record IRDPSRAPIInvitationVtable,
     query_interface : Proc(IRDPSRAPIInvitation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIInvitation*, UInt32),
     release : Proc(IRDPSRAPIInvitation*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIInvitation*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIInvitation*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIInvitation*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIInvitation*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIInvitation*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_ConnectionString : Proc(IRDPSRAPIInvitation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_GroupName : Proc(IRDPSRAPIInvitation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Password : Proc(IRDPSRAPIInvitation*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_AttendeeLimit : Proc(IRDPSRAPIInvitation*, Int32*, Win32cr::Foundation::HRESULT),
     put_AttendeeLimit : Proc(IRDPSRAPIInvitation*, Int32, Win32cr::Foundation::HRESULT),
-    get_Revoked : Proc(IRDPSRAPIInvitation*, Int16*, Win32cr::Foundation::HRESULT),
-    put_Revoked : Proc(IRDPSRAPIInvitation*, Int16, Win32cr::Foundation::HRESULT)
+    get_Revoked : Proc(IRDPSRAPIInvitation*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    put_Revoked : Proc(IRDPSRAPIInvitation*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIInvitation, lpVtbl : IRDPSRAPIInvitationVtbl* do
+  record IRDPSRAPIInvitation, lpVtbl : IRDPSRAPIInvitationVtable* do
     GUID = LibC::GUID.new(0x4fac1d43_u32, 0xfc51_u16, 0x45bb_u16, StaticArray[0xb1_u8, 0xb4_u8, 0x2b_u8, 0x53_u8, 0xaa_u8, 0x56_u8, 0x2f_u8, 0xa3_u8])
     def query_interface(this : IRDPSRAPIInvitation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -753,8 +766,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIInvitation*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIInvitation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIInvitation*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_ConnectionString(this : IRDPSRAPIInvitation*, pbstrVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ConnectionString.call(this, pbstrVal)
@@ -771,32 +784,33 @@ module Win32cr::System::DesktopSharing
     def put_AttendeeLimit(this : IRDPSRAPIInvitation*, new_val : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AttendeeLimit.call(this, new_val)
     end
-    def get_Revoked(this : IRDPSRAPIInvitation*, pRetVal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_Revoked(this : IRDPSRAPIInvitation*, pRetVal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Revoked.call(this, pRetVal)
     end
-    def put_Revoked(this : IRDPSRAPIInvitation*, new_val : Int16) : Win32cr::Foundation::HRESULT
+    def put_Revoked(this : IRDPSRAPIInvitation*, new_val : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Revoked.call(this, new_val)
     end
 
   end
 
   @[Extern]
-  record IRDPSRAPIInvitationManagerVtbl,
+
+  record IRDPSRAPIInvitationManagerVtable,
     query_interface : Proc(IRDPSRAPIInvitationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIInvitationManager*, UInt32),
     release : Proc(IRDPSRAPIInvitationManager*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIInvitationManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIInvitationManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIInvitationManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIInvitationManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIInvitationManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IRDPSRAPIInvitationManager*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IRDPSRAPIInvitationManager*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IRDPSRAPIInvitationManager*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IRDPSRAPIInvitationManager*, Int32*, Win32cr::Foundation::HRESULT),
     create_invitation : Proc(IRDPSRAPIInvitationManager*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIInvitationManager, lpVtbl : IRDPSRAPIInvitationManagerVtbl* do
+  record IRDPSRAPIInvitationManager, lpVtbl : IRDPSRAPIInvitationManagerVtable* do
     GUID = LibC::GUID.new(0x4722b049_u32, 0x92c3_u16, 0x4c2d_u16, StaticArray[0x8a_u8, 0x65_u8, 0xf7_u8, 0x34_u8, 0x8f_u8, 0x64_u8, 0x4d_u8, 0xcf_u8])
     def query_interface(this : IRDPSRAPIInvitationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -816,13 +830,13 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIInvitationManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIInvitationManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIInvitationManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IRDPSRAPIInvitationManager*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
     end
-    def get_Item(this : IRDPSRAPIInvitationManager*, item : Win32cr::System::Com::VARIANT, ppInvitation : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IRDPSRAPIInvitationManager*, item : Win32cr::System::Variant::VARIANT, ppInvitation : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, item, ppInvitation)
     end
     def get_Count(this : IRDPSRAPIInvitationManager*, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
@@ -835,14 +849,15 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPITcpConnectionInfoVtbl,
+
+  record IRDPSRAPITcpConnectionInfoVtable,
     query_interface : Proc(IRDPSRAPITcpConnectionInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPITcpConnectionInfo*, UInt32),
     release : Proc(IRDPSRAPITcpConnectionInfo*, UInt32),
     get_type_info_count : Proc(IRDPSRAPITcpConnectionInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPITcpConnectionInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPITcpConnectionInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPITcpConnectionInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPITcpConnectionInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Protocol : Proc(IRDPSRAPITcpConnectionInfo*, Int32*, Win32cr::Foundation::HRESULT),
     get_LocalPort : Proc(IRDPSRAPITcpConnectionInfo*, Int32*, Win32cr::Foundation::HRESULT),
     get_LocalIP : Proc(IRDPSRAPITcpConnectionInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -851,7 +866,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPITcpConnectionInfo, lpVtbl : IRDPSRAPITcpConnectionInfoVtbl* do
+  record IRDPSRAPITcpConnectionInfo, lpVtbl : IRDPSRAPITcpConnectionInfoVtable* do
     GUID = LibC::GUID.new(0xf74049a4_u32, 0x3d06_u16, 0x4028_u16, StaticArray[0x81_u8, 0x93_u8, 0xa_u8, 0x8c_u8, 0x29_u8, 0xbc_u8, 0x24_u8, 0x52_u8])
     def query_interface(this : IRDPSRAPITcpConnectionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -871,8 +886,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPITcpConnectionInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPITcpConnectionInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPITcpConnectionInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Protocol(this : IRDPSRAPITcpConnectionInfo*, plProtocol : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Protocol.call(this, plProtocol)
@@ -893,14 +908,15 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIAttendeeVtbl,
+
+  record IRDPSRAPIAttendeeVtable,
     query_interface : Proc(IRDPSRAPIAttendee*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIAttendee*, UInt32),
     release : Proc(IRDPSRAPIAttendee*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIAttendee*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIAttendee*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIAttendee*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIAttendee*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIAttendee*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Id : Proc(IRDPSRAPIAttendee*, Int32*, Win32cr::Foundation::HRESULT),
     get_RemoteName : Proc(IRDPSRAPIAttendee*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ControlLevel : Proc(IRDPSRAPIAttendee*, Win32cr::System::DesktopSharing::CTRL_LEVEL*, Win32cr::Foundation::HRESULT),
@@ -912,7 +928,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPIAttendee, lpVtbl : IRDPSRAPIAttendeeVtbl* do
+  record IRDPSRAPIAttendee, lpVtbl : IRDPSRAPIAttendeeVtable* do
     GUID = LibC::GUID.new(0xec0671b3_u32, 0x1b78_u16, 0x4b80_u16, StaticArray[0xa4_u8, 0x64_u8, 0x91_u8, 0x32_u8, 0x24_u8, 0x75_u8, 0x43_u8, 0xe3_u8])
     def query_interface(this : IRDPSRAPIAttendee*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -932,8 +948,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIAttendee*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIAttendee*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIAttendee*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Id(this : IRDPSRAPIAttendee*, pId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pId)
@@ -963,20 +979,21 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIAttendeeManagerVtbl,
+
+  record IRDPSRAPIAttendeeManagerVtable,
     query_interface : Proc(IRDPSRAPIAttendeeManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIAttendeeManager*, UInt32),
     release : Proc(IRDPSRAPIAttendeeManager*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIAttendeeManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIAttendeeManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIAttendeeManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIAttendeeManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIAttendeeManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IRDPSRAPIAttendeeManager*, Void**, Win32cr::Foundation::HRESULT),
     get_Item : Proc(IRDPSRAPIAttendeeManager*, Int32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIAttendeeManager, lpVtbl : IRDPSRAPIAttendeeManagerVtbl* do
+  record IRDPSRAPIAttendeeManager, lpVtbl : IRDPSRAPIAttendeeManagerVtable* do
     GUID = LibC::GUID.new(0xba3a37e8_u32, 0x33da_u16, 0x4749_u16, StaticArray[0x8d_u8, 0xa0_u8, 0x7_u8, 0xfa_u8, 0x34_u8, 0xda_u8, 0x79_u8, 0x44_u8])
     def query_interface(this : IRDPSRAPIAttendeeManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -996,8 +1013,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIAttendeeManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIAttendeeManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIAttendeeManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IRDPSRAPIAttendeeManager*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
@@ -1009,21 +1026,22 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIAttendeeDisconnectInfoVtbl,
+
+  record IRDPSRAPIAttendeeDisconnectInfoVtable,
     query_interface : Proc(IRDPSRAPIAttendeeDisconnectInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIAttendeeDisconnectInfo*, UInt32),
     release : Proc(IRDPSRAPIAttendeeDisconnectInfo*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIAttendeeDisconnectInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIAttendeeDisconnectInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIAttendeeDisconnectInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIAttendeeDisconnectInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIAttendeeDisconnectInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Attendee : Proc(IRDPSRAPIAttendeeDisconnectInfo*, Void**, Win32cr::Foundation::HRESULT),
     get_Reason : Proc(IRDPSRAPIAttendeeDisconnectInfo*, Win32cr::System::DesktopSharing::ATTENDEE_DISCONNECT_REASON*, Win32cr::Foundation::HRESULT),
     get_Code : Proc(IRDPSRAPIAttendeeDisconnectInfo*, Int32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIAttendeeDisconnectInfo, lpVtbl : IRDPSRAPIAttendeeDisconnectInfoVtbl* do
+  record IRDPSRAPIAttendeeDisconnectInfo, lpVtbl : IRDPSRAPIAttendeeDisconnectInfoVtable* do
     GUID = LibC::GUID.new(0xc187689f_u32, 0x447c_u16, 0x44a1_u16, StaticArray[0x9c_u8, 0x14_u8, 0xff_u8, 0xfb_u8, 0xb3_u8, 0xb7_u8, 0xec_u8, 0x17_u8])
     def query_interface(this : IRDPSRAPIAttendeeDisconnectInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1043,8 +1061,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIAttendeeDisconnectInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIAttendeeDisconnectInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIAttendeeDisconnectInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Attendee(this : IRDPSRAPIAttendeeDisconnectInfo*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Attendee.call(this, retval)
@@ -1059,14 +1077,15 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIVirtualChannelVtbl,
+
+  record IRDPSRAPIVirtualChannelVtable,
     query_interface : Proc(IRDPSRAPIVirtualChannel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIVirtualChannel*, UInt32),
     release : Proc(IRDPSRAPIVirtualChannel*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIVirtualChannel*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIVirtualChannel*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIVirtualChannel*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIVirtualChannel*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIVirtualChannel*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     send_data : Proc(IRDPSRAPIVirtualChannel*, Win32cr::Foundation::BSTR, Int32, UInt32, Win32cr::Foundation::HRESULT),
     set_access : Proc(IRDPSRAPIVirtualChannel*, Int32, Win32cr::System::DesktopSharing::CHANNEL_ACCESS_ENUM, Win32cr::Foundation::HRESULT),
     get_Name : Proc(IRDPSRAPIVirtualChannel*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1075,7 +1094,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPIVirtualChannel, lpVtbl : IRDPSRAPIVirtualChannelVtbl* do
+  record IRDPSRAPIVirtualChannel, lpVtbl : IRDPSRAPIVirtualChannelVtable* do
     GUID = LibC::GUID.new(0x5e12f95_u32, 0x28b3_u16, 0x4c9a_u16, StaticArray[0x87_u8, 0x80_u8, 0xd0_u8, 0x24_u8, 0x85_u8, 0x74_u8, 0xa1_u8, 0xe0_u8])
     def query_interface(this : IRDPSRAPIVirtualChannel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1095,8 +1114,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIVirtualChannel*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIVirtualChannel*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIVirtualChannel*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def send_data(this : IRDPSRAPIVirtualChannel*, bstrData : Win32cr::Foundation::BSTR, lAttendeeId : Int32, channel_send_flags : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send_data.call(this, bstrData, lAttendeeId, channel_send_flags)
@@ -1117,21 +1136,22 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIVirtualChannelManagerVtbl,
+
+  record IRDPSRAPIVirtualChannelManagerVtable,
     query_interface : Proc(IRDPSRAPIVirtualChannelManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIVirtualChannelManager*, UInt32),
     release : Proc(IRDPSRAPIVirtualChannelManager*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIVirtualChannelManager*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIVirtualChannelManager*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIVirtualChannelManager*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIVirtualChannelManager*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIVirtualChannelManager*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(IRDPSRAPIVirtualChannelManager*, Void**, Win32cr::Foundation::HRESULT),
-    get_Item : Proc(IRDPSRAPIVirtualChannelManager*, Win32cr::System::Com::VARIANT, Void**, Win32cr::Foundation::HRESULT),
+    get_Item : Proc(IRDPSRAPIVirtualChannelManager*, Win32cr::System::Variant::VARIANT, Void**, Win32cr::Foundation::HRESULT),
     create_virtual_channel : Proc(IRDPSRAPIVirtualChannelManager*, Win32cr::Foundation::BSTR, Win32cr::System::DesktopSharing::CHANNEL_PRIORITY, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSRAPIVirtualChannelManager, lpVtbl : IRDPSRAPIVirtualChannelManagerVtbl* do
+  record IRDPSRAPIVirtualChannelManager, lpVtbl : IRDPSRAPIVirtualChannelManagerVtable* do
     GUID = LibC::GUID.new(0xd11c661_u32, 0x5d0d_u16, 0x4ee4_u16, StaticArray[0x89_u8, 0xdf_u8, 0x21_u8, 0x66_u8, 0xae_u8, 0x1f_u8, 0xdf_u8, 0xed_u8])
     def query_interface(this : IRDPSRAPIVirtualChannelManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1151,13 +1171,13 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIVirtualChannelManager*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIVirtualChannelManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIVirtualChannelManager*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get__NewEnum(this : IRDPSRAPIVirtualChannelManager*, retval : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get__NewEnum.call(this, retval)
     end
-    def get_Item(this : IRDPSRAPIVirtualChannelManager*, item : Win32cr::System::Com::VARIANT, pChannel : Void**) : Win32cr::Foundation::HRESULT
+    def get_Item(this : IRDPSRAPIVirtualChannelManager*, item : Win32cr::System::Variant::VARIANT, pChannel : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Item.call(this, item, pChannel)
     end
     def create_virtual_channel(this : IRDPSRAPIVirtualChannelManager*, bstrChannelName : Win32cr::Foundation::BSTR, priority : Win32cr::System::DesktopSharing::CHANNEL_PRIORITY, channel_flags : UInt32, ppChannel : Void**) : Win32cr::Foundation::HRESULT
@@ -1167,22 +1187,23 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIViewerVtbl,
+
+  record IRDPSRAPIViewerVtable,
     query_interface : Proc(IRDPSRAPIViewer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIViewer*, UInt32),
     release : Proc(IRDPSRAPIViewer*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIViewer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIViewer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIViewer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIViewer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIViewer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     connect : Proc(IRDPSRAPIViewer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     disconnect : Proc(IRDPSRAPIViewer*, Win32cr::Foundation::HRESULT),
     get_Attendees : Proc(IRDPSRAPIViewer*, Void**, Win32cr::Foundation::HRESULT),
     get_Invitations : Proc(IRDPSRAPIViewer*, Void**, Win32cr::Foundation::HRESULT),
     get_ApplicationFilter : Proc(IRDPSRAPIViewer*, Void**, Win32cr::Foundation::HRESULT),
     get_VirtualChannelManager : Proc(IRDPSRAPIViewer*, Void**, Win32cr::Foundation::HRESULT),
-    put_SmartSizing : Proc(IRDPSRAPIViewer*, Int16, Win32cr::Foundation::HRESULT),
-    get_SmartSizing : Proc(IRDPSRAPIViewer*, Int16*, Win32cr::Foundation::HRESULT),
+    put_SmartSizing : Proc(IRDPSRAPIViewer*, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
+    get_SmartSizing : Proc(IRDPSRAPIViewer*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     request_control : Proc(IRDPSRAPIViewer*, Win32cr::System::DesktopSharing::CTRL_LEVEL, Win32cr::Foundation::HRESULT),
     put_DisconnectedText : Proc(IRDPSRAPIViewer*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_DisconnectedText : Proc(IRDPSRAPIViewer*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1192,7 +1213,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPIViewer, lpVtbl : IRDPSRAPIViewerVtbl* do
+  record IRDPSRAPIViewer, lpVtbl : IRDPSRAPIViewerVtable* do
     GUID = LibC::GUID.new(0xc6bfcd38_u32, 0x8ce9_u16, 0x404d_u16, StaticArray[0x8a_u8, 0xe8_u8, 0xf3_u8, 0x1d_u8, 0x0_u8, 0xc6_u8, 0x5c_u8, 0xb5_u8])
     def query_interface(this : IRDPSRAPIViewer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1212,8 +1233,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIViewer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIViewer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIViewer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def connect(this : IRDPSRAPIViewer*, bstrConnectionString : Win32cr::Foundation::BSTR, bstrName : Win32cr::Foundation::BSTR, bstrPassword : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.connect.call(this, bstrConnectionString, bstrName, bstrPassword)
@@ -1233,10 +1254,10 @@ module Win32cr::System::DesktopSharing
     def get_VirtualChannelManager(this : IRDPSRAPIViewer*, ppVal : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_VirtualChannelManager.call(this, ppVal)
     end
-    def put_SmartSizing(this : IRDPSRAPIViewer*, vbSmartSizing : Int16) : Win32cr::Foundation::HRESULT
+    def put_SmartSizing(this : IRDPSRAPIViewer*, vbSmartSizing : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SmartSizing.call(this, vbSmartSizing)
     end
-    def get_SmartSizing(this : IRDPSRAPIViewer*, pvbSmartSizing : Int16*) : Win32cr::Foundation::HRESULT
+    def get_SmartSizing(this : IRDPSRAPIViewer*, pvbSmartSizing : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SmartSizing.call(this, pvbSmartSizing)
     end
     def request_control(this : IRDPSRAPIViewer*, ctrl_level : Win32cr::System::DesktopSharing::CTRL_LEVEL) : Win32cr::Foundation::HRESULT
@@ -1261,14 +1282,15 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPViewerInputSinkVtbl,
+
+  record IRDPViewerInputSinkVtable,
     query_interface : Proc(IRDPViewerInputSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPViewerInputSink*, UInt32),
     release : Proc(IRDPViewerInputSink*, UInt32),
-    send_mouse_button_event : Proc(IRDPViewerInputSink*, Win32cr::System::DesktopSharing::RDPSRAPI_MOUSE_BUTTON_TYPE, Int16, UInt32, UInt32, Win32cr::Foundation::HRESULT),
+    send_mouse_button_event : Proc(IRDPViewerInputSink*, Win32cr::System::DesktopSharing::RDPSRAPI_MOUSE_BUTTON_TYPE, Win32cr::Foundation::VARIANT_BOOL, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     send_mouse_move_event : Proc(IRDPViewerInputSink*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     send_mouse_wheel_event : Proc(IRDPViewerInputSink*, UInt16, Win32cr::Foundation::HRESULT),
-    send_keyboard_event : Proc(IRDPViewerInputSink*, Win32cr::System::DesktopSharing::RDPSRAPI_KBD_CODE_TYPE, UInt16, Int16, Int16, Int16, Win32cr::Foundation::HRESULT),
+    send_keyboard_event : Proc(IRDPViewerInputSink*, Win32cr::System::DesktopSharing::RDPSRAPI_KBD_CODE_TYPE, UInt16, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     send_sync_event : Proc(IRDPViewerInputSink*, UInt32, Win32cr::Foundation::HRESULT),
     begin_touch_frame : Proc(IRDPViewerInputSink*, Win32cr::Foundation::HRESULT),
     add_touch_input : Proc(IRDPViewerInputSink*, UInt32, UInt32, Int32, Int32, Win32cr::Foundation::HRESULT),
@@ -1276,7 +1298,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPViewerInputSink, lpVtbl : IRDPViewerInputSinkVtbl* do
+  record IRDPViewerInputSink, lpVtbl : IRDPViewerInputSinkVtable* do
     GUID = LibC::GUID.new(0xbb590853_u32, 0xa6c5_u16, 0x4a7b_u16, StaticArray[0x8d_u8, 0xd4_u8, 0x76_u8, 0xb6_u8, 0x9e_u8, 0xea_u8, 0x12_u8, 0xd5_u8])
     def query_interface(this : IRDPViewerInputSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1287,7 +1309,7 @@ module Win32cr::System::DesktopSharing
     def release(this : IRDPViewerInputSink*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def send_mouse_button_event(this : IRDPViewerInputSink*, buttonType : Win32cr::System::DesktopSharing::RDPSRAPI_MOUSE_BUTTON_TYPE, vbButtonDown : Int16, xPos : UInt32, yPos : UInt32) : Win32cr::Foundation::HRESULT
+    def send_mouse_button_event(this : IRDPViewerInputSink*, buttonType : Win32cr::System::DesktopSharing::RDPSRAPI_MOUSE_BUTTON_TYPE, vbButtonDown : Win32cr::Foundation::VARIANT_BOOL, xPos : UInt32, yPos : UInt32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send_mouse_button_event.call(this, buttonType, vbButtonDown, xPos, yPos)
     end
     def send_mouse_move_event(this : IRDPViewerInputSink*, xPos : UInt32, yPos : UInt32) : Win32cr::Foundation::HRESULT
@@ -1296,7 +1318,7 @@ module Win32cr::System::DesktopSharing
     def send_mouse_wheel_event(this : IRDPViewerInputSink*, wheelRotation : UInt16) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send_mouse_wheel_event.call(this, wheelRotation)
     end
-    def send_keyboard_event(this : IRDPViewerInputSink*, codeType : Win32cr::System::DesktopSharing::RDPSRAPI_KBD_CODE_TYPE, keycode : UInt16, vbKeyUp : Int16, vbRepeat : Int16, vbExtended : Int16) : Win32cr::Foundation::HRESULT
+    def send_keyboard_event(this : IRDPViewerInputSink*, codeType : Win32cr::System::DesktopSharing::RDPSRAPI_KBD_CODE_TYPE, keycode : UInt16, vbKeyUp : Win32cr::Foundation::VARIANT_BOOL, vbRepeat : Win32cr::Foundation::VARIANT_BOOL, vbExtended : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send_keyboard_event.call(this, codeType, keycode, vbKeyUp, vbRepeat, vbExtended)
     end
     def send_sync_event(this : IRDPViewerInputSink*, syncFlags : UInt32) : Win32cr::Foundation::HRESULT
@@ -1315,14 +1337,15 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPIFrameBufferVtbl,
+
+  record IRDPSRAPIFrameBufferVtable,
     query_interface : Proc(IRDPSRAPIFrameBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPIFrameBuffer*, UInt32),
     release : Proc(IRDPSRAPIFrameBuffer*, UInt32),
     get_type_info_count : Proc(IRDPSRAPIFrameBuffer*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPIFrameBuffer*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPIFrameBuffer*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPIFrameBuffer*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPIFrameBuffer*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Width : Proc(IRDPSRAPIFrameBuffer*, Int32*, Win32cr::Foundation::HRESULT),
     get_Height : Proc(IRDPSRAPIFrameBuffer*, Int32*, Win32cr::Foundation::HRESULT),
     get_Bpp : Proc(IRDPSRAPIFrameBuffer*, Int32*, Win32cr::Foundation::HRESULT),
@@ -1330,7 +1353,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPIFrameBuffer, lpVtbl : IRDPSRAPIFrameBufferVtbl* do
+  record IRDPSRAPIFrameBuffer, lpVtbl : IRDPSRAPIFrameBufferVtable* do
     GUID = LibC::GUID.new(0x3d67e7d2_u32, 0xb27b_u16, 0x448e_u16, StaticArray[0x81_u8, 0xb3_u8, 0xc6_u8, 0x11_u8, 0xe_u8, 0xd8_u8, 0xb4_u8, 0xbe_u8])
     def query_interface(this : IRDPSRAPIFrameBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1350,8 +1373,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPIFrameBuffer*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPIFrameBuffer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPIFrameBuffer*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Width(this : IRDPSRAPIFrameBuffer*, plWidth : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Width.call(this, plWidth)
@@ -1369,7 +1392,8 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPITransportStreamBufferVtbl,
+
+  record IRDPSRAPITransportStreamBufferVtable,
     query_interface : Proc(IRDPSRAPITransportStreamBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPITransportStreamBuffer*, UInt32),
     release : Proc(IRDPSRAPITransportStreamBuffer*, UInt32),
@@ -1386,7 +1410,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPITransportStreamBuffer, lpVtbl : IRDPSRAPITransportStreamBufferVtbl* do
+  record IRDPSRAPITransportStreamBuffer, lpVtbl : IRDPSRAPITransportStreamBufferVtable* do
     GUID = LibC::GUID.new(0x81c80290_u32, 0x5085_u16, 0x44b0_u16, StaticArray[0xb4_u8, 0x60_u8, 0xf8_u8, 0x65_u8, 0xc3_u8, 0x9c_u8, 0xb4_u8, 0xa9_u8])
     def query_interface(this : IRDPSRAPITransportStreamBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1431,7 +1455,8 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPITransportStreamEventsVtbl,
+
+  record IRDPSRAPITransportStreamEventsVtable,
     query_interface : Proc(IRDPSRAPITransportStreamEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPITransportStreamEvents*, UInt32),
     release : Proc(IRDPSRAPITransportStreamEvents*, UInt32),
@@ -1441,7 +1466,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPITransportStreamEvents, lpVtbl : IRDPSRAPITransportStreamEventsVtbl* do
+  record IRDPSRAPITransportStreamEvents, lpVtbl : IRDPSRAPITransportStreamEventsVtable* do
     GUID = LibC::GUID.new(0xea81c254_u32, 0xf5af_u16, 0x4e40_u16, StaticArray[0x98_u8, 0x2e_u8, 0x3e_u8, 0x63_u8, 0xbb_u8, 0x59_u8, 0x52_u8, 0x76_u8])
     def query_interface(this : IRDPSRAPITransportStreamEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1465,7 +1490,8 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPITransportStreamVtbl,
+
+  record IRDPSRAPITransportStreamVtable,
     query_interface : Proc(IRDPSRAPITransportStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPITransportStream*, UInt32),
     release : Proc(IRDPSRAPITransportStream*, UInt32),
@@ -1478,7 +1504,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPITransportStream, lpVtbl : IRDPSRAPITransportStreamVtbl* do
+  record IRDPSRAPITransportStream, lpVtbl : IRDPSRAPITransportStreamVtable* do
     GUID = LibC::GUID.new(0x36cfa065_u32, 0x43bb_u16, 0x4ef7_u16, StaticArray[0xae_u8, 0xd7_u8, 0x9b_u8, 0x88_u8, 0xa5_u8, 0x5_u8, 0x30_u8, 0x36_u8])
     def query_interface(this : IRDPSRAPITransportStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1511,14 +1537,15 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPISharingSessionVtbl,
+
+  record IRDPSRAPISharingSessionVtable,
     query_interface : Proc(IRDPSRAPISharingSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPISharingSession*, UInt32),
     release : Proc(IRDPSRAPISharingSession*, UInt32),
     get_type_info_count : Proc(IRDPSRAPISharingSession*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPISharingSession*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPISharingSession*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPISharingSession*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPISharingSession*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open : Proc(IRDPSRAPISharingSession*, Win32cr::Foundation::HRESULT),
     close : Proc(IRDPSRAPISharingSession*, Win32cr::Foundation::HRESULT),
     put_ColorDepth : Proc(IRDPSRAPISharingSession*, Int32, Win32cr::Foundation::HRESULT),
@@ -1536,7 +1563,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPISharingSession, lpVtbl : IRDPSRAPISharingSessionVtbl* do
+  record IRDPSRAPISharingSession, lpVtbl : IRDPSRAPISharingSessionVtable* do
     GUID = LibC::GUID.new(0xeeb20886_u32, 0xe470_u16, 0x4cf6_u16, StaticArray[0x84_u8, 0x2b_u8, 0x27_u8, 0x39_u8, 0xc0_u8, 0xec_u8, 0x5c_u8, 0xfb_u8])
     def query_interface(this : IRDPSRAPISharingSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1556,8 +1583,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPISharingSession*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPISharingSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPISharingSession*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open(this : IRDPSRAPISharingSession*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this)
@@ -1605,14 +1632,15 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSRAPISharingSession2Vtbl,
+
+  record IRDPSRAPISharingSession2Vtable,
     query_interface : Proc(IRDPSRAPISharingSession2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSRAPISharingSession2*, UInt32),
     release : Proc(IRDPSRAPISharingSession2*, UInt32),
     get_type_info_count : Proc(IRDPSRAPISharingSession2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSRAPISharingSession2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSRAPISharingSession2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSRAPISharingSession2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IRDPSRAPISharingSession2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open : Proc(IRDPSRAPISharingSession2*, Win32cr::Foundation::HRESULT),
     close : Proc(IRDPSRAPISharingSession2*, Win32cr::Foundation::HRESULT),
     put_ColorDepth : Proc(IRDPSRAPISharingSession2*, Int32, Win32cr::Foundation::HRESULT),
@@ -1633,7 +1661,7 @@ module Win32cr::System::DesktopSharing
 
 
   @[Extern]
-  record IRDPSRAPISharingSession2, lpVtbl : IRDPSRAPISharingSession2Vtbl* do
+  record IRDPSRAPISharingSession2, lpVtbl : IRDPSRAPISharingSession2Vtable* do
     GUID = LibC::GUID.new(0xfee4ee57_u32, 0xe3e8_u16, 0x4205_u16, StaticArray[0x8f_u8, 0xb0_u8, 0x8f_u8, 0xd1_u8, 0xd0_u8, 0x67_u8, 0x5c_u8, 0x21_u8])
     def query_interface(this : IRDPSRAPISharingSession2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1653,8 +1681,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSRAPISharingSession2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSRAPISharingSession2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSRAPISharingSession2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open(this : IRDPSRAPISharingSession2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this)
@@ -1711,18 +1739,19 @@ module Win32cr::System::DesktopSharing
   end
 
   @[Extern]
-  record IRDPSessionEvents_Vtbl,
+
+  record IRDPSessionEvents_Vtable,
     query_interface : Proc(IRDPSessionEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRDPSessionEvents_*, UInt32),
     release : Proc(IRDPSessionEvents_*, UInt32),
     get_type_info_count : Proc(IRDPSessionEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IRDPSessionEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IRDPSessionEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IRDPSessionEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IRDPSessionEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRDPSessionEvents_, lpVtbl : IRDPSessionEvents_Vtbl* do
+  record IRDPSessionEvents_, lpVtbl : IRDPSessionEvents_Vtable* do
     GUID = LibC::GUID.new(0x98a97042_u32, 0x6698_u16, 0x40e9_u16, StaticArray[0x8e_u8, 0xfd_u8, 0xb3_u8, 0x20_u8, 0x9_u8, 0x90_u8, 0x0_u8, 0x4b_u8])
     def query_interface(this : IRDPSessionEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1742,8 +1771,8 @@ module Win32cr::System::DesktopSharing
     def get_i_ds_of_names(this : IRDPSessionEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IRDPSessionEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IRDPSessionEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end

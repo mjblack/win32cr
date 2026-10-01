@@ -7,6 +7,7 @@ module Win32cr::System::Diagnostics::Etw
   extend self
   alias TDH_HANDLE = LibC::IntPtrT
   alias PROCESSTRACE_HANDLE = UInt64
+  alias REGHANDLE = Int64
   alias CONTROLTRACE_HANDLE = UInt64
   alias RELOGSTREAM_HANDLE = UInt64
   alias PEVENT_TRACE_BUFFER_CALLBACKW = Proc(Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEW*, UInt32)
@@ -17,23 +18,27 @@ module Win32cr::System::Diagnostics::Etw
 
   alias PEVENT_RECORD_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, Void)
 
+  alias PETW_BUFFER_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::ETW_BUFFER_HEADER*, UInt32, Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CALLBACK_INFORMATION*, Void*, Win32cr::Foundation::BOOL)
+
+  alias PETW_BUFFER_COMPLETION_CALLBACK = Proc(Win32cr::System::Diagnostics::Etw::ETW_BUFFER_HEADER*, Void*, Void)
+
   alias WMIDPREQUEST = Proc(Win32cr::System::Diagnostics::Etw::WMIDPREQUESTCODE, Void*, UInt32*, Void*, UInt32)
 
   alias PENABLECALLBACK = Proc(LibC::GUID*, Win32cr::System::Diagnostics::Etw::ENABLECALLBACK_ENABLED_STATE, UInt8, UInt64, UInt64, Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*, Void*, Void)
 
-  ALPCGuid = "45d8cccd-539f-4b72-a8b7-5c683142609a"
-  DiskIoGuid = "3d6fa8d4-fe05-11d0-9dda-00c04fd7ba7c"
-  EventTraceConfigGuid = "01853a65-418f-4f36-aefc-dc0f1d2fd235"
-  FileIoGuid = "90cbdc39-4a3e-11d1-84f4-0000f80464e3"
-  ImageLoadGuid = "2cb15d1d-5fc1-11d2-abe1-00a0c911f518"
-  PageFaultGuid = "3d6fa8d3-fe05-11d0-9dda-00c04fd7ba7c"
-  PerfInfoGuid = "ce1dbfb4-137e-4da6-87b0-3f59aa102cbc"
-  ProcessGuid = "3d6fa8d0-fe05-11d0-9dda-00c04fd7ba7c"
-  RegistryGuid = "ae53722e-c863-11d2-8659-00c04fa321a1"
-  SplitIoGuid = "d837ca92-12b9-44a5-ad6a-3a65b3578aa8"
-  TcpIpGuid = "9a280ac0-c8e0-11d1-84e2-00c04fb998a2"
-  ThreadGuid = "3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c"
-  UdpIpGuid = "bf3a50c5-a9c9-4988-a005-2df0b7c80f80"
+  ALPCGuid = LibC::GUID.new(0x45d8cccd_u32, 0x539f_u16, 0x4b72_u16, StaticArray[0xa8_u8, 0xb7_u8, 0x5c_u8, 0x68_u8, 0x31_u8, 0x42_u8, 0x60_u8, 0x9a_u8])
+  DiskIoGuid = LibC::GUID.new(0x3d6fa8d4_u32, 0xfe05_u16, 0x11d0_u16, StaticArray[0x9d_u8, 0xda_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xba_u8, 0x7c_u8])
+  EventTraceConfigGuid = LibC::GUID.new(0x1853a65_u32, 0x418f_u16, 0x4f36_u16, StaticArray[0xae_u8, 0xfc_u8, 0xdc_u8, 0xf_u8, 0x1d_u8, 0x2f_u8, 0xd2_u8, 0x35_u8])
+  FileIoGuid = LibC::GUID.new(0x90cbdc39_u32, 0x4a3e_u16, 0x11d1_u16, StaticArray[0x84_u8, 0xf4_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x4_u8, 0x64_u8, 0xe3_u8])
+  ImageLoadGuid = LibC::GUID.new(0x2cb15d1d_u32, 0x5fc1_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xf5_u8, 0x18_u8])
+  PageFaultGuid = LibC::GUID.new(0x3d6fa8d3_u32, 0xfe05_u16, 0x11d0_u16, StaticArray[0x9d_u8, 0xda_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xba_u8, 0x7c_u8])
+  PerfInfoGuid = LibC::GUID.new(0xce1dbfb4_u32, 0x137e_u16, 0x4da6_u16, StaticArray[0x87_u8, 0xb0_u8, 0x3f_u8, 0x59_u8, 0xaa_u8, 0x10_u8, 0x2c_u8, 0xbc_u8])
+  ProcessGuid = LibC::GUID.new(0x3d6fa8d0_u32, 0xfe05_u16, 0x11d0_u16, StaticArray[0x9d_u8, 0xda_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xba_u8, 0x7c_u8])
+  RegistryGuid = LibC::GUID.new(0xae53722e_u32, 0xc863_u16, 0x11d2_u16, StaticArray[0x86_u8, 0x59_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x21_u8, 0xa1_u8])
+  SplitIoGuid = LibC::GUID.new(0xd837ca92_u32, 0x12b9_u16, 0x44a5_u16, StaticArray[0xad_u8, 0x6a_u8, 0x3a_u8, 0x65_u8, 0xb3_u8, 0x57_u8, 0x8a_u8, 0xa8_u8])
+  TcpIpGuid = LibC::GUID.new(0x9a280ac0_u32, 0xc8e0_u16, 0x11d1_u16, StaticArray[0x84_u8, 0xe2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x98_u8, 0xa2_u8])
+  ThreadGuid = LibC::GUID.new(0x3d6fa8d1_u32, 0xfe05_u16, 0x11d0_u16, StaticArray[0x9d_u8, 0xda_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xba_u8, 0x7c_u8])
+  UdpIpGuid = LibC::GUID.new(0xbf3a50c5_u32, 0xa9c9_u16, 0x4988_u16, StaticArray[0xa0_u8, 0x5_u8, 0x2d_u8, 0xf0_u8, 0xb7_u8, 0xc8_u8, 0xf_u8, 0x80_u8])
   WNODE_FLAG_ALL_DATA = 1_u32
   WNODE_FLAG_SINGLE_INSTANCE = 2_u32
   WNODE_FLAG_SINGLE_ITEM = 4_u32
@@ -87,27 +92,28 @@ module Win32cr::System::Diagnostics::Etw
   TRACELOG_JOIN_GROUP = 4096_u32
   WMI_GLOBAL_LOGGER_ID = 1_u32
   MAX_PAYLOAD_PREDICATES = 8_u32
-  EventTraceGuid = "68fdd900-4a3e-11d1-84f4-0000f80464e3"
-  SystemTraceControlGuid = "9e814aad-3204-11d2-9a82-006008a86939"
-  DefaultTraceSecurityGuid = "0811c1af-7a07-4a06-82ed-869455cdf713"
-  PrivateLoggerNotificationGuid = "3595ab5c-042a-4c8e-b942-2d059bfeb1b1"
-  SystemIoFilterProviderGuid = "fbd09363-9e22-4661-b8bf-e7a34b535b8c"
-  SystemObjectProviderGuid = "febd7460-3d1d-47eb-af49-c9eeb1e146f2"
-  SystemPowerProviderGuid = "c134884a-32d5-4488-80e5-14ed7abb8269"
-  SystemHypervisorProviderGuid = "bafa072a-918a-4bed-b622-bc152097098f"
-  SystemLockProviderGuid = "721ddfd3-dacc-4e1e-b26a-a2cb31d4705a"
-  SystemConfigProviderGuid = "fef3a8b6-318d-4b67-a96a-3b0f6b8f18fe"
-  SystemCpuProviderGuid = "c6c5265f-eae8-4650-aae4-9d48603d8510"
-  SystemSchedulerProviderGuid = "599a2a76-4d91-4910-9ac7-7d33f2e97a6c"
-  SystemProfileProviderGuid = "bfeb0324-1cee-496f-a409-2ac2b48a6322"
-  SystemIoProviderGuid = "3d5c43e3-0f1c-4202-b817-174c0070dc79"
-  SystemMemoryProviderGuid = "82958ca9-b6cd-47f8-a3a8-03ae85a4bc24"
-  SystemRegistryProviderGuid = "16156bd9-fab4-4cfa-a232-89d1099058e3"
-  SystemProcessProviderGuid = "151f55dc-467d-471f-83b5-5f889d46ff66"
-  SystemAlpcProviderGuid = "fcb9baaf-e529-4980-92e9-ced1a6aadfdf"
-  SystemSyscallProviderGuid = "434286f7-6f1b-45bb-b37e-95f623046c7c"
-  SystemInterruptProviderGuid = "d4bbee17-b545-4888-858b-744169015b25"
-  SystemTimerProviderGuid = "4f061568-e215-499f-ab2e-eda0ae890a5b"
+  EventTraceGuid = LibC::GUID.new(0x68fdd900_u32, 0x4a3e_u16, 0x11d1_u16, StaticArray[0x84_u8, 0xf4_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x4_u8, 0x64_u8, 0xe3_u8])
+  SystemTraceControlGuid = LibC::GUID.new(0x9e814aad_u32, 0x3204_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x82_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xa8_u8, 0x69_u8, 0x39_u8])
+  DefaultTraceSecurityGuid = LibC::GUID.new(0x811c1af_u32, 0x7a07_u16, 0x4a06_u16, StaticArray[0x82_u8, 0xed_u8, 0x86_u8, 0x94_u8, 0x55_u8, 0xcd_u8, 0xf7_u8, 0x13_u8])
+  PrivateLoggerNotificationGuid = LibC::GUID.new(0x3595ab5c_u32, 0x42a_u16, 0x4c8e_u16, StaticArray[0xb9_u8, 0x42_u8, 0x2d_u8, 0x5_u8, 0x9b_u8, 0xfe_u8, 0xb1_u8, 0xb1_u8])
+  SystemIoFilterProviderGuid = LibC::GUID.new(0xfbd09363_u32, 0x9e22_u16, 0x4661_u16, StaticArray[0xb8_u8, 0xbf_u8, 0xe7_u8, 0xa3_u8, 0x4b_u8, 0x53_u8, 0x5b_u8, 0x8c_u8])
+  SystemObjectProviderGuid = LibC::GUID.new(0xfebd7460_u32, 0x3d1d_u16, 0x47eb_u16, StaticArray[0xaf_u8, 0x49_u8, 0xc9_u8, 0xee_u8, 0xb1_u8, 0xe1_u8, 0x46_u8, 0xf2_u8])
+  SystemPowerProviderGuid = LibC::GUID.new(0xc134884a_u32, 0x32d5_u16, 0x4488_u16, StaticArray[0x80_u8, 0xe5_u8, 0x14_u8, 0xed_u8, 0x7a_u8, 0xbb_u8, 0x82_u8, 0x69_u8])
+  SystemHypervisorProviderGuid = LibC::GUID.new(0xbafa072a_u32, 0x918a_u16, 0x4bed_u16, StaticArray[0xb6_u8, 0x22_u8, 0xbc_u8, 0x15_u8, 0x20_u8, 0x97_u8, 0x9_u8, 0x8f_u8])
+  SystemLockProviderGuid = LibC::GUID.new(0x721ddfd3_u32, 0xdacc_u16, 0x4e1e_u16, StaticArray[0xb2_u8, 0x6a_u8, 0xa2_u8, 0xcb_u8, 0x31_u8, 0xd4_u8, 0x70_u8, 0x5a_u8])
+  SystemConfigProviderGuid = LibC::GUID.new(0xfef3a8b6_u32, 0x318d_u16, 0x4b67_u16, StaticArray[0xa9_u8, 0x6a_u8, 0x3b_u8, 0xf_u8, 0x6b_u8, 0x8f_u8, 0x18_u8, 0xfe_u8])
+  SystemCpuProviderGuid = LibC::GUID.new(0xc6c5265f_u32, 0xeae8_u16, 0x4650_u16, StaticArray[0xaa_u8, 0xe4_u8, 0x9d_u8, 0x48_u8, 0x60_u8, 0x3d_u8, 0x85_u8, 0x10_u8])
+  SystemSchedulerProviderGuid = LibC::GUID.new(0x599a2a76_u32, 0x4d91_u16, 0x4910_u16, StaticArray[0x9a_u8, 0xc7_u8, 0x7d_u8, 0x33_u8, 0xf2_u8, 0xe9_u8, 0x7a_u8, 0x6c_u8])
+  SystemProfileProviderGuid = LibC::GUID.new(0xbfeb0324_u32, 0x1cee_u16, 0x496f_u16, StaticArray[0xa4_u8, 0x9_u8, 0x2a_u8, 0xc2_u8, 0xb4_u8, 0x8a_u8, 0x63_u8, 0x22_u8])
+  SystemIoProviderGuid = LibC::GUID.new(0x3d5c43e3_u32, 0xf1c_u16, 0x4202_u16, StaticArray[0xb8_u8, 0x17_u8, 0x17_u8, 0x4c_u8, 0x0_u8, 0x70_u8, 0xdc_u8, 0x79_u8])
+  SystemMemoryProviderGuid = LibC::GUID.new(0x82958ca9_u32, 0xb6cd_u16, 0x47f8_u16, StaticArray[0xa3_u8, 0xa8_u8, 0x3_u8, 0xae_u8, 0x85_u8, 0xa4_u8, 0xbc_u8, 0x24_u8])
+  SystemRegistryProviderGuid = LibC::GUID.new(0x16156bd9_u32, 0xfab4_u16, 0x4cfa_u16, StaticArray[0xa2_u8, 0x32_u8, 0x89_u8, 0xd1_u8, 0x9_u8, 0x90_u8, 0x58_u8, 0xe3_u8])
+  SystemProcessProviderGuid = LibC::GUID.new(0x151f55dc_u32, 0x467d_u16, 0x471f_u16, StaticArray[0x83_u8, 0xb5_u8, 0x5f_u8, 0x88_u8, 0x9d_u8, 0x46_u8, 0xff_u8, 0x66_u8])
+  SystemAlpcProviderGuid = LibC::GUID.new(0xfcb9baaf_u32, 0xe529_u16, 0x4980_u16, StaticArray[0x92_u8, 0xe9_u8, 0xce_u8, 0xd1_u8, 0xa6_u8, 0xaa_u8, 0xdf_u8, 0xdf_u8])
+  SystemSyscallProviderGuid = LibC::GUID.new(0x434286f7_u32, 0x6f1b_u16, 0x45bb_u16, StaticArray[0xb3_u8, 0x7e_u8, 0x95_u8, 0xf6_u8, 0x23_u8, 0x4_u8, 0x6c_u8, 0x7c_u8])
+  SystemInterruptProviderGuid = LibC::GUID.new(0xd4bbee17_u32, 0xb545_u16, 0x4888_u16, StaticArray[0x85_u8, 0x8b_u8, 0x74_u8, 0x41_u8, 0x69_u8, 0x1_u8, 0x5b_u8, 0x25_u8])
+  SystemTimerProviderGuid = LibC::GUID.new(0x4f061568_u32, 0xe215_u16, 0x499f_u16, StaticArray[0xab_u8, 0x2e_u8, 0xed_u8, 0xa0_u8, 0xae_u8, 0x89_u8, 0xa_u8, 0x5b_u8])
+  LastBranchRecordProviderGuid = LibC::GUID.new(0x99134383_u32, 0x5248_u16, 0x43fc_u16, StaticArray[0x83_u8, 0x4b_u8, 0x52_u8, 0x94_u8, 0x54_u8, 0xe7_u8, 0x5d_u8, 0xf3_u8])
   KERNEL_LOGGER_NAMEW = "NT Kernel Logger"
   GLOBAL_LOGGER_NAMEW = "GlobalLogger"
   EVENT_LOGGER_NAMEW = "EventLog"
@@ -209,6 +215,7 @@ module Win32cr::System::Diagnostics::Etw
   EVENT_TRACE_TYPE_CONFIG_POWER = 16_u32
   EVENT_TRACE_TYPE_CONFIG_NETINFO = 17_u32
   EVENT_TRACE_TYPE_CONFIG_OPTICALMEDIA = 18_u32
+  EVENT_TRACE_TYPE_CONFIG_PHYSICALDISK_EX = 19_u32
   EVENT_TRACE_TYPE_CONFIG_IRQ = 21_u32
   EVENT_TRACE_TYPE_CONFIG_PNP = 22_u32
   EVENT_TRACE_TYPE_CONFIG_IDECHANNEL = 23_u32
@@ -293,6 +300,7 @@ module Win32cr::System::Diagnostics::Etw
   SYSTEM_CPU_KW_CONFIG = 1_u64
   SYSTEM_CPU_KW_CACHE_FLUSH = 2_u64
   SYSTEM_CPU_KW_SPEC_CONTROL = 4_u64
+  SYSTEM_CPU_KW_DOMAIN_CHANGE = 8_u64
   SYSTEM_HYPERVISOR_KW_PROFILE = 1_u64
   SYSTEM_HYPERVISOR_KW_CALLOUTS = 2_u64
   SYSTEM_HYPERVISOR_KW_VTL_CHANGE = 4_u64
@@ -313,6 +321,8 @@ module Win32cr::System::Diagnostics::Etw
   SYSTEM_IO_KW_DRIVERS = 128_u64
   SYSTEM_IO_KW_CC = 256_u64
   SYSTEM_IO_KW_NETWORK = 512_u64
+  SYSTEM_IO_KW_FILE_INIT = 1024_u64
+  SYSTEM_IO_KW_TIMER = 2048_u64
   SYSTEM_IOFILTER_KW_GENERAL = 1_u64
   SYSTEM_IOFILTER_KW_INIT = 2_u64
   SYSTEM_IOFILTER_KW_FASTIO = 4_u64
@@ -372,10 +382,17 @@ module Win32cr::System::Diagnostics::Etw
   SYSTEM_SCHEDULER_KW_IDEAL_PROCESSOR = 256_u64
   SYSTEM_SCHEDULER_KW_CONTEXT_SWITCH = 512_u64
   SYSTEM_SCHEDULER_KW_COMPACT_CSWITCH = 1024_u64
+  SYSTEM_SCHEDULER_KW_SCHEDULE_THREAD = 2048_u64
+  SYSTEM_SCHEDULER_KW_READY_QUEUE = 4096_u64
+  SYSTEM_SCHEDULER_KW_CPU_PARTITION = 8192_u64
+  SYSTEM_SCHEDULER_KW_THREAD_FEEDBACK_READ = 16384_u64
+  SYSTEM_SCHEDULER_KW_WORKLOAD_CLASS_UPDATE = 32768_u64
+  SYSTEM_SCHEDULER_KW_AUTOBOOST = 65536_u64
   SYSTEM_SYSCALL_KW_GENERAL = 1_u64
   SYSTEM_TIMER_KW_GENERAL = 1_u64
   SYSTEM_TIMER_KW_CLOCK_TIMER = 2_u64
   SYSTEM_MEMORY_POOL_FILTER_ID = 1_u32
+  Typedef_tracelogger_handle_ = 1_u32
   ETW_NULL_TYPE_VALUE = 0_u32
   ETW_OBJECT_TYPE_VALUE = 1_u32
   ETW_STRING_TYPE_VALUE = 2_u32
@@ -414,6 +431,8 @@ module Win32cr::System::Diagnostics::Etw
   ETW_REFRENCE_TYPE_VALUE = 120_u32
   TRACE_PROVIDER_FLAG_LEGACY = 1_u32
   TRACE_PROVIDER_FLAG_PRE_ENABLE = 2_u32
+  TRACE_LBR_EVENT_OPCODE = 32_u32
+  TRACE_LBR_MAXIMUM_EVENTS = 4_u32
   KERNEL_LOGGER_NAME = "NT Kernel Logger"
   GLOBAL_LOGGER_NAME = "GlobalLogger"
   EVENT_LOGGER_NAME = "EventLog"
@@ -502,7 +521,7 @@ module Win32cr::System::Diagnostics::Etw
   PROCESS_TRACE_MODE_REAL_TIME = 256_u32
   PROCESS_TRACE_MODE_RAW_TIMESTAMP = 4096_u32
   PROCESS_TRACE_MODE_EVENT_RECORD = 268435456_u32
-  CLSID_TraceRelogger = "7b40792d-05ff-44c4-9058-f440c71f17d4"
+  CLSID_TraceRelogger = LibC::GUID.new(0x7b40792d_u32, 0x5ff_u16, 0x44c4_u16, StaticArray[0x90_u8, 0x58_u8, 0xf4_u8, 0x40_u8, 0xc7_u8, 0x1f_u8, 0x17_u8, 0xd4_u8])
 
   CLSID_CTraceRelogger = LibC::GUID.new(0x7b40792d_u32, 0x5ff_u16, 0x44c4_u16, StaticArray[0x90_u8, 0x58_u8, 0xf4_u8, 0x40_u8, 0xc7_u8, 0x1f_u8, 0x17_u8, 0xd4_u8])
 
@@ -579,6 +598,31 @@ module Win32cr::System::Diagnostics::Etw
     EtwPmcOwnerTagged = 2_i32
     EtwPmcOwnerTaggedWithSource = 3_i32
   end
+  @[Flags]
+  enum ETW_CONTEXT_REGISTER_TYPES
+    EtwContextRegisterTypeNone = 0_i32
+    EtwContextRegisterTypeControl = 1_i32
+    EtwContextRegisterTypeInteger = 2_i32
+  end
+  @[Flags]
+  enum TRACE_LBR_CONFIGURATION
+    TRACE_LBR_CONFIGURATION_NONE = 0_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_KERNEL = 1_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_USER = 2_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_JCC = 4_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_REL_CALL = 8_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_IND_CALL = 16_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_RET = 32_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_IND_JMP = 64_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_NEAR_REL_JMP = 128_i32
+    TRACE_LBR_CONFIGURATION_EXCLUDE_FAR_BRANCH = 256_i32
+    TRACE_LBR_CONFIGURATION_CALLSTACK_ENABLE = 512_i32
+    TRACE_LBR_CONFIGURATION_SAMPLED = 1024_i32
+  end
+  enum ETW_PROCESS_TRACE_MODES
+    ETW_PROCESS_TRACE_MODE_NONE = 0_i32
+    ETW_PROCESS_TRACE_MODE_RAW_TIMESTAMP = 1_i32
+  end
   enum TRACE_QUERY_INFO_CLASS
     TraceGuidQueryList = 0_i32
     TraceGuidQueryInfo = 1_i32
@@ -607,13 +651,16 @@ module Win32cr::System::Diagnostics::Etw
     TraceStackCachingInfo = 24_i32
     TracePmcCounterOwners = 25_i32
     TraceUnifiedStackCachingInfo = 26_i32
-    MaxTraceSetInfoClass = 27_i32
+    TracePmcSessionInformation = 27_i32
+    TraceContextRegisterInfo = 28_i32
+    MaxTraceSetInfoClass = 29_i32
   end
   enum ETW_PROCESS_HANDLE_INFO_TYPE
     EtwQueryPartitionInformation = 1_i32
     EtwQueryPartitionInformationV2 = 2_i32
     EtwQueryLastDroppedTimes = 3_i32
-    EtwQueryProcessHandleInfoMax = 4_i32
+    EtwQueryLogFileHeader = 4_i32
+    EtwQueryProcessHandleInfoMax = 5_i32
   end
   enum EVENT_INFO_CLASS
     EventProviderBinaryTrackInfo = 0_i32
@@ -794,17 +841,6 @@ module Win32cr::System::Diagnostics::Etw
     property client_context : UInt32
     property flags : UInt32
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property count_lost : UInt32
-    property kernel_handle : Win32cr::Foundation::HANDLE
-    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@count_lost : UInt32, @kernel_handle : Win32cr::Foundation::HANDLE, @time_stamp : Win32cr::Foundation::LARGE_INTEGER)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
@@ -821,6 +857,17 @@ module Win32cr::System::Diagnostics::Etw
       end
 
     def initialize(@historical_context : UInt64, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property count_lost : UInt32
+    property kernel_handle : Win32cr::Foundation::HANDLE
+    property time_stamp : Int64
+    def initialize(@count_lost : UInt32, @kernel_handle : Win32cr::Foundation::HANDLE, @time_stamp : Int64)
     end
     end
 
@@ -848,8 +895,8 @@ module Win32cr::System::Diagnostics::Etw
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property fixed_instance_size : UInt32
-    property offset_instance_data_and_length : Win32cr::System::Diagnostics::Etw::OFFSETINSTANCEDATAANDLENGTH*
-    def initialize(@fixed_instance_size : UInt32, @offset_instance_data_and_length : Win32cr::System::Diagnostics::Etw::OFFSETINSTANCEDATAANDLENGTH*)
+    property offset_instance_data_and_length : Win32cr::System::Diagnostics::Etw::OFFSETINSTANCEDATAANDLENGTH[1]
+    def initialize(@fixed_instance_size : UInt32, @offset_instance_data_and_length : Win32cr::System::Diagnostics::Etw::OFFSETINSTANCEDATAANDLENGTH[1])
     end
     end
 
@@ -864,8 +911,8 @@ module Win32cr::System::Diagnostics::Etw
     property instance_index : UInt32
     property data_block_offset : UInt32
     property size_data_block : UInt32
-    property variable_data : UInt8*
-    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @data_block_offset : UInt32, @size_data_block : UInt32, @variable_data : UInt8*)
+    property variable_data : UInt8[1]
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @data_block_offset : UInt32, @size_data_block : UInt32, @variable_data : UInt8[1])
     end
   end
 
@@ -877,8 +924,8 @@ module Win32cr::System::Diagnostics::Etw
     property item_id : UInt32
     property data_block_offset : UInt32
     property size_data_item : UInt32
-    property variable_data : UInt8*
-    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @item_id : UInt32, @data_block_offset : UInt32, @size_data_item : UInt32, @variable_data : UInt8*)
+    property variable_data : UInt8[1]
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @item_id : UInt32, @data_block_offset : UInt32, @size_data_item : UInt32, @variable_data : UInt8[1])
     end
   end
 
@@ -890,8 +937,8 @@ module Win32cr::System::Diagnostics::Etw
     property method_id : UInt32
     property data_block_offset : UInt32
     property size_data_block : UInt32
-    property variable_data : UInt8*
-    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @method_id : UInt32, @data_block_offset : UInt32, @size_data_block : UInt32, @variable_data : UInt8*)
+    property variable_data : UInt8[1]
+    def initialize(@wnode_header : Win32cr::System::Diagnostics::Etw::WNODE_HEADER, @offset_instance_name : UInt32, @instance_index : UInt32, @method_id : UInt32, @data_block_offset : UInt32, @size_data_block : UInt32, @variable_data : UInt8[1])
     end
   end
 
@@ -913,8 +960,8 @@ module Win32cr::System::Diagnostics::Etw
     @[Extern(union: true)]
     struct Anonymous_e__Union_
     property target_instance_index : UInt32
-    property target_instance_name : UInt16*
-    def initialize(@target_instance_index : UInt32, @target_instance_name : UInt16*)
+    property target_instance_name : UInt16[1]
+    def initialize(@target_instance_index : UInt32, @target_instance_name : UInt16[1])
     end
     end
 
@@ -959,8 +1006,8 @@ module Win32cr::System::Diagnostics::Etw
     property registry_path : UInt32
     property mof_resource_name : UInt32
     property guid_count : UInt32
-    property wmi_reg_guid : Win32cr::System::Diagnostics::Etw::WMIREGGUIDW*
-    def initialize(@buffer_size : UInt32, @next_wmi_reg_info : UInt32, @registry_path : UInt32, @mof_resource_name : UInt32, @guid_count : UInt32, @wmi_reg_guid : Win32cr::System::Diagnostics::Etw::WMIREGGUIDW*)
+    property wmi_reg_guid : Win32cr::System::Diagnostics::Etw::WMIREGGUIDW[1]
+    def initialize(@buffer_size : UInt32, @next_wmi_reg_info : UInt32, @registry_path : UInt32, @mof_resource_name : UInt32, @guid_count : UInt32, @wmi_reg_guid : Win32cr::System::Diagnostics::Etw::WMIREGGUIDW[1])
     end
   end
 
@@ -971,37 +1018,26 @@ module Win32cr::System::Diagnostics::Etw
     property anonymous2 : Anonymous2_e__Union_
     property thread_id : UInt32
     property process_id : UInt32
-    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property time_stamp : Int64
     property anonymous3 : Anonymous3_e__Union_
     property anonymous4 : Anonymous4_e__Union_
 
-    # Nested Type Anonymous4_e__Union_
+    # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    struct Anonymous4_e__Union_
-    property anonymous1 : Anonymous1_e__Struct_
-    property processor_time : UInt64
-    property anonymous2 : Anonymous2_e__Struct_
+    struct Anonymous1_e__Union_
+    property field_type_flags : UInt16
+    property anonymous : Anonymous_e__Struct_
 
-      # Nested Type Anonymous2_e__Struct_
+      # Nested Type Anonymous_e__Struct_
       @[Extern]
-      struct Anonymous2_e__Struct_
-    property client_context : UInt32
-    property flags : UInt32
-    def initialize(@client_context : UInt32, @flags : UInt32)
+      struct Anonymous_e__Struct_
+    property header_type : UInt8
+    property marker_flags : UInt8
+    def initialize(@header_type : UInt8, @marker_flags : UInt8)
     end
       end
 
-
-      # Nested Type Anonymous1_e__Struct_
-      @[Extern]
-      struct Anonymous1_e__Struct_
-    property kernel_time : UInt32
-    property user_time : UInt32
-    def initialize(@kernel_time : UInt32, @user_time : UInt32)
-    end
-      end
-
-    def initialize(@anonymous1 : Anonymous1_e__Struct_, @processor_time : UInt64, @anonymous2 : Anonymous2_e__Struct_)
+    def initialize(@field_type_flags : UInt16, @anonymous : Anonymous_e__Struct_)
     end
     end
 
@@ -1023,26 +1059,6 @@ module Win32cr::System::Diagnostics::Etw
       end
 
     def initialize(@version : UInt32, @class__ : Class_e__Struct_)
-    end
-    end
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property field_type_flags : UInt16
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property header_type : UInt8
-    property marker_flags : UInt8
-    def initialize(@header_type : UInt8, @marker_flags : UInt8)
-    end
-      end
-
-    def initialize(@field_type_flags : UInt16, @anonymous : Anonymous_e__Struct_)
     end
     end
 
@@ -1056,40 +1072,13 @@ module Win32cr::System::Diagnostics::Etw
     end
     end
 
-    def initialize(@size : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Win32cr::Foundation::LARGE_INTEGER, @anonymous3 : Anonymous3_e__Union_, @anonymous4 : Anonymous4_e__Union_)
-    end
-  end
 
-  @[Extern]
-  struct EVENT_INSTANCE_HEADER
-    property size : UInt16
-    property anonymous1 : Anonymous1_e__Union_
-    property anonymous2 : Anonymous2_e__Union_
-    property thread_id : UInt32
-    property process_id : UInt32
-    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
-    property reg_handle : UInt64
-    property instance_id : UInt32
-    property parent_instance_id : UInt32
-    property anonymous3 : Anonymous3_e__Union_
-    property parent_reg_handle : UInt64
-
-    # Nested Type Anonymous3_e__Union_
+    # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
-    struct Anonymous3_e__Union_
+    struct Anonymous4_e__Union_
     property anonymous1 : Anonymous1_e__Struct_
     property processor_time : UInt64
     property anonymous2 : Anonymous2_e__Struct_
-
-      # Nested Type Anonymous2_e__Struct_
-      @[Extern]
-      struct Anonymous2_e__Struct_
-    property event_id : UInt32
-    property flags : UInt32
-    def initialize(@event_id : UInt32, @flags : UInt32)
-    end
-      end
-
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
@@ -1100,7 +1089,54 @@ module Win32cr::System::Diagnostics::Etw
     end
       end
 
+
+      # Nested Type Anonymous2_e__Struct_
+      @[Extern]
+      struct Anonymous2_e__Struct_
+    property client_context : UInt32
+    property flags : UInt32
+    def initialize(@client_context : UInt32, @flags : UInt32)
+    end
+      end
+
     def initialize(@anonymous1 : Anonymous1_e__Struct_, @processor_time : UInt64, @anonymous2 : Anonymous2_e__Struct_)
+    end
+    end
+
+    def initialize(@size : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Int64, @anonymous3 : Anonymous3_e__Union_, @anonymous4 : Anonymous4_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct EVENT_INSTANCE_HEADER
+    property size : UInt16
+    property anonymous1 : Anonymous1_e__Union_
+    property anonymous2 : Anonymous2_e__Union_
+    property thread_id : UInt32
+    property process_id : UInt32
+    property time_stamp : Int64
+    property reg_handle : UInt64
+    property instance_id : UInt32
+    property parent_instance_id : UInt32
+    property anonymous3 : Anonymous3_e__Union_
+    property parent_reg_handle : UInt64
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property field_type_flags : UInt16
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property header_type : UInt8
+    property marker_flags : UInt8
+    def initialize(@header_type : UInt8, @marker_flags : UInt8)
+    end
+      end
+
+    def initialize(@field_type_flags : UInt16, @anonymous : Anonymous_e__Struct_)
     end
     end
 
@@ -1126,26 +1162,37 @@ module Win32cr::System::Diagnostics::Etw
     end
 
 
-    # Nested Type Anonymous1_e__Union_
+    # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property field_type_flags : UInt16
-    property anonymous : Anonymous_e__Struct_
+    struct Anonymous3_e__Union_
+    property anonymous1 : Anonymous1_e__Struct_
+    property processor_time : UInt64
+    property anonymous2 : Anonymous2_e__Struct_
 
-      # Nested Type Anonymous_e__Struct_
+      # Nested Type Anonymous1_e__Struct_
       @[Extern]
-      struct Anonymous_e__Struct_
-    property header_type : UInt8
-    property marker_flags : UInt8
-    def initialize(@header_type : UInt8, @marker_flags : UInt8)
+      struct Anonymous1_e__Struct_
+    property kernel_time : UInt32
+    property user_time : UInt32
+    def initialize(@kernel_time : UInt32, @user_time : UInt32)
     end
       end
 
-    def initialize(@field_type_flags : UInt16, @anonymous : Anonymous_e__Struct_)
+
+      # Nested Type Anonymous2_e__Struct_
+      @[Extern]
+      struct Anonymous2_e__Struct_
+    property event_id : UInt32
+    property flags : UInt32
+    def initialize(@event_id : UInt32, @flags : UInt32)
+    end
+      end
+
+    def initialize(@anonymous1 : Anonymous1_e__Struct_, @processor_time : UInt64, @anonymous2 : Anonymous2_e__Struct_)
     end
     end
 
-    def initialize(@size : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Win32cr::Foundation::LARGE_INTEGER, @reg_handle : UInt64, @instance_id : UInt32, @parent_instance_id : UInt32, @anonymous3 : Anonymous3_e__Union_, @parent_reg_handle : UInt64)
+    def initialize(@size : UInt16, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Int64, @reg_handle : UInt64, @instance_id : UInt32, @parent_instance_id : UInt32, @anonymous3 : Anonymous3_e__Union_, @parent_reg_handle : UInt64)
     end
   end
 
@@ -1164,7 +1211,7 @@ module Win32cr::System::Diagnostics::Etw
     property anonymous1 : Anonymous1_e__Union_
     property provider_version : UInt32
     property number_of_processors : UInt32
-    property end_time : Win32cr::Foundation::LARGE_INTEGER
+    property end_time : Int64
     property timer_resolution : UInt32
     property maximum_file_size : UInt32
     property log_file_mode : UInt32
@@ -1173,33 +1220,11 @@ module Win32cr::System::Diagnostics::Etw
     property logger_name : Win32cr::Foundation::PWSTR
     property log_file_name : Win32cr::Foundation::PWSTR
     property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
-    property boot_time : Win32cr::Foundation::LARGE_INTEGER
-    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
-    property start_time : Win32cr::Foundation::LARGE_INTEGER
+    property boot_time : Int64
+    property perf_freq : Int64
+    property start_time : Int64
     property reserved_flags : UInt32
     property buffers_lost : UInt32
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property log_instance_guid : LibC::GUID
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property start_buffers : UInt32
-    property pointer_size : UInt32
-    property events_lost : UInt32
-    property cpu_speed_in_m_hz : UInt32
-    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
-    end
-      end
-
-    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
@@ -1222,7 +1247,29 @@ module Win32cr::System::Diagnostics::Etw
     end
     end
 
-    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Win32cr::Foundation::LARGE_INTEGER, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : Win32cr::Foundation::PWSTR, @log_file_name : Win32cr::Foundation::PWSTR, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER, @start_time : Win32cr::Foundation::LARGE_INTEGER, @reserved_flags : UInt32, @buffers_lost : UInt32)
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property log_instance_guid : LibC::GUID
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property start_buffers : UInt32
+    property pointer_size : UInt32
+    property events_lost : UInt32
+    property cpu_speed_in_m_hz : UInt32
+    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
+    end
+      end
+
+    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Int64, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : Win32cr::Foundation::PWSTR, @log_file_name : Win32cr::Foundation::PWSTR, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Int64, @perf_freq : Int64, @start_time : Int64, @reserved_flags : UInt32, @buffers_lost : UInt32)
     end
   end
 
@@ -1232,7 +1279,7 @@ module Win32cr::System::Diagnostics::Etw
     property anonymous1 : Anonymous1_e__Union_
     property provider_version : UInt32
     property number_of_processors : UInt32
-    property end_time : Win32cr::Foundation::LARGE_INTEGER
+    property end_time : Int64
     property timer_resolution : UInt32
     property maximum_file_size : UInt32
     property log_file_mode : UInt32
@@ -1241,33 +1288,11 @@ module Win32cr::System::Diagnostics::Etw
     property logger_name : UInt32
     property log_file_name : UInt32
     property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
-    property boot_time : Win32cr::Foundation::LARGE_INTEGER
-    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
-    property start_time : Win32cr::Foundation::LARGE_INTEGER
+    property boot_time : Int64
+    property perf_freq : Int64
+    property start_time : Int64
     property reserved_flags : UInt32
     property buffers_lost : UInt32
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property log_instance_guid : LibC::GUID
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property start_buffers : UInt32
-    property pointer_size : UInt32
-    property events_lost : UInt32
-    property cpu_speed_in_m_hz : UInt32
-    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
-    end
-      end
-
-    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
@@ -1290,7 +1315,29 @@ module Win32cr::System::Diagnostics::Etw
     end
     end
 
-    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Win32cr::Foundation::LARGE_INTEGER, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : UInt32, @log_file_name : UInt32, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER, @start_time : Win32cr::Foundation::LARGE_INTEGER, @reserved_flags : UInt32, @buffers_lost : UInt32)
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property log_instance_guid : LibC::GUID
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property start_buffers : UInt32
+    property pointer_size : UInt32
+    property events_lost : UInt32
+    property cpu_speed_in_m_hz : UInt32
+    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
+    end
+      end
+
+    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Int64, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : UInt32, @log_file_name : UInt32, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Int64, @perf_freq : Int64, @start_time : Int64, @reserved_flags : UInt32, @buffers_lost : UInt32)
     end
   end
 
@@ -1300,7 +1347,7 @@ module Win32cr::System::Diagnostics::Etw
     property anonymous1 : Anonymous1_e__Union_
     property provider_version : UInt32
     property number_of_processors : UInt32
-    property end_time : Win32cr::Foundation::LARGE_INTEGER
+    property end_time : Int64
     property timer_resolution : UInt32
     property maximum_file_size : UInt32
     property log_file_mode : UInt32
@@ -1309,33 +1356,11 @@ module Win32cr::System::Diagnostics::Etw
     property logger_name : UInt64
     property log_file_name : UInt64
     property time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION
-    property boot_time : Win32cr::Foundation::LARGE_INTEGER
-    property perf_freq : Win32cr::Foundation::LARGE_INTEGER
-    property start_time : Win32cr::Foundation::LARGE_INTEGER
+    property boot_time : Int64
+    property perf_freq : Int64
+    property start_time : Int64
     property reserved_flags : UInt32
     property buffers_lost : UInt32
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property log_instance_guid : LibC::GUID
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property start_buffers : UInt32
-    property pointer_size : UInt32
-    property events_lost : UInt32
-    property cpu_speed_in_m_hz : UInt32
-    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
-    end
-      end
-
-    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
@@ -1358,7 +1383,29 @@ module Win32cr::System::Diagnostics::Etw
     end
     end
 
-    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Win32cr::Foundation::LARGE_INTEGER, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : UInt64, @log_file_name : UInt64, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Win32cr::Foundation::LARGE_INTEGER, @perf_freq : Win32cr::Foundation::LARGE_INTEGER, @start_time : Win32cr::Foundation::LARGE_INTEGER, @reserved_flags : UInt32, @buffers_lost : UInt32)
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property log_instance_guid : LibC::GUID
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property start_buffers : UInt32
+    property pointer_size : UInt32
+    property events_lost : UInt32
+    property cpu_speed_in_m_hz : UInt32
+    def initialize(@start_buffers : UInt32, @pointer_size : UInt32, @events_lost : UInt32, @cpu_speed_in_m_hz : UInt32)
+    end
+      end
+
+    def initialize(@log_instance_guid : LibC::GUID, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@buffer_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @provider_version : UInt32, @number_of_processors : UInt32, @end_time : Int64, @timer_resolution : UInt32, @maximum_file_size : UInt32, @log_file_mode : UInt32, @buffers_written : UInt32, @anonymous2 : Anonymous2_e__Union_, @logger_name : UInt64, @log_file_name : UInt64, @time_zone : Win32cr::System::Time::TIME_ZONE_INFORMATION, @boot_time : Int64, @perf_freq : Int64, @start_time : Int64, @reserved_flags : UInt32, @buffers_lost : UInt32)
     end
   end
 
@@ -1429,21 +1476,12 @@ module Win32cr::System::Diagnostics::Etw
     property filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*
     property anonymous3 : Anonymous3_e__Union_
 
-    # Nested Type Anonymous3_e__Union_
+    # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    struct Anonymous3_e__Union_
-    property anonymous : Anonymous_e__Struct_
-    property v2_options : UInt64
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt32
-    def initialize(@_bitfield : UInt32)
-    end
-      end
-
-    def initialize(@anonymous : Anonymous_e__Struct_, @v2_options : UInt64)
+    struct Anonymous1_e__Union_
+    property age_limit : Int32
+    property flush_threshold : Int32
+    def initialize(@age_limit : Int32, @flush_threshold : Int32)
     end
     end
 
@@ -1467,12 +1505,21 @@ module Win32cr::System::Diagnostics::Etw
     end
 
 
-    # Nested Type Anonymous1_e__Union_
+    # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property age_limit : Int32
-    property flush_threshold : Int32
-    def initialize(@age_limit : Int32, @flush_threshold : Int32)
+    struct Anonymous3_e__Union_
+    property anonymous : Anonymous_e__Struct_
+    property v2_options : UInt64
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@anonymous : Anonymous_e__Struct_, @v2_options : UInt64)
     end
     end
 
@@ -1567,8 +1614,8 @@ module Win32cr::System::Diagnostics::Etw
     property min_interval : UInt32
     property max_interval : UInt32
     property reserved : UInt64
-    property description : UInt16*
-    def initialize(@next_entry_offset : UInt32, @source : UInt32, @min_interval : UInt32, @max_interval : UInt32, @reserved : UInt64, @description : UInt16*)
+    property description : UInt16[1]
+    def initialize(@next_entry_offset : UInt32, @source : UInt32, @min_interval : UInt32, @max_interval : UInt32, @reserved : UInt64, @description : UInt16[1])
     end
   end
 
@@ -1585,8 +1632,19 @@ module Win32cr::System::Diagnostics::Etw
   struct ETW_PMC_COUNTER_OWNERSHIP_STATUS
     property processor_number : UInt32
     property number_of_counters : UInt32
-    property counter_owners : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER*
-    def initialize(@processor_number : UInt32, @number_of_counters : UInt32, @counter_owners : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER*)
+    property counter_owners : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER[1]
+    def initialize(@processor_number : UInt32, @number_of_counters : UInt32, @counter_owners : Win32cr::System::Diagnostics::Etw::ETW_PMC_COUNTER_OWNER[1])
+    end
+  end
+
+  @[Extern]
+  struct ETW_PMC_SESSION_INFO
+    property next_entry_offset : UInt32
+    property logger_id : UInt16
+    property reserved : UInt16
+    property profile_source_count : UInt32
+    property hook_id_count : UInt32
+    def initialize(@next_entry_offset : UInt32, @logger_id : UInt16, @reserved : UInt16, @profile_source_count : UInt32, @hook_id_count : UInt32)
     end
   end
 
@@ -1610,6 +1668,39 @@ module Win32cr::System::Diagnostics::Etw
     end
 
     def initialize(@header : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_HEADER, @instance_id : UInt32, @parent_instance_id : UInt32, @parent_guid : LibC::GUID, @mof_data : Void*, @mof_length : UInt32, @anonymous : Anonymous_e__Union_)
+    end
+  end
+
+  @[Extern]
+  struct ETW_BUFFER_HEADER
+    property reserved1 : UInt32[4]
+    property time_stamp : Int64
+    property reserved2 : UInt32[4]
+    property client_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT
+    property reserved3 : UInt32
+    property filled_bytes : UInt32
+    property reserved4 : UInt32[5]
+    def initialize(@reserved1 : UInt32[4], @time_stamp : Int64, @reserved2 : UInt32[4], @client_context : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_CONTEXT, @reserved3 : UInt32, @filled_bytes : UInt32, @reserved4 : UInt32[5])
+    end
+  end
+
+  @[Extern]
+  struct ETW_BUFFER_CALLBACK_INFORMATION
+    property trace_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+    property logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER*
+    property buffers_read : UInt32
+    def initialize(@trace_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE, @logfile_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER*, @buffers_read : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct ETW_OPEN_TRACE_OPTIONS
+    property process_trace_modes : Win32cr::System::Diagnostics::Etw::ETW_PROCESS_TRACE_MODES
+    property event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK
+    property event_callback_context : Void*
+    property buffer_callback : Win32cr::System::Diagnostics::Etw::PETW_BUFFER_CALLBACK
+    property buffer_callback_context : Void*
+    def initialize(@process_trace_modes : Win32cr::System::Diagnostics::Etw::ETW_PROCESS_TRACE_MODES, @event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_RECORD_CALLBACK, @event_callback_context : Void*, @buffer_callback : Win32cr::System::Diagnostics::Etw::PETW_BUFFER_CALLBACK, @buffer_callback_context : Void*)
     end
   end
 
@@ -1760,6 +1851,14 @@ module Win32cr::System::Diagnostics::Etw
   end
 
   @[Extern]
+  struct TRACE_CONTEXT_REGISTER_INFO
+    property register_types : Win32cr::System::Diagnostics::Etw::ETW_CONTEXT_REGISTER_TYPES
+    property reserved : UInt32
+    def initialize(@register_types : Win32cr::System::Diagnostics::Etw::ETW_CONTEXT_REGISTER_TYPES, @reserved : UInt32)
+    end
+  end
+
+  @[Extern]
   struct ETW_TRACE_PARTITION_INFORMATION
     property partition_id : LibC::GUID
     property parent_id : LibC::GUID
@@ -1848,8 +1947,8 @@ module Win32cr::System::Diagnostics::Etw
     property filter_in : Win32cr::Foundation::BOOLEAN
     property reserved : UInt8
     property count : UInt16
-    property events : UInt16*
-    def initialize(@filter_in : Win32cr::Foundation::BOOLEAN, @reserved : UInt8, @count : UInt16, @events : UInt16*)
+    property events : UInt16[1]
+    def initialize(@filter_in : Win32cr::Foundation::BOOLEAN, @reserved : UInt8, @count : UInt16, @events : UInt16[1])
     end
   end
 
@@ -1860,8 +1959,8 @@ module Win32cr::System::Diagnostics::Etw
     property level : UInt8
     property filter_in : Win32cr::Foundation::BOOLEAN
     property name_count : UInt16
-    property names : UInt8*
-    def initialize(@match_any_keyword : UInt64, @match_all_keyword : UInt64, @level : UInt8, @filter_in : Win32cr::Foundation::BOOLEAN, @name_count : UInt16, @names : UInt8*)
+    property names : UInt8[1]
+    def initialize(@match_any_keyword : UInt64, @match_all_keyword : UInt64, @level : UInt8, @filter_in : Win32cr::Foundation::BOOLEAN, @name_count : UInt16, @names : UInt8[1])
     end
   end
 
@@ -1921,16 +2020,16 @@ module Win32cr::System::Diagnostics::Etw
   @[Extern]
   struct EVENT_EXTENDED_ITEM_STACK_TRACE32
     property match_id : UInt64
-    property address : UInt32*
-    def initialize(@match_id : UInt64, @address : UInt32*)
+    property address : UInt32[1]
+    def initialize(@match_id : UInt64, @address : UInt32[1])
     end
   end
 
   @[Extern]
   struct EVENT_EXTENDED_ITEM_STACK_TRACE64
     property match_id : UInt64
-    property address : UInt64*
-    def initialize(@match_id : UInt64, @address : UInt64*)
+    property address : UInt64[1]
+    def initialize(@match_id : UInt64, @address : UInt64[1])
     end
   end
 
@@ -1960,8 +2059,8 @@ module Win32cr::System::Diagnostics::Etw
 
   @[Extern]
   struct EVENT_EXTENDED_ITEM_PMC_COUNTERS
-    property counter : UInt64*
-    def initialize(@counter : UInt64*)
+    property counter : UInt64[1]
+    def initialize(@counter : UInt64[1])
     end
   end
 
@@ -1987,7 +2086,7 @@ module Win32cr::System::Diagnostics::Etw
     property event_property : UInt16
     property thread_id : UInt32
     property process_id : UInt32
-    property time_stamp : Win32cr::Foundation::LARGE_INTEGER
+    property time_stamp : Int64
     property provider_id : LibC::GUID
     property event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR
     property anonymous : Anonymous_e__Union_
@@ -2012,7 +2111,7 @@ module Win32cr::System::Diagnostics::Etw
     end
     end
 
-    def initialize(@size : UInt16, @header_type : UInt16, @flags : UInt16, @event_property : UInt16, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Win32cr::Foundation::LARGE_INTEGER, @provider_id : LibC::GUID, @event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR, @anonymous : Anonymous_e__Union_, @activity_id : LibC::GUID)
+    def initialize(@size : UInt16, @header_type : UInt16, @flags : UInt16, @event_property : UInt16, @thread_id : UInt32, @process_id : UInt32, @time_stamp : Int64, @provider_id : LibC::GUID, @event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR, @anonymous : Anonymous_e__Union_, @activity_id : LibC::GUID)
     end
   end
 
@@ -2053,7 +2152,7 @@ module Win32cr::System::Diagnostics::Etw
     property flag : Win32cr::System::Diagnostics::Etw::MAP_FLAGS
     property entry_count : UInt32
     property anonymous : Anonymous_e__Union_
-    property map_entry_array : Win32cr::System::Diagnostics::Etw::EVENT_MAP_ENTRY*
+    property map_entry_array : Win32cr::System::Diagnostics::Etw::EVENT_MAP_ENTRY[1]
 
     # Nested Type Anonymous_e__Union_
     @[Extern(union: true)]
@@ -2064,7 +2163,7 @@ module Win32cr::System::Diagnostics::Etw
     end
     end
 
-    def initialize(@name_offset : UInt32, @flag : Win32cr::System::Diagnostics::Etw::MAP_FLAGS, @entry_count : UInt32, @anonymous : Anonymous_e__Union_, @map_entry_array : Win32cr::System::Diagnostics::Etw::EVENT_MAP_ENTRY*)
+    def initialize(@name_offset : UInt32, @flag : Win32cr::System::Diagnostics::Etw::MAP_FLAGS, @entry_count : UInt32, @anonymous : Anonymous_e__Union_, @map_entry_array : Win32cr::System::Diagnostics::Etw::EVENT_MAP_ENTRY[1])
     end
   end
 
@@ -2077,52 +2176,12 @@ module Win32cr::System::Diagnostics::Etw
     property anonymous3 : Anonymous3_e__Union_
     property anonymous4 : Anonymous4_e__Union_
 
-    # Nested Type Anonymous4_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous4_e__Union_
-    property reserved : UInt32
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt32
-    def initialize(@_bitfield : UInt32)
-    end
-      end
-
-    def initialize(@reserved : UInt32, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property count : UInt16
-    property countPropertyIndex : UInt16
-    def initialize(@count : UInt16, @countPropertyIndex : UInt16)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property nonStructType : Nonstructtype_
     property structType : Structtype_
     property customSchemaType : Customschematype_
-
-      # Nested Type Customschematype_
-      @[Extern]
-      struct Customschematype_
-    property in_type : UInt16
-    property out_type : UInt16
-    property custom_schema_offset : UInt32
-    def initialize(@in_type : UInt16, @out_type : UInt16, @custom_schema_offset : UInt32)
-    end
-      end
-
 
       # Nested Type Nonstructtype_
       @[Extern]
@@ -2145,7 +2204,28 @@ module Win32cr::System::Diagnostics::Etw
     end
       end
 
+
+      # Nested Type Customschematype_
+      @[Extern]
+      struct Customschematype_
+    property in_type : UInt16
+    property out_type : UInt16
+    property custom_schema_offset : UInt32
+    def initialize(@in_type : UInt16, @out_type : UInt16, @custom_schema_offset : UInt32)
+    end
+      end
+
     def initialize(@nonStructType : Nonstructtype_, @structType : Structtype_, @customSchemaType : Customschematype_)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property count : UInt16
+    property countPropertyIndex : UInt16
+    def initialize(@count : UInt16, @countPropertyIndex : UInt16)
     end
     end
 
@@ -2156,6 +2236,25 @@ module Win32cr::System::Diagnostics::Etw
     property length : UInt16
     property lengthPropertyIndex : UInt16
     def initialize(@length : UInt16, @lengthPropertyIndex : UInt16)
+    end
+    end
+
+
+    # Nested Type Anonymous4_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous4_e__Union_
+    property reserved : UInt32
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@reserved : UInt32, @anonymous : Anonymous_e__Struct_)
     end
     end
 
@@ -2184,26 +2283,7 @@ module Win32cr::System::Diagnostics::Etw
     property property_count : UInt32
     property top_level_property_count : UInt32
     property anonymous3 : Anonymous3_e__Union_
-    property event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*
-
-    # Nested Type Anonymous3_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous3_e__Union_
-    property flags : Win32cr::System::Diagnostics::Etw::TEMPLATE_FLAGS
-    property anonymous : Anonymous_e__Struct_
-
-      # Nested Type Anonymous_e__Struct_
-      @[Extern]
-      struct Anonymous_e__Struct_
-    property _bitfield : UInt32
-    def initialize(@_bitfield : UInt32)
-    end
-      end
-
-    def initialize(@flags : Win32cr::System::Diagnostics::Etw::TEMPLATE_FLAGS, @anonymous : Anonymous_e__Struct_)
-    end
-    end
-
+    property event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO[1]
 
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
@@ -2224,7 +2304,26 @@ module Win32cr::System::Diagnostics::Etw
     end
     end
 
-    def initialize(@provider_guid : LibC::GUID, @event_guid : LibC::GUID, @event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR, @decoding_source : Win32cr::System::Diagnostics::Etw::DECODING_SOURCE, @provider_name_offset : UInt32, @level_name_offset : UInt32, @channel_name_offset : UInt32, @keywords_name_offset : UInt32, @task_name_offset : UInt32, @opcode_name_offset : UInt32, @event_message_offset : UInt32, @provider_message_offset : UInt32, @binary_xml_offset : UInt32, @binary_xml_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @property_count : UInt32, @top_level_property_count : UInt32, @anonymous3 : Anonymous3_e__Union_, @event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*)
+
+    # Nested Type Anonymous3_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous3_e__Union_
+    property flags : Win32cr::System::Diagnostics::Etw::TEMPLATE_FLAGS
+    property anonymous : Anonymous_e__Struct_
+
+      # Nested Type Anonymous_e__Struct_
+      @[Extern]
+      struct Anonymous_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+    def initialize(@flags : Win32cr::System::Diagnostics::Etw::TEMPLATE_FLAGS, @anonymous : Anonymous_e__Struct_)
+    end
+    end
+
+    def initialize(@provider_guid : LibC::GUID, @event_guid : LibC::GUID, @event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR, @decoding_source : Win32cr::System::Diagnostics::Etw::DECODING_SOURCE, @provider_name_offset : UInt32, @level_name_offset : UInt32, @channel_name_offset : UInt32, @keywords_name_offset : UInt32, @task_name_offset : UInt32, @opcode_name_offset : UInt32, @event_message_offset : UInt32, @provider_message_offset : UInt32, @binary_xml_offset : UInt32, @binary_xml_size : UInt32, @anonymous1 : Anonymous1_e__Union_, @anonymous2 : Anonymous2_e__Union_, @property_count : UInt32, @top_level_property_count : UInt32, @anonymous3 : Anonymous3_e__Union_, @event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO[1])
     end
   end
 
@@ -2253,8 +2352,8 @@ module Win32cr::System::Diagnostics::Etw
     property message_offset : UInt32
     property reserved : UInt32
     property property_count : UInt32
-    property event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*
-    def initialize(@id : UInt8, @version : UInt8, @message_offset : UInt32, @reserved : UInt32, @property_count : UInt32, @event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO*)
+    property event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO[1]
+    def initialize(@id : UInt8, @version : UInt8, @message_offset : UInt32, @reserved : UInt32, @property_count : UInt32, @event_property_info_array : Win32cr::System::Diagnostics::Etw::EVENT_PROPERTY_INFO[1])
     end
   end
 
@@ -2271,8 +2370,8 @@ module Win32cr::System::Diagnostics::Etw
   struct PROVIDER_FIELD_INFOARRAY
     property number_of_elements : UInt32
     property field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE
-    property field_info_array : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFO*
-    def initialize(@number_of_elements : UInt32, @field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE, @field_info_array : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFO*)
+    property field_info_array : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFO[1]
+    def initialize(@number_of_elements : UInt32, @field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE, @field_info_array : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFO[1])
     end
   end
 
@@ -2289,8 +2388,8 @@ module Win32cr::System::Diagnostics::Etw
   struct PROVIDER_ENUMERATION_INFO
     property number_of_providers : UInt32
     property reserved : UInt32
-    property trace_provider_info_array : Win32cr::System::Diagnostics::Etw::TRACE_PROVIDER_INFO*
-    def initialize(@number_of_providers : UInt32, @reserved : UInt32, @trace_provider_info_array : Win32cr::System::Diagnostics::Etw::TRACE_PROVIDER_INFO*)
+    property trace_provider_info_array : Win32cr::System::Diagnostics::Etw::TRACE_PROVIDER_INFO[1]
+    def initialize(@number_of_providers : UInt32, @reserved : UInt32, @trace_provider_info_array : Win32cr::System::Diagnostics::Etw::TRACE_PROVIDER_INFO[1])
     end
   end
 
@@ -2298,8 +2397,8 @@ module Win32cr::System::Diagnostics::Etw
   struct PROVIDER_EVENT_INFO
     property number_of_events : UInt32
     property reserved : UInt32
-    property event_descriptors_array : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*
-    def initialize(@number_of_events : UInt32, @reserved : UInt32, @event_descriptors_array : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*)
+    property event_descriptors_array : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR[1]
+    def initialize(@number_of_events : UInt32, @reserved : UInt32, @event_descriptors_array : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR[1])
     end
   end
 
@@ -2313,7 +2412,8 @@ module Win32cr::System::Diagnostics::Etw
   end
 
   @[Extern]
-  record ITraceEventVtbl,
+
+  record ITraceEventVtable,
     query_interface : Proc(ITraceEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITraceEvent*, UInt32),
     release : Proc(ITraceEvent*, UInt32),
@@ -2327,12 +2427,12 @@ module Win32cr::System::Diagnostics::Etw
     set_thread_id : Proc(ITraceEvent*, UInt32, Win32cr::Foundation::HRESULT),
     set_thread_times : Proc(ITraceEvent*, UInt32, UInt32, Win32cr::Foundation::HRESULT),
     set_activity_id : Proc(ITraceEvent*, LibC::GUID*, Win32cr::Foundation::HRESULT),
-    set_time_stamp : Proc(ITraceEvent*, Win32cr::Foundation::LARGE_INTEGER*, Win32cr::Foundation::HRESULT),
+    set_time_stamp : Proc(ITraceEvent*, Int64*, Win32cr::Foundation::HRESULT),
     set_provider_id : Proc(ITraceEvent*, LibC::GUID*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ITraceEvent, lpVtbl : ITraceEventVtbl* do
+  record ITraceEvent, lpVtbl : ITraceEventVtable* do
     GUID = LibC::GUID.new(0x8cc97f40_u32, 0x9028_u16, 0x4ff3_u16, StaticArray[0x9b_u8, 0x62_u8, 0x7d_u8, 0x1f_u8, 0x79_u8, 0xca_u8, 0x7b_u8, 0xcb_u8])
     def query_interface(this : ITraceEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2373,7 +2473,7 @@ module Win32cr::System::Diagnostics::Etw
     def set_activity_id(this : ITraceEvent*, activity_id : LibC::GUID*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_activity_id.call(this, activity_id)
     end
-    def set_time_stamp(this : ITraceEvent*, time_stamp : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    def set_time_stamp(this : ITraceEvent*, time_stamp : Int64*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_time_stamp.call(this, time_stamp)
     end
     def set_provider_id(this : ITraceEvent*, provider_id : LibC::GUID*) : Win32cr::Foundation::HRESULT
@@ -2383,7 +2483,8 @@ module Win32cr::System::Diagnostics::Etw
   end
 
   @[Extern]
-  record ITraceEventCallbackVtbl,
+
+  record ITraceEventCallbackVtable,
     query_interface : Proc(ITraceEventCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITraceEventCallback*, UInt32),
     release : Proc(ITraceEventCallback*, UInt32),
@@ -2393,7 +2494,7 @@ module Win32cr::System::Diagnostics::Etw
 
 
   @[Extern]
-  record ITraceEventCallback, lpVtbl : ITraceEventCallbackVtbl* do
+  record ITraceEventCallback, lpVtbl : ITraceEventCallbackVtable* do
     GUID = LibC::GUID.new(0x3ed25501_u32, 0x593f_u16, 0x43e9_u16, StaticArray[0x8f_u8, 0x38_u8, 0x3a_u8, 0xb4_u8, 0x6f_u8, 0x5a_u8, 0x4a_u8, 0x52_u8])
     def query_interface(this : ITraceEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2417,15 +2518,16 @@ module Win32cr::System::Diagnostics::Etw
   end
 
   @[Extern]
-  record ITraceReloggerVtbl,
+
+  record ITraceReloggerVtable,
     query_interface : Proc(ITraceRelogger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITraceRelogger*, UInt32),
     release : Proc(ITraceRelogger*, UInt32),
-    add_logfile_trace_stream : Proc(ITraceRelogger*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Diagnostics::Etw::RELOGSTREAM_HANDLE*, Win32cr::Foundation::HRESULT),
-    add_realtime_trace_stream : Proc(ITraceRelogger*, Win32cr::Foundation::BSTR, Void*, Win32cr::System::Diagnostics::Etw::RELOGSTREAM_HANDLE*, Win32cr::Foundation::HRESULT),
+    add_logfile_trace_stream : Proc(ITraceRelogger*, Win32cr::Foundation::BSTR, Void*, UInt64*, Win32cr::Foundation::HRESULT),
+    add_realtime_trace_stream : Proc(ITraceRelogger*, Win32cr::Foundation::BSTR, Void*, UInt64*, Win32cr::Foundation::HRESULT),
     register_callback : Proc(ITraceRelogger*, Void*, Win32cr::Foundation::HRESULT),
     inject : Proc(ITraceRelogger*, Void*, Win32cr::Foundation::HRESULT),
-    create_event_instance : Proc(ITraceRelogger*, Win32cr::System::Diagnostics::Etw::RELOGSTREAM_HANDLE, UInt32, Void**, Win32cr::Foundation::HRESULT),
+    create_event_instance : Proc(ITraceRelogger*, UInt64, UInt32, Void**, Win32cr::Foundation::HRESULT),
     process_trace : Proc(ITraceRelogger*, Win32cr::Foundation::HRESULT),
     set_output_filename : Proc(ITraceRelogger*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     set_compression_mode : Proc(ITraceRelogger*, Win32cr::Foundation::BOOLEAN, Win32cr::Foundation::HRESULT),
@@ -2433,7 +2535,7 @@ module Win32cr::System::Diagnostics::Etw
 
 
   @[Extern]
-  record ITraceRelogger, lpVtbl : ITraceReloggerVtbl* do
+  record ITraceRelogger, lpVtbl : ITraceReloggerVtable* do
     GUID = LibC::GUID.new(0xf754ad43_u32, 0x3bcc_u16, 0x4286_u16, StaticArray[0x80_u8, 0x9_u8, 0x9c_u8, 0x5d_u8, 0xa2_u8, 0x14_u8, 0xe8_u8, 0x4e_u8])
     def query_interface(this : ITraceRelogger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2444,11 +2546,11 @@ module Win32cr::System::Diagnostics::Etw
     def release(this : ITraceRelogger*) : UInt32
       @lpVtbl.try &.value.release.call(this)
     end
-    def add_logfile_trace_stream(this : ITraceRelogger*, logfile_name : Win32cr::Foundation::BSTR, user_context : Void*, trace_handle : Win32cr::System::Diagnostics::Etw::RELOGSTREAM_HANDLE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.add_logfile_trace_stream.call(this, logfile_name, user_context, trace_handle)
+    def add_logfile_trace_stream(this : ITraceRelogger*, logfile_name : Win32cr::Foundation::BSTR, user_context : Void*, trace_stream_id : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_logfile_trace_stream.call(this, logfile_name, user_context, trace_stream_id)
     end
-    def add_realtime_trace_stream(this : ITraceRelogger*, logger_name : Win32cr::Foundation::BSTR, user_context : Void*, trace_handle : Win32cr::System::Diagnostics::Etw::RELOGSTREAM_HANDLE*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.add_realtime_trace_stream.call(this, logger_name, user_context, trace_handle)
+    def add_realtime_trace_stream(this : ITraceRelogger*, logger_name : Win32cr::Foundation::BSTR, user_context : Void*, trace_stream_id : UInt64*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.add_realtime_trace_stream.call(this, logger_name, user_context, trace_stream_id)
     end
     def register_callback(this : ITraceRelogger*, callback : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_callback.call(this, callback)
@@ -2456,8 +2558,8 @@ module Win32cr::System::Diagnostics::Etw
     def inject(this : ITraceRelogger*, event : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.inject.call(this, event)
     end
-    def create_event_instance(this : ITraceRelogger*, trace_handle : Win32cr::System::Diagnostics::Etw::RELOGSTREAM_HANDLE, flags : UInt32, event : Void**) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.create_event_instance.call(this, trace_handle, flags, event)
+    def create_event_instance(this : ITraceRelogger*, trace_stream_id : UInt64, flags : UInt32, event : Void**) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.create_event_instance.call(this, trace_stream_id, flags, event)
     end
     def process_trace(this : ITraceRelogger*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.process_trace.call(this)
@@ -2474,364 +2576,573 @@ module Win32cr::System::Diagnostics::Etw
 
   end
 
-  def startTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE*, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.StartTraceW(trace_handle, instance_name, properties)
+  def startTraceW(trace_id : UInt64*, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.StartTraceW(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def startTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE*, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.StartTraceA(trace_handle, instance_name, properties)
+  def startTraceA(trace_id : UInt64*, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.StartTraceA(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def stopTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.StopTraceW(trace_handle, instance_name, properties)
+  def stopTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.StopTraceW(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def stopTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.StopTraceA(trace_handle, instance_name, properties)
+  def stopTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.StopTraceA(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def queryTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.QueryTraceW(trace_handle, instance_name, properties)
+  def queryTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.QueryTraceW(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def queryTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.QueryTraceA(trace_handle, instance_name, properties)
+  def queryTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.QueryTraceA(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def updateTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.UpdateTraceW(trace_handle, instance_name, properties)
+  def updateTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.UpdateTraceW(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def updateTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.UpdateTraceA(trace_handle, instance_name, properties)
+  def updateTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.UpdateTraceA(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def flushTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.FlushTraceW(trace_handle, instance_name, properties)
+  def flushTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.FlushTraceW(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def flushTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
-    C.FlushTraceA(trace_handle, instance_name, properties)
+  def flushTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.FlushTraceA(trace_id, instance_name, properties)
+    {% end %}
   end
 
-  def controlTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : Win32cr::Foundation::WIN32_ERROR
-    C.ControlTraceW(trace_handle, instance_name, properties, control_code)
+  def controlTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ControlTraceW(trace_id, instance_name, properties, control_code)
+    {% end %}
   end
 
-  def controlTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : Win32cr::Foundation::WIN32_ERROR
-    C.ControlTraceA(trace_handle, instance_name, properties, control_code)
+  def controlTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.ControlTraceA(trace_id, instance_name, properties, control_code)
+    {% end %}
   end
 
   def queryAllTracesW(property_array : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES**, property_array_count : UInt32, logger_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.QueryAllTracesW(property_array, property_array_count, logger_count)
+    {% end %}
   end
 
   def queryAllTracesA(property_array : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES**, property_array_count : UInt32, logger_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.QueryAllTracesA(property_array, property_array_count, logger_count)
+    {% end %}
   end
 
-  def enableTrace(enable : UInt32, enable_flag : UInt32, enable_level : UInt32, control_guid : LibC::GUID*, trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE) : Win32cr::Foundation::WIN32_ERROR
-    C.EnableTrace(enable, enable_flag, enable_level, control_guid, trace_handle)
+  def enableTrace(enable : UInt32, enable_flag : UInt32, enable_level : UInt32, control_guid : LibC::GUID*, trace_id : UInt64) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.EnableTrace(enable, enable_flag, enable_level, control_guid, trace_id)
+    {% end %}
   end
 
-  def enableTraceEx(provider_id : LibC::GUID*, source_id : LibC::GUID*, trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, is_enabled : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, enable_property : UInt32, enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
-    C.EnableTraceEx(provider_id, source_id, trace_handle, is_enabled, level, match_any_keyword, match_all_keyword, enable_property, enable_filter_desc)
+  def enableTraceEx(provider_id : LibC::GUID*, source_id : LibC::GUID*, trace_id : UInt64, is_enabled : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, enable_property : UInt32, enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.EnableTraceEx(provider_id, source_id, trace_id, is_enabled, level, match_any_keyword, match_all_keyword, enable_property, enable_filter_desc)
+    {% end %}
   end
 
-  def enableTraceEx2(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, provider_id : LibC::GUID*, control_code : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, timeout : UInt32, enable_parameters : Win32cr::System::Diagnostics::Etw::ENABLE_TRACE_PARAMETERS*) : Win32cr::Foundation::WIN32_ERROR
-    C.EnableTraceEx2(trace_handle, provider_id, control_code, level, match_any_keyword, match_all_keyword, timeout, enable_parameters)
+  def enableTraceEx2(trace_id : UInt64, provider_id : LibC::GUID*, control_code : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, timeout : UInt32, enable_parameters : Win32cr::System::Diagnostics::Etw::ENABLE_TRACE_PARAMETERS*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.EnableTraceEx2(trace_id, provider_id, control_code, level, match_any_keyword, match_all_keyword, timeout, enable_parameters)
+    {% end %}
   end
 
   def enumerateTraceGuidsEx(trace_query_info_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, in_buffer : Void*, in_buffer_size : UInt32, out_buffer : Void*, out_buffer_size : UInt32, return_length : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.EnumerateTraceGuidsEx(trace_query_info_class, in_buffer, in_buffer_size, out_buffer, out_buffer_size, return_length)
+    {% end %}
   end
 
-  def traceSetInformation(session_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32) : Win32cr::Foundation::WIN32_ERROR
-    C.TraceSetInformation(session_handle, information_class, trace_information, information_length)
+  def traceSetInformation(trace_id : UInt64, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.TraceSetInformation(trace_id, information_class, trace_information, information_length)
+    {% end %}
   end
 
-  def traceQueryInformation(session_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::WIN32_ERROR
-    C.TraceQueryInformation(session_handle, information_class, trace_information, information_length, return_length)
+  def traceQueryInformation(trace_id : UInt64, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
+    C.TraceQueryInformation(trace_id, information_class, trace_information, information_length, return_length)
+    {% end %}
+  end
+
+  def traceConfigureLastBranchRecord(trace_id : UInt64, lbr_configuration : Win32cr::System::Diagnostics::Etw::TRACE_LBR_CONFIGURATION, events : Win32cr::System::Diagnostics::Etw::CLASSIC_EVENT_ID*, event_count : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    C.TraceConfigureLastBranchRecord(trace_id, lbr_configuration, events, event_count)
+    {% end %}
   end
 
   def createTraceInstanceId(reg_handle : Win32cr::Foundation::HANDLE, inst_info : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_INFO*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.CreateTraceInstanceId(reg_handle, inst_info)
+    {% end %}
   end
 
   def traceEvent(trace_handle : UInt64, event_trace : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_HEADER*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TraceEvent(trace_handle, event_trace)
+    {% end %}
   end
 
   def traceEventInstance(trace_handle : UInt64, event_trace : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_HEADER*, inst_info : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_INFO*, parent_inst_info : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceEventInstance(trace_handle, event_trace, inst_info, parent_inst_info)
+    {% end %}
   end
 
   def registerTraceGuidsW(request_address : Win32cr::System::Diagnostics::Etw::WMIDPREQUEST, request_context : Void*, control_guid : LibC::GUID*, guid_count : UInt32, trace_guid_reg : Win32cr::System::Diagnostics::Etw::TRACE_GUID_REGISTRATION*, mof_image_path : Win32cr::Foundation::PWSTR, mof_resource_name : Win32cr::Foundation::PWSTR, registration_handle : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterTraceGuidsW(request_address, request_context, control_guid, guid_count, trace_guid_reg, mof_image_path, mof_resource_name, registration_handle)
+    {% end %}
   end
 
   def registerTraceGuidsA(request_address : Win32cr::System::Diagnostics::Etw::WMIDPREQUEST, request_context : Void*, control_guid : LibC::GUID*, guid_count : UInt32, trace_guid_reg : Win32cr::System::Diagnostics::Etw::TRACE_GUID_REGISTRATION*, mof_image_path : Win32cr::Foundation::PSTR, mof_resource_name : Win32cr::Foundation::PSTR, registration_handle : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterTraceGuidsA(request_address, request_context, control_guid, guid_count, trace_guid_reg, mof_image_path, mof_resource_name, registration_handle)
+    {% end %}
   end
 
   def enumerateTraceGuids(guid_properties_array : Win32cr::System::Diagnostics::Etw::TRACE_GUID_PROPERTIES**, property_array_count : UInt32, guid_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.EnumerateTraceGuids(guid_properties_array, property_array_count, guid_count)
+    {% end %}
   end
 
   def unregisterTraceGuids(registration_handle : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.UnregisterTraceGuids(registration_handle)
+    {% end %}
   end
 
   def getTraceLoggerHandle(buffer : Void*) : UInt64
+    {% if !flag?(:docs) %}
     C.GetTraceLoggerHandle(buffer)
+    {% end %}
   end
 
   def getTraceEnableLevel(trace_handle : UInt64) : UInt8
+    {% if !flag?(:docs) %}
     C.GetTraceEnableLevel(trace_handle)
+    {% end %}
   end
 
   def getTraceEnableFlags(trace_handle : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTraceEnableFlags(trace_handle)
+    {% end %}
   end
 
   def openTraceW(logfile : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEW*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+    {% if !flag?(:docs) %}
     C.OpenTraceW(logfile)
+    {% end %}
   end
 
   def processTrace(handle_array : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE*, handle_count : UInt32, start_time : Win32cr::Foundation::FILETIME*, end_time : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ProcessTrace(handle_array, handle_count, start_time, end_time)
+    {% end %}
   end
 
   def closeTrace(trace_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.CloseTrace(trace_handle)
+    {% end %}
+  end
+
+  def openTraceFromBufferStream(options : Win32cr::System::Diagnostics::Etw::ETW_OPEN_TRACE_OPTIONS*, buffer_completion_callback : Win32cr::System::Diagnostics::Etw::PETW_BUFFER_COMPLETION_CALLBACK, buffer_completion_context : Void*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+    {% if !flag?(:docs) %}
+    C.OpenTraceFromBufferStream(options, buffer_completion_callback, buffer_completion_context)
+    {% end %}
+  end
+
+  def openTraceFromRealTimeLogger(logger_name : Win32cr::Foundation::PWSTR, options : Win32cr::System::Diagnostics::Etw::ETW_OPEN_TRACE_OPTIONS*, log_file_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+    {% if !flag?(:docs) %}
+    C.OpenTraceFromRealTimeLogger(logger_name, options, log_file_header)
+    {% end %}
+  end
+
+  def openTraceFromRealTimeLoggerWithAllocationOptions(logger_name : Win32cr::Foundation::PWSTR, options : Win32cr::System::Diagnostics::Etw::ETW_OPEN_TRACE_OPTIONS*, allocation_size : LibC::UIntPtrT, memory_partition_handle : Win32cr::Foundation::HANDLE, log_file_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+    {% if !flag?(:docs) %}
+    C.OpenTraceFromRealTimeLoggerWithAllocationOptions(logger_name, options, allocation_size, memory_partition_handle, log_file_header)
+    {% end %}
+  end
+
+  def openTraceFromFile(log_file_name : Win32cr::Foundation::PWSTR, options : Win32cr::System::Diagnostics::Etw::ETW_OPEN_TRACE_OPTIONS*, log_file_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+    {% if !flag?(:docs) %}
+    C.OpenTraceFromFile(log_file_name, options, log_file_header)
+    {% end %}
+  end
+
+  def processTraceBufferIncrementReference(trace_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE, buffer : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_HEADER*) : UInt32
+    {% if !flag?(:docs) %}
+    C.ProcessTraceBufferIncrementReference(trace_handle, buffer)
+    {% end %}
+  end
+
+  def processTraceBufferDecrementReference(buffer : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_HEADER*) : UInt32
+    {% if !flag?(:docs) %}
+    C.ProcessTraceBufferDecrementReference(buffer)
+    {% end %}
+  end
+
+  def processTraceAddBufferToBufferStream(trace_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE, buffer : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_HEADER*, buffer_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
+    C.ProcessTraceAddBufferToBufferStream(trace_handle, buffer, buffer_size)
+    {% end %}
   end
 
   def queryTraceProcessingHandle(processing_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE, information_class : Win32cr::System::Diagnostics::Etw::ETW_PROCESS_HANDLE_INFO_TYPE, in_buffer : Void*, in_buffer_size : UInt32, out_buffer : Void*, out_buffer_size : UInt32, return_length : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.QueryTraceProcessingHandle(processing_handle, information_class, in_buffer, in_buffer_size, out_buffer, out_buffer_size, return_length)
+    {% end %}
   end
 
   def openTraceA(logfile : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_LOGFILEA*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+    {% if !flag?(:docs) %}
     C.OpenTraceA(logfile)
+    {% end %}
   end
 
   def setTraceCallback(pGuid : LibC::GUID*, event_callback : Win32cr::System::Diagnostics::Etw::PEVENT_CALLBACK) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetTraceCallback(pGuid, event_callback)
+    {% end %}
   end
 
   def removeTraceCallback(pGuid : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.RemoveTraceCallback(pGuid)
+    {% end %}
   end
 
   def traceMessage(logger_handle : UInt64, message_flags : Win32cr::System::Diagnostics::Etw::TRACE_MESSAGE_FLAGS, message_guid : LibC::GUID*, message_number : UInt16) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TraceMessage(logger_handle, message_flags, message_guid, message_number)
+    {% end %}
   end
 
   def traceMessageVa(logger_handle : UInt64, message_flags : Win32cr::System::Diagnostics::Etw::TRACE_MESSAGE_FLAGS, message_guid : LibC::GUID*, message_number : UInt16, message_arg_list : Int8*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TraceMessageVa(logger_handle, message_flags, message_guid, message_number, message_arg_list)
+    {% end %}
   end
 
-  def eventRegister(provider_id : LibC::GUID*, enable_callback : Win32cr::System::Diagnostics::Etw::PENABLECALLBACK, callback_context : Void*, reg_handle : UInt64*) : UInt32
+  def eventRegister(provider_id : LibC::GUID*, enable_callback : Win32cr::System::Diagnostics::Etw::PENABLECALLBACK, callback_context : Void*, reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.EventRegister(provider_id, enable_callback, callback_context, reg_handle)
+    {% end %}
   end
 
-  def eventUnregister(reg_handle : UInt64) : UInt32
+  def eventUnregister(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.EventUnregister(reg_handle)
+    {% end %}
   end
 
-  def eventSetInformation(reg_handle : UInt64, information_class : Win32cr::System::Diagnostics::Etw::EVENT_INFO_CLASS, event_information : Void*, information_length : UInt32) : UInt32
+  def eventSetInformation(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, information_class : Win32cr::System::Diagnostics::Etw::EVENT_INFO_CLASS, event_information : Void*, information_length : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.EventSetInformation(reg_handle, information_class, event_information, information_length)
+    {% end %}
   end
 
-  def eventEnabled(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*) : Win32cr::Foundation::BOOLEAN
+  def eventEnabled(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.EventEnabled(reg_handle, event_descriptor)
+    {% end %}
   end
 
-  def eventProviderEnabled(reg_handle : UInt64, level : UInt8, keyword : UInt64) : Win32cr::Foundation::BOOLEAN
+  def eventProviderEnabled(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, level : UInt8, keyword : UInt64) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.EventProviderEnabled(reg_handle, level, keyword)
+    {% end %}
   end
 
-  def eventWrite(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+  def eventWrite(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.EventWrite(reg_handle, event_descriptor, user_data_count, user_data)
+    {% end %}
   end
 
-  def eventWriteTransfer(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+  def eventWriteTransfer(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.EventWriteTransfer(reg_handle, event_descriptor, activity_id, related_activity_id, user_data_count, user_data)
+    {% end %}
   end
 
-  def eventWriteEx(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, filter : UInt64, flags : UInt32, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+  def eventWriteEx(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, filter : UInt64, flags : UInt32, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.EventWriteEx(reg_handle, event_descriptor, filter, flags, activity_id, related_activity_id, user_data_count, user_data)
+    {% end %}
   end
 
-  def eventWriteString(reg_handle : UInt64, level : UInt8, keyword : UInt64, string : Win32cr::Foundation::PWSTR) : UInt32
+  def eventWriteString(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, level : UInt8, keyword : UInt64, string : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.EventWriteString(reg_handle, level, keyword, string)
+    {% end %}
   end
 
   def eventActivityIdControl(control_code : UInt32, activity_id : LibC::GUID*) : UInt32
+    {% if !flag?(:docs) %}
     C.EventActivityIdControl(control_code, activity_id)
+    {% end %}
   end
 
-  def eventAccessControl(guid : LibC::GUID*, operation : UInt32, sid : Win32cr::Foundation::PSID, rights : UInt32, allow_or_deny : Win32cr::Foundation::BOOLEAN) : UInt32
+  def eventAccessControl(guid : LibC::GUID*, operation : UInt32, sid : Win32cr::Security::PSID, rights : UInt32, allow_or_deny : Win32cr::Foundation::BOOLEAN) : UInt32
+    {% if !flag?(:docs) %}
     C.EventAccessControl(guid, operation, sid, rights, allow_or_deny)
+    {% end %}
   end
 
   def eventAccessQuery(guid : LibC::GUID*, buffer : Win32cr::Security::PSECURITY_DESCRIPTOR, buffer_size : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.EventAccessQuery(guid, buffer, buffer_size)
+    {% end %}
   end
 
   def eventAccessRemove(guid : LibC::GUID*) : UInt32
+    {% if !flag?(:docs) %}
     C.EventAccessRemove(guid)
+    {% end %}
   end
 
   def tdhCreatePayloadFilter(provider_guid : LibC::GUID*, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, event_match_any : Win32cr::Foundation::BOOLEAN, payload_predicate_count : UInt32, payload_predicates : Win32cr::System::Diagnostics::Etw::PAYLOAD_FILTER_PREDICATE*, payload_filter : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhCreatePayloadFilter(provider_guid, event_descriptor, event_match_any, payload_predicate_count, payload_predicates, payload_filter)
+    {% end %}
   end
 
   def tdhDeletePayloadFilter(payload_filter : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhDeletePayloadFilter(payload_filter)
+    {% end %}
   end
 
   def tdhAggregatePayloadFilters(payload_filter_count : UInt32, payload_filter_ptrs : Void**, event_match_all_flags : Win32cr::Foundation::BOOLEAN*, event_filter_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhAggregatePayloadFilters(payload_filter_count, payload_filter_ptrs, event_match_all_flags, event_filter_descriptor)
+    {% end %}
   end
 
   def tdhCleanupPayloadEventFilterDescriptor(event_filter_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhCleanupPayloadEventFilterDescriptor(event_filter_descriptor)
+    {% end %}
   end
 
   def tdhGetEventInformation(event : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, tdh_context_count : UInt32, tdh_context : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*, buffer : Win32cr::System::Diagnostics::Etw::TRACE_EVENT_INFO*, buffer_size : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhGetEventInformation(event, tdh_context_count, tdh_context, buffer, buffer_size)
+    {% end %}
   end
 
   def tdhGetEventMapInformation(pEvent : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, pMapName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::System::Diagnostics::Etw::EVENT_MAP_INFO*, pBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhGetEventMapInformation(pEvent, pMapName, pBuffer, pBufferSize)
+    {% end %}
   end
 
   def tdhGetPropertySize(pEvent : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, tdh_context_count : UInt32, pTdhContext : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*, property_data_count : UInt32, pPropertyData : Win32cr::System::Diagnostics::Etw::PROPERTY_DATA_DESCRIPTOR*, pPropertySize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhGetPropertySize(pEvent, tdh_context_count, pTdhContext, property_data_count, pPropertyData, pPropertySize)
+    {% end %}
   end
 
   def tdhGetProperty(pEvent : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, tdh_context_count : UInt32, pTdhContext : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*, property_data_count : UInt32, pPropertyData : Win32cr::System::Diagnostics::Etw::PROPERTY_DATA_DESCRIPTOR*, buffer_size : UInt32, pBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhGetProperty(pEvent, tdh_context_count, pTdhContext, property_data_count, pPropertyData, buffer_size, pBuffer)
+    {% end %}
   end
 
   def tdhEnumerateProviders(pBuffer : Win32cr::System::Diagnostics::Etw::PROVIDER_ENUMERATION_INFO*, pBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhEnumerateProviders(pBuffer, pBufferSize)
+    {% end %}
   end
 
   def tdhEnumerateProvidersForDecodingSource(filter : Win32cr::System::Diagnostics::Etw::DECODING_SOURCE, buffer : Win32cr::System::Diagnostics::Etw::PROVIDER_ENUMERATION_INFO*, bufferSize : UInt32, bufferRequired : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhEnumerateProvidersForDecodingSource(filter, buffer, bufferSize, bufferRequired)
+    {% end %}
   end
 
   def tdhQueryProviderFieldInformation(pGuid : LibC::GUID*, event_field_value : UInt64, event_field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE, pBuffer : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFOARRAY*, pBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhQueryProviderFieldInformation(pGuid, event_field_value, event_field_type, pBuffer, pBufferSize)
+    {% end %}
   end
 
   def tdhEnumerateProviderFieldInformation(pGuid : LibC::GUID*, event_field_type : Win32cr::System::Diagnostics::Etw::EVENT_FIELD_TYPE, pBuffer : Win32cr::System::Diagnostics::Etw::PROVIDER_FIELD_INFOARRAY*, pBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhEnumerateProviderFieldInformation(pGuid, event_field_type, pBuffer, pBufferSize)
+    {% end %}
   end
 
   def tdhEnumerateProviderFilters(guid : LibC::GUID*, tdh_context_count : UInt32, tdh_context : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*, filter_count : UInt32*, buffer : Win32cr::System::Diagnostics::Etw::PROVIDER_FILTER_INFO**, buffer_size : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhEnumerateProviderFilters(guid, tdh_context_count, tdh_context, filter_count, buffer, buffer_size)
+    {% end %}
   end
 
   def tdhLoadManifest(manifest : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhLoadManifest(manifest)
+    {% end %}
   end
 
   def tdhLoadManifestFromMemory(pData : Void*, cbData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhLoadManifestFromMemory(pData, cbData)
+    {% end %}
   end
 
   def tdhUnloadManifest(manifest : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhUnloadManifest(manifest)
+    {% end %}
   end
 
   def tdhUnloadManifestFromMemory(pData : Void*, cbData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhUnloadManifestFromMemory(pData, cbData)
+    {% end %}
   end
 
   def tdhFormatProperty(event_info : Win32cr::System::Diagnostics::Etw::TRACE_EVENT_INFO*, map_info : Win32cr::System::Diagnostics::Etw::EVENT_MAP_INFO*, pointer_size : UInt32, property_in_type : UInt16, property_out_type : UInt16, property_length : UInt16, user_data_length : UInt16, user_data : UInt8*, buffer_size : UInt32*, buffer : Win32cr::Foundation::PWSTR, user_data_consumed : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhFormatProperty(event_info, map_info, pointer_size, property_in_type, property_out_type, property_length, user_data_length, user_data, buffer_size, buffer, user_data_consumed)
+    {% end %}
   end
 
   def tdhOpenDecodingHandle(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhOpenDecodingHandle(handle)
+    {% end %}
   end
 
   def tdhSetDecodingParameter(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE, tdh_context : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhSetDecodingParameter(handle, tdh_context)
+    {% end %}
   end
 
   def tdhGetDecodingParameter(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE, tdh_context : Win32cr::System::Diagnostics::Etw::TDH_CONTEXT*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhGetDecodingParameter(handle, tdh_context)
+    {% end %}
   end
 
   def tdhGetWppProperty(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE, event_record : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, property_name : Win32cr::Foundation::PWSTR, buffer_size : UInt32*, buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhGetWppProperty(handle, event_record, property_name, buffer_size, buffer)
+    {% end %}
   end
 
   def tdhGetWppMessage(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE, event_record : Win32cr::System::Diagnostics::Etw::EVENT_RECORD*, buffer_size : UInt32*, buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhGetWppMessage(handle, event_record, buffer_size, buffer)
+    {% end %}
   end
 
   def tdhCloseDecodingHandle(handle : Win32cr::System::Diagnostics::Etw::TDH_HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhCloseDecodingHandle(handle)
+    {% end %}
   end
 
   def tdhLoadManifestFromBinary(binary_path : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhLoadManifestFromBinary(binary_path)
+    {% end %}
   end
 
   def tdhEnumerateManifestProviderEvents(provider_guid : LibC::GUID*, buffer : Win32cr::System::Diagnostics::Etw::PROVIDER_EVENT_INFO*, buffer_size : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhEnumerateManifestProviderEvents(provider_guid, buffer, buffer_size)
+    {% end %}
   end
 
   def tdhGetManifestEventInformation(provider_guid : LibC::GUID*, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, buffer : Win32cr::System::Diagnostics::Etw::TRACE_EVENT_INFO*, buffer_size : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.TdhGetManifestEventInformation(provider_guid, event_descriptor, buffer, buffer_size)
+    {% end %}
   end
 
   def cveEventWrite(cve_id : Win32cr::Foundation::PWSTR, additional_details : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.CveEventWrite(cve_id, additional_details)
+    {% end %}
   end
 
   @[Link("advapi32")]
   @[Link("tdh")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
-    fun StartTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE*, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun StartTraceW(trace_id : UInt64*, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun StartTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE*, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun StartTraceA(trace_id : UInt64*, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun StopTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun StopTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun StopTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun StopTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun QueryTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun QueryTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun QueryTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun QueryTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun UpdateTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun UpdateTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun UpdateTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun UpdateTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun FlushTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun FlushTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun FlushTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
+    fun FlushTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun ControlTraceW(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : Win32cr::Foundation::WIN32_ERROR
+    fun ControlTraceW(trace_id : UInt64, instance_name : Win32cr::Foundation::PWSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun ControlTraceA(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : Win32cr::Foundation::WIN32_ERROR
+    fun ControlTraceA(trace_id : UInt64, instance_name : Win32cr::Foundation::PSTR, properties : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES*, control_code : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_CONTROL) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun QueryAllTracesW(property_array : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES**, property_array_count : UInt32, logger_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
@@ -2840,22 +3151,25 @@ module Win32cr::System::Diagnostics::Etw
     fun QueryAllTracesA(property_array : Win32cr::System::Diagnostics::Etw::EVENT_TRACE_PROPERTIES**, property_array_count : UInt32, logger_count : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun EnableTrace(enable : UInt32, enable_flag : UInt32, enable_level : UInt32, control_guid : LibC::GUID*, trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    fun EnableTrace(enable : UInt32, enable_flag : UInt32, enable_level : UInt32, control_guid : LibC::GUID*, trace_id : UInt64) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun EnableTraceEx(provider_id : LibC::GUID*, source_id : LibC::GUID*, trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, is_enabled : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, enable_property : UInt32, enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    fun EnableTraceEx(provider_id : LibC::GUID*, source_id : LibC::GUID*, trace_id : UInt64, is_enabled : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, enable_property : UInt32, enable_filter_desc : Win32cr::System::Diagnostics::Etw::EVENT_FILTER_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun EnableTraceEx2(trace_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, provider_id : LibC::GUID*, control_code : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, timeout : UInt32, enable_parameters : Win32cr::System::Diagnostics::Etw::ENABLE_TRACE_PARAMETERS*) : Win32cr::Foundation::WIN32_ERROR
+    fun EnableTraceEx2(trace_id : UInt64, provider_id : LibC::GUID*, control_code : UInt32, level : UInt8, match_any_keyword : UInt64, match_all_keyword : UInt64, timeout : UInt32, enable_parameters : Win32cr::System::Diagnostics::Etw::ENABLE_TRACE_PARAMETERS*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun EnumerateTraceGuidsEx(trace_query_info_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, in_buffer : Void*, in_buffer_size : UInt32, out_buffer : Void*, out_buffer_size : UInt32, return_length : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun TraceSetInformation(session_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    fun TraceSetInformation(trace_id : UInt64, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun TraceQueryInformation(session_handle : Win32cr::System::Diagnostics::Etw::CONTROLTRACE_HANDLE, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    fun TraceQueryInformation(trace_id : UInt64, information_class : Win32cr::System::Diagnostics::Etw::TRACE_QUERY_INFO_CLASS, trace_information : Void*, information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+
+    # :nodoc:
+    fun TraceConfigureLastBranchRecord(trace_id : UInt64, lbr_configuration : Win32cr::System::Diagnostics::Etw::TRACE_LBR_CONFIGURATION, events : Win32cr::System::Diagnostics::Etw::CLASSIC_EVENT_ID*, event_count : UInt32) : UInt32
 
     # :nodoc:
     fun CreateTraceInstanceId(reg_handle : Win32cr::Foundation::HANDLE, inst_info : Win32cr::System::Diagnostics::Etw::EVENT_INSTANCE_INFO*) : Win32cr::Foundation::WIN32_ERROR
@@ -2897,6 +3211,27 @@ module Win32cr::System::Diagnostics::Etw
     fun CloseTrace(trace_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
+    fun OpenTraceFromBufferStream(options : Win32cr::System::Diagnostics::Etw::ETW_OPEN_TRACE_OPTIONS*, buffer_completion_callback : Win32cr::System::Diagnostics::Etw::PETW_BUFFER_COMPLETION_CALLBACK, buffer_completion_context : Void*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+
+    # :nodoc:
+    fun OpenTraceFromRealTimeLogger(logger_name : Win32cr::Foundation::PWSTR, options : Win32cr::System::Diagnostics::Etw::ETW_OPEN_TRACE_OPTIONS*, log_file_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+
+    # :nodoc:
+    fun OpenTraceFromRealTimeLoggerWithAllocationOptions(logger_name : Win32cr::Foundation::PWSTR, options : Win32cr::System::Diagnostics::Etw::ETW_OPEN_TRACE_OPTIONS*, allocation_size : LibC::UIntPtrT, memory_partition_handle : Win32cr::Foundation::HANDLE, log_file_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+
+    # :nodoc:
+    fun OpenTraceFromFile(log_file_name : Win32cr::Foundation::PWSTR, options : Win32cr::System::Diagnostics::Etw::ETW_OPEN_TRACE_OPTIONS*, log_file_header : Win32cr::System::Diagnostics::Etw::TRACE_LOGFILE_HEADER*) : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE
+
+    # :nodoc:
+    fun ProcessTraceBufferIncrementReference(trace_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE, buffer : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_HEADER*) : UInt32
+
+    # :nodoc:
+    fun ProcessTraceBufferDecrementReference(buffer : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_HEADER*) : UInt32
+
+    # :nodoc:
+    fun ProcessTraceAddBufferToBufferStream(trace_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE, buffer : Win32cr::System::Diagnostics::Etw::ETW_BUFFER_HEADER*, buffer_size : UInt32) : UInt32
+
+    # :nodoc:
     fun QueryTraceProcessingHandle(processing_handle : Win32cr::System::Diagnostics::Etw::PROCESSTRACE_HANDLE, information_class : Win32cr::System::Diagnostics::Etw::ETW_PROCESS_HANDLE_INFO_TYPE, in_buffer : Void*, in_buffer_size : UInt32, out_buffer : Void*, out_buffer_size : UInt32, return_length : UInt32*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
@@ -2915,37 +3250,37 @@ module Win32cr::System::Diagnostics::Etw
     fun TraceMessageVa(logger_handle : UInt64, message_flags : Win32cr::System::Diagnostics::Etw::TRACE_MESSAGE_FLAGS, message_guid : LibC::GUID*, message_number : UInt16, message_arg_list : Int8*) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun EventRegister(provider_id : LibC::GUID*, enable_callback : Win32cr::System::Diagnostics::Etw::PENABLECALLBACK, callback_context : Void*, reg_handle : UInt64*) : UInt32
+    fun EventRegister(provider_id : LibC::GUID*, enable_callback : Win32cr::System::Diagnostics::Etw::PENABLECALLBACK, callback_context : Void*, reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE*) : UInt32
 
     # :nodoc:
-    fun EventUnregister(reg_handle : UInt64) : UInt32
+    fun EventUnregister(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE) : UInt32
 
     # :nodoc:
-    fun EventSetInformation(reg_handle : UInt64, information_class : Win32cr::System::Diagnostics::Etw::EVENT_INFO_CLASS, event_information : Void*, information_length : UInt32) : UInt32
+    fun EventSetInformation(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, information_class : Win32cr::System::Diagnostics::Etw::EVENT_INFO_CLASS, event_information : Void*, information_length : UInt32) : UInt32
 
     # :nodoc:
-    fun EventEnabled(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*) : Win32cr::Foundation::BOOLEAN
+    fun EventEnabled(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*) : Win32cr::Foundation::BOOLEAN
 
     # :nodoc:
-    fun EventProviderEnabled(reg_handle : UInt64, level : UInt8, keyword : UInt64) : Win32cr::Foundation::BOOLEAN
+    fun EventProviderEnabled(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, level : UInt8, keyword : UInt64) : Win32cr::Foundation::BOOLEAN
 
     # :nodoc:
-    fun EventWrite(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+    fun EventWrite(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
 
     # :nodoc:
-    fun EventWriteTransfer(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+    fun EventWriteTransfer(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
 
     # :nodoc:
-    fun EventWriteEx(reg_handle : UInt64, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, filter : UInt64, flags : UInt32, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
+    fun EventWriteEx(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, event_descriptor : Win32cr::System::Diagnostics::Etw::EVENT_DESCRIPTOR*, filter : UInt64, flags : UInt32, activity_id : LibC::GUID*, related_activity_id : LibC::GUID*, user_data_count : UInt32, user_data : Win32cr::System::Diagnostics::Etw::EVENT_DATA_DESCRIPTOR*) : UInt32
 
     # :nodoc:
-    fun EventWriteString(reg_handle : UInt64, level : UInt8, keyword : UInt64, string : Win32cr::Foundation::PWSTR) : UInt32
+    fun EventWriteString(reg_handle : Win32cr::System::Diagnostics::Etw::REGHANDLE, level : UInt8, keyword : UInt64, string : Win32cr::Foundation::PWSTR) : UInt32
 
     # :nodoc:
     fun EventActivityIdControl(control_code : UInt32, activity_id : LibC::GUID*) : UInt32
 
     # :nodoc:
-    fun EventAccessControl(guid : LibC::GUID*, operation : UInt32, sid : Win32cr::Foundation::PSID, rights : UInt32, allow_or_deny : Win32cr::Foundation::BOOLEAN) : UInt32
+    fun EventAccessControl(guid : LibC::GUID*, operation : UInt32, sid : Win32cr::Security::PSID, rights : UInt32, allow_or_deny : Win32cr::Foundation::BOOLEAN) : UInt32
 
     # :nodoc:
     fun EventAccessQuery(guid : LibC::GUID*, buffer : Win32cr::Security::PSECURITY_DESCRIPTOR, buffer_size : UInt32*) : UInt32
@@ -3038,4 +3373,5 @@ module Win32cr::System::Diagnostics::Etw
     fun CveEventWrite(cve_id : Win32cr::Foundation::PWSTR, additional_details : Win32cr::Foundation::PWSTR) : Int32
 
   end
+  {% end %}
 end

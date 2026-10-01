@@ -5,11 +5,12 @@ require "./../../../media/media_foundation.cr"
 
 module Win32cr::System::WinRT::Graphics::Imaging
   extend self
-  CLSID_SoftwareBitmapNativeFactory = "84e65691-8602-4a84-be46-708be9cd4b74"
+  CLSID_SoftwareBitmapNativeFactory = LibC::GUID.new(0x84e65691_u32, 0x8602_u16, 0x4a84_u16, StaticArray[0xbe_u8, 0x46_u8, 0x70_u8, 0x8b_u8, 0xe9_u8, 0xcd_u8, 0x4b_u8, 0x74_u8])
 
 
   @[Extern]
-  record ISoftwareBitmapNativeVtbl,
+
+  record ISoftwareBitmapNativeVtable,
     query_interface : Proc(ISoftwareBitmapNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISoftwareBitmapNative*, UInt32),
     release : Proc(ISoftwareBitmapNative*, UInt32),
@@ -20,7 +21,7 @@ module Win32cr::System::WinRT::Graphics::Imaging
 
 
   @[Extern]
-  record ISoftwareBitmapNative, lpVtbl : ISoftwareBitmapNativeVtbl* do
+  record ISoftwareBitmapNative, lpVtbl : ISoftwareBitmapNativeVtable* do
     GUID = LibC::GUID.new(0x94bc8415_u32, 0x4ea_u16, 0x4b2e_u16, StaticArray[0xaf_u8, 0x13_u8, 0x4d_u8, 0xe9_u8, 0x5a_u8, 0xa8_u8, 0x98_u8, 0xeb_u8])
     def query_interface(this : ISoftwareBitmapNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47,7 +48,8 @@ module Win32cr::System::WinRT::Graphics::Imaging
   end
 
   @[Extern]
-  record ISoftwareBitmapNativeFactoryVtbl,
+
+  record ISoftwareBitmapNativeFactoryVtable,
     query_interface : Proc(ISoftwareBitmapNativeFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISoftwareBitmapNativeFactory*, UInt32),
     release : Proc(ISoftwareBitmapNativeFactory*, UInt32),
@@ -59,7 +61,7 @@ module Win32cr::System::WinRT::Graphics::Imaging
 
 
   @[Extern]
-  record ISoftwareBitmapNativeFactory, lpVtbl : ISoftwareBitmapNativeFactoryVtbl* do
+  record ISoftwareBitmapNativeFactory, lpVtbl : ISoftwareBitmapNativeFactoryVtable* do
     GUID = LibC::GUID.new(0xc3c181ec_u32, 0x2914_u16, 0x4791_u16, StaticArray[0xaf_u8, 0x2_u8, 0x2_u8, 0xd2_u8, 0x24_u8, 0xa1_u8, 0xb_u8, 0x43_u8])
     def query_interface(this : ISoftwareBitmapNativeFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

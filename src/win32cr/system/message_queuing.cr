@@ -1,8 +1,15 @@
-require "./com.cr"
 require "./../foundation.cr"
+require "./com.cr"
+require "./variant.cr"
+require "./com/structured_storage.cr"
+require "./io.cr"
+require "./../security.cr"
+require "./distributed_transaction_coordinator.cr"
 
 module Win32cr::System::MessageQueuing
   extend self
+  alias PMQRECEIVECALLBACK = Proc(Win32cr::Foundation::HRESULT, LibC::IntPtrT, UInt32, UInt32, Win32cr::System::MessageQueuing::MQMSGPROPS*, Win32cr::System::IO::OVERLAPPED*, Win32cr::Foundation::HANDLE, Void)
+
   PRLT = 0_u32
   PRLE = 1_u32
   PRGT = 2_u32
@@ -122,6 +129,8 @@ module Win32cr::System::MessageQueuing
   PROPID_Q_PATHNAME_DNS = 124_u32
   PROPID_Q_MULTICAST_ADDRESS = 125_u32
   PROPID_Q_ADS_PATH = 126_u32
+  MQ_QTYPE_REPORT = LibC::GUID.new(0x55ee8f32_u32, 0xcce9_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0x8_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xd6_u8, 0x1c_u8, 0xe9_u8])
+  MQ_QTYPE_TEST = LibC::GUID.new(0x55ee8f33_u32, 0xcce9_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0x8_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xd6_u8, 0x1c_u8, 0xe9_u8])
   PROPID_QM_BASE = 200_u32
   PROPID_QM_SITE_ID = 201_u32
   PROPID_QM_MACHINE_ID = 202_u32
@@ -206,13 +215,6 @@ module Win32cr::System::MessageQueuing
   QUEUE_ACTION_RESUME = "RESUME"
   QUEUE_ACTION_EOD_RESEND = "EOD_RESEND"
   LONG_LIVED = 4294967294_u32
-  MQSEC_DELETE_MESSAGE = 1_u32
-  MQSEC_PEEK_MESSAGE = 2_u32
-  MQSEC_WRITE_MESSAGE = 4_u32
-  MQSEC_DELETE_JOURNAL_MESSAGE = 8_u32
-  MQSEC_SET_QUEUE_PROPERTIES = 16_u32
-  MQSEC_GET_QUEUE_PROPERTIES = 32_u32
-  MQSEC_QUEUE_GENERIC_EXECUTE = 0_u32
   MQ_OK = 0_i32
   MQ_ERROR_RESOLVE_ADDRESS = -1072824167_i32
   MQ_ERROR_TOO_MANY_PROPERTIES = -1072824166_i32
@@ -249,6 +251,25 @@ module Win32cr::System::MessageQueuing
 
   CLSID_MSMQQueueManagement = LibC::GUID.new(0x33b6d07e_u32, 0xf27d_u16, 0x42fa_u16, StaticArray[0xb2_u8, 0xd7_u8, 0xbf_u8, 0x82_u8, 0xe1_u8, 0x1e_u8, 0x93_u8, 0x74_u8])
 
+  @[Flags]
+  enum MQQUEUEACCESSMASK : UInt32
+    MQSEC_DELETE_QUEUE = 65536_u32
+    MQSEC_GET_QUEUE_PERMISSIONS = 131072_u32
+    MQSEC_CHANGE_QUEUE_PERMISSIONS = 262144_u32
+    MQSEC_TAKE_QUEUE_OWNERSHIP = 524288_u32
+    MQSEC_RECEIVE_MESSAGE = 3_u32
+    MQSEC_RECEIVE_JOURNAL_MESSAGE = 10_u32
+    MQSEC_QUEUE_GENERIC_READ = 131115_u32
+    MQSEC_QUEUE_GENERIC_WRITE = 131108_u32
+    MQSEC_QUEUE_GENERIC_ALL = 983103_u32
+    MQSEC_DELETE_MESSAGE = 1_u32
+    MQSEC_PEEK_MESSAGE = 2_u32
+    MQSEC_WRITE_MESSAGE = 4_u32
+    MQSEC_DELETE_JOURNAL_MESSAGE = 8_u32
+    MQSEC_SET_QUEUE_PROPERTIES = 16_u32
+    MQSEC_GET_QUEUE_PROPERTIES = 32_u32
+    MQSEC_QUEUE_GENERIC_EXECUTE = 0_u32
+  end
   enum MQCALG
     MQMSG_CALG_MD2 = 32769_i32
     MQMSG_CALG_MD4 = 32770_i32
@@ -597,21 +618,141 @@ module Win32cr::System::MessageQueuing
     MQ_INFORMATION_INTERNAL_USER_CERT_EXIST = 1074659338_i32
     MQ_INFORMATION_OWNER_IGNORED = 1074659339_i32
   end
+  enum MQConnectionState
+    MQCONN_NOFAILURE = 0_i32
+    MQCONN_ESTABLISH_PACKET_RECEIVED = 1_i32
+    MQCONN_READY = 2_i32
+    MQCONN_UNKNOWN_FAILURE = -2147483648_i32
+    MQCONN_PING_FAILURE = -2147483647_i32
+    MQCONN_CREATE_SOCKET_FAILURE = -2147483646_i32
+    MQCONN_BIND_SOCKET_FAILURE = -2147483645_i32
+    MQCONN_CONNECT_SOCKET_FAILURE = -2147483644_i32
+    MQCONN_TCP_NOT_ENABLED = -2147483643_i32
+    MQCONN_SEND_FAILURE = -2147483642_i32
+    MQCONN_NOT_READY = -2147483641_i32
+    MQCONN_NAME_RESOLUTION_FAILURE = -2147483640_i32
+    MQCONN_INVALID_SERVER_CERT = -2147483639_i32
+    MQCONN_LIMIT_REACHED = -2147483638_i32
+    MQCONN_REFUSED_BY_OTHER_SIDE = -2147483637_i32
+    MQCONN_ROUTING_FAILURE = -2147483636_i32
+    MQCONN_OUT_OF_MEMORY = -2147483635_i32
+  end
 
   @[Extern]
-  record IMSMQQueryVtbl,
+  struct MQPROPERTYRESTRICTION
+    property rel : UInt32
+    property prop : UInt32
+    property prval : Win32cr::System::Com::StructuredStorage::PROPVARIANT
+    def initialize(@rel : UInt32, @prop : UInt32, @prval : Win32cr::System::Com::StructuredStorage::PROPVARIANT)
+    end
+  end
+
+  @[Extern]
+  struct MQRESTRICTION
+    property cRes : UInt32
+    property paPropRes : Win32cr::System::MessageQueuing::MQPROPERTYRESTRICTION*
+    def initialize(@cRes : UInt32, @paPropRes : Win32cr::System::MessageQueuing::MQPROPERTYRESTRICTION*)
+    end
+  end
+
+  @[Extern]
+  struct MQCOLUMNSET
+    property cCol : UInt32
+    property aCol : UInt32*
+    def initialize(@cCol : UInt32, @aCol : UInt32*)
+    end
+  end
+
+  @[Extern]
+  struct MQSORTKEY
+    property propColumn : UInt32
+    property dwOrder : UInt32
+    def initialize(@propColumn : UInt32, @dwOrder : UInt32)
+    end
+  end
+
+  @[Extern]
+  struct MQSORTSET
+    property cCol : UInt32
+    property aCol : Win32cr::System::MessageQueuing::MQSORTKEY*
+    def initialize(@cCol : UInt32, @aCol : Win32cr::System::MessageQueuing::MQSORTKEY*)
+    end
+  end
+
+  @[Extern]
+  struct MQMSGPROPS
+    property cProp : UInt32
+    property aPropID : UInt32*
+    property aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    property aStatus : Win32cr::Foundation::HRESULT*
+    def initialize(@cProp : UInt32, @aPropID : UInt32*, @aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, @aStatus : Win32cr::Foundation::HRESULT*)
+    end
+  end
+
+  @[Extern]
+  struct MQQUEUEPROPS
+    property cProp : UInt32
+    property aPropID : UInt32*
+    property aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    property aStatus : Win32cr::Foundation::HRESULT*
+    def initialize(@cProp : UInt32, @aPropID : UInt32*, @aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, @aStatus : Win32cr::Foundation::HRESULT*)
+    end
+  end
+
+  @[Extern]
+  struct MQQMPROPS
+    property cProp : UInt32
+    property aPropID : UInt32*
+    property aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    property aStatus : Win32cr::Foundation::HRESULT*
+    def initialize(@cProp : UInt32, @aPropID : UInt32*, @aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, @aStatus : Win32cr::Foundation::HRESULT*)
+    end
+  end
+
+  @[Extern]
+  struct MQPRIVATEPROPS
+    property cProp : UInt32
+    property aPropID : UInt32*
+    property aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    property aStatus : Win32cr::Foundation::HRESULT*
+    def initialize(@cProp : UInt32, @aPropID : UInt32*, @aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, @aStatus : Win32cr::Foundation::HRESULT*)
+    end
+  end
+
+  @[Extern]
+  struct MQMGMTPROPS
+    property cProp : UInt32
+    property aPropID : UInt32*
+    property aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*
+    property aStatus : Win32cr::Foundation::HRESULT*
+    def initialize(@cProp : UInt32, @aPropID : UInt32*, @aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, @aStatus : Win32cr::Foundation::HRESULT*)
+    end
+  end
+
+  @[Extern]
+  struct SEQUENCE_INFO
+    property seq_id : Int64
+    property seq_no : UInt32
+    property prev_no : UInt32
+    def initialize(@seq_id : Int64, @seq_no : UInt32, @prev_no : UInt32)
+    end
+  end
+
+  @[Extern]
+
+  record IMSMQQueryVtable,
     query_interface : Proc(IMSMQQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQuery*, UInt32),
     release : Proc(IMSMQQuery*, UInt32),
     get_type_info_count : Proc(IMSMQQuery*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQuery*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQuery*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQuery*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    lookup_queue : Proc(IMSMQQuery*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IMSMQQuery*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    lookup_queue : Proc(IMSMQQuery*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQuery, lpVtbl : IMSMQQueryVtbl* do
+  record IMSMQQuery, lpVtbl : IMSMQQueryVtable* do
     GUID = LibC::GUID.new(0xd7d6e072_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -631,24 +772,25 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQuery*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQuery*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQuery*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def lookup_queue(this : IMSMQQuery*, queue_guid : Win32cr::System::Com::VARIANT*, service_type_guid : Win32cr::System::Com::VARIANT*, label : Win32cr::System::Com::VARIANT*, create_time : Win32cr::System::Com::VARIANT*, modify_time : Win32cr::System::Com::VARIANT*, rel_service_type : Win32cr::System::Com::VARIANT*, rel_label : Win32cr::System::Com::VARIANT*, rel_create_time : Win32cr::System::Com::VARIANT*, rel_modify_time : Win32cr::System::Com::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
+    def lookup_queue(this : IMSMQQuery*, queue_guid : Win32cr::System::Variant::VARIANT*, service_type_guid : Win32cr::System::Variant::VARIANT*, label : Win32cr::System::Variant::VARIANT*, create_time : Win32cr::System::Variant::VARIANT*, modify_time : Win32cr::System::Variant::VARIANT*, rel_service_type : Win32cr::System::Variant::VARIANT*, rel_label : Win32cr::System::Variant::VARIANT*, rel_create_time : Win32cr::System::Variant::VARIANT*, rel_modify_time : Win32cr::System::Variant::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lookup_queue.call(this, queue_guid, service_type_guid, label, create_time, modify_time, rel_service_type, rel_label, rel_create_time, rel_modify_time, ppqinfos)
     end
 
   end
 
   @[Extern]
-  record IMSMQQueueInfoVtbl,
+
+  record IMSMQQueueInfoVtable,
     query_interface : Proc(IMSMQQueueInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfo*, UInt32),
     release : Proc(IMSMQQueueInfo*, UInt32),
     get_type_info_count : Proc(IMSMQQueueInfo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueInfo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueInfo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueInfo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueInfo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_QueueGuid : Proc(IMSMQQueueInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ServiceTypeGuid : Proc(IMSMQQueueInfo*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ServiceTypeGuid : Proc(IMSMQQueueInfo*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -667,14 +809,14 @@ module Win32cr::System::MessageQueuing
     put_Quota : Proc(IMSMQQueueInfo*, Int32, Win32cr::Foundation::HRESULT),
     get_BasePriority : Proc(IMSMQQueueInfo*, Int32*, Win32cr::Foundation::HRESULT),
     put_BasePriority : Proc(IMSMQQueueInfo*, Int32, Win32cr::Foundation::HRESULT),
-    get_CreateTime : Proc(IMSMQQueueInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ModifyTime : Proc(IMSMQQueueInfo*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CreateTime : Proc(IMSMQQueueInfo*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ModifyTime : Proc(IMSMQQueueInfo*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Authenticate : Proc(IMSMQQueueInfo*, Int32*, Win32cr::Foundation::HRESULT),
     put_Authenticate : Proc(IMSMQQueueInfo*, Int32, Win32cr::Foundation::HRESULT),
     get_JournalQuota : Proc(IMSMQQueueInfo*, Int32*, Win32cr::Foundation::HRESULT),
     put_JournalQuota : Proc(IMSMQQueueInfo*, Int32, Win32cr::Foundation::HRESULT),
     get_IsWorldReadable : Proc(IMSMQQueueInfo*, Int16*, Win32cr::Foundation::HRESULT),
-    create : Proc(IMSMQQueueInfo*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    create : Proc(IMSMQQueueInfo*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     delete : Proc(IMSMQQueueInfo*, Win32cr::Foundation::HRESULT),
     open : Proc(IMSMQQueueInfo*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IMSMQQueueInfo*, Win32cr::Foundation::HRESULT),
@@ -682,7 +824,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfo, lpVtbl : IMSMQQueueInfoVtbl* do
+  record IMSMQQueueInfo, lpVtbl : IMSMQQueueInfoVtable* do
     GUID = LibC::GUID.new(0xd7d6e07b_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueueInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -702,8 +844,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueInfo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueInfo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_QueueGuid(this : IMSMQQueueInfo*, pbstrGuidQueue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QueueGuid.call(this, pbstrGuidQueue)
@@ -759,10 +901,10 @@ module Win32cr::System::MessageQueuing
     def put_BasePriority(this : IMSMQQueueInfo*, lBasePriority : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BasePriority.call(this, lBasePriority)
     end
-    def get_CreateTime(this : IMSMQQueueInfo*, pvarCreateTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CreateTime(this : IMSMQQueueInfo*, pvarCreateTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CreateTime.call(this, pvarCreateTime)
     end
-    def get_ModifyTime(this : IMSMQQueueInfo*, pvarModifyTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ModifyTime(this : IMSMQQueueInfo*, pvarModifyTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModifyTime.call(this, pvarModifyTime)
     end
     def get_Authenticate(this : IMSMQQueueInfo*, plAuthenticate : Int32*) : Win32cr::Foundation::HRESULT
@@ -780,7 +922,7 @@ module Win32cr::System::MessageQueuing
     def get_IsWorldReadable(this : IMSMQQueueInfo*, pisWorldReadable : Int16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsWorldReadable.call(this, pisWorldReadable)
     end
-    def create(this : IMSMQQueueInfo*, is_transactional : Win32cr::System::Com::VARIANT*, is_world_readable : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def create(this : IMSMQQueueInfo*, is_transactional : Win32cr::System::Variant::VARIANT*, is_world_readable : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create.call(this, is_transactional, is_world_readable)
     end
     def delete(this : IMSMQQueueInfo*) : Win32cr::Foundation::HRESULT
@@ -799,14 +941,15 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfo2Vtbl,
+
+  record IMSMQQueueInfo2Vtable,
     query_interface : Proc(IMSMQQueueInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfo2*, UInt32),
     release : Proc(IMSMQQueueInfo2*, UInt32),
     get_type_info_count : Proc(IMSMQQueueInfo2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueInfo2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueInfo2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueInfo2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueInfo2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_QueueGuid : Proc(IMSMQQueueInfo2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ServiceTypeGuid : Proc(IMSMQQueueInfo2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ServiceTypeGuid : Proc(IMSMQQueueInfo2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -825,26 +968,26 @@ module Win32cr::System::MessageQueuing
     put_Quota : Proc(IMSMQQueueInfo2*, Int32, Win32cr::Foundation::HRESULT),
     get_BasePriority : Proc(IMSMQQueueInfo2*, Int32*, Win32cr::Foundation::HRESULT),
     put_BasePriority : Proc(IMSMQQueueInfo2*, Int32, Win32cr::Foundation::HRESULT),
-    get_CreateTime : Proc(IMSMQQueueInfo2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ModifyTime : Proc(IMSMQQueueInfo2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CreateTime : Proc(IMSMQQueueInfo2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ModifyTime : Proc(IMSMQQueueInfo2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Authenticate : Proc(IMSMQQueueInfo2*, Int32*, Win32cr::Foundation::HRESULT),
     put_Authenticate : Proc(IMSMQQueueInfo2*, Int32, Win32cr::Foundation::HRESULT),
     get_JournalQuota : Proc(IMSMQQueueInfo2*, Int32*, Win32cr::Foundation::HRESULT),
     put_JournalQuota : Proc(IMSMQQueueInfo2*, Int32, Win32cr::Foundation::HRESULT),
     get_IsWorldReadable : Proc(IMSMQQueueInfo2*, Int16*, Win32cr::Foundation::HRESULT),
-    create : Proc(IMSMQQueueInfo2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    create : Proc(IMSMQQueueInfo2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     delete : Proc(IMSMQQueueInfo2*, Win32cr::Foundation::HRESULT),
     open : Proc(IMSMQQueueInfo2*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IMSMQQueueInfo2*, Win32cr::Foundation::HRESULT),
     update : Proc(IMSMQQueueInfo2*, Win32cr::Foundation::HRESULT),
     get_PathNameDNS : Proc(IMSMQQueueInfo2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueueInfo2*, Void**, Win32cr::Foundation::HRESULT),
-    get_Security : Proc(IMSMQQueueInfo2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Security : Proc(IMSMQQueueInfo2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    get_Security : Proc(IMSMQQueueInfo2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Security : Proc(IMSMQQueueInfo2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueueInfo2, lpVtbl : IMSMQQueueInfo2Vtbl* do
+  record IMSMQQueueInfo2, lpVtbl : IMSMQQueueInfo2Vtable* do
     GUID = LibC::GUID.new(0xfd174a80_u32, 0x89cf_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xf2_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -864,8 +1007,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueInfo2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueInfo2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueInfo2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_QueueGuid(this : IMSMQQueueInfo2*, pbstrGuidQueue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QueueGuid.call(this, pbstrGuidQueue)
@@ -921,10 +1064,10 @@ module Win32cr::System::MessageQueuing
     def put_BasePriority(this : IMSMQQueueInfo2*, lBasePriority : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BasePriority.call(this, lBasePriority)
     end
-    def get_CreateTime(this : IMSMQQueueInfo2*, pvarCreateTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CreateTime(this : IMSMQQueueInfo2*, pvarCreateTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CreateTime.call(this, pvarCreateTime)
     end
-    def get_ModifyTime(this : IMSMQQueueInfo2*, pvarModifyTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ModifyTime(this : IMSMQQueueInfo2*, pvarModifyTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModifyTime.call(this, pvarModifyTime)
     end
     def get_Authenticate(this : IMSMQQueueInfo2*, plAuthenticate : Int32*) : Win32cr::Foundation::HRESULT
@@ -942,7 +1085,7 @@ module Win32cr::System::MessageQueuing
     def get_IsWorldReadable(this : IMSMQQueueInfo2*, pisWorldReadable : Int16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsWorldReadable.call(this, pisWorldReadable)
     end
-    def create(this : IMSMQQueueInfo2*, is_transactional : Win32cr::System::Com::VARIANT*, is_world_readable : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def create(this : IMSMQQueueInfo2*, is_transactional : Win32cr::System::Variant::VARIANT*, is_world_readable : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create.call(this, is_transactional, is_world_readable)
     end
     def delete(this : IMSMQQueueInfo2*) : Win32cr::Foundation::HRESULT
@@ -963,24 +1106,25 @@ module Win32cr::System::MessageQueuing
     def get_Properties(this : IMSMQQueueInfo2*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_Security(this : IMSMQQueueInfo2*, pvarSecurity : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Security(this : IMSMQQueueInfo2*, pvarSecurity : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Security.call(this, pvarSecurity)
     end
-    def put_Security(this : IMSMQQueueInfo2*, varSecurity : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Security(this : IMSMQQueueInfo2*, varSecurity : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Security.call(this, varSecurity)
     end
 
   end
 
   @[Extern]
-  record IMSMQQueueInfo3Vtbl,
+
+  record IMSMQQueueInfo3Vtable,
     query_interface : Proc(IMSMQQueueInfo3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfo3*, UInt32),
     release : Proc(IMSMQQueueInfo3*, UInt32),
     get_type_info_count : Proc(IMSMQQueueInfo3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueInfo3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueInfo3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueInfo3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueInfo3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_QueueGuid : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ServiceTypeGuid : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ServiceTypeGuid : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -999,31 +1143,31 @@ module Win32cr::System::MessageQueuing
     put_Quota : Proc(IMSMQQueueInfo3*, Int32, Win32cr::Foundation::HRESULT),
     get_BasePriority : Proc(IMSMQQueueInfo3*, Int32*, Win32cr::Foundation::HRESULT),
     put_BasePriority : Proc(IMSMQQueueInfo3*, Int32, Win32cr::Foundation::HRESULT),
-    get_CreateTime : Proc(IMSMQQueueInfo3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ModifyTime : Proc(IMSMQQueueInfo3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CreateTime : Proc(IMSMQQueueInfo3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ModifyTime : Proc(IMSMQQueueInfo3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Authenticate : Proc(IMSMQQueueInfo3*, Int32*, Win32cr::Foundation::HRESULT),
     put_Authenticate : Proc(IMSMQQueueInfo3*, Int32, Win32cr::Foundation::HRESULT),
     get_JournalQuota : Proc(IMSMQQueueInfo3*, Int32*, Win32cr::Foundation::HRESULT),
     put_JournalQuota : Proc(IMSMQQueueInfo3*, Int32, Win32cr::Foundation::HRESULT),
     get_IsWorldReadable : Proc(IMSMQQueueInfo3*, Int16*, Win32cr::Foundation::HRESULT),
-    create : Proc(IMSMQQueueInfo3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    create : Proc(IMSMQQueueInfo3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     delete : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::HRESULT),
     open : Proc(IMSMQQueueInfo3*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::HRESULT),
     update : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::HRESULT),
     get_PathNameDNS : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueueInfo3*, Void**, Win32cr::Foundation::HRESULT),
-    get_Security : Proc(IMSMQQueueInfo3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Security : Proc(IMSMQQueueInfo3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_IsTransactional2 : Proc(IMSMQQueueInfo3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsWorldReadable2 : Proc(IMSMQQueueInfo3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Security : Proc(IMSMQQueueInfo3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Security : Proc(IMSMQQueueInfo3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_IsTransactional2 : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsWorldReadable2 : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_MulticastAddress : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_MulticastAddress : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ADsPath : Proc(IMSMQQueueInfo3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueueInfo3, lpVtbl : IMSMQQueueInfo3Vtbl* do
+  record IMSMQQueueInfo3, lpVtbl : IMSMQQueueInfo3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1d_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1043,8 +1187,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueInfo3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueInfo3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueInfo3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_QueueGuid(this : IMSMQQueueInfo3*, pbstrGuidQueue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QueueGuid.call(this, pbstrGuidQueue)
@@ -1100,10 +1244,10 @@ module Win32cr::System::MessageQueuing
     def put_BasePriority(this : IMSMQQueueInfo3*, lBasePriority : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BasePriority.call(this, lBasePriority)
     end
-    def get_CreateTime(this : IMSMQQueueInfo3*, pvarCreateTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CreateTime(this : IMSMQQueueInfo3*, pvarCreateTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CreateTime.call(this, pvarCreateTime)
     end
-    def get_ModifyTime(this : IMSMQQueueInfo3*, pvarModifyTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ModifyTime(this : IMSMQQueueInfo3*, pvarModifyTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModifyTime.call(this, pvarModifyTime)
     end
     def get_Authenticate(this : IMSMQQueueInfo3*, plAuthenticate : Int32*) : Win32cr::Foundation::HRESULT
@@ -1121,7 +1265,7 @@ module Win32cr::System::MessageQueuing
     def get_IsWorldReadable(this : IMSMQQueueInfo3*, pisWorldReadable : Int16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsWorldReadable.call(this, pisWorldReadable)
     end
-    def create(this : IMSMQQueueInfo3*, is_transactional : Win32cr::System::Com::VARIANT*, is_world_readable : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def create(this : IMSMQQueueInfo3*, is_transactional : Win32cr::System::Variant::VARIANT*, is_world_readable : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create.call(this, is_transactional, is_world_readable)
     end
     def delete(this : IMSMQQueueInfo3*) : Win32cr::Foundation::HRESULT
@@ -1142,16 +1286,16 @@ module Win32cr::System::MessageQueuing
     def get_Properties(this : IMSMQQueueInfo3*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_Security(this : IMSMQQueueInfo3*, pvarSecurity : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Security(this : IMSMQQueueInfo3*, pvarSecurity : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Security.call(this, pvarSecurity)
     end
-    def put_Security(this : IMSMQQueueInfo3*, varSecurity : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Security(this : IMSMQQueueInfo3*, varSecurity : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Security.call(this, varSecurity)
     end
-    def get_IsTransactional2(this : IMSMQQueueInfo3*, pisTransactional : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsTransactional2(this : IMSMQQueueInfo3*, pisTransactional : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsTransactional2.call(this, pisTransactional)
     end
-    def get_IsWorldReadable2(this : IMSMQQueueInfo3*, pisWorldReadable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsWorldReadable2(this : IMSMQQueueInfo3*, pisWorldReadable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsWorldReadable2.call(this, pisWorldReadable)
     end
     def get_MulticastAddress(this : IMSMQQueueInfo3*, pbstrMulticastAddress : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1167,14 +1311,15 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfo4Vtbl,
+
+  record IMSMQQueueInfo4Vtable,
     query_interface : Proc(IMSMQQueueInfo4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfo4*, UInt32),
     release : Proc(IMSMQQueueInfo4*, UInt32),
     get_type_info_count : Proc(IMSMQQueueInfo4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueInfo4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueInfo4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueInfo4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueInfo4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_QueueGuid : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_ServiceTypeGuid : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ServiceTypeGuid : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
@@ -1193,31 +1338,31 @@ module Win32cr::System::MessageQueuing
     put_Quota : Proc(IMSMQQueueInfo4*, Int32, Win32cr::Foundation::HRESULT),
     get_BasePriority : Proc(IMSMQQueueInfo4*, Int32*, Win32cr::Foundation::HRESULT),
     put_BasePriority : Proc(IMSMQQueueInfo4*, Int32, Win32cr::Foundation::HRESULT),
-    get_CreateTime : Proc(IMSMQQueueInfo4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ModifyTime : Proc(IMSMQQueueInfo4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CreateTime : Proc(IMSMQQueueInfo4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ModifyTime : Proc(IMSMQQueueInfo4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Authenticate : Proc(IMSMQQueueInfo4*, Int32*, Win32cr::Foundation::HRESULT),
     put_Authenticate : Proc(IMSMQQueueInfo4*, Int32, Win32cr::Foundation::HRESULT),
     get_JournalQuota : Proc(IMSMQQueueInfo4*, Int32*, Win32cr::Foundation::HRESULT),
     put_JournalQuota : Proc(IMSMQQueueInfo4*, Int32, Win32cr::Foundation::HRESULT),
     get_IsWorldReadable : Proc(IMSMQQueueInfo4*, Int16*, Win32cr::Foundation::HRESULT),
-    create : Proc(IMSMQQueueInfo4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    create : Proc(IMSMQQueueInfo4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     delete : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::HRESULT),
     open : Proc(IMSMQQueueInfo4*, Int32, Int32, Void**, Win32cr::Foundation::HRESULT),
     refresh : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::HRESULT),
     update : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::HRESULT),
     get_PathNameDNS : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueueInfo4*, Void**, Win32cr::Foundation::HRESULT),
-    get_Security : Proc(IMSMQQueueInfo4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Security : Proc(IMSMQQueueInfo4*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_IsTransactional2 : Proc(IMSMQQueueInfo4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsWorldReadable2 : Proc(IMSMQQueueInfo4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_Security : Proc(IMSMQQueueInfo4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Security : Proc(IMSMQQueueInfo4*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_IsTransactional2 : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsWorldReadable2 : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_MulticastAddress : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_MulticastAddress : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_ADsPath : Proc(IMSMQQueueInfo4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueueInfo4, lpVtbl : IMSMQQueueInfo4Vtbl* do
+  record IMSMQQueueInfo4, lpVtbl : IMSMQQueueInfo4Vtable* do
     GUID = LibC::GUID.new(0xeba96b21_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1237,8 +1382,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueInfo4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueInfo4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueInfo4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_QueueGuid(this : IMSMQQueueInfo4*, pbstrGuidQueue : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QueueGuid.call(this, pbstrGuidQueue)
@@ -1294,10 +1439,10 @@ module Win32cr::System::MessageQueuing
     def put_BasePriority(this : IMSMQQueueInfo4*, lBasePriority : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_BasePriority.call(this, lBasePriority)
     end
-    def get_CreateTime(this : IMSMQQueueInfo4*, pvarCreateTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CreateTime(this : IMSMQQueueInfo4*, pvarCreateTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CreateTime.call(this, pvarCreateTime)
     end
-    def get_ModifyTime(this : IMSMQQueueInfo4*, pvarModifyTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ModifyTime(this : IMSMQQueueInfo4*, pvarModifyTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ModifyTime.call(this, pvarModifyTime)
     end
     def get_Authenticate(this : IMSMQQueueInfo4*, plAuthenticate : Int32*) : Win32cr::Foundation::HRESULT
@@ -1315,7 +1460,7 @@ module Win32cr::System::MessageQueuing
     def get_IsWorldReadable(this : IMSMQQueueInfo4*, pisWorldReadable : Int16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsWorldReadable.call(this, pisWorldReadable)
     end
-    def create(this : IMSMQQueueInfo4*, is_transactional : Win32cr::System::Com::VARIANT*, is_world_readable : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def create(this : IMSMQQueueInfo4*, is_transactional : Win32cr::System::Variant::VARIANT*, is_world_readable : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.create.call(this, is_transactional, is_world_readable)
     end
     def delete(this : IMSMQQueueInfo4*) : Win32cr::Foundation::HRESULT
@@ -1336,16 +1481,16 @@ module Win32cr::System::MessageQueuing
     def get_Properties(this : IMSMQQueueInfo4*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_Security(this : IMSMQQueueInfo4*, pvarSecurity : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Security(this : IMSMQQueueInfo4*, pvarSecurity : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Security.call(this, pvarSecurity)
     end
-    def put_Security(this : IMSMQQueueInfo4*, varSecurity : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Security(this : IMSMQQueueInfo4*, varSecurity : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Security.call(this, varSecurity)
     end
-    def get_IsTransactional2(this : IMSMQQueueInfo4*, pisTransactional : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsTransactional2(this : IMSMQQueueInfo4*, pisTransactional : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsTransactional2.call(this, pisTransactional)
     end
-    def get_IsWorldReadable2(this : IMSMQQueueInfo4*, pisWorldReadable : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsWorldReadable2(this : IMSMQQueueInfo4*, pisWorldReadable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsWorldReadable2.call(this, pisWorldReadable)
     end
     def get_MulticastAddress(this : IMSMQQueueInfo4*, pbstrMulticastAddress : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -1361,31 +1506,32 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueVtbl,
+
+  record IMSMQQueueVtable,
     query_interface : Proc(IMSMQQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueue*, UInt32),
     release : Proc(IMSMQQueue*, UInt32),
     get_type_info_count : Proc(IMSMQQueue*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueue*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueue*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueue*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueue*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Access : Proc(IMSMQQueue*, Int32*, Win32cr::Foundation::HRESULT),
     get_ShareMode : Proc(IMSMQQueue*, Int32*, Win32cr::Foundation::HRESULT),
     get_QueueInfo : Proc(IMSMQQueue*, Void**, Win32cr::Foundation::HRESULT),
     get_Handle : Proc(IMSMQQueue*, Int32*, Win32cr::Foundation::HRESULT),
     get_IsOpen : Proc(IMSMQQueue*, Int16*, Win32cr::Foundation::HRESULT),
     close : Proc(IMSMQQueue*, Win32cr::Foundation::HRESULT),
-    receive : Proc(IMSMQQueue*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek : Proc(IMSMQQueue*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    enable_notification : Proc(IMSMQQueue*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    receive : Proc(IMSMQQueue*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek : Proc(IMSMQQueue*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    enable_notification : Proc(IMSMQQueue*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMSMQQueue*, Win32cr::Foundation::HRESULT),
-    receive_current : Proc(IMSMQQueue*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next : Proc(IMSMQQueue*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_current : Proc(IMSMQQueue*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    receive_current : Proc(IMSMQQueue*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next : Proc(IMSMQQueue*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_current : Proc(IMSMQQueue*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueue, lpVtbl : IMSMQQueueVtbl* do
+  record IMSMQQueue, lpVtbl : IMSMQQueueVtable* do
     GUID = LibC::GUID.new(0xd7d6e076_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1405,8 +1551,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueue*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueue*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Access(this : IMSMQQueue*, plAccess : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Access.call(this, plAccess)
@@ -1426,62 +1572,63 @@ module Win32cr::System::MessageQueuing
     def close(this : IMSMQQueue*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
-    def receive(this : IMSMQQueue*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive(this : IMSMQQueue*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive.call(this, transaction, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek(this : IMSMQQueue*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek(this : IMSMQQueue*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def enable_notification(this : IMSMQQueue*, event : Void*, cursor : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def enable_notification(this : IMSMQQueue*, event : Void*, cursor : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_notification.call(this, event, cursor, receive_timeout)
     end
     def reset(this : IMSMQQueue*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
     end
-    def receive_current(this : IMSMQQueue*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_current(this : IMSMQQueue*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_current.call(this, transaction, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_next(this : IMSMQQueue*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next(this : IMSMQQueue*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_current(this : IMSMQQueue*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_current(this : IMSMQQueue*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_current.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
 
   end
 
   @[Extern]
-  record IMSMQQueue2Vtbl,
+
+  record IMSMQQueue2Vtable,
     query_interface : Proc(IMSMQQueue2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueue2*, UInt32),
     release : Proc(IMSMQQueue2*, UInt32),
     get_type_info_count : Proc(IMSMQQueue2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueue2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueue2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueue2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueue2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Access : Proc(IMSMQQueue2*, Int32*, Win32cr::Foundation::HRESULT),
     get_ShareMode : Proc(IMSMQQueue2*, Int32*, Win32cr::Foundation::HRESULT),
     get_QueueInfo : Proc(IMSMQQueue2*, Void**, Win32cr::Foundation::HRESULT),
     get_Handle : Proc(IMSMQQueue2*, Int32*, Win32cr::Foundation::HRESULT),
     get_IsOpen : Proc(IMSMQQueue2*, Int16*, Win32cr::Foundation::HRESULT),
     close : Proc(IMSMQQueue2*, Win32cr::Foundation::HRESULT),
-    receive_v1 : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_v1 : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    enable_notification : Proc(IMSMQQueue2*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    receive_v1 : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_v1 : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    enable_notification : Proc(IMSMQQueue2*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMSMQQueue2*, Win32cr::Foundation::HRESULT),
-    receive_current_v1 : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next_v1 : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_current_v1 : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_current : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_current : Proc(IMSMQQueue2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_current_v1 : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next_v1 : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_current_v1 : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_current : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_current : Proc(IMSMQQueue2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueue2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueue2, lpVtbl : IMSMQQueue2Vtbl* do
+  record IMSMQQueue2, lpVtbl : IMSMQQueue2Vtable* do
     GUID = LibC::GUID.new(0xef0574e0_u32, 0x6d8_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x0_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1501,8 +1648,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueue2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueue2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueue2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Access(this : IMSMQQueue2*, plAccess : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Access.call(this, plAccess)
@@ -1522,40 +1669,40 @@ module Win32cr::System::MessageQueuing
     def close(this : IMSMQQueue2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
-    def receive_v1(this : IMSMQQueue2*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_v1(this : IMSMQQueue2*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_v1.call(this, transaction, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_v1(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_v1(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def enable_notification(this : IMSMQQueue2*, event : Void*, cursor : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def enable_notification(this : IMSMQQueue2*, event : Void*, cursor : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_notification.call(this, event, cursor, receive_timeout)
     end
     def reset(this : IMSMQQueue2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
     end
-    def receive_current_v1(this : IMSMQQueue2*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_current_v1(this : IMSMQQueue2*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_current_v1.call(this, transaction, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_next_v1(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next_v1(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_current_v1(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_current_v1(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_current_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def receive(this : IMSMQQueue2*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive(this : IMSMQQueue2*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive.call(this, transaction, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def receive_current(this : IMSMQQueue2*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_current(this : IMSMQQueue2*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_current.call(this, transaction, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek_next(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek_current(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_current(this : IMSMQQueue2*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_current.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
     def get_Properties(this : IMSMQQueue2*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
@@ -1565,50 +1712,51 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueue3Vtbl,
+
+  record IMSMQQueue3Vtable,
     query_interface : Proc(IMSMQQueue3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueue3*, UInt32),
     release : Proc(IMSMQQueue3*, UInt32),
     get_type_info_count : Proc(IMSMQQueue3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueue3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueue3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueue3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueue3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Access : Proc(IMSMQQueue3*, Int32*, Win32cr::Foundation::HRESULT),
     get_ShareMode : Proc(IMSMQQueue3*, Int32*, Win32cr::Foundation::HRESULT),
     get_QueueInfo : Proc(IMSMQQueue3*, Void**, Win32cr::Foundation::HRESULT),
     get_Handle : Proc(IMSMQQueue3*, Int32*, Win32cr::Foundation::HRESULT),
     get_IsOpen : Proc(IMSMQQueue3*, Int16*, Win32cr::Foundation::HRESULT),
     close : Proc(IMSMQQueue3*, Win32cr::Foundation::HRESULT),
-    receive_v1 : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_v1 : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    enable_notification : Proc(IMSMQQueue3*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    receive_v1 : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_v1 : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    enable_notification : Proc(IMSMQQueue3*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMSMQQueue3*, Win32cr::Foundation::HRESULT),
-    receive_current_v1 : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next_v1 : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_current_v1 : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_current : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_current : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_current_v1 : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next_v1 : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_current_v1 : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_current : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_current : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueue3*, Void**, Win32cr::Foundation::HRESULT),
-    get_Handle2 : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    receive_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_next_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_previous_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_first_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_last_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_previous_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_first_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_last_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    get_Handle2 : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    receive_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_next_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_previous_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_first_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_last_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_previous_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_first_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_last_by_lookup_id : Proc(IMSMQQueue3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     purge : Proc(IMSMQQueue3*, Win32cr::Foundation::HRESULT),
-    get_IsOpen2 : Proc(IMSMQQueue3*, Int16*, Win32cr::Foundation::HRESULT)
+    get_IsOpen2 : Proc(IMSMQQueue3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueue3, lpVtbl : IMSMQQueue3Vtbl* do
+  record IMSMQQueue3, lpVtbl : IMSMQQueue3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1b_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1628,8 +1776,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueue3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueue3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueue3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Access(this : IMSMQQueue3*, plAccess : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Access.call(this, plAccess)
@@ -1649,133 +1797,134 @@ module Win32cr::System::MessageQueuing
     def close(this : IMSMQQueue3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
-    def receive_v1(this : IMSMQQueue3*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_v1(this : IMSMQQueue3*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_v1.call(this, transaction, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_v1(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_v1(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def enable_notification(this : IMSMQQueue3*, event : Void*, cursor : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def enable_notification(this : IMSMQQueue3*, event : Void*, cursor : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_notification.call(this, event, cursor, receive_timeout)
     end
     def reset(this : IMSMQQueue3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
     end
-    def receive_current_v1(this : IMSMQQueue3*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_current_v1(this : IMSMQQueue3*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_current_v1.call(this, transaction, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_next_v1(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next_v1(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_current_v1(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_current_v1(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_current_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def receive(this : IMSMQQueue3*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive(this : IMSMQQueue3*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive.call(this, transaction, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def receive_current(this : IMSMQQueue3*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_current(this : IMSMQQueue3*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_current.call(this, transaction, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek_next(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek_current(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_current(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_current.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
     def get_Properties(this : IMSMQQueue3*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_Handle2(this : IMSMQQueue3*, pvarHandle : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Handle2(this : IMSMQQueue3*, pvarHandle : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Handle2.call(this, pvarHandle)
     end
-    def receive_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Com::VARIANT, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Variant::VARIANT, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_by_lookup_id.call(this, lookup_id, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def receive_next_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Com::VARIANT, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_next_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Variant::VARIANT, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_next_by_lookup_id.call(this, lookup_id, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def receive_previous_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Com::VARIANT, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_previous_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Variant::VARIANT, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_previous_by_lookup_id.call(this, lookup_id, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def receive_first_by_lookup_id(this : IMSMQQueue3*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_first_by_lookup_id(this : IMSMQQueue3*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_first_by_lookup_id.call(this, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def receive_last_by_lookup_id(this : IMSMQQueue3*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_last_by_lookup_id(this : IMSMQQueue3*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_last_by_lookup_id.call(this, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Com::VARIANT, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Variant::VARIANT, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_by_lookup_id.call(this, lookup_id, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_next_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Com::VARIANT, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Variant::VARIANT, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next_by_lookup_id.call(this, lookup_id, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_previous_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Com::VARIANT, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_previous_by_lookup_id(this : IMSMQQueue3*, lookup_id : Win32cr::System::Variant::VARIANT, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_previous_by_lookup_id.call(this, lookup_id, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_first_by_lookup_id(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_first_by_lookup_id(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_first_by_lookup_id.call(this, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_last_by_lookup_id(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_last_by_lookup_id(this : IMSMQQueue3*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_last_by_lookup_id.call(this, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
     def purge(this : IMSMQQueue3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.purge.call(this)
     end
-    def get_IsOpen2(this : IMSMQQueue3*, pisOpen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsOpen2(this : IMSMQQueue3*, pisOpen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsOpen2.call(this, pisOpen)
     end
 
   end
 
   @[Extern]
-  record IMSMQQueue4Vtbl,
+
+  record IMSMQQueue4Vtable,
     query_interface : Proc(IMSMQQueue4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueue4*, UInt32),
     release : Proc(IMSMQQueue4*, UInt32),
     get_type_info_count : Proc(IMSMQQueue4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueue4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueue4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueue4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueue4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Access : Proc(IMSMQQueue4*, Int32*, Win32cr::Foundation::HRESULT),
     get_ShareMode : Proc(IMSMQQueue4*, Int32*, Win32cr::Foundation::HRESULT),
     get_QueueInfo : Proc(IMSMQQueue4*, Void**, Win32cr::Foundation::HRESULT),
     get_Handle : Proc(IMSMQQueue4*, Int32*, Win32cr::Foundation::HRESULT),
     get_IsOpen : Proc(IMSMQQueue4*, Int16*, Win32cr::Foundation::HRESULT),
     close : Proc(IMSMQQueue4*, Win32cr::Foundation::HRESULT),
-    receive_v1 : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_v1 : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    enable_notification : Proc(IMSMQQueue4*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    receive_v1 : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_v1 : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    enable_notification : Proc(IMSMQQueue4*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMSMQQueue4*, Win32cr::Foundation::HRESULT),
-    receive_current_v1 : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next_v1 : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_current_v1 : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_current : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_current : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_current_v1 : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next_v1 : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_current_v1 : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_current : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_current : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueue4*, Void**, Win32cr::Foundation::HRESULT),
-    get_Handle2 : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    receive_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_next_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_previous_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_first_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    receive_last_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_next_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_previous_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_first_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
-    peek_last_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    get_Handle2 : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    receive_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_next_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_previous_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_first_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    receive_last_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_next_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_previous_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_first_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    peek_last_by_lookup_id : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     purge : Proc(IMSMQQueue4*, Win32cr::Foundation::HRESULT),
-    get_IsOpen2 : Proc(IMSMQQueue4*, Int16*, Win32cr::Foundation::HRESULT),
-    receive_by_lookup_id_allow_peek : Proc(IMSMQQueue4*, Win32cr::System::Com::VARIANT, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    get_IsOpen2 : Proc(IMSMQQueue4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    receive_by_lookup_id_allow_peek : Proc(IMSMQQueue4*, Win32cr::System::Variant::VARIANT, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueue4, lpVtbl : IMSMQQueue4Vtbl* do
+  record IMSMQQueue4, lpVtbl : IMSMQQueue4Vtable* do
     GUID = LibC::GUID.new(0xeba96b20_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1795,8 +1944,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueue4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueue4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueue4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Access(this : IMSMQQueue4*, plAccess : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Access.call(this, plAccess)
@@ -1816,99 +1965,100 @@ module Win32cr::System::MessageQueuing
     def close(this : IMSMQQueue4*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
-    def receive_v1(this : IMSMQQueue4*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_v1(this : IMSMQQueue4*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_v1.call(this, transaction, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_v1(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_v1(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def enable_notification(this : IMSMQQueue4*, event : Void*, cursor : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def enable_notification(this : IMSMQQueue4*, event : Void*, cursor : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_notification.call(this, event, cursor, receive_timeout)
     end
     def reset(this : IMSMQQueue4*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
     end
-    def receive_current_v1(this : IMSMQQueue4*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_current_v1(this : IMSMQQueue4*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_current_v1.call(this, transaction, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_next_v1(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next_v1(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def peek_current_v1(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_current_v1(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_current_v1.call(this, want_destination_queue, want_body, receive_timeout, ppmsg)
     end
-    def receive(this : IMSMQQueue4*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive(this : IMSMQQueue4*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive.call(this, transaction, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def receive_current(this : IMSMQQueue4*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_current(this : IMSMQQueue4*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_current.call(this, transaction, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek_next(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
-    def peek_current(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, receive_timeout : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_current(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, receive_timeout : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_current.call(this, want_destination_queue, want_body, receive_timeout, want_connector_type, ppmsg)
     end
     def get_Properties(this : IMSMQQueue4*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_Handle2(this : IMSMQQueue4*, pvarHandle : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Handle2(this : IMSMQQueue4*, pvarHandle : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Handle2.call(this, pvarHandle)
     end
-    def receive_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Com::VARIANT, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Variant::VARIANT, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_by_lookup_id.call(this, lookup_id, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def receive_next_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Com::VARIANT, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_next_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Variant::VARIANT, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_next_by_lookup_id.call(this, lookup_id, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def receive_previous_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Com::VARIANT, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_previous_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Variant::VARIANT, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_previous_by_lookup_id.call(this, lookup_id, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def receive_first_by_lookup_id(this : IMSMQQueue4*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_first_by_lookup_id(this : IMSMQQueue4*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_first_by_lookup_id.call(this, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def receive_last_by_lookup_id(this : IMSMQQueue4*, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_last_by_lookup_id(this : IMSMQQueue4*, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_last_by_lookup_id.call(this, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Com::VARIANT, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Variant::VARIANT, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_by_lookup_id.call(this, lookup_id, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_next_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Com::VARIANT, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_next_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Variant::VARIANT, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_next_by_lookup_id.call(this, lookup_id, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_previous_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Com::VARIANT, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_previous_by_lookup_id(this : IMSMQQueue4*, lookup_id : Win32cr::System::Variant::VARIANT, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_previous_by_lookup_id.call(this, lookup_id, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_first_by_lookup_id(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_first_by_lookup_id(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_first_by_lookup_id.call(this, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
-    def peek_last_by_lookup_id(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def peek_last_by_lookup_id(this : IMSMQQueue4*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.peek_last_by_lookup_id.call(this, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
     def purge(this : IMSMQQueue4*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.purge.call(this)
     end
-    def get_IsOpen2(this : IMSMQQueue4*, pisOpen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsOpen2(this : IMSMQQueue4*, pisOpen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsOpen2.call(this, pisOpen)
     end
-    def receive_by_lookup_id_allow_peek(this : IMSMQQueue4*, lookup_id : Win32cr::System::Com::VARIANT, transaction : Win32cr::System::Com::VARIANT*, want_destination_queue : Win32cr::System::Com::VARIANT*, want_body : Win32cr::System::Com::VARIANT*, want_connector_type : Win32cr::System::Com::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
+    def receive_by_lookup_id_allow_peek(this : IMSMQQueue4*, lookup_id : Win32cr::System::Variant::VARIANT, transaction : Win32cr::System::Variant::VARIANT*, want_destination_queue : Win32cr::System::Variant::VARIANT*, want_body : Win32cr::System::Variant::VARIANT*, want_connector_type : Win32cr::System::Variant::VARIANT*, ppmsg : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.receive_by_lookup_id_allow_peek.call(this, lookup_id, transaction, want_destination_queue, want_body, want_connector_type, ppmsg)
     end
 
   end
 
   @[Extern]
-  record IMSMQMessageVtbl,
+
+  record IMSMQMessageVtable,
     query_interface : Proc(IMSMQMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQMessage*, UInt32),
     release : Proc(IMSMQMessage*, UInt32),
     get_type_info_count : Proc(IMSMQMessage*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQMessage*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQMessage*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQMessage*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQMessage*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Class : Proc(IMSMQMessage*, Int32*, Win32cr::Foundation::HRESULT),
     get_PrivLevel : Proc(IMSMQMessage*, Int32*, Win32cr::Foundation::HRESULT),
     put_PrivLevel : Proc(IMSMQMessage*, Int32, Win32cr::Foundation::HRESULT),
@@ -1929,13 +2079,13 @@ module Win32cr::System::MessageQueuing
     put_AppSpecific : Proc(IMSMQMessage*, Int32, Win32cr::Foundation::HRESULT),
     get_SourceMachineGuid : Proc(IMSMQMessage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_BodyLength : Proc(IMSMQMessage*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Body : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Body : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Body : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Body : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_AdminQueueInfo : Proc(IMSMQMessage*, Void**, Win32cr::Foundation::HRESULT),
     putref_AdminQueueInfo : Proc(IMSMQMessage*, Void*, Win32cr::Foundation::HRESULT),
-    get_Id : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_CorrelationId : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_CorrelationId : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CorrelationId : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_CorrelationId : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Ack : Proc(IMSMQMessage*, Int32*, Win32cr::Foundation::HRESULT),
     put_Ack : Proc(IMSMQMessage*, Int32, Win32cr::Foundation::HRESULT),
     get_Label : Proc(IMSMQMessage*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -1948,20 +2098,20 @@ module Win32cr::System::MessageQueuing
     put_HashAlgorithm : Proc(IMSMQMessage*, Int32, Win32cr::Foundation::HRESULT),
     get_EncryptAlgorithm : Proc(IMSMQMessage*, Int32*, Win32cr::Foundation::HRESULT),
     put_EncryptAlgorithm : Proc(IMSMQMessage*, Int32, Win32cr::Foundation::HRESULT),
-    get_SentTime : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ArrivedTime : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SentTime : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ArrivedTime : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_DestinationQueueInfo : Proc(IMSMQMessage*, Void**, Win32cr::Foundation::HRESULT),
-    get_SenderCertificate : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SenderCertificate : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SenderId : Proc(IMSMQMessage*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SenderCertificate : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SenderCertificate : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SenderId : Proc(IMSMQMessage*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_SenderIdType : Proc(IMSMQMessage*, Int32*, Win32cr::Foundation::HRESULT),
     put_SenderIdType : Proc(IMSMQMessage*, Int32, Win32cr::Foundation::HRESULT),
-    send : Proc(IMSMQMessage*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    send : Proc(IMSMQMessage*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     attach_current_security_context : Proc(IMSMQMessage*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQMessage, lpVtbl : IMSMQMessageVtbl* do
+  record IMSMQMessage, lpVtbl : IMSMQMessageVtable* do
     GUID = LibC::GUID.new(0xd7d6e074_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1981,8 +2131,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQMessage*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQMessage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQMessage*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Class(this : IMSMQMessage*, plClass : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Class.call(this, plClass)
@@ -2044,10 +2194,10 @@ module Win32cr::System::MessageQueuing
     def get_BodyLength(this : IMSMQMessage*, pcbBody : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BodyLength.call(this, pcbBody)
     end
-    def get_Body(this : IMSMQMessage*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Body(this : IMSMQMessage*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Body.call(this, pvarBody)
     end
-    def put_Body(this : IMSMQMessage*, varBody : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Body(this : IMSMQMessage*, varBody : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Body.call(this, varBody)
     end
     def get_AdminQueueInfo(this : IMSMQMessage*, ppqinfoAdmin : Void**) : Win32cr::Foundation::HRESULT
@@ -2056,13 +2206,13 @@ module Win32cr::System::MessageQueuing
     def putref_AdminQueueInfo(this : IMSMQMessage*, pqinfoAdmin : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_AdminQueueInfo.call(this, pqinfoAdmin)
     end
-    def get_Id(this : IMSMQMessage*, pvarMsgId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Id(this : IMSMQMessage*, pvarMsgId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pvarMsgId)
     end
-    def get_CorrelationId(this : IMSMQMessage*, pvarMsgId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CorrelationId(this : IMSMQMessage*, pvarMsgId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CorrelationId.call(this, pvarMsgId)
     end
-    def put_CorrelationId(this : IMSMQMessage*, varMsgId : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_CorrelationId(this : IMSMQMessage*, varMsgId : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CorrelationId.call(this, varMsgId)
     end
     def get_Ack(this : IMSMQMessage*, plAck : Int32*) : Win32cr::Foundation::HRESULT
@@ -2101,22 +2251,22 @@ module Win32cr::System::MessageQueuing
     def put_EncryptAlgorithm(this : IMSMQMessage*, lEncryptAlg : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EncryptAlgorithm.call(this, lEncryptAlg)
     end
-    def get_SentTime(this : IMSMQMessage*, pvarSentTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SentTime(this : IMSMQMessage*, pvarSentTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SentTime.call(this, pvarSentTime)
     end
-    def get_ArrivedTime(this : IMSMQMessage*, plArrivedTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ArrivedTime(this : IMSMQMessage*, plArrivedTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ArrivedTime.call(this, plArrivedTime)
     end
     def get_DestinationQueueInfo(this : IMSMQMessage*, ppqinfoDest : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DestinationQueueInfo.call(this, ppqinfoDest)
     end
-    def get_SenderCertificate(this : IMSMQMessage*, pvarSenderCert : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SenderCertificate(this : IMSMQMessage*, pvarSenderCert : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderCertificate.call(this, pvarSenderCert)
     end
-    def put_SenderCertificate(this : IMSMQMessage*, varSenderCert : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SenderCertificate(this : IMSMQMessage*, varSenderCert : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderCertificate.call(this, varSenderCert)
     end
-    def get_SenderId(this : IMSMQMessage*, pvarSenderId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SenderId(this : IMSMQMessage*, pvarSenderId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderId.call(this, pvarSenderId)
     end
     def get_SenderIdType(this : IMSMQMessage*, plSenderIdType : Int32*) : Win32cr::Foundation::HRESULT
@@ -2125,7 +2275,7 @@ module Win32cr::System::MessageQueuing
     def put_SenderIdType(this : IMSMQMessage*, lSenderIdType : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderIdType.call(this, lSenderIdType)
     end
-    def send(this : IMSMQMessage*, destination_queue : Void*, transaction : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def send(this : IMSMQMessage*, destination_queue : Void*, transaction : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send.call(this, destination_queue, transaction)
     end
     def attach_current_security_context(this : IMSMQMessage*) : Win32cr::Foundation::HRESULT
@@ -2135,20 +2285,21 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfosVtbl,
+
+  record IMSMQQueueInfosVtable,
     query_interface : Proc(IMSMQQueueInfos*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfos*, UInt32),
     release : Proc(IMSMQQueueInfos*, UInt32),
     get_type_info_count : Proc(IMSMQQueueInfos*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueInfos*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueInfos*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueInfos*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueInfos*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMSMQQueueInfos*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IMSMQQueueInfos*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueueInfos, lpVtbl : IMSMQQueueInfosVtbl* do
+  record IMSMQQueueInfos, lpVtbl : IMSMQQueueInfosVtable* do
     GUID = LibC::GUID.new(0xd7d6e07d_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueueInfos*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2168,8 +2319,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueInfos*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueInfos*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueInfos*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def reset(this : IMSMQQueueInfos*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
@@ -2181,21 +2332,22 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfos2Vtbl,
+
+  record IMSMQQueueInfos2Vtable,
     query_interface : Proc(IMSMQQueueInfos2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfos2*, UInt32),
     release : Proc(IMSMQQueueInfos2*, UInt32),
     get_type_info_count : Proc(IMSMQQueueInfos2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueInfos2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueInfos2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueInfos2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueInfos2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMSMQQueueInfos2*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IMSMQQueueInfos2*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueueInfos2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueueInfos2, lpVtbl : IMSMQQueueInfos2Vtbl* do
+  record IMSMQQueueInfos2, lpVtbl : IMSMQQueueInfos2Vtable* do
     GUID = LibC::GUID.new(0xeba96b0f_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2215,8 +2367,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueInfos2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueInfos2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueInfos2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def reset(this : IMSMQQueueInfos2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
@@ -2231,21 +2383,22 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfos3Vtbl,
+
+  record IMSMQQueueInfos3Vtable,
     query_interface : Proc(IMSMQQueueInfos3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfos3*, UInt32),
     release : Proc(IMSMQQueueInfos3*, UInt32),
     get_type_info_count : Proc(IMSMQQueueInfos3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueInfos3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueInfos3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueInfos3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueInfos3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMSMQQueueInfos3*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IMSMQQueueInfos3*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueueInfos3*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueueInfos3, lpVtbl : IMSMQQueueInfos3Vtbl* do
+  record IMSMQQueueInfos3, lpVtbl : IMSMQQueueInfos3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1e_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2265,8 +2418,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueInfos3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueInfos3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueInfos3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def reset(this : IMSMQQueueInfos3*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
@@ -2281,21 +2434,22 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfos4Vtbl,
+
+  record IMSMQQueueInfos4Vtable,
     query_interface : Proc(IMSMQQueueInfos4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfos4*, UInt32),
     release : Proc(IMSMQQueueInfos4*, UInt32),
     get_type_info_count : Proc(IMSMQQueueInfos4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueInfos4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueInfos4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueInfos4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueInfos4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     reset : Proc(IMSMQQueueInfos4*, Win32cr::Foundation::HRESULT),
     next__ : Proc(IMSMQQueueInfos4*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQueueInfos4*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueueInfos4, lpVtbl : IMSMQQueueInfos4Vtbl* do
+  record IMSMQQueueInfos4, lpVtbl : IMSMQQueueInfos4Vtable* do
     GUID = LibC::GUID.new(0xeba96b22_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2315,8 +2469,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueInfos4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueInfos4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueInfos4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def reset(this : IMSMQQueueInfos4*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reset.call(this)
@@ -2331,18 +2485,19 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQEventVtbl,
+
+  record IMSMQEventVtable,
     query_interface : Proc(IMSMQEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQEvent*, UInt32),
     release : Proc(IMSMQEvent*, UInt32),
     get_type_info_count : Proc(IMSMQEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IMSMQEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQEvent, lpVtbl : IMSMQEventVtbl* do
+  record IMSMQEvent, lpVtbl : IMSMQEventVtable* do
     GUID = LibC::GUID.new(0xd7d6e077_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2362,26 +2517,27 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IMSMQEvent2Vtbl,
+
+  record IMSMQEvent2Vtable,
     query_interface : Proc(IMSMQEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQEvent2*, UInt32),
     release : Proc(IMSMQEvent2*, UInt32),
     get_type_info_count : Proc(IMSMQEvent2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQEvent2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQEvent2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQEvent2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQEvent2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQEvent2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQEvent2, lpVtbl : IMSMQEvent2Vtbl* do
+  record IMSMQEvent2, lpVtbl : IMSMQEvent2Vtable* do
     GUID = LibC::GUID.new(0xeba96b12_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2401,8 +2557,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQEvent2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQEvent2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Properties(this : IMSMQEvent2*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
@@ -2411,19 +2567,20 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQEvent3Vtbl,
+
+  record IMSMQEvent3Vtable,
     query_interface : Proc(IMSMQEvent3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQEvent3*, UInt32),
     release : Proc(IMSMQEvent3*, UInt32),
     get_type_info_count : Proc(IMSMQEvent3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQEvent3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQEvent3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQEvent3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQEvent3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQEvent3*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQEvent3, lpVtbl : IMSMQEvent3Vtbl* do
+  record IMSMQEvent3, lpVtbl : IMSMQEvent3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1c_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQEvent3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2443,8 +2600,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQEvent3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQEvent3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQEvent3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Properties(this : IMSMQEvent3*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
@@ -2453,21 +2610,22 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransactionVtbl,
+
+  record IMSMQTransactionVtable,
     query_interface : Proc(IMSMQTransaction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransaction*, UInt32),
     release : Proc(IMSMQTransaction*, UInt32),
     get_type_info_count : Proc(IMSMQTransaction*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQTransaction*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQTransaction*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQTransaction*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQTransaction*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Transaction : Proc(IMSMQTransaction*, Int32*, Win32cr::Foundation::HRESULT),
-    commit : Proc(IMSMQTransaction*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    abort : Proc(IMSMQTransaction*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    commit : Proc(IMSMQTransaction*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    abort : Proc(IMSMQTransaction*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQTransaction, lpVtbl : IMSMQTransactionVtbl* do
+  record IMSMQTransaction, lpVtbl : IMSMQTransactionVtable* do
     GUID = LibC::GUID.new(0xd7d6e07f_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQTransaction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2487,35 +2645,36 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQTransaction*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQTransaction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQTransaction*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Transaction(this : IMSMQTransaction*, plTransaction : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Transaction.call(this, plTransaction)
     end
-    def commit(this : IMSMQTransaction*, fRetaining : Win32cr::System::Com::VARIANT*, grfTC : Win32cr::System::Com::VARIANT*, grfRM : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def commit(this : IMSMQTransaction*, fRetaining : Win32cr::System::Variant::VARIANT*, grfTC : Win32cr::System::Variant::VARIANT*, grfRM : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this, fRetaining, grfTC, grfRM)
     end
-    def abort(this : IMSMQTransaction*, fRetaining : Win32cr::System::Com::VARIANT*, fAsync : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def abort(this : IMSMQTransaction*, fRetaining : Win32cr::System::Variant::VARIANT*, fAsync : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.abort.call(this, fRetaining, fAsync)
     end
 
   end
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenserVtbl,
+
+  record IMSMQCoordinatedTransactionDispenserVtable,
     query_interface : Proc(IMSMQCoordinatedTransactionDispenser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32),
     release : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32),
     get_type_info_count : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQCoordinatedTransactionDispenser*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQCoordinatedTransactionDispenser*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQCoordinatedTransactionDispenser*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     begin_transaction : Proc(IMSMQCoordinatedTransactionDispenser*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser, lpVtbl : IMSMQCoordinatedTransactionDispenserVtbl* do
+  record IMSMQCoordinatedTransactionDispenser, lpVtbl : IMSMQCoordinatedTransactionDispenserVtable* do
     GUID = LibC::GUID.new(0xd7d6e081_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2535,8 +2694,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQCoordinatedTransactionDispenser*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQCoordinatedTransactionDispenser*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQCoordinatedTransactionDispenser*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def begin_transaction(this : IMSMQCoordinatedTransactionDispenser*, ptransaction : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_transaction.call(this, ptransaction)
@@ -2545,19 +2704,20 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransactionDispenserVtbl,
+
+  record IMSMQTransactionDispenserVtable,
     query_interface : Proc(IMSMQTransactionDispenser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransactionDispenser*, UInt32),
     release : Proc(IMSMQTransactionDispenser*, UInt32),
     get_type_info_count : Proc(IMSMQTransactionDispenser*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQTransactionDispenser*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQTransactionDispenser*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQTransactionDispenser*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQTransactionDispenser*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     begin_transaction : Proc(IMSMQTransactionDispenser*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQTransactionDispenser, lpVtbl : IMSMQTransactionDispenserVtbl* do
+  record IMSMQTransactionDispenser, lpVtbl : IMSMQTransactionDispenserVtable* do
     GUID = LibC::GUID.new(0xd7d6e083_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQTransactionDispenser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2577,8 +2737,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQTransactionDispenser*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQTransactionDispenser*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQTransactionDispenser*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def begin_transaction(this : IMSMQTransactionDispenser*, ptransaction : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_transaction.call(this, ptransaction)
@@ -2587,20 +2747,21 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQuery2Vtbl,
+
+  record IMSMQQuery2Vtable,
     query_interface : Proc(IMSMQQuery2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQuery2*, UInt32),
     release : Proc(IMSMQQuery2*, UInt32),
     get_type_info_count : Proc(IMSMQQuery2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQuery2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQuery2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQuery2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    lookup_queue : Proc(IMSMQQuery2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQuery2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    lookup_queue : Proc(IMSMQQuery2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQuery2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQuery2, lpVtbl : IMSMQQuery2Vtbl* do
+  record IMSMQQuery2, lpVtbl : IMSMQQuery2Vtable* do
     GUID = LibC::GUID.new(0xeba96b0e_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2620,10 +2781,10 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQuery2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQuery2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQuery2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def lookup_queue(this : IMSMQQuery2*, queue_guid : Win32cr::System::Com::VARIANT*, service_type_guid : Win32cr::System::Com::VARIANT*, label : Win32cr::System::Com::VARIANT*, create_time : Win32cr::System::Com::VARIANT*, modify_time : Win32cr::System::Com::VARIANT*, rel_service_type : Win32cr::System::Com::VARIANT*, rel_label : Win32cr::System::Com::VARIANT*, rel_create_time : Win32cr::System::Com::VARIANT*, rel_modify_time : Win32cr::System::Com::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
+    def lookup_queue(this : IMSMQQuery2*, queue_guid : Win32cr::System::Variant::VARIANT*, service_type_guid : Win32cr::System::Variant::VARIANT*, label : Win32cr::System::Variant::VARIANT*, create_time : Win32cr::System::Variant::VARIANT*, modify_time : Win32cr::System::Variant::VARIANT*, rel_service_type : Win32cr::System::Variant::VARIANT*, rel_label : Win32cr::System::Variant::VARIANT*, rel_create_time : Win32cr::System::Variant::VARIANT*, rel_modify_time : Win32cr::System::Variant::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lookup_queue.call(this, queue_guid, service_type_guid, label, create_time, modify_time, rel_service_type, rel_label, rel_create_time, rel_modify_time, ppqinfos)
     end
     def get_Properties(this : IMSMQQuery2*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
@@ -2633,21 +2794,22 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQuery3Vtbl,
+
+  record IMSMQQuery3Vtable,
     query_interface : Proc(IMSMQQuery3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQuery3*, UInt32),
     release : Proc(IMSMQQuery3*, UInt32),
     get_type_info_count : Proc(IMSMQQuery3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQuery3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQuery3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQuery3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    lookup_queue_v2 : Proc(IMSMQQuery3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQuery3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    lookup_queue_v2 : Proc(IMSMQQuery3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQuery3*, Void**, Win32cr::Foundation::HRESULT),
-    lookup_queue : Proc(IMSMQQuery3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    lookup_queue : Proc(IMSMQQuery3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQuery3, lpVtbl : IMSMQQuery3Vtbl* do
+  record IMSMQQuery3, lpVtbl : IMSMQQuery3Vtable* do
     GUID = LibC::GUID.new(0xeba96b19_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2667,37 +2829,38 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQuery3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQuery3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQuery3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def lookup_queue_v2(this : IMSMQQuery3*, queue_guid : Win32cr::System::Com::VARIANT*, service_type_guid : Win32cr::System::Com::VARIANT*, label : Win32cr::System::Com::VARIANT*, create_time : Win32cr::System::Com::VARIANT*, modify_time : Win32cr::System::Com::VARIANT*, rel_service_type : Win32cr::System::Com::VARIANT*, rel_label : Win32cr::System::Com::VARIANT*, rel_create_time : Win32cr::System::Com::VARIANT*, rel_modify_time : Win32cr::System::Com::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
+    def lookup_queue_v2(this : IMSMQQuery3*, queue_guid : Win32cr::System::Variant::VARIANT*, service_type_guid : Win32cr::System::Variant::VARIANT*, label : Win32cr::System::Variant::VARIANT*, create_time : Win32cr::System::Variant::VARIANT*, modify_time : Win32cr::System::Variant::VARIANT*, rel_service_type : Win32cr::System::Variant::VARIANT*, rel_label : Win32cr::System::Variant::VARIANT*, rel_create_time : Win32cr::System::Variant::VARIANT*, rel_modify_time : Win32cr::System::Variant::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lookup_queue_v2.call(this, queue_guid, service_type_guid, label, create_time, modify_time, rel_service_type, rel_label, rel_create_time, rel_modify_time, ppqinfos)
     end
     def get_Properties(this : IMSMQQuery3*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def lookup_queue(this : IMSMQQuery3*, queue_guid : Win32cr::System::Com::VARIANT*, service_type_guid : Win32cr::System::Com::VARIANT*, label : Win32cr::System::Com::VARIANT*, create_time : Win32cr::System::Com::VARIANT*, modify_time : Win32cr::System::Com::VARIANT*, rel_service_type : Win32cr::System::Com::VARIANT*, rel_label : Win32cr::System::Com::VARIANT*, rel_create_time : Win32cr::System::Com::VARIANT*, rel_modify_time : Win32cr::System::Com::VARIANT*, multicast_address : Win32cr::System::Com::VARIANT*, rel_multicast_address : Win32cr::System::Com::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
+    def lookup_queue(this : IMSMQQuery3*, queue_guid : Win32cr::System::Variant::VARIANT*, service_type_guid : Win32cr::System::Variant::VARIANT*, label : Win32cr::System::Variant::VARIANT*, create_time : Win32cr::System::Variant::VARIANT*, modify_time : Win32cr::System::Variant::VARIANT*, rel_service_type : Win32cr::System::Variant::VARIANT*, rel_label : Win32cr::System::Variant::VARIANT*, rel_create_time : Win32cr::System::Variant::VARIANT*, rel_modify_time : Win32cr::System::Variant::VARIANT*, multicast_address : Win32cr::System::Variant::VARIANT*, rel_multicast_address : Win32cr::System::Variant::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lookup_queue.call(this, queue_guid, service_type_guid, label, create_time, modify_time, rel_service_type, rel_label, rel_create_time, rel_modify_time, multicast_address, rel_multicast_address, ppqinfos)
     end
 
   end
 
   @[Extern]
-  record IMSMQQuery4Vtbl,
+
+  record IMSMQQuery4Vtable,
     query_interface : Proc(IMSMQQuery4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQuery4*, UInt32),
     release : Proc(IMSMQQuery4*, UInt32),
     get_type_info_count : Proc(IMSMQQuery4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQuery4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQuery4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQuery4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    lookup_queue_v2 : Proc(IMSMQQuery4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQuery4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    lookup_queue_v2 : Proc(IMSMQQuery4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQQuery4*, Void**, Win32cr::Foundation::HRESULT),
-    lookup_queue : Proc(IMSMQQuery4*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
+    lookup_queue : Proc(IMSMQQuery4*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQuery4, lpVtbl : IMSMQQuery4Vtbl* do
+  record IMSMQQuery4, lpVtbl : IMSMQQuery4Vtable* do
     GUID = LibC::GUID.new(0xeba96b24_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2717,30 +2880,31 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQuery4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQuery4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQuery4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def lookup_queue_v2(this : IMSMQQuery4*, queue_guid : Win32cr::System::Com::VARIANT*, service_type_guid : Win32cr::System::Com::VARIANT*, label : Win32cr::System::Com::VARIANT*, create_time : Win32cr::System::Com::VARIANT*, modify_time : Win32cr::System::Com::VARIANT*, rel_service_type : Win32cr::System::Com::VARIANT*, rel_label : Win32cr::System::Com::VARIANT*, rel_create_time : Win32cr::System::Com::VARIANT*, rel_modify_time : Win32cr::System::Com::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
+    def lookup_queue_v2(this : IMSMQQuery4*, queue_guid : Win32cr::System::Variant::VARIANT*, service_type_guid : Win32cr::System::Variant::VARIANT*, label : Win32cr::System::Variant::VARIANT*, create_time : Win32cr::System::Variant::VARIANT*, modify_time : Win32cr::System::Variant::VARIANT*, rel_service_type : Win32cr::System::Variant::VARIANT*, rel_label : Win32cr::System::Variant::VARIANT*, rel_create_time : Win32cr::System::Variant::VARIANT*, rel_modify_time : Win32cr::System::Variant::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lookup_queue_v2.call(this, queue_guid, service_type_guid, label, create_time, modify_time, rel_service_type, rel_label, rel_create_time, rel_modify_time, ppqinfos)
     end
     def get_Properties(this : IMSMQQuery4*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def lookup_queue(this : IMSMQQuery4*, queue_guid : Win32cr::System::Com::VARIANT*, service_type_guid : Win32cr::System::Com::VARIANT*, label : Win32cr::System::Com::VARIANT*, create_time : Win32cr::System::Com::VARIANT*, modify_time : Win32cr::System::Com::VARIANT*, rel_service_type : Win32cr::System::Com::VARIANT*, rel_label : Win32cr::System::Com::VARIANT*, rel_create_time : Win32cr::System::Com::VARIANT*, rel_modify_time : Win32cr::System::Com::VARIANT*, multicast_address : Win32cr::System::Com::VARIANT*, rel_multicast_address : Win32cr::System::Com::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
+    def lookup_queue(this : IMSMQQuery4*, queue_guid : Win32cr::System::Variant::VARIANT*, service_type_guid : Win32cr::System::Variant::VARIANT*, label : Win32cr::System::Variant::VARIANT*, create_time : Win32cr::System::Variant::VARIANT*, modify_time : Win32cr::System::Variant::VARIANT*, rel_service_type : Win32cr::System::Variant::VARIANT*, rel_label : Win32cr::System::Variant::VARIANT*, rel_create_time : Win32cr::System::Variant::VARIANT*, rel_modify_time : Win32cr::System::Variant::VARIANT*, multicast_address : Win32cr::System::Variant::VARIANT*, rel_multicast_address : Win32cr::System::Variant::VARIANT*, ppqinfos : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.lookup_queue.call(this, queue_guid, service_type_guid, label, create_time, modify_time, rel_service_type, rel_label, rel_create_time, rel_modify_time, multicast_address, rel_multicast_address, ppqinfos)
     end
 
   end
 
   @[Extern]
-  record IMSMQMessage2Vtbl,
+
+  record IMSMQMessage2Vtable,
     query_interface : Proc(IMSMQMessage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQMessage2*, UInt32),
     release : Proc(IMSMQMessage2*, UInt32),
     get_type_info_count : Proc(IMSMQMessage2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQMessage2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQMessage2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQMessage2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQMessage2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Class : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
     get_PrivLevel : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
     put_PrivLevel : Proc(IMSMQMessage2*, Int32, Win32cr::Foundation::HRESULT),
@@ -2761,13 +2925,13 @@ module Win32cr::System::MessageQueuing
     put_AppSpecific : Proc(IMSMQMessage2*, Int32, Win32cr::Foundation::HRESULT),
     get_SourceMachineGuid : Proc(IMSMQMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_BodyLength : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Body : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Body : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Body : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Body : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_AdminQueueInfo_v1 : Proc(IMSMQMessage2*, Void**, Win32cr::Foundation::HRESULT),
     putref_AdminQueueInfo_v1 : Proc(IMSMQMessage2*, Void*, Win32cr::Foundation::HRESULT),
-    get_Id : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_CorrelationId : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_CorrelationId : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CorrelationId : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_CorrelationId : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Ack : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
     put_Ack : Proc(IMSMQMessage2*, Int32, Win32cr::Foundation::HRESULT),
     get_Label : Proc(IMSMQMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -2780,35 +2944,35 @@ module Win32cr::System::MessageQueuing
     put_HashAlgorithm : Proc(IMSMQMessage2*, Int32, Win32cr::Foundation::HRESULT),
     get_EncryptAlgorithm : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
     put_EncryptAlgorithm : Proc(IMSMQMessage2*, Int32, Win32cr::Foundation::HRESULT),
-    get_SentTime : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ArrivedTime : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SentTime : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ArrivedTime : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_DestinationQueueInfo : Proc(IMSMQMessage2*, Void**, Win32cr::Foundation::HRESULT),
-    get_SenderCertificate : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SenderCertificate : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SenderId : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SenderCertificate : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SenderCertificate : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SenderId : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_SenderIdType : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
     put_SenderIdType : Proc(IMSMQMessage2*, Int32, Win32cr::Foundation::HRESULT),
-    send : Proc(IMSMQMessage2*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    send : Proc(IMSMQMessage2*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     attach_current_security_context : Proc(IMSMQMessage2*, Win32cr::Foundation::HRESULT),
     get_SenderVersion : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Extension : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Extension : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Extension : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Extension : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ConnectorTypeGuid : Proc(IMSMQMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ConnectorTypeGuid : Proc(IMSMQMessage2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TransactionStatusQueueInfo : Proc(IMSMQMessage2*, Void**, Win32cr::Foundation::HRESULT),
-    get_DestinationSymmetricKey : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_DestinationSymmetricKey : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_Signature : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Signature : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DestinationSymmetricKey : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_DestinationSymmetricKey : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Signature : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Signature : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_AuthenticationProviderType : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
     put_AuthenticationProviderType : Proc(IMSMQMessage2*, Int32, Win32cr::Foundation::HRESULT),
     get_AuthenticationProviderName : Proc(IMSMQMessage2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_AuthenticationProviderName : Proc(IMSMQMessage2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    put_SenderId : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    put_SenderId : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_MsgClass : Proc(IMSMQMessage2*, Int32*, Win32cr::Foundation::HRESULT),
     put_MsgClass : Proc(IMSMQMessage2*, Int32, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQMessage2*, Void**, Win32cr::Foundation::HRESULT),
-    get_TransactionId : Proc(IMSMQMessage2*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_TransactionId : Proc(IMSMQMessage2*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_IsFirstInTransaction : Proc(IMSMQMessage2*, Int16*, Win32cr::Foundation::HRESULT),
     get_IsLastInTransaction : Proc(IMSMQMessage2*, Int16*, Win32cr::Foundation::HRESULT),
     get_ResponseQueueInfo : Proc(IMSMQMessage2*, Void**, Win32cr::Foundation::HRESULT),
@@ -2819,7 +2983,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQMessage2, lpVtbl : IMSMQMessage2Vtbl* do
+  record IMSMQMessage2, lpVtbl : IMSMQMessage2Vtable* do
     GUID = LibC::GUID.new(0xd9933be0_u32, 0xa567_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xf3_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2839,8 +3003,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQMessage2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQMessage2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQMessage2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Class(this : IMSMQMessage2*, plClass : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Class.call(this, plClass)
@@ -2902,10 +3066,10 @@ module Win32cr::System::MessageQueuing
     def get_BodyLength(this : IMSMQMessage2*, pcbBody : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BodyLength.call(this, pcbBody)
     end
-    def get_Body(this : IMSMQMessage2*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Body(this : IMSMQMessage2*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Body.call(this, pvarBody)
     end
-    def put_Body(this : IMSMQMessage2*, varBody : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Body(this : IMSMQMessage2*, varBody : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Body.call(this, varBody)
     end
     def get_AdminQueueInfo_v1(this : IMSMQMessage2*, ppqinfoAdmin : Void**) : Win32cr::Foundation::HRESULT
@@ -2914,13 +3078,13 @@ module Win32cr::System::MessageQueuing
     def putref_AdminQueueInfo_v1(this : IMSMQMessage2*, pqinfoAdmin : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_AdminQueueInfo_v1.call(this, pqinfoAdmin)
     end
-    def get_Id(this : IMSMQMessage2*, pvarMsgId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Id(this : IMSMQMessage2*, pvarMsgId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pvarMsgId)
     end
-    def get_CorrelationId(this : IMSMQMessage2*, pvarMsgId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CorrelationId(this : IMSMQMessage2*, pvarMsgId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CorrelationId.call(this, pvarMsgId)
     end
-    def put_CorrelationId(this : IMSMQMessage2*, varMsgId : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_CorrelationId(this : IMSMQMessage2*, varMsgId : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CorrelationId.call(this, varMsgId)
     end
     def get_Ack(this : IMSMQMessage2*, plAck : Int32*) : Win32cr::Foundation::HRESULT
@@ -2959,22 +3123,22 @@ module Win32cr::System::MessageQueuing
     def put_EncryptAlgorithm(this : IMSMQMessage2*, lEncryptAlg : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EncryptAlgorithm.call(this, lEncryptAlg)
     end
-    def get_SentTime(this : IMSMQMessage2*, pvarSentTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SentTime(this : IMSMQMessage2*, pvarSentTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SentTime.call(this, pvarSentTime)
     end
-    def get_ArrivedTime(this : IMSMQMessage2*, plArrivedTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ArrivedTime(this : IMSMQMessage2*, plArrivedTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ArrivedTime.call(this, plArrivedTime)
     end
     def get_DestinationQueueInfo(this : IMSMQMessage2*, ppqinfoDest : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DestinationQueueInfo.call(this, ppqinfoDest)
     end
-    def get_SenderCertificate(this : IMSMQMessage2*, pvarSenderCert : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SenderCertificate(this : IMSMQMessage2*, pvarSenderCert : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderCertificate.call(this, pvarSenderCert)
     end
-    def put_SenderCertificate(this : IMSMQMessage2*, varSenderCert : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SenderCertificate(this : IMSMQMessage2*, varSenderCert : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderCertificate.call(this, varSenderCert)
     end
-    def get_SenderId(this : IMSMQMessage2*, pvarSenderId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SenderId(this : IMSMQMessage2*, pvarSenderId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderId.call(this, pvarSenderId)
     end
     def get_SenderIdType(this : IMSMQMessage2*, plSenderIdType : Int32*) : Win32cr::Foundation::HRESULT
@@ -2983,7 +3147,7 @@ module Win32cr::System::MessageQueuing
     def put_SenderIdType(this : IMSMQMessage2*, lSenderIdType : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderIdType.call(this, lSenderIdType)
     end
-    def send(this : IMSMQMessage2*, destination_queue : Void*, transaction : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def send(this : IMSMQMessage2*, destination_queue : Void*, transaction : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send.call(this, destination_queue, transaction)
     end
     def attach_current_security_context(this : IMSMQMessage2*) : Win32cr::Foundation::HRESULT
@@ -2992,10 +3156,10 @@ module Win32cr::System::MessageQueuing
     def get_SenderVersion(this : IMSMQMessage2*, plSenderVersion : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderVersion.call(this, plSenderVersion)
     end
-    def get_Extension(this : IMSMQMessage2*, pvarExtension : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Extension(this : IMSMQMessage2*, pvarExtension : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Extension.call(this, pvarExtension)
     end
-    def put_Extension(this : IMSMQMessage2*, varExtension : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Extension(this : IMSMQMessage2*, varExtension : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Extension.call(this, varExtension)
     end
     def get_ConnectorTypeGuid(this : IMSMQMessage2*, pbstrGuidConnectorType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3007,16 +3171,16 @@ module Win32cr::System::MessageQueuing
     def get_TransactionStatusQueueInfo(this : IMSMQMessage2*, ppqinfoXactStatus : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionStatusQueueInfo.call(this, ppqinfoXactStatus)
     end
-    def get_DestinationSymmetricKey(this : IMSMQMessage2*, pvarDestSymmKey : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DestinationSymmetricKey(this : IMSMQMessage2*, pvarDestSymmKey : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DestinationSymmetricKey.call(this, pvarDestSymmKey)
     end
-    def put_DestinationSymmetricKey(this : IMSMQMessage2*, varDestSymmKey : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_DestinationSymmetricKey(this : IMSMQMessage2*, varDestSymmKey : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DestinationSymmetricKey.call(this, varDestSymmKey)
     end
-    def get_Signature(this : IMSMQMessage2*, pvarSignature : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Signature(this : IMSMQMessage2*, pvarSignature : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Signature.call(this, pvarSignature)
     end
-    def put_Signature(this : IMSMQMessage2*, varSignature : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Signature(this : IMSMQMessage2*, varSignature : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Signature.call(this, varSignature)
     end
     def get_AuthenticationProviderType(this : IMSMQMessage2*, plAuthProvType : Int32*) : Win32cr::Foundation::HRESULT
@@ -3031,7 +3195,7 @@ module Win32cr::System::MessageQueuing
     def put_AuthenticationProviderName(this : IMSMQMessage2*, bstrAuthProvName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AuthenticationProviderName.call(this, bstrAuthProvName)
     end
-    def put_SenderId(this : IMSMQMessage2*, varSenderId : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SenderId(this : IMSMQMessage2*, varSenderId : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderId.call(this, varSenderId)
     end
     def get_MsgClass(this : IMSMQMessage2*, plMsgClass : Int32*) : Win32cr::Foundation::HRESULT
@@ -3043,7 +3207,7 @@ module Win32cr::System::MessageQueuing
     def get_Properties(this : IMSMQMessage2*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_TransactionId(this : IMSMQMessage2*, pvarXactId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_TransactionId(this : IMSMQMessage2*, pvarXactId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionId.call(this, pvarXactId)
     end
     def get_IsFirstInTransaction(this : IMSMQMessage2*, pisFirstInXact : Int16*) : Win32cr::Foundation::HRESULT
@@ -3071,14 +3235,15 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQMessage3Vtbl,
+
+  record IMSMQMessage3Vtable,
     query_interface : Proc(IMSMQMessage3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQMessage3*, UInt32),
     release : Proc(IMSMQMessage3*, UInt32),
     get_type_info_count : Proc(IMSMQMessage3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQMessage3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQMessage3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQMessage3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQMessage3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Class : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
     get_PrivLevel : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
     put_PrivLevel : Proc(IMSMQMessage3*, Int32, Win32cr::Foundation::HRESULT),
@@ -3099,13 +3264,13 @@ module Win32cr::System::MessageQueuing
     put_AppSpecific : Proc(IMSMQMessage3*, Int32, Win32cr::Foundation::HRESULT),
     get_SourceMachineGuid : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_BodyLength : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Body : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Body : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Body : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Body : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_AdminQueueInfo_v1 : Proc(IMSMQMessage3*, Void**, Win32cr::Foundation::HRESULT),
     putref_AdminQueueInfo_v1 : Proc(IMSMQMessage3*, Void*, Win32cr::Foundation::HRESULT),
-    get_Id : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_CorrelationId : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_CorrelationId : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CorrelationId : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_CorrelationId : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Ack : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
     put_Ack : Proc(IMSMQMessage3*, Int32, Win32cr::Foundation::HRESULT),
     get_Label : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3118,35 +3283,35 @@ module Win32cr::System::MessageQueuing
     put_HashAlgorithm : Proc(IMSMQMessage3*, Int32, Win32cr::Foundation::HRESULT),
     get_EncryptAlgorithm : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
     put_EncryptAlgorithm : Proc(IMSMQMessage3*, Int32, Win32cr::Foundation::HRESULT),
-    get_SentTime : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ArrivedTime : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SentTime : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ArrivedTime : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_DestinationQueueInfo : Proc(IMSMQMessage3*, Void**, Win32cr::Foundation::HRESULT),
-    get_SenderCertificate : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SenderCertificate : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SenderId : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SenderCertificate : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SenderCertificate : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SenderId : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_SenderIdType : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
     put_SenderIdType : Proc(IMSMQMessage3*, Int32, Win32cr::Foundation::HRESULT),
-    send : Proc(IMSMQMessage3*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    send : Proc(IMSMQMessage3*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     attach_current_security_context : Proc(IMSMQMessage3*, Win32cr::Foundation::HRESULT),
     get_SenderVersion : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Extension : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Extension : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Extension : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Extension : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ConnectorTypeGuid : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ConnectorTypeGuid : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TransactionStatusQueueInfo : Proc(IMSMQMessage3*, Void**, Win32cr::Foundation::HRESULT),
-    get_DestinationSymmetricKey : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_DestinationSymmetricKey : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_Signature : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Signature : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DestinationSymmetricKey : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_DestinationSymmetricKey : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Signature : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Signature : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_AuthenticationProviderType : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
     put_AuthenticationProviderType : Proc(IMSMQMessage3*, Int32, Win32cr::Foundation::HRESULT),
     get_AuthenticationProviderName : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_AuthenticationProviderName : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    put_SenderId : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    put_SenderId : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_MsgClass : Proc(IMSMQMessage3*, Int32*, Win32cr::Foundation::HRESULT),
     put_MsgClass : Proc(IMSMQMessage3*, Int32, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQMessage3*, Void**, Win32cr::Foundation::HRESULT),
-    get_TransactionId : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_TransactionId : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_IsFirstInTransaction : Proc(IMSMQMessage3*, Int16*, Win32cr::Foundation::HRESULT),
     get_IsLastInTransaction : Proc(IMSMQMessage3*, Int16*, Win32cr::Foundation::HRESULT),
     get_ResponseQueueInfo_v2 : Proc(IMSMQMessage3*, Void**, Win32cr::Foundation::HRESULT),
@@ -3161,19 +3326,19 @@ module Win32cr::System::MessageQueuing
     get_ResponseDestination : Proc(IMSMQMessage3*, Void**, Win32cr::Foundation::HRESULT),
     putref_ResponseDestination : Proc(IMSMQMessage3*, Void*, Win32cr::Foundation::HRESULT),
     get_Destination : Proc(IMSMQMessage3*, Void**, Win32cr::Foundation::HRESULT),
-    get_LookupId : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_IsAuthenticated2 : Proc(IMSMQMessage3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsFirstInTransaction2 : Proc(IMSMQMessage3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsLastInTransaction2 : Proc(IMSMQMessage3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_LookupId : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_IsAuthenticated2 : Proc(IMSMQMessage3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsFirstInTransaction2 : Proc(IMSMQMessage3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsLastInTransaction2 : Proc(IMSMQMessage3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     attach_current_security_context2 : Proc(IMSMQMessage3*, Win32cr::Foundation::HRESULT),
     get_SoapEnvelope : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_CompoundMessage : Proc(IMSMQMessage3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CompoundMessage : Proc(IMSMQMessage3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_SoapHeader : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     put_SoapBody : Proc(IMSMQMessage3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQMessage3, lpVtbl : IMSMQMessage3Vtbl* do
+  record IMSMQMessage3, lpVtbl : IMSMQMessage3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1a_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3193,8 +3358,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQMessage3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQMessage3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQMessage3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Class(this : IMSMQMessage3*, plClass : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Class.call(this, plClass)
@@ -3256,10 +3421,10 @@ module Win32cr::System::MessageQueuing
     def get_BodyLength(this : IMSMQMessage3*, pcbBody : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BodyLength.call(this, pcbBody)
     end
-    def get_Body(this : IMSMQMessage3*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Body(this : IMSMQMessage3*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Body.call(this, pvarBody)
     end
-    def put_Body(this : IMSMQMessage3*, varBody : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Body(this : IMSMQMessage3*, varBody : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Body.call(this, varBody)
     end
     def get_AdminQueueInfo_v1(this : IMSMQMessage3*, ppqinfoAdmin : Void**) : Win32cr::Foundation::HRESULT
@@ -3268,13 +3433,13 @@ module Win32cr::System::MessageQueuing
     def putref_AdminQueueInfo_v1(this : IMSMQMessage3*, pqinfoAdmin : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_AdminQueueInfo_v1.call(this, pqinfoAdmin)
     end
-    def get_Id(this : IMSMQMessage3*, pvarMsgId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Id(this : IMSMQMessage3*, pvarMsgId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pvarMsgId)
     end
-    def get_CorrelationId(this : IMSMQMessage3*, pvarMsgId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CorrelationId(this : IMSMQMessage3*, pvarMsgId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CorrelationId.call(this, pvarMsgId)
     end
-    def put_CorrelationId(this : IMSMQMessage3*, varMsgId : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_CorrelationId(this : IMSMQMessage3*, varMsgId : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CorrelationId.call(this, varMsgId)
     end
     def get_Ack(this : IMSMQMessage3*, plAck : Int32*) : Win32cr::Foundation::HRESULT
@@ -3313,22 +3478,22 @@ module Win32cr::System::MessageQueuing
     def put_EncryptAlgorithm(this : IMSMQMessage3*, lEncryptAlg : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EncryptAlgorithm.call(this, lEncryptAlg)
     end
-    def get_SentTime(this : IMSMQMessage3*, pvarSentTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SentTime(this : IMSMQMessage3*, pvarSentTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SentTime.call(this, pvarSentTime)
     end
-    def get_ArrivedTime(this : IMSMQMessage3*, plArrivedTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ArrivedTime(this : IMSMQMessage3*, plArrivedTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ArrivedTime.call(this, plArrivedTime)
     end
     def get_DestinationQueueInfo(this : IMSMQMessage3*, ppqinfoDest : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DestinationQueueInfo.call(this, ppqinfoDest)
     end
-    def get_SenderCertificate(this : IMSMQMessage3*, pvarSenderCert : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SenderCertificate(this : IMSMQMessage3*, pvarSenderCert : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderCertificate.call(this, pvarSenderCert)
     end
-    def put_SenderCertificate(this : IMSMQMessage3*, varSenderCert : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SenderCertificate(this : IMSMQMessage3*, varSenderCert : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderCertificate.call(this, varSenderCert)
     end
-    def get_SenderId(this : IMSMQMessage3*, pvarSenderId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SenderId(this : IMSMQMessage3*, pvarSenderId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderId.call(this, pvarSenderId)
     end
     def get_SenderIdType(this : IMSMQMessage3*, plSenderIdType : Int32*) : Win32cr::Foundation::HRESULT
@@ -3337,7 +3502,7 @@ module Win32cr::System::MessageQueuing
     def put_SenderIdType(this : IMSMQMessage3*, lSenderIdType : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderIdType.call(this, lSenderIdType)
     end
-    def send(this : IMSMQMessage3*, destination_queue : Void*, transaction : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def send(this : IMSMQMessage3*, destination_queue : Void*, transaction : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send.call(this, destination_queue, transaction)
     end
     def attach_current_security_context(this : IMSMQMessage3*) : Win32cr::Foundation::HRESULT
@@ -3346,10 +3511,10 @@ module Win32cr::System::MessageQueuing
     def get_SenderVersion(this : IMSMQMessage3*, plSenderVersion : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderVersion.call(this, plSenderVersion)
     end
-    def get_Extension(this : IMSMQMessage3*, pvarExtension : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Extension(this : IMSMQMessage3*, pvarExtension : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Extension.call(this, pvarExtension)
     end
-    def put_Extension(this : IMSMQMessage3*, varExtension : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Extension(this : IMSMQMessage3*, varExtension : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Extension.call(this, varExtension)
     end
     def get_ConnectorTypeGuid(this : IMSMQMessage3*, pbstrGuidConnectorType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3361,16 +3526,16 @@ module Win32cr::System::MessageQueuing
     def get_TransactionStatusQueueInfo(this : IMSMQMessage3*, ppqinfoXactStatus : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionStatusQueueInfo.call(this, ppqinfoXactStatus)
     end
-    def get_DestinationSymmetricKey(this : IMSMQMessage3*, pvarDestSymmKey : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DestinationSymmetricKey(this : IMSMQMessage3*, pvarDestSymmKey : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DestinationSymmetricKey.call(this, pvarDestSymmKey)
     end
-    def put_DestinationSymmetricKey(this : IMSMQMessage3*, varDestSymmKey : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_DestinationSymmetricKey(this : IMSMQMessage3*, varDestSymmKey : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DestinationSymmetricKey.call(this, varDestSymmKey)
     end
-    def get_Signature(this : IMSMQMessage3*, pvarSignature : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Signature(this : IMSMQMessage3*, pvarSignature : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Signature.call(this, pvarSignature)
     end
-    def put_Signature(this : IMSMQMessage3*, varSignature : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Signature(this : IMSMQMessage3*, varSignature : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Signature.call(this, varSignature)
     end
     def get_AuthenticationProviderType(this : IMSMQMessage3*, plAuthProvType : Int32*) : Win32cr::Foundation::HRESULT
@@ -3385,7 +3550,7 @@ module Win32cr::System::MessageQueuing
     def put_AuthenticationProviderName(this : IMSMQMessage3*, bstrAuthProvName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AuthenticationProviderName.call(this, bstrAuthProvName)
     end
-    def put_SenderId(this : IMSMQMessage3*, varSenderId : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SenderId(this : IMSMQMessage3*, varSenderId : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderId.call(this, varSenderId)
     end
     def get_MsgClass(this : IMSMQMessage3*, plMsgClass : Int32*) : Win32cr::Foundation::HRESULT
@@ -3397,7 +3562,7 @@ module Win32cr::System::MessageQueuing
     def get_Properties(this : IMSMQMessage3*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_TransactionId(this : IMSMQMessage3*, pvarXactId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_TransactionId(this : IMSMQMessage3*, pvarXactId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionId.call(this, pvarXactId)
     end
     def get_IsFirstInTransaction(this : IMSMQMessage3*, pisFirstInXact : Int16*) : Win32cr::Foundation::HRESULT
@@ -3442,16 +3607,16 @@ module Win32cr::System::MessageQueuing
     def get_Destination(this : IMSMQMessage3*, ppdestDestination : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Destination.call(this, ppdestDestination)
     end
-    def get_LookupId(this : IMSMQMessage3*, pvarLookupId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LookupId(this : IMSMQMessage3*, pvarLookupId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LookupId.call(this, pvarLookupId)
     end
-    def get_IsAuthenticated2(this : IMSMQMessage3*, pisAuthenticated : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsAuthenticated2(this : IMSMQMessage3*, pisAuthenticated : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsAuthenticated2.call(this, pisAuthenticated)
     end
-    def get_IsFirstInTransaction2(this : IMSMQMessage3*, pisFirstInXact : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsFirstInTransaction2(this : IMSMQMessage3*, pisFirstInXact : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsFirstInTransaction2.call(this, pisFirstInXact)
     end
-    def get_IsLastInTransaction2(this : IMSMQMessage3*, pisLastInXact : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsLastInTransaction2(this : IMSMQMessage3*, pisLastInXact : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsLastInTransaction2.call(this, pisLastInXact)
     end
     def attach_current_security_context2(this : IMSMQMessage3*) : Win32cr::Foundation::HRESULT
@@ -3460,7 +3625,7 @@ module Win32cr::System::MessageQueuing
     def get_SoapEnvelope(this : IMSMQMessage3*, pbstrSoapEnvelope : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SoapEnvelope.call(this, pbstrSoapEnvelope)
     end
-    def get_CompoundMessage(this : IMSMQMessage3*, pvarCompoundMessage : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CompoundMessage(this : IMSMQMessage3*, pvarCompoundMessage : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CompoundMessage.call(this, pvarCompoundMessage)
     end
     def put_SoapHeader(this : IMSMQMessage3*, bstrSoapHeader : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3473,14 +3638,15 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQMessage4Vtbl,
+
+  record IMSMQMessage4Vtable,
     query_interface : Proc(IMSMQMessage4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQMessage4*, UInt32),
     release : Proc(IMSMQMessage4*, UInt32),
     get_type_info_count : Proc(IMSMQMessage4*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQMessage4*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQMessage4*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQMessage4*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQMessage4*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Class : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
     get_PrivLevel : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
     put_PrivLevel : Proc(IMSMQMessage4*, Int32, Win32cr::Foundation::HRESULT),
@@ -3501,13 +3667,13 @@ module Win32cr::System::MessageQueuing
     put_AppSpecific : Proc(IMSMQMessage4*, Int32, Win32cr::Foundation::HRESULT),
     get_SourceMachineGuid : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_BodyLength : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Body : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Body : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Body : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Body : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_AdminQueueInfo_v1 : Proc(IMSMQMessage4*, Void**, Win32cr::Foundation::HRESULT),
     putref_AdminQueueInfo_v1 : Proc(IMSMQMessage4*, Void*, Win32cr::Foundation::HRESULT),
-    get_Id : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_CorrelationId : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_CorrelationId : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Id : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CorrelationId : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_CorrelationId : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Ack : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
     put_Ack : Proc(IMSMQMessage4*, Int32, Win32cr::Foundation::HRESULT),
     get_Label : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -3520,35 +3686,35 @@ module Win32cr::System::MessageQueuing
     put_HashAlgorithm : Proc(IMSMQMessage4*, Int32, Win32cr::Foundation::HRESULT),
     get_EncryptAlgorithm : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
     put_EncryptAlgorithm : Proc(IMSMQMessage4*, Int32, Win32cr::Foundation::HRESULT),
-    get_SentTime : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_ArrivedTime : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SentTime : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ArrivedTime : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_DestinationQueueInfo : Proc(IMSMQMessage4*, Void**, Win32cr::Foundation::HRESULT),
-    get_SenderCertificate : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_SenderCertificate : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_SenderId : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_SenderCertificate : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_SenderCertificate : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_SenderId : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_SenderIdType : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
     put_SenderIdType : Proc(IMSMQMessage4*, Int32, Win32cr::Foundation::HRESULT),
-    send : Proc(IMSMQMessage4*, Void*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    send : Proc(IMSMQMessage4*, Void*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     attach_current_security_context : Proc(IMSMQMessage4*, Win32cr::Foundation::HRESULT),
     get_SenderVersion : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
-    get_Extension : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Extension : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Extension : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Extension : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_ConnectorTypeGuid : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_ConnectorTypeGuid : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_TransactionStatusQueueInfo : Proc(IMSMQMessage4*, Void**, Win32cr::Foundation::HRESULT),
-    get_DestinationSymmetricKey : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_DestinationSymmetricKey : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
-    get_Signature : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Signature : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    get_DestinationSymmetricKey : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_DestinationSymmetricKey : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
+    get_Signature : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Signature : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_AuthenticationProviderType : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
     put_AuthenticationProviderType : Proc(IMSMQMessage4*, Int32, Win32cr::Foundation::HRESULT),
     get_AuthenticationProviderName : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     put_AuthenticationProviderName : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
-    put_SenderId : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    put_SenderId : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_MsgClass : Proc(IMSMQMessage4*, Int32*, Win32cr::Foundation::HRESULT),
     put_MsgClass : Proc(IMSMQMessage4*, Int32, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQMessage4*, Void**, Win32cr::Foundation::HRESULT),
-    get_TransactionId : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_TransactionId : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_IsFirstInTransaction : Proc(IMSMQMessage4*, Int16*, Win32cr::Foundation::HRESULT),
     get_IsLastInTransaction : Proc(IMSMQMessage4*, Int16*, Win32cr::Foundation::HRESULT),
     get_ResponseQueueInfo_v2 : Proc(IMSMQMessage4*, Void**, Win32cr::Foundation::HRESULT),
@@ -3563,19 +3729,19 @@ module Win32cr::System::MessageQueuing
     get_ResponseDestination : Proc(IMSMQMessage4*, Void**, Win32cr::Foundation::HRESULT),
     putref_ResponseDestination : Proc(IMSMQMessage4*, Void*, Win32cr::Foundation::HRESULT),
     get_Destination : Proc(IMSMQMessage4*, Void**, Win32cr::Foundation::HRESULT),
-    get_LookupId : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_IsAuthenticated2 : Proc(IMSMQMessage4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsFirstInTransaction2 : Proc(IMSMQMessage4*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsLastInTransaction2 : Proc(IMSMQMessage4*, Int16*, Win32cr::Foundation::HRESULT),
+    get_LookupId : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_IsAuthenticated2 : Proc(IMSMQMessage4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsFirstInTransaction2 : Proc(IMSMQMessage4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_IsLastInTransaction2 : Proc(IMSMQMessage4*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     attach_current_security_context2 : Proc(IMSMQMessage4*, Win32cr::Foundation::HRESULT),
     get_SoapEnvelope : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_CompoundMessage : Proc(IMSMQMessage4*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_CompoundMessage : Proc(IMSMQMessage4*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_SoapHeader : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     put_SoapBody : Proc(IMSMQMessage4*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQMessage4, lpVtbl : IMSMQMessage4Vtbl* do
+  record IMSMQMessage4, lpVtbl : IMSMQMessage4Vtable* do
     GUID = LibC::GUID.new(0xeba96b23_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3595,8 +3761,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQMessage4*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQMessage4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQMessage4*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Class(this : IMSMQMessage4*, plClass : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Class.call(this, plClass)
@@ -3658,10 +3824,10 @@ module Win32cr::System::MessageQueuing
     def get_BodyLength(this : IMSMQMessage4*, pcbBody : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BodyLength.call(this, pcbBody)
     end
-    def get_Body(this : IMSMQMessage4*, pvarBody : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Body(this : IMSMQMessage4*, pvarBody : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Body.call(this, pvarBody)
     end
-    def put_Body(this : IMSMQMessage4*, varBody : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Body(this : IMSMQMessage4*, varBody : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Body.call(this, varBody)
     end
     def get_AdminQueueInfo_v1(this : IMSMQMessage4*, ppqinfoAdmin : Void**) : Win32cr::Foundation::HRESULT
@@ -3670,13 +3836,13 @@ module Win32cr::System::MessageQueuing
     def putref_AdminQueueInfo_v1(this : IMSMQMessage4*, pqinfoAdmin : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.putref_AdminQueueInfo_v1.call(this, pqinfoAdmin)
     end
-    def get_Id(this : IMSMQMessage4*, pvarMsgId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Id(this : IMSMQMessage4*, pvarMsgId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Id.call(this, pvarMsgId)
     end
-    def get_CorrelationId(this : IMSMQMessage4*, pvarMsgId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CorrelationId(this : IMSMQMessage4*, pvarMsgId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CorrelationId.call(this, pvarMsgId)
     end
-    def put_CorrelationId(this : IMSMQMessage4*, varMsgId : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_CorrelationId(this : IMSMQMessage4*, varMsgId : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_CorrelationId.call(this, varMsgId)
     end
     def get_Ack(this : IMSMQMessage4*, plAck : Int32*) : Win32cr::Foundation::HRESULT
@@ -3715,22 +3881,22 @@ module Win32cr::System::MessageQueuing
     def put_EncryptAlgorithm(this : IMSMQMessage4*, lEncryptAlg : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_EncryptAlgorithm.call(this, lEncryptAlg)
     end
-    def get_SentTime(this : IMSMQMessage4*, pvarSentTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SentTime(this : IMSMQMessage4*, pvarSentTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SentTime.call(this, pvarSentTime)
     end
-    def get_ArrivedTime(this : IMSMQMessage4*, plArrivedTime : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ArrivedTime(this : IMSMQMessage4*, plArrivedTime : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ArrivedTime.call(this, plArrivedTime)
     end
     def get_DestinationQueueInfo(this : IMSMQMessage4*, ppqinfoDest : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DestinationQueueInfo.call(this, ppqinfoDest)
     end
-    def get_SenderCertificate(this : IMSMQMessage4*, pvarSenderCert : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SenderCertificate(this : IMSMQMessage4*, pvarSenderCert : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderCertificate.call(this, pvarSenderCert)
     end
-    def put_SenderCertificate(this : IMSMQMessage4*, varSenderCert : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SenderCertificate(this : IMSMQMessage4*, varSenderCert : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderCertificate.call(this, varSenderCert)
     end
-    def get_SenderId(this : IMSMQMessage4*, pvarSenderId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_SenderId(this : IMSMQMessage4*, pvarSenderId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderId.call(this, pvarSenderId)
     end
     def get_SenderIdType(this : IMSMQMessage4*, plSenderIdType : Int32*) : Win32cr::Foundation::HRESULT
@@ -3739,7 +3905,7 @@ module Win32cr::System::MessageQueuing
     def put_SenderIdType(this : IMSMQMessage4*, lSenderIdType : Int32) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderIdType.call(this, lSenderIdType)
     end
-    def send(this : IMSMQMessage4*, destination_queue : Void*, transaction : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def send(this : IMSMQMessage4*, destination_queue : Void*, transaction : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.send.call(this, destination_queue, transaction)
     end
     def attach_current_security_context(this : IMSMQMessage4*) : Win32cr::Foundation::HRESULT
@@ -3748,10 +3914,10 @@ module Win32cr::System::MessageQueuing
     def get_SenderVersion(this : IMSMQMessage4*, plSenderVersion : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SenderVersion.call(this, plSenderVersion)
     end
-    def get_Extension(this : IMSMQMessage4*, pvarExtension : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Extension(this : IMSMQMessage4*, pvarExtension : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Extension.call(this, pvarExtension)
     end
-    def put_Extension(this : IMSMQMessage4*, varExtension : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Extension(this : IMSMQMessage4*, varExtension : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Extension.call(this, varExtension)
     end
     def get_ConnectorTypeGuid(this : IMSMQMessage4*, pbstrGuidConnectorType : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -3763,16 +3929,16 @@ module Win32cr::System::MessageQueuing
     def get_TransactionStatusQueueInfo(this : IMSMQMessage4*, ppqinfoXactStatus : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionStatusQueueInfo.call(this, ppqinfoXactStatus)
     end
-    def get_DestinationSymmetricKey(this : IMSMQMessage4*, pvarDestSymmKey : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_DestinationSymmetricKey(this : IMSMQMessage4*, pvarDestSymmKey : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DestinationSymmetricKey.call(this, pvarDestSymmKey)
     end
-    def put_DestinationSymmetricKey(this : IMSMQMessage4*, varDestSymmKey : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_DestinationSymmetricKey(this : IMSMQMessage4*, varDestSymmKey : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_DestinationSymmetricKey.call(this, varDestSymmKey)
     end
-    def get_Signature(this : IMSMQMessage4*, pvarSignature : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Signature(this : IMSMQMessage4*, pvarSignature : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Signature.call(this, pvarSignature)
     end
-    def put_Signature(this : IMSMQMessage4*, varSignature : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Signature(this : IMSMQMessage4*, varSignature : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Signature.call(this, varSignature)
     end
     def get_AuthenticationProviderType(this : IMSMQMessage4*, plAuthProvType : Int32*) : Win32cr::Foundation::HRESULT
@@ -3787,7 +3953,7 @@ module Win32cr::System::MessageQueuing
     def put_AuthenticationProviderName(this : IMSMQMessage4*, bstrAuthProvName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_AuthenticationProviderName.call(this, bstrAuthProvName)
     end
-    def put_SenderId(this : IMSMQMessage4*, varSenderId : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_SenderId(this : IMSMQMessage4*, varSenderId : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_SenderId.call(this, varSenderId)
     end
     def get_MsgClass(this : IMSMQMessage4*, plMsgClass : Int32*) : Win32cr::Foundation::HRESULT
@@ -3799,7 +3965,7 @@ module Win32cr::System::MessageQueuing
     def get_Properties(this : IMSMQMessage4*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_TransactionId(this : IMSMQMessage4*, pvarXactId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_TransactionId(this : IMSMQMessage4*, pvarXactId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionId.call(this, pvarXactId)
     end
     def get_IsFirstInTransaction(this : IMSMQMessage4*, pisFirstInXact : Int16*) : Win32cr::Foundation::HRESULT
@@ -3844,16 +4010,16 @@ module Win32cr::System::MessageQueuing
     def get_Destination(this : IMSMQMessage4*, ppdestDestination : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Destination.call(this, ppdestDestination)
     end
-    def get_LookupId(this : IMSMQMessage4*, pvarLookupId : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_LookupId(this : IMSMQMessage4*, pvarLookupId : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_LookupId.call(this, pvarLookupId)
     end
-    def get_IsAuthenticated2(this : IMSMQMessage4*, pisAuthenticated : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsAuthenticated2(this : IMSMQMessage4*, pisAuthenticated : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsAuthenticated2.call(this, pisAuthenticated)
     end
-    def get_IsFirstInTransaction2(this : IMSMQMessage4*, pisFirstInXact : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsFirstInTransaction2(this : IMSMQMessage4*, pisFirstInXact : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsFirstInTransaction2.call(this, pisFirstInXact)
     end
-    def get_IsLastInTransaction2(this : IMSMQMessage4*, pisLastInXact : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsLastInTransaction2(this : IMSMQMessage4*, pisLastInXact : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsLastInTransaction2.call(this, pisLastInXact)
     end
     def attach_current_security_context2(this : IMSMQMessage4*) : Win32cr::Foundation::HRESULT
@@ -3862,7 +4028,7 @@ module Win32cr::System::MessageQueuing
     def get_SoapEnvelope(this : IMSMQMessage4*, pbstrSoapEnvelope : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_SoapEnvelope.call(this, pbstrSoapEnvelope)
     end
-    def get_CompoundMessage(this : IMSMQMessage4*, pvarCompoundMessage : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_CompoundMessage(this : IMSMQMessage4*, pvarCompoundMessage : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_CompoundMessage.call(this, pvarCompoundMessage)
     end
     def put_SoapHeader(this : IMSMQMessage4*, bstrSoapHeader : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -3875,21 +4041,22 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQPrivateEventVtbl,
+
+  record IMSMQPrivateEventVtable,
     query_interface : Proc(IMSMQPrivateEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQPrivateEvent*, UInt32),
     release : Proc(IMSMQPrivateEvent*, UInt32),
     get_type_info_count : Proc(IMSMQPrivateEvent*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQPrivateEvent*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQPrivateEvent*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQPrivateEvent*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQPrivateEvent*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Hwnd : Proc(IMSMQPrivateEvent*, Int32*, Win32cr::Foundation::HRESULT),
     fire_arrived_event : Proc(IMSMQPrivateEvent*, Void*, Int32, Win32cr::Foundation::HRESULT),
     fire_arrived_error_event : Proc(IMSMQPrivateEvent*, Void*, Win32cr::Foundation::HRESULT, Int32, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQPrivateEvent, lpVtbl : IMSMQPrivateEventVtbl* do
+  record IMSMQPrivateEvent, lpVtbl : IMSMQPrivateEventVtable* do
     GUID = LibC::GUID.new(0xd7ab3341_u32, 0xc9d3_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x47_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xc5_u8, 0xa2_u8, 0xc0_u8])
     def query_interface(this : IMSMQPrivateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3909,8 +4076,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQPrivateEvent*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQPrivateEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQPrivateEvent*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Hwnd(this : IMSMQPrivateEvent*, phwnd : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Hwnd.call(this, phwnd)
@@ -3925,18 +4092,19 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record DMSMQEventEvents_Vtbl,
+
+  record DMSMQEventEvents_Vtable,
     query_interface : Proc(DMSMQEventEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DMSMQEventEvents_*, UInt32),
     release : Proc(DMSMQEventEvents_*, UInt32),
     get_type_info_count : Proc(DMSMQEventEvents_*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(DMSMQEventEvents_*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(DMSMQEventEvents_*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(DMSMQEventEvents_*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
+    invoke : Proc(DMSMQEventEvents_*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record DMSMQEventEvents_, lpVtbl : DMSMQEventEvents_Vtbl* do
+  record DMSMQEventEvents_, lpVtbl : DMSMQEventEvents_Vtable* do
     GUID = LibC::GUID.new(0xd7d6e078_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : DMSMQEventEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3956,30 +4124,31 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : DMSMQEventEvents_*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : DMSMQEventEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : DMSMQEventEvents_*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
 
   end
 
   @[Extern]
-  record IMSMQTransaction2Vtbl,
+
+  record IMSMQTransaction2Vtable,
     query_interface : Proc(IMSMQTransaction2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransaction2*, UInt32),
     release : Proc(IMSMQTransaction2*, UInt32),
     get_type_info_count : Proc(IMSMQTransaction2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQTransaction2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQTransaction2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQTransaction2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQTransaction2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Transaction : Proc(IMSMQTransaction2*, Int32*, Win32cr::Foundation::HRESULT),
-    commit : Proc(IMSMQTransaction2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    abort : Proc(IMSMQTransaction2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    init_new : Proc(IMSMQTransaction2*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    commit : Proc(IMSMQTransaction2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    abort : Proc(IMSMQTransaction2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    init_new : Proc(IMSMQTransaction2*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQTransaction2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQTransaction2, lpVtbl : IMSMQTransaction2Vtbl* do
+  record IMSMQTransaction2, lpVtbl : IMSMQTransaction2Vtable* do
     GUID = LibC::GUID.new(0x2ce0c5b0_u32, 0x6e67_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xe6_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransaction2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3999,19 +4168,19 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQTransaction2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQTransaction2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQTransaction2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Transaction(this : IMSMQTransaction2*, plTransaction : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Transaction.call(this, plTransaction)
     end
-    def commit(this : IMSMQTransaction2*, fRetaining : Win32cr::System::Com::VARIANT*, grfTC : Win32cr::System::Com::VARIANT*, grfRM : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def commit(this : IMSMQTransaction2*, fRetaining : Win32cr::System::Variant::VARIANT*, grfTC : Win32cr::System::Variant::VARIANT*, grfRM : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this, fRetaining, grfTC, grfRM)
     end
-    def abort(this : IMSMQTransaction2*, fRetaining : Win32cr::System::Com::VARIANT*, fAsync : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def abort(this : IMSMQTransaction2*, fRetaining : Win32cr::System::Variant::VARIANT*, fAsync : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.abort.call(this, fRetaining, fAsync)
     end
-    def init_new(this : IMSMQTransaction2*, varTransaction : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def init_new(this : IMSMQTransaction2*, varTransaction : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.init_new.call(this, varTransaction)
     end
     def get_Properties(this : IMSMQTransaction2*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
@@ -4021,24 +4190,25 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransaction3Vtbl,
+
+  record IMSMQTransaction3Vtable,
     query_interface : Proc(IMSMQTransaction3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransaction3*, UInt32),
     release : Proc(IMSMQTransaction3*, UInt32),
     get_type_info_count : Proc(IMSMQTransaction3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQTransaction3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQTransaction3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQTransaction3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQTransaction3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Transaction : Proc(IMSMQTransaction3*, Int32*, Win32cr::Foundation::HRESULT),
-    commit : Proc(IMSMQTransaction3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    abort : Proc(IMSMQTransaction3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    init_new : Proc(IMSMQTransaction3*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT),
+    commit : Proc(IMSMQTransaction3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    abort : Proc(IMSMQTransaction3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    init_new : Proc(IMSMQTransaction3*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQTransaction3*, Void**, Win32cr::Foundation::HRESULT),
-    get_ITransaction : Proc(IMSMQTransaction3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_ITransaction : Proc(IMSMQTransaction3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQTransaction3, lpVtbl : IMSMQTransaction3Vtbl* do
+  record IMSMQTransaction3, lpVtbl : IMSMQTransaction3Vtable* do
     GUID = LibC::GUID.new(0xeba96b13_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransaction3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4058,45 +4228,46 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQTransaction3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQTransaction3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQTransaction3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Transaction(this : IMSMQTransaction3*, plTransaction : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Transaction.call(this, plTransaction)
     end
-    def commit(this : IMSMQTransaction3*, fRetaining : Win32cr::System::Com::VARIANT*, grfTC : Win32cr::System::Com::VARIANT*, grfRM : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def commit(this : IMSMQTransaction3*, fRetaining : Win32cr::System::Variant::VARIANT*, grfTC : Win32cr::System::Variant::VARIANT*, grfRM : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.commit.call(this, fRetaining, grfTC, grfRM)
     end
-    def abort(this : IMSMQTransaction3*, fRetaining : Win32cr::System::Com::VARIANT*, fAsync : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def abort(this : IMSMQTransaction3*, fRetaining : Win32cr::System::Variant::VARIANT*, fAsync : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.abort.call(this, fRetaining, fAsync)
     end
-    def init_new(this : IMSMQTransaction3*, varTransaction : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def init_new(this : IMSMQTransaction3*, varTransaction : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.init_new.call(this, varTransaction)
     end
     def get_Properties(this : IMSMQTransaction3*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_ITransaction(this : IMSMQTransaction3*, pvarITransaction : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ITransaction(this : IMSMQTransaction3*, pvarITransaction : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ITransaction.call(this, pvarITransaction)
     end
 
   end
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser2Vtbl,
+
+  record IMSMQCoordinatedTransactionDispenser2Vtable,
     query_interface : Proc(IMSMQCoordinatedTransactionDispenser2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32),
     release : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32),
     get_type_info_count : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQCoordinatedTransactionDispenser2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQCoordinatedTransactionDispenser2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQCoordinatedTransactionDispenser2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     begin_transaction : Proc(IMSMQCoordinatedTransactionDispenser2*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQCoordinatedTransactionDispenser2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser2, lpVtbl : IMSMQCoordinatedTransactionDispenser2Vtbl* do
+  record IMSMQCoordinatedTransactionDispenser2, lpVtbl : IMSMQCoordinatedTransactionDispenser2Vtable* do
     GUID = LibC::GUID.new(0xeba96b10_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4116,8 +4287,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQCoordinatedTransactionDispenser2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQCoordinatedTransactionDispenser2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQCoordinatedTransactionDispenser2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def begin_transaction(this : IMSMQCoordinatedTransactionDispenser2*, ptransaction : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_transaction.call(this, ptransaction)
@@ -4129,20 +4300,21 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser3Vtbl,
+
+  record IMSMQCoordinatedTransactionDispenser3Vtable,
     query_interface : Proc(IMSMQCoordinatedTransactionDispenser3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32),
     release : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32),
     get_type_info_count : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQCoordinatedTransactionDispenser3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQCoordinatedTransactionDispenser3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQCoordinatedTransactionDispenser3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     begin_transaction : Proc(IMSMQCoordinatedTransactionDispenser3*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQCoordinatedTransactionDispenser3*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser3, lpVtbl : IMSMQCoordinatedTransactionDispenser3Vtbl* do
+  record IMSMQCoordinatedTransactionDispenser3, lpVtbl : IMSMQCoordinatedTransactionDispenser3Vtable* do
     GUID = LibC::GUID.new(0xeba96b14_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4162,8 +4334,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQCoordinatedTransactionDispenser3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQCoordinatedTransactionDispenser3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQCoordinatedTransactionDispenser3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def begin_transaction(this : IMSMQCoordinatedTransactionDispenser3*, ptransaction : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_transaction.call(this, ptransaction)
@@ -4175,20 +4347,21 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransactionDispenser2Vtbl,
+
+  record IMSMQTransactionDispenser2Vtable,
     query_interface : Proc(IMSMQTransactionDispenser2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransactionDispenser2*, UInt32),
     release : Proc(IMSMQTransactionDispenser2*, UInt32),
     get_type_info_count : Proc(IMSMQTransactionDispenser2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQTransactionDispenser2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQTransactionDispenser2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQTransactionDispenser2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQTransactionDispenser2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     begin_transaction : Proc(IMSMQTransactionDispenser2*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQTransactionDispenser2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQTransactionDispenser2, lpVtbl : IMSMQTransactionDispenser2Vtbl* do
+  record IMSMQTransactionDispenser2, lpVtbl : IMSMQTransactionDispenser2Vtable* do
     GUID = LibC::GUID.new(0xeba96b11_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransactionDispenser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4208,8 +4381,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQTransactionDispenser2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQTransactionDispenser2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQTransactionDispenser2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def begin_transaction(this : IMSMQTransactionDispenser2*, ptransaction : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_transaction.call(this, ptransaction)
@@ -4221,20 +4394,21 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransactionDispenser3Vtbl,
+
+  record IMSMQTransactionDispenser3Vtable,
     query_interface : Proc(IMSMQTransactionDispenser3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransactionDispenser3*, UInt32),
     release : Proc(IMSMQTransactionDispenser3*, UInt32),
     get_type_info_count : Proc(IMSMQTransactionDispenser3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQTransactionDispenser3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQTransactionDispenser3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQTransactionDispenser3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQTransactionDispenser3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     begin_transaction : Proc(IMSMQTransactionDispenser3*, Void**, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQTransactionDispenser3*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQTransactionDispenser3, lpVtbl : IMSMQTransactionDispenser3Vtbl* do
+  record IMSMQTransactionDispenser3, lpVtbl : IMSMQTransactionDispenser3Vtable* do
     GUID = LibC::GUID.new(0xeba96b15_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransactionDispenser3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4254,8 +4428,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQTransactionDispenser3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQTransactionDispenser3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQTransactionDispenser3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def begin_transaction(this : IMSMQTransactionDispenser3*, ptransaction : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.begin_transaction.call(this, ptransaction)
@@ -4267,19 +4441,20 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQApplicationVtbl,
+
+  record IMSMQApplicationVtable,
     query_interface : Proc(IMSMQApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQApplication*, UInt32),
     release : Proc(IMSMQApplication*, UInt32),
     get_type_info_count : Proc(IMSMQApplication*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQApplication*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQApplication*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQApplication*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQApplication*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     machine_id_of_machine_name : Proc(IMSMQApplication*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQApplication, lpVtbl : IMSMQApplicationVtbl* do
+  record IMSMQApplication, lpVtbl : IMSMQApplicationVtable* do
     GUID = LibC::GUID.new(0xd7d6e085_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4299,8 +4474,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQApplication*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQApplication*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def machine_id_of_machine_name(this : IMSMQApplication*, machine_name : Win32cr::Foundation::BSTR, pbstrGuid : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.machine_id_of_machine_name.call(this, machine_name, pbstrGuid)
@@ -4309,26 +4484,27 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQApplication2Vtbl,
+
+  record IMSMQApplication2Vtable,
     query_interface : Proc(IMSMQApplication2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQApplication2*, UInt32),
     release : Proc(IMSMQApplication2*, UInt32),
     get_type_info_count : Proc(IMSMQApplication2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQApplication2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQApplication2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQApplication2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQApplication2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     machine_id_of_machine_name : Proc(IMSMQApplication2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    register_certificate : Proc(IMSMQApplication2*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    register_certificate : Proc(IMSMQApplication2*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     machine_name_of_machine_id : Proc(IMSMQApplication2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MSMQVersionMajor : Proc(IMSMQApplication2*, Int16*, Win32cr::Foundation::HRESULT),
     get_MSMQVersionMinor : Proc(IMSMQApplication2*, Int16*, Win32cr::Foundation::HRESULT),
     get_MSMQVersionBuild : Proc(IMSMQApplication2*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDsEnabled : Proc(IMSMQApplication2*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsDsEnabled : Proc(IMSMQApplication2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQApplication2*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQApplication2, lpVtbl : IMSMQApplication2Vtbl* do
+  record IMSMQApplication2, lpVtbl : IMSMQApplication2Vtable* do
     GUID = LibC::GUID.new(0x12a30900_u32, 0x7300_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xe6_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQApplication2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4348,13 +4524,13 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQApplication2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQApplication2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQApplication2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def machine_id_of_machine_name(this : IMSMQApplication2*, machine_name : Win32cr::Foundation::BSTR, pbstrGuid : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.machine_id_of_machine_name.call(this, machine_name, pbstrGuid)
     end
-    def register_certificate(this : IMSMQApplication2*, flags : Win32cr::System::Com::VARIANT*, external_certificate : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def register_certificate(this : IMSMQApplication2*, flags : Win32cr::System::Variant::VARIANT*, external_certificate : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_certificate.call(this, flags, external_certificate)
     end
     def machine_name_of_machine_id(this : IMSMQApplication2*, bstrGuid : Win32cr::Foundation::BSTR, pbstrMachineName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4369,7 +4545,7 @@ module Win32cr::System::MessageQueuing
     def get_MSMQVersionBuild(this : IMSMQApplication2*, psMSMQVersionBuild : Int16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MSMQVersionBuild.call(this, psMSMQVersionBuild)
     end
-    def get_IsDsEnabled(this : IMSMQApplication2*, pfIsDsEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDsEnabled(this : IMSMQApplication2*, pfIsDsEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDsEnabled.call(this, pfIsDsEnabled)
     end
     def get_Properties(this : IMSMQApplication2*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
@@ -4379,27 +4555,28 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQApplication3Vtbl,
+
+  record IMSMQApplication3Vtable,
     query_interface : Proc(IMSMQApplication3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQApplication3*, UInt32),
     release : Proc(IMSMQApplication3*, UInt32),
     get_type_info_count : Proc(IMSMQApplication3*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQApplication3*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQApplication3*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQApplication3*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQApplication3*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     machine_id_of_machine_name : Proc(IMSMQApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    register_certificate : Proc(IMSMQApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    register_certificate : Proc(IMSMQApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     machine_name_of_machine_id : Proc(IMSMQApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MSMQVersionMajor : Proc(IMSMQApplication3*, Int16*, Win32cr::Foundation::HRESULT),
     get_MSMQVersionMinor : Proc(IMSMQApplication3*, Int16*, Win32cr::Foundation::HRESULT),
     get_MSMQVersionBuild : Proc(IMSMQApplication3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_IsDsEnabled : Proc(IMSMQApplication3*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsDsEnabled : Proc(IMSMQApplication3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_Properties : Proc(IMSMQApplication3*, Void**, Win32cr::Foundation::HRESULT),
-    get_ActiveQueues : Proc(IMSMQApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_PrivateQueues : Proc(IMSMQApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_ActiveQueues : Proc(IMSMQApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_PrivateQueues : Proc(IMSMQApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_DirectoryServiceServer : Proc(IMSMQApplication3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
-    get_IsConnected : Proc(IMSMQApplication3*, Int16*, Win32cr::Foundation::HRESULT),
-    get_BytesInAllQueues : Proc(IMSMQApplication3*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_IsConnected : Proc(IMSMQApplication3*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    get_BytesInAllQueues : Proc(IMSMQApplication3*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     put_Machine : Proc(IMSMQApplication3*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_Machine : Proc(IMSMQApplication3*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     connect : Proc(IMSMQApplication3*, Win32cr::Foundation::HRESULT),
@@ -4408,7 +4585,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQApplication3, lpVtbl : IMSMQApplication3Vtbl* do
+  record IMSMQApplication3, lpVtbl : IMSMQApplication3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1f_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQApplication3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4428,13 +4605,13 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQApplication3*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQApplication3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQApplication3*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def machine_id_of_machine_name(this : IMSMQApplication3*, machine_name : Win32cr::Foundation::BSTR, pbstrGuid : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.machine_id_of_machine_name.call(this, machine_name, pbstrGuid)
     end
-    def register_certificate(this : IMSMQApplication3*, flags : Win32cr::System::Com::VARIANT*, external_certificate : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def register_certificate(this : IMSMQApplication3*, flags : Win32cr::System::Variant::VARIANT*, external_certificate : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.register_certificate.call(this, flags, external_certificate)
     end
     def machine_name_of_machine_id(this : IMSMQApplication3*, bstrGuid : Win32cr::Foundation::BSTR, pbstrMachineName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4449,25 +4626,25 @@ module Win32cr::System::MessageQueuing
     def get_MSMQVersionBuild(this : IMSMQApplication3*, psMSMQVersionBuild : Int16*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_MSMQVersionBuild.call(this, psMSMQVersionBuild)
     end
-    def get_IsDsEnabled(this : IMSMQApplication3*, pfIsDsEnabled : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsDsEnabled(this : IMSMQApplication3*, pfIsDsEnabled : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsDsEnabled.call(this, pfIsDsEnabled)
     end
     def get_Properties(this : IMSMQApplication3*, ppcolProperties : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Properties.call(this, ppcolProperties)
     end
-    def get_ActiveQueues(this : IMSMQApplication3*, pvActiveQueues : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_ActiveQueues(this : IMSMQApplication3*, pvActiveQueues : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_ActiveQueues.call(this, pvActiveQueues)
     end
-    def get_PrivateQueues(this : IMSMQApplication3*, pvPrivateQueues : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_PrivateQueues(this : IMSMQApplication3*, pvPrivateQueues : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_PrivateQueues.call(this, pvPrivateQueues)
     end
     def get_DirectoryServiceServer(this : IMSMQApplication3*, pbstrDirectoryServiceServer : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_DirectoryServiceServer.call(this, pbstrDirectoryServiceServer)
     end
-    def get_IsConnected(this : IMSMQApplication3*, pfIsConnected : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsConnected(this : IMSMQApplication3*, pfIsConnected : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsConnected.call(this, pfIsConnected)
     end
-    def get_BytesInAllQueues(this : IMSMQApplication3*, pvBytesInAllQueues : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_BytesInAllQueues(this : IMSMQApplication3*, pvBytesInAllQueues : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BytesInAllQueues.call(this, pvBytesInAllQueues)
     end
     def put_Machine(this : IMSMQApplication3*, bstrMachine : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -4489,17 +4666,18 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQDestinationVtbl,
+
+  record IMSMQDestinationVtable,
     query_interface : Proc(IMSMQDestination*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQDestination*, UInt32),
     release : Proc(IMSMQDestination*, UInt32),
     get_type_info_count : Proc(IMSMQDestination*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQDestination*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQDestination*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQDestination*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQDestination*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     open : Proc(IMSMQDestination*, Win32cr::Foundation::HRESULT),
     close : Proc(IMSMQDestination*, Win32cr::Foundation::HRESULT),
-    get_IsOpen : Proc(IMSMQDestination*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsOpen : Proc(IMSMQDestination*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_IADs : Proc(IMSMQDestination*, Void**, Win32cr::Foundation::HRESULT),
     putref_IADs : Proc(IMSMQDestination*, Void*, Win32cr::Foundation::HRESULT),
     get_ADsPath : Proc(IMSMQDestination*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
@@ -4514,7 +4692,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQDestination, lpVtbl : IMSMQDestinationVtbl* do
+  record IMSMQDestination, lpVtbl : IMSMQDestinationVtable* do
     GUID = LibC::GUID.new(0xeba96b16_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQDestination*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4534,8 +4712,8 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQDestination*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQDestination*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQDestination*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def open(this : IMSMQDestination*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this)
@@ -4543,7 +4721,7 @@ module Win32cr::System::MessageQueuing
     def close(this : IMSMQDestination*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.close.call(this)
     end
-    def get_IsOpen(this : IMSMQDestination*, pfIsOpen : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsOpen(this : IMSMQDestination*, pfIsOpen : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsOpen.call(this, pfIsOpen)
     end
     def get_IADs(this : IMSMQDestination*, ppIADs : Void**) : Win32cr::Foundation::HRESULT
@@ -4583,20 +4761,21 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQPrivateDestinationVtbl,
+
+  record IMSMQPrivateDestinationVtable,
     query_interface : Proc(IMSMQPrivateDestination*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQPrivateDestination*, UInt32),
     release : Proc(IMSMQPrivateDestination*, UInt32),
     get_type_info_count : Proc(IMSMQPrivateDestination*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQPrivateDestination*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQPrivateDestination*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQPrivateDestination*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    get_Handle : Proc(IMSMQPrivateDestination*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_Handle : Proc(IMSMQPrivateDestination*, Win32cr::System::Com::VARIANT, Win32cr::Foundation::HRESULT)
+    invoke : Proc(IMSMQPrivateDestination*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    get_Handle : Proc(IMSMQPrivateDestination*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_Handle : Proc(IMSMQPrivateDestination*, Win32cr::System::Variant::VARIANT, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQPrivateDestination, lpVtbl : IMSMQPrivateDestinationVtbl* do
+  record IMSMQPrivateDestination, lpVtbl : IMSMQPrivateDestinationVtable* do
     GUID = LibC::GUID.new(0xeba96b17_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQPrivateDestination*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4616,34 +4795,35 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQPrivateDestination*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQPrivateDestination*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQPrivateDestination*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def get_Handle(this : IMSMQPrivateDestination*, pvarHandle : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_Handle(this : IMSMQPrivateDestination*, pvarHandle : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Handle.call(this, pvarHandle)
     end
-    def put_Handle(this : IMSMQPrivateDestination*, varHandle : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    def put_Handle(this : IMSMQPrivateDestination*, varHandle : Win32cr::System::Variant::VARIANT) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_Handle.call(this, varHandle)
     end
 
   end
 
   @[Extern]
-  record IMSMQCollectionVtbl,
+
+  record IMSMQCollectionVtable,
     query_interface : Proc(IMSMQCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQCollection*, UInt32),
     release : Proc(IMSMQCollection*, UInt32),
     get_type_info_count : Proc(IMSMQCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    item : Proc(IMSMQCollection*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    item : Proc(IMSMQCollection*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(IMSMQCollection*, Int32*, Win32cr::Foundation::HRESULT),
     _new_enum : Proc(IMSMQCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQCollection, lpVtbl : IMSMQCollectionVtbl* do
+  record IMSMQCollection, lpVtbl : IMSMQCollectionVtable* do
     GUID = LibC::GUID.new(0x188ac2f_u32, 0xecb3_u16, 0x4173_u16, StaticArray[0x97_u8, 0x79_u8, 0x63_u8, 0x5c_u8, 0xa2_u8, 0x3_u8, 0x9c_u8, 0x72_u8])
     def query_interface(this : IMSMQCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4663,10 +4843,10 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def item(this : IMSMQCollection*, index : Win32cr::System::Com::VARIANT*, pvarRet : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def item(this : IMSMQCollection*, index : Win32cr::System::Variant::VARIANT*, pvarRet : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, index, pvarRet)
     end
     def get_Count(this : IMSMQCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
@@ -4679,27 +4859,28 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQManagementVtbl,
+
+  record IMSMQManagementVtable,
     query_interface : Proc(IMSMQManagement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQManagement*, UInt32),
     release : Proc(IMSMQManagement*, UInt32),
     get_type_info_count : Proc(IMSMQManagement*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQManagement*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQManagement*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQManagement*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    init : Proc(IMSMQManagement*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQManagement*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    init : Proc(IMSMQManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_FormatName : Proc(IMSMQManagement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Machine : Proc(IMSMQManagement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MessageCount : Proc(IMSMQManagement*, Int32*, Win32cr::Foundation::HRESULT),
     get_ForeignStatus : Proc(IMSMQManagement*, Int32*, Win32cr::Foundation::HRESULT),
     get_QueueType : Proc(IMSMQManagement*, Int32*, Win32cr::Foundation::HRESULT),
-    get_IsLocal : Proc(IMSMQManagement*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsLocal : Proc(IMSMQManagement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TransactionalStatus : Proc(IMSMQManagement*, Int32*, Win32cr::Foundation::HRESULT),
-    get_BytesInQueue : Proc(IMSMQManagement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_BytesInQueue : Proc(IMSMQManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQManagement, lpVtbl : IMSMQManagementVtbl* do
+  record IMSMQManagement, lpVtbl : IMSMQManagementVtable* do
     GUID = LibC::GUID.new(0xbe5f0241_u32, 0xe489_u16, 0x4957_u16, StaticArray[0x8c_u8, 0xc4_u8, 0xa4_u8, 0x52_u8, 0xfc_u8, 0xf3_u8, 0xe2_u8, 0x3e_u8])
     def query_interface(this : IMSMQManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4719,10 +4900,10 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQManagement*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQManagement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQManagement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def init(this : IMSMQManagement*, machine : Win32cr::System::Com::VARIANT*, pathname : Win32cr::System::Com::VARIANT*, format_name : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def init(this : IMSMQManagement*, machine : Win32cr::System::Variant::VARIANT*, pathname : Win32cr::System::Variant::VARIANT*, format_name : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.init.call(this, machine, pathname, format_name)
     end
     def get_FormatName(this : IMSMQManagement*, pbstrFormatName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4740,38 +4921,39 @@ module Win32cr::System::MessageQueuing
     def get_QueueType(this : IMSMQManagement*, plQueueType : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QueueType.call(this, plQueueType)
     end
-    def get_IsLocal(this : IMSMQManagement*, pfIsLocal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsLocal(this : IMSMQManagement*, pfIsLocal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsLocal.call(this, pfIsLocal)
     end
     def get_TransactionalStatus(this : IMSMQManagement*, plTransactionalStatus : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionalStatus.call(this, plTransactionalStatus)
     end
-    def get_BytesInQueue(this : IMSMQManagement*, pvBytesInQueue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_BytesInQueue(this : IMSMQManagement*, pvBytesInQueue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BytesInQueue.call(this, pvBytesInQueue)
     end
 
   end
 
   @[Extern]
-  record IMSMQOutgoingQueueManagementVtbl,
+
+  record IMSMQOutgoingQueueManagementVtable,
     query_interface : Proc(IMSMQOutgoingQueueManagement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQOutgoingQueueManagement*, UInt32),
     release : Proc(IMSMQOutgoingQueueManagement*, UInt32),
     get_type_info_count : Proc(IMSMQOutgoingQueueManagement*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQOutgoingQueueManagement*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQOutgoingQueueManagement*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQOutgoingQueueManagement*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    init : Proc(IMSMQOutgoingQueueManagement*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQOutgoingQueueManagement*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    init : Proc(IMSMQOutgoingQueueManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_FormatName : Proc(IMSMQOutgoingQueueManagement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Machine : Proc(IMSMQOutgoingQueueManagement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MessageCount : Proc(IMSMQOutgoingQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
     get_ForeignStatus : Proc(IMSMQOutgoingQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
     get_QueueType : Proc(IMSMQOutgoingQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
-    get_IsLocal : Proc(IMSMQOutgoingQueueManagement*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsLocal : Proc(IMSMQOutgoingQueueManagement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TransactionalStatus : Proc(IMSMQOutgoingQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
-    get_BytesInQueue : Proc(IMSMQOutgoingQueueManagement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_BytesInQueue : Proc(IMSMQOutgoingQueueManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_State : Proc(IMSMQOutgoingQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
-    get_NextHops : Proc(IMSMQOutgoingQueueManagement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_NextHops : Proc(IMSMQOutgoingQueueManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     eod_get_send_info : Proc(IMSMQOutgoingQueueManagement*, Void**, Win32cr::Foundation::HRESULT),
     resume : Proc(IMSMQOutgoingQueueManagement*, Win32cr::Foundation::HRESULT),
     pause : Proc(IMSMQOutgoingQueueManagement*, Win32cr::Foundation::HRESULT),
@@ -4779,7 +4961,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQOutgoingQueueManagement, lpVtbl : IMSMQOutgoingQueueManagementVtbl* do
+  record IMSMQOutgoingQueueManagement, lpVtbl : IMSMQOutgoingQueueManagementVtable* do
     GUID = LibC::GUID.new(0x64c478fb_u32, 0xf9b0_u16, 0x4695_u16, StaticArray[0x8a_u8, 0x7f_u8, 0x43_u8, 0x9a_u8, 0xc9_u8, 0x43_u8, 0x26_u8, 0xd3_u8])
     def query_interface(this : IMSMQOutgoingQueueManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4799,10 +4981,10 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQOutgoingQueueManagement*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQOutgoingQueueManagement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQOutgoingQueueManagement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def init(this : IMSMQOutgoingQueueManagement*, machine : Win32cr::System::Com::VARIANT*, pathname : Win32cr::System::Com::VARIANT*, format_name : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def init(this : IMSMQOutgoingQueueManagement*, machine : Win32cr::System::Variant::VARIANT*, pathname : Win32cr::System::Variant::VARIANT*, format_name : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.init.call(this, machine, pathname, format_name)
     end
     def get_FormatName(this : IMSMQOutgoingQueueManagement*, pbstrFormatName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4820,19 +5002,19 @@ module Win32cr::System::MessageQueuing
     def get_QueueType(this : IMSMQOutgoingQueueManagement*, plQueueType : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QueueType.call(this, plQueueType)
     end
-    def get_IsLocal(this : IMSMQOutgoingQueueManagement*, pfIsLocal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsLocal(this : IMSMQOutgoingQueueManagement*, pfIsLocal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsLocal.call(this, pfIsLocal)
     end
     def get_TransactionalStatus(this : IMSMQOutgoingQueueManagement*, plTransactionalStatus : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionalStatus.call(this, plTransactionalStatus)
     end
-    def get_BytesInQueue(this : IMSMQOutgoingQueueManagement*, pvBytesInQueue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_BytesInQueue(this : IMSMQOutgoingQueueManagement*, pvBytesInQueue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BytesInQueue.call(this, pvBytesInQueue)
     end
     def get_State(this : IMSMQOutgoingQueueManagement*, plState : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_State.call(this, plState)
     end
-    def get_NextHops(this : IMSMQOutgoingQueueManagement*, pvNextHops : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_NextHops(this : IMSMQOutgoingQueueManagement*, pvNextHops : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_NextHops.call(this, pvNextHops)
     end
     def eod_get_send_info(this : IMSMQOutgoingQueueManagement*, ppCollection : Void**) : Win32cr::Foundation::HRESULT
@@ -4851,30 +5033,31 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueManagementVtbl,
+
+  record IMSMQQueueManagementVtable,
     query_interface : Proc(IMSMQQueueManagement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueManagement*, UInt32),
     release : Proc(IMSMQQueueManagement*, UInt32),
     get_type_info_count : Proc(IMSMQQueueManagement*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(IMSMQQueueManagement*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(IMSMQQueueManagement*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(IMSMQQueueManagement*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    init : Proc(IMSMQQueueManagement*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(IMSMQQueueManagement*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    init : Proc(IMSMQQueueManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_FormatName : Proc(IMSMQQueueManagement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_Machine : Proc(IMSMQQueueManagement*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_MessageCount : Proc(IMSMQQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
     get_ForeignStatus : Proc(IMSMQQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
     get_QueueType : Proc(IMSMQQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
-    get_IsLocal : Proc(IMSMQQueueManagement*, Int16*, Win32cr::Foundation::HRESULT),
+    get_IsLocal : Proc(IMSMQQueueManagement*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_TransactionalStatus : Proc(IMSMQQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
-    get_BytesInQueue : Proc(IMSMQQueueManagement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_BytesInQueue : Proc(IMSMQQueueManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     get_JournalMessageCount : Proc(IMSMQQueueManagement*, Int32*, Win32cr::Foundation::HRESULT),
-    get_BytesInJournal : Proc(IMSMQQueueManagement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    eod_get_receive_info : Proc(IMSMQQueueManagement*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT)
+    get_BytesInJournal : Proc(IMSMQQueueManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    eod_get_receive_info : Proc(IMSMQQueueManagement*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IMSMQQueueManagement, lpVtbl : IMSMQQueueManagementVtbl* do
+  record IMSMQQueueManagement, lpVtbl : IMSMQQueueManagementVtable* do
     GUID = LibC::GUID.new(0x7fbe7759_u32, 0x5760_u16, 0x444d_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x5e_u8, 0x7a_u8, 0xb9_u8, 0xa8_u8, 0x4c_u8, 0xce_u8])
     def query_interface(this : IMSMQQueueManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4894,10 +5077,10 @@ module Win32cr::System::MessageQueuing
     def get_i_ds_of_names(this : IMSMQQueueManagement*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : IMSMQQueueManagement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : IMSMQQueueManagement*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def init(this : IMSMQQueueManagement*, machine : Win32cr::System::Com::VARIANT*, pathname : Win32cr::System::Com::VARIANT*, format_name : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def init(this : IMSMQQueueManagement*, machine : Win32cr::System::Variant::VARIANT*, pathname : Win32cr::System::Variant::VARIANT*, format_name : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.init.call(this, machine, pathname, format_name)
     end
     def get_FormatName(this : IMSMQQueueManagement*, pbstrFormatName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -4915,25 +5098,336 @@ module Win32cr::System::MessageQueuing
     def get_QueueType(this : IMSMQQueueManagement*, plQueueType : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_QueueType.call(this, plQueueType)
     end
-    def get_IsLocal(this : IMSMQQueueManagement*, pfIsLocal : Int16*) : Win32cr::Foundation::HRESULT
+    def get_IsLocal(this : IMSMQQueueManagement*, pfIsLocal : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_IsLocal.call(this, pfIsLocal)
     end
     def get_TransactionalStatus(this : IMSMQQueueManagement*, plTransactionalStatus : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_TransactionalStatus.call(this, plTransactionalStatus)
     end
-    def get_BytesInQueue(this : IMSMQQueueManagement*, pvBytesInQueue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_BytesInQueue(this : IMSMQQueueManagement*, pvBytesInQueue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BytesInQueue.call(this, pvBytesInQueue)
     end
     def get_JournalMessageCount(this : IMSMQQueueManagement*, plJournalMessageCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_JournalMessageCount.call(this, plJournalMessageCount)
     end
-    def get_BytesInJournal(this : IMSMQQueueManagement*, pvBytesInJournal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_BytesInJournal(this : IMSMQQueueManagement*, pvBytesInJournal : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_BytesInJournal.call(this, pvBytesInJournal)
     end
-    def eod_get_receive_info(this : IMSMQQueueManagement*, pvCollection : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def eod_get_receive_info(this : IMSMQQueueManagement*, pvCollection : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.eod_get_receive_info.call(this, pvCollection)
     end
 
   end
 
+  def mQCreateQueue(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pQueueProps : Win32cr::System::MessageQueuing::MQQUEUEPROPS*, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQCreateQueue(pSecurityDescriptor, pQueueProps, lpwcsFormatName, lpdwFormatNameLength)
+    {% end %}
+  end
+
+  def mQDeleteQueue(lpwcsFormatName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQDeleteQueue(lpwcsFormatName)
+    {% end %}
+  end
+
+  def mQLocateBegin(lpwcsContext : Win32cr::Foundation::PWSTR, pRestriction : Win32cr::System::MessageQueuing::MQRESTRICTION*, pColumns : Win32cr::System::MessageQueuing::MQCOLUMNSET*, pSort : Win32cr::System::MessageQueuing::MQSORTSET*, phEnum : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQLocateBegin(lpwcsContext, pRestriction, pColumns, pSort, phEnum)
+    {% end %}
+  end
+
+  def mQLocateNext(hEnum : Win32cr::Foundation::HANDLE, pcProps : UInt32*, aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQLocateNext(hEnum, pcProps, aPropVar)
+    {% end %}
+  end
+
+  def mQLocateEnd(hEnum : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQLocateEnd(hEnum)
+    {% end %}
+  end
+
+  def mQOpenQueue(lpwcsFormatName : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwShareMode : UInt32, phQueue : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQOpenQueue(lpwcsFormatName, dwAccess, dwShareMode, phQueue)
+    {% end %}
+  end
+
+  def mQSendMessage(hDestinationQueue : LibC::IntPtrT, pMessageProps : Win32cr::System::MessageQueuing::MQMSGPROPS*, pTransaction : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQSendMessage(hDestinationQueue, pMessageProps, pTransaction)
+    {% end %}
+  end
+
+  def mQReceiveMessage(hSource : LibC::IntPtrT, dwTimeout : UInt32, dwAction : UInt32, pMessageProps : Win32cr::System::MessageQueuing::MQMSGPROPS*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, fnReceiveCallback : Win32cr::System::MessageQueuing::PMQRECEIVECALLBACK, hCursor : Win32cr::Foundation::HANDLE, pTransaction : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQReceiveMessage(hSource, dwTimeout, dwAction, pMessageProps, lpOverlapped, fnReceiveCallback, hCursor, pTransaction)
+    {% end %}
+  end
+
+  def mQReceiveMessageByLookupId(hSource : LibC::IntPtrT, ullLookupId : UInt64, dwLookupAction : UInt32, pMessageProps : Win32cr::System::MessageQueuing::MQMSGPROPS*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, fnReceiveCallback : Win32cr::System::MessageQueuing::PMQRECEIVECALLBACK, pTransaction : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQReceiveMessageByLookupId(hSource, ullLookupId, dwLookupAction, pMessageProps, lpOverlapped, fnReceiveCallback, pTransaction)
+    {% end %}
+  end
+
+  def mQCreateCursor(hQueue : LibC::IntPtrT, phCursor : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQCreateCursor(hQueue, phCursor)
+    {% end %}
+  end
+
+  def mQCloseCursor(hCursor : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQCloseCursor(hCursor)
+    {% end %}
+  end
+
+  def mQCloseQueue(hQueue : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQCloseQueue(hQueue)
+    {% end %}
+  end
+
+  def mQSetQueueProperties(lpwcsFormatName : Win32cr::Foundation::PWSTR, pQueueProps : Win32cr::System::MessageQueuing::MQQUEUEPROPS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQSetQueueProperties(lpwcsFormatName, pQueueProps)
+    {% end %}
+  end
+
+  def mQGetQueueProperties(lpwcsFormatName : Win32cr::Foundation::PWSTR, pQueueProps : Win32cr::System::MessageQueuing::MQQUEUEPROPS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQGetQueueProperties(lpwcsFormatName, pQueueProps)
+    {% end %}
+  end
+
+  def mQGetQueueSecurity(lpwcsFormatName : Win32cr::Foundation::PWSTR, requested_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQGetQueueSecurity(lpwcsFormatName, requested_information, pSecurityDescriptor, nLength, lpnLengthNeeded)
+    {% end %}
+  end
+
+  def mQSetQueueSecurity(lpwcsFormatName : Win32cr::Foundation::PWSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQSetQueueSecurity(lpwcsFormatName, security_information, pSecurityDescriptor)
+    {% end %}
+  end
+
+  def mQPathNameToFormatName(lpwcsPathName : Win32cr::Foundation::PWSTR, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQPathNameToFormatName(lpwcsPathName, lpwcsFormatName, lpdwFormatNameLength)
+    {% end %}
+  end
+
+  def mQHandleToFormatName(hQueue : LibC::IntPtrT, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQHandleToFormatName(hQueue, lpwcsFormatName, lpdwFormatNameLength)
+    {% end %}
+  end
+
+  def mQInstanceToFormatName(pGuid : LibC::GUID*, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQInstanceToFormatName(pGuid, lpwcsFormatName, lpdwFormatNameLength)
+    {% end %}
+  end
+
+  def mQADsPathToFormatName(lpwcsADsPath : Win32cr::Foundation::PWSTR, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQADsPathToFormatName(lpwcsADsPath, lpwcsFormatName, lpdwFormatNameLength)
+    {% end %}
+  end
+
+  def mQFreeMemory(pvMemory : Void*) : Void
+    {% if !flag?(:docs) %}
+    C.MQFreeMemory(pvMemory)
+    {% end %}
+  end
+
+  def mQGetMachineProperties(lpwcsMachineName : Win32cr::Foundation::PWSTR, pguidMachineId : LibC::GUID*, pQMProps : Win32cr::System::MessageQueuing::MQQMPROPS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQGetMachineProperties(lpwcsMachineName, pguidMachineId, pQMProps)
+    {% end %}
+  end
+
+  def mQGetSecurityContext(lpCertBuffer : Void*, dwCertBufferLength : UInt32, phSecurityContext : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQGetSecurityContext(lpCertBuffer, dwCertBufferLength, phSecurityContext)
+    {% end %}
+  end
+
+  def mQGetSecurityContextEx(lpCertBuffer : Void*, dwCertBufferLength : UInt32, phSecurityContext : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQGetSecurityContextEx(lpCertBuffer, dwCertBufferLength, phSecurityContext)
+    {% end %}
+  end
+
+  def mQFreeSecurityContext(hSecurityContext : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
+    C.MQFreeSecurityContext(hSecurityContext)
+    {% end %}
+  end
+
+  def mQRegisterCertificate(dwFlags : UInt32, lpCertBuffer : Void*, dwCertBufferLength : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQRegisterCertificate(dwFlags, lpCertBuffer, dwCertBufferLength)
+    {% end %}
+  end
+
+  def mQBeginTransaction(ppTransaction : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQBeginTransaction(ppTransaction)
+    {% end %}
+  end
+
+  def mQGetOverlappedResult(lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQGetOverlappedResult(lpOverlapped)
+    {% end %}
+  end
+
+  def mQGetPrivateComputerInformation(lpwcsComputerName : Win32cr::Foundation::PWSTR, pPrivateProps : Win32cr::System::MessageQueuing::MQPRIVATEPROPS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQGetPrivateComputerInformation(lpwcsComputerName, pPrivateProps)
+    {% end %}
+  end
+
+  def mQPurgeQueue(hQueue : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQPurgeQueue(hQueue)
+    {% end %}
+  end
+
+  def mQMgmtGetInfo(pComputerName : Win32cr::Foundation::PWSTR, pObjectName : Win32cr::Foundation::PWSTR, pMgmtProps : Win32cr::System::MessageQueuing::MQMGMTPROPS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQMgmtGetInfo(pComputerName, pObjectName, pMgmtProps)
+    {% end %}
+  end
+
+  def mQMgmtAction(pComputerName : Win32cr::Foundation::PWSTR, pObjectName : Win32cr::Foundation::PWSTR, pAction : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQMgmtAction(pComputerName, pObjectName, pAction)
+    {% end %}
+  end
+
+  def mQMarkMessageRejected(hQueue : Win32cr::Foundation::HANDLE, ullLookupId : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQMarkMessageRejected(hQueue, ullLookupId)
+    {% end %}
+  end
+
+  def mQMoveMessage(hSourceQueue : LibC::IntPtrT, hDestinationQueue : LibC::IntPtrT, ullLookupId : UInt64, pTransaction : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
+    C.MQMoveMessage(hSourceQueue, hDestinationQueue, ullLookupId, pTransaction)
+    {% end %}
+  end
+
+  @[Link("mqrt")]
+  {% if !flag?(:docs) %}
+  lib C
+    # :nodoc:
+    fun MQCreateQueue(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pQueueProps : Win32cr::System::MessageQueuing::MQQUEUEPROPS*, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQDeleteQueue(lpwcsFormatName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQLocateBegin(lpwcsContext : Win32cr::Foundation::PWSTR, pRestriction : Win32cr::System::MessageQueuing::MQRESTRICTION*, pColumns : Win32cr::System::MessageQueuing::MQCOLUMNSET*, pSort : Win32cr::System::MessageQueuing::MQSORTSET*, phEnum : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQLocateNext(hEnum : Win32cr::Foundation::HANDLE, pcProps : UInt32*, aPropVar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQLocateEnd(hEnum : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQOpenQueue(lpwcsFormatName : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwShareMode : UInt32, phQueue : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQSendMessage(hDestinationQueue : LibC::IntPtrT, pMessageProps : Win32cr::System::MessageQueuing::MQMSGPROPS*, pTransaction : Void*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQReceiveMessage(hSource : LibC::IntPtrT, dwTimeout : UInt32, dwAction : UInt32, pMessageProps : Win32cr::System::MessageQueuing::MQMSGPROPS*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, fnReceiveCallback : Win32cr::System::MessageQueuing::PMQRECEIVECALLBACK, hCursor : Win32cr::Foundation::HANDLE, pTransaction : Void*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQReceiveMessageByLookupId(hSource : LibC::IntPtrT, ullLookupId : UInt64, dwLookupAction : UInt32, pMessageProps : Win32cr::System::MessageQueuing::MQMSGPROPS*, lpOverlapped : Win32cr::System::IO::OVERLAPPED*, fnReceiveCallback : Win32cr::System::MessageQueuing::PMQRECEIVECALLBACK, pTransaction : Void*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQCreateCursor(hQueue : LibC::IntPtrT, phCursor : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQCloseCursor(hCursor : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQCloseQueue(hQueue : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQSetQueueProperties(lpwcsFormatName : Win32cr::Foundation::PWSTR, pQueueProps : Win32cr::System::MessageQueuing::MQQUEUEPROPS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQGetQueueProperties(lpwcsFormatName : Win32cr::Foundation::PWSTR, pQueueProps : Win32cr::System::MessageQueuing::MQQUEUEPROPS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQGetQueueSecurity(lpwcsFormatName : Win32cr::Foundation::PWSTR, requested_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQSetQueueSecurity(lpwcsFormatName : Win32cr::Foundation::PWSTR, security_information : Win32cr::Security::OBJECT_SECURITY_INFORMATION, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQPathNameToFormatName(lpwcsPathName : Win32cr::Foundation::PWSTR, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQHandleToFormatName(hQueue : LibC::IntPtrT, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQInstanceToFormatName(pGuid : LibC::GUID*, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQADsPathToFormatName(lpwcsADsPath : Win32cr::Foundation::PWSTR, lpwcsFormatName : Win32cr::Foundation::PWSTR, lpdwFormatNameLength : UInt32*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQFreeMemory(pvMemory : Void*) : Void
+
+    # :nodoc:
+    fun MQGetMachineProperties(lpwcsMachineName : Win32cr::Foundation::PWSTR, pguidMachineId : LibC::GUID*, pQMProps : Win32cr::System::MessageQueuing::MQQMPROPS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQGetSecurityContext(lpCertBuffer : Void*, dwCertBufferLength : UInt32, phSecurityContext : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQGetSecurityContextEx(lpCertBuffer : Void*, dwCertBufferLength : UInt32, phSecurityContext : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQFreeSecurityContext(hSecurityContext : Win32cr::Foundation::HANDLE) : Void
+
+    # :nodoc:
+    fun MQRegisterCertificate(dwFlags : UInt32, lpCertBuffer : Void*, dwCertBufferLength : UInt32) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQBeginTransaction(ppTransaction : Void**) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQGetOverlappedResult(lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQGetPrivateComputerInformation(lpwcsComputerName : Win32cr::Foundation::PWSTR, pPrivateProps : Win32cr::System::MessageQueuing::MQPRIVATEPROPS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQPurgeQueue(hQueue : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQMgmtGetInfo(pComputerName : Win32cr::Foundation::PWSTR, pObjectName : Win32cr::Foundation::PWSTR, pMgmtProps : Win32cr::System::MessageQueuing::MQMGMTPROPS*) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQMgmtAction(pComputerName : Win32cr::Foundation::PWSTR, pObjectName : Win32cr::Foundation::PWSTR, pAction : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQMarkMessageRejected(hQueue : Win32cr::Foundation::HANDLE, ullLookupId : UInt64) : Win32cr::Foundation::HRESULT
+
+    # :nodoc:
+    fun MQMoveMessage(hSourceQueue : LibC::IntPtrT, hDestinationQueue : LibC::IntPtrT, ullLookupId : UInt64, pTransaction : Void*) : Win32cr::Foundation::HRESULT
+
+  end
+  {% end %}
 end

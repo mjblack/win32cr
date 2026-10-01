@@ -1,5 +1,6 @@
 require "./../system/com.cr"
 require "./../foundation.cr"
+require "./../system/variant.cr"
 
 module Win32cr::NetworkManagement::NetworkPolicyServer
   extend self
@@ -267,6 +268,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     IAS_ATTRIBUTE_SERVER_IPv6_ADDRESS = 8170_u32
     IAS_ATTRIBUTE_RADIUS_USERNAME_ENCODING_ASCII = 8171_u32
     MS_ATTRIBUTE_RAS_ROUTING_DOMAIN_ID = 8172_u32
+    MS_ATTRIBUTE_AZURE_POLICY_ID = 8173_u32
     IAS_ATTRIBUTE_CERTIFICATE_THUMBPRINT = 8250_u32
     RAS_ATTRIBUTE_ENCRYPTION_TYPE = 4294967206_u32
     RAS_ATTRIBUTE_ENCRYPTION_POLICY = 4294967207_u32
@@ -723,8 +725,8 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     property vendor_id : UInt8[4]
     property vendor_type : UInt8
     property vendor_length : UInt8
-    property attribute_specific : UInt8*
-    def initialize(@vendor_id : UInt8[4], @vendor_type : UInt8, @vendor_length : UInt8, @attribute_specific : UInt8*)
+    property attribute_specific : UInt8[1]
+    def initialize(@vendor_id : UInt8[4], @vendor_type : UInt8, @vendor_length : UInt8, @attribute_specific : UInt8[1])
     end
   end
 
@@ -756,27 +758,28 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoMachineVtbl,
+
+  record ISdoMachineVtable,
     query_interface : Proc(ISdoMachine*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoMachine*, UInt32),
     release : Proc(ISdoMachine*, UInt32),
     get_type_info_count : Proc(ISdoMachine*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISdoMachine*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISdoMachine*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISdoMachine*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISdoMachine*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     attach : Proc(ISdoMachine*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_dictionary_sdo : Proc(ISdoMachine*, Void**, Win32cr::Foundation::HRESULT),
     get_service_sdo : Proc(ISdoMachine*, Win32cr::NetworkManagement::NetworkPolicyServer::IASDATASTORE, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_user_sdo : Proc(ISdoMachine*, Win32cr::NetworkManagement::NetworkPolicyServer::IASDATASTORE, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_os_type : Proc(ISdoMachine*, Win32cr::NetworkManagement::NetworkPolicyServer::IASOSTYPE*, Win32cr::Foundation::HRESULT),
     get_domain_type : Proc(ISdoMachine*, Win32cr::NetworkManagement::NetworkPolicyServer::IASDOMAINTYPE*, Win32cr::Foundation::HRESULT),
-    is_directory_available : Proc(ISdoMachine*, Int16*, Win32cr::Foundation::HRESULT),
+    is_directory_available : Proc(ISdoMachine*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_attached_computer : Proc(ISdoMachine*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_sdo_schema : Proc(ISdoMachine*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISdoMachine, lpVtbl : ISdoMachineVtbl* do
+  record ISdoMachine, lpVtbl : ISdoMachineVtable* do
     GUID = LibC::GUID.new(0x479f6e75_u32, 0x49a2_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xca_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf5_u8, 0x19_u8])
     def query_interface(this : ISdoMachine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -796,8 +799,8 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_i_ds_of_names(this : ISdoMachine*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISdoMachine*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISdoMachine*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def attach(this : ISdoMachine*, bstrComputerName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.attach.call(this, bstrComputerName)
@@ -817,7 +820,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_domain_type(this : ISdoMachine*, eDomainType : Win32cr::NetworkManagement::NetworkPolicyServer::IASDOMAINTYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_domain_type.call(this, eDomainType)
     end
-    def is_directory_available(this : ISdoMachine*, boolDirectoryAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def is_directory_available(this : ISdoMachine*, boolDirectoryAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_directory_available.call(this, boolDirectoryAvailable)
     end
     def get_attached_computer(this : ISdoMachine*, bstrComputerName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -830,32 +833,33 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoMachine2Vtbl,
+
+  record ISdoMachine2Vtable,
     query_interface : Proc(ISdoMachine2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoMachine2*, UInt32),
     release : Proc(ISdoMachine2*, UInt32),
     get_type_info_count : Proc(ISdoMachine2*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISdoMachine2*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISdoMachine2*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISdoMachine2*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISdoMachine2*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     attach : Proc(ISdoMachine2*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     get_dictionary_sdo : Proc(ISdoMachine2*, Void**, Win32cr::Foundation::HRESULT),
     get_service_sdo : Proc(ISdoMachine2*, Win32cr::NetworkManagement::NetworkPolicyServer::IASDATASTORE, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_user_sdo : Proc(ISdoMachine2*, Win32cr::NetworkManagement::NetworkPolicyServer::IASDATASTORE, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     get_os_type : Proc(ISdoMachine2*, Win32cr::NetworkManagement::NetworkPolicyServer::IASOSTYPE*, Win32cr::Foundation::HRESULT),
     get_domain_type : Proc(ISdoMachine2*, Win32cr::NetworkManagement::NetworkPolicyServer::IASDOMAINTYPE*, Win32cr::Foundation::HRESULT),
-    is_directory_available : Proc(ISdoMachine2*, Int16*, Win32cr::Foundation::HRESULT),
+    is_directory_available : Proc(ISdoMachine2*, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
     get_attached_computer : Proc(ISdoMachine2*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_sdo_schema : Proc(ISdoMachine2*, Void**, Win32cr::Foundation::HRESULT),
     get_templates_sdo : Proc(ISdoMachine2*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     enable_templates : Proc(ISdoMachine2*, Win32cr::Foundation::HRESULT),
-    sync_config_against_templates : Proc(ISdoMachine2*, Win32cr::Foundation::BSTR, Void**, Void**, Int16, Win32cr::Foundation::HRESULT),
+    sync_config_against_templates : Proc(ISdoMachine2*, Win32cr::Foundation::BSTR, Void**, Void**, Win32cr::Foundation::VARIANT_BOOL, Win32cr::Foundation::HRESULT),
     import_remote_templates : Proc(ISdoMachine2*, Void*, Win32cr::Foundation::BSTR, Win32cr::Foundation::HRESULT),
     reload : Proc(ISdoMachine2*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISdoMachine2, lpVtbl : ISdoMachine2Vtbl* do
+  record ISdoMachine2, lpVtbl : ISdoMachine2Vtable* do
     GUID = LibC::GUID.new(0x518e5ffe_u32, 0xd8ce_u16, 0x4f7e_u16, StaticArray[0xa5_u8, 0xdb_u8, 0xb4_u8, 0xa_u8, 0x35_u8, 0x41_u8, 0x9d_u8, 0x3b_u8])
     def query_interface(this : ISdoMachine2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -875,8 +879,8 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_i_ds_of_names(this : ISdoMachine2*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISdoMachine2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISdoMachine2*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def attach(this : ISdoMachine2*, bstrComputerName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.attach.call(this, bstrComputerName)
@@ -896,7 +900,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_domain_type(this : ISdoMachine2*, eDomainType : Win32cr::NetworkManagement::NetworkPolicyServer::IASDOMAINTYPE*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_domain_type.call(this, eDomainType)
     end
-    def is_directory_available(this : ISdoMachine2*, boolDirectoryAvailable : Int16*) : Win32cr::Foundation::HRESULT
+    def is_directory_available(this : ISdoMachine2*, boolDirectoryAvailable : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_directory_available.call(this, boolDirectoryAvailable)
     end
     def get_attached_computer(this : ISdoMachine2*, bstrComputerName : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
@@ -911,7 +915,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def enable_templates(this : ISdoMachine2*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enable_templates.call(this)
     end
-    def sync_config_against_templates(this : ISdoMachine2*, bstrServiceName : Win32cr::Foundation::BSTR, ppConfigRoot : Void**, ppTemplatesRoot : Void**, bForcedSync : Int16) : Win32cr::Foundation::HRESULT
+    def sync_config_against_templates(this : ISdoMachine2*, bstrServiceName : Win32cr::Foundation::BSTR, ppConfigRoot : Void**, ppTemplatesRoot : Void**, bForcedSync : Win32cr::Foundation::VARIANT_BOOL) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.sync_config_against_templates.call(this, bstrServiceName, ppConfigRoot, ppTemplatesRoot, bForcedSync)
     end
     def import_remote_templates(this : ISdoMachine2*, pLocalTemplatesRoot : Void*, bstrRemoteMachineName : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
@@ -924,14 +928,15 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoServiceControlVtbl,
+
+  record ISdoServiceControlVtable,
     query_interface : Proc(ISdoServiceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoServiceControl*, UInt32),
     release : Proc(ISdoServiceControl*, UInt32),
     get_type_info_count : Proc(ISdoServiceControl*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISdoServiceControl*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISdoServiceControl*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISdoServiceControl*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISdoServiceControl*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     start_service : Proc(ISdoServiceControl*, Win32cr::Foundation::HRESULT),
     stop_service : Proc(ISdoServiceControl*, Win32cr::Foundation::HRESULT),
     get_service_status : Proc(ISdoServiceControl*, Int32*, Win32cr::Foundation::HRESULT),
@@ -939,7 +944,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ISdoServiceControl, lpVtbl : ISdoServiceControlVtbl* do
+  record ISdoServiceControl, lpVtbl : ISdoServiceControlVtable* do
     GUID = LibC::GUID.new(0x479f6e74_u32, 0x49a2_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xca_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf5_u8, 0x19_u8])
     def query_interface(this : ISdoServiceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -959,8 +964,8 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_i_ds_of_names(this : ISdoServiceControl*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISdoServiceControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISdoServiceControl*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def start_service(this : ISdoServiceControl*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.start_service.call(this)
@@ -978,17 +983,18 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoVtbl,
+
+  record ISdoVtable,
     query_interface : Proc(ISdo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdo*, UInt32),
     release : Proc(ISdo*, UInt32),
     get_type_info_count : Proc(ISdo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISdo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISdo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISdo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISdo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_property_info : Proc(ISdo*, Int32, Void**, Win32cr::Foundation::HRESULT),
-    get_property : Proc(ISdo*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_property : Proc(ISdo*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(ISdo*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_property : Proc(ISdo*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     reset_property : Proc(ISdo*, Int32, Win32cr::Foundation::HRESULT),
     apply : Proc(ISdo*, Win32cr::Foundation::HRESULT),
     restore : Proc(ISdo*, Win32cr::Foundation::HRESULT),
@@ -996,7 +1002,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ISdo, lpVtbl : ISdoVtbl* do
+  record ISdo, lpVtbl : ISdoVtable* do
     GUID = LibC::GUID.new(0x56bc53de_u32, 0x96db_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x3f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ISdo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1016,16 +1022,16 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_i_ds_of_names(this : ISdo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISdo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISdo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_property_info(this : ISdo*, id : Int32, ppPropertyInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property_info.call(this, id, ppPropertyInfo)
     end
-    def get_property(this : ISdo*, id : Int32, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : ISdo*, id : Int32, pValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, id, pValue)
     end
-    def put_property(this : ISdo*, id : Int32, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def put_property(this : ISdo*, id : Int32, pValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_property.call(this, id, pValue)
     end
     def reset_property(this : ISdo*, id : Int32) : Win32cr::Foundation::HRESULT
@@ -1044,26 +1050,27 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoCollectionVtbl,
+
+  record ISdoCollectionVtable,
     query_interface : Proc(ISdoCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoCollection*, UInt32),
     release : Proc(ISdoCollection*, UInt32),
     get_type_info_count : Proc(ISdoCollection*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISdoCollection*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISdoCollection*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISdoCollection*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISdoCollection*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_Count : Proc(ISdoCollection*, Int32*, Win32cr::Foundation::HRESULT),
     add : Proc(ISdoCollection*, Win32cr::Foundation::BSTR, Void**, Win32cr::Foundation::HRESULT),
     remove : Proc(ISdoCollection*, Void*, Win32cr::Foundation::HRESULT),
     remove_all : Proc(ISdoCollection*, Win32cr::Foundation::HRESULT),
     reload : Proc(ISdoCollection*, Win32cr::Foundation::HRESULT),
-    is_name_unique : Proc(ISdoCollection*, Win32cr::Foundation::BSTR, Int16*, Win32cr::Foundation::HRESULT),
-    item : Proc(ISdoCollection*, Win32cr::System::Com::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
+    is_name_unique : Proc(ISdoCollection*, Win32cr::Foundation::BSTR, Win32cr::Foundation::VARIANT_BOOL*, Win32cr::Foundation::HRESULT),
+    item : Proc(ISdoCollection*, Win32cr::System::Variant::VARIANT*, Void**, Win32cr::Foundation::HRESULT),
     get__NewEnum : Proc(ISdoCollection*, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISdoCollection, lpVtbl : ISdoCollectionVtbl* do
+  record ISdoCollection, lpVtbl : ISdoCollectionVtable* do
     GUID = LibC::GUID.new(0x56bc53e2_u32, 0x96db_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x3f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ISdoCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1083,8 +1090,8 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_i_ds_of_names(this : ISdoCollection*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISdoCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISdoCollection*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_Count(this : ISdoCollection*, pCount : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_Count.call(this, pCount)
@@ -1101,10 +1108,10 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def reload(this : ISdoCollection*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.reload.call(this)
     end
-    def is_name_unique(this : ISdoCollection*, bstrName : Win32cr::Foundation::BSTR, pBool : Int16*) : Win32cr::Foundation::HRESULT
+    def is_name_unique(this : ISdoCollection*, bstrName : Win32cr::Foundation::BSTR, pBool : Win32cr::Foundation::VARIANT_BOOL*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.is_name_unique.call(this, bstrName, pBool)
     end
-    def item(this : ISdoCollection*, name : Win32cr::System::Com::VARIANT*, pItem : Void**) : Win32cr::Foundation::HRESULT
+    def item(this : ISdoCollection*, name : Win32cr::System::Variant::VARIANT*, pItem : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.item.call(this, name, pItem)
     end
     def get__NewEnum(this : ISdoCollection*, ppEnumVARIANT : Void**) : Win32cr::Foundation::HRESULT
@@ -1114,17 +1121,18 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ITemplateSdoVtbl,
+
+  record ITemplateSdoVtable,
     query_interface : Proc(ITemplateSdo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITemplateSdo*, UInt32),
     release : Proc(ITemplateSdo*, UInt32),
     get_type_info_count : Proc(ITemplateSdo*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ITemplateSdo*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ITemplateSdo*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ITemplateSdo*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ITemplateSdo*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
     get_property_info : Proc(ITemplateSdo*, Int32, Void**, Win32cr::Foundation::HRESULT),
-    get_property : Proc(ITemplateSdo*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    put_property : Proc(ITemplateSdo*, Int32, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_property : Proc(ITemplateSdo*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    put_property : Proc(ITemplateSdo*, Int32, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     reset_property : Proc(ITemplateSdo*, Int32, Win32cr::Foundation::HRESULT),
     apply : Proc(ITemplateSdo*, Win32cr::Foundation::HRESULT),
     restore : Proc(ITemplateSdo*, Win32cr::Foundation::HRESULT),
@@ -1135,7 +1143,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ITemplateSdo, lpVtbl : ITemplateSdoVtbl* do
+  record ITemplateSdo, lpVtbl : ITemplateSdoVtable* do
     GUID = LibC::GUID.new(0x8aa85302_u32, 0xd2e2_u16, 0x4e20_u16, StaticArray[0x8b_u8, 0x1f_u8, 0xa5_u8, 0x71_u8, 0xe4_u8, 0x37_u8, 0xd6_u8, 0xc9_u8])
     def query_interface(this : ITemplateSdo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1155,16 +1163,16 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_i_ds_of_names(this : ITemplateSdo*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ITemplateSdo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ITemplateSdo*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
     def get_property_info(this : ITemplateSdo*, id : Int32, ppPropertyInfo : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property_info.call(this, id, ppPropertyInfo)
     end
-    def get_property(this : ITemplateSdo*, id : Int32, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_property(this : ITemplateSdo*, id : Int32, pValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_property.call(this, id, pValue)
     end
-    def put_property(this : ITemplateSdo*, id : Int32, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def put_property(this : ITemplateSdo*, id : Int32, pValue : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.put_property.call(this, id, pValue)
     end
     def reset_property(this : ITemplateSdo*, id : Int32) : Win32cr::Foundation::HRESULT
@@ -1192,23 +1200,24 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoDictionaryOldVtbl,
+
+  record ISdoDictionaryOldVtable,
     query_interface : Proc(ISdoDictionaryOld*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoDictionaryOld*, UInt32),
     release : Proc(ISdoDictionaryOld*, UInt32),
     get_type_info_count : Proc(ISdoDictionaryOld*, UInt32*, Win32cr::Foundation::HRESULT),
     get_type_info : Proc(ISdoDictionaryOld*, UInt32, UInt32, Void**, Win32cr::Foundation::HRESULT),
     get_i_ds_of_names : Proc(ISdoDictionaryOld*, LibC::GUID*, Win32cr::Foundation::PWSTR*, UInt32, UInt32, Int32*, Win32cr::Foundation::HRESULT),
-    invoke_1 : Proc(ISdoDictionaryOld*, Int32, LibC::GUID*, UInt32, UInt16, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
-    enum_attributes : Proc(ISdoDictionaryOld*, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_attribute_info : Proc(ISdoDictionaryOld*, Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    enum_attribute_values : Proc(ISdoDictionaryOld*, Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, Win32cr::System::Com::VARIANT*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    invoke : Proc(ISdoDictionaryOld*, Int32, LibC::GUID*, UInt32, Win32cr::System::Com::DISPATCH_FLAGS, Win32cr::System::Com::DISPPARAMS*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Com::EXCEPINFO*, UInt32*, Win32cr::Foundation::HRESULT),
+    enum_attributes : Proc(ISdoDictionaryOld*, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_attribute_info : Proc(ISdoDictionaryOld*, Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
+    enum_attribute_values : Proc(ISdoDictionaryOld*, Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, Win32cr::System::Variant::VARIANT*, Win32cr::System::Variant::VARIANT*, Win32cr::Foundation::HRESULT),
     create_attribute : Proc(ISdoDictionaryOld*, Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, Void**, Win32cr::Foundation::HRESULT),
     get_attribute_id : Proc(ISdoDictionaryOld*, Win32cr::Foundation::BSTR, Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ISdoDictionaryOld, lpVtbl : ISdoDictionaryOldVtbl* do
+  record ISdoDictionaryOld, lpVtbl : ISdoDictionaryOldVtable* do
     GUID = LibC::GUID.new(0xd432e5f4_u32, 0x53d8_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x98_u8, 0xac_u8])
     def query_interface(this : ISdoDictionaryOld*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1228,16 +1237,16 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
     def get_i_ds_of_names(this : ISdoDictionaryOld*, riid : LibC::GUID*, rgszNames : Win32cr::Foundation::PWSTR*, cNames : UInt32, lcid : UInt32, rgDispId : Int32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_i_ds_of_names.call(this, riid, rgszNames, cNames, lcid, rgDispId)
     end
-    def invoke_1(this : ISdoDictionaryOld*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : UInt16, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Com::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
-      @lpVtbl.try &.value.invoke_1.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
+    def invoke(this : ISdoDictionaryOld*, dispIdMember : Int32, riid : LibC::GUID*, lcid : UInt32, wFlags : Win32cr::System::Com::DISPATCH_FLAGS, pDispParams : Win32cr::System::Com::DISPPARAMS*, pVarResult : Win32cr::System::Variant::VARIANT*, pExcepInfo : Win32cr::System::Com::EXCEPINFO*, puArgErr : UInt32*) : Win32cr::Foundation::HRESULT
+      @lpVtbl.try &.value.invoke.call(this, dispIdMember, riid, lcid, wFlags, pDispParams, pVarResult, pExcepInfo, puArgErr)
     end
-    def enum_attributes(this : ISdoDictionaryOld*, id : Win32cr::System::Com::VARIANT*, pValues : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def enum_attributes(this : ISdoDictionaryOld*, id : Win32cr::System::Variant::VARIANT*, pValues : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_attributes.call(this, id, pValues)
     end
-    def get_attribute_info(this : ISdoDictionaryOld*, id : Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, pInfoIDs : Win32cr::System::Com::VARIANT*, pInfoValues : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_attribute_info(this : ISdoDictionaryOld*, id : Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, pInfoIDs : Win32cr::System::Variant::VARIANT*, pInfoValues : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_attribute_info.call(this, id, pInfoIDs, pInfoValues)
     end
-    def enum_attribute_values(this : ISdoDictionaryOld*, id : Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, pValueIds : Win32cr::System::Com::VARIANT*, pValuesDesc : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def enum_attribute_values(this : ISdoDictionaryOld*, id : Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, pValueIds : Win32cr::System::Variant::VARIANT*, pValuesDesc : Win32cr::System::Variant::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.enum_attribute_values.call(this, id, pValueIds, pValuesDesc)
     end
     def create_attribute(this : ISdoDictionaryOld*, id : Win32cr::NetworkManagement::NetworkPolicyServer::ATTRIBUTEID, ppAttributeObject : Void**) : Win32cr::Foundation::HRESULT
